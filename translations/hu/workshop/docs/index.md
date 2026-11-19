@@ -1,77 +1,77 @@
-# AZD az AI Fejlesztők számára Műhelymunka
+# AZD AI Fejlesztőknek Műhely
 
-> Validált az `azd 1.27.1` verzióval 2026 júliusában.
+> Forrásútmutató átnézve az AZD 1.37.2 verzió alapján 2026. november 4-én. A képernyőképek szemléltető jellegűek; a szolgáltatás elérhetősége, portálcímkék és sablon alapbeállítások változhatnak.
 
 > [!IMPORTANT]  
-> **Ez a műhelymunka egy helyi böngészőben megtekinthető műhelyvezetővel van felszerelve. A kezdéshez nyisd meg a repót GitHub Codespaces-ben, egy fejlesztői konténerben vagy egy helyi klónban, amelyen telepítve van a MkDocs—majd várj, amíg meg nem jelenik egy aktív VS Code terminál, és írd be:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Ekkor meg kell jelennie egy felugró ablaknak, amely a böngészőben történő előnézet megnyitására kérdez rá.**
+> **Ezt a műhelyt egy olyan műhelyútmutató támogatja, amelyet a helyi böngésződben megtekinthetsz. A kezdéshez nyisd meg a tárolót GitHub Codespaces-ben, egy fejlesztői konténerben vagy egy helyi klónban, amelyen telepítve van a MkDocs—ezután várd meg, amíg aktív VS Code terminált látsz, majd írd be:**  
+> A tanfolyam tároló gyökeréből telepítsd az `requirements-dev.txt`, majd futtasd az `python -m mkdocs serve --config-file workshop/mkdocs.yml` a előtérben.
+> **Meg kell jelennie egy felugró párbeszédablaknak, amelyben megnyithatod az előnézeti oldalt a böngészőben.**
 
-Üdvözlünk az Azure Developer CLI (AZD) tanulását célzó gyakorlati műhelymunkában, különös tekintettel az AI alkalmazások telepítésére. Ez a műhely 3 lépésben segít az AZD sablonok alkalmazott megértésében:
+Üdvözlünk az Azure Developer CLI (AZD) megtanulására fókuszáló AI alkalmazás telepítési gyakorlati műhelyben. Ez a műhely három lépésben segít megszerezni az AZD sablonok gyakorlati ismeretét:
 
-1. **Felfedezés** - találd meg a számodra megfelelő sablont.
+1. **Felfedezés** - keresd meg a számodra legmegfelelőbb sablont.
 1. **Telepítés** - telepítsd és ellenőrizd, hogy működik
-1. **Testreszabás** - módosítsd és ismételd, hogy a sajátoddá tedd!
+1. **Testreszabás** - módosítsd és finomítsd, hogy a sajátoddá váljon!
 
-A műhely során megismerkedsz alapvető fejlesztői eszközökkel és munkafolyamatokkal is, hogy egyszerűsítsd a teljes fejlesztési utadat.
+A műhely során megismerkedsz az alapvető fejlesztői eszközökkel és munkafolyamatokkal is, hogy segítsenek egyszerűbbé tenni az end-to-end fejlesztési folyamatodat.
 
 | | | 
 |:---|:---|
-| **📚 Tanfolyam kezdőlapja**| [AZD Kezdőknek](../README.md)|
-| **📖 Dokumentáció** | [Kezdés AI sablonokkal](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ AI Sablonok** | [Microsoft Foundry Sablonok](https://ai.azure.com/templates) |
-|**🚀 Következő lépések** | [Vállald a kihívást](#workshop-challenge) |
+| **📚 Tanfolyam Kezdőlap**| [AZD Kezdőknek](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
+| **📖 Dokumentáció** | [Ismerkedj meg az AI sablonokkal](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Sablonok** | [Microsoft Foundry Sablonok](https://ai.azure.com/templates) |
+|**🚀 Következő lépések** | [Vállald a kihívást](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
-## A műhely áttekintése
+## Műhely áttekintése
 
 **Időtartam:** 3-4 óra  
-**Szint:** Kezdő és középhaladó  
-**Előfeltételek:** Ismeretek az Azure, AI koncepciók, VS Code és parancssoros eszközök terén.
+**Szint:** Kezdőtől középhaladóig  
+**Előfeltételek:** Azure, AI fogalmak, VS Code & parancssori eszközök ismerete.
 
-Ez egy gyakorlati műhely, ahol cselekvéssel tanulsz. Miután végrehajtottad a gyakorlatokat, ajánljuk az AZD Kezdőknek tananyagot, hogy folytasd tanulásodat a Biztonság és Termelékenység bevált gyakorlatairól.
+Ez egy gyakorlati műhely, ahol tanulás közben csinálod a feladatokat. Amint befejezted a gyakorlatokat, javasoljuk, hogy nézd át az AZD Kezdőknek tananyagot, hogy folytasd tanulmányaidat a Biztonság és Termelékenység legjobb gyakorlataival.
 
-| Idő | Modul  | Célkitűzés |
+| Idő| Modul  | Célkitűzés |
 |:---|:---|:---|
-| 15 perc | Bevezetés | A célok megértése, alapok megteremtése |
-| 30 perc | AI Sablon kiválasztása | Opciók feltérképezése és kezdő kiválasztása | 
-| 30 perc | AI Sablon validálása | Alapértelmezett megoldás telepítése Azure-ba |
-| 30 perc | AI Sablon elemzése | Szerkezet és konfiguráció feltárása |
-| 30 perc | AI Sablon konfigurálása | Funkciók aktiválása és kipróbálása |
-| 30 perc | AI Sablon testreszabása | A sablon igényeidhez igazítása |
-| 30 perc | Infrastruktúra bontása | Erőforrások takarítása és felszabadítása |
-| 15 perc | Összefoglalás és következő lépések | Tanulási források, műhely kihívás |
+| 15 perc | Bevezetés | Alapok lefektetése, célok megértése |
+| 30 perc | AI Sablon kiválasztása | Lehetőségek feltérképezése és induló kiválasztása | 
+| 30 perc | AI Sablon ellenőrzése | Alapsablon telepítése Azure-ba |
+| 30 perc | AI Sablon lebontása | Szerkezet és konfiguráció feltárása |
+| 30 perc | AI Sablon konfigurálása | Elérhető funkciók aktiválása és kipróbálása |
+| 30 perc | AI Sablon testreszabása | A sablon igényekhez igazítása |
+| 30 perc | Infrastruktúra bontása | Takarítás és erőforrások felszabadítása |
+| 15 perc | Összefoglaló & Következő lépések | Tanulási források, műhely kihívás |
 | | |
 
 ## Amit megtanulsz
 
-Gondolj az AZD sablonra úgy, mint egy tanulási homokozóra, ahol különféle képességeket és eszközöket fedezhetsz fel az end-to-end fejlesztéshez a Microsoft Foundry platformon. A műhely végére intuitív érzéked lesz az eszközökhöz és fogalmakhoz.
+Gondolj az AZD sablonra úgy, mint egy tanulási homokozóra, ahol megismerhetsz különféle képességeket és eszközöket az end-to-end fejlesztéshez a Microsoft Foundryn. A műhely végére intuitív érzéked lesz a különböző eszközök és fogalmak kapcsán ebben a környezetben.
 
 | Fogalom  | Célkitűzés |
 |:---|:---|
-| **Azure Developer CLI** | Az eszközparancsok és munkafolyamatok megértése|
-| **AZD sablonok**| A projekt szerkezetének és konfigurációjának megértése|
-| **Azure AI Ügynök**| Microsoft Foundry projekt létrehozása és telepítése  |
-| **Azure AI Keresés**| Kontextus-alapú mérnöki megoldások ügynökökkel |
-| **Megfigyelhetőség**| Követés, monitorozás és értékelés feltérképezése |
-| **Red Team gyakorlatok**| Ellenséges tesztelés és enyhítések feltárása |
+| **Azure Developer CLI** | Eszközparancsok és munkafolyamatok megértése|
+| **AZD Sablonok**| Projekt struktúra és konfiguráció megértése|
+| **Azure AI Ügynök**| Microsoft Foundry projekt előkészítése & telepítése  |
+| **Azure AI Keresés**| Kontextus alapszintű kezelése ügynökökkel |
+| **Megfigyelhetőség**| Tracing, monitorozás és kiértékelések felfedezése |
+| **Red Teaming**| Ellenséges tesztelés és védekezések feltérképezése |
 | | |
 
 ## Műhely modulok
 
-Készen állsz? Navigálj a műhely moduljai között:
+Készen állsz? Navigálj a műhely moduljain keresztül:
 
-- [1. modul: AI Sablon kiválasztása](instructions/1-Select-AI-Template.md)
-- [2. modul: AI Sablon validálása](instructions/2-Validate-AI-Template.md) 
-- [3. modul: AI Sablon elemzése](instructions/3-Deconstruct-AI-Template.md)
-- [4. modul: AI Sablon konfigurálása](instructions/4-Configure-AI-Template.md)
-- [5. modul: AI Sablon testreszabása](instructions/5-Customize-AI-Template.md)
-- [6. modul: Infrastruktúra bontása](instructions/6-Teardown-Infrastructure.md)
-- [7. modul: Összefoglalás és következő lépések](instructions/7-Wrap-up.md)
+- [1. Modul: AI Sablon kiválasztása](instructions/1-Select-AI-Template.md)
+- [2. Modul: AI Sablon ellenőrzése](instructions/2-Validate-AI-Template.md) 
+- [3. Modul: AI Sablon lebontása](instructions/3-Deconstruct-AI-Template.md)
+- [4. Modul: AI Sablon konfigurálása](instructions/4-Configure-AI-Template.md)
+- [5. Modul: AI Sablon testreszabása](instructions/5-Customize-AI-Template.md)
+- [6. Modul: Infrastruktúra lebontása](instructions/6-Teardown-Infrastructure.md)
+- [7. Modul: Összefoglalás & Következő lépések](instructions/7-Wrap-up.md)
 
 ## Van visszajelzésed?
 
-Készíts egy issue-t ezen a repón (címkézd meg `Workshop`-pal), vagy csatlakozz hozzánk a [Discordon](https://aka.ms/foundry/discord) és írj a `#get-help` csatornára
+Küldj egy hibajegyet ebben a tárolóban (címkézd `Workshop`), vagy csatlakozz hozzánk a [Discordon](https://aka.ms/foundry/discord), és posztolj az `#get-help` csatornára.
 
 ---
 

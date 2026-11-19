@@ -1,6 +1,6 @@
 # 6. Kuvunja Miundombinu
 
-!!! tip "MWISHONI MWA MODULI HII UTAWEZA"
+!!! tip "MWISHONI WA MODULI HII UTAWEZA"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -13,7 +13,7 @@
 
 Kabla ya kuvunja mradi, chukua dakika chache kufanya uchunguzi wa wazi.
 
-!!! info "Jaribu Hizi Kauli za Uchunguzi"
+!!! info "Jaribu Maoni Haya ya Uchunguzi"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,6 +31,10 @@ Kabla ya kuvunja mradi, chukua dakika chache kufanya uchunguzi wa wazi.
 
 ## Ondoa Miundombinu
 
+!!! warning "Ikiwa pia umehitimisha zoezi la wakala wa mwenyeji wa GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
 1. Kuvunja miundombinu ni rahisi kama:
       
       ```bash title="" linenums="0"
@@ -38,7 +42,7 @@ Kabla ya kuvunja mradi, chukua dakika chache kufanya uchunguzi wa wazi.
       azd show
       azd down
       ```
-1. Thibitisha mazingira uliyochagua na hakiki rasilimali zinazotakiwa kufutwa. Hii huondoa rasilimali za Azure na inaweza kuharibu data. Hifadhi onyesho la uthibitisho kwa mtiririko huu wa kujifunza. Ukishamaliza utaona matokeo kama haya:
+1. Thibitisha mazingira yaliyochaguliwa na kagua rasilimali zitakazofutwa. Hii hufuta rasilimali za Azure na inaweza kuharibu data. Hifadhi ombi la uthibitisho kwa mtiririko huu wa mafunzo. Ukimaliza utaona matokeo yanayofanana na:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Kabla ya kuvunja mradi, chukua dakika chache kufanya uchunguzi wa wazi.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Thibitisha kufutwa kwenye portal na angalia rasilimali nje ya wigo wa usambazaji. Ripoti za gharama na masasisho ya vikwazo zinaweza kuchelewa. Usanidi wa humu nyumbani wa `.azure` hubaki isipokuwa uondoe kwa wazi.
+1. Thibitisha ufutaji kwenye portal na angalia rasilimali nje ya wigo wa usambazaji. Ripoti za gharama na masasisho ya makato yaweza kuchelewa. Usanidi wa ndani wa `.azure` unabaki ikiwa haujauyafuta waziwazi.
 
-1. `azd down --purge` pia huomba kufutwa kabisa kwa rasilimali zilizo soft-delete zinazounga mkono. Tumia tu wakati hali ya kupona si muhimu na unaelewa sera za kuhifadhi/kulinda kufutwa. Haili ahidi kuachilia vikwazo mara moja.
+1. `azd down --purge` pia huomba ufutaji wa kudumu wa rasilimali zilizo waziwa kwa upole zinazounga mkono. Tumia tu wakati ukarabati hauhitajiki na unafahamu sera za uhifadhi/uondoshaji. Hii haisaidii kuachilia makato mara moja.
 
-1. Usisambazie tena kwa ajili ya kuthibitisha usafi. `azd up` iliyokusudiwa baadaye inaweza kuunda tena rasilimali kwa kutumia pembejeo zilizosalia za humu nyumbani, na husababisha gharama tena. Masasisho ya mfano kawaida hutumia mabadiliko yanayoungwa mkono ya usambazaji, si kuvunja.
+1. Usitoe tena usambazaji ili kuthibitisha usafi. `azd up` itakayofanywa baadaye kwa makusudi inaweza kuunda tena rasilimali kwa kutumia pembejeo za ndani zilizobaki, na huuza malipo tena. Sasisho za mfano kawaida hutumia mabadiliko ya kuandaa yanayoungwa mkono, si kuvunja.
 
 ---
 

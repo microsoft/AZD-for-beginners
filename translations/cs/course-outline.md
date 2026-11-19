@@ -2,49 +2,49 @@
 
 ## Přehled kurzu
 
-Ovládněte Azure Developer CLI (azd) prostřednictvím strukturovaných kapitol navržených pro postupné učení. **Zvláštní důraz na nasazení aplikací AI s integrací Microsoft Foundry.**
+Ovládněte Azure Developer CLI (azd) prostřednictvím strukturovaných kapitol navržených pro postupné učení. **Zvláštní zaměření na nasazování AI aplikací s integrací Microsoft Foundry.**
 
 ### Proč je tento kurz nezbytný pro moderní vývojáře
 
 Vývojáři nasazující AI pracovní zátěže často potřebují vedení v oblastech:
-- Složitých víceslužbových AI architekturách
-- Nejlepších praktikách produkčního nasazení AI
+- Komplexní více-službové AI architektury
+- Nejlepší praktiky nasazení AI do produkce  
 - Integrace a konfigurace Azure AI služeb
 - Optimalizace nákladů pro AI pracovní zátěže
 - Řešení problémů specifických pro nasazení AI
 
-### Hlavní cíle učení
+### Základní cíle učení
 
-Dokončením tohoto strukturovaného kurzu budete schopni:
-- **Ovládnout základy AZD**: Základní koncepty, instalace a konfigurace
-- **Nasadit AI aplikace**: Použít AZD se službami Microsoft Foundry
-- **Implementovat infrastrukturu jako kód**: Spravovat Azure zdroje s Bicep šablonami
-- **Řešit problémy s nasazením**: Vyřešit běžné problémy a ladit chyby
-- **Optimalizovat pro produkci**: Bezpečnost, škálování, monitorování a správa nákladů
-- **Vytvářet multi-agentní řešení**: Nasazovat složité AI architektury
+Dokončením tohoto strukturovaného kurzu budete:
+- **Ovládat základy AZD**: Základní koncepty, instalace a konfigurace
+- **Nasazovat AI aplikace**: Používat AZD s Microsoft Foundry službami
+- **Implementovat Infrastructure as Code**: Spravovat Azure zdroje pomocí Bicep šablon
+- **Řešit problémy s nasazením**: Odstraňovat běžné problémy a ladit chyby
+- **Optimalizovat pro produkci**: Zabezpečení, škálování, monitorování a správa nákladů
+- **Vytvářet multi-agentní řešení**: Nasazovat komplexní AI architektury
 
-## 🎓 Zkušenost s učením v rámci workshopu
+## 🎓 Workshop - zážitková výuka
 
 ### Flexibilní možnosti výuky
-Tento kurz je navržen pro podporu jak **individuálního samostatného učení**, tak **workshopových sezení s lektorem**, které umožňují získat praktické zkušenosti s AZD prostřednictvím interaktivních cvičení.
+Tento kurz je navržen tak, aby podporoval jak **samostudium vlastním tempem**, tak **řízené workshopy**, které umožňují praktické zkušenosti s AZD a rozvoj dovedností prostřednictvím interaktivních cvičení.
 
-#### 🚀 Režim samostatného učení
-**Ideální pro individuální vývojáře a průběžné vzdělávání**
+#### 🚀 Samostudium vlastním tempem
+**Ideální pro jednotlivé vývojáře a kontinuální vzdělávání**
 
-**Funkce:**
-- **Prohlížečové rozhraní**: Kompletní workshop poháněný MkDocs přístupný přes libovolný webový prohlížeč
-- **Integrace GitHub Codespaces**: Vývojové prostředí na jedno kliknutí s přednastavenými nástroji
-- **Interaktivní DevContainer prostředí**: Není potřeba místní nastavení – začněte kódovat okamžitě
+**Vlastnosti:**
+- **Rozhraní přes webový prohlížeč**: Kompletní workshop poháněný MkDocs přístupný přes libovolný webový prohlížeč
+- **Integrace GitHub Codespaces**: Vývojové prostředí na jedno kliknutí s předkonfigurovanými nástroji
+- **Interaktivní DevContainer prostředí**: Není potřeba lokální konfigurace – začněte okamžitě programovat
 - **Sledování pokroku**: Vestavěné kontrolní body a validační cvičení
-- **Podpora komunity**: Přístup do Azure Discord kanálů pro dotazy a spolupráci
+- **Podpora komunity**: Přístup k Azure Discord kanálům pro dotazy a spolupráci
 
 **Struktura učení:**
-- **Flexibilní časování**: Dokončete kapitoly vlastním tempem během dní či týdnů
-- **Systém kontrolních bodů**: Ověřte si znalosti před postupem ke složitějším tématům
-- **Knihovna zdrojů**: Komplexní dokumentace, příklady a návody pro řešení problémů
-- **Vývoj portfolia**: Vytvářejte projekty nasaditelné do produkce pro profesionální portfolio
+- **Flexibilní časování**: Dokončujte kapitoly vlastním tempem během dnů či týdnů
+- **Systém kontrolních bodů**: Ověřujte znalosti před postupem k složitějším tématům
+- **Knihovna zdrojů**: Kompletní dokumentace, příklady a návody na řešení problémů
+- **Budování portfolia**: Tvořte projekty vhodné k předvedení ve profesním portfoliu
 
-**Začínáme (samostatně):**
+**Začínáme (samostudium):**
 ```bash
 # Option 1: GitHub Codespaces (Recommended)
 # Navigate to the repository and click "Code" → "Create codespace on main"
@@ -55,154 +55,158 @@ cd azd-for-beginners/workshop
 # Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Workshopová sezení s lektorem
+#### 🏛️ Řízené workshopy
 **Ideální pro firemní školení, bootcampy a vzdělávací instituce**
 
-**Možnosti formátu workshopu:**
+**Možnosti formátu workshopů:**
 
 **📚 Začlenění do akademického kurzu (8-12 týdnů)**
-- **Univerzitní programy**: Semestrální kurz s týdenními dvouhodinovými sezeními
-- **Bootcamp formát**: Intenzivní 3-5 denní program s každodenními 6-8 hodinovými sezeními
-- **Firemní školení**: Měsíční týmová sezení s praktickou implementací projektů
-- **Hodnotící rámec**: Hodnocené úkoly, recenze od vrstevníků a závěrečné projekty
+- **Vysokoškolské programy**: Semestrální kurz s týdenními 2 hodinovými lekcemi
+- **Bootcamp formát**: Intenzivní 3-5 denní program s denními 6-8 hodinovými lekcemi
+- **Firemní školení**: Měsíční týmové lekce s praktickou realizací projektů
+- **Hodnotící rámec**: Hodnocené úkoly, recenze od kolegů a závěrečné projekty
 
 **🚀 Intenzivní workshop (1-3 dny)**
 - **Den 1**: Základy + AI vývoj (kapitoly 1-2) - 6 hodin
 - **Den 2**: Konfigurace + infrastruktura (kapitoly 3-4) - 6 hodin  
 - **Den 3**: Pokročilé vzory + produkce (kapitoly 5-8) - 8 hodin
-- **Následná podpora**: Volitelné 2týdenní mentorství pro dokončení projektů
+- **Následná podpora**: Volitelné 2týdenní mentorství pro dokončení projektu
 
 **⚡ Exekutivní briefing (4-6 hodin)**
-- **Strategický přehled**: Hodnota AZD a dopad na byznys (1 hodina)
-- **Praktická ukázka**: Kompletní nasazení AI aplikace (2 hodiny)
-- **Revize architektury**: Podnikové vzory a správa (1 hodina)
-- **Plán implementace**: Strategie organizační adaptace (1-2 hodiny)
+- **Strategický přehled**: Hodnota AZD a obchodní dopad (1 hodina)
+- **Praktická ukázka**: End-to-end nasazení AI aplikace (2 hodiny)
+- **Revize architektury**: Podnikové vzory a řízení (1 hodina)
+- **Plán implementace**: Strategie adopce v organizaci (1-2 hodiny)
 
-#### 🛠️ Metodologie workshopového učení
-**Postup Objevování → Nasazování → Přizpůsobování pro rozvoj praktických dovedností**
+#### 🛠️ Metodika výuky workshopu
+**Postup Objevování → Nasazení → Přizpůsobení pro rozvoj praktických dovedností**
 
 **Fáze 1: Objevování (45 minut)**
-- **Průzkum šablon**: Vyhodnocení Microsoft Foundry šablon a služeb
+- **Prozkoumání šablon**: Hodnocení šablon a služeb Microsoft Foundry
 - **Analýza architektury**: Porozumění multi-agentním vzorům a strategiím nasazení
-- **Hodnocení požadavků**: Identifikace organizačních potřeb a omezení
+- **Hodnocení požadavků**: Identifikace potřeb a omezení organizace
 - **Nastavení prostředí**: Konfigurace vývojového prostředí a Azure zdrojů
 
 **Fáze 2: Nasazení (2 hodiny)**
-- **Řízená implementace**: Krok za krokem nasazení AI aplikací s AZD
+- **Řízená implementace**: Krok za krokem nasazení AI aplikací pomocí AZD
 - **Konfigurace služeb**: Nastavení Azure AI služeb, koncových bodů a autentizace
-- **Implementace bezpečnosti**: Aplikace podnikových bezpečnostních vzorů a řízení přístupu
+- **Zabezpečení**: Aplikace podnikových bezpečnostních vzorů a řízení přístupu
 - **Testování validace**: Ověření nasazení a řešení běžných problémů
 
 **Fáze 3: Přizpůsobení (45 minut)**
-- **Modifikace aplikace**: Přizpůsobení šablon pro specifické případy a požadavky
+- **Modifikace aplikace**: Přizpůsobení šablon specifickým případům a požadavkům
 - **Optimalizace pro produkci**: Implementace monitorování, správy nákladů a škálování
-- **Pokročilé vzory**: Prozkoumání koordinace multi-agentů a složitých architektur
-- **Plánování dalších kroků**: Definice učební cesty pro další rozvoj dovedností
+- **Pokročilé vzory**: Prozkoumání koordinace multi-agentů a komplexních architektur
+- **Plánování dalších kroků**: Definice cesty dalšího rozvoje dovedností
 
-#### 🎯 Výstupy učení z workshopu
-**Měřitelné dovednosti získané praktickým nácvikem**
+#### 🎯 Výsledky učení workshopu
+**Měřitelné dovednosti získané praktickým tréninkem**
 
 **Technické kompetence:**
-- **Nasazení produkčních AI aplikací**: Úspěšné nasazení a konfigurace AI řešení
-- **Mistrovství infrastruktury jako kódu**: Vytváření a správa vlastních Bicep šablon
-- **Multi-agentní architektura**: Implementace koordinovaných AI agentních řešení
-- **Připravenost na produkci**: Aplikace bezpečnostních, monitorovacích a řídicích vzorů
-- **Odbornost v řešení problémů**: Samostatné řešení nasazovacích a konfiguračních problémů
+- **Nasadit produkční AI aplikace**: Úspěšně nasadit a nakonfigurovat AI řešení
+- **Ovládání Infrastructure as Code**: Vytvářet a spravovat vlastní Bicep šablony
+- **Multi-agentní architektura**: Implementovat koordinovaná AI agentní řešení
+- **Produkční připravenost**: Aplikovat bezpečnostní, monitorovací a řídící vzory
+- **Expertíza v řešení problémů**: Samostatně vyřešit problémy s nasazením a konfigurací
 
 **Profesní dovednosti:**
-- **Vedení projektů**: Vedení technických týmů při cloudových nasazeních
-- **Návrh architektury**: Navrhování škálovatelných a nákladově efektivních Azure řešení
-- **Předávání znalostí**: Školení a mentorování kolegů v AZD nejlepších praktikách
-- **Strategické plánování**: Ovlivňování organizačních strategií cloudové adopce
+- **Vedení projektů**: Vést technické týmy v iniciativách cloudového nasazení
+- **Návrh architektury**: Navrhovat škálovatelná a nákladově efektivní Azure řešení
+- **Přenos znalostí**: Školit a mentorovat kolegy v nejlepších praktikách AZD
+- **Strategické plánování**: Ovlivňovat organizační strategie adopce cloudu
 
-#### 📋 Zdroje a materiály k workshopu
-**Komplexní sada nástrojů pro lektory a studenty**
+#### 📋 Materiály a zdroje workshopu
+**Komplexní nástroje pro facilitátory i účastníky**
 
-**Pro lektory:**
-- **Příručka instruktora**: [Přehled workshopu](workshop/README.md) - Plánování a vedení sezení
-- **Prezentační materiály**: Prezentace, diagramy architektury a demo scénáře
-- **Hodnotící nástroje**: Praktická cvičení, testy znalostí a hodnotící kritéria
-- **Technické nastavení**: Konfigurace prostředí, návody pro řešení problémů a záložní plány
+**Pro facilitátory:**
+- **Průvodce instruktora**: [Přehled workshopu](workshop/README.md) - Plánování a vedení lekcí
+- **Prezentační materiály**: Prezentační sady slidů, diagramy architektury a skripty demo ukázek
+- **Nástroje pro hodnocení**: Praktická cvičení, testy znalostí a hodnotící škály
+- **Technické nastavení**: Konfigurace prostředí, návody na řešení potíží a záložní plány
 
-**Pro studenty:**
-- **Interaktivní workshopové prostředí**: [Materiály workshopu](workshop/README.md) - Prohlížečová výuková platforma
-- **Podrobné instrukce**: [Řízená cvičení](../../workshop/docs/instructions) - Podrobný průvodce implementací  
-- **Referenční dokumentace**: [AI workshop laboratoř](docs/chapter-02-ai-development/ai-workshop-lab.md) - Hloubkové zaměření na AI
-- **Komunitní zdroje**: Azure Discord kanály, GitHub diskuze a podpora expertů
+**Pro účastníky:**
+- **Interaktivní workshopy**: [Materiály workshopu](workshop/README.md) - Webová vzdělávací platforma
+- **Podrobné instrukce**: [Průvodce cvičeními](../../workshop/docs/instructions) - Detailní implementační postupy  
+- **Referenční dokumentace**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Hloubkové materiály zaměřené na AI
+- **Zdroje komunity**: Azure Discord kanály, GitHub diskuze a expertní podpora
 
-#### 🏢 Implementace workshopu v podnicích
-**Strategie nasazení a školení organizací**
+#### 🏢 Implementace workshopů ve firmách
+**Strategie nasazení a školení v organizacích**
 
-**Firemní školící programy:**
-- **Zaškolování vývojářů**: Orientace nových zaměstnanců se základy AZD (2-4 týdny)
+**Firemní školicí programy:**
+- **Zaškolení vývojářů**: Orientace nových zaměstnanců na AZD základy (2-4 týdny)
 - **Zvyšování kvalifikace týmů**: Čtvrtletní workshopy pro stávající vývojové týmy (1-2 dny)
 - **Revize architektury**: Měsíční sezení pro senior inženýry a architekty (4 hodiny)
-- **Briefingy vedení**: Workshop pro technické rozhodovatele (půlden)
+- **Briefingy pro vedení**: Exekutivní workshopy pro technické rozhodující (půldenní)
 
 **Podpora implementace:**
-- **Vlastní návrh workshopu**: Přizpůsobený obsah pro specifické potřeby organizace
-- **Řízení pilotních programů**: Strukturované zavádění s metrikami úspěchu a zpětnou vazbou  
-- **Průběžné mentorství**: Podpora po workshopu pro implementaci projektů
+- **Navržení workshopu na míru**: Přizpůsobený obsah pro konkrétní potřeby organizace
+- **Řízení pilotního programu**: Strukturované zavedení s metrikami úspěšnosti a zpětnou vazbou  
+- **Průběžné mentorování**: Podpora po workshopu při realizaci projektů
 - **Budování komunity**: Interní Azure AI vývojářské komunity a sdílení znalostí
 
-**Metriky úspěchu:**
-- **Získávání dovedností**: Hodnocení před a po kurzu měřící růst technických kompetencí
-- **Úspěšné nasazení**: Procento účastníků úspěšně nasazujících produkční aplikace
-- **Doba do produktivity**: Zkrácení času na zaškolení pro nové Azure AI projekty
-- **Udržení znalostí**: Následná hodnocení 3-6 měsíců po workshopu
+**Metriky úspěšnosti:**
+- **Získávání dovedností**: Testy před a po měřící růst technických kompetencí
+- **Úspěšnost nasazení**: Procento účastníků úspěšně nasazujících produkční aplikace
+- **Doba do produktivity**: Zkrácení doby zaškolení pro nové Azure AI projekty
+- **Zachování znalostí**: Následná hodnocení 3-6 měsíců po workshopu
 
 ## Struktura učení ve 8 kapitolách
 
-### Kapitola 1: Základy a rychlý start (30-45 minut) 🌱
-**Předpoklady**: Azure subscription, základní znalost příkazové řádky  
+### Kapitola 1: Základy & Rychlý start (30-45 minut) 🌱
+**Předpoklady**: Azure předplatné, základní znalost příkazové řádky  
 **Složitost**: ⭐
 
 #### Co se naučíte
-- Porozumění základům Azure Developer CLI
-- Instalace AZD na vaší platformě  
-- Vaše první úspěšné nasazení
+- Porozumět základům Azure Developer CLI
+- Instalace AZD na vaši platformu  
+- Úspěšné první nasazení
 - Základní koncepty a terminologie
 
-#### Výukové zdroje
-- [Základy AZD](docs/chapter-01-foundation/azd-basics.md) - Základní koncepty
-- [Instalace a nastavení](docs/chapter-01-foundation/installation.md) - Průvodce pro konkrétní platformy
+#### Zdroje pro učení
+- [AZD základy](docs/chapter-01-foundation/azd-basics.md) - Základní koncepty
+- [Instalace a nastavení](docs/chapter-01-foundation/installation.md) - Platformově specifické návody
 - [Váš první projekt](docs/chapter-01-foundation/first-project.md) - Praktický tutoriál
-- [Přehled příkazů](resources/cheat-sheet.md) - Rychlá reference
+- [Příkazový rychlokurz](resources/cheat-sheet.md) - Rychlá reference
 
 #### Praktický výsledek
-Úspěšné nasazení jednoduché webové aplikace na Azure pomocí AZD
+Úspěšné nasazení jednoduché webové aplikace do Azure pomocí AZD
 
 ---
 
-### Kapitola 2: Vývoj zaměřený na AI (1-2 hodiny) 🤖
+### Kapitola 2: Vývoj orientovaný na AI (4-5 hodin včetně workshopu) 🤖
 **Předpoklady**: Dokončená kapitola 1  
 **Složitost**: ⭐⭐
 
 #### Co se naučíte
 - Integrace Microsoft Foundry s AZD
+- Instalace GA `microsoft.foundry` balíčku a nasazení hostovaného agenta
+- Testování lokálního agenta Inspector a samostatná hodnotící data/schémata
 - Nasazení AI aplikací
 - Porozumění konfiguracím AI služeb
-- Vzory RAG (Retrieval-Augmented Generation)
+- RAG (Retrieval-Augmented Generation) vzory
 
-#### Výukové zdroje
+#### Zdroje pro učení
 - [Integrace Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [Procházení hostovaného agenta (GA)](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) - Inicializace, recenze `azure.yaml`, provisioning, lokální test, nasazení, hodnocení a vyčištění
+- [Průvodce AI agenty](docs/chapter-02-ai-development/agents.md)
 - [Nasazení AI modelů](docs/chapter-02-ai-development/ai-model-deployment.md)
-- [AI workshop laboratoř](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NOVÉ**: Komplexní 2-3 hodinové praktické cvičení
-- [Interaktivní průvodce workshopem](workshop/README.md) - **NOVÉ**: Prohlížečový workshop s MkDocs náhledem
+- [Laboratoř AI workshopu](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NOVINKA**: Komplexní 2-3 hodinová praktická laboratoř
+- [Interaktivní průvodce workshopem](workshop/README.md) - **NOVINKA**: Workshop založený na webovém rozhraní s náhledem MkDocs
 - [Microsoft Foundry šablony](README.md#featured-microsoft-foundry-templates)
-- [Instrukce pro workshop](../../workshop/docs/instructions) - **NOVÉ**: Řízená cvičení krok za krokem
+- [Instrukce k workshopu](../../workshop/docs/instructions) - **NOVINKA**: Krok za krokem vedená cvičení
 
 #### Praktický výsledek
-Nasadit a nakonfigurovat AI chatovací aplikaci s RAG funkcionalitou
+Otestovat hostovaného agenta lokálně i v Foundry s využitím GA balíčku, zkontrolovat vyhodnocení a rozlišit čištění nových a opakovaně použitých projektů. Samostatná RAG/workshopová cesta pokrývá konfiguraci AI chat aplikace.
 
-#### Učební cesta workshopu (volitelné rozšíření)
-**NOVÁ interaktivní zkušenost**: [Kompletní průvodce workshopem](workshop/README.md)
-1. **Objevování** (30 min): Výběr a vyhodnocení šablony
-2. **Nasazení** (45 min): Nasadit a ověřit funkčnost AI šablony  
-3. **De-konstrukce** (30 min): Porozumět architektuře a komponentám šablony
-4. **Konfigurace** (30 min): Přizpůsobit nastavení a parametry
-5. **Přizpůsobení** (45 min): Upravit a iterovat pro šitý na míru výsledek
-6. **Ukončení** (15 min): Úklid zdrojů a porozumění životnímu cyklu
+#### Workshopová učební cesta (volitelné rozšíření)
+**NOVÝ interaktivní zážitek**: [Kompletní průvodce workshopem](workshop/README.md)
+1. **Objevování** (30 min): Výběr a hodnocení šablon
+2. **Nasazení** (45 min): Nasazení a ověření funkčnosti AI šablony  
+3. **De-konstruování** (30 min): Porozumění architektuře a komponentám šablony
+4. **Konfigurace** (30 min): Přizpůsobení nastavení a parametrů
+5. **Přizpůsobení** (45 min): Úpravy a iterace pro vlastní řešení
+6. **Ukliďte** (15 min): Vyčištění zdrojů a porozumění životnímu cyklu
 7. **Závěr** (15 min): Další kroky a pokročilé učební cesty
 
 ---
@@ -213,40 +217,40 @@ Nasadit a nakonfigurovat AI chatovací aplikaci s RAG funkcionalitou
 
 #### Co se naučíte
 - Konfigurace a správa prostředí
-- Nejlepší praktiky autentizace a bezpečnosti
+- Nejlepší praxe autentizace a zabezpečení
 - Pojmenování a organizace zdrojů
-- Nasazení ve více prostředích
+- Nasazení v několika prostředích
 
-#### Výukové zdroje
+#### Zdroje pro učení
 - [Průvodce konfigurací](docs/chapter-03-configuration/configuration.md) - Nastavení prostředí
-- [Vzorové zabezpečení a autentizace](docs/chapter-03-configuration/authsecurity.md) - Spravovaná identita a integrace Key Vaultu
-- Příklady pro více prostředí
+- [Vzory autentizace a zabezpečení](docs/chapter-03-configuration/authsecurity.md) - Spravovaná identita a integrace Key Vaultu
+- Příklady s více prostředími
 
 #### Praktický výsledek
-Spravovat více prostředí s správnou autentizací a zabezpečením
+Spravovat více prostředí s řádnou autentizací a zabezpečením
 
 ---
 
-### Kapitola 4: Infrastruktura jako kód a nasazení (1-1,5 hodiny) 🏗️
+### Kapitola 4: Infrastructure as Code a nasazení (1-1,5 hodiny) 🏗️
 **Předpoklady**: Dokončené kapitoly 1-3  
 **Složitost**: ⭐⭐⭐
 
 #### Co se naučíte
 - Pokročilé vzory nasazení
-- Infrastruktura jako kód pomocí Bicep
+- Infrastructure as Code s Bicep
 - Strategie poskytování zdrojů
 - Vytváření vlastních šablon
 
-- Nasazení kontejnerových aplikací s Azure Container Apps a AZD
+- Nasazení kontejnerizovaných aplikací pomocí Azure Container Apps a AZD
 
-#### Výukové zdroje
+#### Zdroje pro učení
 - [Průvodce nasazením](docs/chapter-04-infrastructure/deployment-guide.md) - Kompletní pracovní postupy
-- [Provisioning zdrojů](docs/chapter-04-infrastructure/provisioning.md) - Správa zdrojů
-- Příklady kontejnerů a mikroslužeb
-- [Příklady Container Apps](examples/container-app/README.md) - Rychlý start, produkční a pokročilé vzory nasazení
+- [Poskytování zdrojů](docs/chapter-04-infrastructure/provisioning.md) - Správa zdrojů
+- Příklady kontejnerů a mikroservis
+- [Příklady Container Apps](examples/container-app/README.md) - Rychlý start, produkce a pokročilé vzory nasazení
 
 #### Praktický výsledek
-Nasadit složité víceslužbové aplikace pomocí vlastních infrastrukturních šablon
+Nasadit komplexní více-službové aplikace pomocí vlastních šablon infrastruktury
 
 ---
 
@@ -257,19 +261,19 @@ Nasadit složité víceslužbové aplikace pomocí vlastních infrastrukturních
 #### Co se naučíte
 - Vzory multi-agentní architektury
 - Orchestrace a koordinace agentů
-- AI nasazení připravená pro produkci
-- Implementace zákaznických a inventárních agentů
+- Produkčně připravená AI nasazení
+- Implementace agentů pro zákazníky a inventář
 
-- Integrace kontejnerizovaných mikroslužeb jako součást agentních řešení
+- Integrace kontejnerizovaných mikroservis jako součást agentních řešení
 
-#### Výukové zdroje
-- [Retail multi-agentní řešení](examples/retail-scenario.md) - Architektonický plán, nikoli kompletní aplikace
-- [ARM šablona balíček](../../examples/retail-multiagent-arm-template) - Infrastrukturní kostra s předpoklady implementace
+#### Zdroje pro učení
+- [Řešení pro retail multi-agent](examples/retail-scenario.md) - Architektonický plán, nikoliv kompletní aplikace
+- [Balíček ARM šablon](../../examples/retail-multiagent-arm-template) - Infrastrukturální kostra s předpoklady implementace
 - Vzory koordinace multi-agentů
-- [Příklad architektury mikroslužeb](../../examples/container-app/microservices) - Komunikace služba-služba, asynchronní zprávy a produkční nasazení
+- [Příklad mikroservisní architektury](../../examples/container-app/microservices) - Komunikace služba ke službě, asynchronní zprávy a produkční nasazení
 
 #### Praktický výsledek
-Navrhnete multi-agentní AI řešení a identifikujete požadovanou implementaci aplikace, validaci a provozní práci přesahující samotný provisioning infrastruktury
+Navrhnout multi-agentní AI řešení a identifikovat implementační, validační a provozní činnosti aplikace nad rámec poskytování infrastruktury
 
 ---
 
@@ -278,279 +282,279 @@ Navrhnete multi-agentní AI řešení a identifikujete požadovanou implementaci
 **Složitost**: ⭐⭐
 
 #### Co se naučíte
-- Plánování kapacity a validace zdrojů
+- Plánování kapacity a ověření zdrojů
 - Strategie výběru SKU
 - Kontroly před nasazením a automatizace
 - Plánování optimalizace nákladů
 
-#### Výukové zdroje
-- [Plánování kapacity](docs/chapter-06-pre-deployment/capacity-planning.md) - Validace zdrojů
+#### Zdroje pro učení
+- [Plánování kapacity](docs/chapter-06-pre-deployment/capacity-planning.md) - Ověření zdrojů
 - [Výběr SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Nákladově efektivní volby
-- [Kontroly před nasazením](docs/chapter-06-pre-deployment/preflight-checks.md) - Automatizované skripty
-- [Integrace Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Monitorování a observabilita
-- [Vzory koordinace multi-agentů](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategie orchestrace agentů
+- [Kontroly před letem](docs/chapter-06-pre-deployment/preflight-checks.md) - Automatizované skripty
+- [Integrace Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Monitorování a dohledatelnost
+- [Vzorce koordinace více agentů](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategie orchestraci agentů
 
 #### Praktický výsledek
-Validovat a optimalizovat nasazení před spuštěním
+Ověření a optimalizace nasazení před spuštěním
 
 ---
 
 ### Kapitola 7: Řešení problémů a ladění (1-1,5 hodiny) 🔧
-**Předpoklady**: Dokončená jakákoliv kapitola o nasazení  
-**Složitost**: ⭐⭐
+**Požadavky**: Dokončena jakákoli kapitola o nasazení  
+**Náročnost**: ⭐⭐
 
-#### Co se Naučíte
+#### Co se naučíte
 - Systematické přístupy k ladění
 - Běžné problémy a řešení
 - Řešení problémů specifických pro AI
 - Optimalizace výkonu
 
-#### Vzdělávací Zdroje
-- [Běžné Problémy](docs/chapter-07-troubleshooting/common-issues.md) - FAQ a řešení
-- [Průvodce Laděním](docs/chapter-07-troubleshooting/debugging.md) - Strategie krok za krokem
-- [Řešení Problémů v AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Problémy s AI službami
+#### Výukové zdroje
+- [Běžné problémy](docs/chapter-07-troubleshooting/common-issues.md) - Často kladené otázky a řešení
+- [Průvodce laděním](docs/chapter-07-troubleshooting/debugging.md) - Krok za krokem strategie
+- [Řešení problémů AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Problémy AI služeb
 
-#### Praktický Výsledek
-Samostatná diagnostika a řešení běžných problémů nasazení
+#### Praktický výsledek
+Samostatná diagnostika a řešení běžných problémů s nasazením
 
 ---
 
-### Kapitola 8: Produkční & Podnikové Vzory (2-3 hodiny) 🏢
-**Předpoklady**: Kapitoly 1-4 dokončeny  
-**Složitost**: ⭐⭐⭐⭐
+### Kapitola 8: Produkční a podnikové vzorce (2-3 hodiny) 🏢
+**Požadavky**: Dokončeny kapitoly 1-4  
+**Náročnost**: ⭐⭐⭐⭐
 
-#### Co se Naučíte
-- Strategie produkčního nasazení
-- Podnikové bezpečnostní vzory
+#### Co se naučíte
+- Produkční strategie nasazení
+- Podnikové bezpečnostní vzorce
 - Monitorování a optimalizace nákladů
-- Škálovatelnost a řízení
+- Škálovatelnost a správa
 
 - Nejlepší postupy pro produkční nasazení kontejnerových aplikací (bezpečnost, monitorování, náklady, CI/CD)
 
-#### Vzdělávací Zdroje
-- [Nejlepší Průmyslové Praktiky AI v Produkci](docs/chapter-08-production/production-ai-practices.md) - Podnikové vzory
-- Příklady mikroslužeb a podnikové příklady
-- Rámce pro monitorování a řízení
-- [Příklad Architektury Mikroslužeb](../../examples/container-app/microservices) - Blue-green/canary nasazení, distribuované trasování a optimalizace nákladů
+#### Výukové zdroje
+- [Produkční AI nejlepší postupy](docs/chapter-08-production/production-ai-practices.md) - Podnikové vzorce
+- Příklady mikroservis a podnikových aplikací
+- Rámce pro monitorování a správu
+- [Příklad architektury mikroservis](../../examples/container-app/microservices) - Blue-green/canary nasazení, distribuované trasování a optimalizace nákladů
 
-#### Praktický Výsledek
-Nasazení aplikací připravených pro podnik s plnými produkčními schopnostmi
+#### Praktický výsledek
+Nasazení podnikových aplikací s plnými produkčními schopnostmi
 
 ---
 
-## Postup Učení a Složitost
+## Postup učení a náročnost
 
-### Postupné Budování Dovedností
+### Postupné budování dovedností
 
-- **🌱 Začátečníci**: Začněte Kapitolou 1 (Základy) → Kapitola 2 (Vývoj AI)
-- **🔧 Středně pokročilí**: Kapitoly 3-4 (Konfigurace & Infrastruktura) → Kapitola 6 (Validace)
-- **🚀 Pokročilí**: Kapitola 5 (Řešení s Více Agenty) → Kapitola 7 (Řešení Problémů)
-- **🏢 Podnikové**: Dokončit všechny kapitoly, zaměřit se na Kapitolu 8 (Produkční Vzory)
+- **🌱 Začátečníci**: Začněte kapitolou 1 (Základy) → kapitola 2 (Vývoj AI)
+- **🔧 Středně pokročilí**: Kapitoly 3-4 (Konfigurace & infrastruktura) → kapitola 6 (Ověření)
+- **🚀 Pokročilí**: Kapitola 5 (Víceagentní řešení) → kapitola 7 (Řešení problémů)
+- **🏢 Podnikové prostředí**: Dokončit všechny kapitoly, zaměřit se na kapitolu 8 (Produkční vzorce)
 
-- **Cesta Kontejnerových Aplikací**: Kapitoly 4 (Kontejnerizované nasazení), 5 (Integrace mikroslužeb), 8 (Produkční nejlepší praxe)
+- **Cesta kontejnerových aplikací**: Kapitoly 4 (Nasazení kontejnerů), 5 (Integrace mikroservis), 8 (Produkční nejlepší postupy)
 
-### Indikátory Složitosti
+### Ukazatele náročnosti
 
-- **⭐ Základní**: Jednotlivé koncepty, řízené tutoriály, 30-60 minut
-- **⭐⭐ Střední**: Více konceptů, praktický nácvik, 1-2 hodiny  
-- **⭐⭐⭐ Pokročilý**: Složité architektury, vlastní řešení, 1-3 hodiny
-- **⭐⭐⭐⭐ Expert**: Produkční systémy, podnikové vzory, 2-4 hodiny
+- **⭐ Základní**: Jednoduché koncepty, vedené tutoriály, 30-60 minut
+- **⭐⭐ Středně pokročilí**: Několik konceptů, praktická cvičení, 1-2 hodiny  
+- **⭐⭐⭐ Pokročilí**: Složité architektury, vlastní řešení, 1-3 hodiny
+- **⭐⭐⭐⭐ Expert**: Produkční systémy, podnikové vzorce, 2-4 hodiny
 
-### Flexibilní Cesty Učení
+### Flexibilní učební cesty
 
-#### 🎯 Rychlá Cesta Vývojáře AI (4-6 hodin)
-1. **Kapitola 1**: Základy & Rychlý Start (45 min)
-2. **Kapitola 2**: Vývoj orientovaný na AI (2 hodiny)  
-3. **Kapitola 5**: Řešení Multi-Agent AI (3 hodiny)
-4. **Kapitola 8**: Produkční nejlepší praktiky AI (1 hodina)
+#### 🎯 Rychlý kurz pro AI vývojáře (4-6 hodin)
+1. **Kapitola 1**: Základy & Rychlý start (45 minut)
+2. **Kapitola 2**: Vývoj AI jako první (2 hodiny)  
+3. **Kapitola 5**: Víceagentní AI řešení (3 hodiny)
+4. **Kapitola 8**: Nejlepší produkční postupy AI (1 hodina)
 
-#### 🛠️ Cesta Specialisty na Infrastrukturu (5-7 hodin)
-1. **Kapitola 1**: Základy & Rychlý Start (45 min)
+#### 🛠️ Cesta specialisty na infrastrukturu (5-7 hodin)
+1. **Kapitola 1**: Základy & Rychlý start (45 minut)
 2. **Kapitola 3**: Konfigurace & Autentizace (1 hodina)
-3. **Kapitola 4**: Infrastruktura jako Kód & Nasazení (1,5 hodiny)
-4. **Kapitola 6**: Validace a Plánování před Nasazením (1 hodina)
-5. **Kapitola 7**: Řešení Problémů & Ladění (1,5 hodiny)
-6. **Kapitola 8**: Produkční & Podnikové Vzory (2 hodiny)
+3. **Kapitola 4**: Infrastruktura jako kód & nasazení (1,5 hodiny)
+4. **Kapitola 6**: Ověření a plánování před nasazením (1 hodina)
+5. **Kapitola 7**: Řešení problémů a ladění (1,5 hodiny)
+6. **Kapitola 8**: Produkční a podnikové vzorce (2 hodiny)
 
-#### 🎓 Kompletní Učební Plán (8-12 hodin)
-Postupné dokončení všech 8 kapitol s praktickým nácvikem a ověřováním
+#### 🎓 Kompletní učební cesta (8-12 hodin)
+Sekvenční dokončení všech 8 kapitol s praktickými cvičeními a ověřením
 
-## Rámec Dokončení Kurzu
+## Rámec dokončení kurzu
 
-### Ověření Znalostí
+### Ověření znalostí
 - **Kontrolní body kapitol**: Praktická cvičení s měřitelnými výsledky
-- **Ověření praxí**: Nasazení funkčních řešení pro každou kapitolu
-- **Sledování pokroku**: Vizualizace a odznaky dokončení
-- **Ověření komunitou**: Sdílení zkušeností v kanálech Azure Discord
+- **Praktická verifikace**: Nasadit funkční řešení pro každou kapitolu
+- **Sledování pokroku**: Vizualizace indikátorů a odznaků dokončení
+- **Ověření komunitou**: Sdílet zkušenosti v kanálech Azure Discord
 
-### Hodnocení Výsledků Učení
+### Hodnocení výsledků učení
 
-#### Dokončení Kapitol 1-2 (Základy + AI)
+#### Dokončení kapitol 1-2 (Základy + AI)
 - ✅ Nasadit základní webovou aplikaci pomocí AZD
-- ✅ Nasadit AI-poháněnou chatovací aplikaci s RAG
-- ✅ Pochopit základní koncepty AZD a integraci AI
+- ✅ Nasadit chatovací aplikaci s AI funkcemi s RAG
+- ✅ Rozumět základním konceptům AZD a integraci AI
 
-#### Dokončení Kapitol 3-4 (Konfigurace + Infrastruktura)  
-- ✅ Řídit nasazení v několika prostředích
-- ✅ Vytvořit vlastní šablony infrastruktury v Bicepu
-- ✅ Implementovat bezpečné autentizační vzory
+#### Dokončení kapitol 3-4 (Konfigurace + Infrastruktura)  
+- ✅ Spravovat nasazení v různých prostředích
+- ✅ Vytvořit vlastní šablony Bicep infrastruktury
+- ✅ Implementovat bezpečné autentizační vzorce
 
-#### Dokončení Kapitol 5-6 (Multi-Agent + Validace)
-- ✅ Nasadit složité multi-agent AI řešení
+#### Dokončení kapitol 5-6 (Více agentů + Ověření)
+- ✅ Nasadit složité víceagentní AI řešení
 - ✅ Provést plánování kapacity a optimalizaci nákladů
-- ✅ Implementovat automatizovanou validaci před nasazením
+- ✅ Implementovat automatizované ověření před nasazením
 
-#### Dokončení Kapitol 7-8 (Řešení problémů + Produkce)
-- ✅ Samostatně ladit a řešit problémy s nasazením  
-- ✅ Implementovat monitorování a zabezpečení na podnikové úrovni
-- ✅ Nasadit aplikace připravené pro produkci s řízením
+#### Dokončení kapitol 7-8 (Řešení problémů + Produkce)
+- ✅ Ladit a samostatně řešit problémy s nasazením  
+- ✅ Implementovat monitorování a bezpečnost na podnikové úrovni
+- ✅ Nasadit produkční aplikace s řízením
 
-### Certifikace a Uznavání
-- **Odznak dokončení kurzu**: Dokončit všech 8 kapitol s praktickou validací
-- **Uznání v komunitě**: Aktivní účast v Microsoft Foundry Discordu
-- **Profesní rozvoj**: Průmyslově relevantní dovednosti v AZD a AI nasazení
-- **Kariérní postup**: Schopnosti produkčního cloudového nasazení v podnikové úrovni
+### Certifikace a uznání
+- **Odznak dokončení kurzu**: Kompletní všechny 8 kapitoly s praktickým ověřením
+- **Uznání komunity**: Aktivní účast v Microsoft Foundry Discord
+- **Profesní rozvoj**: Dovednosti relevantní pro AZD a AI nasazení
+- **Postup v kariéře**: Schopnosti nasazení cloudových řešení pro podniky
 
-## 🎓 Komplexní Výsledky Učení
+## 🎓 Celkově dosažené výsledky učení
 
-### Úroveň Základů (Kapitoly 1-2)
-Po dokončení základních kapitol budou studenti schopni:
+### Základní úroveň (kapitoly 1-2)
+Po dokončení základních kapitol studenti ukážou:
 
-**Technické Schopnosti:**
+**Technické schopnosti:**
 - Nasadit jednoduché webové aplikace do Azure pomocí příkazů AZD
-- Konfigurovat a nasazovat AI chatovací aplikace s podporou RAG
-- Pochopit základní koncepty AZD: šablony, prostředí, workflow provisioning
-- Integrovat Microsoft Foundry služby s AZD nasazením
-- Navigovat konfigurace Azure AI služeb a API endpointy
+- Konfigurovat a nasadit AI chatovací aplikace s RAG funkcemi
+- Rozumět hlavním konceptům AZD: šablony, prostředí, pracovní postupy provisioning
+- Integrovat služby Microsoft Foundry s nasazením AZD
+- Orientovat se v konfiguracích Azure AI služeb a API endpointech
 
-**Profesní Dovednosti:**
-- Dodržovat strukturované workflow nasazení pro konzistentní výsledky
+**Profesní dovednosti:**
+- Dodržovat strukturované pracovní postupy nasazení pro konzistentní výsledky
 - Řešit základní problémy nasazení pomocí logů a dokumentace
-- Efektivně komunikovat o procesech cloudového nasazení
-- Používat osvědčené postupy pro bezpečnou integraci AI služeb
+- Efektivně komunikovat o procesech nasazení v cloudu
+- Aplikovat nejlepší postupy pro bezpečnou integraci AI služeb
 
-**Ověření Učení:**
-- ✅ Úspěšně nasadit `todo-nodejs-mongo` šablonu
+**Ověření učení:**
+- ✅ Úspěšně nasadit šablonu `todo-nodejs-mongo`
 - ✅ Nasadit a konfigurovat `azure-search-openai-demo` s RAG
-- ✅ Dokončit interaktivní cvičení na workshopu (fáze Discovery)
+- ✅ Dokončit interaktivní cvičení workshopu (fáze objevování)
 - ✅ Účastnit se diskuzí v komunitě Azure Discord
 
-### Středně Pokročilá Úroveň (Kapitoly 3-4)
-Po dokončení středně pokročilých kapitol budou studenti schopni:
+### Středně pokročilá úroveň (kapitoly 3-4)
+Po dokončení středně pokročilých kapitol studenti ukážou:
 
-**Technické Schopnosti:**
-- Řídit nasazení ve více prostředích (vývoj, test, produkce)
-- Vytvořit vlastní Bicep šablony pro infrastrukturu jako kód
-- Implementovat bezpečné autentizační vzory pomocí spravované identity
-- Nasadit složité aplikace s vícero službami a vlastní konfigurací
+**Technické schopnosti:**
+- Spravovat nasazení ve více prostředích (vývoj, test, produkce)
+- Vytvářet vlastní Bicep šablony pro infrastrukturu jako kód
+- Implementovat bezpečné autentizační vzorce s řízenou identitou
+- Nasazovat složité multi-servisní aplikace s vlastní konfigurací
 - Optimalizovat strategie provisioning zdrojů pro náklady a výkon
 
-**Profesní Dovednosti:**
-- Navrhovat škálovatelné infrastruktury
-- Uplatňovat bezpečnostní nejlepší postupy pro cloudová nasazení
-- Dokumentovat vzory infrastruktury pro týmovou spolupráci
-- Hodnotit a vybírat vhodné Azure služby dle požadavků
+**Profesní dovednosti:**
+- Navrhovat škálovatelnou infrastrukturu
+- Implementovat nejlepší bezpečnostní postupy pro cloudová nasazení
+- Dokumentovat vzorce infrastruktury pro týmovou spolupráci
+- Hodnotit a vybírat vhodné Azure služby pro požadavky
 
-**Ověření Učení:**
-- ✅ Konfigurovat samostatná prostředí se specifickým nastavením
-- ✅ Vytvořit a nasadit vlastní Bicep šablonu pro víceslužbovou aplikaci
-- ✅ Implementovat autentizaci spravovanou identitou pro bezpečný přístup
+**Ověření učení:**
+- ✅ Konfigurovat oddělená prostředí s nastavením specifickým pro prostředí
+- ✅ Vytvořit a nasadit vlastní Bicep šablonu pro multi-servisní aplikaci
+- ✅ Implementovat autentizaci řízenou identitou pro bezpečný přístup
 - ✅ Dokončit cvičení správy konfigurace s reálnými scénáři
 
-### Pokročilá Úroveň (Kapitoly 5-6)
-Po dokončení pokročilých kapitol budou studenti schopni:
+### Pokročilá úroveň (kapitoly 5-6)
+Po dokončení pokročilých kapitol studenti ukážou:
 
-**Technické Schopnosti:**
-- Nasadit a koordinovat multi-agent AI řešení s řízenými workflow
-- Implementovat architektury zákaznických a inventárních agentů pro maloobchodní scénáře
-- Provádět komplexní plánování kapacity a validaci zdrojů
-- Provést automatizovanou validaci a optimalizaci před nasazením
-- Navrhnout nákladově efektivní výběr SKU dle požadavků na zátěž
+**Technické schopnosti:**
+- Nasadit a orchestraci víceagentních AI řešení s koordinovanými pracovními postupy
+- Implementovat architektury agentů pro zákazníky a inventář v maloobchodních scénářích
+- Provést komplexní plánování kapacity a ověření zdrojů
+- Provádět automatizované ověření a optimalizaci před nasazením
+- Navrhnout nákladově efektivní výběry SKU podle požadavků zatížení
 
-**Profesní Dovednosti:**
-- Navrhovat komplexní AI řešení pro produkční prostředí
-- Vést technické diskuze o strategiích nasazení AI
-- Mentorovat juniorní vývojáře v AZD a AI nejlepších postupech
-- Hodnotit a doporučovat AI architektonické vzory dle obchodních požadavků
+**Profesní dovednosti:**
+- Navrhovat složitá AI řešení pro produkční prostředí
+- Vést technické diskuse o strategiích nasazení AI
+- Mentorovat juniory ve vývoji AZD a AI nasazení
+- Hodnotit a doporučovat AI architektonické vzorce podle podnikových požadavků
 
-**Ověření Učení:**
-- ✅ Prozkoumat maloobchodní multi-agent blueprint a rozlišit nasazenou infrastrukturu od chybějící implementace aplikace
-- ✅ Demonstrovat koordinaci agentů a řízení workflow
-- ✅ Dokončit cvičení plánování kapacity s reálnými omezeními zdrojů
-- ✅ Ověřit připravenost nasazení prostřednictvím automatizovaných kontrol před startem
+**Ověření učení:**
+- ✅ Projít si maloobchodní vícagentní plán a rozlišit nasazenou infrastrukturu od chybějící implementace aplikace
+- ✅ Demonstrovat koordinaci agentů a orchestraci pracovních postupů
+- ✅ Dokončit kapacitní plánování s reálnými omezeními zdrojů
+- ✅ Ověřit připravenost nasazení prostřednictvím automatizovaných kontrol před letem
 
-### Expertní Úroveň (Kapitoly 7-8)
-Po dokončení expertních kapitol budou studenti schopni:
+### Expertní úroveň (kapitoly 7-8)
+Po dokončení expertních kapitol studenti ukážou:
 
-**Technické Schopnosti:**
+**Technické schopnosti:**
 - Diagnostikovat a samostatně řešit složité problémy nasazení
-- Implementovat podnikové bezpečnostní vzory a rámce řízení
-- Navrhovat komplexní strategie monitorování a upozornění
+- Implementovat bezpečnostní vzorce a rámce řízení na podnikové úrovni
+- Navrhnout komplexní strategie monitorování a hlášení
 - Optimalizovat produkční nasazení pro škálovatelnost, náklady a výkon
-- Zavést CI/CD pipeline s řádným testováním a validací
+- Zavést CI/CD pipeline s patřičným testováním a ověřováním
 
-**Profesní Dovednosti:**
-- Vést podnikové iniciativy pro cloudovou transformaci
-- Navrhovat a implementovat organizační standardy nasazení
-- Školit a mentorovat vývojové týmy v pokročilých praktikách AZD
-- Ovlivňovat technická rozhodnutí pro podniková AI nasazení
+**Profesní dovednosti:**
+- Vést iniciativy podnikové cloudové transformace
+- Navrhnout a implementovat standardy organizace pro nasazení
+- Trénovat a mentorovat týmy ve vyspělých praktikách AZD
+- Ovlivňovat technická rozhodnutí v oblasti podnikových AI nasazení
 
-**Ověření Učení:**
-- ✅ Vyřešit složité selhání nasazení víceslužbových aplikací
-- ✅ Implementovat podnikové bezpečnostní vzory v souladu s požadavky na shodu
-- ✅ Navrhnout a nasadit produkční monitorování pomocí Application Insights
+**Ověření učení:**
+- ✅ Řešit složité selhání nasazení více služeb
+- ✅ Implementovat podnikové bezpečnostní vzorce s požadavky na shodu
+- ✅ Navrhnout a nasadit produkční monitorování s Application Insights
 - ✅ Dokončit implementaci rámce podnikové správy
 
-## 🎯 Certifikace Dokončení Kurzu
+## 🎯 Certifikace dokončení kurzu
 
-### Rámec sledování postupu
-Sledujte svůj pokrok prostřednictvím strukturovaných kontrolních bodů:
+### Rámec sledování pokroku
+Sledujte svůj pokrok ve studiu pomocí strukturovaných kontrolních bodů:
 
-- [ ] **Kapitola 1**: Základy & Rychlý Start ✅
-- [ ] **Kapitola 2**: Vývoj orientovaný na AI ✅  
+- [ ] **Kapitola 1**: Základy & Rychlý start ✅
+- [ ] **Kapitola 2**: Vývoj AI jako první ✅  
 - [ ] **Kapitola 3**: Konfigurace & Autentizace ✅
-- [ ] **Kapitola 4**: Infrastruktura jako Kód & Nasazení ✅
-- [ ] **Kapitola 5**: Řešení Multi-Agent AI ✅
-- [ ] **Kapitola 6**: Validace a Plánování před Nasazením ✅
-- [ ] **Kapitola 7**: Řešení Problémů & Ladění ✅
-- [ ] **Kapitola 8**: Produkční & Podnikové Vzory ✅
+- [ ] **Kapitola 4**: Infrastruktura jako kód & nasazení ✅
+- [ ] **Kapitola 5**: Víceagentní AI řešení ✅
+- [ ] **Kapitola 6**: Ověření a plánování před nasazením ✅
+- [ ] **Kapitola 7**: Řešení problémů a ladění ✅
+- [ ] **Kapitola 8**: Produkční & podnikové vzorce ✅
 
-### Proces Ověření
+### Proces ověření
 Po dokončení každé kapitoly ověřte své znalosti prostřednictvím:
 
-1. **Dokončení praktického cvičení**: Nasazení funkčních řešení pro každou kapitolu
-2. **Hodnocení znalostí**: Projít FAQ sekce a dokončit sebehodnocení
-3. **Zapojení do komunity**: Sdílení zkušeností a zpětné vazby v Azure Discord
-4. **Vývoj portfolia**: Dokumentovat nasazení a poznatky
-5. **Přezkum od vrstevníků**: Spolupracovat s ostatními studenty na složitých scénářích
+1. **Splnění praktického cvičení**: Nasadit funkční řešení pro každou kapitolu
+2. **Hodnocení znalostí**: Projít sekce FAQ a dokončit sebehodnocení
+3. **Zapojení komunity**: Sdílet zkušenosti a získávat zpětnou vazbu v Azure Discord
+4. **Rozvoj portfolia**: Dokumentovat svá nasazení a získané lekce
+5. **Kontrola vrstevníky**: Spolupracovat s ostatními studenty na složitých scénářích
 
-### Výhody Dokončení Kurzu
-Po dokončení všech kapitol s ověřením získají absolventi:
+### Výhody dokončení kurzu
+Po dokončení všech kapitol a ověření budou absolventi mít:
 
-**Technická Odbornost:**
-- **Produkční Zkušenosti**: Nasazení reálných AI aplikací do Azure prostředí
-- **Profesní Dovednosti**: Schopnosti podnikového nasazení a řešení problémů  
-- **Ználost Architektury**: Multi-agent AI řešení a složité infrastrukturní vzory
-- **Mistři Řešení Problémů**: Samostatné řešení problémů nasazení a konfigurace
+**Technická odbornost:**
+- **Produkční zkušenosti**: Nasazené reálné AI aplikace v Azure prostředí
+- **Profesní dovednosti**: Schopnosti nasazení a řešení problémů na podnikové úrovni  
+- **Znalosti architektury**: Víceagentní AI řešení a složité infrastrukturní vzorce
+- **Mistrovství v řešení problémů**: Samostatné řešení potíží s nasazením a konfigurací
 
-**Profesní Rozvoj:**
-- **Uznání v Odvětví**: Ověřitelné dovednosti v AZD a AI nasazení s vysokou poptávkou
-- **Postup v Kariéře**: Kvalifikace pro role cloud architekta a specialisty AI nasazení
-- **Vůdcovství v Komunitě**: Aktivní členství v Azure vývojářských a AI komunitách
-- **Nepřetržité Učení**: Základ pro pokročilou specializaci Microsoft Foundry
+**Profesní rozvoj:**
+- **Uznání v oboru**: Ověřené dovednosti v žádaných oblastech AZD a AI nasazení
+- **Postup v kariéře**: Kvalifikace pro roli cloudového architekta a specialisty nasazení AI
+- **Vedení v komunitě**: Aktivní členství v Azure vývojářských a AI komunitách
+- **Nepřetržité učení**: Základy pro pokročilou specializaci Microsoft Foundry
 
-**Aktiva Portfolia:**
-- **Nasazená Řešení**: Fungující příklady AI aplikací a infrastruktury
-- **Dokumentace**: Komplexní návody na nasazení a postupy řešení problémů  
-- **Příspěvky Komunitě**: Diskuze, příklady a zlepšení sdílená s Azure komunitou
-- **Profesní Síť**: Kontakty na Azure experty a praktiky AI nasazení
+**Portfoliové aktiva:**
+- **Nasazená řešení**: Fungující příklady AI aplikací a infrastrukturních vzorců
+- **Dokumentace**: Komplexní příručky nasazení a postupy řešení problémů  
+- **Příspěvky do komunity**: Diskuze, příklady a vylepšení sdílená s Azure komunitou
+- **Profesní síť**: Spojení s Azure experty a praktikanty AI nasazení
 
-### Cesta Učení po Kurzu
+### Cesta učení po kurzu
 Absolventi jsou připraveni pro pokročilou specializaci v:
-- **Microsoft Foundry Expert**: Hluboká specializace v nasazování a orchestraci AI modelů
-- **Vedoucí Cloudové Architektury**: Návrh a řízení nasazení v podnikovém měřítku
-- **Vůdcovství Vývojářské Komunity**: Přispívání do Azure ukázek a komunitních zdrojů
-- **Firemní Školení**: Výuka dovedností AZD a AI nasazení v organizacích
+- **Microsoft Foundry Expert**: Hluboká specializace v nasazení a orchestraci AI modelů
+- **Vedení cloudové architektury**: Návrh a správa podnikových nasazení
+- **Vedení developerské komunity**: Příspěvky do Azure vzorků a komunitních zdrojů
+- **Firemní školení**: Výuka dovedností AZD a AI nasazení ve firmách
 
 ---
 

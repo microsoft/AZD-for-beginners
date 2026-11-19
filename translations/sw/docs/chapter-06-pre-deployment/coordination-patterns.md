@@ -1,62 +1,62 @@
-# Mifumo ya Uratibu wa Wakala Wengi
+# Mifumo ya Kuratibu Wakala Wengi
 
-⏱️ **Muda Unaokadiriwa**: Dakika 60-75 za kusoma; masaa kadhaa kutekeleza | 💰 **Gharama Inayokadiriwa**: hutegemea mzigo wa kazi | ⭐ **Ugumu**: Juu
+⏱️ **Muda Uliokadiriwa**: dakika 60-75 kusoma; masaa kadhaa kutekeleza | 💰 **Gharama Iliokadiriwa**: inategemea mzigo wa kazi | ⭐ **Ukubwa wa Ugumu**: Kiwanda
 
 **📚 Njia ya Kujifunza:**
-- ← Nyuma: [Mipango ya Uwezo](capacity-planning.md) - Mikakati ya kupima rasilimali na upanuzi
-- 🎯 **Uko Hapa**: Mifumo ya Uratibu wa Wakala Wengi (Utaratibu, mawasiliano, usimamizi wa hali)
-- → Ifuatayo: [Uchaguzi wa SKU](sku-selection.md) - Kuteua huduma za Azure zinazofaa
+- ← Iliyo hapa awali: [Mipango ya Uwezo](capacity-planning.md) - Mikakati ya ukubwa na kigezo cha rasilimali
+- 🎯 **Uko Hapa**: Mifumo ya Kuratibu Wakala Wengi (Utaratibu, mawasiliano, usimamizi wa hali)
+- → Ifuatayo: [Uchaguzi wa SKU](sku-selection.md) - Kuchagua huduma sahihi za Azure
 - 🏠 [Nyumbani kwa Kozi](../../README.md)
 
 ---
 
-## Utahujifunza Nini
+## Utajifunza Nini
 
-Kwa kumaliza somo hili, utapitia:
-- Kuelewa mifumo ya **miundo ya wakala wengi** na lini kuzitumia
-- Kutekeleza **mifumo ya uratibu** (katika kituo kimoja, isiyo ya kituo kimoja, kwa ngazi)
-- Kubuni mikakati ya **mawasiliano ya wakala** (kwa wakati mmoja, bila wakati, inayoendeshwa na matukio)
-- Kusimamia **hali iliyogawanyika** kati ya mawakala waliosambazwa
-- Kuweka mifumo ya **wakala wengi** kwenye Azure kwa kutumia AZD
-- Kutumia **mifumo ya uratibu** kwa hali halisi za AI
-- Kuchunguza na kutatua matatizo ya mifumo ya wakala waliosambazwa
+Kwa kumaliza somo hili, utakuwa umeweza:
+- Elewa mifumo ya **miundo ya wakala wengi** na lini ya kuitumia
+- Tekeleza **mifumo ya utaratibu** (katikati, isiyo ya kati, mlolongo)
+- Buni mikakati ya **mawasiliano ya wakala** (synchronous, asynchronous, inayoendeshwa na matukio)
+- Simamia **hali ya pamoja** kati ya wakala waliosambazwa
+- Tumia **mifumo ya wakala wengi** kwenye Azure kwa kutumia AZD
+- Tumia **mifumo ya kuratibu** kwa matukio halisi ya AI
+- Angalia na tibu hitilafu za mifumo ya wakala waliosambazwa
 
-## Kwa Nini Uratibu wa Wakala Wengi Ni Muhimu
+## Kwa Nini Kuratibu Wakala Wengi Ni Muhimu
 
-### Mageuzi: Kutoka kwa Wakala Mmoja hadi Wakala Wengi
+### Mageuzi: Kutoka kwa Mwakala Mmoja hadi Wakala Wengi
 
-**Wakala Mmoja (Rahisi):**
+**Mwakala Mmoja (Rahisi):**
 ```
 User → Agent → Response
 ```
 - ✅ Rahisi kuelewa na kutekeleza
 - ✅ Haraka kwa kazi rahisi
-- ❌ Huathiriwa na uwezo wa mfano mmoja tu
-- ❌ Haiwezi kuendesha kazi ngumu kwa njia sambamba
-- ❌ Hakuna utaalam maalum
+- ❌ Inapungua kwa uwezo wa mfano mmoja
+- ❌ Haiwezi kupangia kwa usawa kazi ngumu
+- ❌ Hakuna utaalamu maalum
 
-**Mfumo wa Wakala Wengi (Juu):**
+**Mfumo wa Wakala Wengi (Kiwanda):**
 ```mermaid
 graph TD
     Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
     Orchestrator --> Agent2[Agent2<br/>Code]
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
-- ✅ Wakala maalum kwa kazi maalum
-- ✅ Utekelezaji sambamba kwa kasi
-- ✅ Moduli na rahisi kudumishwa
-- ✅ Bora kwa michakato ya kazi ngumu
-- ⚠️ Inahitaji mantiki ya uratibu
+- ✅ Wakala maalum kwa kazi mahususi
+- ✅ Utendaji sambamba kwa kasi
+- ✅ Moduli na inayoendelea kudumishwa
+- ✅ Imekua bora kwa michakato tata
+- ⚠️ Inahitaji mantiki ya kuratibu
 
-**Mfano**: Wakala mmoja ni kama mtu mmoja anayetekeleza kazi zote. Wakala wengi ni kama timu ambapo kila mshiriki ana ujuzi maalum (mtafiti, mhandisi wa programu, mkaguzi, mtaalamu wa uandishi) wakifanya kazi pamoja.
+**Mfano**: Mwakala mmoja ni kama mtu mmoja anayetekeleza kazi zote. Wakala wengi ni kama timu ambapo kila mshiriki ana ujuzi maalum (mtafiti, mchoraji wa msimbo, mkaguzi, mwandishi) wakifanya kazi pamoja.
 
 ---
 
-## Mifumo Msingi ya Uratibu
+## Mifumo Mikuu ya Kuratibu
 
-### Mfumo 1: Uratibu wa Mfuatano (Mnyororo wa Wajibu)
+### Mfumo 1: Kuratibu Mfuatano (Mlolongo wa Wajibu)
 
-**Lini utumie**: Kazi lazima zikamilike kwa mpangilio maalum, kila wakala anaendeleza matokeo ya awali.
+**Lini utumie**: Kazi lazima zimalizike kwa mpangilio fulani, kila wakala hujenga kwenye matokeo ya awali.
 
 ```mermaid
 sequenceDiagram
@@ -80,24 +80,24 @@ sequenceDiagram
 
 **Faida:**
 - ✅ Mtiririko wazi wa data
-- ✅ Rahisi kutambua makosa
-- ✅ Omba kutekelezeka kwa mpangilio unaowezekana
+- ✅ Rahisi kutatua hitilafu
+- ✅ Mpangilio wa utekelezaji unaotarajiwa
 
 **Mikomo:**
-- ❌ Polepole (hakuna utekelezaji sambamba)
-- ❌ Hitilafu moja inazuia mnyororo mzima
+- ❌ Polepole (hakuna utangamano)
+- ❌ Hitilafu moja inazuia mlolongo mzima
 - ❌ Haiwezi kushughulikia kazi zinazotegemeana
 
-**Mfano wa Matumizi:**
-- Mlolongo wa utengenezaji wa maudhui (tafiti → andika → hakiki → chapisha)
-- Uundaji wa msimbo (panga → tekeleza → jaribu → sambaza)
-- Uundaji wa ripoti (kusanya data → chambuzi → onyesha → muhtasari)
+**Mifano ya Matumizi:**
+- Mtiririko wa uundaji wa maudhui (tafiti → andika → hariri → chapisha)
+- Kizalishaji cha msimbo (mpango → tekeleza → jaribu → weka)
+- Kizalishaji ripoti (kusanya data → uchambuzi → uoneshaji wa picha → muhtasari)
 
 ---
 
-### Mfumo 2: Uratibu Sambamba (Fan-Out/Fan-In)
+### Mfumo 2: Kuratibu Sambamba (Fan-Out/Fan-In)
 
-**Lini utumie**: Kazi huru zinaweza kukimbia kwa wakati mmoja, matokeo yachanganywe mwishoni.
+**Lini utumie**: Kazi huru zinaweza kufanyika kwa wakati mmoja, matokeo huunganishwa mwishowe.
 
 ```mermaid
 graph TB
@@ -124,24 +124,24 @@ graph TB
 
 **Faida:**
 - ✅ Haraka (utekelezaji sambamba)
-- ✅ Uvumilivu wa hitilafu (matokeo ya sehemu yanakubalika)
-- ✅ Inaweza kupanuka katika wima
+- ✅ Stahimili hitilafu (matokeo ya sehemu yanakubalika)
+- ✅ Inaongezeka kwa upana
 
 **Mikomo:**
-- ⚠️ Matokeo yanaweza kuwasili nje ya mpangilio
-- ⚠️ Inahitaji mantiki ya kuchanganya matokeo
-- ⚠️ Usimamizi mgumu wa hali
+- ⚠️ Matokeo yanaweza kufika bila mpangilio
+- ⚠️ Inahitaji mantiki ya kujumlisha
+- ⚠️ Usimamizi wa hali ngumu
 
-**Mfano wa Matumizi:**
-- Kukusanya data kutoka vyanzo vingi (APIs + hifadhidata + kuchambua wavuti)
-- Uchambuzi wa ushindani (mifano mingi hutengeneza suluhisho, bora hupendekezwa)
-- Huduma za tafsiri (kutafsiri lugha nyingi kwa wakati mmoja)
+**Mifano ya Matumizi:**
+- Ukusanyaji data kutoka vyanzo vingi (API + hifadhidata + kuvua wavuti)
+- Uchambuzi wa ushindani (mifano mingi hutengeneza suluhisho, bora hupatikana)
+- Huduma za tafsiri (kutoa tafsiri kwa lugha nyingi kwa wakati mmoja)
 
 ---
 
-### Mfumo 3: Uratibu wa Ngazi (Msimamizi-Mfanyakazi)
+### Mfumo 3: Kuratibu Kihierarkia (Msimamizi-Mfanyakazi)
 
-**Lini utumie**: Michakato ngumu yenye kazi ndogo, inahitaji kugawa majukumu.
+**Lini utumie**: Michakato tata yenye kazi ndogo ndogo, ugawaji wa kazi unahitajika.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Faida:**
-- ✅ Inasimamia michakato ngumu
-- ✅ Moduli na rahisi kudumishwa
-- ✅ Mipaka wazi ya majukumu
+- ✅ Husimamia michakato tata
+- ✅ Moduli na inayoendelea kudumishwa
+- ✅ Mipaka wazi ya uwajibikaji
 
 **Mikomo:**
 - ⚠️ Miundo tata zaidi
-- ⚠️ Muda mrefu wa kuchelewa (tabaka nyingi za uratibu)
+- ⚠️ ucheleweshaji mkubwa zaidi (tabaka nyingi za kuratibu)
 - ⚠️ Inahitaji utaratibu wa hali ya juu
 
-**Mfano wa Matumizi:**
-- Uendeshaji wa nyaraka za shirika (ainisha → peleka → fanyia kazi → arjivisha)
-- Mito ya data yenye hatua nyingi (ingiza → safisha → badilisha → chambua → ripoti)
-- Michakato tata ya ujenzi wa kiotomatiki (kupanga → kugawanya rasilimali → kutekeleza → kufuatilia)
+**Mifano ya Matumizi:**
+- Usindikaji wa hati za kampuni (ainisha → panga → sindika → hifadhi)
+- Mitoro ya data ngazi nyingi (ingiza → safisha → badilisha → chambua → ripoti)
+- Michakato tata ya otomatiki (maandalizi → ugawaji wa rasilimali → utendaji → ufuatiliaji)
 
 ---
 
-### Mfumo 4: Uratibu Unaotegemea Matukio (Chapisha-Jisajili)
+### Mfumo 4: Kuratibu Inayotegemea Matukio (Chapisha-Jisajili)
 
-**Lini utumie**: Wakala wanahitaji kutenda kwa matukio, unganisho mwepesi unahitajika.
+**Lini utumie**: Wakala wanahitaji kuingilia matukio, ushirikiano mdogo unahitajika.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Faida:**
-- ✅ Unganisho mwepesi kati ya mawakala
-- ✅ Rahisi kuongeza mawakala wapya (jisajili tu)
-- ✅ Uendeshaji bila wakati
-- ✅ Uvumilivu (uhifadhi wa ujumbe)
+- ✅ Ushirikiano mdogo kati ya wakala
+- ✅ Rahisi kuongeza wakala wapya (jisikilize tu)
+- ✅ Usindikaji usio na mwendo wa saa
+- ✅ Imara (uhifadhi wa ujumbe)
 
 **Mikomo:**
-- ⚠️ Kuwepo kwa muafaka wa hatimaye
-- ⚠️ Ugumu wa kutambua makosa
+- ⚠️ Ulinganifu wa hatimaye
+- ⚠️ Ugumu wa kutatua hitilafu
 - ⚠️ Changamoto za mpangilio wa ujumbe
 
-**Mfano wa Matumizi:**
+**Mifano ya Matumizi:**
 - Mifumo ya ufuatiliaji wa wakati halisi (arifa, dashibodi, kumbukumbu)
-- Arifa kwa njia mbalimbali (barua pepe, SMS, push, Slack)
-- Mito ya usindikaji wa data (wateja wengi kwa data moja)
+- Arifa za njia nyingi (barua pepe, SMS, push, Slack)
+- Mitoro ya usindikaji data (watumiaji wengi wa data ile ile)
 
 ---
 
-### Mfumo 5: Uratibu wa Kiasi (Kupiga Kura/Kundi)
+### Mfumo 5: Kuratibu kwa Makubaliano (Kura/Quorum)
 
-**Lini utumie**: Inahitaji makubaliano kutoka kwa mawakala wengi kabla ya kuendelea.
+**Lini utumie**: Inahitajika makubaliano kutoka kwa wakala wengi kabla ya kuendelea.
 
 ```mermaid
 graph TB
@@ -248,19 +248,19 @@ graph TB
 ```
 
 **Faida:**
-- ✅ Usahihi wa juu (maoni mengi)
-- ✅ Uvumilivu wa hitilafu (makosa ya wachache yanakubalika)
-- ✅ Udhibitisho wa ubora umejengwa ndani
+- ✅ Usahihi zaidi (maoni mengi)
+- ✅ Stahimili hitilafu (makosa ya wachache yanakubalika)
+- ✅ Udhamini wa ubora umejumuishwa
 
 **Mikomo:**
-- ❌ Gharama kubwa (miito mingi ya mifano)
-- ❌ Polepole (kusubiri mawakala wote)
-- ⚠️ Inahitaji utatuzi wa migogoro
+- ❌ Ghali (miito mingi ya mfano)
+- ❌ Polepole (kusubiri wakala wote)
+- ⚠️ Uhitaji wa utatuzi wa migongano
 
-**Mfano wa Matumizi:**
-- Udhibiti wa maudhui (mifano mingi hukagua maudhui)
-- Ukaguzi wa msimbo (liwaza nyingi / wachambuzi)
-- Uchunguzi wa tiba (mifano mingi ya AI, uthibitisho wa mtaalamu)
+**Mifano ya Matumizi:**
+- Ukaguzi wa maudhui (mifano mingi hukagua maudhui)
+- Ukaguzi wa msimbo (linting/uchambuzi wa msimbo)
+- Utambuzi wa matibabu (mifano mingi ya AI, uthibitisho wa mtaalamu)
 
 ---
 
@@ -314,23 +314,23 @@ graph TB
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 
-**Vipengele Muhimu:**
+**Vitu Muhimu:**
 
 | Kipengele | Kusudi | Huduma ya Azure |
 |-----------|---------|---------------|
-| **Kipinda cha API** | Kuingia, kuweka kikomo cha viwango, uthibitishaji | Usimamizi wa API |
-| **Msimamizi wa Uratibu** | Kuratibu mifumo ya kazi za wakala | Container Apps |
-| **Foleni ya Ujumbe** | Mawasiliano yasiyo ya kusubiri | Service Bus / Event Hubs |
-| **Makala** | Wafanyakazi maalum wa AI | Container Apps / Functions |
-| **Hifadhi ya Hali** | Hali iliyogawanyika, ufuatiliaji wa kazi | Cosmos DB |
-| **Hifadhi ya Makabari** | Nyaraka, matokeo, kumbukumbu | Blob Storage |
-| **Ufuatiliaji** | Kufuata kilichosambazwa, kumbukumbu | Application Insights |
+| **Kuingia API** | Mlangoni, ukomo wa kiwango, uthibitishaji | Usimamizi wa API |
+| **Mkurugenzi** | Kuratibu michakato ya wakala | Aplikeshini za Kontena |
+| **Foleni za Ujumbe** | Mawasiliano yasiyo ya kwa wakati mmoja | Service Bus / Event Hubs |
+| **Wakala** | Wafanyakazi maalum wa AI | Aplikeshini za Kontena / Functions |
+| **Hifadhi ya Hali** | Hali ya pamoja, ufuatiliaji wa kazi | Cosmos DB |
+| **Hifadhi ya Waraka** | Hati, matokeo, kumbukumbu | Hifadhi ya Blob |
+| **Ufuatiliaji** | Ufuatiliaji usiosambazwa, kumbukumbu | Maoni ya Programu |
 
-Foleni/maudhuzi ya Service Bus na Event Hubs ni huduma tofauti zenye mifumo tofauti ya usambazaji/matumizi; Event Hubs si mbadala halisi wa msimbo wa mfanyakazi wa Service Bus hapa chini. Utekelezaji sambamba, ujumbe ulihifadhiwa, na kupiga kura kwa mfano hakuahidi peke yake uvumilivu wa hitilafu au usahihi wa juu.
+Foleni/vipindi vya Service Bus na Event Hubs ni huduma tofauti zenye mifumo tofauti ya utoaji/utekelezaji; Event Hubs si mbadala moja kwa moja kwa msimbo wa mfanyakazi wa Service Bus hapa chini. Utangamano wa kazi sambamba, ujumbe uliodumu, na kupiga kura kwa mfano havihakikishi peke yao stahimili ya hitilafu au usahihi wa juu.
 
 ---
 
-## Mahitaji Awali
+## Mahitaji Kabla ya Kuanzia
 
 ### Zana Zinazohitajika
 
@@ -352,28 +352,28 @@ docker --version
 
 - Usajili wa Azure unaoendelea
 - Ruhusa za kuunda:
-  - Container Apps
-  - Mabara ya Service Bus
+  - Aplikeshini za Kontena
+  - Mikoa ya Service Bus
   - Akaunti za Cosmos DB
   - Akaunti za Hifadhi
-  - Application Insights
+  - Maoni ya Programu
 
-### Maarifa Muhimu
+### Mahitaji ya Maarifa
 
-Unapaswa kuwa umefanya:
+Unapaswa umemaliza:
 - [Usimamizi wa Mipangilio](../chapter-03-configuration/configuration.md)
-- [Uthibitishaji & Usalama](../chapter-03-configuration/authsecurity.md)
+- [Uthibitishaji na Usalama](../chapter-03-configuration/authsecurity.md)
 - [Mfano wa Microservices](../../../../examples/microservices)
 
 ---
 
-## Mwongozo wa Kutekeleza
+## Mwongozo wa Utekelezaji
 
-> **Vipande vya muundo, si maabara inayoweza kutumika moja kwa moja:** Mti wa mradi na lebo za `File:` hapa chini zinaelezea faili za kuunda katika mradi wako wenyewe; hazina programu kamili ya `multi-agent-system`. Vipande vinavyokosa ni kama vigezo vikuu, mazingira/rehabari za Container Apps, Dockerfiles na uteuzi wa tegemezi, usanidi wa hifadhidata/cosmos, uanzishaji wa mifano, usanidi wa kitambulisho/majukumu, sheria za upanuzi, na wafanyakazi/foleni sambamba. Usitarajia `azd init` kuunda faili hizi au `azd up` kupeleka vipande hivi bila mabadiliko. Kwa mwanzo unaoweza kutekelezeka, tembelea [Misingi ya Wakala Wengi](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Vipande vya kubuni, si maabara kamili ya kawaida:** Mti wa mradi na lebo za `File:` hapo chini zinaelezea faili za kuunda katika mradi wako; hifadhidata hii haina programu kamili ya `multi-agent-system`. Vipengele vinavyokosekana ni pamoja na mifumo ya msingi/maelezo, mazingira/rejesta ya Aplikeshini za Kontena, Dockerfiles na viwago vya utegemezi, usanidi wa hifadhidata ya Cosmos/database/konteina, usambazaji wa mifano, usanidi wa utambulisho/nafasi, sheria za ukuzaji, na wafanyakazi/foleni sambamba. Usitaraji `azd init` itengeneze faili hizi au `azd up` itekeleze vipande kama ilivyo. Kwa mwanzo wa utekelezaji halisi, maliza [Misingi ya Wakala Wengi](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Makadirio ya wakati wa utendaji:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, na (kwa ufuatiliaji) `azure-monitor-opentelemetry`; weka `shared` katika njia ya kuagiza Python kwa picha ya kila huduma. Kontena la Cosmos `agent-state/tasks` lazima liwe tayari na kitufe cha mgawanyo `/id`. Unganisho kwa kutumia funguo hufanya vipande hivi kuwa rahisi, si ushauri wa uzalishaji: tumia kitambulisho kinachosimamiwa chenye majukumu yaliyopangwa ya Service Bus/Cosmos/OpenAI data-plane. Usifunue funguo katika matokeo au kumbukumbu.
+**Madhumuni ya wakati wa utekelezaji:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, na (kwa ufuatiliaji) `azure-monitor-opentelemetry`; weka `shared` kwenye njia ya kuingiza ya Python katika kila picha ya huduma. Kontena ya Cosmos `agent-state/tasks` lazima iwe tayari na ufunguo wa mgawanyo `/id`. Unganisho la msingi unaifanya iwe rahisi vipande hivi, si ushauri wa uzalishaji: pendelea utambulisho uliosimamiwa na nafasi maalum za data za Service Bus/Cosmos/OpenAI. Usifunue funguo kwenye mazao au kumbukumbu.
 
-Usambazaji wa Service Bus ni **angalia angalau mara moja**. Hifadhi utendakazi wa idempotency kwa kazi **na hatua**, tumia mshindano unaotegemea matarajio (ETags) kwa kusoma/badilisha/kuandika hali, na rudisha funguo za ujumbe wakati wa usindikaji mrefu. Usimamizi rahisi wa hali hapa chini ni kwa mfuatano tu na hauhifadhi dhamana za uzalishaji.
+Utoaji wa Service Bus ni **angalia mara moja au zaidi**. Hifadhi idempotency kwa kila kazi **na hatua**, tumia ushindani wa matumaini (ETags) kwa usomaji/badilisho/andika hali, na rudisha funguo za ujumbe wakati wa usindikaji mrefu. Meneja rahisi wa hali hapa chini ni wa mlolongo tu na hauzuii dhamana hizi za uzalishaji.
 
 ### Muundo wa Mradi
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Somo 1: Mfumo wa Uratibu wa Mfuatano
+## Soma 1: Mfumo wa Kuratibu Mfuatano
 
-### Utekelezaji: Mlolongo wa Utengenezaji Maudhui
+### Utekelezaji: Mlolongo wa Uundaji Maudhui
 
-Tuweke mlolongo wa mfuatano: Tafiti → Andika → Hariri. Kuchapisha ni nje ya mfano huu.
+Tuchague mlolongo wa mfuatano: Tafiti → Andika → Hariri. Kuchapisha ni nje ya mfano huu.
 
 ### 1. Usanidi wa AZD
 
@@ -444,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Miundombinu: Service Bus kwa Uratibu
+### 2. Miundombinu: Service Bus kwa Kuratibu
 
 **Faili: `infra/core/servicebus.bicep`**
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Msimamizi wa Hali Iliyosambazwa
+### 3. Meneja wa Hali Pamoja
 
 **Faili: `src/shared/state_manager.py`**
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Huduma ya Msimamizi wa Uratibu
+### 4. Huduma ya Mkurugenzi
 
 **Faili: `src/orchestrator/app.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Wakala wa Tafiti
+### 5. Wakala wa Utafiti
 
 **Faili: `src/agents/research/app.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Wakala wa Uandishi
+### 6. Wakala Mwandishi
 
 **Faili: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Wakala wa Uhifadhi
+### 7. Wakala Mhariri
 
 **Faili: `src/agents/editor/app.py`**
 
@@ -893,21 +893,21 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Weka na Jaribu
+### 8. Sambaza na Jaribu
 
-Amri hizi zinafaa **baada ya kutekeleza faili za mradi zilizokosekana tu**. Uanzishaji wa wakala wa Interactive Foundry ni mchakato tofauti; hauundaji muundo huu wa Service Bus.
+Amri hizi zinafanya kazi **baada tu ya kutekeleza faili zilizokosekana za mradi**. Uanzishaji wa wakala wa Interactive Foundry ni mchakato tofauti; hauzidi kubuni huu wa Service Bus.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Angalia [Amri za AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa bendera na chaguzi zote za `azd ai`.
+> Tazama [Amri za AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa bendera na chaguzi zote za `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -936,7 +936,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Matokeo Yanayotarajiwa (imemalizika):**
+**✅ Matokeo Yanayotarajiwa (yamekamilika):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -964,13 +964,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Somo 2: Mfumo wa Uratibu Sambamba
+## Soma 2: Mfumo wa Kuratibu Sambamba
 
-### Utekelezaji: Mkusanyiko wa Tafiti Kutoka Vyanzo Vingi
+### Utekelezaji: Mkusanyaji wa Taarifa kutoka Vyanzo Nyingi
 
 Tujenge mfumo sambamba unaokusanya taarifa kutoka vyanzo vingi kwa wakati mmoja.
 
-### Msimamizi Sambamba
+### Mkurugenzi Sambamba
 
 **Faili: `src/orchestrator/parallel_workflow.py`**
 
@@ -1042,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Mantiki ya Kuchanganya
+### Mantiki ya Ujumlishaji
 
 **Faili: `src/agents/aggregator/app.py`**
 
@@ -1123,24 +1123,24 @@ if __name__ == '__main__':
     main()
 ```
 
-**Faida za Mfumo Sambamba:**
-- ⚡ **Huenda kuchelewesha chini** (imefungwa na mfanyakazi polepole zaidi na mzigo wa uratibu)
-- 🔄 **Inaweza kubeba matokeo ya sehemu** kwa tarehe za mwisho na sera ya hitilafu (haijatimizwa na mkusanyiko wa msingi)
-- 📈 **Inaweza kupanuka** (ongeza mawakala kwa urahisi)
+**Faida za Mfano Sambamba:**
+- ⚡ **Inawezekana kuchelewesha kwa chini** (inafungwa na mfanyakazi polepole zaidi pamoja na kazi ya kuratibu)
+- 🔄 **Inaweza kuunga mkono matokeo ya sehemu** na muda maalum na sera za hitilafu (haijajumuishwa na mkusanyaji wa msingi)
+- 📈 **Inaongezeka kwa wingi** (ongeza wakala kwa urahisi)
 
 ---
 
-## Mazoezi ya Kivitendo
+## Mazoezi ya Vitendo
 
-### Zoekezaji 1: Ongeza Usimamizi wa Muda wa Kuisha ⭐⭐ (Kiwango cha Kati)
+### Zoezi 1: Ongeza Utunzaji wa Muda wa Mwisho ⭐⭐ (Kiwiano)
 
-**Lengo**: Tekeleza mantiki ya muda wa kuisha ili mkusanyiko usisubiri milele kwa mawakala waliochelewa.
+**Lengo**: Tekeleza mantiki ya muda wa mwisho ili mkusanyaji asisubiri siku zote kwa wakala watakaochelewa.
 
-**Mwanzo:** Endesha mchakato huu wa kujaribu wa ndani kabla ya kuuumba kwenye mfanyakazi wa foleni. Muda wa kuangalia unaangaliwa tu wakati ujumbe mwingine unakuja hauwawachi hata wakala aliyekosekana kutuma chochote.
+**Mwanzo:** Endesha simulizi ya muda wa mwisho wa hapa kabla ya kuingiza katika mfanyakazi wa foleni. Muda wa mwisho ukichunguzwa tu wakati ujumbe mwingine unapofika hautawaka ikiwa mfanyakazi aliyekosekana hatatuma chochote.
 
 **Hatua:**
 
-1. **Ongeza kufuatilia muda wa kuisha kwa mkusanyiko:**
+1. **Ongeza ufuatiliaji wa muda wa mwisho kwa mkusanyaji:**
 
 ```python
 import asyncio
@@ -1164,15 +1164,15 @@ async def main():
 asyncio.run(main())
 ```
 
-2. **Matokeo yanayotarajiwa:**
+2. **Matokeo Yanayotarajiwa:**
 
 ```text
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Ushirikiano wa mfumo wa foleni (kazi ya kubuni):** Hifadhi tarehe ya mwisho ya kusambaza na mawakala wanaotarajiwa wakati wa kuunda kazi, endesha usafishaji wa tarehe ya mwisho mara kwa mara huru na matokeo yanayoingia, kama atimize matokeo ya sehemu kwa atomiki, na puuza ujumbe umechelewa/kurudiwa kwa kazi zilizokamilika. Muda wa kuisha wa ndani hauzitami kazi za mbali.
+3. **Ushirikiano wa mfumo wa foleni (mradi wa kubuni):** Hifadhi tarehe ya mwisho ya usambazaji na wakala waliotarajiwa wakati wa kuunda kazi, endesha usafishaji wa muda wa mwisho wakati wote bila tegemezo la matokeo yanayopatikana, malizia matokeo ya sehemu kwa atomiki, na puuza ujumbe uliochelewa/kurudiwa kwa kazi zilizomalizika. Muda wa mwisho wa ndani hauzuii wafanyakazi wa mbali.
 
-Kwa mradi wako uliotekelezwa tu:
+Kwa mradi uliotekelezwa tu:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Jaribio la ndani hurarudi baada ya muda wake wa sekunde moja hata wakala haijakamilika
+- ✅ Jaribio la ndani hurejea baada ya muda wake wa mwisho wa sekunde moja hata kama wakala haijakamilika
 - ✅ Jibu linaonyesha matokeo ya sehemu (`"timed_out": true`)
-- ✅ Matokeo yaliyopatikana yarejeshwa (3 kati ya mawakala 4)
+- ✅ Matokeo yanayopatikana yarudishwe (3 kati ya wakala 4)
 
-**Muda**: Dakika 20-25
+**Muda**: dakika 20-25
 
 ---
 
-### Zoekezaji 2: Tekeleza Mantiki ya Jaribio Upya ⭐⭐⭐ (Juu)
+### Zoezi 2: Tekeleza Mantiki ya Jaribu Tena ⭐⭐⭐ (Kiwanda)
 
-**Lengo**: Jaribu tena kazi zilizoshindwa za wakala moja kwa moja kabla ya kuacha.
+**Lengo**: Jaribu tena kazi zilizoshindwa za wakala moja kwa moja kabla ya kukata tamaa.
 
 **Hatua:**
 
-1. **Tumia hesabu za usambazaji wa Service Bus badala ya kuingiza tena makonta ya jaribio binafsi:**
+1. **Tumia kiasi cha utoaji wa Service Bus badala ya kurekodi idadi za jaribu tena za kawaida:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Ongeza mshughulikiaji wa jaribio upya kwa mawakala:**
+2. **Ongeza mshughulikia jaribu tena kwa wakala:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Fuatilia foleni ya barua tupu:**
+3. **Angalia foleni ya barua ya vifo:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Kazi zilizoshindwa zinarudiwa tena moja kwa moja (hadi mara 3)
-- ✅ Usitishi unaoongezeka kati ya jaribio upya (5s, 10s, 20s), na upya wa funguo za ujumbe inapohitajika
-- ✅ Baada ya jaribio la mwisho, ujumbe hupelekwa kwenye foleni ya barua tupu
-- ✅ Ujumbe za foleni ya barua tupu zinaweza kuchunguzwa; kurudisha upya kunahitaji mchakato wa kupona unaoweza kurudiwa
+- ✅ Kazi zilizoshindwa jaribu tena moja kwa moja (hadi mara 3)
+- ✅ Kuongeza kwa kasi kati ya jaribu tena (5s, 10s, 20s), na upya wa funguo za ujumbe mahali panapohitajika
+- ✅ Baada ya jaribu tena nyingi, ujumbe huenda kwenye foleni ya barua ya vifo
+- ✅ Ujumbe wa foleni ya barua ya vifo unaweza kuchunguzwa; kurejeshwa kunahitaji mchakato wa utatuzi wa idempotent tofauti 
 
-**Muda**: Dakika 30-40
+**Muda**: dakika 30-40
 
 ---
 
-### Zoekezaji 3: Tekeleza Wavunaji Mzunguko ⭐⭐⭐ (Juu)
+### Zoezi 3: Tekeleza Kivunja Mzunguko ⭐⭐⭐ (Kiwanda)
 
-**Lengo**: Zuia hitilafu kuenea kwa kuzuia maombi kwa mawakala wanaoshindwa.
+**Lengo**: Zuia mtiririko wa hitilafu kwa kuzuia maombi kwa wakala wanaobadilika.
 
 **Hatua:**
 
-1. **Unda darasa la wavunaji mzunguko:**
+1. **Unda darasa la kivunja mzunguko:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Tumia kwa miito ya wakala:**
+2. **Tumia kwa simu za wakala:**
 
 ```python
 # In orchestrator
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Mzunguko huu unalinda **operesheni ya kutuma**, si kukamilika kwa mfanyakazi wa mbali: kuweka ujumbe kwenye foleni kwa mafanikio hakumaanishi chochote kuhusu kama wakala bado yupo hai. `send_message` ni kazi ya mtumaji katika programu yako. Kwa midundo ya utekelezaji, tumia kushindwa/kusitishwa kwa shughuli zilizoonekana kwa msimamizi thabiti. Darasa hili la kumbukumbu ya ndani ni onyesho la thread moja, si mzunguko wa kugawanyika wa kuzima kwa mzunguko.
+Mzunguko huu unalinda **operesheni ya kutuma**, si kumaliza na mfanyakazi wa mbali: kuweka ujumbe kwenye foleni kwa mafanikio hakusemi chochote kuhusu kama wakala yuko hai. `send_message` ni kazi ya mtumaji wa programu yako. Kwa mizunguko ya utekelezaji, ingiza kushindwa / wakati wa kutekeleza kazi zilizoshuhudiwa katika mratibu wa kudumu. Darasa hili la kumbukumbu ndani ni onyesho la thread moja, si kivunja mzunguko kilichoeneza.
 
-3. **Jaribu kuzima mzunguko ndani ya kompyuta:**
+3. **Jaribu kivunja mzunguko kienyeji:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1369,18 +1369,18 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Baada ya mashindwa 5, mzunguko unafunguliwa (unakataa maombi)
-- ✅ Baada ya sekunde 60, mzunguko unakuwa wa nusu-funguliwa (unajaribu kupona)
-- ✅ Wakala wengine wanaendelea kufanya kazi kama kawaida
-- ✅ Mzunguko unafungwa moja kwa moja wakati wakala anarudi hali nzuri
+- ✅ Baada ya kushindwa 5, mzunguko unafunguka (hukataa maombi)
+- ✅ Baada ya sekunde 60, mzunguko unakuwa nusu-funguka (hujaribu kupona)
+- ✅ Makaimu wengine wanaendelea kufanya kazi kawaida
+- ✅ Mzunguko unafungwa kiotomatiki wakati wakala anaponya
 
 **Muda**: dakika 40-50
 
 ---
 
-## Ufuatiliaji na Utatuzi wa Kasoro
+## Ufuatiliaji na Utatuzi wa Matatizo
 
-### Kufuatilia kwa Usambazaji kwa Application Insights
+### Ufuatiliaji ulioenea kwa Application Insights
 
 **Faili: `src/shared/tracing.py`**
 
@@ -1427,7 +1427,7 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
 
 ### Maswali ya Application Insights
 
-**Fuata mifumo ya wakala wengi:**
+**Fuata michakato ya mawakala wengi:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1437,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Ulinganisho wa utendaji wa wakala:**
+**Ulinganishaji wa utendaji wa wakala:**
 
 ```kusto
 // Compare agent execution times
@@ -1468,24 +1468,24 @@ exceptions
 
 ## Uchambuzi wa Gharama
 
-### Gharama za Mfumo wa Wakala Wengi (Makadirio ya Kila Mwezi)
+### Gharama za Mfumo wa Mawakala Wengi (Makadirio ya Mwezi)
 
-Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565/kila mwezi**. Hakiki viwango vya kikanda vya sasa, saa za nakala za kazi zinazofanya kazi/sitofanya kazi, mchanganyiko wa tokeni za kuingiza/kutoa, hifadhi, na telemetry. Serverless haina kiwango cha chini cha kupitia malipo lakini bado inalipisha kwa maombi na hifadhi.
+Takwimu za kinadharia tu kwa mipango, si maelezo ya bei: jumla hapa chini ni **$240-565/mwezi**. Hakiki viwango vya sasa vya mkoa, saa za nakala zilizo hai/zimedumishwa, mchanganyiko wa tokeni za ingizo/pato, hifadhi, na telemetry. Serverless haina kiwango cha chini cha throughput kilichopangwa lakini bado hulipisha kwa maombi na hifadhi.
 
-| Kipengele | Usanidi | Gharama |
+| Sehemu | Mipangilio | Gharama |
 |-----------|--------------|------|
-| **Msimamizi** | Programu ya Kontena 1 (CPU 1, GB 2) | $30-50 |
-| **Wakala 4** | Programu za Kontena 4 (CPU 0.5, GB 1 kila moja) | $60-120 |
-| **Service Bus** | Ngazi ya kawaida, ujumbe milioni 10 | $10-20 |
-| **Cosmos DB** | Serverless, hifadhi ya GB 5, RUs milioni 1 | $25-50 |
-| **Blob Storage** | Hifadhi ya GB 10, operesheni 100K | $5-10 |
-| **Application Insights** | Kuingiza GB 5 | $10-15 |
+| **Mratibu** | Programu 1 ya Kontena (1 vCPU, 2GB) | $30-50 |
+| **Makala 4** | Programu 4 za Kontena (0.5 vCPU, 1GB kila moja) | $60-120 |
+| **Service Bus** | Kiwango cha kawaida, ujumbe milioni 10 | $10-20 |
+| **Cosmos DB** | Serverless, 5GB hifadhi, RU milioni 1 | $25-50 |
+| **Hifadhi ya Blob** | 10GB hifadhi, shughuli 100K | $5-10 |
+| **Application Insights** | 5GB uingizaji | $10-15 |
 | **Microsoft Foundry Models** | gpt-4.1, tokeni milioni 10 | $100-300 |
-| **Jumla** | | **$240-565/kila mwezi** |
+| **Jumla** | | **$240-565/mwezi** |
 
-### Mikakati ya Kupunguza Gharama
+### Mikakati ya Kuokoa Gharama
 
-1. **Tumia serverless pale inapowezekana:**
+1. **Tumia serverless pale panapowezekana:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1494,7 +1494,7 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
    }
    ```
 
-2. **Punguza wingi wa wakala hadi sifuri wakati hawatumo kazi:**
+2. **Punguza wakala hadi sifuri wakati wa ukimya:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1508,7 +1508,7 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Hifadhi matokeo yanayotumika mara kwa mara:**
+4. **Hifadhi matokeo yanayotumiwa mara kwa mara:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1517,18 +1517,18 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
 
 ---
 
-## Mazoea Bora
+## Mazoezi Bora
 
 ### ✅ FANYA:
 
-1. **Tumia operesheni zisizobadilisha matokeo**
+1. **Tumia operesheni zisizobadilika**
    ```python
    # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Tekeleza uandikaji wa kina wa kumbukumbu**
+2. **Tekeleza uandikaji wa kina**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1542,14 +1542,14 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
    }
    ```
 
-4. **Weka muda wa kuishi kwa ujumbe (TTL)**
+4. **Wezesha muda wa kuishi ujumbe (TTL)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Fuata foleni za barua zilizokufa**
+5. **Fuatilia foleni za barua zilizokufa**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1557,13 +1557,13 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
 
 ### ❌ USIFANYE:
 
-1. **Usitengeneze utegemezi wa mduara**
+1. **Usizalisha utegemezi wa mizunguko**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Usizuie thread za wakala**
+2. **Usizuie mistari ya wakala**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1572,13 +1572,13 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
    # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Usiache kushindwa kidogo bila kujali**
+3. **Usipuuzie kushindwa sehemu**
    ```python
    # ❌ BAD: Fail entire workflow if one agent fails
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Usitumie jaribio la kurudia bila kikomo**
+4. **Usitumie jaribio lisilo na kikomo**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1586,14 +1586,14 @@ Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565
 
 ---
 
-## Mwongozo wa Kutatua Matatizo
+## Mwongozo wa Utatuzi wa Matatizo
 
-### Tatizo: Ujumbe umekwama kwenye foleni
+### Tatizo: Ujumbe umevizwa kwenye foleni
 
 **Dalili:**
 - Ujumbe unaongezeka kwenye foleni
-- Wakala hawashughuliki
-- Hali ya kazi inakaa "inangoja"
+- Wakala hawafanyi kazi
+- Hali ya kazi imekwama "inasukuma"
 
 **Uchunguzi:**
 ```bash
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Kagua foleni ya barua zilizokufa:**
+2. **Angalia foleni ya barua zilizokufa:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,11 +1630,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Tatizo: Kazi imekwisha muda wa muda/mhakikisha haijakamilika
+### Tatizo: Kazi inachelewa/haimaliziki kamwe
 
 **Dalili:**
-- Hali ya kazi inabaki "inapoendelea"
-- Baadhi ya wakala wanakamilisha, wengine hawakamilishi
+- Hali ya kazi inaendelea "in_progress"
+- Baadhi ya wakala wanamaliza, wengine hawamalizi
 - Hakuna ujumbe wa kosa
 
 **Uchunguzi:**
@@ -1648,9 +1648,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Suluhisho:**
 
-1. **Tekeleza muda wa kukata kazi kwenye mchanganyiko (Zoekazi 1)**
+1. **Tekeleza muda wa kukataa katika muunganishaji (Mazoezi 1)**
 
-2. **Angalia kwa kushindwa kwa wakala kwa kutumia Azure Monitor:**
+2. **Angalia kushindwa kwa wakala kwa kutumia Azure Monitor:**
    ```bash
    # View logs via azd monitor
    azd monitor --logs
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Hakikisha wakala wote wanaendesha:**
+3. **Thibitisha wakala wote wapo kazi:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1676,38 +1676,38 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Hatua Zinazofuata Katika Kozi Hii
-- ← Kwenye: [Mpango wa Uwezo](capacity-planning.md)
+### Hatua Zifuatazo Katika Kozi Hii
+- ← Mbele: [Mipango ya Uwezo](capacity-planning.md)
 - → Ifuatayo: [Uchaguzi wa SKU](sku-selection.md)
-- 🏠 [Mwanzo wa Kozi](../../README.md)
+- 🏠 [Nyumbani Kozi](../../README.md)
 
 ### Mifano Inayohusiana
 - [Mfano wa Microservices](../../../../examples/microservices) - Mifumo ya mawasiliano ya huduma
-- [Mfano wa Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Muunganiko wa AI
+- [Mfano wa Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Ushirikiano wa AI
 
 ---
 
 ## Muhtasari
 
 **Umejifunza:**
-- ✅ Mifumo mitano ya uratibu (mfuatano, sambamba, ngazi, inayosababishwa na matukio, makubaliano)
-- ✅ Miundo ya wakala wengi kwenye Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Usimamizi wa hali kati ya wakala walioenea
-- ✅ Ushughulikiaji wa muda wa kukata kazi, jaribio la kurudia, na kuzima kwa mzunguko
-- ✅ Ufuatiliaji na utatuzi wa kasoro katika mifumo iliyosambazwa
-- ✅ Mikakati ya kuboresha gharama
+- ✅ Mifumo mitano ya uratibu (mfuatano, sambamba, mlolongo, inaendeshwa na matukio, makubaliano)
+- ✅ Uhandisi wa mawakala wengi kwenye Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Usimamizi wa hali kati ya mawakala waliotawanyika
+- ✅ Ushughulikiaji wa muda, jaribio tena, na kivunja mizunguko
+- ✅ Ufuatiliaji na utatuzi wa mifumo iliyosambazwa
+- ✅ Mikakati ya kuokoa gharama
 
-**Muhimu:**
-1. **Chagua mfumo sahihi** - Mfuatano kwa kazi zilizo na mpangilio, sambamba kwa kasi, inayosababishwa na matukio kwa urahisi
-2. **Dhibiti hali kwa uangalifu** - Tumia Cosmos DB au sawa kwa hali ya kushirikiwa
-3. **Shughulikia kushindwa kwa heshima** - Muda wa kukata kazi, jaribio la kurudia, kuzima kwa mzunguko, foleni za barua zilizokufa
-4. **Fuata kila kitu** - Kufuatilia kwa usambazaji ni muhimu kwa utatuzi wa kasoro
-5. **Boresha gharama** - Punguza hadi sifuri, tumia serverless, tekeleza kuhifadhi matokeo
+**Mambo Muhimu:**
+1. **Chagua mfumo unaofaa** - Mfuatano kwa michakato yenye utaratibu, sambamba kwa kasi, inaendeshwa na matukio kwa kubadilika
+2. **Dhibiti hali kwa umakini** - Tumia Cosmos DB au sawa kwa hali ya pamoja
+3. **Shughulikia kushindwa kwa hila** - Muda wa kukataa, jaribio tena, kivunja mizunguko, foleni za barua zilizokufa
+4. **Fuatilia kila kitu** - Ufuatiliaji ulioenea ni muhimu kwa utatuzi
+5. **Boresha gharama** - Punguza hadi sifuri, tumia serverless, tekeleza uhifadhi
 
-**Hatua Zinazofuata:**
-1. Kamilisha mazoezi halisi
-2. Jenga mfumo wa wakala wengi kwa matumizi yako
-3. Soma [Uchaguzi wa SKU](sku-selection.md) ili kuboresha utendaji na gharama
+**Hatua Zifuatazo:**
+1. Kamilisha mazoezi ya vitendo
+2. Tengeneza mfumo wa mawakala wengi kwa matumizi yako
+3. Soma [Uchaguzi wa SKU](sku-selection.md) kuboresha utendaji na gharama
 
 ---
 

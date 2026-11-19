@@ -1,22 +1,22 @@
 # Sura ya 5: Suluhisho za AI za Wakala Wengi
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Saa 2-3 | **⭐ Ugumu**: Juu
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Masaa 2-3 | **⭐ Ugumu**: Wa Juu
 
 ---
 
 ## Muhtasari
 
-Sura hii inashughulikia mifumo ya hali ya juu ya usanifu wa wakala wengi, uratibu wa mawakala, na uanzishaji wa AI unao tayari kwa uzalishaji kwa hali ngumu.
+Sura hii inajumuisha mifumo ya usanifu wa wakala wengi wa hali ya juu, uratibu wa mawakala, na uanzishaji wa AI tayari kwa uzalishaji kwa hali ngumu.
 
-> Maelekezo ya amri yameangaliwa dhidi ya rejeleo lililotolewa la `azd 1.37.2`. Uanzishaji wa wingu haukufanyika.
+> Mwongozo wa amri uliohakikiwa dhidi ya marejeleo ya `azd 1.37.2` yaliyoachiliwa. Usambazaji wa mawingu haukujumuishwa.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utakuwa umejifunza:
+Kwa kumaliza sura hii, utaweza:
 - Kuelewa mifumo ya usanifu wa wakala wengi
-- Kuanzisha mifumo ya mawakala wa AI inayoratibiwa
+- Kusambaza mifumo ya mawakala wa AI walioratibika
 - Kutekeleza mawasiliano kati ya mawakala
-- Kujenga suluhisho za wakala wengi zinazostahili uzalishaji
+- Kujenga suluhisho za wakala wengi tayari kwa uzalishaji
 
 ---
 
@@ -24,11 +24,11 @@ Kwa kumaliza sura hii, utakuwa umejifunza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Msingi wa Wakala Wengi](multi-agent-basics.md) | Vitendo: anzisha programu ya wakala wengi inayofanya kazi na `azd up` | Dak 45 |
-| 2 | [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md) | Mikakati ya uratibu wa wakala (itaendelea katika Sura ya 6) | Dak 30 |
-| 3 | [Uanzishaji wa Templeti ya ARM](../../examples/retail-multiagent-arm-template/README.md) | Mfano wa uanzishaji kwa bonyeza moja | Dak 30 |
+| 1 | [Misingi ya Wakala Wengi](multi-agent-basics.md) | Vitendo: anzisha programu ya wakala wengi inayofanya kazi kwa kutumia `azd up` | Dakika 45 |
+| 2 | [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md) | Mikakati ya uratibu wa wakala (inaendelea katika Sura ya 6) | Dakika 30 |
+| 3 | [Usambazaji wa Templeti ya ARM](../../examples/retail-multiagent-arm-template/README.md) | Mfano wa usambazaji wa bonyeza moja | Dakika 30 |
 
-> **Anza na Somo la 1.** Hilo ndilo somo pekee la vitendo kamili, linaloweza kuanzishwa katika sura hii. Somo la 2 lipo katika Sura ya 6 (linashirikiana na upangaji kabla ya uanzishaji), na [Suluhisho la Wakala Wengi la Rejareja](../../examples/retail-scenario.md) ni muundo wa usanifu—rejeleo la muundo, si templeti ya amri moja.
+> **Anza na Somo 1.** Ndilo somo pekee la vitendo kamili, linaweza kusambazwa katika sura hii. Somo la 2 lipo katika Sura 6 (linashirikiana na upangaji wa kabla ya usambazaji), na [Suluhisho la Wakala Wengi la Rejareja](../../examples/retail-scenario.md) ni ramani ya usanifu—marejeleo ya muundo, si templeti ya amri moja.
 
 ---
 
@@ -39,15 +39,15 @@ Kwa kumaliza sura hii, utakuwa umejifunza:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Njia gani?** Tumia `azd init --template` kuanza na sampuli inayofanya kazi. Tumia `azd ai agent init` kwa njia ya mwingiliano, au `azd ai agent init --template <path-to-azure.yaml>` kuchukua mradi wa wakala wa sasa. Angalia [rejeleo la CLI la AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa mahitaji ya toleo na uhamiaji wa tathmini.
+> **Njia gani?** Tumia `azd init --template` kuanza na sampuli inayofanya kazi. Tumia `azd ai agent init` kwa maingiliano, au `azd ai agent init --template <path-to-azure.yaml>` ili kukubali mradi wa wakala wa sasa. Angalia [marejeleo ya AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa mahitaji ya toleo na uhamisho wa tathmini.
 
-Endesha hizi mbadala katika folda tupu tofauti. Kiongezi cha mawakala `1.0.0-beta.23` kinahitaji `azd >= 1.37.0`; mtiririko wake wa mwingiliano hautengenezi bomba la huduma la kawaida katika somo la uratibu.
+Endesha mbadala hizi katika folda tofauti tupu. Mchakato wa GA Foundry unahitaji `azd >= 1.37.0`; mtiririko wake wa maingiliano hauundaji bomba la huduma maalum ya Service Bus katika somo la uratibu. Kwa majaribio ya ndani, usambazaji wa msimbo, na usafishaji wa miradi mipya dhidi ya ile inayotumika tena, fuata [mwongozo wa wakala aliyehifadhiwa](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -61,41 +61,41 @@ graph TD
 
 ---
 
-## 🎯 Suluhisho Maarufu: Wakala Wengi wa Rejareja
+## 🎯 Suluhisho Lililochaguliwa: Wakala Wengi wa Rejareja
 
-Suluhisho la [Wakala Wingi wa Rejareja](../../examples/retail-scenario.md) linaonyesha:
+Suluhisho la [Wakala Wengi wa Biashara Ndogo](../../examples/retail-scenario.md) linaonyesha:
 
-- **Mwakala wa Mteja**: Hushughulikia mwingiliano na mapendeleo ya mtumiaji
-- **Mwakala wa Hifadhi**: Husimamia bidhaa na usindikaji wa maagizo
-- **Mratibu**: Hupanua miongoni mwa mawakala
-- **Kumbukumbu Ilioshirikiwa**: Usimamizi wa muktadha kati ya mawakala
+- **Wakala wa Mteja**: Hutatua mwingiliano na mapendeleo ya mtumiaji
+- **Wakala wa Hesabu**: Husimamia hisa na usindikaji wa maagizo
+- **Mpangiliaji**: Huandalia ushirikiano kati ya mawakala
+- **Kumbukumbu Iliyoshirikiwa**: Usimamizi wa muktadha kati ya mawakala
 
-### Huduma Zinazotumika
+### Huduma Zinazotumiwa
 
 | Huduma | Kusudi |
 |---------|---------|
-| Microsoft Foundry Models | Uelewa wa lugha |
+| Miundo ya Microsoft Foundry | Uelewa wa lugha |
 | Azure AI Search | Katalogi ya bidhaa |
 | Cosmos DB | Hali na kumbukumbu ya wakala |
-| Container Apps | Utoaji wa wakala |
+| Container Apps | Ukaribishaji wa wakala |
 | Application Insights | Ufuatiliaji |
 
 ---
 
-## 🔗 Uabiri
+## 🔗 Uelekezaji
 
-| Mwelekeo | Sura |
+| Mwongozo | Sura |
 |-----------|---------|
-| **Iliyotangulia** | [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md) |
-| **Ifuatayo** | [Sura 6: Kabla ya Uwekaji](../chapter-06-pre-deployment/README.md) |
+| **Iliyopita** | [Sura ya 4: Miundombinu](../chapter-04-infrastructure/README.md) |
+| **Ifuatayo** | [Sura ya 6: Kabla ya Uwekaji](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Rasilimali Zinazohusiana
+## 📖 Vyanzo Vinavyohusiana
 
 - [Mwongozo wa Wakala wa AI](../chapter-02-ai-development/agents.md)
-- [Mazingira ya Uzalishaji ya AI](../chapter-08-production/production-ai-practices.md)
-- [Utatuzi wa Matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Mila za AI za Uzalishaji](../chapter-08-production/production-ai-practices.md)
+- [Utatua wa Matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

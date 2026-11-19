@@ -1,36 +1,36 @@
-# Karatasi ya Amri ya Haraka - Amri Muhimu za AZD
+# Kivinjari cha Amri - Amri Muhimu za AZD
 
-**Marejeo ya Haraka kwa Sura Zote**
-- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../README.md)
-- **📖 Mwanzo wa Haraka**: [Sura 1: Msingi & Mwanzo wa Haraka](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Amri za AI**: [Sura 2: Maendeleo ya Kwanza ya AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Zaidi**: [Sura 4: Miundombinu kama Kanuni](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Marejeleo ya Haraka kwa Sura Zote**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../README.md)
+- **📖 Anza Haraka**: [Sura ya 1: Msingi & Anza Haraka](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Amri za AI**: [Sura ya 2: Maendeleo Ya Kwanza AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Mtaalam**: [Sura ya 4: Miundombinu Kama Msimbo](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Utangulizi
 
-Kadi hii ya kina ya amri hutoa marejeo ya haraka kwa amri zinazotumika sana za Azure Developer CLI, zimepangwa kwa vikundi kulingana na mifano ya vitendo. Inafaa kwa uangalizi wa haraka wakati wa maendeleo, utatuzi wa matatizo, na shughuli za kila siku na miradi ya azd.
+Kivinjari hiki kamili cha amri kinatoa marejeleo ya haraka kwa amri za CLI za Azure Developer zinazotumiwa mara nyingi, zilizopangwa kwa makundi pamoja na mifano ya vitendo. Ni bora kwa kutafuta haraka wakati wa maendeleo, utatuzi wa matatizo, na shughuli za kila siku na miradi ya azd.
 
 ## Malengo ya Kujifunza
 
-Kwa kutumia kadi hii ya amri, utaweza:
-- Kupata mara moja amri muhimu za Azure Developer CLI na sarufi
-- Kuelewa muundo wa amri kwa vikundi vya kazi na matumizi
-- Kutumia mifano ya vitendo kwa hali za kawaida za maendeleo na usambazaji
-- Kupata amri za utatuzi kwa haraka wa matatizo
-- Kupata chaguzi za usanidi wa hali ya juu kwa ufanisi
-- Kupata amri za usimamizi wa mazingira na mchakato wa mazingira mengi
+Kwa kutumia kivinjari hiki, utakuwa na uwezo wa:
+- Kupata mara moja amri muhimu za Azure Developer CLI na muundo wake
+- Kuelewa upangaji wa amri kwa makundi ya kazi na matumizi
+- Kurejelea mifano ya vitendo kwa hali za kawaida za maendeleo na uenezaji
+- Kupata amri za kutatua matatizo kwa haraka
+- Kupata kwa ufanisi chaguzi za usanidi wa juu na ubinafsishaji
+- Kupata amri za usimamizi wa mazingira na mtiririko wa kazi wa mazingira mengi
 
 ## Matokeo ya Kujifunza
 
-Kwa matumizi ya mara kwa mara ya kadi hii ya amri, utaweza:
-- Kutekeleza amri za azd kwa ujasiri bila kuangalia nyaraka kamili
-- Kutatua matatizo ya kawaida kwa haraka kwa kutumia amri sahihi za uchunguzi
-- Kusimamia kwa ufanisi mazingira mengi na hali za usambazaji
-- Kutumia vipengele vya azd vya hali ya juu na chaguzi za usanidi ipasavyo
-- Kutatua matatizo ya usambazaji kwa kutumia mfululizo wa amri ulio mpangiliwa
-- Kuboresha michakato kupitia matumizi bora ya njia za mkato na chaguzi za azd
+Kwa marejeleo ya mara kwa mara ya kivinjari hiki, utaweza:
+- Kutekeleza amri za azd kwa ujasiri bila kurejelea nyaraka kamili
+- Kutatua matatizo ya kawaida haraka kwa kutumia amri sahihi za uchunguzi
+- Kusimamia mazingira mengi na hali za uenezaji kwa ufanisi
+- Kutumia vipengele vya juu vya azd na chaguzi za usanidi kama inavyohitajika
+- Kutatua matatizo ya uzalishaji kwa kutumia mfululizo wa amri kwa utaratibu
+- Kuboresha mtiririko wa kazi kwa kutumia njia za mkato na chaguzi za azd kwa ufanisi
 
-## Amri za Kuanzisha
+## Amri za Kuanzia
 
 ### Uthibitishaji
 ```bash
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Uanzishaji wa Mradi
+### Mwanzo wa Mradi
 ```bash
 # Browse available templates
 azd template list
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Amri Muhimu za Usambazaji
+## Amri Muhimu za Uenezaji
 
-### Mchakato Kamili wa Usambazaji
+### Mtiririko Kamili wa Uenezaji
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** hupakua utegemezi wa programu yako (npm, pip, NuGet, Maven, n.k.). Inaendeshwa moja kwa moja wakati wa `azd package` na `azd deploy`, kwa hivyo mara chache utaipigia simu moja kwa moja—ezaendesha mwenyewe kujipatia utegemezi mapema (kwa mfano, kuwasilisha cache ya CI au kufanya kazi bila mtandao baadaye).
+> **`azd restore`** hupakua utegemezi wa programu yako (npm, pip, NuGet, Maven, n.k.). Inaendesha moja kwa moja wakati wa `azd package` na `azd deploy`, kwa hiyo mara chache huipigia simu moja kwa moja—itelekeza binafsi ili kupakia utegemezi mapema (kwa mfano, kuoanisha cache ya CI au kufanya kazi bila mtandao baadaye).
 
-> **`azd package`** huandaa kifurushi kinachoweza kusambazwa bila kuweka huduma ya programu. Mwelekeo unategemea lugha na mwenyeji: kufunga kontena kunaweza kutumia ujenzi wa mbali wa Azure na kuchapisha picha kwenye rejista, kwa hivyo si lazima iwe bila mtandao au isiyo na uandishi wa Azure. `azd deploy` inaweza kufunga moja kwa moja; tumia hatua ya kifurushi tofauti unaposhea kifurushi au ukaguzi wa ujenzi.
+> **`azd package`** huandaa kifurushi cha kuenezwa bila kueneza huduma ya programu. Tabia hutegemea lugha na mwenyeji: kufunga kontena kunaweza kutumia ujenzi wa mbali wa Azure na kuchapisha picha kwenye rejista, hivyo si lazima iwe offline au isiyo na maandishi ya Azure. `azd deploy` inaweza kufunga moja kwa moja; tumia hatua tofauti ya kufunga wakati unahitaji kifurushi au ukaguzi wa ujenzi.
 
 
 ## 🌍 Usimamizi wa Mazingira
@@ -154,7 +154,7 @@ azd env list
 azd env refresh
 ```
 
-### Vigezo vya Mazingira
+### Mabadiliko ya Mazingira
 ```bash
 # Set environment variable
 azd env set LOG_LEVEL info
@@ -170,7 +170,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Mafaili ya mazingira ni maandishi rahisi. Usitazame `azd env set` kama hifadhi ya siri; tumia marejeleo ya Key Vault au utambulisho ulioendeshwa ipasavyo.
+Faili za mazingira ni maandishi wazi. Usihesabu `azd env set` kama hifadhi ya siri; tumia rejeleo za Key Vault au utambulisho ulioendeshwa kama inavyofaa.
 
 ## ⚙️ Amri za Usanidi
 
@@ -202,7 +202,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 Ufuatiliaji na Uchunguzi
+## 📊 Ufuatiliaji na Utambuzi
 
 ### Dashibodi ya Ufuatiliaji
 ```bash
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights lazima iwekwe na kiolezo. Chaguo la AZD la Live Metrics kwa sasa halitegemezwi kwa programu za Python; tumia muhtasari, kumbukumbu, au mchakato wa kufuatilia uliodokumentwa wa sampuli badala yake.
+Application Insights lazima iwe imesanidiwa na kiolezo. Chaguo la Live Metrics la AZD halijaungwa mkono kwa sasa kwa programu za Python; tumia muhtasari, kumbukumbu, au mtiririko wa kutambua wa sampuli uliodhibitishwa badala yake.
 
-### Kuangalia Kumbukumbu za Kontena
+### Kutazama Kumbukumbu za Kontena
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Maswali ya Log Analytics
+### Maswali ya Uchambuzi wa Kumbukumbu
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -273,9 +273,9 @@ azd version
 azd config show
 ```
 
-## 🔧 Amri za Juu
+## 🔧 Amri za Kitaalamu
 
-### Mchakato wa Pipeline na CI/CD
+### Mlolongo wa Mabomba na CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 Amri za AI & Virutubisho
+## 🤖 AI & Amri za Virutubisho
 
 ### Virutubisho vya AZD
 
-Marejeo ya CLI ya AI yaliangaliwa 2026-11-04: `azd 1.37.2`, mawakala `1.0.0-beta.23`, tathmini `1.0.0-beta.2`. Tumia `azd >= 1.37.0` kwa mchakato wa pamoja; boresha CLI kuu kabla ya virutubisho visivyolingana.
+Marejeleo ya Foundry GA yameboreshwa 2026-11-09: `microsoft.foundry` kifurushi 1.0, kilitangazwa [Novemba 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Tumia `azd >= 1.37.0`; vipengele hupewa toleo tofauti peke yao na vipengele vya utangulizi wa hiari vinaendelea kuwa na hadhi zao.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,9 +344,12 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
+
+Kifurushi hakijajumuisha tathmini, seti za data, uboreshaji, au mifano maalum. Kusakinisha virutubisho vya msingi kwa mtu binafsi bado kunaungwa mkono. Fuata [maelekezo ya wakala wa GA](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) kwa sampuli inayoweza kutekelezwa na Python 3.13+, uv wa sasa, ruhusa, na kikomo cha mfano.
 
 ### Amri za Wakala wa AI
 ```bash
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` hubadilisha tahajia ya zamani `--manifest`/`-m`; hati za kale zinahitaji uhamishaji. Hakuna chaguo la wakala-init `--host containerapp` kwa sasa. Mtumizi wa mfululizo, sauti, na mapitio ya muda mrefu yanahitaji kujiunga na mazingira ya shell/CI peke yao; angalia [marejeo ya AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` hudhoofisha tahajia ya zamani ya `--manifest`/`-m`; faili za kale zina hitaji kuhamishwa. Hakuna chaguo la sasa la wakala-init `--host containerapp`. Maonekano yaliyodhibitiwa, sauti, na marejeleo marefu yanahitaji kujisajili kwa mazingira ya shell/CI peke yao; angalia [marejeleo ya AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+Jaribio la ndani bado linatumia uenezaji wa mfano wa Azure na husababisha ada. Kwa usafishaji, `azd down` hurudisha kundi la rasilimali la mradi mpya wa Foundry, lakini linaliacha rasilimali zilizo tumika tena; toa tu rasilimali usizotaka uliweke umebia kwa njia tofauti.
 
 ### Tathmini na Uboreshaji wa AI
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,9 +417,24 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Mawakala beta.22 walibadilisha amri za zamani za tathmini na `azd ai eval` kutoka `azure.ai.evaluations`. Usanidi mpya wa tathmini hutumia funguo za camelCase. Uboreshaji `--config` unahitaji ombi la API la uboreshaji huru, **sio** amri za zamani za `eval.yaml` au mpya za `azure.eval.yaml`; tumia `--eval`/`--eval-config` kwa matumizi tena ya tathmini. Angalia [usanidi wa tathmini](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) na [uhamishaji wa uboreshaji](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Wakala beta.22 walibadilisha amri za tathmini za zamani na `azd ai eval` kutoka `azure.ai.evaluations`. Usanidi mpya wa tathmini hutumia funguo za camelCase. Uboreshaji `--config` unahitaji ombi la API la uboreshaji mtawaliwa, **si** zamani `eval.yaml` au mpya `azure.eval.yaml`; tumia `--eval`/`--eval-config` kwa kutumia tena tathmini. Angalia [usanidi wa tathmini](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) na [uhamisho wa uboreshaji](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-### Seva ya MCP (Alpha)
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Kipande cha mchezaji si mtiririko kamili wa kazi. Wahakiki wanaangalia usanidi wa tathmini na mali zisizo za siri, wanatoa ruhusa ya seti ya data/mtathmini/mfano, na hutumia mazingira kwa kila hatua. Angalia [mfano wa CI/CD ulio thibitishwa](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
+### Server ya MCP (Alpha)
 ```bash
 # Start the MCP server for your project
 azd mcp start
@@ -408,7 +443,7 @@ azd mcp start
 azd copilot consent list
 ```
 
-### Utoaji wa Miundombinu
+### Uzalishaji wa Miundombinu
 ```bash
 # Generate IaC files from your project definition
 azd infra generate
@@ -419,9 +454,9 @@ azd infra --help
 
 ---
 
-## 🎯 Michakato ya Haraka
+## 🎯 Mitiririko ya Haraka
 
-### Mchakato wa Maendeleo
+### Mtiririko wa Maendeleo
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Mchakato wa Mazingira Mengi
+### Mtiririko wa Mazingira Mengi
 ```bash
 # Set up environments
 azd env new dev
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### Mchakato wa Utatuzi wa Matatizo
+### Mtiririko wa Utatuzi wa Matatizo
 ```bash
 # Check deployment status
 azd show --debug
@@ -473,9 +508,9 @@ azd monitor --logs
 azd show --output json
 ```
 
-## 🔍 Amri za Kurekebisha Hitilafu
+## 🔍 Amri za Utatuzi
 
-### Taarifa za Kurekebisha
+### Taarifa za Utatuzi
 ```bash
 # Enable debug output for a command
 azd <command> --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Kurekebisha Kiolezo
+### Utatuzi wa Violezo
 ```bash
 # List available templates with details
 azd template list --output json
@@ -540,7 +575,7 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Mchanganyiko ya Amri Zilizopo
+## 🔧 Mchanganyiko wa Amri Zilizopo
 
 ### Skripti ya Ukaguzi wa Afya
 ```bash
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Uthibitishaji wa Usambazaji
+### Uthibitishaji wa Uenezaji
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -560,7 +595,7 @@ azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Ulinganifu wa Mazingira
+### Ulinganisho wa Mazingira
 ```bash
 #!/bin/bash
 # Compare environments
@@ -578,9 +613,9 @@ azd env list
 azd down --environment <environment-name>
 ```
 
-## 📝 Vigezo vya Mazingira
+## 📝 Mabadiliko ya Mazingira
 
-### Vigezo vya Mazingira Vinavyotumika Mara nyingi
+### Mabadiliko ya Mazingira ya Kawaida
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -613,7 +648,7 @@ azd deploy
 azd show --output json
 ```
 
-### Amri za Urejeshaji
+### Amri za Urekebishaji
 ```bash
 # Inspect before retrying; deletion/purge is not a routine recovery step
 azd show
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 Vidokezo vya Mtaalamu
 
-### Majina Mbadala kwa Mchakato wa Haraka
+### Majina ya Kuingiza kwa Mtiririko Haraka
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Kidokezo**: Fanya alama ya kadi hii ya amri na tumia `Ctrl+F` kupata haraka amri unazozihitaji!
+**Kidokezo**: Weka alama ya kivinjari hiki na tumia `Ctrl+F` ili kupata amri unazohitaji kwa haraka!
 
 ---
 
-**Uchaguzi wa Usogezaji**
-- **Somo lililopita**: [Uhakiki wa Awali](../docs/chapter-06-pre-deployment/preflight-checks.md)
-- **Somo lijalo**: [Orodha ya Maneno](glossary.md)
+**Uelekezaji**
+- **Somo lililopita**: [Tathmini za Awali](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Somo lijalo**: [Kamusi](glossary.md)
 
 ---
 
-> **💡 Unataka msaada wa amri za Azure katika mhariri wako?** Sakinisha [Ujuzi wa Wakala wa Microsoft Azure](https://skills.sh/microsoft/github-copilot-for-azure) na `npx skills add microsoft/github-copilot-for-azure` — ujuzi 37 kwa AI, Foundry, usambazaji, uchunguzi, na zaidi.
+> **💡 Unataka msaada wa amri za Azure katika mhariri wako?** Sakinisha [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) na `npx skills add microsoft/github-copilot-for-azure` — ujuzi 37 kwa AI, Foundry, uenezaji, utambuzi, na zaidi.
 
 ---
 
