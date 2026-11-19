@@ -1,38 +1,38 @@
-# Komentojen pikakuvake – olennaiset AZD-komennot
+# Komentojen pikalista - Oleelliset AZD-komennot
 
-**Nopea viite kaikille luvuillesi**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../README.md)
-- **📖 Pika-aloitus**: [Luku 1: Perusta & pika-aloitus](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-komennot**: [Luku 2: AI-ensimmäinen kehitys](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+**Pikaviite kaikille luvuillesi**
+- **📚 Kurssin etusivu**: [AZD aloittelijoille](../README.md)
+- **📖 Nopeasti alkuun**: [Luku 1: Perustukset & Nopeasti alkuun](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-komennot**: [Luku 2: AI-Ensimmäinen kehitys](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Edistynyt**: [Luku 4: Infrastruktuuri koodina](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Johdanto
 
-Tämä kattava pikakuvake tarjoaa nopean viitteen yleisimmin käytetyistä Azure Developer CLI -komennoista, järjestettynä kategorioittain käytännön esimerkkien kanssa. Täydellinen nopeaan tarkistukseen kehityksen, vianmäärityksen ja päivittäisen azd-projektien kanssa työskentelyn aikana.
+Tämä kattava pikalista tarjoaa nopean viitteen yleisimmin käytetyille Azure Developer CLI -komennoille, järjestettynä kategorioittain käytännön esimerkkien kera. Täydellinen nopeisiin tarkistuksiin kehityksen, virheiden selvityksen ja päivittäisten azd-projektien toimintojen aikana.
 
 ## Oppimistavoitteet
 
-Tämän pikakuvakkeen avulla sinä:
+Tämän pikalistan avulla sinä:
 - Saat välittömän pääsyn olennaisiin Azure Developer CLI -komentoihin ja syntaksiin
-- Ymmärrät komentojen järjestämisen toiminnallisiin kategorioihin ja käyttötapauksiin
-- Löydät käytännön esimerkkejä yleisistä kehitys- ja käyttöönotto-tilanteista
-- Saat vianmäärityskomennot nopeaan ongelmanratkaisuun
-- Löydät tehokkaasti edistyneet määrittely- ja mukautusvaihtoehdot
-- Löydät komentojen hallinnan ympäristöjen ja monien ympäristöjen työnkulkuun
+- Ymmärrät komentojen järjestelyn toiminnallisten kategorioiden ja käytön tapausten mukaan
+- Löydät käytännön esimerkit yleisistä kehitys- ja käyttöönottoasetelmista
+- Saat käyttöösi vianmäärityskomentoja nopeaan ongelmanratkaisuun
+- Löydät tehokkaasti edistyneet määritys- ja kustomointivaihtoehdot
+- Löydät ympäristönhallinta- ja moniympäristötyönkulun komennot
 
 ## Oppimistulokset
 
-Kun viittaat tähän pikakuvakkeeseen säännöllisesti, pystyt:
-- Suorittamaan azd-komennot itsevarmasti ilman täydelliseen dokumentaatioon viittaamista
-- Ratkaisemaan nopeasti yleisiä ongelmia asianmukaisilla diagnoosikomennoilla
-- Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönotto-tilanteita
-- Käyttämään tarpeen mukaan edistyneitä azd-ominaisuuksia ja määritysvaihtoehtoja
-- Vianmäärityksessä käyttämään järjestelmällistä komentojonoa käyttöönotto-ongelmien ratkaisuun
-- Optimoimaan työnkulkuja azd-pikakomentojen ja -asetusten tehokkaalla käytöllä
+Käyttämällä tätä pikalistaa säännöllisesti pystyt:
+- Suorittamaan azd-komennot itsevarmasti ilman täydellistä dokumentaatiota
+- Ratkaisemaan yleisimmät ongelmat nopeasti sopivilla diagnostiikkakomennoilla
+- Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönottoasetelmia
+- Käyttämään tarvittaessa edistyneitä azd-ominaisuuksia ja määritysasetuksia
+- Vianmääritymään käyttöönottovirheitä järjestelmällisillä komentojonoilla
+- Optimoimaan työnkulkuja tehokkaiden azd-pikavalintojen ja -asetusten avulla
 
-## Aloituskäskyt
+## Aloituskomennot
 
-### Todennus
+### Tunnistautuminen
 ```bash
 # Login to Azure via AZD
 azd auth login
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Projektin alustaminen
+### Projektin alustus
 ```bash
 # Browse available templates
 azd template list
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Peruskäyttöönoton komennot
+## Keskeiset käyttöönotto-komennot
 
-### Täydellinen käyttöönoton työnkulku
+### Täydellinen käyttöönottotyönkulku
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** lataa sovelluksesi riippuvuudet (npm, pip, NuGet, Maven jne.). Se suoritetaan automaattisesti `azd package` ja `azd deploy` aikana, joten sitä ei harvoin kutsuta suoraan — suorita manuaalisesti ennakkonoutoa varten (esimerkiksi CI välimuistin lämmittämiseen tai offline-tilassa työskentelyyn myöhemmin).
+> **`azd restore`** lataa sovelluksesi riippuvuudet (npm, pip, NuGet, Maven jne.). Se suoritetaan automaattisesti `azd package` ja `azd deploy` aikana, joten sitä harvoin kutsutaan suoraan — suorita se manuaalisesti riippuvuuksien ennakkohakuun (esimerkiksi CI-välimuistin esilämmittämiseksi tai offline-työskentelyä varten myöhemmin).
 
-> **`azd package`** valmistaa käyttöönottokelpoisen paketin ilman, että sovelluspalvelua otetaan käyttöön. Käytös riippuu kielestä ja isännästä: konttipakkaus voi käyttää Azure etärakennuksia ja julkaista kuvat rekisteriin, joten se ei välttämättä ole offline-tilassa tai Azure-kirjoituksista vapaa. `azd deploy` voi pakata automaattisesti; käytä erillistä pakkausvaihetta, kun tarvitset artefaktin tai rakennustarkistuksen.
+> **`azd package`** valmistelee käyttöön otettavan paketin asentamatta sovelluspalvelua. Toiminta riippuu kielestä ja isännästä: konttipakettien luonti voi hyödyntää Azuren etärakennuksia ja julkaista kuvia rekisteriin, joten se ei välttämättä ole offline tai Azure-kirjoitukseton. `azd deploy` voi pakata automaattisesti; käytä erillistä pakkausvaihetta, kun tarvitset artefaktin tai rakentamisen tarkistuksen.
 
 
 ## 🌍 Ympäristön hallinta
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Ympäristötiedostot ovat tekstimuotoisia. Älä käsittele `azd env set`:tä salaisena tallennustilana; käytä Key Vault -viittauksia tai hallittua identiteettiä tilanteen mukaan.
+Ympäristötiedostot ovat tekstitiedostoja. Älä käsittele `azd env set` salaisena säilytyspaikkana; käytä Key Vault -viitteitä tai hallittua tunnistautumista tarpeen mukaan.
 
 ## ⚙️ Määrityskomennot
 
-### Globaali määritys
+### Globaalit määritykset
 ```bash
 # List all configuration
 azd config show
@@ -190,7 +190,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Projektin määritys
+### Projektin määritykset
 ```bash
 # Inspect user configuration (this is not azure.yaml validation)
 azd config show
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights täytyy määrittää mallilla. AZD:n Live Metrics -vaihtoehtoa ei tällä hetkellä tueta Python-sovelluksille; käytä sijasta yleiskatsausta, lokeja tai näytteen dokumentoitua jäljitystyönkulkua.
+Application Insights on määritettävä mallin kautta. AZD:n Live Metrics -vaihtoehto ei tällä hetkellä tue Python-sovelluksia; käytä sen sijaan yleiskatsausta, lokitietoja tai esimerkin dokumentoitua jäljitystyönkulkua.
 
-### Säiliölokien katselu
+### Konttilokien katselu
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -244,7 +244,7 @@ az monitor log-analytics query \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Huoltokomennot
+## 🛠️ Ylläpitokomennot
 
 ### Siivous
 ```bash
@@ -275,7 +275,7 @@ azd config show
 
 ## 🔧 Edistyneet komennot
 
-### Pipeline ja CI/CD
+### Putki ja CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -305,7 +305,7 @@ azd provision --preview
 azd infra --help
 ```
 
-### Projektin tiedot
+### Projektitiedot
 ```bash
 # Show project status and endpoints
 azd show
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI & Laajennukset
+## 🤖 AI ja laajennukset
 
-### AZD-laajennukset
+### AZD-lisäosat
 
-AI CLI -viite tarkistettu 2026-11-04: `azd 1.37.2`, agentit `1.0.0-beta.23`, arvioinnit `1.0.0-beta.2`. Käytä `azd >= 1.37.0` yhdistettyyn työnkulkuun; päivitä ydinkomennot ennen yhteensopimattomia laajennuksia.
+Foundry GA -viite päivitetty 2026-11-09: `microsoft.foundry` paketti 1.0, julkistettu [5. marraskuuta 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Käytä `azd >= 1.37.0`; komponentit on versioitu itsenäisesti ja valinnaisilla esikatseluominaisuuksilla on oma tilansa.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI-agenttien komennot
+Paketti ei sisällä arviointeja, aineistoja, hienosäätöä tai mukautettuja malleja. Yksittäisten ydinkomponenttien asentaminen on edelleen tuettu. Noudata [GA-hosted-agentin opastusta](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) käyttökelpoisesta esimerkistä Python 3.13+:lla, nykyisellä uv:llä, käyttöoikeuksilla ja mallikiintiöllä.
+
+### AI-agenttikomennot
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` korvaa vanhentuneen `--manifest`/`-m` kirjoitusasun; vanhat manifestit vaativat migraation. Ei ole nykyistä agent-init-`--host containerapp` -vaihtoehtoa. Hallittu-harjanne, puhe ja pitkäkestoiset ennakkoversiot tarvitsevat itsenäisen shell/CI-ympäristön hyväksynnän; katso [AI CLI -viite](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` korvaa vanhentuneen `--manifest`/`-m` kirjoitusmuodon; vanhojen manifestien migrointi on tarpeen. Nykyään ei ole agent-init `--host containerapp` -vaihtoehtoa. Hallitut-harjanne-, puhe- ja pitkäkäyntiesikatselut vaativat itsenäisen shell/CI-ympäristön valinnan; katso [AI CLI -viite](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+Paikallinen testaus käyttää edelleen Azure-mallien käyttöönottoja ja aiheuttaa kuluja. Siivoukseen `azd down` poistaa vasta luodun Foundry-projektin resurssiryhmän, mutta jättää uudelleen käytetyt projektin resurssit paikalleen; poista vain erikseen hallinnoimasi ei-toivotut resurssit.
 
 ### AI-arvioinnit ja optimointi
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,9 +417,24 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agentit beta.22 korvasi perinteiset arviointikomentot `azd ai eval` -komennolla `azure.ai.evaluations`:stä. Uusi arviointimääritys käyttää camelCase-avaimia. Optimointi `--config` ottaa erillisen optimointin API-kutsun, **ei** perinteistä `eval.yaml` tai uutta `azure.eval.yaml`; käytä `--eval`/`--eval-config` arvioinnin uudelleenkäyttöön. Katso [arvioinnin asennus](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ja [optimoinnin migraatio](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agentit beta.22 korvasi vanhat arviointikomennot `azd ai eval` -komennolla `azure.ai.evaluations`. Uusi arviointimääritys käyttää camelCase-avaimia. Optimointi `--config` edellyttää erillistä optimointien API-pyyntöä, **ei** vanhaa `eval.yaml` tai uutta `azure.eval.yaml`; käytä `--eval`/`--eval-config` arviointien uudelleenkäyttöön. Katso [arvioinnin alustus](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ja [optimoinnin migrointi](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-### MCP-palvelin (Alfa)
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Tämä runner-pätkä ei ole täydellinen työnkulku. Tee sitoumus tarkistettuun arviointimääritykseen ja ei-salaisiin resursseihin, myönnä aineisto/arvioija/mallin käyttöoikeudet, ja käytä yhtä ympäristöä vaihetta kohden. Katso [todennettu CI/CD-esimerkki](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
+### MCP-palvelin (Alpha)
 ```bash
 # Start the MCP server for your project
 azd mcp start
@@ -421,7 +456,7 @@ azd infra --help
 
 ## 🎯 Nopeat työnkulut
 
-### Kehitystyön työnkulku
+### Kehitystyönkulku
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Moniympäristöinen työnkulku
+### Moniympäristötyönkulku
 ```bash
 # Set up environments
 azd env new dev
@@ -502,9 +537,9 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 Tiedosto- ja hakemistokomentot
+## 📁 Tiedosto- ja hakemistokomennot
 
-### Projektin rakenne
+### Projektirakenne
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -540,9 +575,9 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Yleiset komentoyhdistelmät
+## 🔧 Tavalliset komentoyhdistelmät
 
-### Terveystarkistusskripti
+### Terveystarkistus-skripti
 ```bash
 #!/bin/bash
 # Quick health check
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Käyttöönoton validointi
+### Käyttöönottovahvistus
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -560,7 +595,7 @@ azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Ympäristöjen vertailu
+### Ympäristövertailu
 ```bash
 #!/bin/bash
 # Compare environments
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### Resurssien siivousskripti
+### Resurssien siivousscriptti
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -580,7 +615,7 @@ azd down --environment <environment-name>
 
 ## 📝 Ympäristömuuttujat
 
-### Yleiset ympäristömuuttujat
+### Tavalliset ympäristömuuttujat
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -626,9 +661,9 @@ azd provision
 azd deploy
 ```
 
-## 💡 Pro Vinkit
+## 💡 Vinkkejä ammattilaisille
 
-### Alias-komennot työnkulun nopeuttamiseksi
+### Aliakset nopeampaan työnkulkuun
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -637,7 +672,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funktioiden pikakomennot
+### Funktioiden pikanäppäimet
 ```bash
 # Quick environment switching
 azd-env() {
@@ -658,9 +693,9 @@ azd-status() {
 }
 ```
 
-## 📖 Apua ja dokumentaatio
+## 📖 Ohje ja dokumentaatio
 
-### Avun saaminen
+### Avun hakeminen
 ```bash
 # General help
 azd --help
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Vinkki**: Lisää tämä pikakuvake kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi tarvitsemasi komennot nopeasti!
+**Vinkki**: Kirjanmerkkaa tämä pikalista ja käytä `Ctrl+F` löytääksesi nopeasti tarvitsemasi komennot!
 
 ---
 
-**Navigointi**
-- **Edellinen oppitunti**: [Esilennotustarkistukset](../docs/chapter-06-pre-deployment/preflight-checks.md)
+**Navigaatio**
+- **Edellinen oppitunti**: [Esilennotustarkastukset](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Seuraava oppitunti**: [Sanasto](glossary.md)
 
 ---
 
-> **💡 Haluatko Azure-käskyapua editorissasi?** Asenna [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) käyttämällä `npx skills add microsoft/github-copilot-for-azure` — 37 taitoa AI:lle, Foundrylle, käyttöönotolle, diagnostiikalle ja muulle.
+> **💡 Haluatko Azure-komennoille apua editorissasi?** Asenna [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) käyttäen `npx skills add microsoft/github-copilot-for-azure` — 37 taitoa AI:lle, Foundryl­le, käyttöönotolle, diagnostiikalle ja muulle.
 
 ---
 
