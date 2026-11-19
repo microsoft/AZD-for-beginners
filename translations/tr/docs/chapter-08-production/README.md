@@ -1,25 +1,25 @@
-# Bölüm 8: Üretim & Kurumsal Modeller
+# Bölüm 8: Üretim ve Kurumsal Desenler
 
-**📚 Kurs**: [Başlangıç İçin AZD](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk Seviyesi**: İleri
+**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri Seviye
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, kurumsal kullanılabilirlikte dağıtım modellerini, güvenlik sertleştirme, izleme ve üretim AI iş yükleri için maliyet optimizasyonunu kapsar.
+Bu bölüm, kurumsal seviyede dağıtım desenlerini, güvenlik güçlendirmesini, izlemeyi ve üretim yapay zeka iş yükleri için maliyet optimizasyonunu ele almaktadır.
 
-Bu, tam dağıtılabilir bir üretim şablonu değil, mimari bir referanstır. Örnekler, kendi uygulamanızda sağlanması ve test edilmesi gereken entegrasyon detaylarını atlar; kontrol listesini okumak üretim hazır olma sertifikası vermez.
+Bu bir mimari referanstır, tam bir dağıtılabilir üretim şablonu değildir. Örnekler, kendi uygulamanızda sağlanması ve test edilmesi gereken entegrasyon detaylarını içermemektedir; kontrol listesini okumak üretim hazır olduğunu garanti etmez.
 
-> **Sürüm incelemesi (2026-11-04):** AI CLI rehberi `azd 1.37.2`, ajanlar `1.0.0-beta.23` ve değerlendirmeler `1.0.0-beta.2` belgeleri/kaynakları ile karşılaştırıldı. Uyum gereksinimleri ve taşıma detayları için [sürüm değişiklikleri ve düzeltmeler](production-ai-practices.md#recent-release-changes-and-fixes) bakınız; bu canlı bir dağıtım doğrulaması değildir.
+> **Foundry GA güncellemesi (2026-11-09):** Foundry iş akışı için `azd >= 1.37.0` ve genel kullanıma açık `microsoft.foundry` 1.0 paketini kullanın; değerlendirmeler ayrı olarak yüklenir. [Sürüm kapsamı ve geçiş](production-ai-practices.md#recent-release-changes-and-fixes) ve [doğrulanmış işlem hattı örneğine](production-ai-practices.md#cicd-pipeline-configuration) bakınız. Bu bir dokümantasyon incelemesidir, canlı dağıtım doğrulaması veya isteğe bağlı önizleme özellikleri için genel GA statüsü değildir.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda:
-- Çok bölgeli dayanıklı uygulamaları dağıtacaksınız
-- Kurumsal güvenlik modellerini uygulayacaksınız
-- Kapsamlı izleme yapılandıracaksınız
-- Ölçekli maliyetleri optimize edeceksiniz
-- AZD ile CI/CD boru hatları kuracaksınız
+Bu bölümü tamamlayarak:
+- Çok bölgeli dayanıklı uygulamalar dağıtacaksınız
+- Kurumsal güvenlik desenlerini uygulayacaksınız
+- Kapsamlı izlemeyi yapılandıracaksınız
+- Ölçekli maliyet optimizasyonu yapacaksınız
+- AZD ile CI/CD işlem hatları kuracaksınız
 
 ---
 
@@ -27,25 +27,25 @@ Bu bölümü tamamladığınızda:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Üretim AI Uygulamaları](production-ai-practices.md) | Kurumsal dağıtım modelleri | 90 dk |
+| 1 | [Üretim Yapay Zeka Uygulamaları](production-ai-practices.md) | Kurumsal dağıtım desenleri | 90 dk |
 
 ---
 
 ## 🚀 Üretim Kontrol Listesi
 
 - [ ] Dayanıklılık için çok bölgeli dağıtım
-- [ ] Kimlik doğrulama için yönetilen kimlik (anahtar yok)
+- [ ] Kimlik doğrulama için yönetilen kimlik (anahtarsız)
 - [ ] İzleme için Application Insights
 - [ ] Maliyet bütçeleri ve uyarılar yapılandırıldı
 - [ ] Güvenlik taraması etkinleştirildi
-- [ ] CI/CD boru hattı entegrasyonu
+- [ ] CI/CD işlem hattı entegrasyonu
 - [ ] Felaket kurtarma planı
 
 ---
 
-## 🏗️ Mimari Modeller
+## 🏗️ Mimari Desenler
 
-### Model 1: Mikroservisler AI
+### Desen 1: Mikroservisler AI
 
 ```mermaid
 graph LR
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Model 2: Olay Tabanlı AI
+### Desen 2: Olay Tabanlı AI
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Strateji | Ana Kısıtlama |
 |----------|---------|
-| Sıfıra ölçekleme (Container Apps) | Uygun bir tetikleyici gerekir; diğer servisler hala maliyet oluşturur |
-| Geliştirici için tüketim katmanları kullanımı | Seçilen hizmet fiyatlandırması ve iş yükü karşılaştırması |
-| Planlı ölçeklendirme | Desteklenen altyapı/otomasyon ile ölçeklendirme |
-| Rezervasyonlar/ayrılmış kapasite | Sadece desteklendiğinde; taahhütler boşta kalan maliyetleri artırabilir |
+| Sıfıra ölçekleme (Container Apps) | Uygun tetikleyici gerekir; diğer hizmetler yine maliyet oluşturur |
+| Geliştirme için tüketim katmanlarını kullan | Seçilen hizmet fiyatlandırması ve iş yükü karşılaştırması |
+| Zamanlanmış ölçeklendirme | Desteklenen altyapı/otomasyon ile ölçeklendir |
+| Rezervasyonlar/ayrılmış kapasite | Yalnızca desteklendiğinde; taahhütler boşta maliyetleri artırabilir |
 
-Geçerli bir başlangıç tarihi, faturalama kapsamı, alıcılar ve izinler ile [tam bütçe kaynak modeli](production-ai-practices.md#2-cost-monitoring-and-budgets) kullanın. Bir bütçe uyarılar gönderir; harcamayı sınırlandırmaz. Tasarruflar ölçülen kullanıma bağlıdır ve garanti edilen yüzdeler değildir.
+Geçerli bir başlama tarihi, faturalama kapsamı, alıcılar ve izinlerle birlikte [tam bütçe kaynak deseni](production-ai-practices.md#2-cost-monitoring-and-budgets) kullanın. Bir bütçe uyarılar gönderir; harcamayı sınırlandırmaz. Tasarruflar ölçülen kullanım oranlarına bağlıdır ve garanti edilmez.
 
 ---
 
-## 📊 İzleme Ayarları
+## 📊 İzleme Kurulumu
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -122,9 +122,9 @@ az monitor metrics list --resource <resource-id>
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
+- [AI Ajanları Rehberi](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md)
+- [Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md)
 - [Mikroservisler Örneği](../../examples/microservices/README.md)
 
 ---

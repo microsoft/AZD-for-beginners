@@ -1,29 +1,29 @@
-# Wzorce koordynacji wielu agentów
+# Wzorce Koordynacji Wieloagentowej
 
-⏱️ **Przewidywany czas**: 60-75 minut czytania; kilka godzin na implementację | 💰 **Szacowany koszt**: zależny od nakładu pracy | ⭐ **Złożoność**: Zaawansowany
+⏱️ **Szacowany czas**: 60-75 minut czytania; kilka godzin na wdrożenie | 💰 **Szacowany koszt**: zależny od nakładu pracy | ⭐ **Złożoność**: Zaawansowana
 
 **📚 Ścieżka nauki:**
-- ← Poprzedni: [Planowanie pojemności](capacity-planning.md) - strategie doboru zasobów i skalowania
-- 🎯 **Jesteś tutaj**: Wzorce koordynacji wielu agentów (orkiestracja, komunikacja, zarządzanie stanem)
-- → Następny: [Wybór SKU](sku-selection.md) - Wybór odpowiednich usług Azure
+- ← Poprzedni: [Planowanie pojemności](capacity-planning.md) - Strategie doboru i skalowania zasobów
+- 🎯 **Jesteś tutaj**: Wzorce Koordynacji Wieloagentowej (orkiestracja, komunikacja, zarządzanie stanem)
+- → Następny: [Wybór SKU](sku-selection.md) - Dobór odpowiednich usług Azure
 - 🏠 [Strona kursu](../../README.md)
 
 ---
 
 ## Czego się nauczysz
 
-Po ukończeniu tej lekcji będziesz potrafił:
-- Zrozumieć wzorce **architektury wielu agentów** oraz kiedy ich używać
-- Zaimplementować **wzorce orkiestracji** (zcentralizowane, zdecentralizowane, hierarchiczne)
-- Zaprojektować strategie **komunikacji agentów** (synchronizowana, asynchroniczna, sterowana zdarzeniami)
-- Zarządzać **wspólnym stanem** w rozproszonych agentach
-- Wdrożyć **systemy wielu agentów** na Azure za pomocą AZD
-- Stosować **wzorce koordynacji** w scenariuszach AI z prawdziwego świata
-- Monitorować i debugować rozproszone systemy agentów
+Po ukończeniu tej lekcji będziesz:
+- Rozumiał wzorce **architektury wieloagentowej** oraz kiedy ich używać
+- Implementował **wzorce orkiestracji** (scentralizowana, zdecentralizowana, hierarchiczna)
+- Projektował strategie **komunikacji agentów** (synchronizacja, asynchronizacja, zdarzeniowe)
+- Zarządzał **wspólnym stanem** wśród rozproszonych agentów
+- Wdrażał **systemy wieloagentowe** na platformie Azure z użyciem AZD
+- Stosował **wzorce koordynacyjne** w scenariuszach AI z prawdziwego świata
+- Monitorował i debugował rozproszone systemy agentów
 
-## Dlaczego koordynacja wielu agentów jest ważna
+## Dlaczego koordynacja wieloagentowa jest ważna
 
-### Ewolucja: Od pojedynczego agenta do wielu agentów
+### Ewolucja: od pojedynczego agenta do wieloagentowego systemu
 
 **Pojedynczy agent (prosty):**
 ```
@@ -31,32 +31,32 @@ User → Agent → Response
 ```
 - ✅ Łatwy do zrozumienia i implementacji
 - ✅ Szybki dla prostych zadań
-- ❌ Ograniczony możliwościami jednego modelu
-- ❌ Nie można równolegle wykonywać złożonych zadań
+- ❌ Ograniczony możliwościami pojedynczego modelu
+- ❌ Nie pozwala na równoległe przetwarzanie złożonych zadań
 - ❌ Brak specjalizacji
 
-**System wielu agentów (zaawansowany):**
+**System wieloagentowy (zaawansowany):**
 ```mermaid
 graph TD
     Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
     Orchestrator --> Agent2[Agent2<br/>Code]
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
-- ✅ Agenci wyspecjalizowani w określonych zadaniach
-- ✅ Równoległe wykonywanie dla szybkości
-- ✅ Modularny i łatwy w utrzymaniu
-- ✅ Lepszy w złożonych przepływach pracy
+- ✅ Specjalizowani agenci do określonych zadań
+- ✅ Równoległe wykonanie dla szybkości
+- ✅ Modułowy i łatwy w utrzymaniu
+- ✅ Lepszy przy złożonych procesach
 - ⚠️ Wymaga logiki koordynacji
 
-**Analogia**: pojedynczy agent to jak jedna osoba wykonująca wszystkie zadania. Wielu agentów to jak zespół, gdzie każdy członek ma specjalistyczne umiejętności (badacz, programista, recenzent, pisarz) i pracują razem.
+**Analogia**: pojedynczy agent to jak jedna osoba wykonująca wszystkie zadania. System wieloagentowy to zespół, w którym każdy członek ma specjalistyczne umiejętności (badacz, programista, recenzent, pisarz) i współpracują.
 
 ---
 
 ## Podstawowe wzorce koordynacji
 
-### Wzorzec 1: Koordynacja sekwencyjna (Łańcuch odpowiedzialności)
+### Wzorzec 1: Koordynacja sekwencyjna (łańcuch odpowiedzialności)
 
-**Kiedy używać**: Zadania muszą być wykonane w określonej kolejności, każdy agent korzysta z outputu poprzedniego.
+**Kiedy używać**: Zadania muszą być wykonane w określonym porządku, każdy agent buduje na wyjściu poprzedniego.
 
 ```mermaid
 sequenceDiagram
@@ -80,24 +80,24 @@ sequenceDiagram
 
 **Korzyści:**
 - ✅ Jasny przepływ danych
-- ✅ Łatwe do debugowania
+- ✅ Łatwy do debugowania
 - ✅ Przewidywalna kolejność wykonania
 
 **Ograniczenia:**
-- ❌ Wolniejsze (brak równoległości)
-- ❌ Jeden błąd blokuje cały łańcuch
-- ❌ Nie radzi sobie z zadaniami wzajemnie zależnymi
+- ❌ Wolniejszy (brak równoległości)
+- ❌ Jedna awaria blokuje cały łańcuch
+- ❌ Nie radzi sobie z zadaniami współzależnymi
 
-**Przykładowe zastosowania:**
-- Pipeline tworzenia treści (badania → pisanie → edycja → publikacja)
-- Generowanie kodu (planowanie → implementacja → testy → wdrożenie)
+**Przykłady zastosowań:**
+- Proces tworzenia treści (badania → pisanie → redakcja → publikacja)
+- Generowanie kodu (planowanie → implementacja → testowanie → wdrożenie)
 - Generowanie raportów (zbieranie danych → analiza → wizualizacja → podsumowanie)
 
 ---
 
-### Wzorzec 2: Koordynacja równoległa (Fan-Out/Fan-In)
+### Wzorzec 2: Koordynacja równoległa (fan-out/fan-in)
 
-**Kiedy używać**: Niezależne zadania mogą działać jednocześnie, wyniki są scalane na końcu.
+**Kiedy używać**: Niezależne zadania mogą być wykonywane równocześnie, wyniki łączone na końcu.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Korzyści:**
-- ✅ Szybkie (wykonanie równoległe)
-- ✅ Odporne na błędy (akceptowalne częściowe wyniki)
-- ✅ Skalowalne poziomo
+- ✅ Szybki (równoległe wykonanie)
+- ✅ Odporność na błędy (akceptowane częściowe wyniki)
+- ✅ Skalowalność horyzontalna
 
 **Ograniczenia:**
-- ⚠️ Wyniki mogą przychodzić poza kolejnością
-- ⚠️ Wymaga logiki agregacji
+- ⚠️ Wyniki mogą pojawić się w nieuporządkowanej kolejności
+- ⚠️ Wymagana logika agregacji
 - ⚠️ Złożone zarządzanie stanem
 
-**Przykładowe zastosowania:**
-- Gromadzenie danych z wielu źródeł (API + bazy danych + web scraping)
-- Analiza konkurencji (wiele modeli generuje rozwiązania, wybierany najlepszy)
-- Usługi tłumaczeń (równoczesne tłumaczenie na wiele języków)
+**Przykłady zastosowań:**
+- Zbieranie danych z wielu źródeł (API + bazy danych + web scraping)
+- Analiza konkurencji (wiele modeli generuje rozwiązania, wybierane jest najlepsze)
+- Usługi tłumaczeniowe (tłumaczenie na wiele języków jednocześnie)
 
 ---
 
-### Wzorzec 3: Koordynacja hierarchiczna (Manager-Pracownik)
+### Wzorzec 3: Koordynacja hierarchiczna (manager-pracownik)
 
-**Kiedy używać**: Złożone przepływy pracy z podzadaniami, konieczność delegacji.
+**Kiedy używać**: Złożone przepływy pracy z podzadaniami, potrzebna delegacja.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Korzyści:**
-- ✅ Radzi sobie ze złożonymi przepływami pracy
-- ✅ Modularny i łatwy w utrzymaniu
+- ✅ Obsługuje złożone przepływy pracy
+- ✅ Modułowy i łatwy w utrzymaniu
 - ✅ Jasne granice odpowiedzialności
 
 **Ograniczenia:**
-- ⚠️ Bardziej skomplikowana architektura
-- ⚠️ Wyższa latencja (wielowarstwowa koordynacja)
+- ⚠️ Bardziej złożona architektura
+- ⚠️ Wyższe opóźnienia (wielowarstwowa koordynacja)
 - ⚠️ Wymaga zaawansowanej orkiestracji
 
-**Przykładowe zastosowania:**
-- Przetwarzanie dokumentów korporacyjnych (klasyfikacja → kierowanie → przetwarzanie → archiwizacja)
-- Wieloetapowe pipeline’y danych (pobieranie → czyszczenie → transformacja → analiza → raport)
-- Złożone przepływy automatyzacji (planowanie → alokacja zasobów → wykonanie → monitoring)
+**Przykłady zastosowań:**
+- Przetwarzanie dokumentów firmowych (klasyfikacja → routing → przetwarzanie → archiwizacja)
+- Wieloetapowe potoki danych (pozyskiwanie → czyszczenie → transformacja → analiza → raportowanie)
+- Złożone automatyzacje (planowanie → alokacja zasobów → wykonanie → monitorowanie)
 
 ---
 
-### Wzorzec 4: Koordynacja zdarzeniowa (Publish-Subscribe)
+### Wzorzec 4: Koordynacja zdarzeniowa (publish-subscribe)
 
-**Kiedy używać**: Agenci muszą reagować na zdarzenia, pożądane jest luźne powiązanie.
+**Kiedy używać**: Agenty muszą reagować na zdarzenia, oczekiwane luźne powiązania.
 
 ```mermaid
 sequenceDiagram
@@ -207,25 +207,25 @@ sequenceDiagram
 
 **Korzyści:**
 - ✅ Luźne powiązanie między agentami
-- ✅ Łatwe dodawanie nowych agentów (wystarczy subskrypcja)
-- ✅ Asynchroniczne przetwarzanie
-- ✅ Odporność (utrwalanie wiadomości)
+- ✅ Łatwość dodawania nowych agentów (wystarczy subskrypcja)
+- ✅ Przetwarzanie asynchroniczne
+- ✅ Odporność (trwałość wiadomości)
 
 **Ograniczenia:**
 - ⚠️ Ostateczna spójność
-- ⚠️ Trudne debugowanie
-- ⚠️ Problemy z kolejnością wiadomości
+- ⚠️ Trudności z debugowaniem
+- ⚠️ Trudności z porządkiem wiadomości
 
-**Przykładowe zastosowania:**
-- Systemy monitoringu w czasie rzeczywistym (alerty, dashboardy, logi)
+**Przykłady zastosowań:**
+- Systemy monitoringu w czasie rzeczywistym (alerty, panele, logi)
 - Powiadomienia wielokanałowe (email, SMS, push, Slack)
-- Pipeline’y przetwarzania danych (wielu konsumentów tych samych danych)
+- Potoki przetwarzania danych (wielu konsumentów tych samych danych)
 
 ---
 
 ### Wzorzec 5: Koordynacja oparta na konsensusie (głosowanie/kworum)
 
-**Kiedy używać**: Potrzeba uzyskania zgody od wielu agentów przed kontynuacją.
+**Kiedy używać**: Potrzeba zgody wielu agentów przed kontynuacją.
 
 ```mermaid
 graph TB
@@ -249,24 +249,24 @@ graph TB
 
 **Korzyści:**
 - ✅ Wyższa dokładność (wiele opinii)
-- ✅ Odporność na błędy (dopuszczalne awarie mniejszości)
+- ✅ Odporność na błędy (akceptowane mniejsze niepowodzenia)
 - ✅ Wbudowana kontrola jakości
 
 **Ograniczenia:**
-- ❌ Drogi (wiele wywołań modeli)
-- ❌ Wolniejszy (czekanie na wszystkich agentów)
+- ❌ Kosztowny (wiele wywołań modeli)
+- ❌ Wolniejszy (oczekiwanie na wszystkich agentów)
 - ⚠️ Wymaga rozwiązywania konfliktów
 
-**Przykładowe zastosowania:**
+**Przykłady zastosowań:**
 - Moderacja treści (wiele modeli ocenia treść)
 - Przegląd kodu (wiele linterów/analityków)
-- Diagnostyka medyczna (wiele modeli AI, walidacja ekspercka)
+- Diagnostyka medyczna (wiele modeli AI, walidacja ekspertów)
 
 ---
 
 ## Przegląd architektury
 
-### Kompletny system wielu agentów na Azure
+### Kompletny system wieloagentowy na platformie Azure
 
 ```mermaid
 graph TB
@@ -316,17 +316,17 @@ graph TB
 
 **Kluczowe komponenty:**
 
-| Komponent | Przeznaczenie | Usługa Azure |
-|-----------|--------------|--------------|
-| **API Gateway** | Punkt wejścia, ograniczanie przepływu, uwierzytelnianie | API Management |
-| **Orkiestrator** | Koordynacja przepływów pracy agentów | Container Apps |
+| Komponent | Cel | Usługa Azure |
+|-----------|-----|-------------|
+| **API Gateway** | Punkt wejścia, limitowanie zapytań, uwierzytelnianie | API Management |
+| **Orkiestrator** | Koordynuje przepływy pracy agentów | Container Apps |
 | **Kolejka wiadomości** | Komunikacja asynchroniczna | Service Bus / Event Hubs |
-| **Agenci** | Wyspecjalizowani pracownicy AI | Container Apps / Functions |
+| **Agenci** | Specjalizowani pracownicy AI | Container Apps / Functions |
 | **Magazyn stanu** | Wspólny stan, śledzenie zadań | Cosmos DB |
 | **Magazyn artefaktów** | Dokumenty, wyniki, logi | Blob Storage |
-| **Monitorowanie** | Śledzenie rozproszone, logi | Application Insights |
+| **Monitoring** | Rozproszone śledzenie, logi | Application Insights |
 
-Kolejki/tematy Service Bus i Event Hubs to różne usługi o różnych modelach dostarczania/konsumpcji; Event Hubs nie jest bezpośrednim zamiennikiem kodu pracownika Service Bus poniżej. Równoległość, utrwalone wiadomości i głosowanie modeli same w sobie nie gwarantują odporności na błędy ani wyższej dokładności.
+Kolejki/tematy Service Bus oraz Event Hubs to różne usługi z różnymi modelami dostarczania/konsumpcji; Event Hubs nie jest zamiennikiem kodu roboczego Service Bus poniżej. Równoległość, utrwalone wiadomości i głosowanie modeli same w sobie nie gwarantują odporności na błędy ani większej dokładności.
 
 ---
 
@@ -348,32 +348,32 @@ docker --version
 # ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Wymagania Azure
+### Wymagania platformy Azure
 
 - Aktywna subskrypcja Azure
 - Uprawnienia do tworzenia:
   - Container Apps
-  - Namespace Service Bus
-  - Konta Cosmos DB
-  - Konta Storage
+  - namespace'ów Service Bus
+  - kont Cosmos DB
+  - kont Storage
   - Application Insights
 
-### Wymagania wiedzy
+### Wymagane umiejętności
 
 Powinieneś ukończyć:
 - [Zarządzanie konfiguracją](../chapter-03-configuration/configuration.md)
 - [Uwierzytelnianie i bezpieczeństwo](../chapter-03-configuration/authsecurity.md)
-- [Przykład mikrousług](../../../../examples/microservices)
+- [Przykład mikroserwisów](../../../../examples/microservices)
 
 ---
 
-## Przewodnik po implementacji
+## Przewodnik implementacji
 
-> **Fragmenty projektowe, a nie wdrażalny lab:** Drzewo projektu i etykiety `File:` poniżej opisują pliki do utworzenia we własnym projekcie; to repozytorium nie zawiera kompletnej aplikacji `multi-agent-system`. Brakujące elementy to szablony main/parameter, środowisko/registry Container Apps, Dockerfile i pliki blokujące zależności, konfiguracja bazy danych Cosmos, wdrożenia modeli, konfiguracja tożsamości/rola, reguły skalowania oraz równolegli pracownicy/kolejki. Nie oczekuj, że `azd init` wygeneruje te pliki ani, że `azd up` wdroży niezmienione fragmenty. Dla wykonalnego punktu wyjścia ukończ [Podstawy wielu agentów](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Fragmenty projektu, nie wdrażalne laboratorium:** Drzewo projektu i etykiety `File:` poniżej opisują pliki do utworzenia we własnym projekcie; to repozytorium nie zawiera kompletnej aplikacji `multi-agent-system`. Brakuje głównych szablonów/parametrów, środowiska/rejestru Container Apps, Dockerfiles i blokad zależności, konfiguracji bazy danych/kontenera Cosmos, wdrożeń modeli, konfiguracji tożsamości/rol, zasad skalowania oraz równoległych robotników/kolejek. Nie oczekuj, że `azd init` wygeneruje te pliki lub `azd up` wdroży skrypty bez zmian. Dla wykonalnego punktu startowego ukończ [Podstawy wieloagentowe](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Założenia środowiskowe:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask oraz (do monitoringu) `azure-monitor-opentelemetry`; umieść `shared` na ścieżce importu Pythona w każdym obrazie usługi. Kontener Cosmos `agent-state/tasks` musi już istnieć z kluczem partycji `/id`. Połączenia oparte na kluczach upraszczają te fragmenty, to nie wskazania produkcyjne: preferuj tożsamości zarządzane z rolami poziomu danych Service Bus/Cosmos/OpenAI. Nie ujawniaj kluczy w outputach ani logach.
+**Założenia środowiskowe:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask i (do monitoringu) `azure-monitor-opentelemetry`; umieść `shared` na ścieżce importu Pythona w każdym obrazie usługi. Kontener Cosmos `agent-state/tasks` musi już istnieć z kluczem partycji `/id`. Połączenia oparte na kluczach upraszczają te fragmenty, nie są produkcyjnymi rekomendacjami: preferuj zarządzane tożsamości z odpowiednio zakresowymi rolami danych Service Bus/Cosmos/OpenAI. Nie eksponuj kluczy w wynikach ani logach.
 
-Dostarczanie Service Bus jest **przynajmniej raz**. Zachowaj idempotencję na poziomie zadania **i kroku**, stosuj optymistyczną współbieżność (ETagi) do odczytu/modyfikacji/zapisu stanu i odnawiaj blokady wiadomości przy długim przetwarzaniu. Poniższy prosty menedżer stanu obsługuje tylko sekwencje i nie implementuje tych gwarancji produkcyjnych.
+Dostarczanie w Service Bus jest **przynajmniej jednokrotne**. Wprowadź idempotencję per zadanie **i krok**, używaj optymistycznej współbieżności (ETags) do odczytu/modyfikacji/zapisu stanu oraz odnawiaj blokady wiadomości podczas długiego przetwarzania. Poniższy prosty menedżer stanu jest wyłącznie sekwencyjny i nie implementuje tych gwarancji produkcyjnych.
 
 ### Struktura projektu
 
@@ -411,7 +411,7 @@ multi-agent-system/
 
 ### Implementacja: Pipeline tworzenia treści
 
-Zaprojektujmy pipeline sekwencyjny: Badania → Pisanie → Edycja. Publikacja poza tym przykładem.
+Zaprojektujmy sekwencyjny pipeline: Badania → Pisanie → Redakcja. Publikacja jest poza tym przykładem.
 
 ### 1. Konfiguracja AZD
 
@@ -444,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastruktura: Service Bus dla koordynacji
+### 2. Infrastruktura: Service Bus do koordynacji
 
 **Plik: `infra/core/servicebus.bicep`**
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Menedżer stanu współdzielonego
+### 3. Menedżer wspólnego stanu
 
 **Plik: `src/shared/state_manager.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Agent pisarz
+### 6. Agent piszący
 
 **Plik: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Agent redaktor
+### 7. Agent redakcyjny
 
 **Plik: `src/agents/editor/app.py`**
 
@@ -893,21 +893,21 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Wdrażanie i testowanie
+### 8. Wdrożenie i testy
 
-Te polecenia stosuj **tylko po implementacji brakujących plików projektu**. Inicjalizacja agenta interaktywnego Foundry to osobny workflow; nie generuje tego projektu Service Bus.
+Te polecenia mają zastosowanie **dopiero po wdrożeniu brakujących plików projektu**. Inicjalizacja agenta Interactive Foundry to odrębny proces; nie generuje tej architektury Service Bus.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Zobacz [polecenia AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dla wszystkich flag i opcji `azd ai`.
+> Zobacz [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dla wszystkich flag i opcji `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -930,7 +930,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Sprawdź postęp zadań:**
+**Sprawdź postęp zadania:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -966,9 +966,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Lekcja 2: Wzorzec koordynacji równoległej
 
-### Implementacja: Agregator badań z wielu źródeł
+### Implementacja: Agregator badań wieloźródłowych
 
-Zbudujmy system równoległy, który zbiera informacje z wielu źródeł jednocześnie.
+Zbudujmy równoległy system zbierający informacje z wielu źródeł jednocześnie.
 
 ### Orkiestrator równoległy
 
@@ -1124,23 +1124,23 @@ if __name__ == '__main__':
 ```
 
 **Korzyści wzorca równoległego:**
-- ⚡ **Potencjalnie niższa latencja** (ograniczona przez najwolniejszego pracownika plus narzut koordynacji)
-- 🔄 **Może obsługiwać wyniki częściowe** z określonymi deadline'ami i polityką awarii (niezaimplementowane przez podstawowy agregator)
+- ⚡ **Potencjalnie niższe opóźnienie** (ograniczone przez najwolniejszego pracownika plus narzut koordynacji)
+- 🔄 **Obsługuje częściowe wyniki** z wyraźnymi terminami i polityką błędów (nie implementowane przez podstawowy agregator)
 - 📈 **Skalowalny** (łatwe dodawanie agentów)
 
 ---
 
 ## Ćwiczenia praktyczne
 
-### Ćwiczenie 1: Dodaj obsługę timeoutu ⭐⭐ (średni)
+### Ćwiczenie 1: Dodaj obsługę timeout ⭐⭐ (Średnie)
 
-**Cel**: Zaimplementuj logikę timeoutu, aby agregator nie czekał wiecznie na wolnych agentów.
+**Cel**: Wdróż logikę timeout, aby agregator nie czekał wiecznie na spóźnionych agentów.
 
-**Punkt startowy:** Uruchom symulację lokalnego deadline przed integracją z workerem kolejki. Timeout sprawdzany tylko przy nadejściu innej wiadomości nigdy nie zadziała, jeśli brakujący pracownik nic nie wyśle.
+**Punkt startowy:** Uruchom tę lokalną symulację deadline przed integracją z workerem kolejki. Timeout sprawdzany tylko podczas nadejścia innej wiadomości nigdy nie zadziała, jeśli brakujący pracownik nic nie wyśle.
 
 **Kroki**:
 
-1. **Dodaj śledzenie timeoutu do agregatora:**
+1. **Dodaj śledzenie timeout do agregatora:**
 
 ```python
 import asyncio
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integracja z systemem kolejki (zadanie projektowe):** Zachowaj deadline dispatchu i oczekiwanych agentów przy tworzeniu zadania, uruchamiaj cykliczne sprawdzanie deadline’u niezależnie od nadejścia wyników, atomowo finalizuj częściowe wyniki, ignoruj spóźnione/duplikaty dla ukończonych zadań. Lokalny timeout nie anuluje zdalnych pracowników.
+3. **Integracja z systemem kolejek (zadanie projektowe):** Zachowaj deadline przesyłania i oczekiwanych agentów przy tworzeniu zadania, uruchamiaj okresowe czyszczenie deadline niezależne od przychodzących wyników, atomowo finalizuj częściowe wyniki i ignoruj spóźnione/duplikaty wiadomości dla zakończonych zadań. Lokalny timeout nie przerywa zdalnych workerów.
 
-Tylko dla swojego zaimplementowanego projektu:
+Wyłącznie dla Twojego wdrożonego projektu:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Kryteria sukcesu:**
-- ✅ Test lokalny kończy się po jednej sekundzie, nawet jeśli agent jest nieukończony
-- ✅ Odpowiedź wskazuje częściowe wyniki (`"timed_out": true`)
-- ✅ Zwracane są dostępne wyniki (3 z 4 agentów)
+- ✅ Lokalny test zwraca wynik po jednym sekundowym terminie, nawet jeśli agent jest niekompletny
+- ✅ Odpowiedź zawiera częściowe wyniki (`"timed_out": true`)
+- ✅ Dostępne wyniki są zwracane (3 z 4 agentów)
 
 **Czas**: 20-25 minut
 
 ---
 
-### Ćwiczenie 2: Wdroż retry logic ⭐⭐⭐ (zaawansowany)
+### Ćwiczenie 2: Implementacja logiki ponawiania prób ⭐⭐⭐ (Zaawansowane)
 
-**Cel**: Automatycznie powtarzaj nieudane zadania agentów przed poddaniem się.
+**Cel**: Automatyczne ponawianie nieudanych zadań agentów przed poddaniem się.
 
 **Kroki**:
 
-1. **Wykorzystaj licznik dostarczeń Service Bus zamiast własnych liczników retry w kolejkach:**
+1. **Użyj liczników dostarczania Service Bus zamiast własnych liczników retry:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Dodaj obsługę retry do agentów:**
+2. **Dodaj handler retry do agentów:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Monitoruj kolejkę dead letter:**
+3. **Monitoruj kolejkę martwych listów:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Kryteria sukcesu:**
-- ✅ Nieudane zadania retry automatycznie (do 3 razy)
-- ✅ Eksponencjalne opóźnienie między powtórkami (5s, 10s, 20s), z odnawianiem blokad wiadomości gdy potrzebne
-- ✅ Po maksymalnej liczbie retry wiadomości trafiają do kolejki dead letter
-- ✅ Wiadomości z dead letter można analizować; replay wymaga osobnego workflow odzyskiwania idempotentnego
+- ✅ Nieudane zadania są automatycznie ponawiane (do 3 razy)
+- ✅ Eksponecnjalny odstęp między retry (5s, 10s, 20s), z odnawianiem blokady wiadomości tam, gdzie trzeba
+- ✅ Po maksymalnych retry wiadomości trafiają na kolejkę martwych listów
+- ✅ Wiadomości w martwej kolejce można przeglądać; odtwarzanie wymaga osobnego idempotentnego procesu odzyskiwania
 
 **Czas**: 30-40 minut
 
 ---
 
-### Ćwiczenie 3: Wdroż circuit breaker ⭐⭐⭐ (zaawansowany)
+### Ćwiczenie 3: Implementacja wyłącznika obwodu (Circuit Breaker) ⭐⭐⭐ (Zaawansowane)
 
-**Cel**: Zapobiegać kaskadowym awariom, zatrzymując żądania do zawodzących agentów.
+**Cel**: Zapobiec kaskadowym awariom przez zatrzymanie zapytań do zawodnych agentów.
 
 **Kroki**:
 
-1. **Utwórz klasę circuit breaker:**
+1. **Stwórz klasę wyłącznika obwodu:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Zastosuj do wywołań agentów:**
+2. **Zastosuj w wywołaniach agentów:**
 
 ```python
 # In orchestrator
@@ -1348,7 +1348,7 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Ten obwód chroni **operację wysyłania**, a nie zakończenie przez zdalnego pracownika: pomyślne dodanie wiadomości do kolejki nic nie mówi o tym, czy agent jest aktywny. `send_message` to funkcja wysyłkowa Twojej aplikacji. Dla obwodów wykonawczych wprowadź zaobserwowane błędy/zapomnienia zadań do trwałego koordynatora. Ta klasa w pamięci jest demonstracją jednowątkową, a nie rozproszonym wyłącznikiem obwodów.
+Ten układ chroni **operację wysyłania**, a nie zakończenie przez zdalnego agenta: pomyślne umieszczenie wiadomości w kolejce nic nie mówi o tym, czy agent jest aktywny. `send_message` to funkcja wysyłająca w Twojej aplikacji. Dla obwodów wykonawczych przekazuj obserwowane awarie/zakończenia z przekroczeniem czasu zadań do trwałego koordynatora. Ta klasa działająca w pamięci jest demonstracją jednowątkową, a nie rozproszonym wyłącznikiem obwodu.
 
 3. **Testuj wyłącznik obwodu lokalnie:**
 
@@ -1369,10 +1369,10 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Kryteria sukcesu:**
-- ✅ Po 5 niepowodzeniach, obwód się otwiera (odrzuca żądania)
-- ✅ Po 60 sekundach obwód przechodzi w stan półotwarty (testuje odzyskiwanie)
-- ✅ Inni agenci działają normalnie
-- ✅ Obwód zamyka się automatycznie, gdy agent się odzyskuje
+- ✅ Po 5 niepowodzeniach obwód otwiera się (odrzuca żądania)
+- ✅ Po 60 sekundach obwód przechodzi w stan półotwarty (testuje odzyskanie)
+- ✅ Inne agenty działają normalnie
+- ✅ Obwód zamyka się automatycznie po odzyskaniu agenta
 
 **Czas**: 40-50 minut
 
@@ -1380,7 +1380,7 @@ print("Circuit breaker recovery verified")
 
 ## Monitorowanie i debugowanie
 
-### Rozproszone śledzenie w Application Insights
+### Rozproszone śledzenie za pomocą Application Insights
 
 **Plik: `src/shared/tracing.py`**
 
@@ -1425,9 +1425,9 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
             raise
 ```
 
-### Zapytania do Application Insights
+### Zapytania w Application Insights
 
-**Śledź przepływy pracy wieloagentowe:**
+**Śledzenie przepływów pracy z wieloma agentami:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1451,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Analiza niepowodzeń:**
+**Analiza błędów:**
 
 ```kusto
 // Find which agents fail most
@@ -1468,24 +1468,24 @@ exceptions
 
 ## Analiza kosztów
 
-### Koszty systemu wieloagentowego (miesięczne szacunki)
+### Koszty systemu wieloagentowego (szacunki miesięczne)
 
-Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesiąc**. Zweryfikuj aktualne stawki regionalne, godziny aktywne/bezużyteczne replik, miks tokenów wejścia/wyjścia, przechowywanie i telemetrię. Serverless nie ma minimalnego przezroczystości przepustowości, ale wciąż nalicza opłaty za żądania i przechowywanie.
+Wyłącznie ilustracyjne dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesiąc**. Sprawdź aktualne stawki regionalne, godziny działania/niewykorzystane repliki, miks tokenów wejściowych/wyjściowych, pamięć masową i telemetrię. Serverless nie wymaga minimalnej przepustowości, ale nadal nalicza opłaty za żądania i pamięć masową.
 
 | Komponent | Konfiguracja | Koszt |
 |-----------|--------------|------|
 | **Orkiestrator** | 1 Container App (1 vCPU, 2GB) | 30-50 USD |
-| **4 Agenci** | 4 Container Apps (0.5 vCPU, 1GB każdy) | 60-120 USD |
-| **Service Bus** | Standard tier, 10M wiadomości | 10-20 USD |
-| **Cosmos DB** | Serverless, 5GB przechowywania, 1M RUs | 25-50 USD |
-| **Blob Storage** | 10GB przechowywania, 100K operacji | 5-10 USD |
-| **Application Insights** | 5GB przetwarzania danych | 10-15 USD |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokenów | 100-300 USD |
+| **4 Agenty** | 4 Container Apps (0.5 vCPU, 1GB każdy) | 60-120 USD |
+| **Service Bus** | Poziom standardowy, 10 mln wiadomości | 10-20 USD |
+| **Cosmos DB** | Serverless, 5GB pamięci, 1 mln RU | 25-50 USD |
+| **Blob Storage** | 10GB pamięci, 100 tys. operacji | 5-10 USD |
+| **Application Insights** | 5GB importu | 10-15 USD |
+| **Microsoft Foundry Models** | gpt-4.1, 10 mln tokenów | 100-300 USD |
 | **Razem** | | **240-565 USD/miesiąc** |
 
 ### Strategie optymalizacji kosztów
 
-1. **Używaj serverless tam, gdzie możliwe:**
+1. **Używaj serverless tam, gdzie to możliwe:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1494,7 +1494,7 @@ Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesi
    }
    ```
 
-2. **Skaluj agentów do zera, gdy są nieaktywne:**
+2. **Skaluj agentów do zera, gdy są bezczynni:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1508,7 +1508,7 @@ Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesi
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Buforuj często używane wyniki:**
+4. **Przechowuj w pamięci wyniki często używane:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1528,12 +1528,12 @@ Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesi
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Wdrażaj kompleksowe logowanie**
+2. **Wdróż kompleksowe logowanie**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Używaj ID korelacji**
+3. **Używaj identyfikatorów korelacji**
    ```python
    # Pass task_id through entire workflow
    message_data = {
@@ -1542,14 +1542,14 @@ Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesi
    }
    ```
 
-4. **Ustaw czas życia wiadomości (TTL)**
+4. **Ustaw TTL (czas życia) wiadomości**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Monitoruj kolejki martwych wiadomości**
+5. **Monitoruj kolejki dead letter**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1578,7 +1578,7 @@ Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesi
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Nie używaj nieskończonych powtórzeń**
+4. **Nie używaj nieskończonych prób ponawiania**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1588,12 +1588,12 @@ Przykładowe dane planistyczne, nie oferty: suma poniżej to **240-565 USD/miesi
 
 ## Przewodnik rozwiązywania problemów
 
-### Problem: Wiadomości utkwiły w kolejce
+### Problem: Wiadomości utknięte w kolejce
 
 **Objawy:**
 - Wiadomości gromadzą się w kolejce
-- Agenci nie przetwarzają
-- Status zadania utknął na "oczekujące"
+- Agenty nie przetwarzają
+- Status zadania utknięty na „oczekujące”
 
 **Diagnoza:**
 ```bash
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Sprawdź kolejkę martwych wiadomości:**
+2. **Sprawdź kolejkę dead letter:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,11 +1630,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Czas wykonania zadania minął/nie kończy się
+### Problem: Przekroczenie czasu zadania / zadanie nigdy się nie kończy
 
 **Objawy:**
-- Status zadania pozostaje "w trakcie"
-- Niektórzy agenci kończą, inni nie
+- Status zadania pozostaje „w toku”
+- Niektóre agenty kończą, inne nie
 - Brak komunikatów o błędach
 
 **Diagnoza:**
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Rozwiązania:**
 
-1. **Wdroż timeout w agregatorze (Ćwiczenie 1)**
+1. **Wdróż limit czasu w agregatorze (Ćwiczenie 1)**
 
 2. **Sprawdź awarie agentów za pomocą Azure Monitor:**
    ```bash
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Zweryfikuj, czy wszyscy agenci działają:**
+3. **Zweryfikuj, czy wszystkie agenty działają:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1690,23 +1690,23 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ## Podsumowanie
 
 **Nauczyłeś się:**
-- ✅ Pięciu wzorców koordynacji (sekwencyjny, równoległy, hierarchiczny, zdarzeniowy, konsensus)
-- ✅ Architektury wieloagentowej na Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Zarządzania stanem w agentach rozproszonych
-- ✅ Obsługi limitów czasowych, ponowień i wyłączników obwodów
-- ✅ Monitorowania i debugowania systemów rozproszonych
-- ✅ Strategii optymalizacji kosztów
+- ✅ Pięć wzorców koordynacji (sekwencyjny, równoległy, hierarchiczny, zdarzeniowy, konsensus)
+- ✅ Architektura wieloagentowa na Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Zarządzanie stanem w rozproszonych agentach
+- ✅ Obsługa limitów czasu, ponawianie prób i wyłączniki obwodu
+- ✅ Monitorowanie i debugowanie systemów rozproszonych
+- ✅ Strategie optymalizacji kosztów
 
 **Kluczowe wnioski:**
-1. **Wybierz odpowiedni wzorzec** - sekwencyjny dla uporządkowanych przepływów, równoległy dla szybkości, zdarzeniowy dla elastyczności
-2. **Uważnie zarządzaj stanem** - używaj Cosmos DB lub podobnych do wspólnego stanu
-3. **Radź sobie z niepowodzeniami z wdziękiem** - limity czasowe, ponowienia, wyłączniki, kolejki martwych wiadomości
-4. **Monitoruj wszystko** - rozproszone śledzenie jest niezbędne do debugowania
-5. **Optymalizuj koszty** - skaluj do zera, używaj serverless, wdrażaj buforowanie
+1. **Wybierz odpowiedni wzorzec** - Sekwencyjny dla uporządkowanych przepływów, równoległy dla szybkości, zdarzeniowy dla elastyczności
+2. **Dokładnie zarządzaj stanem** - Używaj Cosmos DB lub podobnego do stanu współdzielonego
+3. **Łagodnie obsługuj awarie** - Limity czasu, ponowienia, wyłączniki obwodu, kolejki dead letter
+4. **Monitoruj wszystko** - Rozproszone śledzenie jest niezbędne do debugowania
+5. **Optymalizuj koszty** - Skaluj do zera, używaj serverless, implementuj cache
 
-**Kolejne kroki:**
-1. Wykonaj praktyczne ćwiczenia
-2. Zbuduj system wieloagentowy dla swojego przypadku użycia
+**Następne kroki:**
+1. Wykonaj ćwiczenia praktyczne
+2. Zbuduj system wieloagentowy dla swojego zastosowania
 3. Przestudiuj [Wybór SKU](sku-selection.md), aby zoptymalizować wydajność i koszty
 
 ---

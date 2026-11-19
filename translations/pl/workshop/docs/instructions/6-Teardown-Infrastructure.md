@@ -1,6 +1,6 @@
-# 6. Demontaż infrastruktury
+# 6. Usuwanie infrastruktury
 
-!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ UMIAŁ"
+!!! tip "PO ZAKOŃCZENIU TEGO MODUŁU BĘDZIESZ POTRAFIŁ"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -11,9 +11,9 @@
 
 ## Ćwiczenia dodatkowe
 
-Zanim zdemontujesz projekt, poświęć kilka minut na swobodne eksploracje.
+Zanim usuniesz projekt, poświęć kilka minut na otwarte eksploracje.
 
-!!! info "Wypróbuj te pytania do eksploracji"
+!!! info "Wypróbuj poniższe pomysły do eksploracji"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Zanim zdemontujesz projekt, poświęć kilka minut na swobodne eksploracje.
 
 ---
 
-## Demontaż infrastruktury
+## Usuwanie infrastruktury
 
-1. Demontaż infrastruktury jest tak prosty jak:
+!!! warning "Jeśli ukończyłeś także ćwiczenie z agentem hostowanym przez GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Usuwanie infrastruktury jest tak proste jak:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Potwierdź wybrane środowisko i przejrzyj zasoby do usunięcia. Usuwa to zasoby Azure i może spowodować utratę danych. Zachowaj monit potwierdzenia dla tego procesu nauki. Po zakończeniu zobaczysz podobny wynik:
+1. Potwierdź wybrane środowisko i sprawdź zasoby do usunięcia. Usuwa to zasoby Azure i może zniszczyć dane. Zachowaj monit potwierdzający dla tego procesu nauki. Po zakończeniu zobaczysz podobne wyjście:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Zanim zdemontujesz projekt, poświęć kilka minut na swobodne eksploracje.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Zweryfikuj usunięcie w portalu i sprawdź zasoby poza zakresem wdrożenia. Raportowanie kosztów i aktualizacje limitów mogą mieć opóźnienie. Lokalna konfiguracja `.azure` pozostaje, chyba że ją wyraźnie usuniesz.
+1. Zweryfikuj usunięcie w portalu i sprawdź zasoby poza zakresem wdrożenia. Raportowanie kosztów i aktualizacje limitów mogą się opóźniać. Lokalna konfiguracja `.azure` pozostaje, chyba że wyraźnie ją usuniesz.
 
-1. `azd down --purge` dodatkowo żąda trwałego usunięcia obsługiwanych zasobów w stanie miękkiego usunięcia. Używaj go tylko, gdy odzyskanie nie jest potrzebne i rozumiesz zasady retencji/ochrony przed usunięciem. Nie gwarantuje natychmiastowego zwolnienia limitów.
+1. `azd down --purge` dodatkowo żąda trwałego usunięcia obsługiwanych zasobów z miękkiego usunięcia. Używaj go tylko, gdy odzyskanie nie jest wymagane i rozumiesz zasady retencji/ochrony przed oczyszczaniem. Nie gwarantuje natychmiastowego zwolnienia limitu.
 
-1. Nie wdrażaj ponownie tylko po to, by zweryfikować czyszczenie. Późniejsza celowa komenda `azd up` może odtworzyć zasoby, używając pozostałych lokalnych danych wejściowych, co spowoduje ponowne naliczenie opłat. Aktualizacje modelu zazwyczaj używają wspieranych zmian provisioningowych, a nie demontażu.
+1. Nie wdrażaj ponownie tylko po to, by zweryfikować czyszczenie. Późniejsze celowe `azd up` może odtworzyć zasoby korzystając z pozostałych lokalnych danych wejściowych, co ponownie generuje opłaty. Aktualizacje modelu zwykle używają obsługiwanych zmian provisioningowych, a nie usuwania.
 
 ---
 

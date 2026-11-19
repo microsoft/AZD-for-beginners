@@ -1,6 +1,6 @@
-# 6. Altyapıyı Kaldırma
+# 6. Altyapıyı Sökme
 
-!!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
+!!! tip "BU MODÜLÜN SONUNDA YAPABİLECEKLERİNİZ"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -11,9 +11,9 @@
 
 ## Bonus Egzersizler
 
-Projeyi kaldırmadan önce, birkaç dakika açık uçlu keşif yapın.
+Projeyi sökmeden önce, açık uçlu keşif yapmak için birkaç dakika ayırın.
 
-!!! info "Bu Keşif Yönlendirmelerini Deneyin"
+!!! info "Bu Keşif Tavsiyelerini Deneyin"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Projeyi kaldırmadan önce, birkaç dakika açık uçlu keşif yapın.
 
 ---
 
-## Altyapıyı Devreden Çıkar
+## Altyapıyı Hizmetten Kaldırma
 
-1. Altyapıyı kaldırmak şu kadar kolaydır:
+!!! warning "Eğer ayrıca GA hosted-agent egzersizini tamamladıysanız"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Altyapıyı sökme işlemi şu kadar kolaydır:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Seçilen ortamı onaylayın ve silinecek kaynakları gözden geçirin. Bu Azure kaynaklarını kaldırır ve veri yok edebilir. Bu öğrenme iş akışı için onay istemi kalmalıdır. Tamamlandığında şöyle bir çıktı görürsünüz:
+1. Seçilen ortamı doğrulayın ve silinecek kaynakları gözden geçirin. Bu Azure kaynaklarını kaldırır ve verileri yok edebilir. Bu öğrenme iş akışı için doğrulama istemini tutun. Tamamlandıktan sonra benzer bir çıktı göreceksiniz:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Projeyi kaldırmadan önce, birkaç dakika açık uçlu keşif yapın.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Portalda silmeyi doğrulayın ve dağıtım kapsamının dışındaki kaynakları kontrol edin. Maliyet raporlaması ve kota güncellemeleri gecikebilir. Yerel `.azure` yapılandırması açıkça kaldırmadığınız sürece kalır.
+1. Portalda silmeyi doğrulayın ve dağıtım kapsamı dışındaki kaynakları kontrol edin. Maliyet raporlaması ve kota güncellemeleri gecikebilir. Yerel `.azure` yapılandırması, açıkça kaldırılmadıkça kalır.
 
-1. `azd down --purge` ayrıca desteklenen yumuşak silinmiş kaynakların kalıcı silinmesini talep eder. Kurtarma gerekmiyorsa ve saklama/temizleme koruma politikalarını anlıyorsanız kullanın. Hemen kota serbest bırakma garantisi vermez.
+1. `azd down --purge` ayrıca desteklenen yumuşak silinmiş kaynakların kalıcı silinmesini talep eder. Kurtarma gerekmiyorsa ve saklama/silinebilirlik politikalarını anlıyorsanız bunu kullanın. Hemen kota serbest bırakma garantisi vermez.
 
-1. Temizliği doğrulamak için yeniden dağıtım yapmayın. Sonradan kasıtlı bir `azd up` kalan yerel girişleri kullanarak kaynakları tekrar oluşturabilir ve ücretlendirmeyi yeniden başlatır. Model güncellemeleri normalde desteklenen sağlama değişiklikleriyle yapılır, kaldırma ile değil.
+1. Temizliği doğrulamak için yeniden dağıtmayın. Daha sonra yapılacak kasıtlı bir `azd up` kalan yerel girdileri kullanarak kaynakları yeniden oluşturabilir ve tekrar ücretlendirme yapar. Model güncellemeleri genellikle desteklenen yapılandırma değişiklikleriyle yapılır, sökme ile değil.
 
 ---
 

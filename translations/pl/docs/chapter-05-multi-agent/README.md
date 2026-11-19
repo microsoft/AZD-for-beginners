@@ -1,14 +1,14 @@
 # Rozdział 5: Rozwiązania AI z wieloma agentami
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Złożoność**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział omawia zaawansowane wzorce architektury z wieloma agentami, orkiestrację agentów oraz wdrożenia AI gotowe do produkcji dla złożonych scenariuszy.
+Ten rozdział omawia zaawansowane wzorce architektury wieloagentowej, orkiestrację agentów oraz produkcyjne wdrożenia AI dla złożonych scenariuszy.
 
-> Wskazówki dotyczące poleceń zostały zweryfikowane względem opublikowanego odniesienia `azd 1.37.2`. Wdrożenia w chmurze nie zostały wykonane.
+> Instrukcje poleceń sprawdzono względem udostępnionego odniesienia `azd 1.37.2`. Wdrożenia w chmurze nie zostały wykonane.
 
 ## Cele nauki
 
@@ -16,7 +16,7 @@ Po ukończeniu tego rozdziału będziesz:
 - Rozumieć wzorce architektury wieloagentowej
 - Wdrażać skoordynowane systemy agentów AI
 - Implementować komunikację między agentami
-- Budować rozwiązania wieloagentowe gotowe do produkcji
+- Budować produkcyjne rozwiązania wieloagentowe
 
 ---
 
@@ -24,11 +24,11 @@ Po ukończeniu tego rozdziału będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Podstawy wieloagentowe](multi-agent-basics.md) | Praktycznie: wdrożenie działającej aplikacji wieloagentowej z `azd up` | 45 min |
-| 2 | [Wzorce koordynacji](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orkiestracji agentów (kontynuacja w rozdziale 6) | 30 min |
+| 1 | [Podstawy wieloagentowości](multi-agent-basics.md) | Praktycznie: wdrożenie działającej aplikacji wieloagentowej z `azd up` | 45 min |
+| 2 | [Wzorce koordynacji](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orkiestracji agentów (kontynuowane w Rozdziale 6) | 30 min |
 | 3 | [Wdrożenie szablonu ARM](../../examples/retail-multiagent-arm-template/README.md) | Przykład wdrożenia jednym kliknięciem | 30 min |
 
-> **Zacznij od lekcji 1.** To jedyna w pełni praktyczna, wdrażalna lekcja w tym rozdziale. Lekcja 2 znajduje się w rozdziale 6 (wspólna z planowaniem przed wdrożeniem), a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) to plan architektury — wzór projektowy, a nie szablon do wdrożenia jednym poleceniem.
+> **Rozpocznij od Lekcji 1.** Jest to jedyna w pełni praktyczna, gotowa do wdrożenia lekcja w tym rozdziale. Lekcja 2 znajduje się w Rozdziale 6 (jest współdzielona z planowaniem przedwdrożeniowym), a [Rozwiązanie wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) to szablon architektury — odniesienie projektowe, a nie szablon jednego polecenia.
 
 ---
 
@@ -39,15 +39,15 @@ Po ukończeniu tego rozdziału będziesz:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Które podejście?** Użyj `azd init --template`, aby zacząć od działającego przykładu. Użyj `azd ai agent init` interaktywnie lub `azd ai agent init --template <path-to-azure.yaml>`, aby zaadaptować istniejący projekt agenta. Zobacz [odniesienie AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dla wymagań wersji i migracji oceny.
+> **Które podejście?** Użyj `azd init --template`, aby zacząć od działającego przykładu. Użyj `azd ai agent init` interaktywnie lub `azd ai agent init --template <path-to-azure.yaml>`, aby zaadaptować obecny projekt agenta. Zobacz [odniesienie AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dla wymagań wersji i migracji oceny.
 
-Uruchom te alternatywy w osobnych, pustych folderach. Rozszerzenie agentów `1.0.0-beta.23` wymaga `azd >= 1.37.0`; jego tryb interaktywny nie generuje niestandardowego potoku Service Bus w lekcji koordynacji.
+Uruchom te alternatywy w osobnych pustych folderach. Przepływ prac GA Foundry wymaga `azd >= 1.37.0`; jego interaktywny przebieg nie generuje niestandardowego potoku Service Bus w lekcji koordynacji. Do testów lokalnych, wdrożenia kodu i porządkowania nowych kontra ponownie używanych projektów, postępuj zgodnie z [przewodnikiem po hostowanym agencie](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -61,16 +61,16 @@ graph TD
 
 ---
 
-## 🎯 Prezentowane rozwiązanie: Retail Multi-Agent
+## 🎯 Rozwiązanie wyróżnione: Wieloagent dla handlu detalicznego
 
-Rozwiązanie [Retail Multi-Agent](../../examples/retail-scenario.md) demonstruje:
+Przykład [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstruje:
 
 - **Agent Klienta**: Obsługuje interakcje i preferencje użytkownika
-- **Agent Inwentaryzacji**: Zarządza stanem magazynowym i przetwarzaniem zamówień
-- **Orkiestrator**: Koordynuje pracę agentów
+- **Agent Inwentaryzacji**: Zarządza stanem magazynowym i realizacją zamówień
+- **Orkiestrator**: Koordynuje działanie agentów
 - **Wspólna Pamięć**: Zarządzanie kontekstem między agentami
 
-### Używane usługi
+### Użyte usługi
 
 | Usługa | Cel |
 |---------|---------|
@@ -87,14 +87,14 @@ Rozwiązanie [Retail Multi-Agent](../../examples/retail-scenario.md) demonstruje
 | Kierunek | Rozdział |
 |-----------|---------|
 | **Poprzedni** | [Rozdział 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
-| **Następny** | [Rozdział 6: Przygotowanie do wdrożenia](../chapter-06-pre-deployment/README.md) |
+| **Następny** | [Rozdział 6: Przed wdrożeniem](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Powiązane zasoby
 
 - [Przewodnik po agentach AI](../chapter-02-ai-development/agents.md)
-- [Praktyki produkcyjne AI](../chapter-08-production/production-ai-practices.md)
+- [Praktyki produkcji AI](../chapter-08-production/production-ai-practices.md)
 - [Rozwiązywanie problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
