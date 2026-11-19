@@ -1,6 +1,6 @@
 # 6. 인프라 해체
 
-!!! tip "이 모듈을 마치면 할 수 있는 것"
+!!! tip "이 모듈이 끝날 때쯤에는 다음을 할 수 있습니다"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## 추가 연습 문제
+## 보너스 연습문제
 
-프로젝트를 해체하기 전에, 잠시 시간을 내어 자유 탐색을 해보세요.
+프로젝트를 해체하기 전에 잠시 시간을 내어 자유롭게 탐색해 보세요.
 
-!!! info "이 탐색 프롬프트를 시도해보세요"
+!!! info "다음 탐색 프롬프트를 시도해 보세요"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,7 +29,11 @@
 
 ---
 
-## 인프라 제거
+## 인프라 해제
+
+!!! warning "GA 호스티드 에이전트 연습문제를 완료한 경우"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
 
 1. 인프라 해체는 다음처럼 간단합니다:
       
@@ -38,7 +42,7 @@
       azd show
       azd down
       ```
-1. 선택한 환경을 확인하고 삭제할 리소스를 검토하세요. 이 작업은 Azure 리소스를 제거하며 데이터가 파괴될 수 있습니다. 이 학습 워크플로우에서는 확인 프롬프트를 유지하세요. 완료되면 다음과 유사한 출력이 표시됩니다:
+1. 선택한 환경을 확인하고 삭제할 리소스를 검토하세요. 이 작업은 Azure 리소스를 제거하고 데이터를 삭제할 수 있습니다. 이 학습 워크플로우에서는 확인 프롬프트를 유지하세요. 완료되면 다음과 유사한 출력이 표시됩니다:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. 포털에서 삭제를 확인하고 배포 범위 밖에 있는 리소스를 점검하세요. 비용 보고 및 할당량 업데이트는 지연될 수 있습니다. 명시적으로 제거하지 않는 한 로컬 `.azure` 구성은 유지됩니다.
+1. 포털에서 삭제를 확인하고 배포 범위 밖의 리소스를 점검하세요. 비용 보고와 쿼터 업데이트는 지연될 수 있습니다. 로컬 `.azure` 구성은 명시적으로 제거하지 않는 한 남아 있습니다.
 
-1. `azd down --purge` 는 지원되는 소프트 삭제된 리소스의 영구 삭제도 요청합니다. 복구가 필요 없고 보존/정리 보호 정책을 이해한 경우에만 사용하세요. 즉각적인 할당량 해제를 보장하지 않습니다.
+1. `azd down --purge` 는 지원되는 소프트 삭제된 리소스를 영구 삭제하도록 추가 요청합니다. 복구가 필요 없고 보존/정리 보호 정책을 이해할 때만 사용하세요. 즉각적인 쿼터 해제를 보장하지 않습니다.
 
-1. 정리를 확인하기 위해 재배포하지 마세요. 나중에 의도적으로 `azd up` 를 실행하면 남아 있는 로컬 입력을 사용해 리소스를 다시 만들고 다시 비용이 청구됩니다. 모델 업데이트는 일반적으로 지원되는 프로비저닝 변경을 사용하며, 해체 방식은 아닙니다.
+1. 정리를 확인하려고 재배포하지 마세요. 이후에 의도적으로 수행하는 `azd up` 가 남은 로컬 입력을 사용해 리소스를 다시 생성하며, 비용이 다시 발생합니다. 모델 업데이트는 일반적으로 해체가 아닌 지원되는 프로비저닝 변경을 사용합니다.
 
 ---
 
