@@ -1,22 +1,24 @@
-# Kapitel 2: KI-Erste Entwicklung
+# Kapitel 2: AI-First Entwicklung
 
 **📚 Kurs**: [AZD Für Einsteiger](../../README.md) | **⏱️ Dauer**: 4-5 Stunden inklusive Workshop | **⭐ Komplexität**: Mittelstufe
 
 ---
 
-## Überblick
+## Übersicht
 
-Dieses Kapitel konzentriert sich auf das Bereitstellen KI-gestützter Anwendungen mit Azure Developer CLI und den Microsoft Foundry-Diensten. Von einfachen KI-Chat-Apps bis zu intelligenten Agenten mit Tools.
+Dieses Kapitel konzentriert sich auf die Bereitstellung KI-gestützter Anwendungen mit Azure Developer CLI und Microsoft Foundry-Diensten. Von einfachen KI-Chat-Apps bis zu intelligenten Agenten mit Tools.
 
-> **Release-Review (2026-11-04):** Die KI-CLI-Anleitung wurde mit der veröffentlichten `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` und `azure.ai.evaluations` `1.0.0-beta.2` Dokumentation/Quelle abgeglichen. Verwenden Sie `azd >= 1.37.0` für den kombinierten Workflow. Bewertungen verwenden jetzt den separaten `azd ai eval` Namespace; siehe [Release-Änderungen und Migrationshinweise](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Dies ist keine Validierung der Live-Bereitstellung.
+> **Foundry GA-Update (2026-11-09):** Das `microsoft.foundry` 1.0 Bundle ist [allgemein verfügbar](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Verwenden Sie `azd >= 1.37.0`; Evaluierungen bleiben eine separate Installation. Der [Hosted-Agent Walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) behandelt lokales Agent Inspector Testing und Remote-Code-Bereitstellung. Dies ist eine Dokumentationsprüfung, keine Live-Bereitstellungsvalidierung; optionale Vorschaufunktionen behalten ihren eigenen Status.
 
 ## Lernziele
 
-Am Ende dieses Kapitels werden Sie:
+Nach Abschluss dieses Kapitels werden Sie:
 - KI-Anwendungen mit vorgefertigten AZD-Vorlagen bereitstellen
-- Die Integration von Microsoft Foundry mit AZD verstehen
+- Die Microsoft Foundry-Integration mit AZD verstehen
+- Das GA-Bundle installieren und einen gehosteten Agenten lokal testen, bevor der Quellcode in Foundry bereitgestellt wird
+- `azure.yaml`, Evaluierungsassets und Cleanup von neuen gegenüber wiederverwendeten Projekten überprüfen
 - KI-Agenten mit Tools konfigurieren und anpassen
-- RAG (Retrieval-Augmented Generation)-Anwendungen bereitstellen
+- RAG (Retrieval-Augmented Generation) Anwendungen bereitstellen
 
 ---
 
@@ -24,16 +26,18 @@ Am Ende dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD mit Foundry-Diensten verbinden | 30 min |
-| 2 | [KI-Agenten-Anleitung](agents.md) | Intelligente Agenten mit Tools bereitstellen | 45 min |
-| 3 | [KI-Modell-Bereitstellung](ai-model-deployment.md) | KI-Modelle bereitstellen und konfigurieren | 30 min |
-| 4 | [KI Workshop Labor](ai-workshop-lab.md) | Praxis: Eine Vorlage erkunden und Ihre Umwandlung planen | 2-3 Stunden |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | GA-Bundle, gehosteter Agent lokal-zu-Cloud Workflow und Evaluierungen | 60 min |
+| 2 | [Handbuch KI-Agenten](agents.md) | Intelligente Agenten mit Tools bereitstellen | 45 min |
+| 3 | [KI Modellbereitstellung](ai-model-deployment.md) | KI-Modelle bereitstellen und konfigurieren | 30 min |
+| 4 | [KI Workshop Labor](ai-workshop-lab.md) | Praktisch: Eine Vorlage erkunden und Ihre Umwandlung planen | 2-3 Stunden |
 
 ---
 
 ## 🚀 Schnellstart
 
-Wählen Sie eine Option in einem neuen leeren Verzeichnis. Das abschließende `.` initialisiert das aktuelle Verzeichnis; andernfalls kann AZD ein Unterverzeichnis erstellen, ohne das Arbeitsverzeichnis Ihrer Shell zu ändern.
+Wählen Sie eine Option in einem neuen leeren Verzeichnis. Das angehängte `.` initialisiert das aktuelle Verzeichnis; ansonsten kann AZD ein Unterverzeichnis erstellen, ohne das Arbeitsverzeichnis Ihrer Shell zu ändern.
+
+Für den **GA hosted-agent Code-Bereitstellungspfad** beginnen Sie mit dem [geführten Walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Es erfordert AZD 1.37.0+, aktuelle uv, Python 3.13+, Foundry-Berechtigungen und Modellkontingent. Die unten aufgeführten vollständigen Anwendungsvorlagen sind Alternativen, keine Voraussetzungen für diesen Walkthrough.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -55,23 +59,23 @@ azd up
 
 | Vorlage | Beschreibung | Dienste |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-Chat mit Quellenangaben | OpenAI + KI-Suche |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | KI-Agent mit Tools | KI-Agent-Dienst |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Grundlegender KI-Chat | OpenAI + Container-Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-Chat mit Zitaten | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | KI-Agent mit Tools | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Basis-KI-Chat | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Kostenbewusstsein
 
-Dies sind illustrative Bereiche, keine Angebote oder Obergrenzen; Modellverkehr, Search/Compute-SKUs, Region und optionale Features können darüber hinausgehen. Prüfen Sie die aktuelle Preisgestaltung Ihrer gewählten Beispielvorlage vor der Bereitstellung.
+Dies sind illustrative Bereiche, keine verbindlichen Angaben oder Obergrenzen; Modellverkehr, Search/Compute SKUs, Region und optionale Funktionen können diese überschreiten. Überprüfen Sie vor der Bereitstellung die aktuellen Preisinformationen Ihres gewählten Beispiels.
 
 | Umgebung | Geschätzte Monatliche Kosten |
-|-------------|----------------------------|
+|-------------|---------------------------|
 | Entwicklung | 80-150 $ |
 | Staging | 150-300 $ |
 | Produktion | 300-3.500+ $ |
 
-**Tipp:** Führen Sie `azd down` nach dem Testen aus, um Gebühren zu vermeiden.
+**Bereinigung:** Überprüfen Sie `azd down` vor der Bestätigung: Für ein neu erstelltes Foundry-Projekt werden die Ressourcengruppe und alles darin gelöscht. Für ein wiederverwendetes Foundry-Projekt bleiben das Projekt und die Agent-Ressourcen erhalten; folgen Sie der [Anleitungsbereinigung](microsoft-foundry-integration.md#7-clean-up-deliberately), um unerwünschte Ressourcen separat zu entfernen.
 
 ---
 
@@ -79,16 +83,16 @@ Dies sind illustrative Bereiche, keine Angebote oder Obergrenzen; Modellverkehr,
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Vorheriges** | [Kapitel 1: Grundlagen](../chapter-01-foundation/README.md) |
-| **Nächstes** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
-| **Überspringen zu** | [Kapitel 8: Produktionsmuster](../chapter-08-production/README.md) |
+| **Zurück** | [Kapitel 1: Grundlagen](../chapter-01-foundation/README.md) |
+| **Weiter** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
+| **Springe zu** | [Kapitel 8: Produktionsmuster](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
 - [KI-Fehlerbehebung](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Produktions-KI-Praktiken](../chapter-08-production/production-ai-practices.md)
+- [Praxis der KI-Produktion](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

@@ -1,237 +1,248 @@
-# Conceptos básicos de sistemas multiagente - Despliega tu primer sistema de IA coordinado
+# Conceptos Básicos de Multi-Agente - Implementa Tu Primer Sistema de IA Coordinado
 
-**Navegación del capítulo:**
-- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
-- **📖 Capítulo actual**: Capítulo 5 - Soluciones de IA multiagente
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 5 - Soluciones de IA Multi-Agente
 - **⬅️ Anterior**: [Capítulo 4: Infraestructura](../chapter-04-infrastructure/README.md)
-- **➡️ Siguiente**: [Patrones de coordinación](../chapter-06-pre-deployment/coordination-patterns.md)
+- **➡️ Siguiente**: [Patrones de Coordinación](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Validado con `azd 1.27.1` en julio de 2026.
+> Guía de comandos revisada contra la referencia liberada `azd 1.37.2`. No se ejecutaron despliegues en la nube.
 
 ## Introducción
 
-En los capítulos anteriores desplegaste una única aplicación—y en el Capítulo 2 desplegaste un agente de IA único. Esta lección da el siguiente paso: desplegar un **sistema multiagente**, donde varios agentes especializados trabajan juntos para resolver un problema que ningún agente solo podría manejar bien.
+En los capítulos anteriores implementaste una sola aplicación—y en el Capítulo 2 implementaste un solo agente de IA. Esta lección da el siguiente paso: implementar un **sistema multi-agente**, donde varios agentes especializados trabajan juntos para resolver un problema que ningún agente solo podría manejar bien.
 
-La buena noticia para principiantes: **no necesitas comandos nuevos.** Una solución multiagente sigue siendo un proyecto azd. Harás `azd init`, `azd up`, pruebas y `azd down`—exactamente el flujo de trabajo que ya conoces. Lo que cambia es la *estructura* de la aplicación por dentro.
+La buena noticia para principiantes: **no necesitas nuevos comandos.** Una solución multi-agente sigue siendo un proyecto azd. Vas a `azd init`, `azd up`, probar, y `azd down`—exactamente el flujo de trabajo que ya conoces. Lo que cambia es la *forma* de la aplicación por dentro.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
 Al final de esta lección, podrás:
-- Entender qué significa "multiagente" y cuándo vale la pena la complejidad extra
-- Reconocer los roles comunes en un sistema multiagente (orquestador + especialistas)
-- Desplegar una plantilla multiagente real y funcional con `azd up`
-- Comprender los recursos de Azure que respaldan una aplicación multiagente
-- Saber cómo verificar, personalizar y desmontar la solución de forma segura
+- Entender qué significa "multi-agente" y cuándo vale la pena la complejidad extra
+- Reconocer los roles comunes en un sistema multi-agente (orquestador + especialistas)
+- Implementar una plantilla multi-agente real y funcional con `azd up`
+- Entender los recursos de Azure que respaldan una aplicación multi-agente
+- Saber cómo verificar, personalizar, y desmantelar la solución de forma segura
 
-## Resultados de aprendizaje
+## Resultados del Aprendizaje
 
-Después de completar esta lección, podrás:
-- Explicar la diferencia entre un agente único y un sistema multiagente
-- Elegir entre un solo agente con herramientas y un diseño multiagente verdadero
-- Desplegar y probar una plantilla multiagente de principio a fin con azd
+Después de completar esta lección, serás capaz de:
+- Explicar la diferencia entre un agente único y un sistema multi-agente
+- Elegir entre un agente único con herramientas y un diseño multi-agente genuino
+- Implementar y probar una plantilla multi-agente de extremo a extremo con azd
 - Identificar dónde se ejecuta cada agente y cómo se comunican
 - Limpiar todos los recursos para evitar cargos continuos
 
 ---
 
-## ¿Qué es un sistema multiagente?
+## ¿Qué es un Sistema Multi-Agente?
 
-Un agente de IA único es un modelo con un conjunto de instrucciones y (opcionalmente) algunas herramientas. Eso funciona bien para tareas enfocadas. Pero a medida que una tarea crece—investigación, luego escritura, luego edición, luego verificación de hechos—incluir todo en un único prompt hace el agente más lento, menos fiable y más difícil de depurar.
+Un agente de IA único es un modelo con un conjunto de instrucciones y (opcionalmente) algunas herramientas. Eso funciona bien para tareas enfocadas. Pero a medida que una tarea crece—investigación, luego escritura, luego edición, luego verificación de hechos—encajar todo en un solo aviso hace que el agente sea más lento, menos confiable y más difícil de depurar.
 
-Un **sistema multiagente** divide el trabajo en especialistas que cada uno hace bien un trabajo, coordinados por un orquestador:
+Un **sistema multi-agente** divide el trabajo en especialistas que hacen bien un trabajo, coordinados por un orquestador:
 
 ```mermaid
 graph TD
-    User([Solicitud del usuario]) --> Orchestrator[Agente Orquestador<br/>Planifica y dirige el trabajo]
-    Orchestrator --> Researcher[Agente Investigador<br/>Recopila datos]
-    Orchestrator --> Writer[Agente Redactor<br/>Elabora el contenido]
-    Orchestrator --> Editor[Agente Editor<br/>Revisa y mejora]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Respuesta final])
+    Orchestrator --> Result([Final answer])
 ```
 
 ### Los dos roles que siempre verás
 
 | Rol | Trabajo | Ejemplo |
 |------|-----|---------|
-| **Orquestador** | Decide *qué ocurre después* y enruta el trabajo entre agentes | "Primero investigación, luego escribir, luego editar" |
-| **Especialista** | Hace un trabajo específico y devuelve un resultado | Un "investigador" que solo recoge hechos |
+| **Orquestador** | Decide *qué sucede después* y enruta el trabajo entre agentes | "Primero investigar, luego escribir, luego editar" |
+| **Especialista** | Hace un trabajo enfocado y devuelve un resultado | Un "investigador" que solo recoge hechos |
 
-### ¿Realmente necesitas varios agentes?
+### ¿Realmente necesitas múltiples agentes?
 
-Empieza simple. Usa multiagente **solo** cuando alguna de estas sea verdadera:
+Empieza simple. Usa multi-agente **solo** cuando una de estas sea verdadera:
 
 - ✅ La tarea tiene **etapas distintas** que se benefician de instrucciones diferentes (investigar vs. escribir vs. revisar)
-- ✅ Quieres que especialistas trabajen **en paralelo** para ahorrar tiempo
+- ✅ Quieres que especialistas operen **en paralelo** para ahorrar tiempo
 - ✅ Diferentes pasos necesitan **herramientas o fuentes de datos diferentes**
-- ✅ Necesitas que cada paso sea **probablemente testable y depurable de forma independiente**
+- ✅ Necesitas que cada paso sea **testable y depurable de forma independiente**
 
-Si tu tarea es una pregunta-respuesta simple o una llamada a herramienta sencilla, un **agente único con herramientas** (Capítulo 2) es más simple, barato y fácil de operar.
+Si tu tarea es una sola pregunta y respuesta o una llamada simple a una herramienta, un **agente único con herramientas** (Capítulo 2) es más simple, barato y fácil de operar.
 
-> **Consejo para principiantes:** "Más agentes" no es "mejor." Cada agente añade latencia, costo y algo nuevo que monitorear. Añade agentes solo cuando el problema claramente se divide en partes.
+> **Consejo para principiantes:** "Más agentes" no es "mejor." Cada agente añade latencia, costo y algo nuevo que monitorear. Agrega agentes solo cuando el problema claramente se divide en partes.
 
 ---
 
-## Dos formas de construir sistemas multiagente en Azure
+## Dos Formas de Construir Multi-Agente en Azure
 
 | Enfoque | Qué es | Mejor para |
 |----------|-----------|----------|
-| **Agente único + herramientas** | Un agente Foundry que llama a funciones/herramientas | Flujos simples, empezar rápido |
-| **Varios agentes coordinados** | Varios agentes con un orquestador | Etapas distintas, trabajo paralelo, especialización |
+| **Agente único + herramientas** | Un agente Foundry que llama funciones/herramientas | Flujos simples, empezar |
+| **Múltiples agentes coordinados** | Varios agentes con un orquestador | Etapas distintas, trabajo en paralelo, especialización |
 
-Esta lección se enfoca en el segundo enfoque usando una **plantilla lista para usar**, así puedes ver un sistema multiagente real funcionando antes de construir el tuyo.
+Esta lección se enfoca en el segundo enfoque usando una **plantilla lista para usar**, para que puedas ver un sistema multi-agente real funcionando antes de construir el tuyo propio.
 
 ---
 
-## Práctica: Desplegar una aplicación multiagente funcional
+## Práctica: Implementa una Aplicación Multi-Agente Funcional
 
-Vamos a desplegar **Contoso Creative Writer**, un ejemplo oficial de Azure que usa múltiples agentes (investigador, escritor, editor) coordinados para producir un artículo. Es una gran primera app multiagente porque los roles son fáciles de entender.
+Implementaremos **Contoso Creative Writer**, un ejemplo oficial de Azure que coordina agentes de investigación, producto, escritura y edición para producir un artículo. Antes de continuar, revisa los [prerrequisitos y costos del ejemplo](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): necesita cuota de modelos, Azure AI Search, acceso a Bing Grounding, Python, Docker, y hooks compatibles con Bash. La disponibilidad del modelo y región depende de tu suscripción; no se garantiza implementación eligiendo una región particular.
 
 ### Paso 1: Inicializa la plantilla
 
 ```bash
-# Crear una carpeta de trabajo
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Inicializar desde la plantilla oficial multiagente
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Explora más plantillas multiagente en cualquier momento en la [galería Awesome AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Otras opciones amigables para principiantes incluyen `get-started-with-ai-agents` y `azure-ai-travel-agents`.
+> Navega más plantillas multi-agente en cualquier momento en la [galería Awesome AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Otras opciones amigables para principiantes incluyen `get-started-with-ai-agents` y `azure-ai-travel-agents`.
 
 ### Paso 2: Autenticarse
 
 ```bash
-# Requerido para los flujos de trabajo azd
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Paso 3: Crear un entorno
+### Paso 3: Verifica el entorno
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
-### Paso 4: Previsualizar y luego desplegar
+### Paso 4: Vista previa, luego despliegue
 
 ```bash
-# Vea qué se creará antes de gastar nada (recomendado)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Proveer infraestructura e implementar todos los agentes en un solo paso
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` solicitará una suscripción y región, luego aprovisionará los recursos de Azure y desplegará la aplicación. Los despliegues de IA pueden tardar más que una app web simple—si despliegas modelos más grandes, puedes extender el tiempo límite de despliegue:
+`azd up` solicitará los ajustes de suscripción y región faltantes, luego aprovisionará recursos y desplegará la aplicación. La vista previa no reserva cuota ni garantiza éxito; los hooks de plantilla pueden ejecutarse durante una vista previa de aprovisionamiento, así que inspecciónalos primero. Para extender cuánto espera azd por cada **despliegue de servicio** (no aprovisionamiento de modelo):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Aviso sobre costo y capacidad:** Las apps multiagente despliegan modelos de IA que consumen cuota y generan costo. Si `azd up` falla por cuota de modelo, consulta [Resolución de problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md) para corregir región y cuota, y el Capítulo 6 [Planificación de capacidad](../chapter-06-pre-deployment/capacity-planning.md).
+Un tiempo de espera detiene la espera de azd; no cancela el despliegue en Azure. Inspecciona el estado del recurso antes de reintentar.
+
+> **Advertencia sobre costos y capacidad:** Las aplicaciones multi-agente despliegan modelos de IA que consumen cuota e incurren en costo. Si `azd up` falla por cuota de modelo, consulta [Solución de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md) para arreglar región y cuota, y el Capítulo 6 [Planificación de Capacidad](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Entendiendo lo que desplegaste
+## Entendiendo Qué Implementaste
 
-Una app multiagente típica como esta provisona un conjunto de recursos de Azure que se corresponden directamente con las responsabilidades del diagrama anterior:
+Una aplicación típica multi-agente como esta aprovisiona un conjunto de recursos de Azure que mapean directamente a las responsabilidades del diagrama arriba:
 
-| Recurso | Por qué está ahí |
+| Recurso | Por qué está |
 |----------|----------------|
-| **Microsoft Foundry / Modelos** | Aloja los modelos de lenguaje que usa cada agente |
-| **Azure AI Search** | Le da al agente investigador datos fundamentados para buscar |
-| **Container Apps** (o App Service) | Aloja el orquestador y el código de los agentes |
-| **Cosmos DB** (en algunos ejemplos) | Almacena estado/memoria compartida que pasa entre agentes |
-| **Application Insights** | Rastrea solicitudes *entre* agentes para que puedas depurar el flujo |
+| **Microsoft Foundry / Modelos** | Aloja los modelos de lenguaje que cada agente usa |
+| **Azure AI Search** | Proporciona datos fundamentados para que el agente investigador busque |
+| **Container Apps** (o App Service) | Aloja el código del orquestador y agentes |
+| **Cosmos DB** (en algunos ejemplos) | Almacena estado/memoria compartida entre agentes |
+| **Application Insights** | Rastrea peticiones *a través* de agentes para que puedas depurar el flujo |
 
-### Cómo hablan los agentes entre sí
+### Cómo se comunican los agentes entre sí
 
-En la mayoría de ejemplos multiagente con azd, el **orquestador se ejecuta en tu código de aplicación** (por ejemplo, usando un framework como Semantic Kernel o Microsoft Agent Framework). El orquestador llama a cada agente especialista por turno, pasa los resultados y arma la respuesta final. Los agentes comparten contexto mediante:
+En la mayoría de los ejemplos azd multi-agente, el **orquestador se ejecuta en tu código de aplicación** (por ejemplo, usando un framework como Semantic Kernel o Microsoft Agent Framework). El orquestador llama a cada agente especialista a su turno, pasa los resultados, y arma la respuesta final. Los agentes comparten contexto a través de:
 
-- **Llamadas a funciones/herramientas** — el orquestador invoca al especialista y recibe un resultado
-- **Memoria compartida** — una base de datos (a menudo Cosmos DB) guarda estado que ambos agentes pueden leer
-- **Mensajes/eventos** — para un acoplamiento más flexible, los agentes se comunican vía una cola o Service Bus
+- **Llamadas a funciones/herramientas** — el orquestador invoca un especialista y recibe resultados
+- **Memoria compartida** — una base de datos (a menudo Cosmos DB) almacena estado que ambos agentes pueden leer
+- **Mensajes/eventos** — para acoplamiento más suelto, los agentes se comunican vía una cola o Service Bus
 
-> **Por qué esto importa para la depuración:** porque cada paso es separado, Application Insights te muestra *qué* agente fue el lento o falló. Esa es una razón clave para dividir el trabajo entre agentes.
+> **Por qué importa esto para depurar:** porque cada paso es separado, Application Insights te muestra *qué* agente fue lento o falló. Esa es una razón principal para dividir trabajo entre agentes desde el principio.
 
 ---
 
-## Verifica el despliegue
+## Verifica el Despliegue
 
-Confirma que el sistema realmente funciona antes de continuar:
+Confirma que el sistema funcione antes de continuar:
 
 ```bash
-# Mostrar los endpoints desplegados
+# Show the deployed endpoints
 azd show
 
-# Abrir el panel de monitoreo de la aplicación
+# Open the app's monitoring dashboard
 azd monitor
 
-# Seguir los registros si algo parece estar mal
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Luego abre la URL de la app desde `azd show` y prueba una solicitud que ejercite todos los agentes (para Creative Writer, pídele escribir un artículo corto sobre un tema). En la **búsqueda de transacciones** de Application Insights, deberías ver la solicitud distribuida a las etapas investigador, escritor y editor.
+Luego abre la URL de la app desde `azd show` y solicita un artículo corto. Usa la vista de depuración del ejemplo para inspeccionar el flujo de trabajo del agente. La búsqueda de transacciones de Application Insights puede mostrar los pasos individuales solo si el ejemplo los instrumenta y correlaciona; azd no añade automáticamente trazas de agentes.
 
 **Criterios de éxito:**
 - ✅ `azd show` lista un endpoint accesible
-- ✅ Una solicitud produce un resultado que claramente pasó por múltiples etapas
-- ✅ Application Insights muestra trazas de más de un paso de agente
+- ✅ Una petición produce un resultado que claramente pasó por múltiples etapas
+- ✅ La vista de depuración muestra múltiples pasos de agente; si el rastreo está habilitado, verifica la telemetría correspondiente después de la ingestión
 
 ---
 
-## Personalizar: agregar o ajustar un agente
+## Personaliza: Agrega o Ajusta un Agente
 
-Dado que cada agente es solo instrucciones más herramientas, personalizar es accesible:
+Como cada agente son solo instrucciones más herramientas, personalizar es accesible:
 
-1. **Encuentra las definiciones de agente** en la plantilla (a menudo un conjunto de archivos `prompts/`, `agents/` o `*.prompty`).
-2. **Ajusta las instrucciones del agente** — por ejemplo, dile al agente editor que aplique un tono específico o un conteo de palabras.
-3. **Re-despliega solo el código** (la infraestructura no cambia):
+1. **Encuentra las definiciones del agente** en la plantilla (a menudo un conjunto de archivos `prompts/`, `agents/`, o `*.prompty`).
+2. **Ajusta las instrucciones de un agente** — por ejemplo, indica al agente editor que aplique un tono específico o tamaño de palabra.
+3. **Despliega solamente el código** (la infraestructura no cambia):
 
    ```bash
    azd deploy
    ```
 
-Para ir más allá y construir agentes desde *tu propio* manifiesto, usa la extensión de agentes y su ciclo de vida completo:
+Para avanzar con tu *propio* proyecto de agente Foundry, usa el paquete GA con AZD 1.37.0+ en un directorio vacío separado:
 
 ```bash
-azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ext install microsoft.foundry
+azd ai agent init
 azd up
-azd ai agent invoke      # prueba, con temporización de respuesta
+azd ai agent invoke      # test, with response timing
 ```
 
-Consulta [Capítulo 2: Agentes](../chapter-02-ai-development/agents.md) y la [referencia de CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para el ciclo completo de vida del agente (`invoke`, `eval generate`, `optimize`, `delete`).
+Consulta el [tutorial de agente alojado GA](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) para pruebas locales de Agent Inspector, despliegue remoto de código y limpieza. La [referencia AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) también cubre extensiones separadas de evaluaciones, optimización y eliminación de agentes.
 
 ---
 
 ## Limpieza
 
-Las apps multiagente ejecutan múltiples servicios facturables. Desmonta todo cuando termines:
+Las aplicaciones multi-agente ejecutan múltiples servicios facturables. Desmantela todo cuando termines:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-La bandera `--purge` también elimina recursos de IA eliminados suavemente (como Foundry/cuentas de Azure AI Services) para que no bloqueen un re-despliegue futuro ni sigan generando costo.
+La eliminación es destructiva. Para un laboratorio desechable, `azd down --force --purge` omite la eliminación y las confirmaciones de purga con eliminación suave soportadas; purgar es irreversible donde está soportado y puede ser bloqueado por protección de purga. La eliminación suave es una cuestión de recuperación/reutilización de nombre, no en sí misma prueba de cargos continuos. Revisa recursos retenidos y facturación después de limpiar.
+
+Si también inicializaste un agente alojado contra un proyecto Foundry existente, `azd down` deja ese agente y otros recursos del proyecto en su lugar. Elimina solo los recursos no deseados que poseas por separado. Para un proyecto nuevo de Foundry creado por su entorno AZD, `azd down` elimina el grupo de recursos y todo lo que contiene.
 
 ---
 
-## Una nota sobre sistemas multiagente en producción
+## Una Nota Sobre Sistemas Multi-Agente en Producción
 
-La [Solución Multi-Agente para Retail](../../examples/retail-scenario.md) en este repositorio es un **plan arquitectónico**, no una plantilla de un solo comando—documenta cómo *se construiría* un sistema retail en producción (y es explícito que una construcción completa es un esfuerzo sustancial). Úsalo como referencia de diseño *después* de haber desplegado un ejemplo funcional aquí. Para preocupaciones de producción (resiliencia, costo, monitoreo, gobernanza), continúa con el [Capítulo 8: Prácticas de IA en Producción](../chapter-08-production/production-ai-practices.md).
+La [Solución Multi-Agente para Retail](../../examples/retail-scenario.md) en este repositorio es un **plano de arquitectura**, no una plantilla de un solo comando—documenta cómo *sería* construído un sistema retail en producción (y es explícito que una construcción completa es un esfuerzo considerable). Úsalo como referencia de diseño *después* de haber implementado un ejemplo funcional aquí. Para asuntos de producción (resiliencia, costo, monitoreo, gobernanza), continúa con el [Capítulo 8: Prácticas de IA en Producción](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Resumen
 
-- Un sistema multiagente divide el trabajo entre especialistas coordinados por un orquestador.
-- Úsalo solo cuando la tarea tiene etapas distintas, paralelismo o herramientas diferentes por paso—de lo contrario prefiere un agente único.
-- El flujo de trabajo de azd no cambia: `azd init` → `azd up` → prueba → `azd down`.
-- Una plantilla real como `contoso-creative-writer` te permite ver y personalizar hoy una app multiagente funcional.
-- El rastreo de Application Insights entre agentes es uno de los mayores beneficios prácticos del diseño multiagente.
+- Un sistema multi-agente divide el trabajo entre especialistas coordinados por un orquestador.
+- Úsalo solo cuando la tarea tenga etapas distintas, paralelismo o diferentes herramientas por paso—de lo contrario prefiere un agente único.
+- El flujo de trabajo azd no cambia: `azd init` → `azd up` → probar → `azd down`.
+- Una plantilla real como `contoso-creative-writer` te permite ver y personalizar una aplicación multi-agente funcionando hoy.
+- El rastreo de Application Insights a través de agentes es uno de los mayores beneficios prácticos del diseño multi-agente.
 
 ---
 
@@ -240,14 +251,14 @@ La [Solución Multi-Agente para Retail](../../examples/retail-scenario.md) en es
 | Dirección | Lección |
 |-----------|--------|
 | **Anterior** | [Capítulo 4: Infraestructura](../chapter-04-infrastructure/README.md) |
-| **Siguiente** | [Patrones de coordinación](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Siguiente** | [Patrones de Coordinación](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Recursos relacionados
+## 📖 Recursos Relacionados
 
 - [Guía de Agentes de IA](../chapter-02-ai-development/agents.md)
-- [Patrones de coordinación](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Patrones de Coordinación](../chapter-06-pre-deployment/coordination-patterns.md)
 - [Prácticas de IA en Producción](../chapter-08-production/production-ai-practices.md)
-- [Resolución de problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Solución de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

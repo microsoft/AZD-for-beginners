@@ -1,54 +1,56 @@
-# Installi ja seadistamise juhend
+# Installimise ja seadistamise juhend
 
-**Peatüki navigatsioon:**
+**Peatükkide navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Jooksev peatükk**: Peatükk 1 - Vundament ja kiire algus
-- **⬅️ Eelmine**: [AZD põhialused](azd-basics.md)
+- **📖 Praegune peatükk**: Peatükk 1 - Alused ja kiire algus
+- **⬅️ Eelmine**: [AZD põhitõed](azd-basics.md)
 - **➡️ Järgmine**: [Teie esimene projekt](first-project.md)
-- **🚀 Järgmine peatükk**: [Peatükk 2: AI-esmalt arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Järgmine peatükk**: [Peatükk 2: Tehisintellekt-eelne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend viib teid läbi Azure Developer CLI (azd) paigaldamise ja seadistamise teie süsteemis. Õpite erinevaid paigaldusmeetodeid erinevate operatsioonisüsteemide jaoks, autentimise seadistamist ja esialgset konfiguratsiooni, et valmistada oma arenduskeskkond Azure juurutusteks ette.
+See põhjalik juhend viib teid läbi Azure Developer CLI (azd) installimise ja konfiguratsiooni teie süsteemis. Õpite erinevaid installimismeetodeid erinevate operatsioonisüsteemide jaoks, autentimise seadistust ning esmase konfiguratsiooni, et valmistada oma arenduskeskkond ette Azure'i juurutusteks.
 
 ## Õpieesmärgid
 
-Selle tunni lõpuks suudate:
-- Õnnestunult paigaldada Azure Developer CLI oma operatsioonisüsteemile
-- Konfigureerida autentimist Azure’iga mitmete meetodite abil
-- Seadistada oma arenduskeskkond vajalike eeldustega
-- Mõista erinevaid paigaldusvalikuid ja millal mida kasutada
-- Lahendada levinud paigaldus- ja seadistusprobleeme
+Selle tunni lõpuks saate:
+- Azure Developer CLI edukalt installida oma operatsioonisüsteemi
+- Azure'i autentimise seadistada mitme meetodi abil
+- Seada üles oma arenduskeskkond vajalike eeltingimustega
+- Mõista erinevaid installimisvõimalusi ja millal igaüht kasutada
+- Lahendada tavalisi installi- ja seadistusprobleeme
 
-## Õpitulemused
+## Õppe tulemused
 
-Pärast selle tunni läbimist suudate:
-- Paigaldada azd sobiva meetodi abil vastavalt oma platvormile
-- Autentida Azure’iga kasutades azd auth login käsku
-- Kontrollida paigaldust ja testida põhilisi azd käske
-- Seadistada oma arenduskeskkond azd optimaalseks kasutamiseks
-- Sõltumatult lahendada sagedased paigaldusprobleemid
+Pärast selle õppetüki lõpetamist suudate:
+- Installida azd oma platvormi jaoks sobival meetodil
+- Autentida Azure'i kasutades käsu azd auth login abil
+- Kontrollida oma installatsiooni ja testida põhilisi azd käske
+- Seada oma arenduskeskkond optimaalseks azd kasutuseks
+- Lahendada iseseisvalt tavalisi installiprobleeme
 
-See juhend aitab teil paigaldada ja seadistada Azure Developer CLI oma süsteemis, olenemata teie operatsioonisüsteemist või arenduskeskkonnast.
+See juhend aitab teil Azure Developer CLI installida ja konfigureerida sõltumata teie operatsioonisüsteemist või arenduskeskkonnast.
 
-## Eeldused
+## Eeltingimused
 
-Enne azd paigaldamist veenduge, et teil on:
-- **Azure tellimus** - [Loo tasuta konto](https://azure.microsoft.com/free/)
-- **Azure CLI** (valikuline) - Näidete jaoks, mis otseselt kasutavad `az`; azd autentib iseseisvalt
+Enne azd installimist veenduge, et teil oleks:
+- **Azure’i tellimus** - [Loo tasuta konto](https://azure.microsoft.com/free/)
+- **Azure CLI** (valikuline) - Näidete jaoks, mis selgelt kasutavad `az`; azd autentib siiski iseseisvalt
 - **Git** - Mallide kloonimiseks ja versioonihalduseks
-- **Docker** (valikuline) - Konteinerirakenduste jaoks
+- **Docker** (valikuline) - Konteineripõhiste rakenduste jaoks
 
-## Paigaldusmeetodid
+**Peatükk 2 Foundry GA rada:** Kasutage AZD **1.37.0 või uuemat**, installige komplekt käsuga `azd ext install microsoft.foundry`, kasutage Pythonit **3.13+** ja praegust **uv** hostitud agendi näite jaoks. Koodi juurutus toimub kaugtöötlusena, seega kohalikku Docker build’i pole vaja. Foundry õigused, piirkondlik mudeli saadavus ja kvoodid on endiselt vajalikud; vaadake [hostitud agendi seadistust](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize).
+
+## Installatsioonimeetodid
 
 ### Windows
 
-#### Valik 1: Windowsi pakihaldur (Soovitatav)
+#### Valik 1: Windows Package Manager (Soovitatav)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### Valik 2: PowerShell paigaldusskript
+#### Valik 2: PowerShell installiskript
 ```powershell
 # Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
@@ -59,10 +61,10 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 choco install azd
 ```
 
-#### Valik 4: Manuaalne paigaldus
-1. Laadige alla viimane versioon [GitHubist](https://github.com/Azure/azure-dev/releases)
-2. Pakkige lahti kausta `C:\Program Files\azd\`
-3. Lisage PATH keskkonnamuutujasse
+#### Valik 4: Käsitsi installimine
+1. Laadige alla uusim versioon [GitHubist](https://github.com/Azure/azure-dev/releases)
+2. Pakkige lahti kataloogi `C:\Program Files\azd\`
+3. Lisage see PATH keskkonnamuutujasse
 
 ### macOS
 
@@ -72,24 +74,24 @@ brew tap azure/azd
 brew install azd
 ```
 
-#### Valik 2: Paigaldusskript
+#### Valik 2: Installatsiooniskript
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Valik 3: Manuaalne paigaldus
-Laadige arhiveeritud fail alla oma macOS arhitektuuri jaoks [vabastuse varadest](https://github.com/Azure/azure-dev/releases), pakkige see lahti ja lisage `azd` binaarfail oma `PATH`-sse.
+#### Valik 3: Käsitsi installimine
+Laadige oma macOS arhitektuurile sobiv arhiiv alla [vabastuse failidest](https://github.com/Azure/azure-dev/releases), pakkige välja ja lisage `azd` binaarfail oma `PATH`.
 
 ### Linux
 
-#### Valik 1: Paigaldusskript (Soovitatav)
+#### Valik 1: Installatsiooniskript (Soovitatav)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Valik 2: Pakihaldurid
+#### Valik 2: Paketihaldurid
 
-**Manuaalne paigaldus vabastuse varadest:**
+**Käsitsi installimine vabastuse failidest:**
 ```bash
 # Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
@@ -98,13 +100,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ### GitHub Codespaces
 
-Mõned Codespaces ja arenduskonteineri keskkonnad sisaldavad juba `azd`, kuid peaksite selle üle kontrollima, mitte eeldama seda:
+Mõned Codespaces ja dev konteinerikeskkonnad sisaldavad juba `azd`, kuid kontrollige seda kindlasti, mitte ainult ärge eeldage:
 
 ```bash
 azd version
 ```
 
-Kui `azd` puudub, paigaldage see vastava keskkonna tavapärase skripti abil.
+Kui `azd` puudub, installige see vastava standardse skriptiga.
 
 ### Docker
 
@@ -116,11 +118,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure
 alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-See ajutine konteiner ei säilita sisselogimisseisundit sessioonide vahel. Korduvate juurutuste jaoks kasutage [dev konteineri seadistust](dev-containers.md); konteineri ehitamiseks on samuti vajalik konteinerist ligipääsetav Docker daemon.
+See ajutine konteiner ei säilita sisselogimise olekut jooksude vahel. Korduvateks juurutusteks kasutage [dev konteineri seadistust](dev-containers.md); konteinerit ehitades peab Docker'i teenus konteineri sees olema ligipääsetav.
 
-## ✅ Paigalduse kontrollimine
+## ✅ Installatsiooni kontroll
 
-Pärast paigaldamist kontrollige, et azd toimib korrektselt:
+Pärast installi veenduge, et azd töötab korrektselt:
 
 ```bash
 # Check version
@@ -133,26 +135,26 @@ azd --help
 azd template list
 ```
 
-Oodatud väljund:
+Oodatav väljund:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Märkus**: Tõeline versiooninumber võib erineda. Vaadake uusimat versiooni [Azure Developer CLI väljaannetest](https://github.com/Azure/azure-dev/releases).
+**Märkus**: Tegelik versiooninumber võib erineda. Vaadake uusima versiooni jaoks [Azure Developer CLI väljalasked](https://github.com/Azure/azure-dev/releases).
 
-**✅ Eduka paigalduse kontrollnimekiri:**
+**✅ Installatsiooni õnnestumise kontrollnimekiri:**
 - [ ] `azd version` kuvab versiooninumbri ilma vigadeta
-- [ ] `azd --help` kuvab käsu dokumentatsiooni
-- [ ] `azd template list` kuvab saadavalolevad mallid
-- [ ] Saate luua testi kausta ja edukalt käivitada `azd init`
+- [ ] `azd --help` näitab käsu dokumentatsiooni
+- [ ] `azd template list` kuvab olemasolevad mallid
+- [ ] Saate luua testkataloogi ja edukalt käivitada `azd init`
 
-**Kui kõik kontrollid on läbinud, olete valmis liikuma edasi [Teie esimese projekti](first-project.md) juurde!**
+**Kui kõik kontrollid läbivad, olete valmis minema edasi [Teie esimese projekti](first-project.md) juurde!**
 
 ## Autentimise seadistamine
 
-### Soovitatav algajatele mõeldud seadistus
+### Soovitatav algajate seadistus
 
-AZD-esmase töövoo jaoks logige sisse kasutades `azd auth login`.
+AZD-esimesed töövood nõuavad sisselogimist käsuga `azd auth login`.
 
 ```bash
 # Required for AZD commands such as azd up
@@ -162,7 +164,7 @@ azd auth login
 azd auth login --check-status
 ```
 
-Kasutage Azure CLI sisselogimist ainult siis, kui kavatsete ise kursuse jooksul käivitada `az` käske.
+Kasutage Azure CLI sisselogimist ainult siis, kui plaanite kursuse jooksul ise käivitada käske `az`.
 
 ### Azure CLI autentimine (valikuline)
 ```bash
@@ -178,20 +180,20 @@ az login
 az account show
 ```
 
-### Millist sisselogimisvoogu kasutada?
+### Millist sisselogimisvoogu valida?
 
-- Kasutage `azd auth login`, kui järgite algajale mõeldud AZD rada ja peamiselt käivitate `azd` käske.
-- Kasutage ka `az login`, kui soovite käivitada Azure CLI käske nagu `az account show` või vaadata ressursse otse.
-- Kui harjutus sisaldab nii `azd` kui ka `az` käske, käivitage mõlemad sisselogimiskäsud ühe korra alguses.
+- Kasutage `azd auth login`, kui järgisite algajate AZD rada ja peamiselt käivitate käske `azd`.
+- Kasutage `az login` ka siis, kui soovite käivitada Azure CLI käske nagu `az account show` või kontrollida ressursse otse.
+- Kui harjutus sisaldab nii `azd` kui ka `az` käske, käivitage mõlemad sisselogimiskäsud korraga alguses.
 
 ### Seadme koodi autentimine
-Kui olete peata süsteemis või teil on brauseri probleeme:
+Kui kasutate peakset või teil esineb brauseri probleeme:
 ```bash
 azd auth login --use-device-code
 ```
 
-### Teenuse põhiarendaja (CI/CD)
-Automaatsete keskkondade jaoks:
+### Teenusprintsiip (CI/CD)
+Automaatsetes keskkondades:
 ```bash
 azd auth login \
   --client-id "<client-id>" \
@@ -199,9 +201,9 @@ azd auth login \
   --tenant-id "<tenant-id>"
 ```
 
-### Kontrollige oma täielikku seadistust
+### Kontrollige oma täituvat seadistust
 
-Kui soovite kiiret valmisoleku kontrolli enne Peatüki 1 alustamist:
+Kui soovite kiire valmisoleku kontrolli enne peatüki 1 alustamist:
 
 **Windows:**
 ```powershell
@@ -228,7 +230,7 @@ azd config show
 ```
 
 ### Keskkonnamuutujad
-Lisage need oma kestaprofiili (`.bashrc`, `.zshrc`, `.profile`):
+Lisage oma terminali profiilile (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -238,18 +240,18 @@ export AZURE_LOCATION="eastus2"
 azd version --debug
 ```
 
-## IDE integreerimine
+## IDE integratsioon
 
 ### Visual Studio Code
-Paigaldage Azure Developer CLI laiendus:
+Paigaldage Azure Developer CLI laiend:
 1. Avage VS Code
-2. Minge Laienduste juurde (Ctrl+Shift+X)
+2. Minge laienduste menüüsse (Ctrl+Shift+X)
 3. Otsige "Azure Developer CLI"
 4. Paigaldage laiendus
 
 Omadused:
 - IntelliSense azure.yaml jaoks
-- Integreeritud terminali käsud
+- Integreeritud terminalikäsud
 - Mallide sirvimine
 - Juurutuse jälgimine
 
@@ -268,21 +270,21 @@ Looge `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Paigaldage Azure plugin
-2. Seadistage Azure mandaadid
-3. Kasutage azd käskude jaoks integreeritud terminali
+2. Seadistage Azure volitused
+3. Kasutage integreeritud terminali azd käskude jaoks
 
-## 🐛 Paigalduse veaotsing
+## 🐛 Installatsiooniprobleemide lahendamine
 
-### Levinud probleemid
+### Levinumad probleemid
 
-#### Luba keelatud (Windows)
+#### Luba keeldus (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH probleemid
-Lisage azd käsitsi oma PATH-i:
+Lisage azd käsitsi PATH-i:
 
 **Windows:**
 ```cmd
@@ -295,7 +297,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Võrgu/proksi probleemid
+#### Võrgu-/prookside probleemid
 ```bash
 # Configure standard proxy environment variables for the current Bash session
 export HTTP_PROXY="http://proxy:8080"
@@ -314,7 +316,7 @@ export HTTPS_PROXY="http://proxy:8080"
 rm -rf ~/.azd
 ```
 
-### Rohkem abi saamine
+### Kust saada lisatuge
 ```bash
 # Enable debug logging
 azd show --debug
@@ -329,7 +331,7 @@ azd show
 ## azd uuendamine
 
 ### Uuenduste kontroll
-azd annab hoiatuse, kui saadaval on uuem versioon, ja saate oma praeguse versiooni kontrollida käsuga:
+azd annab märku, kui uus versioon ilmub, ja saate oma praegust ehitust kontrollida käsuga:
 ```bash
 azd version
 ```
@@ -351,37 +353,37 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Sageli küsitud küsimused
+## 💡 Korduma kippuvad küsimused
 
 <details>
-<summary><strong>Mis vahe on azd ja az CLI vahel?</strong></summary>
+<summary><strong>Mis vahe on azd ja az CLI-l?</strong></summary>
 
 **Azure CLI (az)**: Madala taseme tööriist üksikute Azure ressursside haldamiseks
 - `az webapp create`, `az storage account create`
 - Üks ressurss korraga
-- Taristu halduse fookus
+- Infrastruktuuri haldusele keskendunud
 
-**Azure Developer CLI (azd)**: Kõrgema taseme tööriist täielike rakenduste juurutamiseks
-- `azd up` juurutab kogu rakenduse koos kõigi ressurssidega
+**Azure Developer CLI (azd)**: Kõrge taseme tööriist täielike rakenduste juurutamiseks
+- `azd up` juurutab kogu rakenduse kõigi ressurssidega
 - Mallipõhised töövood
-- Arendajate tootlikkusele keskendunud
+- Arendaja tootlikkuse fookus
 
-**Need on iseseisvad**: azd kasutab vaikimisi oma autentimist. Paigaldage ja logige sisse Azure CLI-sse ainult `az` käskude jaoks või valige selgesõnaliselt `azd config set auth.useAzCliAuth true`.
+**Need on sõltumatud**: azd kasutab vaikimisi oma autentimist. Azure CLI installige ja logige sisse ainult `az` käskude jaoks või valige selgesõnaliselt `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
-<summary><strong>Kas ma saan kasutada azd olemasolevate Azure ressurssidega?</strong></summary>
+<summary><strong>Kas ma saan azd kasutada olemasolevate Azure ressurssidega?</strong></summary>
 
 Jah! Saate:
-1. Importida olemasolevaid ressursse azd keskkondadesse
+1. Impordida olemasolevad ressursid azd keskkondadesse
 2. Viidata olemasolevatele ressurssidele oma Bicep mallides
-3. Kasutada azd uuteks juurutusteks koos olemasoleva taristuga
+3. Kasutada azd uuteks juurutusteks olemasoleva infrastruktuuri kõrval
 
-Täpsemale infole vaadake [Seadistamise juhendit](../chapter-03-configuration/configuration.md).
+Vaadake üksikasju [Konfiguratsiooni juhendist](../chapter-03-configuration/configuration.md).
 </details>
 
 <details>
-<summary><strong>Kas azd töötab Azure Governmenti või Azure China’ga?</strong></summary>
+<summary><strong>Kas azd töötab Azure Government või Azure Chinaga?</strong></summary>
 
 Jah, seadistage pilv:
 ```bash
@@ -394,57 +396,57 @@ azd config set cloud.name AzureChinaCloud
 azd auth login
 ```
 
-Kui kasutate ka Azure CLI-d, seadistage `az cloud set --name ...` eraldi. Malliteenuste ja mudeli saadavus varieerub pilvest olenevalt.
+Kui kasutate ka Azure CLI-d, seadistage `az cloud set --name ...` eraldi. Malliteenused ja mudeli saadavus varieeruvad pilve kaupa.
 </details>
 
 <details>
-<summary><strong>Kas ma saan kasutada azd CI/CD torudes?</strong></summary>
+<summary><strong>Kas azd sobib CI/CD torujuhtmikega?</strong></summary>
 
 Absoluutselt! azd on loodud automatiseerimiseks:
-- GitHub Actions integratsioon
+- GitHub Actions integreerimine
 - Azure DevOpsi tugi
-- Teenuse põhipõhise autentimise tugi
-- Mitteinimese-interaktiivne režiim
+- Teenusprintsiibi autentimine
+- Mitteinteraktiivne režiim
 
-Vaadake [Juurutamise juhendit](../chapter-04-infrastructure/deployment-guide.md) CI/CD mustrite jaoks.
+Vaadake CI/CD mustreid [Juurutamise juhendist](../chapter-04-infrastructure/deployment-guide.md).
 </details>
 
 <details>
 <summary><strong>Kui palju maksab azd kasutamine?</strong></summary>
 
-azd ise on **täiesti tasuta** ja avatud lähtekoodiga. Maksate ainult:
+Azd ise on **täiesti tasuta** ja avatud lähtekoodiga. Tasute ainult:
 - Azure ressursid, mida juurutate
-- Azure tarbimiskulud (arvutus, salvestus jne)
+- Azure kasutuskulud (arvutusvõimsus, salvestus jne)
 
-Kasutage `azd provision --preview`, et vaadata ettepanekuid ressurssidest, seejärel hinnake nende kulusid [Azure hinnakalkulaatoriga](https://azure.microsoft.com/pricing/calculator/). Eelvaade ei arvuta hindu.
+Kasutage oma ettepanekute vaatamiseks `azd provision --preview` ja hinnake nende kulusid [Azure hinnakalkulaatori](https://azure.microsoft.com/pricing/calculator/) abil. Eelvaade hinda ei arvesta.
 </details>
 
 ## Järgmised sammud
 
-1. **Lõpetage autentimine**: Veenduge, et pääsete ligi oma Azure tellimusele
-2. **Proovige oma esimest juurutust**: Järgige [Esimese projekti juhendit](first-project.md)
-3. **Uurige malle**: Sirvige saadaolevaid malle `azd template list` abil
-4. **Seadistage oma IDE**: Kohandage oma arenduskeskkonda
+1. **Viige läbi autentimine**: Veenduge, et pääsete juurde oma Azure tellimusele
+2. **Proovige oma esimene juurutus**: Järgige [Esimese projekti juhendit](first-project.md)
+3. **Uurige malle**: Sirvige saadaolevaid malle käsuga `azd template list`
+4. **Seadistage oma IDE**: Koostage oma arenduskeskkond
 
 ## Tugi
 
 Kui teil tekib probleeme:
 - [Ametlik dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Probleemide teatamine](https://github.com/Azure/azure-dev/issues)
+- [Teata probleemidest](https://github.com/Azure/azure-dev/issues)
 - [Kogukonna arutelud](https://github.com/Azure/azure-dev/discussions)
 - [Azure tugi](https://azure.microsoft.com/support/)
-- [**Azure'i agendi oskused**](https://skills.sh/microsoft/github-copilot-for-azure) - Saa Azure'i käsu juhised otse oma redaktoris koos `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Saate Azure käsu juhiseid otse oma redaktoris käsuga `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Peatüki navigeerimine:**
+**Peatükkide navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 1 - Alused & Kiire algus
-- **⬅️ Eelmine**: [AZD põhialused](azd-basics.md) 
-- **➡️ Järgmine**: [Sinu esimene projekt](first-project.md)
-- **🚀 Järgmine peatükk**: [Peatükk 2: AI-Esimene arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Praegune peatükk**: Peatükk 1 - Alused ja kiire algus
+- **⬅️ Eelmine**: [AZD põhitõed](azd-basics.md) 
+- **➡️ Järgmine**: [Teie esimene projekt](first-project.md)
+- **🚀 Järgmine peatükk**: [Peatükk 2: Tehisintellekt-eelne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Paigaldamine lõpetatud!** Jätka [Sinu esimene projekt](first-project.md), et alustada ehitamist azd-ga.
+**✅ Installatsioon lõpule viidud!** Jätkake [Teie esimese projektiga](first-project.md), et alustada azd kasutamist.
 
 ---
 

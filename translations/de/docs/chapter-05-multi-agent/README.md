@@ -1,22 +1,22 @@
 # Kapitel 5: Multi-Agenten KI-Lösungen
 
-**📚 Kurs**: [AZD Für Anfänger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
+**📚 Kurs**: [AZD Für Einsteiger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
-## Überblick
+## Übersicht
 
-Dieses Kapitel behandelt fortgeschrittene Multi-Agenten-Architekturpatterns, Agenten-Orchestrierung und produktionsbereite KI-Bereitstellungen für komplexe Szenarien.
+Dieses Kapitel behandelt fortgeschrittene Multi-Agenten-Architektur-Pattern, Agentenorchestrierung und produktionsreife KI-Bereitstellungen für komplexe Szenarien.
 
-> Befehlsanleitung geprüft gegen das veröffentlichte `azd 1.37.2` Referenzdokument. Cloud-Bereitstellungen wurden nicht durchgeführt.
+> Befehlsleitung geprüft anhand des veröffentlichten `azd 1.37.2` Referenz. Cloud-Bereitstellungen wurden nicht ausgeführt.
 
 ## Lernziele
 
-Nach Abschluss dieses Kapitels werden Sie:
-- Multi-Agenten-Architekturpatterns verstehen
+Durch das Abschließen dieses Kapitels werden Sie:
+- Multi-Agenten-Architektur-Pattern verstehen
 - Koordinierte KI-Agenten-Systeme bereitstellen
 - Agent-zu-Agent-Kommunikation implementieren
-- Produktionsbereite Multi-Agenten-Lösungen entwickeln
+- Produktionsreife Multi-Agenten-Lösungen erstellen
 
 ---
 
@@ -24,11 +24,11 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Multi-Agenten Grundlagen](multi-agent-basics.md) | Praxis: Bereitstellung einer funktionierenden Multi-Agenten-App mit `azd up` | 45 Min |
-| 2 | [Koordinationsmuster](../chapter-06-pre-deployment/coordination-patterns.md) | Agenten-Orchestrierungsstrategien (Fortsetzung in Kapitel 6) | 30 Min |
-| 3 | [ARM Template Bereitstellung](../../examples/retail-multiagent-arm-template/README.md) | Ein-Klick-Bereitstellungsbeispiel | 30 Min |
+| 1 | [Multi-Agent Grundlagen](multi-agent-basics.md) | Praxis: Bereitstellung einer funktionierenden Multi-Agenten-App mit `azd up` | 45 Min |
+| 2 | [Koordinations-Pattern](../chapter-06-pre-deployment/coordination-patterns.md) | Agentenorchestrierungsstrategien (geht in Kapitel 6 weiter) | 30 Min |
+| 3 | [ARM Template Bereitstellung](../../examples/retail-multiagent-arm-template/README.md) | Beispiel für Ein-Klick-Bereitstellung | 30 Min |
 
-> **Beginnen Sie mit Lektion 1.** Sie ist die einzige vollständig praxisorientierte, bereitstellbare Lektion in diesem Kapitel. Lektion 2 befindet sich in Kapitel 6 (wird mit Pre-Deployment-Planung geteilt), und die [Retail Multi-Agent Lösung](../../examples/retail-scenario.md) ist ein Architektur-Blueprint — eine Designreferenz, kein Ein-Befehl-Template.
+> **Beginnen Sie mit Lektion 1.** Sie ist die einzige durchgehend praktische, einsatzbare Lektion in diesem Kapitel. Lektion 2 gehört zu Kapitel 6 (sie wird mit der Vorbereitungsplanung geteilt), und die [Retail Multi-Agent Lösung](../../examples/retail-scenario.md) ist eine Architekturvorlage — ein Design-Referenz, kein Ein-Kommando-Template.
 
 ---
 
@@ -39,19 +39,19 @@ Nach Abschluss dieses Kapitels werden Sie:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Welche Herangehensweise?** Verwenden Sie `azd init --template`, um mit einer funktionierenden Vorlage zu starten. Verwenden Sie `azd ai agent init` interaktiv oder `azd ai agent init --template <path-to-azure.yaml>`, um ein aktuelles Agentenprojekt zu übernehmen. Siehe die [AZD AI CLI Referenz](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für Versionsanforderungen und Evaluierungs-Migration.
+> **Welcher Ansatz?** Verwenden Sie `azd init --template`, um mit einem funktionierenden Beispiel zu starten. Nutzen Sie `azd ai agent init` interaktiv oder `azd ai agent init --template <path-to-azure.yaml>`, um ein aktuelles Agentenprojekt zu übernehmen. Siehe die [AZD AI CLI Referenz](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für Versionsanforderungen und Migrationshinweise.
 
-Führen Sie diese Alternativen in separaten leeren Ordnern aus. Die Agents-Erweiterung `1.0.0-beta.23` benötigt `azd >= 1.37.0`; deren interaktiver Ablauf erzeugt nicht die benutzerdefinierte Service-Bus-Pipeline in der Koordinationslektion.
+Führen Sie diese Alternativen in separaten leeren Ordnern aus. Der GA Foundry Workflow benötigt `azd >= 1.37.0`; sein interaktiver Ablauf erstellt die benutzerdefinierte Service Bus-Pipeline in der Koordinationslektion nicht. Für lokale Tests, Code-Bereitstellung und Bereinigung von Neu-gegen-Wiederverwendet-Projekten folgen Sie dem [hosted-agent Walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
-## 🤖 Multi-Agenten Architektur
+## 🤖 Multi-Agenten-Architektur
 
 ```mermaid
 graph TD
@@ -63,20 +63,20 @@ graph TD
 
 ## 🎯 Vorgestellte Lösung: Retail Multi-Agent
 
-Die [Retail Multi-Agent Lösung](../../examples/retail-scenario.md) demonstriert:
+Die [Retail Multi-Agent Lösung](../../examples/retail-scenario.md) zeigt:
 
-- **Kunden-Agent**: Handhabt Benutzerinteraktionen und Präferenzen
-- **Inventar-Agent**: Verwaltert Lagerbestand und Bestellabwicklung
+- **Kundenagent**: Verwaltet Nutzerinteraktionen und Präferenzen
+- **Inventaragent**: Verwaltet Lagerbestand und Bestellverarbeitung
 - **Orchestrator**: Koordiniert zwischen Agenten
 - **Gemeinsamer Speicher**: Kontextverwaltung über Agenten hinweg
 
-### Eingesetzte Dienste
+### Verwendete Dienste
 
 | Dienst | Zweck |
 |---------|---------|
 | Microsoft Foundry Modelle | Sprachverständnis |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agentenzustand und Speicher |
+| Cosmos DB | Agentenzustand und -speicher |
 | Container Apps | Agenten-Hosting |
 | Application Insights | Überwachung |
 
@@ -87,15 +87,15 @@ Die [Retail Multi-Agent Lösung](../../examples/retail-scenario.md) demonstriert
 | Richtung | Kapitel |
 |-----------|---------|
 | **Vorheriges** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Nächstes** | [Kapitel 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Nächstes** | [Kapitel 6: Vorbereitungen vor der Bereitstellung](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
 - [KI-Agenten Leitfaden](../chapter-02-ai-development/agents.md)
-- [Produktions-KI Praktiken](../chapter-08-production/production-ai-practices.md)
-- [KI Fehlerbehebung](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [KI-Produktionspraktiken](../chapter-08-production/production-ai-practices.md)
+- [KI-Fehlerbehebung](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

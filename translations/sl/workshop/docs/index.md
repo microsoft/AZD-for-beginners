@@ -1,77 +1,77 @@
-# Delavnica AZD za razvijalce umetne inteligence
+# Delavnica AZD za razvijalce AI
 
-> Preverjeno z `azd 1.27.1` julija 2026.
+> Viri so bili preverjeni glede na AZD 1.37.2 dne 4. novembra 2026. Posnetki zaslona so za ponazoritev; razpoložljivost storitev, oznake v portalu in privzete predloge se lahko spremenijo.
 
 > [!IMPORTANT]  
-> **Ta delavnica je opremljena z vodičem, ki si ga lahko ogledate v vašem lokalnem brskalniku. Za začetek odprite repozitorij v GitHub Codespaces, razvijalskem kontejnerju ali lokalni kopiji z nameščenim MkDocs—nato počakajte, da vidite aktivni terminal VS Code in vnesite:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Iz videti bi se moral pojaviti pojavni dialog za odprtje predogleda strani v brskalniku.**
+> **Za to delavnico je na voljo vodnik delavnice, ki si ga lahko ogledate v svojem lokalnem brskalniku. Da začnete, odprite repozitorij v GitHub Codespaces, razvojni posodi ali lokalnemu klonu z nameščenim MkDocs—nato počakajte, da se prikaže aktivna terminalska vrstica VS Code in vnesite:**  
+> Iz korenskega repozitorija tečaja namestite `requirements-dev.txt`, nato zaženite `python -m mkdocs serve --config-file workshop/mkdocs.yml` v ospredju.
+> **Prikazalo bi se vam moralo pojavno okno za odpiranje predogledne strani v brskalniku.**
 
-Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s poudarkom na nameščanju aplikacij umetne inteligence. Ta delavnica vam pomaga pridobiti praktično razumevanje AZD predlog v 3 korakih:
+Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) z osredotočenostjo na uvajanje AI aplikacij. Ta delavnica vam pomaga pridobiti praktično razumevanje AZD predlog v 3 korakih:
 
-1. **Odkritje** - poiščite predlogo, ki vam najbolj ustreza.
-1. **Namestitev** - namestite in preverite, da deluje
-1. **Prilagoditev** - spremenite in izboljšajte, da bo vaša!
+1. **Odkritje** - poiščite predlogo, ki vam ustreza.
+1. **Uvajanje** - uvedite in preverite, da deluje
+1. **Prilagajanje** - spremenite in iterirajte, da bo vaša!
 
-V času te delavnice boste spoznali tudi osnovna orodja in delovne tokove za razvijalce, da boste lahko poenostavili svojo celotno razvojno pot.
+V času te delavnice boste spoznali tudi osnovna orodja in delovne tokove za razvijalce, ki vam bodo pomagali poenostaviti celoten razvojni proces.
 
 | | | 
 |:---|:---|
-| **📚 Domača stran tečaja**| [AZD za začetnike](../README.md)|
-| **📖 Dokumentacija** | [Začni z AI predlogami](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Predloge** | [Microsoft Foundry Predloge](https://ai.azure.com/templates) |
-|**🚀 Naslednji koraki** | [Sprejmi izziv](#workshop-challenge) |
+| **📚 Domača stran tečaja**| [AZD za začetnike](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
+| **📖 Dokumentacija** | [Začnite z AI predlogami](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI predloge** | [Microsoft Foundry predloge](https://ai.azure.com/templates) |
+|**🚀 Naslednji koraki** | [Sprejmi izziv](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Pregled delavnice
 
 **Trajanje:** 3-4 ure  
-**Nivo:** Začetni do srednji  
-**Predpogoji:** Poznavanje Azure, konceptov umetne inteligence, VS Code in orodij ukazne vrstice.
+**Nivo:** Začetni do vmesni  
+**Predpogoji:** Poznavanje Azure, konceptov AI, VS Code in orodij ukazne vrstice.
 
-To je praktična delavnica, kjer se učite z izvajanjem. Ko zaključite vaje, priporočamo pregled kurikuluma AZD za začetnike, da nadaljujete z učenjem varnostnih in produktivnostnih najboljših praks.
+To je praktična delavnica, kjer se učite z delom. Ko zaključite vaje, priporočamo, da si ogledate AZD za začetnike kurikulum, da nadaljujete svojo učno pot na področju varnosti in produktivnosti.
 
 | Čas| Modul  | Cilj |
 |:---|:---|:---|
-| 15 min | Uvod | Postavi temelje, razumi cilje |
-| 30 min | Izbira AI Predloge | Raziskovanje možnosti in izbira začetne predloge | 
-| 30 min | Preverjanje AI Predloge | Namesti privzeto rešitev v Azure |
-| 30 min | Razgradnja AI Predloge | Raziskovanje strukture in konfiguracije |
-| 30 min | Konfiguracija AI Predloge | Aktiviraj in preizkusi razpoložljive funkcije |
-| 30 min | Prilagoditev AI Predloge | Prilagodi predlogo svojim potrebam |
-| 30 min | Odstranitev infrastrukture | Počisti in sprosti vire |
-| 15 min | Zaključek in naslednji koraki | Viri za učenje, izziv delavnice |
+| 15 min | Uvod | Postavite temelje, razumite cilje |
+| 30 min | Izbor AI predloge | Raziščite možnosti in izberite začetno |
+| 30 min | Preverjanje AI predloge | Uvedba privzete rešitve na Azure |
+| 30 min | Razčlenitev AI predloge | Raziščite strukturo in konfiguracijo |
+| 30 min | Konfiguracija AI predloge | Aktivirajte in preizkusite razpoložljive funkcije |
+| 30 min | Prilagajanje AI predloge | Prilagodite predlogo svojim potrebam |
+| 30 min | Razgradnja infrastrukture | Čiščenje in sprostitev virov |
+| 15 min | Zaključek in naslednji koraki | Uporabni viri, izziv delavnice |
 | | |
 
 ## Kaj se boste naučili
 
-Predstavljajte si AZD Predlogo kot učno okolje za raziskovanje različnih zmogljivosti in orodij za celostni razvoj v Microsoft Foundry. Na koncu te delavnice bi morali intuitivno razumeti različna orodja in pojme v tem kontekstu.
+Predstavljajte si AZD predlogo kot učno okolje za raziskovanje različnih zmogljivosti in orodij za celostni razvoj na Microsoft Foundry. Do konca te delavnice bi morali imeti intuitiven občutek za različna orodja in koncepte v tem kontekstu.
 
-| Pojem  | Cilj |
+| Koncept  | Cilj |
 |:---|:---|
-| **Azure Developer CLI** | Razumeti ukaze in delovne tokove orodja|
-| **AZD Predloge**| Razumeti strukturo projekta in konfiguracijo|
-| **Azure AI Agent**| Zagotoviti in namestiti Microsoft Foundry projekt  |
-| **Azure AI Search**| Omogočiti kontekstno inženirstvo z agenti |
-| **Opazovanje**| Raziskati sledenje, spremljanje in ocene |
-| **Red Teaming**| Raziskati nasprotujoče se teste in ukrepe |
+| **Azure Developer CLI** | Razumeti ukaze orodja in delovne tokove|
+| **AZD predloge**| Razumeti strukturo projekta in konfiguracijo|
+| **Azure AI Agent**| Zagotovitev in uvajanje Microsoft Foundry projekta  |
+| **Azure AI Search**| Omogočiti inženiring konteksta z agenti |
+| **Opazovanje**| Raziščite sledenje, nadzor in ocene |
+| **Red Teaming**| Raziščite nasprotujoče se teste in blažitve |
 | | |
 
 ## Moduli delavnice
 
-Ste pripravljeni za začetek? Pomaknite se skozi module delavnice:
+Pripravljeni na začetek? Pojdite skozi module delavnice:
 
-- [Modul 1: Izbira AI Predloge](instructions/1-Select-AI-Template.md)
-- [Modul 2: Preverjanje AI Predloge](instructions/2-Validate-AI-Template.md) 
-- [Modul 3: Razgradnja AI Predloge](instructions/3-Deconstruct-AI-Template.md)
-- [Modul 4: Konfiguracija AI Predloge](instructions/4-Configure-AI-Template.md)
-- [Modul 5: Prilagoditev AI Predloge](instructions/5-Customize-AI-Template.md)
-- [Modul 6: Odstranitev infrastrukture](instructions/6-Teardown-Infrastructure.md)
+- [Modul 1: Izbor AI predloge](instructions/1-Select-AI-Template.md)
+- [Modul 2: Preverjanje AI predloge](instructions/2-Validate-AI-Template.md) 
+- [Modul 3: Razčlenitev AI predloge](instructions/3-Deconstruct-AI-Template.md)
+- [Modul 4: Konfiguracija AI predloge](instructions/4-Configure-AI-Template.md)
+- [Modul 5: Prilagajanje AI predloge](instructions/5-Customize-AI-Template.md)
+- [Modul 6: Razgradnja infrastrukture](instructions/6-Teardown-Infrastructure.md)
 - [Modul 7: Zaključek in naslednji koraki](instructions/7-Wrap-up.md)
 
-## Imate povratne informacije?
+## Imate povratno informacijo?
 
-Objavite težavo v tem repozitoriju (označite jo z `Workshop`) ali se pridružite nam na [Discord](https://aka.ms/foundry/discord) in objavite v našem kanalu `#get-help`
+Pošljite težavo na ta repozitorij (označite jo z `Workshop`) ali se nam pridružite na [Discord](https://aka.ms/foundry/discord) in objavite na našem `#get-help` kanalu
 
 ---
 

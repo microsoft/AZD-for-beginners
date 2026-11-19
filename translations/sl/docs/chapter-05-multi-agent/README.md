@@ -6,17 +6,17 @@
 
 ## Pregled
 
-To poglavje zajema napredne vzorce večagentne arhitekture, usklajevanje agentov in produkcijsko pripravljene AI namestitve za kompleksne scenarije.
+To poglavje zajema napredne vzorce večagentne arhitekture, orkestracijo agentov in AI implementacije, pripravljene za produkcijo, za kompleksne scenarije.
 
-> Navodila za ukaze so bila pregledana glede na izdano referenco `azd 1.37.2`. Namestitve v oblaku niso bile izvedene.
+> Navodila za ukaze so pregledana glede na objavo referenčnega `azd 1.37.2`. Namestitve v oblaku niso bile izvedene.
 
 ## Cilji učenja
 
 Z dokončanjem tega poglavja boste:
 - Razumeli vzorce večagentne arhitekture
-- Namestili usklajene sisteme AI agentov
+- Implementirali usklajene sisteme AI agentov
 - Izvedli komunikacijo med agenti
-- Zgradili produkcijsko pripravljene večagentne rešitve
+- Zgradili večagentne rešitve, pripravljene za produkcijo
 
 ---
 
@@ -24,11 +24,11 @@ Z dokončanjem tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Osnove več agentov](multi-agent-basics.md) | Praktično: namestitev delujoče večagentne aplikacije z `azd up` | 45 min |
-| 2 | [Vzorci usklajevanja](../chapter-06-pre-deployment/coordination-patterns.md) | Strategije orkestracije agentov (nadaljuje se v poglavju 6) | 30 min |
-| 3 | [Namestitev ARM predloge](../../examples/retail-multiagent-arm-template/README.md) | Primer enkratne namestitve | 30 min |
+| 1 | [Osnove večagentnosti](multi-agent-basics.md) | Praktično: namestitev delujoče večagentne aplikacije z `azd up` | 45 min |
+| 2 | [Vzorce usklajevanja](../chapter-06-pre-deployment/coordination-patterns.md) | Strategije orkestracije agentov (nadaljuje se v poglavju 6) | 30 min |
+| 3 | [Implementacija ARM predloge](../../examples/retail-multiagent-arm-template/README.md) | Primer namestitve z enim klikom | 30 min |
 
-> **Začnite z lekcijo 1.** To je edina popolnoma praktična, izvedljiva lekcija v tem poglavju. Lekcija 2 je v poglavju 6 (deljena s prednamestitvenim načrtovanjem), [Večagentna rešitev za trgovine](../../examples/retail-scenario.md) pa je arhitekturni načrt—referenca za oblikovanje, ne predloga z enim ukazom.
+> **Začnite z lekcijo 1.** To je edina popolnoma praktična in namestljiva lekcija v tem poglavju. Lekcija 2 je v poglavju 6 (je del načrtovanja pred namestitvijo), medtem ko je [Retail Multi-Agent Solution](../../examples/retail-scenario.md) arhitekturna predloga – načrtniški primer, ne predloga za en ukaz.
 
 ---
 
@@ -39,15 +39,15 @@ Z dokončanjem tega poglavja boste:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Kateri pristop?** Začnite s primerom, ki deluje z uporabo `azd init --template`. Uporabite `azd ai agent init` interaktivno ali `azd ai agent init --template <path-to-azure.yaml>` za prevzem trenutnega projekta agenta. Za zahteve verzije in migracijo ocenjevanja glejte [AZD AI CLI referenco](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Kateri pristop?** Začnite z delujočim vzorcem z uporabo `azd init --template`. Uporabite `azd ai agent init` interaktivno ali `azd ai agent init --template <path-to-azure.yaml>` za prevzem trenutnega projekta agenta. Glejte [referenco AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za zahteve glede verzije in migracijo ocenjevanja.
 
-Ukaze izvajajte v ločenih praznih mapah. Razširitev agentov `1.0.0-beta.23` zahteva `azd >= 1.37.0`; njen interaktivni potek ne generira prilagojenega službenega Service Bus kanala v lekciji o usklajevanju.
+Te alternative zaženite v ločenih praznih mapah. Delovni tok GA Foundry zahteva `azd >= 1.37.0`; njegov interaktivni potek ne ustvari prilagojene Service Bus cevovode v lekciji o usklajevanju. Za lokalno testiranje, nameščanje kode in čiščenje novih ali ponovno uporabljenih projektov sledite [vodniku po gostovanem agentu](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -61,14 +61,14 @@ graph TD
 
 ---
 
-## 🎯 Izpostavljena rešitev: Večagentna rešitev za trgovine
+## 🎯 Izpostavljena rešitev: Večagentni sistem za maloprodajo
 
-Rešitev [Retail Multi-Agent Solution](../../examples/retail-scenario.md) prikazuje:
+Rešitev [Retail Multi-Agent](../../examples/retail-scenario.md) prikazuje:
 
-- **Agent za stranke**: Upravlja interakcije z uporabniki in njihove preference
-- **Agent za zalogo**: Upravljanje zalog in obdelava naročil
-- **Koordinator**: Usmerja sodelovanje med agenti
-- **Deljeni pomnilnik**: Upravljanje konteksta med agenti
+- **Agent za stranke**: Upravljanje interakcij in preferenc uporabnikov
+- **Agent za zaloge**: Upravljanje zalog in obdelava naročil
+- **Orkestrator**: Koordinacija med agenti
+- **Deljeni spomin**: Upravljanje konteksta med agenti
 
 ### Uporabljene storitve
 
@@ -76,26 +76,26 @@ Rešitev [Retail Multi-Agent Solution](../../examples/retail-scenario.md) prikaz
 |---------|---------|
 | Microsoft Foundry Models | Razumevanje jezika |
 | Azure AI Search | Katalog izdelkov |
-| Cosmos DB | Stanje in pomnilnik agentov |
+| Cosmos DB | Stanje in spomin agenta |
 | Container Apps | Gostovanje agentov |
-| Application Insights | Spremljanje |
+| Application Insights | Nadzor |
 
 ---
 
 ## 🔗 Navigacija
 
-| Smer | Poglavje |
+| Usmeritev | Poglavje |
 |-----------|---------|
 | **Prejšnje** | [Poglavje 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
-| **Naslednje** | [Poglavje 6: Pred uvajanjem](../chapter-06-pre-deployment/README.md) |
+| **Naslednje** | [Poglavje 6: Pred-namestitev](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Sorodni viri
+## 📖 Povezani viri
 
-- [Vodnik za AI agente](../chapter-02-ai-development/agents.md)
-- [Prakse proizvodne umetne inteligence](../chapter-08-production/production-ai-practices.md)
-- [Reševanje težav z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Vodnik po AI agentih](../chapter-02-ai-development/agents.md)
+- [Prakse AI v proizvodnji](../chapter-08-production/production-ai-practices.md)
+- [Odpravljanje težav z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

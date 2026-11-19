@@ -1,6 +1,6 @@
 # 6. تفكيك البنية التحتية
 
-!!! tip "بنهاية هذه الوحدة، ستتمكن من"
+!!! tip "بنهاية هذه الوحدة ستكون قادرًا على"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -11,9 +11,9 @@
 
 ## تمارين إضافية
 
-قبل تفكيك المشروع، خذ بضع دقائق للقيام ببعض الاستكشاف المفتوح.
+قبل أن نقوم بتفكيك المشروع، خذ بضع دقائق للقيام ببعض الاستكشاف المفتوح.
 
-!!! info "جرب هذه المحفزات للاستكشاف"
+!!! info "جرب هذه المطالبات للاستكشاف"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@
 
 ---
 
-## إزالة تجهيز البنية التحتية
+## إلغاء تزويد البنية التحتية
 
-1. تفكيك البنية التحتية سهل كما يلي:
+!!! warning "إذا كنت قد أكملت أيضًا تمرين الوكيل المستضاف GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. تفكيك البنية التحتية سهل مثل:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. تأكد من البيئة المختارة وراجع الموارد المراد حذفها. هذا الإجراء يزيل موارد Azure وقد يدمر البيانات. احتفظ برسالة التأكيد لهذه العملية التعليمية. عند الانتهاء سترى مخرجات مشابهة لـ:
+1. تأكد من البيئة المختارة وراجع الموارد التي سيتم حذفها. هذا الإجراء يزيل موارد Azure وقد يدمر البيانات. احتفظ برسالة التأكيد لهذه العملية التعليمية. عند الانتهاء سترى مخرجات مشابهة لـ:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. تحقق من الحذف في البوابة الالكترونية وتفقد الموارد خارج نطاق النشر. تقارير التكلفة وتحديثات الحصص قد تتأخر. تبقى إعدادات `.azure` المحلية ما لم تقم بحذفها صراحة.
+1. تحقق من الحذف في البوابة وتحقق من الموارد خارج نطاق النشر. قد تتأخر تقارير التكلفة وتحديثات الحصة. يبقى تكوين `.azure` المحلي ما لم تقم بإزالته صراحة.
 
-1. يطلب `azd down --purge` أيضاً الحذف الدائم للموارد المحذوفة ناعماً المدعومة. استخدمه فقط عندما لا تحتاج إلى الاسترداد وتفهم سياسات الاحتفاظ/الحماية من الحذف. لا يضمن تحرير الحصة فورياً.
+1. يقوم `azd down --purge` أيضًا بطلب الحذف الدائم للموارد المحذوفة مؤقتًا المدعومة. استخدمه فقط عندما لا تكون هناك حاجة للاسترداد وتفهم سياسات الاحتفاظ والحماية من الحذف. لا يضمن تحرير الحصة الفوري.
 
-1. لا تعيد النشر فقط للتحقق من التنظيف. يمكن لإجراء `azd up` مقصود لاحقاً إعادة إنشاء الموارد باستخدام المدخلات المحلية المتبقية، ويرافقه رسوم جديدة. تحديثات النموذج عادة تستخدم تغييرات التجهيز المدعومة، لا التفكيك.
+1. لا تعيد النشر فقط للتحقق من التنظيف. يمكن لعملية `azd up` المتعمدة لاحقًا إعادة إنشاء الموارد باستخدام المدخلات المحلية المتبقية، وستتسبب في رسوم مجددًا. تستخدم تحديثات النموذج عادةً تغييرات التزويد المدعومة، وليس التفكيك.
 
 ---
 

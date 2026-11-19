@@ -1,6 +1,6 @@
-# 6. Tõrke infrastruktuur maha
+# 6. Infrastruktuuri demonteerimine
 
-!!! tip "SELLE MODUULI LÕPUS OLED SA VÕimeline"
+!!! tip "Selle mooduli lõpuks oskad sa"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -11,9 +11,9 @@
 
 ## Boonusülesanded
 
-Enne projekti lammutamist võta paar minutit, et teha mõningaid avatud uurimisi.
+Enne projekti demonteerimist võta paar minutit, et teha mõningaid avatud uurimisharjutusi.
 
-!!! info "Proovi neid uurimiskomplekte"
+!!! info "Proovi neid uurimissuuniseid"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Enne projekti lammutamist võta paar minutit, et teha mõningaid avatud uurimisi
 
 ---
 
-## Infrastruktuuri eemaldamine
+## Infrastruktuuri keelamine
 
-1. Infrastruktuuri maha võtmine on sama lihtne kui:
+!!! warning "Kui sa täitsid ka GA hostitud agendi harjutuse"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Infrastruktuuri demonteerimine on sama lihtne kui:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Kinnita valitud keskkond ja vaata üle kustutatavad ressursid. See eemaldab Azure'i ressursid ja võib andmeid hävitada. Hoia selle õppimise töövoo jaoks kinnituskutse. Kui lõpetad, näed väljundit, mis näeb välja nagu:
+1. Kinnita valitud keskkond ja vaata üle kustutamist vajavad ressursid. See eemaldab Azure'i ressursid ja võib andmeid hävitada. Hoia selle õppeprotsessi jaoks kinnituskäsk sees. Pärast lõpetamist näed sarnast väljundit:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Enne projekti lammutamist võta paar minutit, et teha mõningaid avatud uurimisi
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Kontrolli portaalis kustutamist ja otsi üles ressursid, mis jäävad väljapoole juurutuspiirkonda. Kulude aruandlus ja limiidi uuendused võivad hilineda. Kohalik `.azure` konfiguratsioon püsib alles, kui sa seda ekspliciitselt ei eemalda.
+1. Kontrolli kustutamist portaalis ja vaata üle ressursid väljaspool juurutuse ulatust. Kuluraportid ja kvota uuendused võivad viibida. Kohalik `.azure` konfiguratsioon jääb alles, kui sa seda teadlikult ei eemalda.
 
-1. `azd down --purge` nõuab lisaks toetatud pehmeta kustutatud ressursside jäädavat kustutamist. Kasuta seda ainult siis, kui taastamine pole vajalik ning sa mõistad säilitamis- ja puhastus-kaitse poliitikaid. See ei taga kohest limiidi vabastamist.
+1. `azd down --purge` taotleb lisaks toetatud pehmelt kustutatud ressursside püsivat kustutamist. Kasuta seda ainult siis, kui taastamine ei ole vajalik ja sa mõistad säilitamis- ja puhastuskaitsepoliitikaid. See ei taga kohe kvota vabastamist.
 
-1. Ära juuruta uuesti lihtsalt puhastuse kontrollimiseks. Hilisem tahtlik `azd up` võib järelejäänud kohalike sisendite abil ressursid uuesti luua ja see põhjustab taas tasusid. Mudeli uuendused kasutavad tavaliselt toetatud juurutusmuudatusi, mitte lammutamist.
+1. Ära juuruta uuesti ainult puhastuse kontrollimiseks. Hilisem sihilik `azd up` võib olemasolevaid kohalikke sisendeid kasutades ressursid taastada ning see toob taas kulud kaasa. Mudeli värskendused kasutavad tavaliselt toetatud provisioning`u muutusi, mitte demonteerimist.
 
 ---
 

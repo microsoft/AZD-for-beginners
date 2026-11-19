@@ -1,48 +1,50 @@
 # Tích hợp Microsoft Foundry với AZD
 
 **Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 2 - Phát triển Ưu tiên AI
+- **📚 Trang khóa học**: [AZD Dành cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
 - **⬅️ Chương trước**: [Chương 1: Dự án đầu tiên của bạn](../chapter-01-foundation/first-project.md)
-- **➡️ Tiếp theo**: [Đại lý AI](agents.md)
-- **🚀 Chương kế tiếp**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
+- **➡️ Tiếp theo**: [AI Agents](agents.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
 
 ## Tổng quan
 
-Hướng dẫn này trình bày cách tích hợp dịch vụ Microsoft Foundry với Azure Developer CLI (AZD) để triển khai ứng dụng AI hiệu quả hơn. Microsoft Foundry cung cấp nền tảng toàn diện để xây dựng, triển khai và quản lý các ứng dụng AI, trong khi AZD đơn giản hóa quy trình hạ tầng và triển khai.
+Hướng dẫn này trình bày cách tích hợp các dịch vụ Microsoft Foundry với Azure Developer CLI (AZD) để đơn giản hóa triển khai ứng dụng AI. Microsoft Foundry cung cấp một nền tảng toàn diện để xây dựng, triển khai, và quản lý ứng dụng AI, trong khi AZD đơn giản hoá quá trình hạ tầng và triển khai.
 
 ## Microsoft Foundry là gì?
 
 Microsoft Foundry là nền tảng hợp nhất của Microsoft cho phát triển AI bao gồm:
 
-- **Danh mục Mô hình**: Truy cập các mô hình AI tiên tiến nhất
-- **Dòng lệnh Prompt**: Trình thiết kế trực quan cho các luồng công việc AI
+- **Danh mục mô hình**: Truy cập các mô hình AI tiên tiến nhất
+- **Dòng công việc Prompt**: Trình thiết kế trực quan cho luồng AI
 - **Cổng Microsoft Foundry**: Môi trường phát triển tích hợp cho ứng dụng AI
-- **Tùy chọn Triển khai**: Nhiều lựa chọn lưu trữ và mở rộng quy mô
+- **Tùy chọn triển khai**: Nhiều lựa chọn lưu trữ và mở rộng
 - **An toàn và Bảo mật**: Tính năng AI có trách nhiệm tích hợp sẵn
 
 ## AZD + Microsoft Foundry: Tốt hơn khi kết hợp
 
-| Tính năng | Microsoft Foundry | Lợi ích khi tích hợp AZD |
+| Tính năng | Microsoft Foundry | Lợi ích Tích hợp AZD |
 |---------|-----------------|------------------------|
-| **Triển khai Mô hình** | Triển khai thủ công qua cổng | Triển khai tự động, có thể lặp lại |
-| **Hạ tầng** | Cấp phát qua giao diện | Hạ tầng dưới dạng Mã (Bicep) |
-| **Quản lý Môi trường** | Tập trung vào một môi trường | Đa môi trường (phát triển/kiểm thử/sản xuất) |
-| **Tích hợp CI/CD** | Hạn chế | Hỗ trợ GitHub Actions gốc |
-| **Quản lý Chi phí** | Giám sát cơ bản | Tối ưu chi phí theo môi trường |
+| **Triển khai mô hình** | Triển khai thủ công qua cổng | Triển khai tự động, có thể lặp lại |
+| **Hạ tầng** | Cấu hình dự án và tài nguyên | Bắt đầu từ `azure.yaml`; xuất Bicep hoặc Terraform khi cần |
+| **Quản lý môi trường** | Tập trung một môi trường duy nhất | Hỗ trợ đa môi trường (dev/staging/prod) |
+| **Tích hợp CI/CD** | Dịch vụ triển khai và đánh giá | Tái sử dụng cấu hình trong GitHub Actions hoặc Azure DevOps |
+| **Quản lý chi phí** | Giám sát cơ bản | Tối ưu chi phí theo môi trường cụ thể |
 
 ## Yêu cầu trước
 
-- Đăng ký Azure với quyền truy cập phù hợp
-- Cài đặt Azure Developer CLI
+- Đăng ký Azure với quyền phù hợp
+- Azure Developer CLI 1.37.0 trở lên cho luồng làm việc Foundry GA
 - Truy cập dịch vụ Microsoft Foundry Models
 - Hiểu biết cơ bản về Microsoft Foundry
 
-> **Đánh giá phát hành (2026-11-04):** Hướng dẫn AI CLI đã được kiểm tra so với tài liệu/nguon mã `azd` `1.37.2`, đại lý `1.0.0-beta.23` và đánh giá `1.0.0-beta.2`. Sử dụng `azd >= 1.37.0` cho luồng công việc kết hợp. Xem [các thay đổi và sửa lỗi phát hành](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes); đánh giá này không chứng nhận mọi mẫu hay ví dụ SDK đối với triển khai thực tế.
+> **Cập nhật Foundry GA (2026-11-09):** Gói mở rộng `microsoft.foundry` đã đạt phiên bản 1.0 và khả dụng chung vào ngày [05 tháng 11 năm 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Các bước hướng dẫn dưới đây dựa theo thông báo đó và tài liệu Microsoft Learn quickstart liên kết. Đây là đánh giá tài liệu, không phải xác nhận triển khai trực tiếp. Các tính năng xem trước tùy chọn và các tiện ích mở rộng phát hành độc lập giữ trạng thái phát hành riêng.
+
+**Kết quả học tập:** Cài đặt gói GA, xem xét `azure.yaml` của agent, so sánh phản hồi trên máy và trên môi trường triển khai, và giải thích đánh giá, CI/CD, và giới hạn dọn dẹp. Để triển khai agent theo từng bước, xem [hướng dẫn hosted-agent](#hosted-agent-walkthrough-ga). Các mảnh tài nguyên bên dưới bao gồm các mẫu tích hợp khác.
 
 ## Các mẫu tích hợp chính
 
-**Phạm vi ví dụ:** Mẫu Bicep dưới đây chứa các đoạn tài nguyên minh họa, không phải mẫu hoàn chỉnh có thể triển khai. Mẫu bao gồm phải định nghĩa tên, `location`, tài nguyên tham chiếu, danh tính, kết quả đầu ra, và lưu trữ ứng dụng. Sử dụng mẫu liên kết cho điểm bắt đầu có thể chạy. Ví dụ Bash yêu cầu xác thực Azure CLI riêng biệt với `azd auth login`.
+**Phạm vi ví dụ:** Bicep dưới đây chứa các mảnh tài nguyên minh họa, không phải mẫu triển khai đầy đủ. Mẫu chứa phải xác định tên, `location`, tài nguyên tham chiếu, nhận dạng, kết quả đầu ra và lưu trữ ứng dụng. Sử dụng mẫu liên kết để có điểm bắt đầu chạy được. Ví dụ Bash yêu cầu xác thực Azure CLI riêng biệt với `azd auth login`.
 
 ### Mẫu 1: Tích hợp Microsoft Foundry Models
 
@@ -93,11 +95,11 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-Người gọi cần có danh tính được quản lý đính kèm và `Cognitive Services OpenAI User` ở mức tài khoản; vô hiệu hóa khóa không cấp quyền truy cập. Xác minh khu vực/mô hình/SKU khả dụng và hạn mức trước khi triển khai.
+Người gọi cần có managed identity đính kèm và `Cognitive Services OpenAI User` ở phạm vi tài khoản; vô hiệu hóa key không cấp quyền truy cập. Xác minh khu vực/mô hình/SKU khả dụng và hạn mức trước khi triển khai.
 
 ### Mẫu 2: Tích hợp AI Search + RAG
 
-**Trường hợp sử dụng**: Triển khai ứng dụng sinh tạo hỗ trợ truy xuất (RAG)
+**Trường hợp sử dụng**: Triển khai ứng dụng sinh tạo tăng cường truy xuất (RAG)
 
 ```bicep
 // Azure AI Search
@@ -116,11 +118,11 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 
 ```
 
-Không có tài nguyên ARM `Microsoft.Search/searchServices/dataConnections` cho tích hợp này. Cấu hình chỉ mục Search, nguồn dữ liệu, indexer/skillset hoặc vectorizer qua các API mặt dữ liệu Search hỗ trợ. Nếu Search gọi mô hình nhúng, hãy bật danh tính được quản lý của nó, cấp vai trò mô hình liên quan, và cấu hình kỹ năng nhúng/vectorizer. Xem [tích hợp vector hóa](https://learn.microsoft.com/azure/search/vector-search-integrated-vectorization).
+Không có tài nguyên ARM `Microsoft.Search/searchServices/dataConnections` cho tích hợp này. Cấu hình chỉ mục Search, nguồn dữ liệu, indexer/skillset hoặc vectorizer thông qua API mặt dữ liệu Search được hỗ trợ. Nếu Search gọi mô hình nhúng, kích hoạt managed identity của nó, cấp vai trò mô hình phù hợp, và cấu hình kỹ năng nhúng/vectorizer. Xem [tích hợp vector hóa](https://learn.microsoft.com/azure/search/vector-search-integrated-vectorization).
 
-### Mẫu 3: Tích hợp Trí tuệ Văn bản
+### Mẫu 3: Tích hợp Document Intelligence
 
-**Trường hợp sử dụng**: Quy trình xử lý và phân tích văn bản
+**Trường hợp sử dụng**: Quy trình xử lý và phân tích tài liệu
 
 ```bicep
 // Document Intelligence service
@@ -151,11 +153,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Mẫu Cấu hình
+## 🔧 Mẫu cấu hình
 
-### Thiết lập Biến Môi trường
+### Thiết lập biến môi trường
 
-Ngoại trừ các thiết lập AZD đã được ghi lại như `AZURE_LOCATION`, đây là **tên đầu vào mẫu tùy chỉnh**. Chúng không có tác dụng trừ khi mẫu/ứng dụng tiêu thụ qua ánh xạ tham số và môi trường chủ. Đối với `azure-search-openai-demo`, hãy dùng các tên thực tế như `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY` và `AZURE_SEARCH_SERVICE_SKU` thay thế. Dung lượng mô hình không phải là SKU tài khoản.
+Ngoại trừ các cài đặt AZD đã được tài liệu hoá như `AZURE_LOCATION`, đây là **tên đầu vào tùy chỉnh của mẫu**. Chúng không có tác dụng trừ khi mẫu/ứng dụng sử dụng qua các tham số và ánh xạ môi trường máy chủ. Với `azure-search-openai-demo`, hãy dùng tên thực tế như `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY` và `AZURE_SEARCH_SERVICE_SKU` thay thế. Dung lượng mô hình không phải là SKU tài khoản.
 
 **Cấu hình sản xuất:**
 ```bash
@@ -181,9 +183,9 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Cấu hình Bảo mật với Key Vault
+### Cấu hình bảo mật với Key Vault
 
-Ưu tiên Entra ID với xác thực khóa cục bộ bị vô hiệu. Dưới đây là **phương án xác thực khóa cũ** chỉ dành cho ứng dụng yêu cầu khóa: cần tài khoản bật xác thực khóa, danh tính ứng dụng gắn chặt với host, và truy cập/điều phối Key Vault hoạt động. Không dùng kết hợp lấy khóa với `disableLocalAuth: true` và mong các cuộc gọi dựa trên khóa hoạt động.
+Ưu tiên Entra ID với xác thực key cục bộ bị vô hiệu hoá. Dưới đây chỉ là **biện pháp thay thế xác thực key cũ** cho ứng dụng cần key: yêu cầu tài khoản bật xác thực key, nhận dạng ứng dụng gắn với host, và quyền truy cập/lưới mạng Key Vault hoạt động. Không kết hợp lấy key với `disableLocalAuth: true` và mong đợi gọi dựa trên key hoạt động.
 
 ```bicep
 // Key Vault for secrets
@@ -219,51 +221,134 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Quy trình Triển khai
+## Luồng triển khai
 
-### Phần mở rộng AZD cho Foundry
+### Tiện ích AZD cho Foundry
 
-AZD cung cấp các phần mở rộng bổ sung năng lực AI cụ thể để làm việc với dịch vụ Microsoft Foundry:
+Đối với luồng GA, cài đặt gói `microsoft.foundry` thay vì từng tiện ích mở rộng cơ bản riêng lẻ:
 
 ```bash
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check the core CLI, then sign in and install the GA bundle
+azd version
+azd auth login
+azd ext install microsoft.foundry
 
-# Install the separate evaluations extension
-azd extension install azure.ai.evaluations
-
-# Install the fine-tuning extension
-azd extension install azure.ai.finetune
-
-# Install the custom models extension
-azd extension install azure.ai.models
-
-# List installed extensions
-azd extension list --installed
-
-# Inspect the currently installed agent extension version
-azd extension show azure.ai.agents
+# Verify installation and update the bundle when needed
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-Các phần mở rộng AI vẫn phát triển nhanh trong giai đoạn xem trước. Nếu lệnh hoạt động khác với mô tả, nâng cấp phần mở rộng liên quan trước khi xử lý dự án.
+Gói cài đặt các agent, kết nối, inspector, dự án, routine, kỹ năng, và bộ công cụ. Nó không thêm nhóm lệnh `microsoft.foundry`. Đánh giá, bộ dữ liệu, fine-tuning, và mô hình tùy chỉnh được cài riêng khi cần. Xem [tham khảo đóng gói tiện ích mở rộng](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions).
 
-### Triển khai Ưu tiên Đại lý với `azd ai`
+### Hướng dẫn Hosted-Agent (GA)
 
-Sử dụng `azd ai agent init` tương tác, hoặc áp dụng mẫu dự án đại lý `azure.yaml` đã được kết nối với Foundry Agent Service:
+Một **hosted agent** chạy code agent của bạn trên máy tính do Foundry quản lý. Bài tập này dùng mẫu API Python Agent Framework Responses cơ bản phía trên, không phải các đoạn SDK Agent Service truyền thống trong các bài học khác.
+
+#### 1. Chuẩn bị và khởi tạo
+
+Dùng thư mục rỗng ngoài thư mục khoá học này. Cài đặt Python 3.13 trở lên và [phiên bản uv hiện hành](https://docs.astral.sh/uv/getting-started/installation/). Cài đặt uv độc lập có thể dùng `uv self update`. Kiểm tra [quyền hosted-agent](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions), khả dụng mô hình, và hạn mức trong đăng ký và khu vực trước khi cung cấp. Tài nguyên Azure và cuộc gọi mô hình cục bộ sẽ tính phí.
+
+Hoàn thành cài đặt `azd auth login` và gói trên. Mã mẫu cục bộ dùng `DefaultAzureCredential`; nếu dùng chứng thực Azure CLI, đăng nhập `az login` với cùng tài khoản và tenant như AZD. Đăng nhập AZD riêng không phải đăng nhập Azure CLI.
+
+Chạy lệnh một dòng này trong Bash hoặc PowerShell:
+
+```text
+azd ai agent init --template https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml --deploy-mode code --src .
+```
+
+Chọn dự án Foundry mới hoặc hiện có và đăng ký cùng khu vực dự định. Để tái sử dụng triển khai mô hình, thêm `--model-deployment <existing-deployment-name>` vào lệnh khởi tạo **trước khi chạy**, và chọn lại dự án hiện có. Giữ thư mục chứa `azure.yaml` tạo ra cho các lệnh tiếp theo.
+
+#### 2. Xem lại định nghĩa triển khai
+
+Mở `azure.yaml` và tìm các cài đặt này trong [mẫu phía trên](https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml):
+
+| Cài đặt | Kiểm tra gì |
+|---------|---------------|
+| `host: azure.ai.project` và `deployments` | Dự án Foundry dự kiến và tên mô hình, phiên bản, SKU triển khai, và dung lượng |
+| `host: azure.ai.agent` và `project` | Hosted agent và thư mục chứa mã nguồn |
+| `codeConfiguration` | Runtime Python và điểm đầu vào; mẫu xem xét dùng `python_3_13` và `main.py` |
+| `uses` | Phụ thuộc dịch vụ dự án Foundry |
+| `container.resources` | CPU và bộ nhớ phân bổ, dù code được xây dựng từ xa |
+| `env` | Bản đồ triển khai mô hình và `PYTHONNOUSERSITE: "1"` để tắt tải package người dùng |
+| `infra.provider` | `microsoft.foundry`, tổng hợp hạ tầng cần thiết |
+
+Cam kết cùng lúc `azure.yaml` đã xem xét và mã agent. Không cần hạ tầng viết tay để bắt đầu; khi cần file cung cấp có thể chỉnh sửa, theo [xuất hạ tầng](https://learn.microsoft.com/azure/foundry/agents/concepts/cli-infrastructure) cho Bicep hoặc Terraform và tiếp tục dùng `azd provision`. Không cam kết thông tin xác thực hoặc trạng thái môi trường `.azure/`.
+
+#### 3. Cung cấp và thử nghiệm cục bộ
 
 ```bash
-# Initialize from a current project template (supply your template path)
-azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
+azd provision
+azd ai agent run
+```
 
-# Deploy to Azure
+Cung cấp có thể tạo các triển khai mô hình còn thiếu **dù trong dự án tái sử dụng**. Xem lại mô hình prompt và chọn loại triển khai online có sẵn như Global Standard hoặc Data Zone Standard; hạn mức và hỗ trợ khu vực thay đổi.
+
+Chạy cục bộ chuẩn bị phụ thuộc và mở **Agent Inspector**, nơi bạn có thể kiểm tra yêu cầu, phản hồi, và hoạt động công cụ/mô hình. Giữ nó chạy rồi mở cửa sổ terminal thứ hai ở cùng thư mục dự án:
+
+```bash
+azd ai agent invoke --local "Explain one benefit of keeping agent deployment settings with application code."
+```
+
+**Điểm kiểm tra:** Xác nhận bạn nhận phản hồi phù hợp và có thể xem hoạt động liên quan cục bộ. Chạy tại chỗ vẫn gọi triển khai mô hình Azure của bạn; không phải thử offline hay miễn phí. Dùng prompt tổng hợp và tránh lộ bí mật hoặc dữ liệu nhạy cảm trong đầu ra inspector.
+
+#### 4. Triển khai và so sánh
+
+Dừng chạy cục bộ với Ctrl+C khi hoàn thành. Trước khi gọi từ xa, cấu hình hoặc kiểm tra [kết nối Application Insights và quyền đọc trace](https://learn.microsoft.com/azure/foundry/tutorials/quickstart-create-foundry-resources#connect-application-insights-for-agent-tracing) của dự án.
+
+```bash
+azd deploy
+azd ai agent invoke "Explain one benefit of keeping agent deployment settings with application code."
+```
+
+Ở chế độ triển khai mã, AZD tải lên nguồn để xây dựng Foundry từ xa; bạn không cần build container cục bộ cho đường đi này. Đầu ra triển khai cung cấp liên kết playground và đầu cuối. Xác minh phản hồi từ agent đã triển khai và truy vết đám mây; chỉ sự kiện inspector cục bộ không chứng minh truy vết đám mây hoạt động.
+
+Cho các thay đổi sau, xem cấu hình hosted-agent được hỗ trợ với `azd deploy --preview`. Phát trực tiếp log bằng `azd ai agent monitor --follow`, hoặc chẩn đoán thiết lập và truy cập với `azd ai agent doctor`. Xem trước triển khai không phải đánh giá hạ tầng hay bảo mật hoàn chỉnh.
+
+#### 5. Thêm kiểm tra chất lượng có thể lặp lại
+
+Cài tiện ích đánh giá phát hành độc lập, sau đó tạo tài sản thử nghiệm bản thảo:
+
+```bash
+azd ext install azure.ai.evaluations
+azd ai eval generate
+```
+
+Mô tả hành vi dự định của agent và chọn **Dataset and evaluator**, rồi **Turn**. Xem lại và chỉnh sửa các trường hợp tạo ra và bảng điểm, bao gồm trường hợp câu hỏi không được hỗ trợ, trước khi cấu hình đánh giá:
+
+```bash
+azd ai eval init --name quality
+```
+
+Chọn bộ dữ liệu và bảng điểm đã xem, xác nhận triển khai mô hình thẩm định. Kiểm tra `evals/azure.eval.yaml` và tham chiếu dịch vụ đánh giá trong `azure.yaml`, rồi đăng ký tài sản và thực thi:
+
+```bash
 azd up
+azd ai eval run start --eval quality
 ```
 
-`--template`/`-t` thay thế chính tả lỗi thời `--manifest`/`-m`; tệp manifest cũ và cấu hình đại lý lồng nhau vẫn cần di chuyển. Đánh giá đại lý với `azd ai eval` từ `azure.ai.evaluations`, không dùng luồng công việc cũ đã loại bỏ. Xem [di chuyển đánh giá](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) cho thiết lập, thực hiện, và kết quả.
+Kiểm tra điểm và các trường hợp thất bại hoặc lỗi; đánh giá hoàn thành không tự động là đạt chất lượng. Sinh tạo và chấm điểm còn phát sinh phí mô hình. Cam kết cấu hình không bí mật, bộ dữ liệu, và bảng điểm để đồng đội dễ so sánh thay đổi. `azd ai agent optimize` có thể tái sử dụng đánh giá tương thích làm chuẩn, nhưng xem xét các ứng viên trước khi triển khai rõ ràng. Xem [cổng chất lượng và di chuyển](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) cho dự án và CI cũ.
 
-Xem [Lệnh AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để tham khảo đầy đủ lệnh và cờ.
+#### 6. Tái sử dụng luồng làm việc trong CI/CD
 
-### Triển khai với Một Lệnh Đơn
+Sau `azd up` thành công, chạy `azd pipeline config` và xem luồng làm việc GitHub Actions hoặc Azure DevOps tạo ra. Cài `microsoft.foundry` trên runner, thêm `azure.ai.evaluations` nếu chạy đánh giá. Giữ lại thiết lập checkout, đăng nhập, và môi trường tạo ra; chỉ cài đặt không xác thực pipeline.
+
+Dùng môi trường AZD riêng cho từng giai đoạn, cấp quyền tài nguyên và quyền Foundry cho nhận dạng pipeline, và giữ thông tin xác thực trong bí mật pipeline hoặc dùng nhận dạng liên kết. Cam kết tài sản đánh giá và xác minh nhận dạng có thể truy cập bộ dữ liệu/đánh giá tham chiếu. Xem [ví dụ pipeline khóa học](../chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration) và [hướng dẫn Foundry CI/CD](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli).
+
+#### 7. Dọn dẹp cẩn thận
+
+Với **dự án mới được tạo bởi môi trường này**, xem lại tài nguyên được liệt kê bởi `azd down` trước khi xác nhận: nó sẽ xoá nhóm tài nguyên và mọi thứ bên trong.
+
+Với **dự án tái sử dụng**, `azd down` giữ dự án, hosted agent, và các tài nguyên khác nguyên vị trí. Chỉ xoá tài nguyên không mong muốn bạn sở hữu theo [hướng dẫn dọn dẹp khởi động nhanh](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources); không xoá nhóm tài nguyên chia sẻ để dọn dẹp một bài tập.
+
+**Kiểm tra hoàn thành:** Giải thích cài đặt điều khiển hành vi cục bộ và đám mây, hiển thị phản hồi cục bộ và triển khai, xem xét kết quả đánh giá, và xác định tài nguyên còn lại sau dọn dẹp.
+
+### Tùy chọn: Tạo khung với Microsoft Foundry Skill
+
+Cài đặt [Microsoft Foundry Skill](https://learn.microsoft.com/azure/foundry/how-to/develop/use-microsoft-foundry-skill) cho host agent lập trình của bạn, sau đó mở thư mục rỗng riêng biệt. Yêu cầu nó tạo khung mẫu API Python Agent Framework Responses cơ bản ở chế độ triển khai mã, giải thích `azure.yaml` tạo ra, và đề xuất đăng ký, khu vực, dự án, và triển khai mô hình. Yêu cầu phê duyệt **trước khi tạo tài nguyên Azure**, yêu cầu thử nghiệm cục bộ, và dừng trước khi triển khai. Xem lại đầu ra và chỉ tiếp tục các bước triển khai trên khi sẵn sàng.
+
+Đối với các dự án hiện có, `--template`/`-t` thay thế cho chính tả `--manifest`/`-m` đã bị loại bỏ; việc thay đổi cờ không di chuyển các bản mẫu cũ hoặc cấu hình tác nhân lồng nhau. Xem [tài liệu tham khảo AI CLI](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
+
+### Triển khai Lệnh Đơn
 
 ```bash
 # Deploy everything with one command
@@ -277,7 +362,7 @@ azd deploy     # Application only
 azd deploy --timeout 1800
 ```
 
-### Triển khai theo Môi trường
+### Triển khai Theo Môi Trường Riêng
 
 ```bash
 # Development environment
@@ -313,7 +398,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 // Custom metrics for AI operations
 ```
 
-Điều này cấp phát tài nguyên Insights, không phải dụng cụ telemetry. Khi ứng dụng bạn phát sinh các span gọi mô hình, chạy truy vấn minh họa này trong Application Insights Logs (thay đổi bộ lọc theo tên span thực tế):
+Điều này cung cấp một tài nguyên Insights, không phải cài đặt theo dõi. Khi ứng dụng của bạn phát ra khoảng gọi mô hình ra ngoài, chạy truy vấn minh họa này trong Application Insights Logs (điều chỉnh bộ lọc theo tên khoảng của bạn):
 
 ```kusto
 dependencies
@@ -353,11 +438,11 @@ resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
 }
 ```
 
-Sử dụng người nhận thật và xác minh quyền phạm vi thanh toán. Ngân sách gửi cảnh báo; không phải giới hạn chi tiêu.
+Sử dụng người nhận thật và xác nhận quyền hạn chế phạm vi tính phí. Một ngân sách gửi cảnh báo; nó không phải là giới hạn chi tiêu.
 
-## 🔐 Thực hành Bảo mật Tốt nhất
+## 🔐 Thực hành bảo mật tốt nhất
 
-### Cấu hình Danh tính được Quản lý
+### Cấu hình Managed Identity
 
 ```bicep
 // Managed identity for the web application
@@ -380,7 +465,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ### Bảo mật Mạng
 
-Đoạn endpoint này cũng cần vùng DNS riêng/tập nhóm, liên kết VNet, kết nối ứng dụng VNet, và chính sách truy cập công khai rõ ràng. Tạo endpoint riêng chưa tắt truy cập công khai.
+Mảnh điểm cuối này cũng cần một vùng DNS riêng/tập hợp, liên kết VNet, kết nối ứng dụng VNet, và chính sách truy cập công cộng rõ ràng. Tạo một điểm cuối riêng không tự động vô hiệu truy cập công cộng.
 
 ```bicep
 // Private endpoints for AI services
@@ -404,7 +489,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Tối ưu Hiệu năng
+## Tối ưu hiệu suất
 
 ### Chiến lược Bộ nhớ đệm
 
@@ -436,11 +521,11 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-Azure Cache cho Redis Basic/Standard/Premium đang trong quá trình [ngừng hỗ trợ](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq); sử dụng Azure Managed Redis cho triển khai mới và theo dõi hướng dẫn mẫu/xác thực hiện hành. Phạm vi bộ nhớ đệm phản hồi AI theo ủy quyền, mô hình/ hướng dẫn, và phiên bản dữ liệu, có thời hạn; không bao giờ chia sẻ phản hồi riêng tư chỉ dựa trên văn bản truy vấn.
+Azure Cache for Redis Basic/Standard/Premium đang trên [đường hướng nghỉ hưu](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq); sử dụng Azure Managed Redis cho các triển khai mới và theo hướng dẫn mẫu/xác thực hiện tại. Phạm vi các phản hồi AI bộ nhớ đệm bằng ủy quyền, mô hình/hướng dẫn, và phiên bản dữ liệu, với thời hạn; không bao giờ chia sẻ phản hồi riêng tư chỉ bằng văn bản truy vấn.
 
 ### Cấu hình Tự động mở rộng
 
-**Tài nguyên một phần:** hợp nhất các thiết lập tỷ lệ/lưu lượng này vào Container App hoàn chỉnh với môi trường quản lý, hình ảnh container, và giới hạn tài nguyên. Thêm bản sao không tăng hạn mức mô hình.
+**Tài nguyên một phần:** hợp nhất các thiết lập quy mô/lưu lượng này thành một Container App hoàn chỉnh với môi trường được quản lý, hình ảnh container và giới hạn tài nguyên. Nhiều bản sao hơn không làm tăng hạn mức mô hình.
 
 ```bicep
 // Container App with auto-scaling
@@ -474,12 +559,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Xử lý sự cố Phổ biến
+## Khắc phục sự cố phổ biến
 
-### Vấn đề 1: Vượt quá Hạn mức OpenAI
+### Vấn đề 1: Vượt hạn mức OpenAI
 
 **Triệu chứng:**
-- Triển khai thất bại với lỗi vượt hạn mức
+- Triển khai thất bại với lỗi hạn mức
 - Lỗi 429 trong nhật ký ứng dụng
 
 **Giải pháp:**
@@ -498,13 +583,13 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 ```
 
-Biến dung lượng nêu trên chỉ áp dụng cho mẫu tùy chỉnh kết nối sử dụng nó. Với ví dụ RAG, sử dụng `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`. Không thay đổi `AZURE_LOCATION` để di chuyển tài nguyên hiện tại; tạo môi trường riêng cho khu vực mới và lên kế hoạch di chuyển/dọn dẹp.
+Biến capacity ở trên chỉ áp dụng cho mẫu tùy chỉnh được kết nối để sử dụng nó. Đối với ví dụ RAG, sử dụng `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`. Không thay đổi `AZURE_LOCATION` để di chuyển tài nguyên hiện có; tạo một môi trường riêng cho vùng mới và lên kế hoạch di chuyển/dọn dẹp.
 
-### Vấn đề 2: Lỗi Xác thực
+### Vấn đề 2: Lỗi xác thực
 
 **Triệu chứng:**
 - Lỗi 401/403 khi gọi dịch vụ AI
-- Thông báo "Truy cập bị từ chối"
+- Thông báo "Access denied"
 
 **Giải pháp:**
 ```bash
@@ -521,8 +606,8 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key --query id -o
 ### Vấn đề 3: Lỗi Triển khai Mô hình
 
 **Triệu chứng:**
-- Mô hình không khả dụng trong triển khai
-- Phiên bản mô hình cụ thể bị lỗi
+- Mô hình không có sẵn trong triển khai
+- Phiên bản mô hình cụ thể thất bại
 
 **Giải pháp:**
 ```bash
@@ -535,7 +620,7 @@ az cognitiveservices model list --location eastus
 
 ## Mẫu Ví dụ
 
-Đây là những lựa chọn thay thế, không phải lệnh tuần tự. Bắt đầu mỗi mẫu trong thư mục trống riêng biệt. Đích `.` rõ ràng giữ việc khởi tạo trong thư mục hiện tại của bạn; nếu không AZD hiện tại có thể tạo thư mục con theo tên mẫu mà không thay đổi thư mục làm việc của shell.
+Đây là các lựa chọn thay thế, không phải lệnh tuần tự. Bắt đầu từng cái trong một thư mục trống riêng biệt. Đích `.` rõ ràng giữ khởi tạo trong thư mục hiện tại của bạn; nếu không AZD hiện tại có thể tạo thư mục con tên mẫu mà không thay đổi thư mục làm việc của shell của bạn.
 
 ### Ứng dụng Chat RAG (Python)
 
@@ -543,7 +628,7 @@ az cognitiveservices model list --location eastus
 
 **Dịch vụ**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Mô tả**: Ứng dụng chat RAG mẫu tham khảo cho câu hỏi dựa trên tài liệu, với truy xuất Azure AI Search. Xem lại mô hình hỗ trợ hiện tại, tính năng tùy chọn, hướng dẫn chi phí, và tăng cường cho sản xuất trước khi sử dụng; triển khai mẫu không làm cho ứng dụng sẵn sàng sản xuất.
+**Mô tả**: Ứng dụng tham khảo chat RAG cho các câu hỏi trên tài liệu của bạn, với thu hồi Azure AI Search. Xem lại các mô hình được hỗ trợ hiện tại của mẫu, các tính năng tùy chọn, hướng dẫn chi phí và tăng cường sản xuất trước khi sử dụng; triển khai một mẫu không làm cho ứng dụng sẵn sàng cho sản xuất.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -557,7 +642,7 @@ azd up
 
 **Dịch vụ**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Mô tả**: Phiên bản .NET/C# tương đương ứng dụng chat RAG Python. Xây dựng bằng ASP.NET Core Minimal API và frontend Blazor WebAssembly. Bao gồm chat giọng nói, hỗ trợ tầm nhìn GPT-4o-mini, và ứng dụng .NET MAUI Blazor Hybrid cho desktop/mobile kèm theo.
+**Mô tả**: Bản tương đương .NET/C# của mẫu chat RAG Python. Xây dựng với API tối giản ASP.NET Core và frontend Blazor WebAssembly. Bao gồm chat thoại, hỗ trợ tầm nhìn GPT-4o-mini, và client đồng hành .NET MAUI Blazor Hybrid cho desktop/mobile.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -571,7 +656,7 @@ azd up
 
 **Dịch vụ**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Mô tả**: Phiên bản Java của mẫu chat RAG sử dụng Langchain4J cho phối hợp AI. Hỗ trợ kiến trúc sự kiện microservice, nhiều chiến lược tìm kiếm (văn bản, vector, lai), tải tài liệu với Azure Document Intelligence, và triển khai trên Azure Container Apps hoặc Azure Kubernetes Service.
+**Mô tả**: Phiên bản Java của mẫu chat RAG sử dụng Langchain4J cho phối hợp AI. Hỗ trợ kiến trúc microservice sự kiện điều khiển, nhiều chiến lược tìm kiếm (văn bản, vector, lai), tải tài liệu với Azure Document Intelligence, và triển khai trên Azure Container Apps hoặc Azure Kubernetes Service.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -579,13 +664,13 @@ azd init --template azure-search-openai-demo-java .
 azd up
 ```
 
-### Copilot Bán lẻ Doanh nghiệp với Microsoft Foundry
+### Hỗ trợ Bán lẻ Doanh nghiệp với Microsoft Foundry
 
 **Kho lưu trữ**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Dịch vụ**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Mô tả**: Copilot bán lẻ RAG đầu cuối sử dụng Microsoft Foundry và Prompty. Chatbot nhà bán lẻ Contoso Outdoor dựa trên dữ liệu danh mục sản phẩm và đơn hàng khách hàng. Minh họa toàn bộ quy trình GenAIOps — thiết kế nguyên mẫu với Prompty, đánh giá với các công cụ trợ giúp AI, và triển khai qua AZD tới Container Apps.
+**Mô tả**: Bộ hỗ trợ bán lẻ RAG đầu-cuối sử dụng Microsoft Foundry và Prompty. Chatbot Contoso Outdoor kết nối phản hồi dựa trên danh mục sản phẩm và dữ liệu đơn hàng khách hàng. Minh họa toàn bộ quy trình GenAIOps — tạo mẫu với Prompty, đánh giá với bộ đánh giá hỗ trợ AI, và triển khai qua AZD đến Container Apps.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -593,13 +678,13 @@ azd init --template contoso-chat .
 azd up
 ```
 
-### Ứng dụng Viết Sáng tạo Multi-Agent
+### Ứng dụng Viết Sáng tạo Nhiều Tác nhân
 
 **Kho lưu trữ**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Dịch vụ**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Mô tả**: Ví dụ multi-agent minh họa phối hợp đại lý AI với Prompty. Bao gồm đại lý nghiên cứu (Bing Grounding trong Azure AI Agent Service), đại lý sản phẩm (Azure AI Search), đại lý viết, và đại lý biên tập cùng hợp tác tạo bài báo nghiên cứu tốt. Kèm CI/CD với đánh giá trong GitHub Actions.
+**Mô tả**: Mẫu đa tác nhân thể hiện phối hợp tác nhân AI với Prompty. Sử dụng tác nhân nghiên cứu (Bing Grounding trong Azure AI Agent Service), tác nhân sản phẩm (Azure AI Search), tác nhân viết và tác nhân biên tập hợp tác sản xuất các bài viết nghiên cứu kỹ. Bao gồm CI/CD với đánh giá trong GitHub Actions.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -607,13 +692,13 @@ azd init --template contoso-creative-writer .
 azd up
 ```
 
-### Chat RAG Serverless (JavaScript/TypeScript)
+### Chat RAG Không máy chủ (JavaScript/TypeScript)
 
 **Kho lưu trữ**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Dịch vụ**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB cho NoSQL + LangChain.js
+**Dịch vụ**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Mô tả**: Chatbot RAG hoàn toàn serverless dùng LangChain.js với Azure Functions cho API và Azure Static Web Apps để lưu trữ. Dùng Azure Cosmos DB làm kho vector và cơ sở dữ liệu lịch sử chat. Hỗ trợ phát triển cục bộ với Ollama để kiểm thử không tốn phí.
+**Mô tả**: Chatbot RAG hoàn toàn không máy chủ sử dụng LangChain.js với Azure Functions cho API và Azure Static Web Apps để lưu trữ. Sử dụng Azure Cosmos DB làm kho vector và cơ sở dữ liệu lịch sử chat. Hỗ trợ phát triển cục bộ với Ollama để thử nghiệm không tốn phí.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -621,13 +706,13 @@ azd init --template serverless-chat-langchainjs .
 azd up
 ```
 
-### Bộ Tăng tốc Giải pháp Chat với Dữ liệu của Bạn
+### Gia tốc giải pháp Chat với dữ liệu của bạn
 
 **Kho lưu trữ**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**Dịch vụ**: Microsoft Foundry + Azure Container Apps (web/API/ingestion) + Azure AI Search với Cosmos DB hoặc PostgreSQL với pgvector
+**Dịch vụ**: Microsoft Foundry + Azure Container Apps (web/API/ingestion) + Azure AI Search với Cosmos DB, hoặc PostgreSQL với pgvector
 
-**Mô tả**: Bộ tăng tốc chat dựa trên tài liệu với trích dẫn. Mẫu hiện tại lưu trữ frontend React, backend FastAPI, và worker Functions xử lý trên Container Apps; các tùy chọn phối hợp là Agent Framework và LangGraph. Lựa chọn cơ sở dữ liệu/truy xuất được chọn khi triển khai. Đây là điểm bắt đầu, không phải hệ thống sản xuất sẵn; không giả định các biến thể App Service, Semantic Kernel, hoặc Prompt Flow cũ mô tả mặc định hiện hành.
+**Mô tả**: Bộ tăng tốc chat dựa trên tài liệu với trích dẫn. Mẫu hiện tại lưu trữ frontend React, backend FastAPI, và worker ingestion Functions trên Container Apps; tùy chọn điều phối là Agent Framework và LangGraph. Lựa chọn cơ sở dữ liệu/tìm kiếm được chọn khi triển khai. Đây là điểm bắt đầu, không phải hệ thống sản xuất hoàn chỉnh; không giả định các biến thể App Service, Semantic Kernel, hoặc Prompt Flow cũ mô tả mặc định hiện tại.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -635,13 +720,13 @@ azd init --template chat-with-your-data-solution-accelerator .
 azd up
 ```
 
-### Đại lý Du lịch AI — Phối hợp Multi-Agent MCP
+### Các Tác nhân Du lịch AI — Phối hợp Multi-Agent MCP
 
 **Kho lưu trữ**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
 **Dịch vụ**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Mô tả**: Ứng dụng tham khảo cho điều phối AI đa tác nhân sử dụng ba framework (LangChain.js, LlamaIndex.TS và Microsoft Agent Framework). Có các máy chủ MCP (Model Context Protocol) bằng bốn ngôn ngữ triển khai dưới dạng Azure Container Apps không máy chủ với giám sát OpenTelemetry.
+**Mô tả**: Ứng dụng tham khảo phối hợp đa tác nhân AI sử dụng ba framework (LangChain.js, LlamaIndex.TS, và Microsoft Agent Framework). Có các máy chủ MCP (Model Context Protocol) bằng bốn ngôn ngữ triển khai như Azure Container Apps không máy chủ với giám sát OpenTelemetry.
 
 **Bắt đầu nhanh**:
 ```bash
@@ -649,21 +734,21 @@ azd init --template azure-ai-travel-agents .
 azd up
 ```
 
-> **Duyệt thêm mẫu**: Truy cập [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) để xem các mẫu hiện có trên các ngôn ngữ và kịch bản. Mỗi ví dụ liên kết là kho lưu trữ bên ngoài, không phải ví dụ cục bộ do khóa học cung cấp; kiểm tra yêu cầu và hướng dẫn sản xuất hiện hành trước khi triển khai.
+> **Xem thêm mẫu khác**: Ghé thăm [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) để xem các mẫu hiện có qua các ngôn ngữ và kịch bản. Mỗi ví dụ liên kết là kho lưu trữ bên ngoài, không phải ví dụ cục bộ của khóa học; kiểm tra các yêu cầu và hướng dẫn sản xuất hiện tại trước khi triển khai.
 
-## Các Bước Tiếp Theo
+## Bước tiếp theo
 
-1. **Thử các Ví dụ**: Bắt đầu với mẫu đã xây dựng sẵn phù hợp với trường hợp sử dụng của bạn
-2. **Tuỳ chỉnh Theo Nhu Cầu**: Điều chỉnh hạ tầng và mã ứng dụng
-3. **Thêm Giám sát**: Triển khai quan sát toàn diện
-4. **Tối Ưu Chi Phí**: Tinh chỉnh cấu hình phù hợp ngân sách
-5. **Bảo mật Triển khai**: Áp dụng mẫu bảo mật doanh nghiệp
-6. **Mở Rộng Đến Sản Xuất**: Thêm chức năng đa vùng và khả năng cao
+1. **Thử các ví dụ**: Bắt đầu với mẫu xây dựng sẵn phù hợp trường hợp sử dụng của bạn
+2. **Tùy chỉnh theo nhu cầu**: Sửa đổi cơ sở hạ tầng và mã ứng dụng
+3. **Thêm giám sát**: Triển khai khả năng quan sát toàn diện
+4. **Tối ưu chi phí**: Tinh chỉnh cấu hình phù hợp ngân sách
+5. **Bảo mật triển khai của bạn**: Áp dụng các mô hình bảo mật doanh nghiệp
+6. **Mở rộng lên sản xuất**: Thêm các tính năng đa vùng và độ sẵn sàng cao
 
-## 🎯 Bài Tập Thực Hành
+## 🎯 Thực hành Thực tế
 
 ### Bài tập 1: Triển khai Ứng dụng Chat Microsoft Foundry Models (30 phút)
-**Mục tiêu**: Triển khai và thử nghiệm ứng dụng chat AI tham khảo
+**Mục tiêu**: Triển khai và kiểm thử ứng dụng chat AI tham khảo
 
 ```bash
 # Initialize template
@@ -684,23 +769,23 @@ azd show
 # Monitor AI operations
 azd monitor
 
-# Clean up
-azd down --force --purge
+# Review the listed resources and confirm cleanup
+azd down
 ```
 
 **Tiêu chí thành công:**
-- [ ] Triển khai hoàn tất không lỗi hạn ngạch
+- [ ] Triển khai hoàn thành không lỗi hạn mức
 - [ ] Có thể truy cập giao diện chat trên trình duyệt
-- [ ] Có thể hỏi và nhận phản hồi AI
-- [ ] Application Insights hiển thị dữ liệu telemetry
+- [ ] Có thể đặt câu hỏi và nhận phản hồi sử dụng AI
+- [ ] Application Insights hiển thị dữ liệu theo dõi
 - [ ] Đã dọn dẹp tài nguyên thành công
 
-**Chi phí:** Xem lại hướng dẫn chi phí và SKU đã chọn trước khi triển khai. Việc tính phí tiếp tục cho đến khi tài nguyên bị xóa; không có ước tính cố định 30 phút áp dụng cho mọi cấu hình.
+**Chi phí:** Xem lại hướng dẫn chi phí hiện tại và SKU đã chọn trước khi triển khai. Thanh toán tiếp tục cho đến khi xóa tài nguyên; không có ước tính cố định 30 phút áp dụng cho mọi cấu hình.
 
-### Bài tập 2: Cấu hình Triển khai Đa mô hình (45 phút)
-**Mục tiêu**: Triển khai nhiều mô hình AI với các cấu hình khác nhau
+### Bài tập 2: Cấu hình Triển khai Đa Mô hình (45 phút)
+**Mục tiêu**: Triển khai nhiều mô hình AI với cấu hình khác nhau
 
-**Điểm bắt đầu:** Một tài khoản Azure OpenAI hiện có và mô-đun nhóm tài nguyên AZD có thể gọi file này. Tạo `infra/ai-models.bicep` với nội dung sau bằng trình soạn thảo của bạn. Nó không tự động triển khai chỉ vì nằm dưới `infra/`.
+**Điểm bắt đầu:** Một tài khoản Azure OpenAI hiện có và một module nhóm tài nguyên AZD có thể gọi tệp này. Tạo `infra/ai-models.bicep` với nội dung sau bằng trình chỉnh sửa của bạn. Nó không tự động triển khai chỉ vì nằm dưới `infra/`.
 
 ```bicep
 param openAiAccountName string
@@ -745,7 +830,7 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 ```
 
-Từ mô-đun phạm vi nhóm tài nguyên sở hữu tài khoản, thêm lời gọi mô-đun (điều chỉnh tên ký hiệu theo tài khoản thực tế của bạn):
+Từ module phạm vi nhóm tài nguyên sở hữu tài khoản, thêm lời gọi module (điều chỉnh tên ký hiệu cho tài khoản thực tế của bạn):
 
 ```bicep
 module additionalModels 'ai-models.bicep' = {
@@ -756,7 +841,7 @@ module additionalModels 'ai-models.bicep' = {
 }
 ```
 
-Không khai báo các triển khai giống nhau trong cả hai mô-đun. Nếu điểm vào AZD phạm vi đăng ký, hãy gọi từ mô-đun con phạm vi nhóm tài nguyên và điều chỉnh đường dẫn tương đối. Xây dựng mô-đun bao gồm đó với `az bicep build --file <path-to-containing-module>`, sau đó:
+Không khai báo cùng triển khai trong cả hai module. Nếu điểm vào AZD là phạm vi đăng ký, gọi nó từ module con phạm vi nhóm tài nguyên và điều chỉnh đường dẫn tương đối. Xây dựng module chứa đó bằng `az bicep build --file <path-to-containing-module>`, sau đó:
 
 ```bash
 azd provision
@@ -767,14 +852,14 @@ az cognitiveservices account deployment list \
 
 **Tiêu chí thành công:**
 - [ ] Nhiều mô hình được triển khai thành công
-- [ ] Áp dụng các cấu hình dung lượng khác nhau
+- [ ] Các thiết lập capacity khác nhau được áp dụng
 - [ ] Mô hình có thể truy cập qua API
 - [ ] Có thể gọi cả hai mô hình từ ứng dụng
 
 ### Bài tập 3: Triển khai Giám sát Chi phí (20 phút)
 **Mục tiêu**: Thiết lập cảnh báo ngân sách và theo dõi chi phí
 
-**Điểm bắt đầu:** Mẫu ngân sách đã mô tả và mô-đun hạ tầng phạm vi nhóm tài nguyên. Thêm tài nguyên này bằng trình soạn thảo; truyền `budgetStartDate` từ ánh xạ tham số của bạn (không sao chép tham số nếu đã khai báo). Thay thế người nhận và xác nhận bạn có quyền ghi ngân sách.
+**Điểm bắt đầu:** Mẫu ngân sách ở trên và một module cơ sở hạ tầng phạm vi nhóm tài nguyên. Thêm tài nguyên này bằng trình chỉnh sửa; truyền `budgetStartDate` từ ánh xạ tham số của bạn (không trùng lặp tham số nếu đã khai báo). Thay thế người nhận và xác nhận quyền ghi ngân sách.
 
 ```bicep
 param budgetStartDate string
@@ -814,24 +899,24 @@ az rest --method get \
   --url "https://management.azure.com/subscriptions/YOUR_SUB/resourceGroups/YOUR_RG/providers/Microsoft.Consumption/budgets/ai-monthly-budget?api-version=2024-08-01"
 ```
 
-Mong đợi: phản hồi chứa `amount: 200`, cả hai ngưỡng và người nhận của bạn. Kiểm tra Quản lý Chi phí trong cổng để xem phí thực tế; dữ liệu chi phí có độ trễ và cảnh báo không nhất thiết bật trong bài tập ngắn.
+Mong đợi: phản hồi chứa `amount: 200`, cả hai ngưỡng, và người nhận của bạn. Kiểm tra Quản lý Chi phí trong cổng để xem chi phí thực tế; dữ liệu chi phí bị trễ và cảnh báo không cần kích hoạt trong bài tập ngắn.
 
 **Tiêu chí thành công:**
-- [ ] Cảnh báo ngân sách được tạo trong Azure
-- [ ] Cấu hình thông báo email
-- [ ] Có thể xem dữ liệu chi phí trong Azure Portal
-- [ ] Ngưỡng ngân sách được thiết lập phù hợp
+- [ ] Đã tạo cảnh báo ngân sách trong Azure
+- [ ] Đã cấu hình thông báo email
+- [ ] Có thể xem dữ liệu chi phí trên Cổng Azure
+- [ ] Ngưỡng ngân sách được đặt phù hợp
 
-## 💡 Câu Hỏi Thường Gặp
+## 💡 Các câu hỏi thường gặp
 
 <details>
 <summary><strong>Làm thế nào để giảm chi phí Microsoft Foundry Models trong quá trình phát triển?</strong></summary>
 
-1. **Kiểm tra giá**: Không có mức miễn phí toàn cục 50,000 token mỗi tháng cho các mô hình Azure OpenAI
-2. **Chọn kích thước dung lượng đúng**: Dung lượng `10` thường đại diện cho 10,000 TPM cho các mô hình văn bản Chuẩn này, không phải 10 TPM. Giảm giới hạn tốc độ này không giảm giá mỗi token
-3. **Sử dụng azd down**: Xoá các tài nguyên dùng tạm khi không phát triển (không phải giải phóng)
-4. **Bộ nhớ đệm Phản hồi**: Triển khai Redis cache cho các truy vấn lặp lại
-5. **Sử dụng Kỹ thuật Prompt**: Giảm sử dụng token bằng prompt hiệu quả
+1. **Kiểm tra giá**: Không có khoản miễn phí chung 50.000 token hàng tháng cho các mô hình Azure OpenAI
+2. **Chọn dung lượng phù hợp**: Capacity `10` thường tương đương 10.000 TPM cho các mô hình văn bản chuẩn này, không phải 10 TPM. Giảm giới hạn tốc độ này không làm giảm giá token
+3. **Dùng azd down**: Xóa tài nguyên dùng tạm khi không phát triển (không phải gỡ tài nguyên)
+4. **Bộ nhớ đệm Phản hồi**: Triển khai bộ nhớ đệm Redis cho truy vấn lặp lại
+5. **Kỹ thuật Nhắc nhở**: Giảm sử dụng token với nhắc nhở hiệu quả
 
 ```bash
 # Development configuration
@@ -842,22 +927,22 @@ azd provision
 </details>
 
 <details>
-<summary><strong>Sự khác biệt giữa Microsoft Foundry Models và OpenAI API là gì?</strong></summary>
+<summary><strong>Sự khác nhau giữa Microsoft Foundry Models và OpenAI API là gì?</strong></summary>
 
 **Microsoft Foundry Models**:
 - Bảo mật và tuân thủ doanh nghiệp
-- Tích hợp mạng riêng tư
-- Cam kết SLA
-- Xác thực danh tính được quản lý
-- Có hạn ngạch cao hơn
+- Tích hợp mạng riêng
+- Đảm bảo SLA
+- Xác thực bằng Managed Identity
+- Hạn mức cao hơn có sẵn
 
-**OpenAI API**: Nhà cung cấp/API riêng biệt với mô hình, giá cả, xác thực và kết nối doanh nghiệp riêng. So sánh các dịch vụ hiện có thay vì giả định chỉ dành cho công cộng hoặc luôn cung cấp mô hình đầu tiên.
+**OpenAI API**: Nhà cung cấp riêng/bộ API với tính sẵn có mô hình, giá cả, xác thực, và kết nối doanh nghiệp riêng. So sánh các sản phẩm hiện tại thay vì giả định chỉ trên mạng công cộng hoặc luôn cung cấp mô hình trước tiên.
 
-Chọn dựa trên yêu cầu tổ chức; ví dụ danh tính được quản lý và liên kết riêng trong Azure ở khóa học này áp dụng cho dịch vụ Azure, không với mọi mô hình/ nhà cung cấp trong catalog Foundry.
+Lựa chọn dựa trên yêu cầu tổ chức của bạn; các ví dụ xác thực Managed Identity và private-link dành riêng Azure trong khóa học này áp dụng cho dịch vụ Azure-hosted, không phải mọi mô hình/nhà cung cấp trong danh mục Foundry.
 </details>
 
 <details>
-<summary><strong>Làm sao xử lý lỗi vượt hạn ngạch Microsoft Foundry Models?</strong></summary>
+<summary><strong>Làm thế nào xử lý lỗi vượt hạn mức Microsoft Foundry Models?</strong></summary>
 
 ```bash
 # Check current quota
@@ -879,9 +964,9 @@ azd provision
 </details>
 
 <details>
-<summary><strong>Tôi có thể dùng dữ liệu riêng với Microsoft Foundry Models không?</strong></summary>
+<summary><strong>Tôi có thể sử dụng dữ liệu riêng với Microsoft Foundry Models không?</strong></summary>
 
-Có! Dùng **Azure AI Search** cho RAG (Retrieval Augmented Generation):
+Vâng! Sử dụng **Azure AI Search** cho RAG (Tạo nâng cao thu hồi):
 
 ```yaml
 # azure.yaml
@@ -899,14 +984,14 @@ Xem mẫu [azure-search-openai-demo](https://github.com/Azure-Samples/azure-sear
 </details>
 
 <details>
-<summary><strong>Làm thế nào để bảo mật điểm cuối mô hình AI?</strong></summary>
+<summary><strong>Làm thế nào để tôi bảo mật các điểm cuối mô hình AI?</strong></summary>
 
-**Thực hành tốt nhất**:
+**Thực tiễn tốt nhất**:
 1. Sử dụng Managed Identity (không dùng khóa API)
-2. Bật Private Endpoints
+2. Kích hoạt Private Endpoints
 3. Cấu hình nhóm bảo mật mạng
 4. Thực hiện giới hạn tốc độ
-5. Dùng Azure Key Vault để quản lý bí mật
+5. Sử dụng Azure Key Vault cho các bí mật
 
 ```bicep
 // Managed Identity authentication
@@ -928,21 +1013,21 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## Cộng đồng và Hỗ trợ
 
-- **Microsoft Foundry Discord**: [kênh #Azure](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Vấn đề và thảo luận](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Tài liệu chính thức](https://learn.microsoft.com/azure/ai-studio/)
-- **Kỹ năng Agent**: [Kỹ năng Microsoft Foundry trên skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Cài đặt kỹ năng Azure + Foundry agent trong trình soạn thảo với `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Kỹ năng Microsoft Foundry trên skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Cài đặt kỹ năng Azure + Foundry agent trong trình chỉnh sửa của bạn bằng `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Điều hướng Chương:**
-- **📚 Trang Khóa học**: [AZD Dành cho Người Mới](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 2 - Phát triển AI-First
-- **⬅️ Chương Trước**: [Chương 1: Dự án Đầu tiên của Bạn](../chapter-01-foundation/first-project.md)
-- **➡️ Tiếp theo**: [Agent AI](agents.md)
-- **🚀 Chương Kế Tiếp**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
+- **📚 Trang Khóa học**: [AZD cho Người mới bắt đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
+- **⬅️ Chương trước**: [Chương 1: Dự án đầu tiên của bạn](../chapter-01-foundation/first-project.md)
+- **➡️ Tiếp theo**: [AI Agents](agents.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
 
-**Cần giúp đỡ?** Tham gia thảo luận cộng đồng hoặc mở vấn đề trong kho lưu trữ. Cộng đồng Azure AI + AZD luôn sẵn sàng hỗ trợ bạn thành công!
+**Cần giúp đỡ?** Tham gia các thảo luận cộng đồng hoặc mở một vấn đề trong kho lưu trữ. Cộng đồng Azure AI + AZD luôn ở đây để giúp bạn thành công!
 
 ---
 

@@ -1,221 +1,25 @@
-# 4. টেমপ্লেট কনফিগার করুন
+# ৪. একটি টেমপ্লেট কনফিগার করুন
 
-!!! tip "এই মডিউলটির শেষে আপনি সক্ষম হবেন"
+!!! tip "এই মডিউলের শেষে আপনি পারবেন"
 
-    - [ ] `azure.yaml`-এর উদ্দেশ্য বুঝতে পারা
-    - [ ] `azure.yaml`-এর গঠন বুঝতে পারা
-    - [ ] azd লাইফসাইকেল `hooks`-এর গুরুত্ব বুঝতে পারা
-    - [ ] **ল্যাব ৪:** পরিবেশ ভেরিয়েবল অন্বেষণ ও পরিবর্তন করা
-
----
-
-!!! prompt "এই `azure.yaml` ফাইলটি কী কাজ করে? একটি কোডফেন্স ব্যবহার করে লাইন-বাই-লাইন ব্যাখ্যা করুন"
-
-      `azure.yaml` ফাইলটি হলো **Azure Developer CLI (azd)-এর কনফিগারেশন ফাইল**। এটি সংজ্ঞায়িত করে যে আপনার অ্যাপ্লিকেশন কিভাবে Azure-এ ডিপ্লয় করা উচিত, যার মধ্যে রয়েছে ইনফ্রাস্ট্রাকচার, সার্ভিসসমূহ, ডিপ্লয়মেন্ট হুক, এবং পরিবেশ ভেরিয়েবলসমূহ।
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. উদ্দেশ্য ও কার্যকারিতা
+## ১. আসল টেমপ্লেট থেকে শুরু করুন
 
-এই `azure.yaml` ফাইলটি একটি AI এজেন্ট অ্যাপ্লিকেশনের জন্য **ডিপ্লয়মেন্ট ব্লুপ্রিন্ট** হিসেবে কাজ করে যা:
+আপনি যে রিপোজিটরি ইনিশিয়ালাইজ করেছেন সেখানে [`azure.yaml` in Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) খুলুন। আপস্ট্রীম টেমপ্লেটটি এই কর্মশালার থেকে স্বাধীনভাবে পরিবর্তিত হতে পারে। নিচের **অবতরণ**টি ৪ নভেম্বর, ২০২৬ এ পরীক্ষা করা হয়েছে; এটি সম্পূর্ণ ফাইলের বিকল্প নয়:
 
-1. ডিপ্লয়ের পূর্বে **পরিবেশ যাচাই করে**
-2. **Azure AI সার্ভিসসমূহ প্রোভিশন করে** (AI Hub, AI Project, Search, ইত্যাদি)
-3. **Python অ্যাপ্লিকেশন ডিপ্লয় করে** Azure Container Apps-এ
-4. চ্যাট এবং এমবেডিং উভয় কার্যকারিতার জন্য **AI মডেল কনফিগার করে**
-5. AI অ্যাপ্লিকেশনের জন্য **মনিটরিং এবং ট্রেসিং সেটআপ করে**
-6. **নতুন এবং বিদ্যমান উভয়** Azure AI প্রকল্প পরিস্থিতি পরিচালনা করে
-
-ফাইলটি সঠিক যাচাইকরণ, প্রোভিশনিং এবং পোস্ট-ডিপ্লয়মেন্ট কনফিগারেশনসহ একটি সম্পূর্ণ AI এজেন্ট সলিউশনকে একক কমান্ডে ডিপ্লয় করতে সক্ষম করে (`azd up`)।
-
-??? info "বিস্তার করে দেখুন: `azure.yaml`"
-
-      `azure.yaml` ফাইলটি সংজ্ঞায়িত করে কিভাবে Azure Developer CLI এই AI Agent অ্যাপ্লিকেশনটি Azure-এ ডিপ্লয় ও পরিচালনা করবে। আসুন এটিকে লাইন-বাই-লাইন বিশ্লেষণ করি।
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. ফাইল বিশ্লেষণ
-
-আসুন অধ্যায়ক্রমে ফাইলটি পর্যালোচনা করি, যাতে বোঝা যায় এটি কী করে — এবং কেন করে।
-
-### 2.1 **হেডার ও স্কিমা (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Line 1**: IDE সমর্থন এবং IntelliSense-এর জন্য YAML ল্যাঙ্গুয়েজ সার্ভারের স্কিমা ভ্যালিডেশন প্রদান করে
-
-### 2.2 প্রকল্প মেটাডেটা (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Line 5**: Azure Developer CLI দ্বারা ব্যবহৃত প্রকল্পের নাম নির্ধারণ করে
-- **Lines 6-7**: এটি একটি টেমপ্লেট সংস্করণ 1.0.2-এ ভিত্তি করে তৈরি করা হয়েছে তা নির্দেশ করে
-- **Lines 8-9**: Azure Developer CLI সংস্করণ 1.14.0 বা তার উপরে প্রয়োজন
-
-### 2.3 ডিপ্লয় হুক (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Lines 11-20**: **প্রি-ডিপ্লয়মেন্ট হুক** - `azd up` চালানোর আগে চলে
-
-      - Unix/Linux-এ: যাচাইকরণ স্ক্রিপ্টকে এক্সিকিউটেবল করে এবং চালায়
-      - Windows-এ: PowerShell যাচাইকরণ স্ক্রিপ্ট চালায়
-      - উভয়ই ইন্টারেক্টিভ এবং যদি ব্যর্থ হয় তবে ডিপ্লয়মেন্ট বন্ধ করে দেবে
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Lines 21-30**: **পোস্ট-প্রোভিশন হুক** - Azure রিসোর্সগুলি তৈরি হওয়ার পরে চলে
-
-  - পরিবেশ ভেরিয়েবল লেখার স্ক্রিপ্টগুলো চালায়
-  - এই স্ক্রিপ্টগুলি ব্যর্থ হলেও ডিপ্লয়মেন্ট চালিয়ে যায় (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Lines 31-40**: **পোস্ট-ডিপ্লয় হুক** - অ্যাপ্লিকেশন ডিপ্লয়ের পরে চলে
-
-  - চূড়ান্ত সেটআপ স্ক্রিপ্টগুলো চালায়
-  - স্ক্রিপ্ট ব্যর্থ হলেও এটি চালু রেখে দেয়
-
-### 2.4 সার্ভিস কনফিগ (41-48)
-
-এই কনফিগারেশনটি আপনি যে অ্যাপ্লিকেশন সার্ভিসটি ডিপ্লয় করছেন সেটিকে কনফিগার করে।
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Line 42**: "api_and_frontend" নামে একটি সার্ভিস সংজ্ঞায়িত করে
-- **Line 43**: সোর্স কোডের জন্য `./src` ডিরেক্টরিকে নির্দেশ করে
-- **Line 44**: প্রোগ্রামিং ভাষা হিসেবে Python নির্ধারণ করে
-- **Line 45**: হোস্টিং প্ল্যাটফর্ম হিসেবে Azure Container Apps ব্যবহার করে
-- **Lines 46-48**: Docker কনফিগারেশন
+- `name` AZD প্রকল্পটি নির্দেশ করে; `metadata.template` টেমপ্লেট সংস্করণ রেকর্ড করে।
+- `requiredVersions.azd` টেমপ্লেটের ন্যূনতম, পুরানো CLI এর উপর থাকার সুপারিশ নয়। একটি বর্তমান সমর্থিত AZD রিলিজ ব্যবহার করুন।
+- `services` অ্যাপ্লিকেশন মোতায়েনের লক্ষ্যমাত্রা নির্ধারণ করে। এই টেমপ্লেট তার পিএইচপি API এবং ফ্রন্টএন্ড একক কনটেইনার অ্যাপস সার্ভিস হিসেবে মোতায়েন করে।
+- `project` `azure.yaml` এর আপেক্ষিক।
+- `remoteBuild` একটি রিমোট কনটেইনার বিল্ড অনুরোধ করে। আপনার পরিচয় এখনও প্রয়োজনীয় Azure অনুমতিগুলি প্রয়োজন।
 
-      - Docker ইমেজের নাম হিসেবে "api_and_frontend" ব্যবহার করে
-      - Docker ইমেজটি Azure-এ রিমোটলি বিল্ড করে (লোকাল নয়)
+টেমপ্লেটের Bicep ফাইলগুলো `infra/` এর নীচে থাকে, কেবল `services` তালিকা নয়, যা Microsoft Foundry, মডেল মোতায়েন, স্টোরেজ এবং ঐচ্ছিক AI সার্চ সহ সম্পদ ঘোষণা করে।
 
-### 2.5 পাইপলাইন ভেরিয়েবল (49-76)
+## ২. জীবনচক্র হুকগুলো বুঝুন
 
-এগুলো হ'ল CI/CD পাইপলাইনে স্বয়ংক্রিয়তার জন্য `azd` চালানোর সময় সাহায্যকারী ভেরিয়েবলসমূহ
+টেমপ্লেট চালানোর আগে `hooks` সেকশন এবং তার উল্লেখিত স্ক্রিপ্টগুলো পরিদর্শন করুন। পর্যালোচিত সংস্করণটি অন্তর্ভুক্ত:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| হুক | উদ্দেশ্য | গুরুত্বপূর্ণ আচরণ |
+|------|---------|--------------------|
+| `preup` | `up` ওয়ার্কফ্লোর আগে টেমপ্লেট পরিবেশ ইনপুট যাচাই করুন | প্ল্যাটফর্ম-নির্দিষ্ট শেল স্ক্রিপ্ট ব্যর্থ হলে ওয়ার্কফ্লো বন্ধ করতে পারে |
+| `postdeploy` | অ্যাপ্লিকেশন মোতায়েনের পর টেমপ্লেট-নির্দিষ্ট সেটআপ চালান | `continueOnError` এবং স্ক্রিপ্ট আউটপুট পরিদর্শন করুন; সফল মোতায়েন প্রতিটি সেটআপ কাজ সফল হয়েছে প্রমাণ করে না |
 
-এই বিভাগটি **ডিপ্লয়ের সময়** ব্যবহৃত পরিবেশ ভেরিয়েবলসমূহকে বিভাগ অনুযায়ী সংগঠিতভাবে সংজ্ঞায়িত করে:
+এই সংস্করণে **না** পুরোনো `postprovision` / `write_env` হুক যা আগের কর্মশালা উপকরণে দেখানো হয়েছে। ইতিমধ্যেই অস্তিত্বহীন স্ক্রিপ্টগুলিতে হুক রেফারেন্স অনুলিপি করবেন না।
 
-- **Azure রিসোর্স নামসমূহ (Lines 51-60)**:
-      - মূল Azure সার্ভিস রিসোর্স নামসমূহ, উদাহরণস্বরূপ Resource Group, AI Hub, AI Project ইত্যাদি
-- **ফিচার ফ্ল্যাগসমূহ (Lines 61-63)**:
-      - নির্দিষ্ট Azure সার্ভিসগুলো অন/অফ করার জন্য বুলিয়ান ভেরিয়েবলসমূহ
-- **AI এজেন্ট কনফিগারেশন (Lines 64-71)**:
-      - প্রধান AI এজেন্টের কনফিগারেশন, যেমন নাম, আইডি, ডিপ্লয়মেন্ট সেটিংস, মডেল বিবরণ
-- **AI এমবেডিং কনফিগারেশন (Lines 72-79)**:
-      - ভেক্টর সার্চের জন্য ব্যবহৃত এমবেডিং মডেলের কনফিগারেশন
-- **Search এবং মনিটরিং (Lines 80-84)**:
-      - সার্চ ইনডেক্স নাম, বিদ্যমান রিসোর্স আইডি, এবং মনিটরিং/ট্রেসিং সেটিংস
+হুক কী লাইফসাইকেল ইভেন্ট নির্বাচন করে; `posix` এবং `windows` প্ল্যাটফর্ম বাস্তবায়ন নির্বাচন করে। `shell`, `run`, `interactive`, এবং `continueOnError` এক্সিকিউশন নিয়ন্ত্রণ করে। এগুলো আপনার অনুমতির সঙ্গে নির্বাহযোগ্য স্ক্রিপ্ট, তাই এগুলো পর্যালোচনা করুন যেমনটি আপনি অ্যাপ্লিকেশন কোড করবেন।
 
----
+সম্পূর্ণ জীবচক্রের জন্য [AZD হুকের ডকুমেন্টেশন](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) দেখুন।
 
-## 3. পরিবেশ ভেরিয়েবল সম্পর্কে জানুন
-নিচের পরিবেশ ভেরিয়েবলগুলো আপনার ডিপ্লয়ের কনফিগারেশন এবং আচরণ নিয়ন্ত্রণ করে, এবং এগুলো তাদের মূল উদ্দেশ্য অনুসারে সংগঠিত। বেশিরভাগ ভেরিয়েবলের গ্রহণযোগ্য ডিফল্ট থাকে, তবে আপনি এগুলো কাস্টমাইজ করে আপনার নির্দিষ্ট চাহিদা বা বিদ্যমান Azure রিসোর্সের সাথে মিলে নিতে পারেন।
+## 3. পরিকাঠামোতে পরিবেশ ইনপুটগুলিকে ট্রেস করুন
 
-### 3.1 প্রয়োজনীয় ভেরিয়েবল 
+প্রাথমিক নমুনা রিপোজিটরি থেকে এই কমান্ডগুলি চালান:
 
-```bash title="" linenums="0"
-# মূল অ্যাজিউর কনফিগারেশন
-AZURE_ENV_NAME                    # পরিবেশের নাম (রিসোর্স নামকরণে ব্যবহৃত)
-AZURE_LOCATION                    # ডিপ্লয়মেন্ট অঞ্চল
-AZURE_SUBSCRIPTION_ID             # টার্গেট সাবস্ক্রিপশন
-AZURE_RESOURCE_GROUP              # রিসোর্স গ্রুপের নাম
-AZURE_PRINCIPAL_ID                # RBAC-এর জন্য ব্যবহারকারী প্রিন্সিপাল
-
-# রিসোর্স নামসমূহ (উল্লেখ না করলে স্বয়ংক্রিয়ভাবে তৈরি হবে)
-AZURE_AIHUB_NAME                  # Microsoft Foundry হাবের নাম
-AZURE_AIPROJECT_NAME              # এআই প্রকল্পের নাম
-AZURE_AISERVICES_NAME             # এআই সেবা অ্যাকাউন্টের নাম
-AZURE_STORAGE_ACCOUNT_NAME        # স্টোরেজ অ্যাকাউন্টের নাম
-AZURE_CONTAINER_REGISTRY_NAME     # কনটেইনার রেজিস্ট্রির নাম
-AZURE_KEYVAULT_NAME               # কী ভল্টের নাম (যদি ব্যবহৃত হয়)
-```
-
-### 3.2 মডেল কনফিগারেশন 
-```bash title="" linenums="0"
-# চ্যাট মডেল কনফিগারেশন
-AZURE_AI_AGENT_MODEL_NAME         # ডিফল্ট: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # ডিফল্ট: OpenAI (অথবা Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # ডিফল্ট: সর্বশেষ উপলব্ধ
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # চ্যাট মডেলের ডিপ্লয়মেন্টের নাম
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # ডিফল্ট: স্ট্যান্ডার্ড
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # ডিফল্ট: 80 (হাজার TPM)
-
-# এম্বেডিং মডেল কনফিগারেশন
-AZURE_AI_EMBED_MODEL_NAME         # ডিফল্ট: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # ডিফল্ট: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # ডিফল্ট: সর্বশেষ উপলব্ধ
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # এম্বেডিংগুলোর ডিপ্লয়মেন্টের নাম
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # ডিফল্ট: স্ট্যান্ডার্ড
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # ডিফল্ট: 50 (হাজার TPM)
-
-# এজেন্ট কনফিগারেশন
-AZURE_AI_AGENT_NAME               # এজেন্টের প্রদর্শন নাম
-AZURE_EXISTING_AGENT_ID           # বিদ্যমান এজেন্ট ব্যবহার করুন (ঐচ্ছিক)
-```
-
-### 3.3 ফিচার টগল
-```bash title="" linenums="0"
-# ঐচ্ছিক পরিষেবাসমূহ
-USE_APPLICATION_INSIGHTS         # ডিফল্ট: সত্য
-USE_AZURE_AI_SEARCH_SERVICE      # ডিফল্ট: মিথ্যা
-USE_CONTAINER_REGISTRY           # ডিফল্ট: সত্য
-
-# মনিটরিং এবং ট্রেসিং
-ENABLE_AZURE_MONITOR_TRACING     # ডিফল্ট: মিথ্যা
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # ডিফল্ট: মিথ্যা
-
-# অনুসন্ধান কনফিগারেশন
-AZURE_AI_SEARCH_INDEX_NAME       # অনুসন্ধান সূচকের নাম
-AZURE_SEARCH_SERVICE_NAME        # অনুসন্ধান সার্ভিসের নাম
-```
-
-### 3.4 AI প্রকল্প কনফিগারেশন 
-```bash title="" linenums="0"
-# বিদ্যমান রিসোর্স ব্যবহার করুন
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # বিদ্যমান AI প্রকল্পের পূর্ণ রিসোর্স আইডি
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # বিদ্যমান প্রকল্পের এন্ডপয়েন্ট URL
-```
-
-### 3.5 আপনার ভেরিয়েবলগুলো পরীক্ষা করুন
-
-Azure Developer CLI ব্যবহার করে আপনার পরিবেশ ভেরিয়েবলগুলো দেখুন এবং পরিচালনা করুন:
-
-```bash title="" linenums="0"
-# বর্তমান পরিবেশের সকল পরিবেশ ভেরিয়েবল দেখুন
-azd env get-values
-
-# একটি নির্দিষ্ট পরিবেশ ভেরিয়েবল পান
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# একটি পরিবেশ ভেরিয়েবল সেট করুন
-azd env set AZURE_LOCATION eastus
-
-# একটি .env ফাইল থেকে একাধিক ভেরিয়েবল সেট করুন
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+`infra/main.parameters.json` পরিদর্শন করুন দেখতে কি ধরনের পরিবেশ ভেরিয়েবল টেমপ্লেট প্রকৃতপক্ষে ব্যবহার করে। `azd env set` দিয়ে একটি ইচ্ছাকৃত নাম সেট করলেও স্বয়ংক্রিয়ভাবে কোনো Azure রিসোর্স পরিবর্তিত হয় না।
+
+পর্যালোচিত ডিফল্টগুলি অন্তর্ভুক্ত:
+
+| ইনপুট | ডিফল্ট / উদ্দেশ্য |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; কোটার ইউনিটগুলি মডেল এবং মোতায়েনের ধরনের উপর নির্ভর করে |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; তথ্য পরিচালনা পর্যালোচনা না করা পর্যন্ত অক্ষম রাখুন |
+
+এগুলি নমুনা-নির্দিষ্ট ইনপুট, বৈশ্বিক AZD সেটিংস নয়। একটি মডেল, SKU, ক্ষমতা বা অবস্থান নির্বাচন করার আগে [মডেল এবং অঞ্চল সমর্থন দলিল](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) এবং আপনার সাবস্ক্রিপশনের কোটা পরীক্ষা করুন। প্রতিটি ক্ষমতা একককে প্রতি মিনিটে ১,০০০ টোকেন হিসেবে ব্যাখ্যা করবেন না।
+
+একটি ভিন্ন চ্যাট মডেল নির্বাচন করতে, সংশ্লিষ্ট **নাম, সংস্করণ, ফরম্যাট, SKU, এবং ক্ষমতা একসাথে** আপডেট করুন, [নমুনার কাস্টমাইজেশন গাইড](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md) অনুসারে। শুধুমাত্র নাম পরিবর্তন করলে অসংগত সংস্করণ বা ডিপ্লয়মেন্ট টাইপ থাকতে পারে।
+
+## ৪. ল্যাব: ঐচ্ছিক অনুসন্ধান এবং ট্রেসিং সক্ষম করা
+
+!!! সতর্কতা "এই সেটিংস বিলযোগ্য রিসোর্স যোগ করতে পারে"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+অবকাঠামোগত পরিবর্তনের জন্য প্রোভিশনিং প্রয়োজন; শুধুমাত্র `azd deploy` অ্যাপ্লিকেশন সার্ভিস ডিপ্লয় করে। অনুসন্ধান সূচীকরণ এবং সমর্থিত পুনরুদ্ধার বিকল্পের জন্য [AI অনুসন্ধান গাইড](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) অনুসরণ করুন। মনিটরিংয়ের জন্য, [পর্যবেক্ষণযোগ্যতা গাইড](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md) অনুসরণ করুন।
+
+প্রয়োজনীয় সম্মতি, প্রবেশাধিকার নিয়ন্ত্রণ, সংরক্ষণ নীতি এবং লালপত্র ছাড়া বাস্তব গ্রাহকের ডেটায় প্রম্পট/প্রতিক্রিয়া বিষয়বস্তু ক্যাপচার সক্ষম করবেন না।
+
+## ৫. বিদ্যমান সম্পদ এবং CI/CD
+
+একটি Foundry প্রকল্প পুনরায় ব্যবহার করতে, স্যাম্পলের [existing-resource instructions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) অনুসরণ করুন। `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` সেট করা হলে ডিপ্লয়মেন্ট পথ পরিবর্তিত হয়; সেই পরিস্থিতিতে, টেমপ্লেটটি আপনার জন্য Application Insights বা AI Search তৈরি করে না। ডিপেন্ডেন্সি, রোল অ্যাসাইনমেন্ট এবং মডেল ডিপ্লয়মেন্টগুলি স্পষ্টভাবে যাচাই করুন।
+
+`pipeline.variables` বিভাগটি একটি তৈরি করা পাইপলাইনে পাস করা মানগুলি নিয়ন্ত্রণ করে; এটি কোনও গোপন স্টোর নয় এবং Azure সম্পদ তৈরি করে না। অ্যাপে পরিচালিত পরিচয় ব্যবহার করা উচিত এবং CI/CD-এর জন্য OIDC প্রাধান্য দিন। AZD পরিবেশ ফাইলগুলি প্লেইনটেক্সট এবং কমিট করা উচিত নয়।
+
+AZD একটি বিশ্বস্ত, লোকালি প্রস্তুতকৃত dotenv ফাইল আমদানির সমর্থন করে:
+
+```bash
+azd env set --file .env
+```
+
+আমদানি করার আগে ঐ ফাইলটি পর্যালোচনা করুন, এবং গোপনীয়তা যুক্ত পরিবেশ ফাইলগুলি শেয়ার করা টার্মিনাল বা CI লগে মুদ্রণ করবেন না।
+
+## 6. আপনার বোঝাপড়া পরীক্ষা করুন
+
+- কোন `azure.yaml` পরিষেবা অ্যাপ্লিকেশনটি স্থাপন করে?
+- আপনি পরিবর্তন করা প্রতিটি মান কোন অবকাঠামো প্যারামিটার ব্যবহার করে?
+- কোন পরিবর্তনগুলি শুধুমাত্র স্থাপনের চেয়ে প্রকৌশল প্রয়োজন?
+- নির্বাচিত অঞ্চল এবং সাবস্ক্রিপশন মডেল ও কোটাকে সমর্থন করে কি?
+- সব সেটআপ হুক সফল হয়েছে কি, এবং আপনি স্থাপিত অ্যাপ্লিকেশনের আচরণ যাচাই করতে পারেন কি?
+
+চালিয়ে যান [একটি টেমপ্লেট কাস্টমাইজ করুন](5-Customize-AI-Template.md)।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-দায়-অস্বীকৃতি:
-এই নথিটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা সঠিকতা বজায় রাখার চেষ্টা করি, তবে দয়া করে留意 করুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল নথিটি তার মূল ভাষায়ই প্রামাণ্য উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের ক্ষেত্রে পেশাদার মানব অনুবাদ নেওয়ার পরামর্শ দেওয়া হয়। এই অনুবাদ ব্যবহারের ফলে সৃষ্ট কোনো ভুলবোঝাবুঝি বা ভ্রান্ত ব্যখ্যার জন্য আমরা দায়বদ্ধ নই।
+**অস্বীকৃতি**:
+এই নথিটি AI অনুবাদ পরিষেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনূদিত হয়েছে। যদিও আমরা শুদ্ধতার জন্য চেষ্টা করি, অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল নথিটি তার স্বভাষায় কর্তৃত্বপূর্ণ উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ সুপারিশ করা হয়। এই অনুবাদের ব্যবহারে প্রয়োজনীয় ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়বদ্ধ নই।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

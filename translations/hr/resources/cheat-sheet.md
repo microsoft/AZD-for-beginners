@@ -1,38 +1,38 @@
-# Prečac naredbi - Osnovne AZD naredbe
+# Komandni Kratki Priručnik - Osnovne AZD Komande
 
-**Brzi referentni vodič za sve poglavlja**
-- **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
-- **📖 Brzi početak**: [Poglavlje 1: Osnove i brzi početak](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI naredbe**: [Poglavlje 2: AI-prvi razvoj](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Napredno**: [Poglavlje 4: Infrastruktura kao kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Brzi Pregled za Sve Poglavlja**
+- **📚 Početna Stranica Tečaja**: [AZD Za Početnike](../README.md)
+- **📖 Brzi Početak**: [Poglavlje 1: Osnove i Brzi Početak](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Komande**: [Poglavlje 2: AI-Prvo Razvijanje](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Napredno**: [Poglavlje 4: Infrastruktura kao Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Uvod
 
-Ovaj detaljan prečac pruža brzi referentni vodič za najčešće korištene Azure Developer CLI naredbe, organizirane po kategorijama s praktičnim primjerima. Savršen za brze preglede tijekom razvoja, otklanjanja poteškoća i svakodnevnog rada s azd projektima.
+Ovaj sveobuhvatni kratki priručnik pruža brzi pregled najčešće korištenih Azure Developer CLI komandi, organiziranih po kategorijama s praktičnim primjerima. Savršeno za brza pretraživanja tijekom razvoja, otklanjanja poteškoća i svakodnevnog rada s azd projektima.
 
-## Ciljevi učenja
+## Ciljevi Učenja
 
-Korištenjem ovog prečaca, moći ćete:
-- Imati trenutni pristup osnovnim Azure Developer CLI naredbama i sintaksi
-- Razumjeti organizaciju naredbi prema funkcionalnim kategorijama i slučajevima uporabe
+Koristeći ovaj kratki priručnik, moći ćete:
+- Imati trenutni pristup osnovnim Azure Developer CLI komandama i sintaksi
+- Razumjeti organizaciju komandi prema funkcionalnim kategorijama i slučajevima upotrebe
 - Referencirati praktične primjere za uobičajene scenarije razvoja i implementacije
-- Pristupiti naredbama za otklanjanje poteškoća za brzo rješavanje problema
+- Pristupiti komandama za otklanjanje poteškoća za brzo rješavanje problema
 - Pronaći napredne opcije konfiguracije i prilagodbe učinkovito
-- Locirati naredbe za upravljanje okruženjima i radnim tijekovima za više okruženja
+- Lokalizirati komande za upravljanje okruženjima i višekružne radne tokove
 
-## Ishodi učenja
+## Ishodi Učenja
 
-Redovitim korištenjem ovog prečaca, moći ćete:
-- Izvoditi azd naredbe samouvjereno bez potrebe za potpuni dokumentacijom
-- Brzo rješavati uobičajene probleme korištenjem odgovarajućih dijagnostičkih naredbi
+Redovitim korištenjem ovog kratkog priručnika, moći ćete:
+- Izvršavati azd komande s povjerenjem bez potrebe za stalnim pogledom u kompletnu dokumentaciju
+- Brzo rješavati uobičajene probleme koristeći odgovarajuće dijagnostičke komande
 - Učinkovito upravljati višestrukim okruženjima i scenarijima implementacije
-- Primijeniti napredne azd značajke i konfiguracijske opcije prema potrebi
-- Rješavati probleme s implementacijom pomoću sustavnih nizova naredbi
-- Optimizirati radne tokove kroz učinkovitu uporabu azd prečaca i opcija
+- Primijeniti napredne funkcije i opcije konfiguracije azd po potrebi
+- Otklanjati probleme s implementacijom koristeći sistematske sekvence komandi
+- Optimizirati radne tokove kroz efikasno korištenje azd prečaca i opcija
 
-## Početne naredbe
+## Početne Komande
 
-### Autentikacija
+### Autentifikacija
 ```bash
 # Login to Azure via AZD
 azd auth login
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Inicijalizacija projekta
+### Inicijalizacija Projekta
 ```bash
 # Browse available templates
 azd template list
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Osnovne naredbe implementacije
+## Osnovne Komande za Implementaciju
 
-### Cijeli tijek implementacije
+### Cjelokupni Proces Implementacije
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -89,7 +89,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-### Samo infrastruktura
+### Samo Infrastruktura
 ```bash
 # Provision Azure resources
 azd provision
@@ -100,7 +100,7 @@ azd provision --preview
 # It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Samo aplikacija
+### Samo Aplikacija
 ```bash
 # Deploy application code
 azd deploy
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Izgradnja i pakiranje
+### Izgradnja i Pakiranje
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,14 +128,14 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** preuzima ovisnosti vaše aplikacije (npm, pip, NuGet, Maven itd.). Pokreće se automatski tijekom `azd package` i `azd deploy`, pa ga rijetko pozivate izravno — pokrenite ga ručno za prethodno dohvaćanje ovisnosti (na primjer, za zagrijavanje CI cachea ili naknadni rad offline).
+> **`azd restore`** preuzima zavisnosti vaše aplikacije (npm, pip, NuGet, Maven itd.). Pokreće se automatski tijekom `azd package` i `azd deploy`, tako da ga rijetko pozivate izravno — pokrenite ga ručno kako biste prethodno preuzeli zavisnosti (na primjer, za zagrijavanje CI cache-a ili kasniji rad offline).
 
-> **`azd package`** priprema spremni artefakt za implementaciju bez implementacije aplikacijskog servisa. Ponašanje ovisi o jeziku i hostu: pakiranje kontejnera može koristiti Azure udaljene izgradnje i objavljivati slike u registar, pa nije nužno offline ili bez zapisivanja u Azure. `azd deploy` može automatski pakirati; koristite zaseban korak pakiranja kada vam treba artefakt ili provjera izgradnje.
+> **`azd package`** priprema deployabilni artefakt bez implementacije aplikacijske usluge. Ponašanje ovisi o jeziku i hostu: pakiranje containera može koristiti Azure udaljene buildove i objavljivati slike u registar, tako da nije nužno offline ili bez pisanih pristupa Azureu. `azd deploy` može automatski pakirati; koristi se poseban korak pakiranja kada vam treba artefakt ili provjera builda.
 
 
-## 🌍 Upravljanje okolinom
+## 🌍 Upravljanje Okruženjem
 
-### Operacije okoline
+### Operacije s Okruženjem
 ```bash
 # List all environments
 azd env list
@@ -154,7 +154,7 @@ azd env list
 azd env refresh
 ```
 
-### Varijable okoline
+### Varijable Okruženja
 ```bash
 # Set environment variable
 azd env set LOG_LEVEL info
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Datoteke okoline su običan tekst. Nemojte tretirati `azd env set` kao spremište tajni; koristite reference na Key Vault ili upravljane identitete prema potrebi.
+Datoteke okruženja su običan tekst. Nemojte tretirati `azd env set` kao pohranu tajni; koristite Key Vault reference ili upravljani identitet prema potrebi.
 
-## ⚙️ Konfiguracijske naredbe
+## ⚙️ Komande za Konfiguraciju
 
-### Globalna konfiguracija
+### Globalna Konfiguracija
 ```bash
 # List all configuration
 azd config show
@@ -190,7 +190,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Konfiguracija projekta
+### Konfiguracija Projekta
 ```bash
 # Inspect user configuration (this is not azure.yaml validation)
 azd config show
@@ -202,9 +202,9 @@ azd show
 azd show --output json
 ```
 
-## 📊 Nadzor i dijagnostika
+## 📊 Nadgledanje i Dijagnostika
 
-### Nadzorna ploča
+### Nadzorna Ploča
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights mora biti konfiguriran putem predloška. AZD-ova opcija Live Metrics trenutno nije podržana za Python aplikacije; koristite pregled, zapise ili dokumentirani trag radnog tijeka uzorka.
+Application Insights mora biti konfiguriran putem predloška. AZD-ova opcija Live Metrics trenutno nije podržana za Python aplikacije; koristite pregled, zapise ili dokumentirani workflow praćenja iz primjera umjesto toga.
 
-### Pregledavanje spremničkih zapisa
+### Pregledavanje Zapisa Iz Conatinera
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Upiti u Log Analytics-u
+### Upiti u Log Analytics
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -244,7 +244,7 @@ az monitor log-analytics query \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Održavanje
+## 🛠️ Komande za Održavanje
 
 ### Čišćenje
 ```bash
@@ -273,7 +273,7 @@ azd version
 azd config show
 ```
 
-## 🔧 Napredne naredbe
+## 🔧 Napredne Komande
 
 ### Pipeline i CI/CD
 ```bash
@@ -287,7 +287,7 @@ azd pipeline config --provider azdo
 azd pipeline config --help
 ```
 
-### Upravljanje infrastrukturom
+### Upravljanje Infrastrukturom
 ```bash
 # Generate infrastructure templates
 azd infra generate
@@ -305,7 +305,7 @@ azd provision --preview
 azd infra --help
 ```
 
-### Informacije o projektu
+### Informacije o Projektu
 ```bash
 # Show project status and endpoints
 azd show
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI i proširenja
+## 🤖 AI & Ekstenzije Komande
 
-### AZD proširenja
+### AZD Ekstenzije
 
-AI CLI referenca pregledana 2026-11-04: `azd 1.37.2`, agenti `1.0.0-beta.23`, evaluacije `1.0.0-beta.2`. Koristite `azd >= 1.37.0` za spojeni tijek rada; nadogradite osnovni CLI prije nekompatibilnih proširenja.
+Referenca Foundry GA ažurirana 2026-11-09: `microsoft.foundry` paket 1.0, najavljeno [5. studenog 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Koristite `azd >= 1.37.0`; komponente su verzionirane neovisno i opcionalne preview značajke zadržavaju vlastiti status.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI Agent naredbe
+Paket ne uključuje evaluacije, skupove podataka, fino podešavanje ili prilagođene modele. Instalacija pojedinačnih osnovnih ekstenzija ostaje podržana. Slijedite [GA walkthrough za hosted-agent](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) za pokretni primjer s Python 3.13+, trenutnim uvjetima, dozvolama i kvotom za modele.
+
+### AI Agent Komande
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` zamjenjuje zastarjelo `--manifest`/`-m` pravopis; potrebna je migracija za naslijeđene manifeste. Trenutno nema agent-init `--host containerapp` opcije. Pregledi upravljani po naravi, glasovni i dugotrajni zahtijevaju zasebno uključivanje u školjku/CI okruženje; pogledajte [AI CLI referencu](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` zamjenjuje zastarjeli `--manifest`/`-m` pravopis; stari manifesti trebaju migraciju. Trenutno nema agent-init `--host containerapp` opcije. Managed-harness, glasovne i dugotrajne preview verzije zahtijevaju nezavisno uključivanje u shell/CI okruženju; pogledajte [AI CLI referencu](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### AI evaluacije i optimizacija
+Lokalno testiranje još uvijek koristi Azure model deploymente i naplaćuje se. Za čišćenje, `azd down` briše novo kreiranu Foundry resource group, ali ostavlja resurse ponovno korištenih projekata na mjestu; brišite samo neželjene resurse koje sami posjedujete zasebno.
+
+### AI Evaluacije i Optimizacija
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,9 +417,24 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agenti beta.22 zamijenili su stare evalucijske naredbe `azd ai eval` iz `azure.ai.evaluations`. Nova konfiguracija evaluacije koristi camelCase ključeve. Optimizacija `--config` zahtijeva samostalni API zahtjev za optimizaciju, **ne** naslijeđene `eval.yaml` ili nove `azure.eval.yaml`; koristite `--eval`/`--eval-config` za ponovnu uporabu evaluacije. Pogledajte [postavljanje evaluacije](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) i [migraciju optimizacije](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agents beta.22 zamijenio je stare komande evaluacije s `azd ai eval` iz `azure.ai.evaluations`. Nova konfiguracija evaluacije koristi camelCase ključeve. Optimizacija `--config` zahtjeva samostalni API za optimizaciju, **ne** stare `eval.yaml` ili nove `azure.eval.yaml`; koristite `--eval`/`--eval-config` za ponovnu upotrebu evaluacija. Pogledajte [postavljanje evaluacije](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) i [migraciju optimizacije](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-### MCP poslužitelj (Alfa)
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Fragment runneša nije kompletan workflow. Commitajte pregledanu konfiguraciju evaluacije i ne-tajne resurse, dopuštajte pristup datasetu/evaluatoru/modelu i koristite zasebno okruženje po fazi. Pogledajte [primjer autentificiranog CI/CD](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
+### MCP Server (Alpha)
 ```bash
 # Start the MCP server for your project
 azd mcp start
@@ -408,7 +443,7 @@ azd mcp start
 azd copilot consent list
 ```
 
-### Generiranje infrastrukture
+### Generiranje Infrastrukture
 ```bash
 # Generate IaC files from your project definition
 azd infra generate
@@ -419,9 +454,9 @@ azd infra --help
 
 ---
 
-## 🎯 Brzi radni tokovi
+## 🎯 Brzi Radni Tokovi
 
-### Radni tok razvoja
+### Radni Tok Razvoja
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Radni tok za više okruženja
+### Višekružno Upravljanje Okruženjima
 ```bash
 # Set up environments
 azd env new dev
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### Radni tok za otklanjanje poteškoća
+### Radni Tok za Otklanjanje Problema
 ```bash
 # Check deployment status
 azd show --debug
@@ -473,9 +508,9 @@ azd monitor --logs
 azd show --output json
 ```
 
-## 🔍 Naredbe za ispravljanje pogrešaka
+## 🔍 Komande za Debugging
 
-### Informacije o ispravljanju pogrešaka
+### Informacije za Debugging
 ```bash
 # Enable debug output for a command
 azd <command> --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Ispravljanje predložaka
+### Debugging Predložaka
 ```bash
 # List available templates with details
 azd template list --output json
@@ -502,9 +537,9 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 Naredbe za datoteke i direktorije
+## 📁 Komande za Datoteke i Direktorije
 
-### Struktura projekta
+### Struktura Projekta
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -517,9 +552,9 @@ cd /path/to/your/project
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Formatiranje izlaza
+## 🎨 Formatiranje Izlaza
 
-### JSON izlaz
+### JSON Izlaz
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -531,7 +566,7 @@ azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tablični izlaz
+### Izlaz u Tablici
 ```bash
 # Human-readable environment table
 azd env list
@@ -540,9 +575,9 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Uobičajene kombinacije naredbi
+## 🔧 Uobičajene Kombinacije Komandi
 
-### Skripta za provjeru zdravlja
+### Skripta za Provjeru Zdravlja
 ```bash
 #!/bin/bash
 # Quick health check
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Validacija implementacije
+### Validacija Implementacije
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -560,7 +595,7 @@ azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Usporedba okoline
+### Usporedba Okruženja
 ```bash
 #!/bin/bash
 # Compare environments
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### Skripta za čišćenje resursa
+### Skripta za Čišćenje Resursa
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -578,9 +613,9 @@ azd env list
 azd down --environment <environment-name>
 ```
 
-## 📝 Varijable okoline
+## 📝 Varijable Okruženja
 
-### Uobičajene varijable okoline
+### Uobičajene Varijable Okruženja
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -596,9 +631,9 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Hitne naredbe
+## 🚨 Hitne Komande
 
-### Brza rješenja
+### Brze Popravke
 ```bash
 # Reauthenticate AZD without changing Azure CLI's account cache
 azd auth login
@@ -613,7 +648,7 @@ azd deploy
 azd show --output json
 ```
 
-### Naredbe za oporavak
+### Komande za Oporavak
 ```bash
 # Inspect before retrying; deletion/purge is not a routine recovery step
 azd show
@@ -626,9 +661,9 @@ azd provision
 azd deploy
 ```
 
-## 💡 Profesionalni savjeti
+## 💡 Profesionalni Savjeti
 
-### Alias naredbe za brži radni tok
+### Alias-i za Brži Radni Tok
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -637,7 +672,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Prečaci funkcija
+### Prečaci za Funkcije
 ```bash
 # Quick environment switching
 azd-env() {
@@ -658,9 +693,9 @@ azd-status() {
 }
 ```
 
-## 📖 Pomoć i dokumentacija
+## 📖 Pomoć i Dokumentacija
 
-### Dobivanje pomoći
+### Dobivanje Pomoći
 ```bash
 # General help
 azd --help
@@ -676,7 +711,7 @@ azd version
 azd version --output json
 ```
 
-### Linkovi na dokumentaciju
+### Linkovi za Dokumentaciju
 ```bash
 # Open documentation in browser
 azd docs
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Savjet**: Dodajte ovaj prečac u favorite i koristite `Ctrl+F` za brzo pronalaženje potrebnih naredbi!
+**Savjet**: Označite ovu cheat sheet i koristite `Ctrl+F` za brzo pronalaženje potrebnih komandi!
 
 ---
 
 **Navigacija**
-- **Prethodna lekcija**: [Preflight provjere](../docs/chapter-06-pre-deployment/preflight-checks.md)
-- **Sljedeća lekcija**: [Rječnik](glossary.md)
+- **Prethodni Lekcija**: [Preflight Provjere](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Sljedeća Lekcija**: [Rječnik](glossary.md)
 
 ---
 
-> **💡 Želite pomoć s Azure naredbama u vašem uređivaču?** Instalirajte [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) s `npx skills add microsoft/github-copilot-for-azure` — 37 vještina za AI, Foundry, implementaciju, dijagnostiku i još mnogo toga.
+> **💡 Želite pomoć za Azure komande u svom editoru?** Instalirajte [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) s `npx skills add microsoft/github-copilot-for-azure` — 37 vještina za AI, Foundry, implementaciju, dijagnostiku i još mnogo toga.
 
 ---
 

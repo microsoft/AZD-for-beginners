@@ -8,9 +8,9 @@
 
 Dis chapter dey cover enterprise-ready deployment patterns, security hardening, monitoring, and cost optimization for production AI workloads.
 
-Dis one na architectural reference, no be complete deployable production template. Examples no include integration details wey you gats supply and test for your own application; to read the checklist no mean say production don ready.
+Dis na architectural reference, no be complete deployable production template. Examples no put integration details wey you gas supply and test for your own application; to read the checklist no mean say production ready don sure.
 
-> **Release review (2026-11-04):** AI CLI guidance dem check am for against `azd 1.37.2`, agents `1.0.0-beta.23`, and evaluations `1.0.0-beta.2` documentation/source. See [release changes and fixes](production-ai-practices.md#recent-release-changes-and-fixes) for compatibility requirements and migration details; dis one no be live deployment validation.
+> **Foundry GA update (2026-11-09):** Use `azd >= 1.37.0` and the generally available `microsoft.foundry` 1.0 bundle for the Foundry workflow; evaluations dem dey install separately. Make you see [release scope and migration](production-ai-practices.md#recent-release-changes-and-fixes) and the [authenticated pipeline example](production-ai-practices.md#cicd-pipeline-configuration). Na documentation review dis, no be live deployment validation or blanket GA status for optional preview features.
 
 ## Learning Objectives
 
@@ -87,12 +87,12 @@ properties: {
 
 | Strategy | Main Constraint |
 |----------|---------|
-| Scale to zero (Container Apps) | Requires a suitable trigger; other services still incur costs |
-| Use consumption tiers for dev | Compare selected service pricing and workload |
+| Scale to zero (Container Apps) | Need correct trigger; oda services still dey cost money |
+| Use consumption tiers for dev | Check pricing and workload wey you select |
 | Scheduled scaling | Scale through supported infrastructure/automation |
-| Reservations/provisioned capacity | Only when supported; commitments can increase idle costs |
+| Reservations/provisioned capacity | Only if e dey; commitments fit make una idle cost high |
 
-Use the [complete budget resource pattern](production-ai-practices.md#2-cost-monitoring-and-budgets) wit valid start date, billing scope, recipients, and permissions. Budget dey send alerts; e no dey cap spending. Savings depend on measured utilization and no be guaranteed percentages.
+Use di [complete budget resource pattern](production-ai-practices.md#2-cost-monitoring-and-budgets) wit correct start date, billing scope, recipients, and permissions. Budget go send alerts; e no dey limit how much you fit spend. Savings depend on how you take use am, no be guaranteed percentage.
 
 ---
 

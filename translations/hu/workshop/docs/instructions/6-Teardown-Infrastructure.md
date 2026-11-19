@@ -1,6 +1,6 @@
 # 6. Infrastruktúra lebontása
 
-!!! tip "A MODUL VÉGÉRE KÉPES LESZEL"
+!!! tip "A MODUL VÉGÉRE KÉPES LESZ"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Bónusz feladatok
+## Bónusz gyakorlatok
 
-Mielőtt lebontanánk a projektet, szánj néhány percet szabad feltáró tevékenységre.
+Mielőtt lebontanánk a projektet, szánjon néhány percet nyitott végű felfedezésre.
 
-!!! info "Próbáld ki ezeket a feltáró kérdéseket"
+!!! info "Próbálja ki ezeket a felfedező kérdéseket"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Mielőtt lebontanánk a projektet, szánj néhány percet szabad feltáró tevé
 
 ---
 
-## Infrastruktúra eltávolítása
+## Infra leszerelése
 
-1. Az infrastruktúra lebontása egyszerű:
+!!! warning "Ha Ön szintén elvégezte a GA hosztolt ügynök gyakorlatot"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Az infrastruktúra leszerelése egyszerűen:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Erősítsd meg a kiválasztott környezetet, és tekintsd át a törlendő erőforrásokat. Ez eltávolítja az Azure erőforrásokat, és adatokat törölhet. Tartsd meg a megerősítő üzenetet ehhez a tanulási folyamathoz. A befejezés után hasonló kimenetet fogsz látni:
+1. Erősítse meg a kiválasztott környezetet, és tekintse át a törlendő erőforrásokat. Ez eltávolítja az Azure erőforrásokat és adatokat is veszthet. Tartsa meg az megerősítő promptot ehhez a tanulási munkafolyamathoz. A folyamat végén hasonló kimenetet lát:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Mielőtt lebontanánk a projektet, szánj néhány percet szabad feltáró tevé
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Ellenőrizd a törlést a portálon, és keresd meg a telepítés körén kívüli erőforrásokat. A költségjelentés és a kvóta-frissítések késhetnek. A helyi `.azure` konfiguráció megmarad, hacsak nem törlöd kifejezetten.
+1. Ellenőrizze a törlést a portálon, és nézze meg, vannak-e az üzembe helyezés hatókörén kívüli erőforrások. A költségjelentés és a kvótafrissítés késhet. A helyi `.azure` konfiguráció megmarad, kivéve, ha kifejezetten eltávolítja azt.
 
-1. Az `azd down --purge` továbbá kéri a támogatott, lágyan törölt erőforrások végleges törlését. Csak akkor használd, ha nincs szükség a helyreállításra, és ismered a megőrzési / törlési védelmi szabályzatokat. Nem garantálja a kvóta azonnali felszabadulását.
+1. Az `azd down --purge` további kéréseket tesz a támogatott, puha törölt erőforrások végleges törlésére. Csak akkor használja, amikor nincs szükség visszaállításra, és érti a megőrzési/tisztításvédelmi szabályokat. Nem garantálja az azonnali kvóta felszabadítást.
 
-1. Ne telepítsd újra csak a takarítás ellenőrzése miatt. Egy későbbi szándékos `azd up` újra létrehozhatja az erőforrásokat a megmaradt helyi bemenetek felhasználásával, és újra költségekkel jár. A modellfrissítések általában támogatott szolgáltatásváltoztatásokat használnak, nem lebontást.
+1. Ne telepítse újra csak a tisztítás ellenőrzésére. Egy későbbi szándékos `azd up` újra létrehozhatja az erőforrásokat a megmaradt helyi bemenetek alapján, és ismét díjköteles lesz. A modellfrissítések általában támogatott provisioning változásokat használnak, nem lebontást.
 
 ---
 

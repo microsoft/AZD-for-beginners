@@ -1,77 +1,77 @@
-# AZD pre vývojárov AI - Workshop
+# AZD pre AI vývojárov Workshop
 
-> Overené s `azd 1.27.1` v júli 2026.
+> Zdrojové pokyny prekontrolované podľa AZD 1.37.2 k 4. novembru 2026. Snímky obrazovky sú ilustračné; dostupnosť služby, označenia v portáli a prednastavenia šablón sa môžu zmeniť.
 
 > [!IMPORTANT]  
-> **Tento workshop je vybavený sprievodcom, ktorý si môžete prezrieť vo vašom lokálnom prehliadači. Pre začiatok otvorte repozitár v GitHub Codespaces, vývojovom kontejnere alebo lokálnom klone s nainštalovaným MkDocs—potom počkajte, kým sa vám nezobrazí aktívny terminál VS Code a zadajte:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Mali by sa vám zobraziť vyskakovacie okná na otvorenie náhľadu stránky v prehliadači.**
+> **Tento workshop je vybavený sprievodcom workshopom, ktorého náhľad si môžete pozrieť vo vašom lokálnom prehliadači. Pre začiatok otvorte repozitár v GitHub Codespaces, dev kontajneri alebo lokálnom klone s nainštalovaným MkDocs — potom počkajte, kým neuvidíte aktívny terminál VS Code a zadajte:**  
+> Z koreňového adresára repozitára kurzu nainštalujte `requirements-dev.txt`, potom spustite `python -m mkdocs serve --config-file workshop/mkdocs.yml` na popredí.
+> **Mali by ste vidieť vyskočiace dialógové okno na otvorenie náhľadovej stránky v prehliadači.**
 
-Vitajte na praktickom workshope na naučenie sa Azure Developer CLI (AZD) so zameraním na nasadenie AI aplikácií. Tento workshop vám pomôže získať praktické porozumenie šablón AZD v 3 krokoch:
+Vitajte na praktickom workshope zameranom na učenie Azure Developer CLI (AZD) so zameraním na nasadenie AI aplikácií. Tento workshop vám pomôže získať praktické pochopenie AZD šablón v 3 krokoch:
 
-1. **Objavovanie** - nájdite šablónu, ktorá je pre vás tá pravá.
-1. **Nasadenie** - nasadiť a overiť, že funguje
-1. **Prispôsobenie** - upravte a vylepšujte, aby bola vaša!
+1. **Objavovanie** - nájdite šablónu, ktorá je pre vás správna.
+1. **Nasadenie** - nasadiť a overiť, že to funguje
+1. **Prispôsobenie** - upraviť a iterovať, aby bola vaša!
 
-Počas tohto workshopu budete tiež oboznámení so základnými vývojárskymi nástrojmi a pracovnými tokmi, ktoré vám pomôžu zefektívniť váš celý vývojový proces.
+Počas tohoto workshopu sa tiež oboznámite so základnými nástrojmi a pracovnými postupmi pre vývojárov, ktoré vám pomôžu zefektívniť váš celý vývojový proces.
 
 | | | 
 |:---|:---|
-| **📚 Domov kurzu**| [AZD Pre začiatočníkov](../README.md)|
+| **📚 Domovská stránka kurzu**| [AZD pre začiatočníkov](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
 | **📖 Dokumentácia** | [Začnite so šablónami AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️Šablóny AI** | [Microsoft Foundry Šablóny](https://ai.azure.com/templates) |
-|**🚀 Ďalšie kroky** | [Prijmite výzvu](#workshop-challenge) |
+| **🛠️AI Šablóny** | [Microsoft Foundry Šablóny](https://ai.azure.com/templates) |
+|**🚀 Ďalšie kroky** | [Prijmite Výzvu](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Prehľad workshopu
 
 **Trvanie:** 3-4 hodiny  
-**Úroveň:** Začiatočník až Stredne pokročilý  
-**Predpoklady:** Znalosť Azure, konceptov AI, VS Code a nástrojov príkazového riadka.
+**Úroveň:** Začiatočník až stredne pokročilý  
+**Predpoklady:** Znalosť Azure, konceptov AI, VS Code a nástrojov príkazového riadku.
 
-Tento workshop je praktický, kde sa učíte priamo pri práci. Po dokončení cvičení odporúčame dôkladne prejsť kurz AZD Pre začiatočníkov, aby ste mohli pokračovať vo svojom vzdelávaní o bezpečnostných a produktívnych najlepších postupoch.
+Toto je praktický workshop, kde sa učíte priamo pri práci. Po dokončení cvičení odporúčame preštudovať si kurz AZD pre začiatočníkov, aby ste pokračovali vo vašom učení o bezpečnostných a produktívnych osvedčených postupoch.
 
 | Čas| Modul  | Cieľ |
 |:---|:---|:---|
-| 15 minút | Úvod | Nastaviť rámec, pochopiť ciele |
-| 30 minút | Výber AI šablóny | Preskúmať možnosti a vybrať štartovaciu |
-| 30 minút | Overenie AI šablóny | Nasadiť základné riešenie do Azure |
+| 15 minút | Úvod | Nastavenie cieľov, pochopenie zámerov |
+| 30 minút | Výber AI šablóny | Preskúmať možnosti a vybrať začínajúcu šablónu | 
+| 30 minút | Overenie AI šablóny | Nasadiť predvolenú verziu na Azure |
 | 30 minút | Rozobratie AI šablóny | Preskúmať štruktúru a konfiguráciu |
 | 30 minút | Konfigurácia AI šablóny | Aktivovať a vyskúšať dostupné funkcie |
-| 30 minút | Prispôsobenie AI šablóny | Upraviť šablónu podľa vlastných potrieb |
-| 30 minút | Odstránenie infraštruktúry | Upratať a uvoľniť zdroje |
-| 15 minút | Záver & Ďalšie kroky | Vzdelávacie zdroje, výzva workshopu |
+| 30 minút | Prispôsobenie AI šablóny | Prispôsobiť šablónu vašim potrebám |
+| 30 minút | Uvoľnenie infraštruktúry | Vyčistiť a uvoľniť zdroje |
+| 15 minút | Záver a ďalšie kroky | Zdroj učenia, výzva workshopu |
 | | |
 
 ## Čo sa naučíte
 
-Myslite na AZD šablónu ako na vzdelávacie prostredie na preskúmanie rôznych schopností a nástrojov pre komplexný vývoj v Microsoft Foundry. Na konci tohto workshopu by ste mali mať intuitívny prehľad o rôznych nástrojoch a konceptoch v tomto kontexte.
+Vnímajte AZD šablónu ako vzdelávacie pieskovisko na preskúmanie rôznych schopností a nástrojov pre úplný vývoj na Microsoft Foundry. Na konci workshopu by ste mali mať intuitívny prehľad o rôznych nástrojoch a konceptoch v tomto kontexte.
 
 | Koncept  | Cieľ |
 |:---|:---|
-| **Azure Developer CLI** | Pochopiť príkazy nástroja a pracovné toky|
-| **AZD šablóny**| Pochopiť štruktúru projektu a konfiguráciu|
-| **Azure AI Agent**| Zriadenie a nasadenie projektu Microsoft Foundry |
-| **Azure AI Search**| Umožniť kontextové inžinierstvo s agentmi |
-| **Pozorovateľnosť**| Preskúmať trasovanie, monitorovanie a hodnotenia |
-| **Red Teaming**| Preskúmať adversárske testovanie a prostriedky |
+| **Azure Developer CLI** | Pochopenie príkazov nástroja a pracovných postupov|
+| **AZD šablóny**| Pochopenie štruktúry projektu a konfigurácie|
+| **Azure AI Agent**| Zavedenie a nasadenie Microsoft Foundry projektu  |
+| **Azure AI Search**| Umožnenie kontextového inžinierstva s agentmi |
+| **Observability**| Preskúmať trasovanie, monitorovanie a vyhodnocovanie |
+| **Red Teaming**| Preskúmať adversárske testovanie a opatrenia |
 | | |
 
 ## Moduly workshopu
 
-Pripravení začať? Prejdite cez moduly workshopu:
+Pripravený začať? Prejdite si moduly workshopu:
 
 - [Modul 1: Výber AI šablóny](instructions/1-Select-AI-Template.md)
 - [Modul 2: Overenie AI šablóny](instructions/2-Validate-AI-Template.md) 
 - [Modul 3: Rozobratie AI šablóny](instructions/3-Deconstruct-AI-Template.md)
 - [Modul 4: Konfigurácia AI šablóny](instructions/4-Configure-AI-Template.md)
 - [Modul 5: Prispôsobenie AI šablóny](instructions/5-Customize-AI-Template.md)
-- [Modul 6: Odstránenie infraštruktúry](instructions/6-Teardown-Infrastructure.md)
-- [Modul 7: Záver & Ďalšie kroky](instructions/7-Wrap-up.md)
+- [Modul 6: Uvoľnenie infraštruktúry](instructions/6-Teardown-Infrastructure.md)
+- [Modul 7: Záver a ďalšie kroky](instructions/7-Wrap-up.md)
 
 ## Máte spätnú väzbu?
 
-Pridajte problém v tomto repozitári (označte ho `Workshop`) alebo sa pripojte na [Discord](https://aka.ms/foundry/discord) a napíšte do nášho kanála `#get-help`
+Zverejnite problém v tomto repozitári (označte ho `Workshop`) alebo sa pridajte k nám na [Discord](https://aka.ms/foundry/discord) a napíšte na náš `#get-help` kanál
 
 ---
 

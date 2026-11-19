@@ -1,36 +1,36 @@
-# גיליון פקודות - פקודות AZD חיוניות
+# גיליון פקודות – פקודות חיוניות של AZD
 
-**התייחסות מהירה לכל הפרקים**
+**מדריך מהיר לכל הפרקים**
 - **📚 דף הקורס**: [AZD למתחילים](../README.md)
 - **📖 התחלה מהירה**: [פרק 1: יסודות והתחלה מהירה](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 פקודות AI**: [פרק 2: פיתוח מונחה AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 פקודות AI**: [פרק 2: פיתוח מבוסס AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 מתקדם**: [פרק 4: תשתית כקוד](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## מבוא
 
-גיליון פקודות מקיף זה מספק התייחסות מהירה לפקודות ה-Azure Developer CLI הנפוצות ביותר, מאורגנות לפי קטגוריות עם דוגמאות מעשיות. מושלם לחיפוש מהיר במהלך פיתוח, פתרון תקלות ופעולות יומיומיות עם פרויקטים של azd.
+גיליון פקודות מקיף זה מספק הפניה מהירה לפקודות ה-Azure Developer CLI הנפוצות ביותר, מאורגן לפי קטגוריות עם דוגמאות מעשיות. אידיאלי לחיפושים מהירים במהלך פיתוח, פתרון בעיות ופעולות יומיות עם פרויקטים של azd.
 
-## מטרות הלמידה
+## יעדי למידה
 
-באמצעות גיליון פקודות זה, תוכל:
+בשימוש בגיליון פקודות זה, תוכל:
 - לקבל גישה מיידית לפקודות וסינטקס חיוניים של Azure Developer CLI
 - להבין ארגון פקודות לפי קטגוריות פונקציונליות ומקרי שימוש
-- להתייחס לדוגמאות מעשיות לתרחישי פיתוח ופריסה נפוצים
-- לגשת לפקודות פתרון תקלות לפתרון מהיר של בעיות
-- למצוא אפשרויות תצורה וההתאמה מתקדמות ביעילות
-- לאתר פקודות ניהול סביבה וזרימות עבודה מרובות-סביבה
+- לעיין בדוגמאות מעשיות לתרחישי פיתוח ופריסות נפוצות
+- לגשת לפקודות פתרון בעיות לפתרון מהיר של תקלות
+- למצוא אפשרויות קונפיגורציה והתאמה אישית מתקדמות ביעילות
+- למקם פקודות לניהול סביבות ותהליכי עבודה מרובי סביבות
 
-## תוצאות הלמידה
+## תוצאות למידה
 
-עם התייחסות רגילה לגיליון פקודות זה, תוכל:
-- להפעיל פקודות azd בביטחון ללא צורך בהתייחסות לתיעוד מלא
+עם הפניה סדירה לגיליון הפקודות הזה, תוכל:
+- להפעיל פקודות azd בביטחון מבלי להסתכל בתיעוד מלא
 - לפתור במהירות בעיות נפוצות באמצעות פקודות אבחון מתאימות
-- לנהל ביעילות סביבות ותסריטי פריסה מרובים
-- ליישם תכונות ותצורות azd מתקדמות לפי הצורך
-- לפתור בעיות פריסה באמצעות רצפים שיטתיים של פקודות
-- לייעל זרימות עבודה באמצעות שימוש יעיל בקיצורי דרך ואפשרויות azd
+- לנהל ביעילות סביבות ותרחישי פריסה מרובים
+- ליישם תכונות קונפיגורציה מתקדמות של azd לפי צורך
+- לפתור בעיות בפריסה באמצעות רצפי פקודות שיטתיים
+- לייעל תזרימי עבודה באמצעות שימוש יעיל בקיצורי דרך ואפשרויות azd
 
-## פקודות התחלה מהירה
+## פקודות התחלה
 
 ### אימות
 ```bash
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### ייזום פרויקט
+### אתחול פרויקט
 ```bash
 # Browse available templates
 azd template list
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## פקודות פריסה מרכזיות
+## פקודות פריסה עיקריות
 
-### זרימת עבודה לפריסה מלאה
+### תהליך פריסה מלא
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### בנייה וחבילה
+### בניה ואריזה
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** מוריד את התלויות של האפליקציה שלך (npm, pip, NuGet, Maven וכו'). הוא מופעל אוטומטית במהלך `azd package` ו-`azd deploy`, ולכן נדיר לקרוא לו ישירות — הפעל אותו ידנית כדי לקרוא מראש תלויות (לדוגמה, לחמם מטמון CI או לעבוד באופליין אחר כך).
+> **`azd restore`** מוריד את התלויות של האפליקציה שלך (npm, pip, NuGet, Maven וכו'). הוא מתבצע אוטומטית במהלך `azd package` ו-`azd deploy`, אז אתה בדרך כלל לא מפעיל אותו ישירות — הפעל אותו ידנית כדי להוריד מראש תלויות (למשל, לחמם מטמון של CI או לעבוד ללא חיבור לאחר מכן).
 
-> **`azd package`** מכין ארטיפקט לפריסה מבלי לפרוס את שירות האפליקציה. ההתנהגות תלויה בשפה והמארח: אריזת מכולות יכולה להשתמש בבניות מרוחקות ב-Azure ולפרסם תמונות לרג'יסטרי, לכן היא לא תמיד אופליין או ללא פעולות כתיבה ל-Azure. `azd deploy` יכול לארוז אוטומטית; השתמש בשלב אריזה נפרד כשאתה צריך ארטיפקט או בדיקת בנייה.
+> **`azd package`** מכין ארטיפקט לפריסה מבלי לפרוס את שירות האפליקציה. ההתנהגות תלויה בשפה ובמארח: אריזת מכולות יכולה להשתמש בבניות מרחוק של Azure ולפרסם תמונות לרג'סטרי, כך שזה לא בהכרח אופליין או ללא כתיבות ל-Azure. `azd deploy` יכול לארוז אוטומטית; השתמש בצעד אריזה נפרד כשאתה צריך ארטיפקט או בדיקת בניה.
 
 
 ## 🌍 ניהול סביבה
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-קבצי סביבה הם טקסט רגיל. אל תטפל ב-`azd env set` כאחסון סודי; השתמש בהפניות Key Vault או זהות מנוהלת כנדרש.
+קבצי סביבה הם טקסט פשוט. אל תתייחס ל-`azd env set` כאחסון סודי; השתמש בהפניות ל-Key Vault או זהות מנוהלת כנדרש.
 
-## ⚙️ פקודות תצורה
+## ⚙️ פקודות קונפיגורציה
 
-### תצורה גלובלית
+### קונפיגורציה גלובלית
 ```bash
 # List all configuration
 azd config show
@@ -190,7 +190,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### תצורת פרויקט
+### קונפיגורציית פרויקט
 ```bash
 # Inspect user configuration (this is not azure.yaml validation)
 azd config show
@@ -204,7 +204,7 @@ azd show --output json
 
 ## 📊 ניטור ואבחון
 
-### לוח ניטור
+### לוח בקרה לניטור
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-יש להגדיר Application Insights באמצעות התבנית. אפשרות Live Metrics של AZD אינה נתמכת כרגע לאפליקציות Python; השתמש בסקירה, בלוגים או בזרימת עבודה המתועדת לדוגמה במקום.
+על Application Insights להיות מוגדר על ידי התבנית. אפשרות Live Metrics של AZD אינה נתמכת כרגע לאפליקציות Python; השתמש בסיכום, בלוגים או בתהליך התיעוד של הדוגמה.
 
-### צפייה ביומני מכולות
+### צפייה בלוגים של מכולה
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### שאילתות לניתוח יומנים
+### שאילתות לוג אנליטיקס
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -244,9 +244,9 @@ az monitor log-analytics query \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ פקודות תחזוקה
+## 🛠️ פקודות אחזקה
 
-### ניקוי
+### ניקיון
 ```bash
 # Remove all Azure resources
 azd down
@@ -305,7 +305,7 @@ azd provision --preview
 azd infra --help
 ```
 
-### מידע על הפרויקט
+### מידע על פרויקט
 ```bash
 # Show project status and endpoints
 azd show
@@ -321,23 +321,22 @@ azd show --output json | jq '.services'
 
 ### הרחבות AZD
 
-הפניה ל-AI CLI תוקנה 2026-11-04: `azd 1.37.2`, סוכנים `1.0.0-beta.23`, הערכות `1.0.0-beta.2`. השתמש ב-`azd >= 1.37.0` לזרימת עבודה משולבת; שדרג את ה-CLI הראשי לפני הרחבות לא תואמות.
+הפניה ל-Foundry GA עודכנה ל-2026-11-09: חבילה `microsoft.foundry` 1.0, הודעה [5 בנובמבר 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). השתמש ב-`azd >= 1.37.0`; רכיבים מתועדים בנפרד ותכונות תצוגה ראשונית אופציונליות שומרות על הסטטוס שלהן.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### פקודות סוכני AI
+החבילה אינה כוללת הערכות, סטים של נתונים, כיוונון, או מודלים מותאמים אישית. עדיין נתמך התקנת הרחבות ליבה בודדות. עקוב אחרי [מדריך סוכן מארח GA](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) לדוגמה ניתנת להרצה עם Python 3.13+, גרסאות uv נוכחיות, הרשאות, ומכסת מודלים.
+
+### פקודות סוכן AI
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` מחליפים את כתיב `--manifest`/`-m` שלא בשימוש; יש למנף את המניפסטים הישנים. אין כרגע אפשרות סוכן-שלבי `--host containerapp`. תצוגות ניהול מונחות, קול והרצות ארוכות דורשות הרשמה נפרדת לסביבה או לצלחת CI; עיין ב-[AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` מחליף את האיות המיושן `--manifest`/`-m`; יש צורך בהגירת מנשרים ישנים. אין אפשרות סוכן-init `--host containerapp` נוכחית. מצגות מנוהלות, קול ומצגות ארוכות דורשות אפשרות עצמאית בסביבת shell/CI; עיין ב-[תיעוד AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### הערכות ואופטימיזציה של AI
+בדיקות מקומיות עדיין משתמשות בפריסות מודלים של Azure ומחייבות חיובים. לניקיון, `azd down` מוחק קבוצת משאבים של פרויקט Foundry שנוצר זה עתה, אך משאבים משותפים נשארים; הסר רק משאבים לא רצויים שבבעלותך בנפרד.
+
+### הערכות AI ואופטימיזציה
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-סוכנים beta.22 החליפו פקודות הערכה ישנות ל-`azd ai eval` מ-`azure.ai.evaluations`. תצורת הערכה חדשה משתמשת במפתחות camelCase. אופטימיזציה ב-`--config` דורשת בקשה נפרדת לממשק אופטימיזציה, **לא** ב-`eval.yaml` הישן או ב-`azure.eval.yaml` החדש; השתמש ב-`--eval`/`--eval-config` לשימוש חוזר בהערכה. עיין ב-[הגדרת הערכה](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ו-[הגירת אופטימיזציה](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+סוכנים beta.22 החליפו פקודות הערכה מיושנות עם `azd ai eval` מ-`azure.ai.evaluations`. קונפיגורציית הערכה חדשה משתמשת במפתחות בסגנון camelCase. אופטימיזציה ב-`--config` לוקחת בקשת API של אופטימיזציה עצמאית, **לא** פקודות מיושנות של `eval.yaml` או חדשות של `azure.eval.yaml`; השתמש ב-`--eval`/`--eval-config` לשימוש חוזר בהערכה. ראה [הגדרת הערכה](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ו-[הגירה לאופטימיזציה](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+הקטע של הרץ אינו תהליך עבודה מלא. בצע commit לקונפיגורציית הערכה שנבחנה ונכסים לא סודיים, אפשר גישה לסט נתונים/מוערך/מודל, והשתמש בסביבה נפרדת לכל שלב. עיין ב-[דוגמה ל-CI/CD מאומת](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### שרת MCP (אלפא)
 ```bash
@@ -419,9 +454,9 @@ azd infra --help
 
 ---
 
-## 🎯 זרימות עבודה מהירות
+## 🎯 תזרימי עבודה מהירים
 
-### זרימת פיתוח
+### תהליך פיתוח
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### זרימת עבודה מולטי-סביבה
+### תהליך עבודה מרובת סביבות
 ```bash
 # Set up environments
 azd env new dev
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### זרימת פתרון תקלות
+### תהליך פתרון תקלות
 ```bash
 # Check deployment status
 azd show --debug
@@ -473,9 +508,9 @@ azd monitor --logs
 azd show --output json
 ```
 
-## 🔍 פקודות דיבוג
+## 🔍 פקודות איתור תקלות
 
-### מידע דיבוג
+### מידע לאיתור תקלות
 ```bash
 # Enable debug output for a command
 azd <command> --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### דיבוג תבנית
+### איתור תקלות בתבניות
 ```bash
 # List available templates with details
 azd template list --output json
@@ -502,7 +537,7 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 פקודות קבצים ותיקיות
+## 📁 פקודות קבצים וספריות
 
 ### מבנה פרויקט
 ```bash
@@ -531,7 +566,7 @@ azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### פלט טבלה
+### פלט טבלאי
 ```bash
 # Human-readable environment table
 azd env list
@@ -540,7 +575,7 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 שילובי פקודות נפוצים
+## 🔧 קומבינציות פקודות נפוצות
 
 ### סקריפט בדיקת בריאות
 ```bash
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 טיפים מקצועיים
 
-### כינויים לזרימת עבודה מהירה יותר
+### מחרוזות לשיפור מהירות העבודה
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -676,7 +711,7 @@ azd version
 azd version --output json
 ```
 
-### קישורי תיעוד
+### קישורים לתיעוד
 ```bash
 # Open documentation in browser
 azd docs
@@ -687,7 +722,7 @@ azd template show <template-name> --docs
 
 ---
 
-**טיפ**: שמור את גיליון הפקודות הזה בסימניות והשתמש ב-`Ctrl+F` כדי למצוא במהירות את הפקודות שאתה צריך!
+**טיפ**: סמן עמוד זה והשתמש ב-`Ctrl+F` כדי למצוא במהירות את הפקודות שאתה צריך!
 
 ---
 
@@ -697,7 +732,7 @@ azd template show <template-name> --docs
 
 ---
 
-> **💡 רוצה עזרה לפקודות Azure בעורך שלך?** התקן את [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) עם `npx skills add microsoft/github-copilot-for-azure` — 37 כישורים ל-AI, Foundry, פריסה, אבחון ועוד.
+> **💡 רוצה עזרה בפקודות Azure בעורך שלך?** התקן את [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) עם `npx skills add microsoft/github-copilot-for-azure` — 37 מיומנויות ל-AI, Foundry, פריסה, אבחון ועוד.
 
 ---
 

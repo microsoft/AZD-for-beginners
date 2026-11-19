@@ -1,6 +1,6 @@
-# 6. 拆除基礎設施
+# 6. 拆除基礎架構
 
-!!! tip "完成本模組後你將能夠"
+!!! tip "在本單元結束時，您將能夠"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -13,7 +13,7 @@
 
 在拆除專案之前，花幾分鐘進行一些開放式探索。
 
-!!! info "試試以下探索提示"
+!!! info "嘗試這些探索提示"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@
 
 ---
 
-## 撤銷基礎設施
+## 撤銷基礎架構
 
-1. 拆除基礎設施很簡單：
+!!! warning "如果您也完成了 GA 托管代理練習"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. 拆除基礎架構很簡單：
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. 確認所選環境並檢查要刪除的資源。這會移除 Azure 資源並可能破壞資料。保留此學習流程的確認提示。完成後你會看到類似輸出：
+1. 確認所選環境並檢閱將要刪除的資源。這將移除 Azure 資源並可能會摧毀資料。針對此學習工作流程保留確認提示。完成後您會看到類似的輸出：
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. 在入口網站中驗證刪除，並檢查部署範圍外的資源。成本報告和配額更新可能會延遲。本地 `.azure` 設定會保留，除非你明確移除它。
+1. 在入口網站中驗證刪除，並檢查部署範圍外的資源。成本報告和配額更新可能會有延遲。本地 `.azure` 設定會保留，除非您明確將其移除。
 
-1. `azd down --purge` 另外要求永久刪除支援的軟刪除資源。只有在不需要復原且瞭解保留/清除保護政策時才使用。它不保證立即釋放配額。
+1. `azd down --purge` 另外會請求永久刪除已支持的軟刪除資源。只有在不需要恢復且您了解保留/清除保護政策時才使用。它不保證立即釋放配額。
 
-1. 不要僅為了驗證清理而重新部署。之後有意的 `azd up` 可以利用剩餘本地輸入重新建立資源，並再次產生成本。模型更新通常使用支援的佈建變更，而非拆除。
+1. 不要僅為了驗證清理而重新部署。之後可用意圖明確的 `azd up` 利用剩餘的本地輸入重新建立資源，並再次產生費用。模型更新通常使用支持的配置變更，而非拆除。
 
 ---
 

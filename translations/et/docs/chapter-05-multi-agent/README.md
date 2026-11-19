@@ -1,22 +1,22 @@
-# 5. peatükk: Mitme agendiga tehisintellekti lahendused
+# 5. peatükk: Mitme agendiga AI lahendused
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Tase**: Täiustatud
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Keerukus**: Täiustatud
 
 ---
 
 ## Ülevaade
 
-Selles peatükis käsitletakse täiustatud mitme agendi arhitektuurimustreid, agentide orkestreerimist ja tootmiskõlblikke tehisintellekti lahendusi keerukate stsenaariumite jaoks.
+Selles peatükis käsitletakse täiustatud mitme agendi arhitektuurimustreid, agentide koordineerimist ja tootmiskõlblikke AI juurutusi keerukate stsenaariumite jaoks.
 
-> Kontrollitud versiooniga `azd 1.27.1` 2026. aasta juulis.
+> Käskude juhised kontrollitud välja antud `azd 1.37.2` viite põhjal. Pilvejuurutusi ei tehtud.
 
 ## Õpieesmärgid
 
-Selle peatüki läbimisel õpite:
-- Mõistma mitme agendiga arhitektuurimustreid
-- Paigaldama koordineeritud tehisintellekti agentide süsteeme
+Selles peatükis õpid:
+- Mõistma mitme agendi arhitektuurimustreid
+- Juurutama koordineeritud AI agentide süsteeme
 - Rakendama agentidevahelist suhtlust
-- Looma tootmiskõlblikke mitme agendiga lahendusi
+- Looma tootmiskõlblikke mitme agendi lahendusi
 
 ---
 
@@ -24,76 +24,78 @@ Selle peatüki läbimisel õpite:
 
 | # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Mitme agendiga alused](multi-agent-basics.md) | Praktiline: töötava mitme agendiga rakenduse paigaldamine käsuga `azd up` | 45 min |
-| 2 | [Koordatsioonimustrid](../chapter-06-pre-deployment/coordination-patterns.md) | Agentide orkestreerimise strateegiad (jätkub 6. peatükis) | 30 min |
-| 3 | [ARM-i malli paigaldamine](../../examples/retail-multiagent-arm-template/README.md) | Ühe klõpsuga paigaldamise näide | 30 min |
+| 1 | [Mitme agendi põhialused](multi-agent-basics.md) | Praktiline: töötava mitme agendi rakenduse juurutamine koos `azd up` | 45 min |
+| 2 | [Koordineerimismustrid](../chapter-06-pre-deployment/coordination-patterns.md) | Agentide orkestreerimise strateegiad (jätkub peatükis 6) | 30 min |
+| 3 | [ARM mallide juurutamine](../../examples/retail-multiagent-arm-template/README.md) | Ühe klõpsuga juurutamise näide | 30 min |
 
-> **Alustage 1. õppetunnist.** See on ainus täielikult praktiline ja paigaldatav õppetund selles peatükis. 2. õppetund on 6. peatükis (jagatud eelpaigaldusplaanimisega) ning [Jaemüügi mitme agendi lahendus](../../examples/retail-scenario.md) on arhitektuuriskeem – disaini referents, mitte ühe käsu mall.
+> **Alusta õppetundist 1.** See on ainus täielikult praktiline ja juurutatav õppetund selles peatükis. Õppetund 2 asub peatükis 6 (see jaguneb eelpaarimisega) ja [Jaemüügi mitme agendi lahendus](../../examples/retail-scenario.md) on arhitektuuri kavand — disaini viide, mitte ühe käsu mall.
 
 ---
 
 ## 🚀 Kiire algus
 
 ```bash
-# Valik 1: Paigalda mallist
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Valik 2: Paigalda agendi manifestist (nõuab azure.ai.agents laiendust)
-azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
+azd ai agent init
 azd up
 ```
 
-> **Millist lähenemist valida?** Kasutage `azd init --template`, et alustada tööd proovinäitega. Kasutage `azd ai agent init`, kui teil on oma agendi manifest. Täpsemat teavet leiate jaotisest [AZD AI CLI viide](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Millist lähenemist valida?** Kasuta `azd init --template` selleks, et alustada töötava näidisrakendusega. Kasuta `azd ai agent init` interaktiivselt või `azd ai agent init --template <path-to-azure.yaml>`, et võtta üle olemasolev agendi projekt. Versiooninõuete ja hindamise ülemineku jaoks vaata [AZD AI CLI viidet](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+
+Käivita need alternatiivid eraldi tühjades kaustades. GA Foundry töövoog nõuab `azd >= 1.37.0`; selle interaktiivne voog ei loo kohandatud Service Bus torujuhtme koordineerimismustris. Kohalikuks testimiseks, koodi juurutamiseks ning uue ja taaskasutatava projekti puhastamiseks järgi [hostitud agendi samme](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
-## 🤖 Mitme agendiga arhitektuur
+## 🤖 Mitme agendi arhitektuur
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestreerija agent<br/>Suunab päringuid, haldab töövoogu] --> Customer[Kliendi agent<br/>Kasutaja päringud, eelistused]
-    Orchestrator --> Inventory[Laovaru agent<br/>Laoseisud, tellimused]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
-## 🎯 Toodud lahendus: Jaemüügi mitme agendi lahendus
+## 🎯 Esiletõstetud lahendus: Jaemüügi mitme agendi lahendus
 
-[Jaemüügi mitme agendi lahendus](../../examples/retail-scenario.md) demonstreerib:
+Lahenduse [Jaemüügi mitme agendi lahendus](../../examples/retail-scenario.md) näide:
 
-- **Kliendiagent**: Halda kasutajategevusi ja eelistusi
-- **Laomuagent**: Varude ja tellimuste haldus
-- **Orkestreerija**: Agentide koordineerimine
-- **Jagatud mälu**: Agendideülese konteksti haldamine
+- **Kliendiagent**: Halda kasutajate suhtlusi ja eelistusi
+- **Laosagent**: Halda laoseisu ja tellimuste töötlemist
+- **Orkestreerija**: Koordineerib agentide vahel
+- **Jagatud mälu**: Agendiülene konteksti juhtimine
 
 ### Kasutatavad teenused
 
 | Teenus | Eesmärk |
 |---------|---------|
-| Microsoft Foundry Models | Keele mõistmine |
-| Azure AI Search | Toodete kataloog |
+| Microsoft Foundry mudelid | Keeletöötlus |
+| Azure AI Search | Tootekataloog |
 | Cosmos DB | Agendi olek ja mälu |
-| Container Apps | Agendi hostimine |
+| Container Apps | Agendi majutamine |
 | Application Insights | Jälgimine |
 
 ---
 
-## 🔗 Navigatsioon
+## 🔗 Navigeerimine
 
 | Suund | Peatükk |
 |-----------|---------|
-| **Eelmine** | [4. peatükk: Taristu](../chapter-04-infrastructure/README.md) |
-| **Järgmine** | [6. peatükk: Eelpaigaldus](../chapter-06-pre-deployment/README.md) |
+| **Eelmine** | [Peatükk 4: Taristu](../chapter-04-infrastructure/README.md) |
+| **Järgmine** | [Peatükk 6: Eelpaigaldus](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [Tehisintellekti agendid](../chapter-02-ai-development/agents.md)
-- [Tootmisvalmid tehisintellekti lahendused](../chapter-08-production/production-ai-practices.md)
-- [Tehisintellekti tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Agentide juhend](../chapter-02-ai-development/agents.md)
+- [Produktiivse AI tavad](../chapter-08-production/production-ai-practices.md)
+- [AI tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

@@ -6,19 +6,19 @@
 
 ## Visão Geral
 
-Este capítulo cobre padrões de implementação prontos para empresas, reforço de segurança, monitorização e otimização de custos para workloads de IA em produção.
+Este capítulo abrange padrões de implantação prontos para empresas, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
 
-Esta é uma referência arquitetural, não um template completo para produção. Os exemplos omittem detalhes de integração que devem ser fornecidos e testados na sua própria aplicação; ler a lista de verificação não certifica a prontidão para produção.
+Este é um referência arquitetónica, não um template completo para implantação em produção. Os exemplos omitem detalhes de integração que devem ser fornecidos e testados na sua própria aplicação; a leitura da lista de verificação não certifica a prontidão para produção.
 
-> **Revisão da versão (2026-11-04):** A orientação da CLI de IA foi verificada contra a documentação/fonte de `azd 1.37.2`, agentes `1.0.0-beta.23`, e avaliações `1.0.0-beta.2`. Veja [alterações e correções da versão](production-ai-practices.md#recent-release-changes-and-fixes) para requisitos de compatibilidade e detalhes da migração; isto não é uma validação de implementação ao vivo.
+> **Atualização Foundry GA (2026-11-09):** Use `azd >= 1.37.0` e o pacote geralmente disponível `microsoft.foundry` 1.0 para o workflow Foundry; avaliações são instaladas separadamente. Veja [escopo de lançamento e migração](production-ai-practices.md#recent-release-changes-and-fixes) e o [exemplo de pipeline autenticado](production-ai-practices.md#cicd-pipeline-configuration). Esta é uma revisão de documentação, não uma validação de implantação ao vivo ou status GA abrangente para funcionalidades opcionais em preview.
 
-## Objectivos de Aprendizagem
+## Objetivos de Aprendizagem
 
 Ao completar este capítulo, você irá:
-- Implementar aplicações resilientes multi-regionais
-- Implementar padrões de segurança empresariais
+- Implantar aplicações resilientes multi-região
+- Implementar padrões de segurança empresarial
 - Configurar monitorização abrangente
-- Otimizar custos em escala
+- Otimizar custos em larga escala
 - Configurar pipelines CI/CD com AZD
 
 ---
@@ -27,19 +27,19 @@ Ao completar este capítulo, você irá:
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresarial | 90 min |
+| 1 | [Práticas de IA para Produção](production-ai-practices.md) | Padrões de implantação empresarial | 90 min |
 
 ---
 
-## 🚀 Lista de Verificação para Produção
+## 🚀 Lista de Verificação de Produção
 
-- [ ] Implementação multi-region para resiliência
+- [ ] Implantação multi-região para resiliência
 - [ ] Identidade gerida para autenticação (sem chaves)
 - [ ] Application Insights para monitorização
-- [ ] Orçamentos de custos e alertas configurados
-- [ ] Verificação de segurança ativada
+- [ ] Orçamentos e alertas de custos configurados
+- [ ] Análise de segurança ativada
 - [ ] Integração de pipeline CI/CD
-- [ ] Plano de recuperação de desastres
+- [ ] Plano de recuperação de desastre
 
 ---
 
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Padrão 2: AI Orientada a Eventos
+### Padrão 2: IA Orientada a Eventos
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Melhores práticas de segurança
+## 🔐 Melhores Práticas de Segurança
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -83,16 +83,16 @@ properties: {
 
 ---
 
-## 💰 Otimização de custos
+## 💰 Otimização de Custos
 
-| Estratégia | Principal restrição |
+| Estratégia | Principal Restrição |
 |----------|---------|
-| Escalar a zero (Apps de Contentores) | Requer um trigger adequado; outros serviços ainda geram custos |
-| Usar níveis de consumo para dev | Comparar preços do serviço selecionado e carga de trabalho |
-| Escalonamento programado | Escalar através da infraestrutura/automação suportada |
-| Reservas/capacidade provisionada | Apenas quando suportado; compromissos podem aumentar custos em ócio |
+| Escalamento para zero (Container Apps) | Requer um trigger adequado; outros serviços ainda geram custos |
+| Usar níveis de consumo para desenvolvimento | Compare o preço do serviço selecionado e a carga de trabalho |
+| Escalamento programado | Escalar através da infraestrutura/automação suportada |
+| Reservas/capacidade provisionada | Apenas quando suportado; compromissos podem aumentar custos em inatividade |
 
-Utilize o [padrão completo de recurso de orçamento](production-ai-practices.md#2-cost-monitoring-and-budgets) com uma data de início válida, âmbito de faturação, destinatários e permissões. Um orçamento envia alertas; não limita gastos. As poupanças dependem da utilização medida e não são percentagens garantidas.
+Use o [padrão completo para recurso de orçamento](production-ai-practices.md#2-cost-monitoring-and-budgets) com uma data de início válida, escopo de faturação, destinatários e permissões. Um orçamento envia alertas; não impõe limites de gasto. As poupanças dependem da utilização medida e não são percentagens garantidas.
 
 ---
 
@@ -116,13 +116,13 @@ az monitor metrics list --resource <resource-id>
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Completo** | [Início do Curso](../../README.md) |
+| **Curso Completo** | [Página Inicial do Curso](../../README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Guia de Agentes AI](../chapter-02-ai-development/agents.md)
+- [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluções Multi-Agente](../chapter-05-multi-agent/README.md)
 - [Exemplo de Microserviços](../../examples/microservices/README.md)

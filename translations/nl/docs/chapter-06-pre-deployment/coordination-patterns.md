@@ -1,38 +1,38 @@
 # Patronen voor Multi-Agent Coördinatie
 
-⏱️ **Geschatte Tijd**: 60-75 minuten lezen; enkele uren om te implementeren | 💰 **Geschatte Kosten**: afhankelijk van werklast | ⭐ **Complexiteit**: Gevorderd
+⏱️ **Geschatte Tijd**: 60-75 minuten lezen; enkele uren om te implementeren | 💰 **Geschatte Kosten**: afhankelijk van werkbelasting | ⭐ **Complexiteit**: Gevorderd
 
-**📚 Leertraject:**
-- ← Vorige: [Capacity Planning](capacity-planning.md) - Strategieën voor resource sizing en schaalvergroting
-- 🎯 **Je Bent Hier**: Patronen voor Multi-Agent Coördinatie (Orkestratie, communicatie, staatbeheer)
-- → Volgende: [SKU Selectie](sku-selection.md) - Het kiezen van de juiste Azure-diensten
+**📚 Leerpad:**
+- ← Vorige: [Capacity Planning](capacity-planning.md) - Strategieën voor resource sizing en schaling
+- 🎯 **Je bent hier**: Patronen voor Multi-Agent Coördinatie (Orkestratie, communicatie, state management)
+- → Volgende: [SKU Selection](sku-selection.md) - Keuze van de juiste Azure-diensten
 - 🏠 [Cursus Startpagina](../../README.md)
 
 ---
 
-## Wat Je Zal Leren
+## Wat je zult leren
 
-Door deze les te voltooien, zal je:
-- Begrijpen van **multi-agent architectuur** patronen en wanneer ze te gebruiken
-- Implementeren van **orkestratiepatronen** (gecentraliseerd, gedecentraliseerd, hiërarchisch)
-- Ontwerpen van **agent communicatie** strategieën (synchroon, asynchroon, event-gedreven)
-- Beheren van **gedeelde staat** over verspreide agenten
-- Implementeren van **multi-agent systemen** op Azure met AZD
-- Toepassen van **coördinatiepatronen** voor AI-scenario's in de praktijk
-- Monitoren en debuggen van gedistribueerde agentsystemen
+Na het afronden van deze les zul je:
+- Begrijpen wat **multi-agent architectuur** patronen zijn en wanneer deze te gebruiken
+- **Orkestratiepatronen** implementeren (gecentraliseerd, gedecentraliseerd, hiërarchisch)
+- **Agent-communicatiestrategieën** ontwerpen (synchroon, asynchroon, gebeurtenisgestuurd)
+- **Gedeelde status** beheren over gedistribueerde agents
+- **Multi-agent systemen** uitrollen op Azure met AZD
+- **Coördinatiepatronen** toepassen voor praktische AI-scenario's
+- Gedistribueerde agent systemen monitoren en debuggen
 
-## Waarom Multi-Agent Coördinatie Belangrijk Is
+## Waarom Multi-Agent Coördinatie belangrijk is
 
-### De Evolutie: Van Enkele Agent naar Multi-Agent
+### De evolutie: Van enkele agent naar multi-agent
 
 **Enkele Agent (Eenvoudig):**
 ```
 User → Agent → Response
 ```
-- ✅ Gemakkelijk te begrijpen en implementeren
-- ✅ Snel voor eenvoudige taken
+- ✅ Makkelijk te begrijpen en te implementeren
+- ✅ Snel voor simpele taken
 - ❌ Beperkt door capaciteiten van één model
-- ❌ Kan complexe taken niet parallel uitvoeren
+- ❌ Kan geen complexe taken parallel uitvoeren
 - ❌ Geen specialisatie
 
 **Multi-Agent Systeem (Gevorderd):**
@@ -42,21 +42,21 @@ graph TD
     Orchestrator --> Agent2[Agent2<br/>Code]
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
-- ✅ Gespecialiseerde agenten voor specifieke taken
-- ✅ Parallelle uitvoer voor snelheid
+- ✅ Gespecialiseerde agents voor specifieke taken
+- ✅ Parallelle uitvoering voor snelheid
 - ✅ Modulair en onderhoudbaar
-- ✅ Beter voor complexe werkstromen
+- ✅ Beter geschikt voor complexe workflows
 - ⚠️ Vereist coördinatielogica
 
-**Analogie**: Een enkele agent is als één persoon die alle taken uitvoert. Multi-agent is als een team waar elk lid gespecialiseerde vaardigheden heeft (onderzoeker, programmeur, beoordelaar, schrijver) die samenwerken.
+**Analog**: Een enkele agent is als één persoon die alle taken doet. Multi-agent is als een team waarbij elk lid gespecialiseerde vaardigheden heeft (onderzoeker, programmeur, reviewer, schrijver) en samenwerkt.
 
 ---
 
-## Kern Coördinatiepatronen
+## Kerncoördinatiepatronen
 
-### Patroon 1: Sequentiële Coördinatie (Chain of Responsibility)
+### Patroon 1: Sequentiële Coördinatie (Keten van Verantwoordelijkheid)
 
-**Wanneer te gebruiken**: Taken moeten in een specifieke volgorde worden voltooid, elke agent bouwt voort op de output van de vorige.
+**Wanneer gebruiken**: Taken moeten in een specifieke volgorde worden voltooid, elke agent bouwt voort op de output van de vorige.
 
 ```mermaid
 sequenceDiagram
@@ -80,16 +80,16 @@ sequenceDiagram
 
 **Voordelen:**
 - ✅ Duidelijke datastroom
-- ✅ Gemakkelijk te debuggen
+- ✅ Makkelijk te debuggen
 - ✅ Voorspelbare uitvoeringsvolgorde
 
 **Beperkingen:**
 - ❌ Trager (geen parallelisme)
-- ❌ Eén falen blokkeert de hele keten
-- ❌ Kan geen onderling afhankelijke taken afhandelen
+- ❌ Eén fout blokkeert de gehele keten
+- ❌ Kan geen onderling afhankelijke taken aan
 
-**Voorbeeldtoepassingen:**
-- Content creatie pipeline (onderzoek → schrijven → bewerken → publiceren)
+**Voorbeeld gebruikssituaties:**
+- Content creatie pijplijn (onderzoek → schrijven → bewerken → publiceren)
 - Code generatie (plannen → implementeren → testen → uitrollen)
 - Rapportage generatie (dataverzameling → analyse → visualisatie → samenvatting)
 
@@ -97,7 +97,7 @@ sequenceDiagram
 
 ### Patroon 2: Parallelle Coördinatie (Fan-Out/Fan-In)
 
-**Wanneer te gebruiken**: Onafhankelijke taken kunnen gelijktijdig worden uitgevoerd, resultaten worden aan het einde gecombineerd.
+**Wanneer gebruiken**: Onafhankelijke taken kunnen gelijktijdig worden uitgevoerd, resultaten worden aan het einde gecombineerd.
 
 ```mermaid
 graph TB
@@ -124,24 +124,24 @@ graph TB
 
 **Voordelen:**
 - ✅ Snel (parallelle uitvoering)
-- ✅ Fouttolerant (gedeeltelijke resultaten zijn acceptabel)
+- ✅ Fouttolerant (gedeeltelijke resultaten acceptabel)
 - ✅ Schaalbaar horizontaal
 
 **Beperkingen:**
-- ⚠️ Resultaten kunnen buiten volgorde aankomen
+- ⚠️ Resultaten kunnen buiten volgorde binnenkomen
 - ⚠️ Vereist aggregatielogica
-- ⚠️ Complex staatbeheer
+- ⚠️ Complexe statusbeheer
 
-**Voorbeeldtoepassingen:**
-- Multi-source dataverzameling (APIs + databases + web scraping)
+**Voorbeeld gebruikssituaties:**
+- Gegevensverzameling uit meerdere bronnen (APIs + databases + webscraping)
 - Concurrentieanalyse (meerdere modellen genereren oplossingen, beste wordt gekozen)
-- Vertalingsdiensten (gelijktijdig vertalen naar meerdere talen)
+- Vertaalservices (tegelijkertijd vertalen naar meerdere talen)
 
 ---
 
-### Patroon 3: Hiërarchische Coördinatie (Manager-Worker)
+### Patroon 3: Hiërarchische Coördinatie (Manager-Werker)
 
-**Wanneer te gebruiken**: Complexe werkstromen met sub-taken, delegatie is nodig.
+**Wanneer gebruiken**: Complexe workflows met subtaken, delegatie nodig.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Voordelen:**
-- ✅ Handelt complexe werkstromen af
+- ✅ Omgaat met complexe workflows
 - ✅ Modulair en onderhoudbaar
-- ✅ Duidelijke verantwoordelijkheidsgrenzen
+- ✅ Duidelijke grens tussen verantwoordelijkheden
 
 **Beperkingen:**
 - ⚠️ Complexere architectuur
-- ⚠️ Hogere latency (meerdere coördinatielagen)
+- ⚠️ Hogere latentie (meerdere coördinatielagen)
 - ⚠️ Vereist geavanceerde orkestratie
 
-**Voorbeeldtoepassingen:**
-- Enterprise documentverwerking (classificeren → routeren → verwerken → archiveren)
-- Multi-stage datapijplijnen (inladen → schoonmaken → transformeren → analyseren → rapporteren)
-- Complexe automatiseringswerkstromen (planning → resource allocatie → uitvoering → monitoring)
+**Voorbeeld gebruikssituaties:**
+- Documentverwerking in ondernemingen (classificeren → routeren → verwerken → archiveren)
+- Meervoudige stadia datapijplijnen (invoeren → opschonen → transformeren → analyseren → rapporteren)
+- Complexe automatiseringsworkflows (plannen → resource toewijzing → uitvoering → monitoring)
 
 ---
 
-### Patroon 4: Event-gedreven Coördinatie (Publish-Subscribe)
+### Patroon 4: Gebeurtenisgestuurde Coördinatie (Publish-Subscribe)
 
-**Wanneer te gebruiken**: Agenten moeten op gebeurtenissen reageren, losse koppeling gewenst.
+**Wanneer gebruiken**: Agents moeten reageren op gebeurtenissen, losse koppeling gewenst.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Voordelen:**
-- ✅ Losse koppeling tussen agenten
-- ✅ Gemakkelijk nieuwe agenten toe te voegen (gewoon abonneren)
+- ✅ Losse koppeling tussen agents
+- ✅ Makkelijk nieuwe agents toe te voegen (gewoon abonneren)
 - ✅ Asynchrone verwerking
-- ✅ Veerkrachtig (berichtenpersistentie)
+- ✅ Veerkrachtig (berichtpersistentie)
 
 **Beperkingen:**
-- ⚠️ Uiteindelijk consistente gegevens
-- ⚠️ Complexe debugging
-- ⚠️ Problemen met berichtvolgorde
+- ⚠️ Uiteindelijk consistente data
+- ⚠️ Complex om te debuggen
+- ⚠️ Lastig om berichten op volgorde te krijgen
 
-**Voorbeeldtoepassingen:**
-- Real-time monitoringsystemen (meldingen, dashboards, logs)
-- Multikanaal notificaties (e-mail, sms, push, Slack)
+**Voorbeeld gebruikssituaties:**
+- Real-time monitoringsystemen (waarschuwingen, dashboards, logs)
+- Multi-kanaal notificaties (e-mail, SMS, push, Slack)
 - Dataverwerkingspijplijnen (meerdere consumenten van dezelfde data)
 
 ---
 
 ### Patroon 5: Consensus-gebaseerde Coördinatie (Stemmen/Quorum)
 
-**Wanneer te gebruiken**: Instemming nodig van meerdere agenten voordat door te gaan.
+**Wanneer gebruiken**: Overeenkomst nodig van meerdere agents voordat doorgaan.
 
 ```mermaid
 graph TB
@@ -254,13 +254,13 @@ graph TB
 
 **Beperkingen:**
 - ❌ Duur (meerdere model-aanroepen)
-- ❌ Trager (wachten op alle agenten)
-- ⚠️ Benodigde conflictoplossing
+- ❌ Trager (wachten op alle agents)
+- ⚠️ Vereist conflictoplossing
 
-**Voorbeeldtoepassingen:**
-- Content moderatie (meerdere modellen beoordelen content)
+**Voorbeeld gebruikssituaties:**
+- Contentmoderatie (meerdere modellen beoordelen inhoud)
 - Code review (meerdere linters/analyzers)
-- Medische diagnose (meerdere AI-modellen, deskundige validatie)
+- Medische diagnose (meerdere AI-modellen, expertvalidatie)
 
 ---
 
@@ -318,21 +318,21 @@ graph TB
 
 | Component | Doel | Azure Dienst |
 |-----------|---------|---------------|
-| **API Gateway** | Ingangspunt, rate limiting, authenticatie | API Management |
-| **Orkestrator** | Coördineert agent werkstromen | Container Apps |
+| **API Gateway** | Toegangspunt, rate limiting, authenticatie | API Management |
+| **Orkestrator** | Coördineert agent workflows | Container Apps |
 | **Berichtenwachtrij** | Asynchrone communicatie | Service Bus / Event Hubs |
-| **Agenten** | Gespecialiseerde AI-werkers | Container Apps / Functions |
-| **Statusopslag** | Gedeelde staat, taaktracking | Cosmos DB |
-| **Artifact Opslag** | Documenten, resultaten, logs | Blob Storage |
+| **Agents** | Gespecialiseerde AI-werkers | Container Apps / Functions |
+| **State Store** | Gedeelde status, taaktracking | Cosmos DB |
+| **Artifact Storage** | Documenten, resultaten, logs | Blob Storage |
 | **Monitoring** | Gedistribueerde tracing, logs | Application Insights |
 
-Service Bus-wachtrijen/topics en Event Hubs zijn verschillende diensten met verschillende leverings-/consumptiemodellen; Event Hubs is geen drop-in vervanging voor de Service Bus worker code hieronder. Parallelisme, gepersisteerde berichten en modelstemmen garanderen op zich geen fouttolerantie of hogere nauwkeurigheid.
+Service Bus-wachtrijen/topics en Event Hubs zijn verschillende diensten met verschillende leverings-/verbruikmodellen; Event Hubs is geen directe vervanging van de Service Bus code hieronder. Parallelisme, gepersistenteerde berichten en modelstemming garanderen op zichzelf geen fouttolerantie of hogere nauwkeurigheid.
 
 ---
 
 ## Vereisten
 
-### Vereiste Tools
+### Benodigde tools
 
 ```bash
 # Verify Azure Developer CLI
@@ -348,32 +348,32 @@ docker --version
 # ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Azure Vereisten
+### Azure vereisten
 
 - Actief Azure-abonnement
 - Machtigingen om te creëren:
   - Container Apps
   - Service Bus namespaces
-  - Cosmos DB-accounts
+  - Cosmos DB accounts
   - Storage accounts
   - Application Insights
 
 ### Kennisvereisten
 
-Je zou afgerond moeten hebben:
-- [Configuratiebeheer](../chapter-03-configuration/configuration.md)
+Je zou voltooid moeten hebben:
+- [Configuration Management](../chapter-03-configuration/configuration.md)
 - [Authenticatie & Beveiliging](../chapter-03-configuration/authsecurity.md)
 - [Microservices Voorbeeld](../../../../examples/microservices)
 
 ---
 
-## Implementatiehandleiding
+## Implementatiegids
 
-> **Ontwerpfragmenten, geen inzetbare lab:** De projectstructuur en `File:` labels hieronder beschrijven bestanden om in je eigen project te creëren; deze repository bevat geen volledige `multi-agent-system` applicatie. Ontbrekende stukken zijn onder andere main/parameter templates, Container Apps omgeving/registry, Dockerfiles en dependency locks, Cosmos database/container setup, modelimplementaties, identiteit/rolconfiguratie, schaalregels, en parallelle workers/wachtrijen. Verwacht niet dat `azd init` deze bestanden genereert of `azd up` de codefragmenten ongewijzigd implementeert. Voor een uitvoerbaar startpunt, voltooi [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Ontwerpfragmenten, geen inzetbare lab:** De projectstructuur en `File:` labels hieronder beschrijven bestanden die je zelf maakt; deze repository bevat geen complete `multi-agent-system` applicatie. Ontbrekende stukken zijn onder andere hoofd-/parameter-templates, Container Apps omgeving/registry, Dockerfiles en afhankelijkheidsvergrendelingen, Cosmos database/container setup, model deployments, identiteit/rol configuratie, schaalregels en parallelle workers/wachtrijen. Verwacht niet dat `azd init` deze bestanden genereert of `azd up` deze snippets onveranderd uitrolt. Voor een uitvoerbaar startpunt, voltooi [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Runtime veronderstellingen:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, en (voor monitoring) `azure-monitor-opentelemetry`; zet `shared` op het Python import pad in elke service image. De Cosmos `agent-state/tasks` container moet al bestaan met partitiesleutel `/id`. Sleutel-gebaseerde connecties vereenvoudigen deze fragmenten, zijn geen productieadvies: geef de voorkeur aan managed identities met gescopeerde Service Bus/Cosmos/OpenAI data-vlak rollen. Maak sleutels niet publiek in outputs of logs.
+**Runtime aannames:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask en (voor monitoring) `azure-monitor-opentelemetry`; zet `shared` op het Python importpad in elk service image. De Cosmos `agent-state/tasks` container moet al bestaan met partition key `/id`. Sleutelgebaseerde connecties vereenvoudigen deze fragmenten, niet productierichtlijnen: geef de voorkeur aan managed identities met gerichte Service Bus/Cosmos/OpenAI data-plane rollen. Blootstelling van sleutels in outputs of logs vermijden.
 
-Service Bus levering is **minstens één keer**. Bewaar idempotentie per taak **en stap**, gebruik optimistische gelijktijdigheid (ETags) voor lezen/wijzigen/schrijven van staat, en vernieuw berichtenlocks tijdens langdurige verwerking. De eenvoudige state manager hieronder is alleen sequentieel en implementeert deze productiegaranties niet.
+Service Bus levering is **minstens één keer**. Behoud idempotentie per taak **en stap**, gebruik optimistische gelijktijdigheid (ETags) voor lezen/wijzigen/schrijven van staat, en vernieuw berichtlocks bij langlopende verwerking. De eenvoudige statusbeheerder hieronder is alleen sequentieel en implementeert deze productiegaranties niet.
 
 ### Projectstructuur
 
@@ -409,9 +409,9 @@ multi-agent-system/
 
 ## Les 1: Sequentieel Coördinatiepatroon
 
-### Implementatie: Content Creatiepipeline
+### Implementatie: Content creatie pijplijn
 
-Laten we een sequentiële pipeline ontwerpen: Onderzoek → Schrijven → Bewerken. Publicatie valt buiten dit voorbeeld.
+Laten we een sequentiële pijplijn ontwerpen: Onderzoek → Schrijf → Bewerk. Publiceren valt buiten dit voorbeeld.
 
 ### 1. AZD Configuratie
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Shared State Manager
+### 3. Gedeelde Statusbeheerder
 
 **Bestand: `src/shared/state_manager.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Redacteursagent
+### 7. Redacteuragent
 
 **Bestand: `src/agents/editor/app.py`**
 
@@ -895,14 +895,14 @@ if __name__ == '__main__':
 
 ### 8. Uitrollen en Testen
 
-Deze opdrachten zijn **alleen van toepassing nadat je de ontbrekende projectbestanden hebt geïmplementeerd**. Interactieve Foundry agent initialisatie is een aparte workflow; dit genereert niet dit Service Bus ontwerp.
+Deze commando's zijn **alleen toepasbaar nadat je de ontbrekende projectbestanden hebt geïmplementeerd**. Interactieve Foundry agent-initialisatie is een aparte workflow; het genereert deze Service Bus-opzet niet.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
@@ -968,7 +968,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Implementatie: Multi-Source Onderzoeksaggregator
 
-Laten we een parallel systeem bouwen dat gelijktijdig informatie uit meerdere bronnen verzamelt.
+Laten we een parallel systeem bouwen dat informatie gelijktijdig van meerdere bronnen verzamelt.
 
 ### Parallelle Orkestrator
 
@@ -1123,24 +1123,24 @@ if __name__ == '__main__':
     main()
 ```
 
-**Voordelen van Parallel Patroon:**
-- ⚡ **Mogelijk lagere latency** (beperkt door de langzaamste werker plus coördinatie overhead)
+**Voordelen van parallel patroon:**
+- ⚡ **Mogelijk lagere latentie** (begrensd door de langzaamste werker plus coördinatie-overhead)
 - 🔄 **Kan gedeeltelijke resultaten ondersteunen** met expliciete deadlines en faalbeleid (niet geïmplementeerd door de basisaggregator)
-- 📈 **Schaalbaar** (voeg gemakkelijk meer agenten toe)
+- 📈 **Schaalbaar** (makkelijk extra agents toevoegen)
 
 ---
 
-## Praktische Oefeningen
+## Praktische oefeningen
 
-### Oefening 1: Timeout Afhandeling Toevoegen ⭐⭐ (Middenniveau)
+### Oefening 1: Timeout-afhandeling toevoegen ⭐⭐ (Medium)
 
-**Doel**: Implementeer timeoutlogica zodat de aggregator niet voor altijd wacht op trage agenten.
+**Doel**: Implementeer timeout-logica zodat de aggregator niet oneindig wacht op trage agents.
 
-**Startpunt:** Voer deze lokale deadline simulatie uit voordat je deze integreert in een wachtrijworker. Een timeout die alleen wordt gecontroleerd wanneer een ander bericht arriveert, vuurt nooit af als de missende werker niets stuurt.
+**Startpunt:** Voer deze lokale deadline-simulatie uit voordat je het integreert in een queue worker. Een timeout die alleen wordt gecontroleerd als er een ander bericht arriveert, wordt nooit afgevuurd als de ontbrekende werker niets verzendt.
 
 **Stappen**:
 
-1. **Voeg timeout tracking toe aan aggregator:**
+1. **Timeout-tracking toevoegen aan aggregator:**
 
 ```python
 import asyncio
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Wachtrijsysteem integratie (ontwerptaak):** Bewaar de dispatch deadline en verwachte agenten bij het aanmaken van de taak, voer periodieke deadline sweep uit onafhankelijk van binnenkomende resultaten, finaliseer atomair gedeeltelijke resultaten en negeer late/dubbele berichten voor gefinaliseerde taken. Een lokale timeout annuleert geen externe werkers.
+3. **Queue-systeem integratie (ontwerptaak):** Bewaar de dispatch deadline en verwachte agents bij het maken van de taak, voer een periodieke deadline sweep uit onafhankelijk van binnenkomende resultaten, finaliseer gedeeltelijke resultaten atomair, en negeer late/duplicaat berichten voor gefinaliseerde taken. Een lokale timeout annuleert geen externe workers.
 
-Alleen voor je geïmplementeerde project:
+Alleen voor jouw geïmplementeerde project:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Succescriteria:**
-- ✅ De lokale test beëindigt na de één-seconde deadline zelfs als een agent onvolledig is
+- ✅ De lokale test keert terug na zijn één-seconde deadline, zelfs als een agent niet compleet is
 - ✅ Respons geeft gedeeltelijke resultaten aan (`"timed_out": true`)
-- ✅ Beschikbare resultaten worden geretourneerd (3 van 4 agenten)
+- ✅ Beschikbare resultaten worden geretourneerd (3 van de 4 agents)
 
 **Tijd**: 20-25 minuten
 
 ---
 
-### Oefening 2: Retrylogica Implementeer ⭐⭐⭐ (Gevorderd)
+### Oefening 2: Retry-logica implementeren ⭐⭐⭐ (Gevorderd)
 
-**Doel**: Probeer automatisch mislukte agenttaken opnieuw voordat je opgeeft.
+**Doel**: Mislukte agenttaken automatisch opnieuw proberen voordat opgegeven wordt.
 
 **Stappen**:
 
-1. **Gebruik Service Bus leveringsaantallen in plaats van herinvoeren van aangepaste retry-tellers:**
+1. **Gebruik Service Bus leveringsaantallen in plaats van custom retry tellers te herenqueueën:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Voeg retry-handler toe aan agenten:**
+2. **Voeg retry-handler toe aan agents:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1260,9 +1260,9 @@ def monitor_dead_letters():
 
 **✅ Succescriteria:**
 - ✅ Mislukte taken worden automatisch opnieuw geprobeerd (tot 3 keer)
-- ✅ Exponentiële backoff tussen retries (5s, 10s, 20s), met vernieuwing van berichtlock waar nodig
-- ✅ Na maximale retries gaan berichten naar dead letter queue
-- ✅ Dead letter berichten kunnen worden geïnspecteerd; replay vereist aparte idempotente herstelworkflow
+- ✅ Exponentiële backoff tussen retries (5s, 10s, 20s), met message-lock vernieuwing waar nodig
+- ✅ Na maximale retries, gaan berichten naar dead letter queue
+- ✅ Dead letter berichten kunnen worden geïnspecteerd; replay vereist aparte idempotente recovery workflow
 
 **Tijd**: 30-40 minuten
 
@@ -1270,7 +1270,7 @@ def monitor_dead_letters():
 
 ### Oefening 3: Circuit Breaker Implementeren ⭐⭐⭐ (Gevorderd)
 
-**Doel**: Voorkom kettingfalen door verzoeken aan falende agenten te stoppen.
+**Doel**: Voorkom kettingfouten door aanvragen naar falende agents te stoppen.
 
 **Stappen**:
 
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Pas toe op agent-aanroepen:**
+2. **Pas toe op agent aanroepen:**
 
 ```python
 # In orchestrator
@@ -1348,7 +1348,7 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Deze schakeling beschermt de **zendoperatie**, niet de voltooiing door de externe werker: het succesvol in de wachtrij plaatsen van een bericht zegt niets over of een agent actief is. `send_message` is de verzendfunctie van jouw applicatie. Voer bij uitvoering van schakelingen waargenomen taakfouten/time-outs in een duurzame coördinator in. Deze in-memory klasse is een demonstratie in één thread, geen gedistribueerde circuit breaker.
+Dit circuit beschermt de **verzendoperatie**, niet de voltooiing door de externe worker: het succesvol in de wachtrij plaatsen van een bericht zegt niets over of een agent actief is. `send_message` is de verzendfunctie van jouw applicatie. Voor uitvoeringscircuits, voer waargenomen taakfouten/tijdoverschrijdingen in een duurzame coördinator in. Deze in-memory klasse is een single-thread demonstratie, geen gedistribueerde circuit breaker.
 
 3. **Test de circuit breaker lokaal:**
 
@@ -1369,16 +1369,16 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Succescriteria:**
-- ✅ Na 5 fouten opent de circuit (weigert verzoeken)
-- ✅ Na 60 seconden gaat de circuit half-open (test herstel)
-- ✅ Andere agents blijven normaal werken
-- ✅ Circuit sluit automatisch als agent herstelt
+- ✅ Na 5 fouten opent het circuit (weigert aanvragen)
+- ✅ Na 60 seconden wordt het circuit half-open (test herstel)
+- ✅ Andere agents werken normaal door
+- ✅ Circuit sluit automatisch wanneer agent herstelt
 
 **Tijd**: 40-50 minuten
 
 ---
 
-## Monitoring en Debugging
+## Monitoring en Debuggen
 
 ### Gedistribueerde Tracing met Application Insights
 
@@ -1425,7 +1425,7 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
             raise
 ```
 
-### Application Insights Query's
+### Application Insights Queries
 
 **Volg multi-agent workflows:**
 
@@ -1437,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Agent prestatievergelijking:**
+**Vergelijking agent prestaties:**
 
 ```kusto
 // Compare agent execution times
@@ -1470,20 +1470,20 @@ exceptions
 
 ### Kosten Multi-Agent Systeem (maandelijkse schattingen)
 
-Alleen illustratieve planningscijfers, geen offertes: het totaal hieronder is **$240-565/maand**. Verifieer actuele regionale tarieven, actieve/inactieve replica-uren, input/output token-mix, opslag en telemetrie. Serverless heeft geen minimum voor voorspellende doorvoer maar brengt nog steeds kosten in rekening voor verzoeken en opslag.
+Illustratieve planningscijfers alleen, geen offertes: de som hieronder is **$240-565/maand**. Controleer huidige regionale tarieven, actieve/inactieve replica-uren, input/output tokenmix, opslag en telemetrie. Serverless kent geen voorziening-doorvoerminimum, maar rekent wel kosten voor aanvragen en opslag.
 
 | Component | Configuratie | Kosten |
-|-----------|--------------|------|
+|-----------|--------------|-------|
 | **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB elk) | $60-120 |
-| **Service Bus** | Standaardlaag, 10M berichten | $10-20 |
+| **Service Bus** | Standaard tier, 10M berichten | $10-20 |
 | **Cosmos DB** | Serverless, 5GB opslag, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB opslag, 100K operaties | $5-10 |
 | **Application Insights** | 5GB ingestie | $10-15 |
 | **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **Totaal** | | **$240-565/maand** |
 
-### Kostenoptimalisatiestrategieën
+### Strategieën voor kostenoptimalisatie
 
 1. **Gebruik serverless waar mogelijk:**
    ```bicep
@@ -1494,7 +1494,7 @@ Alleen illustratieve planningscijfers, geen offertes: het totaal hieronder is **
    }
    ```
 
-2. **Schaal agents naar nul als ze inactief zijn:**
+2. **Schaal agents naar nul bij inactiviteit:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1508,7 +1508,7 @@ Alleen illustratieve planningscijfers, geen offertes: het totaal hieronder is **
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache veelgebruikte resultaten:**
+4. **Cache vaak gebruikte resultaten:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1542,7 +1542,7 @@ Alleen illustratieve planningscijfers, geen offertes: het totaal hieronder is **
    }
    ```
 
-4. **Stel TTL (time-to-live) in voor berichten**
+4. **Stel bericht-TTL (time-to-live) in**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
@@ -1557,13 +1557,13 @@ Alleen illustratieve planningscijfers, geen offertes: het totaal hieronder is **
 
 ### ❌ NIET DOEN:
 
-1. **Creëer geen cirkelvormige afhankelijkheden**
+1. **Maak geen circulaire afhankelijkheden**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Blokkeer de threads van agents niet**
+2. **Blokkeer agent threads niet**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1578,7 +1578,7 @@ Alleen illustratieve planningscijfers, geen offertes: het totaal hieronder is **
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Gebruik geen oneindige herhalingen**
+4. **Gebruik geen oneindige retries**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1610,7 +1610,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **Oplossingen:**
 
-1. **Verhoog het aantal agentreplica's:**
+1. **Vergroot het aantal agent replicas:**
    ```bash
    az containerapp update \
      --resource-group "$RG_NAME" \
@@ -1630,11 +1630,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Probleem: Taak time-out/verloopt nooit
+### Probleem: Taak time-out/voltooit nooit
 
 **Symptomen:**
-- Taakstatus blijft "in uitvoering"
-- Sommige agents voltooien, anderen niet
+- Taakstatus blijft "in_progress"
+- Sommige agents voltooien, andere niet
 - Geen foutmeldingen
 
 **Diagnose:**
@@ -1648,9 +1648,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Oplossingen:**
 
-1. **Implementeer timeout in aggregator (Oefening 1)**
+1. **Implementeer time-out in aggregator (Oefening 1)**
 
-2. **Controleer op agentfouten met Azure Monitor:**
+2. **Controleer agentfouten via Azure Monitor:**
    ```bash
    # View logs via azd monitor
    azd monitor --logs
@@ -1668,7 +1668,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Meer Informatie
+## Meer informatie
 
 ### Officiële Documentatie
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -1677,37 +1677,37 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Volgende stappen in deze cursus
-- ← Vorige: [Capaciteitsplanning](capacity-planning.md)
-- → Volgende: [SKU-selectie](sku-selection.md)
-- 🏠 [Cursus Home](../../README.md)
+- ← Vorige: [Capacity Planning](capacity-planning.md)
+- → Volgende: [SKU Selection](sku-selection.md)
+- 🏠 [Cursusstartpagina](../../README.md)
 
 ### Gerelateerde voorbeelden
-- [Microservices Voorbeeld](../../../../examples/microservices) - Patronen voor servicecommunicatie
-- [Microsoft Foundry Models Voorbeeld](../../../../examples/azure-openai-chat) - AI-integratie
+- [Microservices Voorbeeld](../../../../examples/microservices) - Service communicatiepatronen
+- [Microsoft Foundry Models Voorbeeld](../../../../examples/azure-openai-chat) - AI integratie
 
 ---
 
 ## Samenvatting
 
 **Je hebt geleerd:**
-- ✅ Vijf coördinatiepatronen (sequentieel, parallel, hiërarchisch, gebeurtenisgestuurd, consensus)
+- ✅ Vijf coördinatiepatronen (sequentieel, parallel, hiërarchisch, evenementgestuurd, consensus)
 - ✅ Multi-agent architectuur op Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Staatbeheer over gedistribueerde agents
-- ✅ Timeoutafhandeling, herhalingen en circuit breakers
-- ✅ Monitoring en debugging van gedistribueerde systemen
-- ✅ Kostenoptimalisatiestrategieën
+- ✅ Statusbeheer over gedistribueerde agents
+- ✅ Timeout-afhandeling, retries en circuit breakers
+- ✅ Monitoring en debuggen van gedistribueerde systemen
+- ✅ Strategieën voor kostenoptimalisatie
 
-**Belangrijke punten:**
-1. **Kies het juiste patroon** - Sequentieel voor geordende workflows, parallel voor snelheid, gebeurtenisgestuurd voor flexibiliteit
-2. **Beheer staat zorgvuldig** - Gebruik Cosmos DB of een vergelijkbare oplossing voor gedeelde staat
-3. **Ga op een elegante manier om met fouten** - Timeouts, herhalingen, circuit breakers, dead letter queues
+**Belangrijkste punten:**
+1. **Kies het juiste patroon** - Sequentieel voor geordende workflows, parallel voor snelheid, evenementgestuurd voor flexibiliteit
+2. **Beheer status zorgvuldig** - Gebruik Cosmos DB of vergelijkbaar voor gedeelde status
+3. **Ga verstandig om met fouten** - Time-outs, retries, circuit breakers, dead letter queues
 4. **Monitor alles** - Gedistribueerde tracing is essentieel voor debugging
 5. **Optimaliseer kosten** - Schaal naar nul, gebruik serverless, implementeer caching
 
 **Volgende stappen:**
-1. Voltooi de praktische oefeningen
-2. Bouw een multi-agent systeem voor jouw gebruiksscenario
-3. Bestudeer [SKU-selectie](sku-selection.md) om prestaties en kosten te optimaliseren
+1. Voltooi de praktijkopdrachten
+2. Bouw een multi-agent systeem voor jouw use case
+3. Bestudeer [SKU Selection](sku-selection.md) om prestaties en kosten te optimaliseren
 
 ---
 

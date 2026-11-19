@@ -1,54 +1,54 @@
-# AZD Grunnleggende - Kjerneskonsepter og Grunnprinsipper
+# AZD Grunnprinsipper - Kjernebegreper og Grunnleggende
 
 **Kapittelnavigasjon:**
 - **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
 - **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Rask Start
-- **⬅️ Forrige**: [Kurs Oversikt](../../README.md#-chapter-1-foundation--quick-start)
+- **⬅️ Forrige**: [Kursoversikt](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Neste**: [Installasjon & Oppsett](installation.md)
-- **🚀 Neste Kapittel**: [Kapittel 2: AI-Foran Utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduksjon
 
-> Gjennomgått mot `azd 1.37.2` (november 2026). Bash-kommandoer bruker siterte plassholdere som du må erstatte. Malarbeidsflyter bruker `.` for å initialisere gjeldende katalog; uten et katalogargument oppretter malinitialisering en underkatalog og endrer ikke arbeidskatalogen i skallet ditt. Avanserte utdrag er illustrative, ikke fullstendige prosjekter.
+> Gjennomgått opp mot `azd 1.37.2` (november 2026). Bash-kommandoer bruker siterte plassholdere som du må erstatte. Malarbeidsflyter bruker `.` til å initialisere gjeldende katalog; uten et katalogargument oppretter malinitialisering en undermappe og endrer ikke terminalens arbeidskatalog. Avanserte kodeeksempler er illustrerende, ikke komplette prosjekter.
 
-Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen din fra lokal utvikling til Azure-distribusjon. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler distribusjon av sky-nære applikasjoner.
+Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen fra lokal utvikling til Azure-distribusjon. Du vil lære grunnleggende konsepter, kjernefunksjoner, og forstå hvordan azd forenkler distribusjon av cloud-native applikasjoner.
 
 ## Læringsmål
 
-På slutten av denne leksjonen vil du:
+Ved slutten av denne leksjonen vil du:
 - Forstå hva Azure Developer CLI er og dets primære formål
 - Lære kjernebegrepene maler, miljøer og tjenester
-- Utforske nøkkelfunksjoner inkludert mal-drevet utvikling og Infrastruktur som Kode
-- Forstå azd prosjektstruktur og arbeidsflyt
+- Utforske nøkkelfunksjoner inkludert malstyrt utvikling og Infrastruktur som kode
+- Forstå azd-prosjektstruktur og arbeidsflyt
 - Være forberedt på å installere og konfigurere azd for ditt utviklingsmiljø
 
 ## Læringsresultater
 
-Etter å ha fullført denne leksjonen, vil du kunne:
-- Forklare rollen til azd i moderne skyutviklingsarbeidsflyter
-- Identifisere komponentene i en azd prosjektstruktur
+Etter å ha fullført denne leksjonen vil du kunne:
+- Forklare rollen til azd i moderne cloud-utviklingsarbeidsflyter
+- Identifisere komponenter i en azd-prosjektstruktur
 - Beskrive hvordan maler, miljøer og tjenester fungerer sammen
-- Forstå fordelene med Infrastruktur som Kode med azd
-- Gjenkjenne ulike azd-kommandoer og deres formål
+- Forstå fordelene med Infrastruktur som kode med azd
+- Gjenkjenne forskjellige azd-kommandoer og deres formål
 
 ## Hva er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen din fra lokal utvikling til Azure-distribusjon. Det forenkler prosessen med å bygge, distribuere og administrere sky-nære applikasjoner på Azure.
+Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen fra lokal utvikling til Azure-distribusjon. Det forenkler prosessen med å bygge, distribuere og administrere cloud-native applikasjoner på Azure.
 
 ### Hva kan du distribuere med azd?
 
 azd støtter et bredt spekter av arbeidsmengder—og listen vokser stadig. I dag kan du bruke azd til å distribuere:
 
-| Arbeidsmengdetype | Eksempler | Samme arbeidsflyt? |
+| Arbeidsmengde Type | Eksempler | Samme Arbeidsflyt? |
 |---------------|----------|----------------|
-| **Tradisjonelle applikasjoner** | Webapper, REST-API-er, statiske nettsteder | ✅ `azd up` |
-| **Tjenester og mikrotjenester** | Container Apps, Funksjonsapper, fler-tjeneste bakender | ✅ `azd up` |
-| **AI-drevne applikasjoner** | Chat-apper med Microsoft Foundry-modeller, RAG-løsninger med AI-søk | ✅ `azd up` |
-| **Intelligente agenter** | Foundry-hostede agenter, fleragentorkestreringer | ✅ `azd up` |
+| **Tradisjonelle apper** | Webapplikasjoner, REST APIer, statiske nettsteder | ✅ `azd up` |
+| **Tjenester og mikrotjenester** | Container Apps, Funksjonsapper, flertjeneste backend | ✅ `azd up` |
+| **AI-drevne apper** | Chat-apper med Microsoft Foundry-modeller, RAG-løsninger med AI-søk | ✅ `azd up` |
+| **Intelligente agenter** | Foundry-hostede agenter, multi-agent orkestreringer | ✅ `azd up` |
 
-Nøkkelpunket er at **azd sin livssyklus er den samme uansett hva du distribuerer**. Du initialiserer et prosjekt, provisjonerer infrastruktur, distribuerer koden din, overvåker appen og rydder opp—enten det er et enkelt nettsted eller en sofistikert AI-agent.
+Hovedinnsikten er at **azd sin livssyklus er lik uansett hva du distribuerer**. Du initialiserer et prosjekt, sørger for infrastruktur, distribuerer koden, overvåker appen og rydder opp—enten det er et enkelt nettsted eller en avansert AI-agent.
 
-Denne kontinuiteten er etter design. azd behandler AI-funksjoner som en annen type tjeneste applikasjonen din kan bruke, ikke noe fundamentalt annerledes. Et chat-endepunkt støttet av Microsoft Foundry-modeller er, fra azd sitt perspektiv, bare en annen tjeneste å konfigurere og distribuere.
+Denne kontinuiteten er designet slik. azd behandler AI-funksjoner som en annen type tjeneste applikasjonen kan bruke, ikke som noe fundamentalt annerledes. Et chat-endepunkt drevet av Microsoft Foundry-modeller er, fra azd sitt perspektiv, bare en annen tjeneste som skal konfigureres og distribueres.
 
 ### 🎯 Hvorfor bruke AZD? En virkelighetsnær sammenligning
 
@@ -56,7 +56,7 @@ La oss sammenligne distribusjon av en enkel webapp med database:
 
 #### ❌ UTEN AZD: Manuell Azure-distribusjon (30+ minutter)
 
-**Illustrerende Bash-sammenligning, ikke en kjørbar applikasjonsstarter.** Dette forutsetter eksisterende applikasjonskode, unike ressursnavn, Azure CLI-autentisering, og eventuelle nødvendige CLI-utvidelser. Bruk maløvelsen under for støttet ende-til-ende-løype.
+**Illustrerende Bash-sammenligning, ikke en kjørbar appstarter.** Dette forutsetter eksisterende applikasjonskode, unike ressursnavn, Azure CLI-autentisering og nødvendige CLI-utvidelser. Bruk maløvelsen nedenfor for støttet ende-til-ende prosess.
 
 ```bash
 # Step 1: Create resource group
@@ -145,13 +145,13 @@ az webapp deployment source config-zip \
 ```
 
 **Problemer:**
-- ❌ 15+ kommandoer å huske og kjøre i rekkefølge
-- ❌ 30-45 minutter manuelt arbeid
-- ❌ Lett å gjøre feil (tastefeil, feil parametere)
-- ❌ Legitimasjon krever eksplisitt håndtering; debug-logger og skallsniffer kan avsløre dem
+- ❌ 15+ kommandoer å huske og utføre i riktig rekkefølge
+- ❌ 30-45 minutter manuell jobb
+- ❌ Lett å gjøre feil (tastefeil, gale parametere)
+- ❌ Legitimasjon krever eksplisitt håndtering; debug-logger og shell-sporing kan eksponere dem
 - ❌ Ingen automatisert rollback ved feil
-- ❌ Vanskelig å replikere for teammedlemmer
-- ❌ Forskjellig hver gang (ikke reproduserbart)
+- ❌ Vanskelig å gjenskape for teammedlemmer
+- ❌ Variabel hver gang (ikke reproduserbar)
 
 #### ✅ MED AZD: Automatisert distribusjon (5 kommandoer, 10-15 minutter)
 
@@ -175,50 +175,50 @@ azd up
 ```
 
 **Fordeler:**
-- ✅ **5 kommandoer** vs 15+ manuelle steg
-- ✅ **10-15 minutter** total tid (mest venting på Azure)
-- ✅ **Færre manuelle feil** - konsistent, mal-drevet arbeidsflyt
-- ✅ **Sikker hemmelighåndtering** - mange maler bruker Azure-administrert hemmelig lagring
+- ✅ **5 kommandoer** vs. 15+ manuelle steg
+- ✅ **10-15 minutter** totalt (for det meste ventetid på Azure)
+- ✅ **Færre manuelle feil** - konsistent, malstyrt arbeidsflyt
+- ✅ **Sikker håndtering av hemmeligheter** - mange maler bruker Azure-administrert hemmelighetslagring
 - ✅ **Reproduserbare distribusjoner** - samme arbeidsflyt hver gang
-- ✅ **Reproduserbare infrastrukturbeskrivelser** - underlagt kvoter, regions tilgjengelighet og malversjoner
-- ✅ **Klar for teambruk** - hvem som helst kan distribuere med de samme kommandoene
+- ✅ **Reproduserbare infrastrukturdefinisjoner** - avhengig av kvoter, regions tilgjengelighet og malversjoner
+- ✅ **Teamklar** - hvem som helst kan distribuere med de samme kommandoene
 - ✅ **Infrastruktur som kode** - versjonskontrollerte Bicep-maler
-- ✅ **Maldefinert overvåkning** - Application Insights når inkludert i malen
+- ✅ **Maldefinert overvåkning** - Application Insights om inkludert i malen
 
-### Tid og Pålitelighet
+### Tid og Påliteligehet
 
-Tidsangivelsene over er estimater, ikke benchmarks. azd reduserer kommandoene du må koordinere, men garanterer ikke distribusjonstid, eliminerer ikke feil, eller gir automatisk rollback av applikasjon/database. Ha fungerende versjoner i kildekontroll og test gjenopprettingsprosedyrer.
+Tidsangivelsene over er estimater, ikke benchmarks. azd reduserer kommandoene du må koordinere, men garanterer ikke distribusjonstid, eliminerer ikke feil, eller tilbyr automatisk rollback for applikasjon/database. Oppbevar fungerende versjoner i kildekontroll og test gjenopprettingsprosedyrer.
 
-## Kjerneskonsepter
+## Kjernebegreper
 
 ### Maler
-Maler er fundamentet for azd. De inneholder:
-- **Applikasjonskode** - Kildekoden og avhengigheter
-- **Infrastrukturbeskrivelser** - Azure-ressurser definert i Bicep eller Terraform
+Maler er grunnlaget for azd. De inneholder:
+- **Applikasjonskode** - Din kildekode og avhengigheter
+- **Infrastrukturdefinisjoner** - Azure-ressurser definert i Bicep eller Terraform
 - **Konfigurasjonsfiler** - Innstillinger og miljøvariabler
 - **Distribusjonsskript** - Automatiserte distribusjonsarbeidsflyter
 
 ### Miljøer
 Miljøer representerer forskjellige distribusjonsmål:
 - **Utvikling** - For testing og utvikling
-- **Staging** - Pre-produksjonsmiljø
+- **Staging** - Forproduksjonsmiljø
 - **Produksjon** - Live produksjonsmiljø
 
-Hvert miljø vedlikeholder sin egen:
-- Miljønavn og verdier; ressursisolering avhenger av infrastrukturen i malen
+Hvert miljø opprettholder sin egen:
+- Miljønavn og verdier; ressursisolasjon avhenger av infrastrukturen malen
 - Konfigurasjonsinnstillinger
 - Distribusjonstilstand
 
 ### Tjenester
-Tjenester i `azure.yaml` beskriver distribuerbare applikasjonskomponenter:
-- **Frontend** - Webapplikasjoner, enkeltsideapplikasjoner (SPA)
-- **Backend** - API-er, mikrotjenester
+Tjenester i `azure.yaml` beskriver deployerbare applikasjonskomponenter:
+- **Frontend** - Webapplikasjoner, Single Page Applications
+- **Backend** - APIer, mikrotjenester
 
-Databaser og lagring tildeles normalt som infrastrukturr ressurser, ikke som oppfunnet tjenestevert som `host: postgres`.
+Databaser og lagring blir normalt tilordnet som infrastrukturrressurser, ikke som oppdiktede tjenesteverter som `host: postgres`.
 
 ## Nøkkelfunksjoner
 
-### 1. Mal-Drevet Utvikling
+### 1. Malstyrt utvikling
 ```bash
 # Browse available templates
 azd template list
@@ -227,10 +227,10 @@ azd template list
 azd init --template "<template-name>" .
 ```
 
-### 2. Infrastruktur som Kode
-- **Bicep** - Azures domenespesifikke språk
-- **Terraform** - Verktøy for infrastruktur på tvers av skyer
-- Bicep kompilerer til ARM-maler; rå ARM JSON er ikke en egen innebygget `infra.provider`.
+### 2. Infrastruktur som kode
+- **Bicep** - Azures domene-spesifikke språk
+- **Terraform** - Multi-cloud infrastrukturverktøy
+- Bicep kompileres til ARM-maler; rå ARM JSON er ikke en egen innebygd `infra.provider`.
 
 ### 3. Integrerte Arbeidsflyter
 ```bash
@@ -245,12 +245,12 @@ azd deploy        # Deploy application code or redeploy application code once up
 azd down          # Clean up resources
 ```
 
-#### 🛡️ Sikker Infrastrukturoppsett med Forhåndsvisning
-Kommandoen `azd provision --preview` er en banebryter for sikre distribusjoner:
-- **Tørrkjøringsanalyse** - Viser hva som vil opprettes, endres eller slettes
-- **Ingen infrastruktur-påføring** - Vurderer leverandørendringer; inspiser prosjektkroker først, siden kroker kan kjøre kommandoer med bivirkninger
+#### 🛡️ Sikker infrastrukturplanlegging med forhåndsvisning
+Kommandoen `azd provision --preview` er en spillveksler for sikre distribusjoner:
+- **Tørrkjøringsanalyse** - Viser hva som vil bli opprettet, endret eller slettet
+- **Ingen infrastruktur-utføring** - Går gjennom provider-endringer; inspiser prosjekt-hooks først, siden hooks kan kjøre kommandoer med sideeffekter
 - **Teamsamarbeid** - Del forhåndsvisningsresultater før distribusjon
-- **Kostnadsplanlegging** - Inspiser foreslåtte SKU-er, pris deretter med Azure Pricing Calculator; forhåndsvisningen kalkulerer ikke priser
+- **Kostnadsplanlegging** - Inspiser foreslåtte SKUer, prissett dem med Azure Pricing Calculator; forhåndsvisning kalkulerer ikke priser
 
 ```bash
 # Example preview workflow
@@ -298,16 +298,16 @@ graph LR
     style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
-**Arbeidsflytforklaring:**
+**Forklaring til arbeidsflyt:**
 1. **Init** - Start med mal eller nytt prosjekt
-2. **Autentisering** - Autentiser med Azure
+2. **Auth** - Autentiser med Azure
 3. **Miljø** - Opprett isolert distribusjonsmiljø
-4. **Forhåndsvisning** - 🆕 Alltid forhåndsvis infrastrukturoppdateringer først (sikker praksis)
+4. **Forhåndsvisning** - 🆕 Alltid forhåndsvis infrastrukturendringer først (sikker praksis)
 5. **Provision** - Opprett/oppdater Azure-ressurser
-6. **Deploy** - Push applikasjonskode
-7. **Monitor** - Observer applikasjonsytelse
-8. **Iterer** - Gjør endringer og distribuer på nytt
-9. **Cleanup** - Fjern ressurser når ferdig
+6. **Deploy** - Push applikasjonskoden din
+7. **Overvåk** - Observer applikasjonens ytelse
+8. **Iterer** - Gjør endringer og deployer koden på nytt
+9. **Rydd opp** - Fjern ressurser når du er ferdig
 
 ### 4. Miljøhåndtering
 ```bash
@@ -317,16 +317,16 @@ azd env select "<environment-name>"
 azd env list
 ```
 
-### 5. Utvidelser og AI-Kommandoer
+### 5. Utvidelser og AI-kommandoer
 
-azd bruker et utvidelsessystem for å legge til funksjoner utover kjerne-CLI. Dette er spesielt nyttig for AI-arbeidsmengder:
+azd bruker et utvidelsessystem for å legge til funksjonalitet utover kjerne-CLI. Dette er spesielt nyttig for AI-arbeidsmengder:
 
 ```bash
 # List available extensions
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Initialize an AI agent project interactively
 azd ai agent init
@@ -338,22 +338,24 @@ azd ai agent invoke
 azd mcp start
 ```
 
-**Agentens livssyklus, ende-til-ende.** Bruk `azure.ai.agents` for agentlivssyklusoperasjoner og installer `azure.ai.evaluations` separat for evaluering. Bruk `azd >= 1.37.0` for kombinert arbeidsflyt. Du trenger ikke alle disse på dag én:
+**Agentens livssyklus, ende til ende.** GA `microsoft.foundry`-pakken inkluderer `azure.ai.agents` og seks andre kjerneutvidelser. Installer `azure.ai.evaluations` separat for evaluering. Bruk `azd >= 1.37.0` for denne arbeidsflyten. Du trenger ikke alle disse første dag:
 
 | Fase | Kommando | Hva den gjør |
 |-------|---------|--------------|
-| **Skjelettstruktur** | `azd ai agent init --template <path-to-azure.yaml>` | Adopter en aktuell agentprosjektmal |
-| **Test** | `azd ai agent invoke` | Kall agenten og se responstid |
-| **Mål** | `azd ai eval init`, `generate`, `run start` | Konfigurer, deployer og kjør evalueringer med den separate utvidelsen |
+| **Scaffold** | `azd ai agent init --template <path-to-azure.yaml>` | Ta i bruk en gjeldende agentprosjektmal |
+| **Kjør lokalt** | `azd ai agent run`, deretter `azd ai agent invoke --local "Test prompt"` i et annet terminalvindu | Inspiser lokal aktivitet i Agent Inspector; modellkall bruker fortsatt Azure |
+| **Distribuer** | `azd deploy` | For agent-verter i kode modus, last opp kildekode for fjern Foundry-bygg |
+| **Test** | `azd ai agent invoke` | Ring agenten og se responstid |
+| **Mål** | `azd ai eval init`, `generate`, `run start` | Konfigurer, deployer og kjør evalueringer med separat utvidelse |
 | **Forbedre** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Gjenbruk en kompatibel evaluering for å optimalisere agenten |
-| **Inspiser** | `azd ai agent endpoint show` | Vis den levende endepunktskonfigurasjonen |
-| **Rydd opp** | `azd ai agent delete` | Slett en hostet agent og alle dens versjoner |
+| **Inspiser** | `azd ai agent endpoint show` | Se live-endepunkt konfigurering |
+| **Rydd opp** | `azd ai agent delete` | Slett en hostet agent og alle versjoner |
 
-> Utvidelser dekkes i detalj i [Kapittel 2: AI-Foran Utvikling](../chapter-02-ai-development/agents.md) og referansen [AZD AI CLI Kommandoer](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> Start med [GA hosted-agent gjennomgang](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga), som dekker forutsetninger, provisjonering og sikker opprydding. Utvidelser er ytterligere forklart i [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) referanse.
 
 ## 📁 Prosjektstruktur
 
-En typisk azd prosjektstruktur:
+En typisk azd-prosjektstruktur:
 ```
 my-app/
 ├── .azure/                  # Local environments and selected-environment config
@@ -376,7 +378,7 @@ my-app/
 ## 🔧 Konfigurasjonsfiler
 
 ### azure.yaml
-Hovedprosjektets konfigurasjonsfil:
+Hovedkonfigurasjonsfilen for prosjektet:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -399,20 +401,20 @@ hooks:
 ```
 
 ### .azure/config.json
-Prosjektlokal valg av standardmiljø (illustrativt; administreres av azd):
+Prosjektlokalt valg av standardmiljø (illustrerende; styrt av azd):
 ```json
 {
   "defaultEnvironment": "dev"
 }
 ```
 
-## 🎪 Vanlige Arbeidsflyter med Praktiske Øvelser
+## 🎪 Vanlige Arbeidsflyter med Håndfaste Øvelser
 
 > **💡 Læringstips:** Følg disse øvelsene i rekkefølge for å bygge dine AZD-ferdigheter gradvis.
 
-### 🎯 Øvelse 1: Initialiser Ditt Første Prosjekt
+### 🎯 Øvelse 1: Initialiser ditt første prosjekt
 
-**Mål:** Opprett et AZD prosjekt og utforsk dets struktur
+**Mål:** Opprett et AZD-prosjekt og utforsk dets struktur
 
 **Steg:**
 ```bash
@@ -431,13 +433,13 @@ ls -la  # View all files including hidden ones
 # - src/ (application code)
 ```
 
-**✅ Suksess:** Du har azure.yaml, infra/ og src/ kataloger
+**✅ Suksess:** Du har azure.yaml, infra/, og src/-mapper
 
 ---
 
 ### 🎯 Øvelse 2: Distribuer til Azure
 
-**Mål:** Fullfør ende-til-ende distribusjon
+**Mål:** Fullfør distribusjon ende til ende
 
 **Steg:**
 ```bash
@@ -479,9 +481,9 @@ azd env list
 azd env select dev
 ```
 
-**✅ Suksess:** To separate ressursgrupper i Azure Portal
+**✅ Suksess:** To separate ressursgrupper i Azure-portalen
 
-**Opprydding:** Øvelse 3 oppretter en andre fakturerbar distribusjon. Slett begge når ferdig:
+**Rydd opp:** Øvelse 3 oppretter en annen fakturerbar distribusjon. Slett begge etter ferdig:
 
 ```bash
 azd down --environment dev
@@ -490,9 +492,9 @@ azd down --environment staging
 
 ---
 
-### 🛡️ Destruktiv opprydding: `azd down --force --purge`
+### 🛡️ Destruktiv Opprydding: `azd down --force --purge`
 
-Når du bevisst vil slette Azure-ressursene for det valgte miljøet:
+Når du med vilje ønsker å slette valgte miljøets Azure-ressurser:
 
 ```bash
 azd down --force --purge
@@ -500,15 +502,15 @@ azd down --force --purge
 
 **Hva den gjør:**
 - `--force`: Ingen bekreftelsesprompt
-- `--purge`: Sletter også permanent støttede mykt slettede ressurser (for eksempel Key Vaults), der rensingsbeskyttelse tillater det. Den sletter ikke den lokale `.azure/` katalogen.
+- `--purge`: Sletter også permanent støttede soft-slettede ressurser (f.eks. Key Vaults), der purge-beskyttelse tillater det. Den sletter ikke den lokale `.azure/` mappen.
 
-**Bruk når:** du er ferdig med et engangsmiljø. Behandle ikke destruktiv opprydding som første svar på autentiserings-, kvote- eller konfigurasjonsfeil.
+**Bruk når:** ferdig med et forbruksbasert miljø. Ikke betrakt destruktiv opprydding som første respons ved autentiserings-, kvote- eller konfigurasjonsfeil.
 
 ---
 
-## 🎪 Original Arbeidsflytreferanse
+## 🎪 Original Arbeidsflyt Referanse
 
-### Starte et Nytt Prosjekt
+### Starte et nytt prosjekt
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo .
@@ -537,28 +539,28 @@ azd deploy
 azd down --force --purge # Deletes this environment's discovered Azure resources; review before forcing deletion.
 ```
 
-## Forstå `azd down --force --purge`
-Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned ditt azd-miljø og alle tilknyttede ressurser. Her er en gjennomgang av hva hver flagg gjør:
+## Forståelse av `azd down --force --purge`
+Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned ditt azd-miljø og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
 ```
 --force
 ```
 - Hopper over bekreftelsesprompt.
-- Nyttig for automatisering eller skripting der manuell inndata ikke er mulig.
-- Omgår ikke tillatelser, rensingsbeskyttelse eller slettefeil.
+- Nyttig for automatisering eller skripting der manuell input ikke er mulig.
+- Omgår ikke tillatelser, purge-beskyttelse eller slettingsfeil.
 
 ```
 --purge
 ```
-Sletter permanent støttede mykt slettede Azure-ressurser uten ekstra bekreftelse. Rensingsbeskyttelse og tillatelser gjelder fortsatt. Den fjerner **ikke** lokale miljøer eller `.azure/` mappen.
+Sletter permanent støttede soft-slettede Azure-ressurser uten ekstra bekreftelse. Purge-beskyttelse og tillatelser gjelder fortsatt. Den fjerner **ikke** lokale miljøer eller `.azure/`-mappen.
 
 
 ### Hvorfor bruke begge?
-Bruk begge bare når du har til hensikt å slette Azure-ressursene for det valgte miljøet og rense gjenopprettbare ressurser. Dette er destruktiv opprydding, ikke generell reparasjon eller lokal tilstand nullstilling.
+Bruk begge bare når du har til hensikt å slette valgt miljøs Azure-ressurser og rydde opp gjenopprettbare ressurser. Dette er destruktiv opprydding, ikke generell reparasjon eller lokal stat-resett.
 
-Det er spesielt nyttig etter manuell ressurssletting i Azure-portalen eller ved bytte av maler, miljøer eller navnekonvensjoner for ressursgrupper.
+Det er spesielt nyttig etter manuelle ressursslettinger i Azure-portalen eller ved bytte av mal, miljø eller navnekonvensjon for ressursgrupper.
 
 
-### Håndtere Flere Miljøer
+### Håndtering av flere miljøer
 ```bash
 # Create staging environment
 azd env new staging
@@ -574,11 +576,11 @@ azd env list
 
 ## 🔐 Autentisering og legitimasjon
 
-Skill mellom distribusjonsautentisering (`azd auth login`) og applikasjons-SDK-autentisering (`DefaultAzureCredential`). De er separate. azd bruker ikke Azure CLI-legitimasjon som standard.
+Skill mellom distribusjonsautentisering (`azd auth login`) og applikasjons SDK-autentisering (`DefaultAzureCredential`). De er separate. azd bruker ikke Azure CLI-legitimasjon som standard.
 
-### Azure CLI Autentisering (`az login`)
+### Azure CLI-autentisering (`az login`)
 
-Kjør `azd auth login` for azd. Følgende Azure CLI-kommandoer er valgfrie og autentiserer `az` kommandoer separat:
+Kjør `azd auth login` for azd. Følgende Azure CLI-kommandoer er valgfrie og autentiserer `az`-kommandoer separat:
 
 ```bash
 # Interactive login (opens browser)
@@ -602,17 +604,17 @@ az account set --subscription "<subscription-id>"
 
 ### Autentiseringsflyt
 1. **Interaktiv innlogging**: Åpner standard nettleser for autentisering
-2. **Enhetskodeflyt**: For miljøer uten nettlesertilgang
-3. **Tjenesteprinsipp**: For automatisering og CI/CD-scenarier
-4. **Administrert identitet**: For Azure-hostede applikasjoner
+2. **Device Code Flow**: For miljøer uten nettlesertilgang
+3. **Service Principal**: For automatiserings- og CI/CD-scenarier
+4. **Managed Identity**: For Azure-hostede applikasjoner
 
-### DefaultAzureCredential-kjede
+### Standard DefaultAzureCredential-kjede
 
 `DefaultAzureCredential` er en legitimasjonstype som gir en forenklet autentiseringsopplevelse ved automatisk å prøve flere legitimasjonskilder i en bestemt rekkefølge:
 
-#### Applikasjons-SDK Legitimasjonskjede
+#### Applikasjons-SDK-legitimasjonskjede
 
-Den eksakte kjeden avhenger av Azure Identity SDK-språk, versjon, installerte plugins og alternativer. Dette diagrammet er konseptuelt, ikke en fastlagt azd-autentiseringssekvens; nyere SDK-er kan også inkludere Azure Developer CLI-legitimasjon.
+Den eksakte kjeden avhenger av Azure Identity SDK-språk, versjon, installerte plugins og alternativer. Dette diagrammet er konseptuelt, ikke en fast azd autentiseringssekvens; nyere SDK-er kan også inkludere Azure Developer CLI-legitimasjoner.
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -653,8 +655,8 @@ az containerapp show --name "<app-name>" --resource-group "<rg-name>" --query id
 
 #### 4. Integrasjon med utviklerverktøy
 - **Visual Studio**: Bruker automatisk pålogget konto
-- **VS Code**: Støtte avhenger av SDK og dets støttede broker/plugin-oppsett
-- **Azure CLI**: Bruker `az login` legitimasjon (mest vanlig for lokal utvikling)
+- **VS Code**: Støtte avhenger av SDK og dets støttede formidler/plugin-oppsett
+- **Azure CLI**: Bruker `az login` legitimasjoner (mest vanlig for lokal utvikling)
 
 ### AZD-autentiseringsoppsett
 
@@ -701,8 +703,8 @@ azd auth login --check-status
 
 #### For produksjonsmiljøer
 - Bruk **Managed Identity** når du kjører på Azure-ressurser
-- Bruk **Service Principal** for automatiseringsscenarioer
-- Unngå å lagre legitimasjon i kode eller konfigurasjonsfiler
+- Bruk **Service Principal** for automatiseringsscenarier
+- Unngå å lagre legitimasjoner i kode eller konfigurasjonsfiler
 - Bruk **Azure Key Vault** for sensitiv konfigurasjon
 
 ### Vanlige autentiseringsproblemer og løsninger
@@ -743,14 +745,14 @@ az login
 azd auth login
 ```
 
-#### Teamutvikling
+#### Team-utvikling
 ```bash
 # Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
 azd auth login --tenant-id "<tenant-id>"
 ```
 
-#### Multi-leietaker scenarier
+#### Multi-leietakerscenarier
 ```bash
 # Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
@@ -769,9 +771,9 @@ azd up
 
 ### Sikkerhetshensyn
 
-1. **Lagring av legitimasjon**: Aldri lagre legitimasjon i kildekode
-2. **Omfangsbegrensning**: Bruk minste nødvendige privilegier for service principals
-3. **Token-rotasjon**: Roter service principal-hemmeligheter regelmessig
+1. **Lagring av legitimasjon**: Lagre aldri legitimasjoner i kildekode
+2. **Begrensning av omfang**: Bruk minste privilegium-prinsippet for service principals
+3. **Token-rotasjon**: Roter regelmessig service principal-hemmeligheter
 4. **Revisjonsspor**: Overvåk autentiserings- og distribusjonsaktiviteter
 5. **Nettverkssikkerhet**: Bruk private endepunkter når mulig
 
@@ -789,9 +791,9 @@ az ad signed-in-user show      # Microsoft Entra ID user details
 az group list                  # Test resource access
 ```
 
-## Kommandofinning
+## Kommandooppdagelse
 
-### Finning
+### Oppdagelse
 ```bash
 azd template list              # Browse templates
 azd template list --help       # Template discovery options
@@ -826,55 +828,55 @@ azd env new env1
 azd init --template template1 .
 ```
 
-### 2. Utnytt maler
+### 2. Benytt maler
 - Start med eksisterende maler
-- Tilpass etter dine behov
-- Lag gjenbrukbare maler for din organisasjon
+- Tilpass for dine behov
+- Lag gjenbrukbare maler for organisasjonen din
 
 ### 3. Miljøisolasjon
-- Bruk separate miljøer for dev/staging/prod
+- Bruk separate miljøer for dev/test/produksjon
 - Distribuer aldri direkte til produksjon fra lokal maskin
 - Bruk CI/CD-pipelines for produksjonsdistribusjoner
 
 ### 4. Konfigurasjonsstyring
-- Bruk managed identity og Key Vault for hemmeligheter; vanlige `azd env set`-verdier er lokal klartekst
-- Hold konfigurasjon i versjonskontroll
+- Bruk managed identity og Key Vault for hemmeligheter; vanlige `azd env set`-verdier er lokal ren tekst
+- Hold konfigurasjonen under versjonskontroll
 - Dokumenter miljøspesifikke innstillinger
 
 ## Læringsprogresjon
 
-### Nybegynner (uke 1-2)
+### Nybegynner (Uke 1-2)
 1. Installer azd og autentiser
 2. Distribuer en enkel mal
 3. Forstå prosjektstruktur
 4. Lær grunnleggende kommandoer (up, down, deploy)
 
-### Mellomnivå (uke 3-4)
+### Mellomnivå (Uke 3-4)
 1. Tilpass maler
-2. Administrer flere miljøer
+2. Håndter flere miljøer
 3. Forstå infrastrukturkode
 4. Sett opp CI/CD-pipelines
 
-### Avansert (uke 5+)
+### Avansert (Uke 5+)
 1. Lag egendefinerte maler
 2. Avanserte infrastrukturmønstre
-3. Distribusjoner i flere regioner
-4. Enterprise-grad konfigurasjoner
+3. Multi-region distribusjoner
+4. Konfigurasjoner på bedriftsnivå
 
 ## Neste steg
 
 **📖 Fortsett kapittel 1 læring:**
 - [Installasjon og oppsett](installation.md) - Få azd installert og konfigurert
-- [Ditt første prosjekt](first-project.md) - Fullfør praktisk veiledning
-- [Konfigurasjonsguide](../chapter-03-configuration/configuration.md) - Avanserte konfigurasjonsvalg
+- [Ditt første prosjekt](first-project.md) - Fullfør interaktiv opplæring
+- [Konfigurasjonsveiledning](../chapter-03-configuration/configuration.md) - Avanserte konfigurasjonsvalg
 
 **🎯 Klar for neste kapittel?**
 - [Kapittel 2: AI-først utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md) - Begynn å bygge AI-applikasjoner
 
-## Tilleggsressurser
+## Ytterligere ressurser
 
 - [Oversikt over Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Malgalleri](https://azure.github.io/awesome-azd/)
+- [Malbibliotek](https://azure.github.io/awesome-azd/)
 - [Community-eksempler](https://github.com/Azure-Samples)
 
 ---
@@ -883,9 +885,9 @@ azd init --template template1 .
 
 ### Generelle spørsmål
 
-**Q: Hva er forskjellen på AZD og Azure CLI?**
+**Q: Hva er forskjellen mellom AZD og Azure CLI?**
 
-A: Azure CLI (`az`) er for å administrere individuelle Azure-ressurser. AZD (`azd`) er for å administrere hele applikasjoner:
+A: Azure CLI (`az`) brukes for å administrere individuelle Azure-ressurser. AZD (`azd`) brukes for å administrere hele applikasjoner:
 
 ```bash
 # Azure CLI - Low-level resource management
@@ -898,8 +900,8 @@ azd up  # Deploys entire app with all resources
 ```
 
 **Tenk på det slik:**
-- `az` = Operere på individuelle Legoklosser
-- `azd` = Jobbe med komplette Legosett
+- `az` = Operere på individuelle Lego-klosser
+- `azd` = Jobbe med komplette Lego-sett
 
 ---
 
@@ -912,13 +914,13 @@ azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-Du kan lære Bicep senere for å tilpasse infrastrukturen. Maler gir fungerende eksempler å lære av.
+Du kan lære Bicep senere for å tilpasse infrastrukturen. Maler gir fungerende eksempler å lære fra.
 
 ---
 
 **Q: Hvor mye koster det å kjøre AZD-maler?**
 
-A: Kostnader varierer etter region, SKU, oppetid, databasemodus og modellbruk. Et utviklingsmiljø kan pådra seg betydelige månedlige kostnader selv når det er inaktivt; ikke anta at $50-150 er universelt:
+A: Kostnader varierer etter region, SKU, oppetid, databasedrift og modellbruk. Et utviklingsmiljø kan pådra seg betydelige månedlige kostnader selv når det er inaktivt; ikke anta et universelt $50-150 spenn:
 
 ```bash
 # Preview resource changes (not prices)
@@ -930,8 +932,8 @@ azd down --force --purge  # Removes all resources
 
 **Profftips:** Bruk gratisnivåer der det er tilgjengelig:
 - App Service: F1 (Gratis) nivå
-- Azure OpenAI: ingen generell garantert månedlig gratis tokenkvote; sjekk gjeldende modell og pris
-- Cosmos DB: kvalifiserte kontoer med provisjonert gjennomstrømning kan velge gratisnivå; serverløse maler kvalifiserer ikke automatisk
+- Azure OpenAI: ingen generell garantert månedlig gratis token-kvote; sjekk gjeldende modell og pris
+- Cosmos DB: kvalifiserte provisjonerte gjennomstrømningskontoer kan velge gratisnivå; serverless-maler kvalifiserer ikke automatisk
 
 ---
 
@@ -951,9 +953,9 @@ azd up  # Creates new environment
 
 ---
 
-**Q: Hvordan deler jeg prosjektet mitt med lagkamerater?**
+**Q: Hvordan deler jeg prosjektet mitt med teammedlemmer?**
 
-A: Legg AZD-prosjektet inn i Git (men IKKE .azure-mappen):
+A: Committ AZD-prosjektet til Git (men IKKE .azure-mappen):
 
 ```bash
 # Already in .gitignore by default
@@ -968,7 +970,7 @@ azd env new "<their-name>-dev"
 azd up
 ```
 
-Alle får identisk infrastruktur fra de samme malene.
+Alle får identisk infrastruktur fra samme maler.
 
 ---
 
@@ -976,7 +978,7 @@ Alle får identisk infrastruktur fra de samme malene.
 
 **Q: "azd up" feilet halvveis. Hva gjør jeg?**
 
-A: Sjekk feilen, rett den, og prøv på nytt:
+A: Sjekk feilen, rett den, og prøv igjen:
 
 ```bash
 # Capture detailed diagnostics (redact sensitive values before sharing)
@@ -1024,7 +1026,7 @@ Hastighetssammenligning:
 
 ---
 
-**Q: Kan jeg tilpasse infrastrukturmalene?**
+**Q: Kan jeg tilpasse infrastruktusmalene?**
 
 A: Ja! Rediger Bicep-filene i `infra/`:
 
@@ -1050,9 +1052,9 @@ sku: {
 
 ---
 
-**Q: Hvordan sletter jeg alt AZD har laget?**
+**Q: Hvordan sletter jeg alt AZD har opprettet?**
 
-A: En kommando fjerner alle ressurser:
+A: Én kommando fjerner alle ressurser:
 
 ```bash
 azd down --force --purge
@@ -1064,17 +1066,17 @@ azd down --force --purge
 ```
 
 **Kjør alltid dette når:**
-- Ferdig med testing av en mal
+- Ferdig med å teste en mal
 - Bytter til et annet prosjekt
-- Ønsker å starte på nytt
+- Ønsker å starte helt på nytt
 
-**Kostnadssjekk:** Bekreft sletting i Azure og sjekk etter beholdte/delte ressurser. Tidligere påløpte kostnader gjelder fortsatt.
+**Kostnadssjekk:** Bekreft sletting i Azure og sjekk om det finnes beholdte/delte ressurser. Tidligere påløpte kostnader gjelder fortsatt.
 
 ---
 
-**Q: Hva om jeg ved et uhell slettet ressurser i Azure Portal?**
+**Q: Hva om jeg ved et uhell slettet ressurser i Azure-portalen?**
 
-A: AZD-tilstanden kan komme i utakt. Bruk «clean slate»-tilnærming:
+A: AZD-tilstand kan komme ut av synk. Tørr start-tilnærming:
 
 ```bash
 # 1. Delete remaining resources only if that is your intent
@@ -1131,16 +1133,16 @@ jobs:
 
 **Q: Hvordan håndterer jeg hemmeligheter og sensitiv data?**
 
-A: Bruk eksplisitt Key Vault. `azd env set` skriver vanlige verdier til lokal miljøfil; det oppretter ikke automatisk en vault, tildeler roller eller injiserer hemmeligheter i applikasjonen din.
+A: Bruk Key Vault eksplisitt. `azd env set` skriver vanlige verdier til lokal miljøfil; det oppretter ikke automatisk en vault, tildeler roller eller injiserer hemmeligheter i applikasjonen din.
 
 ```bash
 # Interactive: create/select a Key Vault secret and save its reference
 azd env set-secret DATABASE_PASSWORD
 ```
 
-Du trenger passende vault-tillatelser. Infrastruktur/applikasjon må fortsatt koble hemmeligheten til sin konsument og gi kjøretidsidentiteten tilgang. Ikke skriv ut løste hemmelige verdier i logger.
+Du trenger passende vault-tillatelser. Infrastruktur/applikasjon må fortsatt koble hemmelige verdier til forbrukeren og gi kjøretidsidentitet tilgang. Ikke skriv ut løste hemmelige verdier i logger.
 
-**Aldri kommitter:**
+**Ikke k ommitter:**
 - `.azure/`-mappen (inneholder miljødata)
 - `.env` filer (lokale hemmeligheter)
 - Tilkoblingsstrenger
@@ -1149,7 +1151,7 @@ Du trenger passende vault-tillatelser. Infrastruktur/applikasjon må fortsatt ko
 
 **Q: Kan jeg distribuere til flere regioner?**
 
-A: Ja, lag miljø per region:
+A: Ja, opprett ett miljø per region:
 
 ```bash
 # East US environment
@@ -1166,7 +1168,7 @@ azd up
 azd env list
 ```
 
-For ekte multi-region apper, tilpass Bicep-maler for samtidig distribusjon til flere regioner.
+For ekte multi-region apper, tilpass Bicep-maler for samtidige distribusjoner i flere regioner.
 
 ---
 
@@ -1175,42 +1177,42 @@ For ekte multi-region apper, tilpass Bicep-maler for samtidig distribusjon til f
 1. **AZD-dokumentasjon:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli-kanal
-4. **Stack Overflow:** Merke `azure-developer-cli`
-5. **Dette kurset:** [Feilsøkingsguide](../chapter-07-troubleshooting/common-issues.md)
+4. **Stack Overflow:** Tagg `azure-developer-cli`
+5. **Dette kurset:** [Feilsøkingsveiledning](../chapter-07-troubleshooting/common-issues.md)
 
 **Profftips:** Før du spør, kjør:
 ```bash
 azd show       # Shows current state
 azd version    # Shows your version
 ```
-Inkluder denne infoen i spørsmålet ditt for raskere hjelp.
+Inkluder denne informasjonen i spørsmålet for raskere hjelp.
 
 ---
 
-## 🎓 Hva er neste?
+## 🎓 Hva nå?
 
-Du forstår nå AZD-grunnleggende. Velg din vei:
+Du forstår nå AZD-grunnprinsippene. Velg din vei:
 
 ### 🎯 For nybegynnere:
 1. **Neste:** [Installasjon og oppsett](installation.md) - Installer AZD på din maskin
-2. **Deretter:** [Ditt første prosjekt](first-project.md) - Distribuer din første app
-3. **Øv:** Fullfør alle 3 øvelser i denne leksjonen
+2. **Så:** [Ditt første prosjekt](first-project.md) - Distribuer din første app
+3. **Øvelse:** Fullfør alle 3 øvelser i denne leksjonen
 
 ### 🚀 For AI-utviklere:
 1. **Hopp til:** [Kapittel 2: AI-først utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Distribuer:** I et tomt prosjektkatalog, start med `azd init --template get-started-with-ai-chat .`
+2. **Distribuer:** I en tom prosjektmappe, start med `azd init --template get-started-with-ai-chat .`
 3. **Lær:** Bygg mens du distribuerer
 
 ### 🏗️ For erfarne utviklere:
-1. **Gjennomgå:** [Konfigurasjonsguide](../chapter-03-configuration/configuration.md) - Avanserte innstillinger
+1. **Gå gjennom:** [Konfigurasjonsveiledning](../chapter-03-configuration/configuration.md) - Avanserte innstillinger
 2. **Utforsk:** [Infrastruktur som kode](../chapter-04-infrastructure/provisioning.md) - Dypdykk i Bicep
-3. **Bygg:** Lag egendefinerte maler for din stack
+3. **Bygg:** Lag egendefinerte maler for ditt stack
 
 ---
 
 **Kapittelnavigasjon:**
 - **📚 Kurs Hjem**: [AZD for nybegynnere](../../README.md)
-- **📖 Nåværende kapittel**: Kapittel 1 - Grunnlag og rask start  
+- **📖 Nåværende kapittel**: Kapittel 1 - Grunnlag & rask start  
 - **⬅️ Forrige**: [Kursoversikt](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Neste**: [Installasjon og oppsett](installation.md)
 - **🚀 Neste kapittel**: [Kapittel 2: AI-først utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)

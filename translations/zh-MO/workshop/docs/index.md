@@ -1,77 +1,77 @@
-# 給 AI 開發者的 AZD 工作坊
+# AI 開發者的 AZD 工作坊
 
-> 已針對 2026 年 7 月的 `azd 1.27.1` 版本驗證。
+> 來源指引經過 2026 年 11 月 4 日 AZD 1.37.2 版本檢視。截圖僅供參考；服務可用性、入口網站標籤及範本預設可能會有所更動。
 
 > [!IMPORTANT]  
-> **本工作坊配備了工作坊指南，您可以在本地瀏覽器中預覽。開始前，請在 GitHub Codespaces、開發容器，或已安裝 MkDocs 的本地 clone 中打開此倉庫——然後等待看到活動的 VS Code 終端機並輸入：**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **您應該會看到一個彈出對話框，提示在瀏覽器中打開預覽頁面。**
+> **本工作坊配有工作坊指引，您可在本機瀏覽器中預覽。要開始，請在 GitHub Codespaces、開發容器或安裝了 MkDocs 的本機複本中打開儲存庫，然後等待看到活躍的 VS Code 終端，接着輸入：**  
+> 從課程儲存庫根目錄安裝 `requirements-dev.txt`，接着前景執行 `python -m mkdocs serve --config-file workshop/mkdocs.yml`。
+> **您應該會看到彈出對話框，詢問是否在瀏覽器中打開預覽頁面。**
 
-歡迎參加專注於 AI 應用部署的 Azure Developer CLI (AZD) 實作工作坊。這個工作坊透過 3 個步驟，幫助您實際學習 AZD 範本：
+歡迎參加專注於 AI 應用部署的 Azure Developer CLI (AZD) 實作工作坊。此工作坊協助您通過三個步驟深入了解 AZD 範本：
 
-1. <strong>探索</strong> - 找到適合您的範本。
-1. <strong>部署</strong> - 部署並驗證範本是否有效。
-1. <strong>自訂</strong> - 修改並迭代，使其成為您的專案！
+1. <strong>探索</strong> - 找出適合您的範本。
+1. <strong>部署</strong> - 部署並驗證其運作。
+1. <strong>自訂</strong> - 修改並反覆調整，使之成為您的專屬！
 
-在工作坊過程中，您還將接觸到核心開發工具和工作流程，幫助您優化端到端開發流程。
+在整個工作坊期間，您還將接觸到核心開發工具和流程，助您順暢完成端到端的開發旅程。
 
 | | | 
 |:---|:---|
-| **📚 課程首頁**| [AZD 初學者](../README.md)|
-| **📖 文件** | [從 AI 範本開始](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **📚 課程首頁**| [AZD 初學者](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
+| **📖 文件** | [開始使用 AI 範本](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️ AI 範本** | [Microsoft Foundry 範本](https://ai.azure.com/templates) |
-|**🚀 下一步** | [接受挑戰](#workshop-challenge) |
+|**🚀 下一步** | [接受挑戰](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## 工作坊概覽
 
-**時長:** 3-4 小時  
-**等級:** 初學者至中階  
-**先備知識:** 了解 Azure、AI 概念、VS Code 及命令列工具。
+**時長：** 3-4 小時  
+**程度：** 初學者至中階  
+**先備知識：** 熟悉 Azure、AI 概念、VS Code 及命令列工具。
 
-這是個實作工作坊，透過實際練習學習。完成練習後，我們建議您回顧 AZD 初學者課程，繼續深入學習安全和生產力最佳實踐。
+這是一個實作工作坊，讓您通過實踐學習。完成練習後，我們建議您參考 AZD 初學者課程，繼續學習安全和生產力最佳實務。
 
 | 時間| 模組  | 目標 |
 |:---|:---|:---|
-| 15 分鐘 | 介紹 | 設定階段，理解目標 |
-| 30 分鐘 | 選擇 AI 範本 | 探索選項並選定起點 | 
+| 15 分鐘 | 導入 | 說明背景，了解目標 |
+| 30 分鐘 | 選擇 AI 範本 | 探索選項並挑選起步範本 | 
 | 30 分鐘 | 驗證 AI 範本 | 部署預設方案至 Azure |
-| 30 分鐘 | 拆解 AI 範本 | 探索結構與設定 |
-| 30 分鐘 | 配置 AI 範本 | 啟用並嘗試現有功能 |
-| 30 分鐘 | 客制化 AI 範本 | 根據需求調整範本 |
-| 30 分鐘 | 拆除基礎架構 | 清理並釋放資源 |
-| 15 分鐘 | 總結與下一步 | 學習資源，工作坊挑戰 |
+| 30 分鐘 | 解構 AI 範本 | 探索結構與設定 |
+| 30 分鐘 | 配置 AI 範本 | 啟用並嘗試可用功能 |
+| 30 分鐘 | 自訂 AI 範本 | 根據需求調整範本 |
+| 30 分鐘 | 拆除基礎設施 | 清理並釋放資源 |
+| 15 分鐘 | 結束與下一步 | 學習資源，工作坊挑戰 |
 | | |
 
-## 您將學到什麼
+## 您將學到的內容
 
-將 AZD 範本視為學習沙盒，探索 Microsoft Foundry 端到端開發的各種能力與工具。完成本工作坊後，您應對此背景中的多種工具與概念有直觀的了解。
+將 AZD 範本視為一個學習沙盒，探索 Microsoft Foundry 端到端開發的各種功能與工具。工作坊結束時，您應對此情境中的各種工具與概念有直覺性理解。
 
 | 概念  | 目標 |
 |:---|:---|
-| **Azure Developer CLI** | 了解命令及工作流程 |
-| **AZD 範本**| 了解專案結構與設定 |
-| **Azure AI Agent**| 配置並部署 Microsoft Foundry 專案  |
-| **Azure AI 搜尋**| 透過代理實現情境工程 |
+| **Azure Developer CLI** | 了解工具指令與工作流程|
+| **AZD 範本**| 了解專案結構與設定|
+| **Azure AI Agent**| 佈建及部署 Microsoft Foundry 專案  |
+| **Azure AI Search**| 使用代理促進上下文工程 |
 | <strong>可觀察性</strong>| 探索追蹤、監控與評估 |
-| <strong>紅隊測試</strong>| 探索對抗測試與緩解措施 |
+| <strong>紅隊測試</strong>| 探索對抗測試及緩解措施 |
 | | |
 
 ## 工作坊模組
 
-準備開始了嗎？請瀏覽以下工作坊模組：
+準備好開始了嗎？從以下工作坊模組導航：
 
 - [模組 1：選擇 AI 範本](instructions/1-Select-AI-Template.md)
 - [模組 2：驗證 AI 範本](instructions/2-Validate-AI-Template.md) 
-- [模組 3：拆解 AI 範本](instructions/3-Deconstruct-AI-Template.md)
+- [模組 3：解構 AI 範本](instructions/3-Deconstruct-AI-Template.md)
 - [模組 4：配置 AI 範本](instructions/4-Configure-AI-Template.md)
 - [模組 5：自訂 AI 範本](instructions/5-Customize-AI-Template.md)
 - [模組 6：拆除基礎設施](instructions/6-Teardown-Infrastructure.md)
-- [模組 7：總結與下一步](instructions/7-Wrap-up.md)
+- [模組 7：結束與下一步](instructions/7-Wrap-up.md)
 
 ## 有意見回饋嗎？
 
-請在此 repo 發布 issue（標籤為 `Workshop`）或加入我們的 [Discord](https://aka.ms/foundry/discord)，並發佈至 `#get-help` 頻道
+在此儲存庫發送問題 (標記 `Workshop`) 或加入我們的 [Discord](https://aka.ms/foundry/discord) 頻道，並在 `#get-help` 頻道發佈訊息
 
 ---
 

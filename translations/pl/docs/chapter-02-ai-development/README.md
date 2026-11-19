@@ -1,22 +1,24 @@
-# Rozdział 2: Rozwój z AI na pierwszym miejscu
+# Rozdział 2: Rozwój z AI jako pierwszym krokiem
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 4-5 godzin wraz z warsztatami | **⭐ Poziom**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 4-5 godzin łącznie z warsztatami | **⭐ Trudność**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział koncentruje się na wdrażaniu aplikacji zasilanych AI przy użyciu Azure Developer CLI i usług Microsoft Foundry. Od prostych aplikacji czatu AI po inteligentne agentury z narzędziami.
+Ten rozdział koncentruje się na wdrażaniu aplikacji zasilanych AI za pomocą Azure Developer CLI i usług Microsoft Foundry. Od prostych aplikacji czatu AI po inteligentnych agentów z narzędziami.
 
-> **Przegląd wydania (2026-11-04):** Wytyczne dotyczące AI CLI zostały sprawdzone w odniesieniu do opublikowanej dokumentacji/źródła `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` oraz `azure.ai.evaluations` `1.0.0-beta.2`. Użyj `azd >= 1.37.0` dla połączonego przepływu pracy. Oceny teraz korzystają z osobnej przestrzeni nazw `azd ai eval`; zobacz [zmiany w wydaniu i wskazówki dotyczące migracji](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). To nie jest walidacja wdrożenia na żywo.
+> **Aktualizacja Foundry GA (2026-11-09):** Pakiet `microsoft.foundry` 1.0 jest [dostępny ogólnie](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Używaj `azd >= 1.37.0`; oceny pozostają oddzielną instalacją. [Przewodnik po hostowanym agencie](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) obejmuje testowanie Agenta Inspektora lokalnie i wdrażanie kodu zdalnie. To przegląd dokumentacji, a nie walidacja wdrożenia na żywo; opcjonalne funkcje podglądu zachowują swój status.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz umiał:
-- Wdrażać aplikacje AI przy użyciu gotowych szablonów AZD
-- Rozumieć integrację Microsoft Foundry z AZD
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Wdrażać aplikacje AI korzystając z gotowych szablonów AZD
+- Zrozumieć integrację Microsoft Foundry z AZD
+- Zainstalować pakiet GA i przetestować hostowanego agenta lokalnie przed wdrożeniem jego źródła do Foundry
+- Przejrzeć `azure.yaml`, zasoby oceny oraz czyszczenie nowych i używanych projektów
 - Konfigurować i dostosowywać agentów AI z narzędziami
-- Wdrażać aplikacje RAG (Retrieval-Augmented Generation)
+- Wdrażać aplikacje RAG (generowanie wspomagane wyszukiwaniem)
 
 ---
 
@@ -24,16 +26,18 @@ Po ukończeniu tego rozdziału będziesz umiał:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Integracja Microsoft Foundry](microsoft-foundry-integration.md) | Połączenie AZD z usługami Foundry | 30 min |
+| 1 | [Integracja Microsoft Foundry](microsoft-foundry-integration.md) | Pakiet GA, lokalno-chmurowy workflow hostowanego agenta i oceny | 60 min |
 | 2 | [Przewodnik po agentach AI](agents.md) | Wdrażanie inteligentnych agentów z narzędziami | 45 min |
-| 3 | [Wdrożenie modelu AI](ai-model-deployment.md) | Wdrażanie i konfigurowanie modeli AI | 30 min |
-| 4 | [Laboratorium warsztatowe AI](ai-workshop-lab.md) | Praktycznie: Eksploracja szablonu i planowanie konwersji | 2-3 godziny |
+| 3 | [Wdrażanie modeli AI](ai-model-deployment.md) | Wdrażanie i konfiguracja modeli AI | 30 min |
+| 4 | [Warsztat AI](ai-workshop-lab.md) | Praktyczne: poznaj szablon i zaplanuj konwersję | 2-3 godziny |
 
 ---
 
 ## 🚀 Szybki start
 
-Wybierz jedną opcję w nowym pustym katalogu. Wymieniony `.` inicjuje bieżący katalog; w przeciwnym razie AZD może utworzyć podkatalog bez zmiany katalogu roboczego twojej powłoki.
+Wybierz jedną opcję w nowym pustym katalogu. Końcowy `.` inicjuje bieżący katalog; w przeciwnym razie AZD może utworzyć podkatalog bez zmiany katalogu roboczego shell.
+
+Dla **ścieżki wdrażania kodu hostowanego agenta GA** rozpocznij od [przewodnika krok po kroku](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Wymaga AZD 1.37.0+, aktualnego uv, Pythona 3.13+, uprawnień Foundry i limitu modelu. Kompleksowe szablony aplikacji poniżej to alternatywy, a nie wymagania dla tego przewodnika.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -56,22 +60,22 @@ azd up
 | Szablon | Opis | Usługi |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Czat RAG z cytatami | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI z narzędziami | AI Agent Service |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI z narzędziami | Usługa agenta AI |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Podstawowy czat AI | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Świadomość kosztów
 
-Są to zakresy orientacyjne, nie oferty ani limity; ruch modelu, SKU wyszukiwania/obliczeń, region i opcjonalne funkcje mogą je przekroczyć. Przejrzyj aktualne wskazówki cenowe wybranego przykładu przed uruchomieniem.
+Są to orientacyjne zakresy, nie oferty ani limity; ruch modelu, SKU wyszukiwania/obliczeń, region i opcjonalne funkcje mogą je przekroczyć. Sprawdź aktualne wytyczne cenowe wybranego przykładu przed uruchomieniem.
 
 | Środowisko | Szacowany miesięczny koszt |
 |-------------|----------------------|
 | Rozwój | 80-150 USD |
 | Testowanie | 150-300 USD |
-| Produkcja | 300-3500+ USD |
+| Produkcja | 300-3 500+ USD |
 
-**Wskazówka:** Uruchom `azd down` po testach, aby uniknąć opłat.
+**Czyszczenie:** Przejrzyj `azd down` przed potwierdzeniem: dla nowo utworzonego projektu Foundry usuwa grupę zasobów i wszystko w niej. Dla ponownie używanego projektu Foundry pozostawia zasoby projektu i agenta; stosuj się do [wytycznych dotyczących czyszczenia przewodnika](microsoft-foundry-integration.md#7-clean-up-deliberately), aby oddzielnie usunąć niechciane zasoby.
 
 ---
 
@@ -79,9 +83,9 @@ Są to zakresy orientacyjne, nie oferty ani limity; ruch modelu, SKU wyszukiwani
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Poprzedni** | [Rozdział 1: Podstawy](../chapter-01-foundation/README.md) |
+| **Poprzedni** | [Rozdział 1: Fundamenty](../chapter-01-foundation/README.md) |
 | **Następny** | [Rozdział 3: Konfiguracja](../chapter-03-configuration/README.md) |
-| **Przejdź do** | [Rozdział 8: Wzorce produkcyjne](../chapter-08-production/README.md) |
+| **Pomiń do** | [Rozdział 8: Wzorce produkcyjne](../chapter-08-production/README.md) |
 
 ---
 

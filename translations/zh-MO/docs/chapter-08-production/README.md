@@ -1,25 +1,25 @@
-# 第8章：生產與企業模式
+# 第8章：生產及企業模式
 
-**📚 課程**：[AZD 入門](../../README.md) | **⏱️ 時長**：2-3 小時 | **⭐ 複雜度**：進階
+**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時長**: 2-3 小時 | **⭐ 複雜度**: 進階
 
 ---
 
 ## 概覽
 
-本章涵蓋企業級部署模式、安全加固、監控以及生產 AI 工作負載的成本優化。
+本章涵蓋企業級部署模式、安全強化、監控以及生產 AI 工作負載的成本優化。
 
-這是一個架構參考，而非完整可部署的生產範本。範例省略了必須由您的應用程式補充及測試的整合細節；閱讀清單並不代表已通過生產準備認證。
+這是一份架構參考，而非完整可部署的生產範本。範例省略了必須在你自身應用中補充及測試的整合細節；閱讀核對清單不代表已達生產準備狀態。
 
-> **版本檢視 (2026-11-04)：** AI CLI 指南已與 `azd 1.37.2`、代理程式 `1.0.0-beta.23` 及評估 `1.0.0-beta.2` 文件/原始碼對照檢查。詳見[版本變更及修正](production-ai-practices.md#recent-release-changes-and-fixes) 以了解相容性要求及遷移細節；這並非線上部署驗證。
+> **Foundry GA 更新 (2026-11-09):** 使用 `azd >= 1.37.0` 及一般可用的 `microsoft.foundry` 1.0 套件作為 Foundry 工作流程；評估工具則需另行安裝。請參閱 [版本範圍與遷移](production-ai-practices.md#recent-release-changes-and-fixes) 及 [驗證管線範例](production-ai-practices.md#cicd-pipeline-configuration)。這是文件審閱，非即時部署驗證或選用預覽功能的全面 GA 狀態。
 
 ## 學習目標
 
 完成本章後，您將能：
 - 部署多區域具韌性的應用程式
-- 實作企業級安全模式
-- 配置全面監控
-- 以規模優化成本
-- 使用 AZD 設置 CI/CD 管線
+- 實作企業安全模式
+- 設定完整的監控機制
+- 進行規模化成本優化
+- 使用 AZD 設定 CI/CD 管線
 
 ---
 
@@ -27,19 +27,19 @@
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [生產環境 AI 實務](production-ai-practices.md) | 企業部署模式 | 90 分鐘 |
+| 1 | [生產級 AI 實務](production-ai-practices.md) | 企業部署模式 | 90 分鐘 |
 
 ---
 
 ## 🚀 生產檢查清單
 
-- [ ] 多區域部署以提高韌性
-- [ ] 使用託管身份驗證（無金鑰）
-- [ ] 使用 Application Insights 進行監控
-- [ ] 配置成本預算和警報
+- [ ] 多區域部署以增強韌性
+- [ ] 以管理身份驗證（無需密鑰）
+- [ ] 使用 Application Insights 監控
+- [ ] 設定成本預算與警示
 - [ ] 啟用安全掃描
 - [ ] 整合 CI/CD 管線
-- [ ] 災難復原計畫
+- [ ] 災難復原計劃
 
 ---
 
@@ -87,12 +87,12 @@ properties: {
 
 | 策略 | 主要限制 |
 |----------|---------|
-| 零規模延展 (Container Apps) | 需要適當的觸發器；其他服務仍會產生費用 |
-| 使用消費層級於開發 | 比較選定服務價格及工作負載 |
-| 預定擴展 | 通過受支援的基礎設施/自動化擴展 |
-| 預留/預配容量 | 只在支援時使用；承諾可能會增加閒置成本 |
+| 零規模擴展（Container Apps） | 需要合適的觸發器；其他服務仍需支付費用 |
+| 開發環境使用消耗層級 | 比較所選服務價格與工作負載 |
+| 排程式擴展 | 透過支援的基礎設施/自動化擴展 |
+| 預留/配置容量 | 僅在支援時使用；承諾可能增加閒置成本 |
 
-使用帶有效開始日期、計費範圍、接收者與權限的[完整預算資源模式](production-ai-practices.md#2-cost-monitoring-and-budgets)。預算會發送警報；不會限制支出。節省取決於測量的利用率，並非保證百分比。
+使用 [完整預算資源模式](production-ai-practices.md#2-cost-monitoring-and-budgets)，需有有效的起始日期、計費範圍、接收者及權限。預算會發送警示；不會限制支出。節省金額取決於實際使用情況，非保證百分比。
 
 ---
 
@@ -111,20 +111,20 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 導航
+## 🔗 導覽
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第7章：故障排除](../chapter-07-troubleshooting/README.md) |
-| <strong>課程完成</strong> | [課程首頁](../../README.md) |
+| <strong>上一章</strong> | [第 7 章：除錯](../chapter-07-troubleshooting/README.md) |
+| <strong>完成課程</strong> | [課程首頁](../../README.md) |
 
 ---
 
 ## 📖 相關資源
 
-- [AI 代理指南](../chapter-02-ai-development/agents.md)
-- [應用程式洞察](../chapter-06-pre-deployment/application-insights.md)
-- [多代理解決方案](../chapter-05-multi-agent/README.md)
+- [AI 代理人指南](../chapter-02-ai-development/agents.md)
+- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [多代理方案](../chapter-05-multi-agent/README.md)
 - [微服務範例](../../examples/microservices/README.md)
 
 ---

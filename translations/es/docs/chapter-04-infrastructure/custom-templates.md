@@ -6,18 +6,18 @@
 - **⬅️ Anterior**: [Guía de Despliegue](deployment-guide.md)
 - **🚀 Siguiente Capítulo**: [Capítulo 5: Soluciones Multi-Agente](../chapter-05-multi-agent/README.md)
 
-> Validado con `azd 1.27.1` en julio de 2026.
+> Revisado contra `azd 1.37.2` (noviembre de 2026). Esta es una **guía de creación con archivos parciales**, no una plantilla completa: debes proporcionar el código de la aplicación y `modules/web.bicep` con su entorno, registro, Aplicación de Contenedor y salidas antes del despliegue. No se ejecutó aprovisionamiento de Azure en esta revisión.
 
 ## Introducción
 
-Hasta ahora has *consumido* plantillas con `azd init --template <nombre>`. Pero una vez que tengas un diseño de proyecto que le guste a tu equipo—por ejemplo, una Aplicación en Contenedor con una base de datos Cosmos DB y el monitoreo adecuado—querrás convertirlo en una plantilla reutilizable propia. Una plantilla es simplemente un repositorio Git con una estructura predecible que azd sabe cómo leer. Esta lección te muestra cómo crear una desde cero, probarla y (opcionalmente) publicarla en la galería comunitaria.
+Hasta ahora has *consumido* plantillas con `azd init --template <name>`. Pero una vez que tengas un diseño de proyecto que a tu equipo le guste—por ejemplo, una Aplicación de Contenedor con Cosmos DB y el monitoreo adecuado—querrás convertirlo en una plantilla reusable propia. Una plantilla es simplemente un repositorio Git con una estructura predecible que azd sabe cómo leer. Esta lección te muestra cómo construir una desde cero, probarla y (opcionalmente) publicarla en la galería comunitaria.
 
 ## Objetivos de Aprendizaje
 
 Al final de esta lección, podrás:
-- Entender qué convierte una carpeta en una "plantilla azd"
+- Entender qué hace que una carpeta sea una "plantilla azd"
 - Conocer los archivos y la estructura de carpetas requeridos
-- Agregar un `azure.yaml` y `infra/` que otras personas puedan reutilizar
+- Agregar un `azure.yaml` y `infra/` que otros puedan reutilizar
 - Probar tu plantilla localmente antes de compartirla
 - Publicarla y (opcionalmente) enviarla a Awesome AZD
 
@@ -27,41 +27,41 @@ Después de completar esta lección, podrás:
 - Crear un nuevo repositorio de plantilla
 - Parametrizar la infraestructura para que funcione en cualquier suscripción
 - Validar una plantilla con `azd init` y `azd up`
-- Agregar los metadatos requeridos por la galería comunitaria
+- Añadir los metadatos que requiere la galería comunitaria
 
 ---
 
-## ¿Qué Es Realmente una Plantilla?
+## ¿Qué es Realmente una Plantilla?
 
 Una plantilla azd es **un repositorio Git** que contiene, como mínimo:
 
 | Archivo / carpeta | Propósito | ¿Requerido? |
-|-----------------|-----------|------------|
-| `azure.yaml` | Describe servicios, hosts, y proveedor de infraestructura | ✅ Sí |
-| `infra/` | Bicep, Terraform, o Pulumi que provisiona recursos | ✅ Sí |
-| `src/` (o tu código) | El código de aplicación que azd despliega | ✅ Sí |
-| `README.md` | Cómo usar la plantilla | ✅ Muy recomendado |
+|---------------|---------|-----------|
+| `azure.yaml` | Describe servicios, hosts y proveedor de infraestructura | ✅ Sí |
+| `infra/` | Definiciones de aprovisionamiento Bicep o Terraform | Requerido para este ejemplo explícito de IaC; proyectos con infraestructura generada pueden omitirlo |
+| `src/` (o tu código) | El código de aplicación que azd despliega | Requerido para servicios basados en código fuente; no todas las plantillas contienen código de aplicación |
+| `README.md` | Cómo usar la plantilla | ✅ Altamente recomendado |
 | `.azdo/` o `.github/` | Definiciones de pipeline CI/CD | Opcional |
 | `.devcontainer/` | Entorno de desarrollo reproducible | Opcional |
-| `azure.yaml` `metadata` | Información para galería + telemetría | Opcional (requerido para publicar) |
+| `azure.yaml` `metadata` | Información de identidad/telemetría de la plantilla | Recomendado; publicar un repositorio Git no lo requiere |
 
 No hay nada mágico aquí: cuando ejecutas `azd init --template you/your-repo`, azd clona el repositorio y lee `azure.yaml`.
 
 ---
 
-## Paso 1: Crear la Estructura del Repositorio
+## Paso 1: Construye la Estructura del Repositorio
 
-Crea la estructura de carpetas manualmente o parte de una plantilla minimalista y edítala:
+Crea la estructura de carpetas a mano o parte de una plantilla mínima y edítala:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Crear el diseño estándar
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Un diseño terminado típico se ve así:
+Un diseño típico terminado se ve así:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Paso 2: Escribir `azure.yaml`
+## Paso 2: Escribe `azure.yaml`
 
-Este es el corazón de la plantilla. Le indica a azd qué desplegar y cómo:
+Esta es el corazón de la plantilla. Le dice a azd qué desplegar y cómo:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> El campo `metadata.template` es el que usa la telemetría de la galería para contar uso. Usa la convención `nombre@versión`.
+> El campo `metadata.template` es lo que la telemetría de la galería usa para contar el uso. Usa la convención `name@version`.
 
 ---
 
-## Paso 3: Parametrizar la Infraestructura
+## Paso 3: Parametriza la Infraestructura
 
-La regla más importante para una plantilla *reutilizable*: **nunca codifiques nombres, regiones, o valores específicos de suscripción.** Usa parámetros y el patrón de token recurso para que la misma plantilla funcione en cualquier suscripción.
+La regla más importante para una plantilla *reusable*: **nunca codifiques nombres, regiones o valores específicos de suscripción.** Usa parámetros y el patrón de token de recursos para que la misma plantilla funcione en la suscripción de cualquiera.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Dos cosas hacen esta plantilla amigable:
+Dos cosas hacen que esta plantilla sea amigable:
 
-1. Etiqueta **`azd-env-name`** — azd la usa para rastrear y limpiar recursos por ambiente.
-2. Token recurso **`uniqueString(...)`** — produce un sufijo estable y globalmente único para que los nombres no colisionen.
+1. **Etiqueta `azd-env-name`** — azd la usa para rastrear y limpiar recursos por ambiente.
+2. **Token de recurso `uniqueString(...)`** — produce un sufijo hash estable para reducir colisiones; no garantiza unicidad global.
 
-Proporciona un archivo de parámetros coincidente que lea valores que azd inyecta desde el entorno:
+El `modules/web.bicep` faltante debe aceptar `name`, `location` y `tags`, aprovisionar el entorno/registro y la Aplicación de Contenedores, etiquetar la app con `azd-service-name: web` y exportar `uri`. También debe exponer valores del registro necesarios para el flujo de construcción/despliegue elegido (por ejemplo `AZURE_CONTAINER_REGISTRY_ENDPOINT` desde el módulo raíz). Solo una salida endpoint no conecta el descubrimiento del servicio, configuraciones de la aplicación o autenticación de registro.
+
+Proporciona un archivo de parámetros correspondiente que lea valores que azd inyecte desde el ambiente:
+
+Guarda lo siguiente como `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,103 +167,107 @@ Proporciona un archivo de parámetros coincidente que lea valores que azd inyect
 }
 ```
 
-azd sustituye `${AZURE_ENV_NAME}` y `${AZURE_LOCATION}` del entorno actual automáticamente.
+azd sustituye `${AZURE_ENV_NAME}` y `${AZURE_LOCATION}` automáticamente desde el ambiente actual.
 
 ---
 
 ## Paso 4: Prueba Tu Plantilla Localmente
 
-Antes de compartir, demuestra que la plantilla funciona desde un estado limpio.
+Antes de compartir, prueba que la plantilla funcione desde un estado limpio.
 
-**Prueba desde la carpeta local** (no se requiere subir a Git):
+**Prueba desde la carpeta local** (no se requiere push a Git):
 
 ```bash
-# Desde un directorio vacío, inicialice usando su ruta de plantilla local
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Provisionar + desplegar de extremo a extremo
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Luego prueba la eliminación**—una buena plantilla limpia completamente:
+**Luego prueba el desmontaje**—una buena plantilla limpia completamente:
 
 ```bash
 azd down --force --purge
 ```
 
-Si `azd down` deja recursos, probablemente te hayas olvidado de la etiqueta `azd-env-name` en algún recurso.
+Si `azd down` deja recursos, verifica descubrimiento del ambiente/grupo de recursos, recursos externos/compartidos, permisos, bloqueos y protección de purga. `--purge` no elimina el estado local `.azure/`.
 
-> **Consejo:** ejecuta `azd provision --preview` primero. Hace un what-if y muestra errores de plantilla antes de crear recursos.
+> **Consejo:** después de proporcionar todos los archivos faltantes, ejecuta `azd provision --preview` primero. Inspecciona hooks antes del preview porque pueden ejecutar comandos con efectos secundarios. Preview no es una estimación de precio ni una garantía de que el aprovisionamiento tendrá éxito.
 
 ---
 
-## Paso 5: Publicar la Plantilla
+## Paso 5: Publica la Plantilla
 
-Sube el repositorio a GitHub (público si quieres que otros lo usen):
+Envía el repositorio a GitHub (público si quieres que otros la usen):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Cualquiera ahora puede usarlo:
+Ahora cualquiera puede usarlo:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Paso 6 (Opcional): Enviar a Awesome AZD
+## Paso 6 (Opcional): Envía a Awesome AZD
 
-La [galería Awesome AZD](https://azure.github.io/awesome-azd/) lista plantillas comunitarias. Para ser listado tu repositorio debería incluir:
+La [galería Awesome AZD](https://azure.github.io/awesome-azd/) lista plantillas comunitarias. Para ser listado tu repositorio debe incluir:
 
-- ✅ Un claro `README.md` con prerrequisitos, un diagrama de arquitectura, y notas de costos
+- ✅ Un `README.md` claro con prerequisitos, diagrama de arquitectura y notas de costos
 - ✅ Un `azure.yaml` funcional con `metadata.template`
-- ✅ Infraestructura que se pueda provisionar limpiamente en una suscripción nueva
+- ✅ Infraestructura que se aprovisione limpiamente en una suscripción nueva
 - ✅ Un archivo `LICENSE`
 - ✅ (Recomendado) Un `.devcontainer/` para Codespaces con un clic
 
-Envía tu contribución abriendo un pull request que agregue tu plantilla al archivo de datos de la galería, siguiendo la guía de contribución en el [repositorio Awesome AZD](https://github.com/Azure/awesome-azd).
+Envía abriendo un pull request que agregue tu plantilla al archivo de datos de la galería, siguiendo la guía de contribución en el [repositorio Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
 ## Errores Comunes
 
 | Error | Solución |
-|--------|----------|
-| Nombres de recursos codificados | Usa el token recurso `uniqueString()` |
-| `azd down` deja recursos | Etiqueta todos los recursos (o el grupo de recursos) con `azd-env-name` |
-| La plantilla funciona para ti, falla para otros | Elimina IDs de suscripción, IDs de tenant y suposiciones de región |
-| Salidas no conectadas a la app | Exporta `SERVICE_<NAME>_ENDPOINT_URL` y otras salidas `AZURE_*` |
-| Rechazo en la sumisión a la galería | Agrega `README.md`, `LICENSE`, y `metadata.template` |
+|---------|-----|
+| Nombres de recursos codificados | Usa el token de recurso `uniqueString()` |
+| `azd down` deja recursos | Etiqueta cada recurso (o el grupo de recursos) con `azd-env-name` |
+| La plantilla funciona para ti, falla para otros | Elimina IDs de suscripción, IDs de inquilino y supuestos de región |
+| Salidas no conectadas a la app | Coincide `azd-service-name`/`resourceName` para el despliegue y mapea explícitamente salidas a configuraciones de la app |
+| Envío a la galería rechazado | Añade `README.md`, `LICENSE` y `metadata.template` |
 
 ---
 
 ## Resumen
 
-- Una plantilla es solo un repo Git con `azure.yaml`, `infra/`, y tu código.
-- Parametriza todo—nombres, regiones, e IDs—para que funcione en cualquier lugar.
-- Siempre etiqueta los recursos con `azd-env-name` para que `azd down` funcione.
-- Prueba localmente con `azd init --template <ruta-local>` antes de publicar.
-- Agrega metadatos y un README para enviar a Awesome AZD.
+- Una plantilla es solo un repo Git con `azure.yaml`, `infra/` y tu código.
+- Parametriza todo—nombres, regiones e IDs—para que funcione en cualquier lugar.
+- Siempre etiqueta recursos con `azd-env-name` para que `azd down` funcione.
+- Prueba localmente con `azd init --template <local-path>` antes de publicar.
+- Añade metadatos y un README para enviar a Awesome AZD.
 
 ---
 
 ## 🔗 Navegación
 
 | Dirección | Recurso |
-|-----------|---------|
+|-----------|----------|
 | **Anterior** | [Guía de Despliegue](deployment-guide.md) |
 | **Inicio del Capítulo** | [Capítulo 4: Infraestructura como Código](README.md) |
 | **Siguiente Capítulo** | [Capítulo 5: Soluciones Multi-Agente](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Recursos Relacionados
 
-- [Provisionamiento de Recursos](provisioning.md)
+- [Aprovisionamiento de Recursos](provisioning.md)
 - [Galería Awesome AZD](https://azure.github.io/awesome-azd/)
-- [Documentación oficial de plantillas azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Documentación oficial de la plantilla azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

@@ -1,6 +1,6 @@
-# 6. Pagtanggal ng Imprastruktura
+# 6. Pagtanggal ng Imprastraktura
 
-!!! tip "PAGKATAPOS NG MODULONG ITO IKAW AY MAAARING"
+!!! tip "PAGKATAPOS NG MODULONG ITO, MAGAGAWA MO NA"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Mga Bonus na Pagsasanay
+## Mga Karagdagang Ehersisyo
 
-Bago natin gibain ang proyekto, maglaan ng ilang minuto para sa bukas na paggalugad.
+Bago natin tanggalin ang proyekto, maglaan ng ilang minuto para sa malayang paggalugad.
 
-!!! info "Subukan ang mga Pahiwatig na ito sa Paggalugad"
+!!! info "Subukan ang mga Prompt sa Paggalugad na Ito"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,14 +31,18 @@ Bago natin gibain ang proyekto, maglaan ng ilang minuto para sa bukas na paggalu
 
 ## Pagtanggal ng Infra
 
-1. Ang pagbibiyak ng imprastruktura ay kasing dali ng:
+!!! warning "Kung natapos mo na rin ang GA hosted-agent na ehersisyo"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Madaling gawin ang pagtanggal ng imprastraktura:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Kumpirmahin ang napiling kapaligiran at suriin ang mga resource na tatanggalin. Tinatanggal nito ang mga Azure resource at maaaring magwasak ng data. Panatilihin ang kumpirmasyon para sa workflow na ito ng pag-aaral. Kapag tapos na makakakita ka ng output na kahalintulad ng:
+1. Kumpirmahin ang napiling kapaligiran at suriin ang mga mapapaganang burahin. Tinatanggal nito ang mga Azure na resources at maaaring sirain ang data. Panatilihin ang kumpirmasyon para sa prosesong ito ng pag-aaral. Kapag tapos, makikita mo ang output na katulad ng:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Bago natin gibain ang proyekto, maglaan ng ilang minuto para sa bukas na paggalu
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Suriin ang pagtanggal sa portal at tingnan ang mga resource na nasa labas ng saklaw ng deployment. Ang ulat ng gastos at update ng quota ay maaaring mahuli. Mananatili ang lokal na `.azure` na pagsasaayos maliban kung ito ay tahasang tinanggal.
+1. Siguraduhing nabura na ito sa portal at suriin kung may mga resources na nasa labas ng sakop ng deployment. Maaaring mabagal ang pag-update ng gastos at quota. Ang lokal na pagsasaayos ng `.azure` ay nananatili maliban kung iyong aalisin ito nang tahasan.
 
-1. Humihiling din ang `azd down --purge` ng permanenteng pagtanggal ng mga supportadong soft-deleted na resource. Gamitin lamang ito kapag hindi na kailangan ang pagbawi at naiintindihan mo ang mga patakaran sa pagpapanatili/pagprotekta sa pag-delete. Hindi nito ginagarantiyahan ang agarang pag-release ng quota.
+1. Ang `azd down --purge` ay karagdagang humihiling ng permanenteng pagtanggal sa mga suportadong soft-deleted resources. Gamitin ito lamang kapag hindi na kailangan ang pagbawi at nauunawaan mo ang mga patakaran sa pag-retain/purge-protection. Hindi nito ginagarantiyahan ang agarang pagpapalaya ng quota.
 
-1. Huwag muling i-deploy para lamang tiyakin ang paglilinis. Ang isang hinaharap na sadyang `azd up` ay maaaring muling lumikha ng mga resource gamit ang natitirang lokal na mga input, at muling magdudulot ng bayarin. Karaniwang ginagamit ang mga update sa modelo sa pamamagitan ng suportadong pagbabago sa provisioning, hindi sa teardown.
+1. Huwag mag redeploy para lang tiyakin ang paglilinis. Ang susunod na sinadyang `azd up` ay maaaring muling likhain ang mga resources gamit ang natitirang lokal na input, at muling magkakaroon ng singil. Karaniwan, ang mga update sa modelo ay gumagamit ng suportadong pagbabago sa provisioning, hindi sa pagtanggal.
 
 ---
 

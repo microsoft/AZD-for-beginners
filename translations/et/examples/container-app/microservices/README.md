@@ -1,798 +1,269 @@
-# Mikroteenuste arhitektuur - konteinerirakenduse näide
+# Kahe-teenusega mikroteenused — Azure Container Apps
 
-⏱️ **Hinnanguline aeg**: 25-35 minutit | 💰 **Hinnanguline maksumus**: ~$50-100/kuus | ⭐ **Kompleksus**: Edasijõudnu
+**Tase:** Kesktase · **Aeg:** 45–60 minutit koos seadistamisega
 
-**Lihtsustatud, aga funktsionaalne** mikroteenuste arhitektuur, mis on kasutusele võetud Azure Container Apps rakenduses, kasutades AZD CLI-d. See näide demonstreerib teenustevahelist kommunikatsiooni, konteinerite orkestreerimist ja jälgimist praktilise 2-teenusega seadistusega.
+See õppenäide rakendab **Node.js API-silla** ja **ainult lugemiseks mõeldud Python
+toote teenuse**. Allikas, Dockerfailid, Bicep ja azd konfiguratsioon on kaasas.
+See ei ole tootmiskõlbulik süsteem.
 
-> **📚 Õppimismeetod**: See näide algab minimaalse 2-teenusega arhitektuuriga (API Gateway + Backend Service), mida saad reaalselt juurutada ja õppida. Kui see alus on omandatud, pakume juhiseid laiendamiseks täismahus mikroteenuste ökosüsteemi.
+## Mida õpid
 
-## Mida sa õpid
-
-Selle näite lõpetamisega sa:
-- Juurutad mitu konteinerit Azure Container Apps keskkonda
-- Rakendad teenustevahelist suhtlust sisevõrgu kaudu
-- Konfigureerid keskkonnapõhist skaleerimist ja tervisekontrolle
-- Jälgid hajutatud rakendusi Application Insights abil
-- Mõistad mikroteenuste juurutusmustreid ja parimaid praktikaid
-- Õpid astmelist laiendamist lihtsast keerukani arhitektuurini
-
-## Arhitektuur
-
-### Faas 1: Mida me ehitame (kaasas selles näites)
+- Kaks teenust juurutada iseseisvalt.
+- Kasutada sisemist backend FQDN-i üle HTTPS.
+- Kinnitada edukat, mitte leitud ja teenuse mittenõuetekohast vastust.
+- Mõista telemeetria ja iseseisvate skaala piiranguid.
 
 ```mermaid
-graph TD
-    Internet[Internet] -- HTTPS --> Gateway[API värav<br/>Node.js konteiner<br/>Suunab päringuid<br/>Tervisekontrollid<br/>Päringute logimine]
-    Gateway -- HTTP sisemine --> Product[Toote teenus<br/>Python konteiner<br/>Toote CRUD<br/>Mäluandmehoidla<br/>REST API]
-    Product --> Insights[Rakenduse analüütika<br/>Jälgimine ja logid]
-```
-**Miks alustada lihtsast?**
-- ✅ Kiire juurutamine ja mõistmine (25-35 minutit)
-- ✅ Õpi põhitehnikaid ilma keerukuseta
-- ✅ Töötav kood, mida saad muuta ja katsetada
-- ✅ Madalamad kulud õppimiseks (~$50-100/kuus vs $300-1400/kuus)
-- ✅ Ehita enesekindlust enne andmebaaside ja sõnumijärjekordade lisamist
-
-**Analoogia**: Mõtle sellele nagu sõiduõppele. Alustad tühjast parkimiskohast (2 teenust), valdad põhiteadmisi, seejärel liigud edasi linnaliiklusesse (5+ teenust andmebaasidega).
-
-### Faas 2: Tuleviku laiendamine (viitearhitektuur)
-
-Kui 2-teenuse arhitektuur on valduses, võid laiendada:
-
-```
-Full Architecture (Not Included - For Reference)
-├── API Gateway (✅ Included)
-├── Product Service (✅ Included)
-├── Order Service (🔜 Add next)
-├── User Service (🔜 Add next)
-├── Notification Service (🔜 Add last)
-├── Azure Service Bus (🔜 For async communication)
-├── Cosmos DB (🔜 For product persistence)
-├── Azure SQL (🔜 For order management)
-└── Azure Storage (🔜 For file storage)
+flowchart LR
+    Client -->|HTTPS| Gateway[Public Node.js gateway — port 8080]
+    Gateway -->|HTTPS internal FQDN| Product[Internal Python product API — port 8000]
+    Gateway -. request/dependency telemetry .-> Insights[Application Insights]
+    Product -. application log traces .-> Insights
 ```
 
-Vaata jaotist "Laiendamise juhend" lõpus samm-sammult juhiste jaoks.
+Tootekataloog sisaldab viit fikseeritud toodet mälus. Puuduvad **POST,
+PUT või DELETE töötlejad**, andmebaas, Service Bus, tellimuse/kasutaja/teavitusteenus,
+C# või Go kood. Need on tuleviku arendusideed, mitte kaasatud funktsioonid.
+Lähtevärav ei autentita kasutajaid; sisemine sisenemine ei asenda
+rakenduse autoriseerimist.
 
-## Kaasasolevad funktsioonid
+## Eeldused
 
-✅ **Teenuse avastamine**: automaatne DNS-põhine avastus konteinerite vahel  
-✅ **Koormuse tasakaalustamine**: sisseehitatud koormuse jaotus koopiate vahel  
-✅ **Automaatne skaleerimine**: iga teenuse iseseisev skaleerimine HTTP-päringute põhjal  
-✅ **Tervisekontrollid**: mõlema teenuse elujõulisuse ja valmisoleku sondid  
-✅ **Hajutatud logimine**: tsentraliseeritud logimine Application Insightsiga  
-✅ **Sisevõrk**: turvaline teenustevaheline kommunikatsioon  
-✅ **Konteineri orkestreerimine**: automaatne juurutamine ja skaleerimine  
-✅ **Puuduvad seisakud uuendamisel**: järkjärguline uuendamine ja versioonihaldus  
-
-## Eeltingimused
-
-### Nõutavad tööriistad
-
-Enne alustamist veendu, et sul on need tööriistad paigaldatud:
-
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versioon 1.0.0 või uuem)
-   ```bash
-   azd version
-   # Oodatav väljund: azd versioon 1.0.0 või uuem
-   ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versioon 2.50.0 või uuem)
-   ```bash
-   az --version
-   # Oodatav väljund: azure-cli 2.50.0 või uuem
-   ```
-
-3. **[Docker](https://www.docker.com/get-started)** (kohalikuks arenduseks/testimiseks - vabatahtlik)
-   ```bash
-   docker --version
-   # Oodatav väljund: Dockeri versioon 20.10 või uuem
-   ```
-
-### Azure'i nõuded
-
-- Aktiivne **Azure tellimus** ([loo tasuta konto](https://azure.microsoft.com/free/))
-- Õigused ressursse loomiseks oma tellimuses
-- **Contributor** roll tellimuse või ressursigrupi tasemel
-
-### Teadmiste eelduseks
-
-See on **edasijõudnutele** mõeldud näide. Peaksid olema:
-- Läbinud [Simple Flask API näite](../../../../../examples/container-app/simple-flask-api) 
-- Põhiteadmised mikroteenuste arhitektuurist
-- Tutvunud REST API-de ja HTTP-ga
-- Mõistma konteinerite kontseptsiooni
-
-**Uus Container Appsis?** Alusta esmalt [Simple Flask API näitega](../../../../../examples/container-app/simple-flask-api), et põhiasjad selgeks saada.
-
-## Kiire algus (samm-sammult)
-
-### Samm 1: Kopeeri ja liigu kausta
+Täitke esmalt [ainult Flask API](../../../../../examples/container-app/simple-flask-api).
+Installige ajakohane stabiilne azd (ülevaate ajal avaldatud versioon: 1.37.2), Azure CLI,
+ja Docker koos taustaprotsessiga. Vajate Azure tellimust, ressursside loomise õigusi
+ning Container Apps piirkondlikku kvota.
 
 ```bash
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/container-app/microservices
-```
-
-**✓ Õnnestumise kontroll**: Veendu, et näed `azure.yaml` faili:
-```bash
-ls
-# Oodatud: README.md, azure.yaml, infra/, src/
-```
-
-### Samm 2: Autendi Azure'i
-
-```bash
+azd version
+az version
+docker info
 azd auth login
+az login
 ```
 
-See avab brauseri Azure autentimiseks. Logi sisse oma Azure kontoga.
+Kasutage mõlemas CLI tööriistas sama tellimust. Alljärgnevad käsud on Bash-is.
 
-**✓ Õnnestumise kontroll**: Sa peaksid nägema järgmist:
-```
-Logged in to Azure.
-```
+## Paigaldus ja kontroll
 
-### Samm 3: Initsialiseeri keskkond
+Hoidla juurkataloogist:
 
 ```bash
-azd init
-```
-
-**Näidatud küsimused**:
-- **Keskkonna nimi**: Sisesta lühike nimi (nt `microservices-dev`)
-- **Azure tellimus**: Vali oma tellimus
-- **Azure regioon**: Vali piirkond (nt `eastus`, `westeurope`)
-
-**✓ Õnnestumise kontroll**: Sa peaksid nägema:
-```
-SUCCESS: New project initialized!
-```
-
-### Samm 4: Juuruta infrastruktuur ja teenused
-
-```bash
+cd examples/container-app/microservices
+azd env new microservices-demo
 azd up
+GATEWAY_URL=$(azd env get-value API_GATEWAY_URL)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+GATEWAY_NAME=$(azd env get-value API_GATEWAY_NAME)
+PRODUCT_NAME=$(azd env get-value PRODUCT_SERVICE_NAME)
+
+curl --fail-with-body "${GATEWAY_URL}/health"
+curl --fail-with-body "${GATEWAY_URL}/api/products"
+curl --fail-with-body "${GATEWAY_URL}/api/products/1"
+curl -i "${GATEWAY_URL}/api/products/999"
 ```
 
-**Mis toimub** (kestab 8-12 minutit):
-1. Luuakse Container Apps keskkond
-2. Luuakse Application Insights jälgimiseks
-3. Koostatakse API Gateway konteiner (Node.js)
-4. Koostatakse Product Service konteiner (Python)
-5. Mõlemad konteinerid juurutatakse Azure’i
-6. Konfigureeritakse võrgustik ja tervisekontrollid
-7. Häälestatakse jälgimine ja logimine
+**Edu:** tervis 200; nimekiri 200 viie tootega; toode 1 on sülearvuti,
+hinnaga 999,99 ja laoseisuga 50; tundmatu toode tagastab 404.
+Kirjeldused on vastustes kaasatud; ajatemplitel on varieeruvus.
 
-**✓ Õnnestumise kontroll**: Sa peaksid nägema:
+Esmase paigalduse puhul kasutatakse avalikke hello-world pilte pordil 80, et ei
+oleks vaja tõmmata mitteolemasolevaid pilte tühjast registrist. Teenusepõhised Bicep moodulid
+ja parameeterfailid asendavad need ehitatud piltide ja rakenduse portide/probidega paigalduse ajal
+`azd deploy`. Peamised parameetrid säilitavad avaldatud piltide nimed hilisemaks paigaldamiseks.
+
+## Teenused ja võrgustik
+
+| Teenus | Avalikustatud lõpp-punktid | Vaikimisi ressursid |
+|---|---|---|
+| Gateway | GET `/`, `/health`, `/api/products`, `/api/products/:id` | 1 vCPU, 2 GiB, 2–20 koopiat |
+| Product | GET `/`, `/health`, `/products`, `/products/<id>` | 0.5 vCPU, 1 GiB, 1–10 koopiat |
+
+Product-ingress'il on `external: false` ja `allowInsecure: false`. Bicep süstib
+`PRODUCT_SERVICE_URL=https://<actual-internal-fqdn>` gateway-sse. HTTP oleks
+suunamine; HTTPS vastab konfigureeritud sisenemisteele. Lühike DNS-i nimi peab vastama
+**tõelisele konteinerirakenduse nimele**, mitte loogilisele teenusevõtmele `product-service`.
+Ära proovi sisemist URL-i otse oma sülearvutist kutsuda.
+
+Sisenemislüüsil on tootepäringute jaoks viie sekundi aegumine. Puuduvad tootetunnused
+põhjustavad 404; transpordivead/muutuvad taustateenuse vead tagastavad 503. Lüüs
+`/health` kontrollib ainult lüüsi, mitte taustateenuse saadavust.
+
+## Failid ja konfiguratsioon
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/core/container-apps-environment.bicep
+infra/core/monitor.bicep
+infra/app/api-gateway.bicep
+infra/app/api-gateway.parameters.json
+infra/app/product-service.bicep
+infra/app/product-service.parameters.json
+src/api-gateway/{app.js,package.json,Dockerfile}
+src/product-service/{main.py,requirements.txt,Dockerfile}
 ```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
-```
 
-**⏱️ Aeg**: 8-12 minutit
+Skaalamine, CPU/mälu, pordid ja sondid on määratud failis `infra/app/*.bicep`. Muuda neid
+faile ja käivita `azd up` infrastruktuuri rakendamiseks ja ümberpaigutamiseks. Selles
+näites puudub `GATEWAY_MAX_REPLICAS` keskkonnamuutuja parameeter.
 
-### Samm 5: Testi juurutust
+Ainult koodi muudatuste puhul:
 
 ```bash
-# Hangi värava lõpp-punkt
-GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
-
-# Testi API värava tervislikkus
-curl $GATEWAY_URL/health
-
-# Oodatav väljund:
-# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
-```
-
-**Testi tooteteenust gateway kaudu**:
-```bash
-# Toodete nimekiri
-curl $GATEWAY_URL/api/products
-
-# Oodatav väljund:
-# [
-#   {"id":1,"nimi":"Sülearvuti","hind":999.99,"laos":50},
-#   {"id":2,"nimi":"Hiir","hind":29.99,"laos":200},
-#   {"id":3,"nimi":"Klaviatuur","hind":79.99,"laos":150}
-# ]
-```
-
-**✓ Õnnestumise kontroll**: Mõlemad lõpp-punktid tagastavad JSON andmeid ilma vigadeta.
-
----
-
-**🎉 Palju õnne!** Sa oled juurutanud mikroteenuste arhitektuuri Azure’i!
-
-## Projekti struktuur
-
-Kõik rakendusfailid on kaasas – see on täielik ja töökindel näide:
-
-```
-microservices/
-│
-├── README.md                         # This file
-├── azure.yaml                        # AZD configuration
-├── .gitignore                        # Git ignore patterns
-│
-├── infra/                           # Infrastructure as Code (Bicep)
-│   ├── main.bicep                   # Main orchestration
-│   ├── abbreviations.json           # Naming conventions
-│   ├── core/                        # Shared infrastructure
-│   │   ├── container-apps-environment.bicep  # Container environment + registry
-│   │   └── monitor.bicep            # Application Insights + Log Analytics
-│   └── app/                         # Service definitions
-│       ├── api-gateway.bicep        # API Gateway container app
-│       └── product-service.bicep    # Product Service container app
-│
-└── src/                             # Application source code
-    ├── api-gateway/                 # Node.js API Gateway
-    │   ├── app.js                   # Express server with routing
-    │   ├── package.json             # Node dependencies
-    │   └── Dockerfile               # Container definition
-    └── product-service/             # Python Product Service
-        ├── main.py                  # Flask API with product data
-        ├── requirements.txt         # Python dependencies
-        └── Dockerfile               # Container definition
-```
-
-**Mida iga komponent teeb:**
-
-**Infrastruktuur (infra/)**:
-- `main.bicep`: Haldab kõiki Azure ressursse ja nende sõltuvusi
-- `core/container-apps-environment.bicep`: Loob Container Apps keskkonna ja Azure Container Registry
-- `core/monitor.bicep`: Häälestab Application Insights hajutatud logimiseks
-- `app/*.bicep`: Individuaalsed konteinerirakenduste definitsioonid koos skaleerimise ja tervisekontrollidega
-
-**API Gateway (src/api-gateway/)**:
-- Avalikkusele suunatud teenus, mis juhib päringuid backend-teenustele
-- Teostab logimist, veakäsitlust ja päringute edastamist
-- Demonstreerib teenustevahelist HTTP suhtlust
-
-**Product Service (src/product-service/)**:
-- Sisemine teenus tooteloendiga (lihtsuse huvides mälus)
-- REST API koos tervisekontrollidega
-- Näide backend-mikroteenuse mustrist
-
-## Teenuste ülevaade
-
-### API Gateway (Node.js/Express)
-
-**Port**: 8080  
-**Juurdepääs**: Avalik (väline sisenemine)  
-**Eesmärk**: Suunab sissetulevad päringud sobivatele backend-teenustele  
-
-**Lõpp-punktid**:
-- `GET /` - Teenuse info
-- `GET /health` - Tervisekontrolli lõpp-punkt
-- `GET /api/products` - Suunamine tooteteenusele (kõik tooted)
-- `GET /api/products/:id` - Suunamine tooteteenusele (toode ID järgi)
-
-**Põhifunktsioonid**:
-- Päringute suunamine axios’iga
-- Tsentraliseeritud logimine
-- Veakäsitlus ja aegumise juhtimine
-- Teenuse avastus keskkonnamuutujate kaudu
-- Application Insights integratsioon
-
-**Koodinäide** (`src/api-gateway/app.js`):
-```javascript
-// Sisemine teenustevaheline suhtlus
-app.get('/api/products', async (req, res) => {
-  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-  res.json(response.data);
-});
-```
-
-### Product Service (Python/Flask)
-
-**Port**: 8000  
-**Juurdepääs**: Ainult sisevõrgus (väline sisenemine puudub)  
-**Eesmärk**: Haldab tootekataloogi mälupõhiselt  
-
-**Lõpp-punktid**:
-- `GET /` - Teenuse info
-- `GET /health` - Tervisekontrolli lõpp-punkt
-- `GET /products` - Kõik tooted
-- `GET /products/<id>` - Toode ID järgi
-
-**Põhifunktsioonid**:
-- REST API Flaskiga
-- Mälupõhine tootepood (lihtne, andmebaasi ei vaja)
-- Tervise jälgimine sondidega
-- Struktureeritud logimine
-- Application Insights integratsioon
-
-**Andmemudel**:
-```python
-{
-  "id": 1,
-  "name": "Laptop",
-  "description": "High-performance laptop",
-  "price": 999.99,
-  "stock": 50
-}
-```
-
-**Miks ainult sisevõrgu jaoks?**
-Tooteteenus ei ole avalikult kättesaadav. Kõik päringud peavad minema API Gateway kaudu, mis tagab:
-- Turvalisus: kontrollitud ligipääs
-- Paindlikkus: saab muuta backend’i ilma klienti mõjutamata
-- Jälgimine: tsentraliseeritud päringute logimine
-
-## Kuidas teenused omavahel suhtlevad
-
-### Kuidas teenused omavahel suhtlevad
-
-Selles näites suhtleb API Gateway Product Service’iga kasutades **sisesideseid HTTP-kõnesid**:
-
-```javascript
-// API värav (src/api-gateway/app.js)
-const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
-
-// Tee sisemine HTTP päring
-const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-```
-
-**Olulised punktid**:
-
-1. **DNS-põhine avastamine**: Container Apps pakub automaatselt DNS-i sise-teenustele
-   - Product Service täielik domeeninimi: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Lihtsustatud kujul: `http://product-service` (Container Apps lahendab selle)
-
-2. **Avalikku ligipääsu pole**: Product Service’il on Bicep-s `external: false`
-   - Kättesaadav ainult Container Apps keskkonnas
-   - Pole ligipääsetav interneti kaudu
-
-3. **Keskkonnamuutujad**: Teenuse URL-id süstitakse juurutamise ajal
-   - Bicep edastab sise-FQDN gateway'le
-   - Rakenduskoodis pole kõvasid URL-e
-
-**Analoogia**: Mõtle sellele kui kontoriruumidele. API Gateway on vastuvõtulaud (avalik), Product Service on kontoriruum (ainult siseruum). Külastajad peavad läbi vastuvõtu igasse kontorisse pääsemiseks.
-
-## Juurutamise võimalused
-
-### Täielik juurutus (soovitatav)
-
-```bash
-# Paigalda infrastruktuur ja mõlemad teenused
-azd up
-```
-
-See juurutab:
-1. Container Apps keskkonna
-2. Application Insights’i
-3. Container Registry
-4. API Gateway konteineri
-5. Product Service konteineri
-
-**Aeg**: 8-12 minutit
-
-### Juuruta üksik teenus
-
-```bash
-# Hangi üles ainult üks teenus (pärast esmast azd up)
-azd deploy api-gateway
-
-# Või aja käima toote teenus
 azd deploy product-service
+azd deploy api-gateway
 ```
 
-**Kasutusjuhtum**: Kui oled ühes teenuses koodi uuendanud ja soovid ainult seda teenust uuesti juurutada.
+Node'i pilt kasutab Node 22; Pythoni pilt kasutab Python 3.11. Mõlemad seovad end
+`0.0.0.0`. Sisenemiskiht/sondid kasutavad vastavalt porti 8080 (lüüs) ja 8000 (toode).
 
-### Konfiguratsiooni värskendamine
+## Kohalik arendus Dockeriga
+
+Käivita sellest näitedirektoriumist. Kasuta kasutajapoolset võrku, **mitte `localhost`
+ühe konteineri jaoks teise jõudmiseks**:
 
 ```bash
-# Muuda skaleerimisparameetreid
-azd env set GATEWAY_MAX_REPLICAS 30
-
-# Käivita uuesti uue konfiguratsiooniga
-azd up
+docker network create azd-microservices-demo
+docker build -t local-product ./src/product-service
+docker build -t local-gateway ./src/api-gateway
+docker run -d --name azd-product --network azd-microservices-demo local-product
+docker run -d --name azd-gateway --network azd-microservices-demo \
+  -p 8080:8080 -e PRODUCT_SERVICE_URL=http://azd-product:8000 local-gateway
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-## Konfiguratsioon
-
-### Skaleerimise konfiguratsioon
-
-Mõlemad teenused on konfigureeritud HTTP-põhise automaatse skaleerimisega oma Bicep failides:
-
-**API Gateway**:
-- Min koopiad: 2 (alati vähemalt 2 kättesaadavuse tagamiseks)
-- Max koopiad: 20
-- Skaleerimise käivitaja: 50 samaaegset päringut koopia kohta
-
-**Product Service**:
-- Min koopiad: 1 (vajadusel saab skaleerida ka nullini)
-- Max koopiad: 10
-- Skaleerimise käivitaja: 100 samaaegset päringut koopia kohta
-
-**Skaleerimise kohandamine** (`infra/app/*.bicep`):
-```bicep
-scale: {
-  minReplicas: 1
-  maxReplicas: 10
-  rules: [
-    {
-      name: 'http-scale-rule'
-      http: {
-        metadata: {
-          concurrentRequests: '100'  // Adjust this
-        }
-      }
-    }
-  ]
-}
-```
-
-### Ressursside jaotus
-
-**API Gateway**:
-- CPU: 1.0 vCPU
-- Mälu: 2 GiB
-- Põhjus: Töötleb kogu välist liiklust
-
-**Product Service**:
-- CPU: 0.5 vCPU
-- Mälu: 1 GiB
-- Põhjus: Kergekaaluline mälutöötlus
-
-### Tervisekontrollid
-
-Mõlemas teenuses on elujõulisuse ja valmisoleku sondid:
-
-```bicep
-probes: [
-  {
-    type: 'Liveness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 10
-    periodSeconds: 30
-  }
-  {
-    type: 'Readiness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  }
-]
-```
-
-**Mida see tähendab**:
-- **Elujõulisus**: kui tervisekontroll ebaõnnestub, taaskäivitab Container Apps konteineri
-- **Valmisolek**: kui teenus pole valmis, lõpetab Container Apps selle koopia liikluse suunamise
-
-
-
-## Jälgimine ja vaatlusalus
-
-### Teenuste logide vaatamine
+Oodatav: viis toodet. HTTP-d kasutatakse ainult selle kohaliku Dockeri võrgu jaoks.
 
 ```bash
-# Vaata logisid, kasutades azd monitorit
-azd monitor --logs
-
-# Või kasuta Azure CLI-d konkreetsete konteinerirakenduste jaoks:
-# Voogesita logisid API väravast
-az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
-
-# Vaata viimaseid tootepoe logisid
-az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+docker stop azd-product azd-gateway
+docker rm azd-product azd-gateway
+docker network rm azd-microservices-demo
 ```
 
-**Oodatav väljund**:
+## Jälgimine
+
+```bash
+az containerapp logs show --name "$GATEWAY_NAME" --resource-group "$RG_NAME" --follow
+# In a separate terminal:
+az containerapp logs show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" --tail 100
 ```
-[api-gateway] API Gateway listening on port 8080
-[api-gateway] Product Service URL: http://product-service
-[api-gateway] GET /api/products 200 - 45ms
-[product-service] Retrieved 5 products
-```
 
-### Application Insights päringud
+`azd monitor --logs` avab portaali vaate; see ei vooga terminali logisid.
+Node SDK kogub lüüsi päringuid/sõltuvusi. Pythoni `AzureLogHandler` ekspordib
+**logijälgi**, mitte automaatseid Flaski päringuid, SQL-i sõltuvusi ega täielikke
+jaotatud jälgi. OpenCensus on pärand SDK; eelistage Azure Monitor OpenTelemetry’d,
+kui seda näidet laiendate.
 
-Azure Portaalis Application Insightsi juures tee need päringud:
+Application Insightsi logides genereerige päringud ja vaadake:
 
-**Leia aeglased päringud**:
 ```kusto
 requests
 | where timestamp > ago(1h)
-| where duration > 1000  // Requests taking >1 second
-| summarize count() by name, cloud_RoleName
-| order by count_ desc
+| where name contains "products"
+| summarize RequestCount=count(), AvgDuration=avg(duration) by bin(timestamp, 5m)
 ```
 
-**Jälgi teenustevahelisi kõnesid**:
+Pythoni rakenduste sõnumite jaoks:
+
 ```kusto
-dependencies
+traces
 | where timestamp > ago(1h)
-| where type == "Http"
-| project timestamp, name, target, duration, success
-| order by timestamp desc
+| where message contains "products"
+| project timestamp, message, severityLevel
 ```
 
-**Vigade määr teenuse kaupa**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName, type
-| order by errorCount desc
-```
+Arvesta sisseimportimise viivitust ja valimit; ära oota täpset päringute arvu ega
+garanteeritud latentsust. Kohandatud hoiatusi ega armatuurlaudu pole konfigureeritud.
 
-**Päringute maht aja jooksul**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
-| render timechart
-```
+## Praktilised harjutused
 
-### Juurdepääs jälgimise armatuurlaudadele
+### Harjutus 1: muuta kataloogi
+
+**Alguspunkt:** `src/product-service/main.py`.
+**Eesmärk:** kontrollida sõltumatut teenuse juurutamist.
+Muuda sülearvuti laoseis 50-lt 49-le fikseeritud `products` nimekirjas, käivita
+`azd deploy product-service`, seejärel küsi `${GATEWAY_URL}/api/products/1`.
+
+**Õnnestumise kriteerium / lahendus:** HTTP 200 koos `"stock":49`. Taasta 50 ja paigalda uuesti.
+**Tavaline probleem:** sisenemislüüsi muutmine teenuse asemel, mis kataloogi haldab.
+See muudab allikandmeid, mitte püsivat laoseisu andmebaasi.
+
+### Harjutus 2: veendu koopiate seadistuses
+
+**Alguspunkt:** `infra/app/product-service.bicep`.
+**Eesmärk:** jälgida infrastruktuuri muutust ilma autoskaalumise oletamiseta.
+Muuda `minReplicas: 1` väärtuseks `minReplicas: 2`, käivita `azd up`, seejärel:
 
 ```bash
-# Hangi Application Insights'i üksikasjad
-azd env get-values | grep APPLICATIONINSIGHTS
-
-# Ava Azure Portali jälgimine
-az monitor app-insights component show \
-  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
-  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
-  --query "appId" -o tsv
+az containerapp show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" \
+  --query properties.template.scale -o json
 ```
 
-### Reaalaegsed mõõdikud
+**Õnnestumise kriteerium:** konfigureeritud minimaalne on 2 ja maksimaalne jääb 10-ks.
+Taasta minimaalne 1 ja käivita `azd up`.
+**Tavaline probleem:** ainult `azd deploy` ei rakenda muudatusi mitteseotud jagatud
+infrastruktuuril. Ära sea `maxReplicas` väärtust nulliks viga simuleerides.
+See kontrollib konfiguratsiooni, mitte koormustesti ega garanteeritud hetkelist koopiate arvu.
 
-1. Mine Azure Portaalis Application Insightsi
-2. Klõpsa "Live Metrics"
-3. Näed reaalajas päringuid, tõrkeid ja jõudlust
-4. Proovi käivitada: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+### Harjutus 3: testi kohalikku teenuse mittesaadavust
 
-## Praktilised ülesanded
-
-[Märkused: täielikke harjutusi näed "Praktiliste ülesannete" jaotises, mis sisaldab samm-sammult harjutusi juurutuse kontrollimiseks, andmete muutmiseks, automaatse skaleerimise testimiseks, vigade käsitlemiseks ja kolmanda teenuse lisamiseks.]
-
-## Kuluanalüüs
-
-### Hinnangulised kuukulud (selle 2-teenuse näite jaoks)
-
-| Ressurss | Konfiguratsioon | Hinnanguline maksumus |
-|----------|-----------------|----------------------|
-| API Gateway | 2-20 koopiat, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 koopiat, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Algne tase | $5 |
-| Application Insights | 1-2 GB/kuus | $5-10 |
-| Log Analytics | 1 GB/kuus | $3 |
-| **Kokku** | | **$58-243/kuus** |
-
-**Kulu jaotus kasutuse järgi**:
-- **Vähene liiklus** (testimine/õppimine): ~$60/kuus
-- **Mõõdukas liiklus** (väike tootmine): ~$120/kuus
-- **Suur liiklus** (rasked perioodid): ~$240/kuus
-
-### Kuluoptimeerimise näpunäited
-
-1. **Skaleeri arendushooajal nullini**:
-   ```bicep
-   scale: {
-     minReplicas: 0  // Save $30-40/month when not in use
-     maxReplicas: 10
-   }
-   ```
-
-2. **Kasuta Cosmos DB jaoks tarbimise plaani** (kui see lisada):
-   - Maksad ainult kasutuse eest
-   - Minimaalset tasu pole
-
-3. **Seadista Application Insightsi näidiste võtmine**:
-   ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Proovi 50% päringutest
-   ```
-
-4. **Puhasta, kui pole enam vaja**:
-   ```bash
-   azd down
-   ```
-
-### Tasuta taseme võimalused
-
-Õppimiseks/testimiseks soovitatakse:
-- Kasutage Azure tasuta krediiti (esimesed 30 päeva)  
-- Hoidke replikate arv minimaalsena  
-- Kustutage peale testimist (ei teki jooksvaid kulusid)  
-
----
-
-## Puhastamine
-
-Jooksvate kulude vältimiseks kustutage kõik ressursid:
+**Alguspunkt:** mõlemad kohaliku Dockeri konteinerid on käimas.
+**Eesmärk:** eristada taustateenuse riket puuduvast tootest.
+Peata ainult tootekonteiner:
 
 ```bash
-azd down --force --purge
+docker stop azd-product
+curl -i http://localhost:8080/api/products
+docker start azd-product
+curl --fail-with-body http://localhost:8080/api/products
 ```
-  
-**Kinnituspalve**:  
-```
-? Total resources to delete: 6, are you sure you want to continue? (y/N)
-```
-  
-Tippige kinnitamiseks `y`.  
 
-**Mida kustutatakse**:  
-- Container Apps keskkond  
-- Mõlemad Container Appsid (lüüsi ja toote teenus)  
-- Container Registry  
-- Application Insights  
-- Log Analytics tööruum  
-- Ressursirühm  
+**Õnnestumise kriteerium:** peatamise ajal tagastab lüüs 503 koos
+`"error":"Product service unavailable"`; taaskäivitamisel tagastab nimekiri 200.
+Vajadusel proovi uuesti pärast lühikest käivitumisviivitust.
+**Tavaline probleem:** lüüsi peatamine testib teistsugust viga (pole HTTP vastust).
 
-**✓ Kontrolli puhastust**:  
+## Kulud ja tootmisvahed
+
+Vaikimisi minimaalne koopiate arv hoiab arvutuse töös. Ka registri ja jälgimise eest tuleb maksta.
+Fixsumma 50 dollari kuus puudub; hinda piirkondlikku CPU/mälu,
+koopiate tunde, päringuid, registrit ja logide säilitust aadressil
+[Azure'i hinnakalkulaator](https://azure.microsoft.com/pricing/calculator/).
+Kustuta õppematerjalid kiiresti.
+
+Tootmises on kaasatud autentimine/autoriseerimine, piiritletud hallatavad identiteedid,
+püsivad andmed, sisendi/väljundi valideerimine, toetatud jälgimisinstrumendid,
+koormus-/veatesting, CI/CD, teated ja taastamismeetodid. Tellimusteenuse,
+järjekorra või andmebaasi lisamine on eraldi teostustöö, mitte selle harjutuse
+lõpetatud osa ega siin saadaval funktsioon.
+
+## Tõrkeotsing ja puhastamine
+
+- **Pilt puudub esimesel käivitamisel:** käivitamisel tuleks kasutada avalikku pilti;
+  kontrolli põhipildi parameetrite vaikeväärtusi ja juurutamise mooduli seoseid.
+- **503 tooted:** vaata tootelogisid, pildi revisjoni ja injekteeritud sisemist HTTPS URL-i.
+- **404 ootamatu tee:** toote API on ainult lugemiseks; kontrolli marsruuti, mitte olematut CRUD-i käitlejat.
+- **Telemeetria puudub:** kontrolli runtime'i ühendusstringe, ilma et neid avalikustataks, ning
+  arvesta andmete vastuvõtu viivitusega. Pythoni päringulaule ei täideta selle logihalduri poolt.
+
+Sellest näitedirektoriumist:
+
 ```bash
-az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+azd down
 ```
-  
-Peab tagastama tühja tulemuse.  
 
----
+Vaata kustutusteadeid ja veendu, et pühendatud ressursigrupi eemaldamine õnnestus.
 
-## Laiendusjuhend: 2-st 5+ teenuseni
-
-Kui oled selle 2-teenuse arhitektuuri omandanud, on siin, kuidas edasi laiendada:  
-
-### Faas 1: Lisa andmebaasi püsivus (järgmine samm)
-
-**Lisa Cosmos DB toote teenusele**:
-
-1. Loo `infra/core/cosmos.bicep`:  
-   ```bicep
-   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
-     name: name
-     location: location
-     kind: 'GlobalDocumentDB'
-     properties: {
-       databaseAccountOfferType: 'Standard'
-       locations: [{ locationName: location, failoverPriority: 0 }]
-     }
-   }
-   ```
-  
-2. Uuenda toote teenust kasutamaks Cosmos DB-d mälus hoidmise asemel  
-
-3. Hinnanguline lisakulu: ~25 USD kuus (serverless)  
-
-### Faas 2: Lisa kolmas teenus (tellimuste haldus)
-
-**Loo tellimuste teenus**:
-
-1. Uus kaust: `src/order-service/` (Python/Node.js/C#)  
-2. Uus Bicep: `infra/app/order-service.bicep`  
-3. Uuenda API Gateway marsruuti `/api/orders`  
-4. Lisa Azure SQL andmebaas tellimuste püsivuseks  
-
-**Arhitektuur muutub selliseks**:  
-```
-API Gateway → Product Service (Cosmos DB)
-           → Order Service (Azure SQL)
-```
-  
-### Faas 3: Lisa asünkroonne suhtlus (Service Bus)
-
-**Rakenda sündmuspõhine arhitektuur**:
-
-1. Lisa Azure Service Bus: `infra/core/servicebus.bicep`  
-2. Toote teenus avaldab "ProductCreated" sündmusi  
-3. Tellimuste teenus tellimusi kuulab  
-4. Lisa teavitusteenus sündmuste töötlemiseks  
-
-**Muster**: Päring/Vastus (HTTP) + Sündmuspõhine (Service Bus)  
-
-### Faas 4: Lisa kasutajate autentimine
-
-**Rakenda kasutajate teenus**:
-
-1. Loo `src/user-service/` (Go/Node.js)  
-2. Lisa Azure AD B2C või kohandatud JWT autentimine  
-3. API Gateway valideerib tokenid  
-4. Teenused kontrollivad kasutaja õigusi  
-
-### Faas 5: Tootmisvalmidus
-
-**Lisa need komponendid**:  
-- Azure Front Door (globaalne koormuse tasakaalustamine)  
-- Azure Key Vault (salajaste andmete haldus)  
-- Azure Monitor Workbooks (kohandatud armatuurlauad)  
-- CI/CD torujuhe (GitHub Actions)  
-- Blue-Green juurutused  
-- Halda identiteeti kõigile teenustele  
-
-**Täieliku tootmisarhitektuuri kulu**: ~300-1,400 USD kuus  
-
----
-
-## Lisateave
-
-### Seotud dokumentatsioon  
-- [Azure Container Apps dokumentatsioon](https://learn.microsoft.com/azure/container-apps/)  
-- [Mikroteenuste arhitektuuri juhend](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)  
-- [Application Insights hajutatud jälgimiseks](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)  
-- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-
-### Järgmised sammud kursusel  
-- ← Eelmine: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Algaja ühe konteineri näide  
-- → Järgmine: [AI integratsiooni juhend](../../../../../examples/docs/ai-foundry) - Lisa tehisintellekti võimekused  
-- 🏠 [Kursuse avaleht](../../README.md)  
-
-### Võrdlus: millal kasutada mida
-
-**Üksik konteineri rakendus** (Simple Flask API näide):  
-- ✅ Lihtsad rakendused  
-- ✅ Monoliitne arhitektuur  
-- ✅ Kiire juurutamine  
-- ❌ Piiratud skaleeritavus  
-- **Kulu**: ~15-50 USD kuus  
-
-**Mikroteenused** (see näide):  
-- ✅ Komplekssed rakendused  
-- ✅ Iga teenuse sõltumatu skaleerimine  
-- ✅ Meeskondade autonoomia (erinevad teenused, erinevad meeskonnad)  
-- ❌ Ülalpidamine keerulisem  
-- **Kulu**: ~60-250 USD kuus  
-
-**Kubernetes (AKS)**:  
-- ✅ Maksimaalne kontroll ja paindlikkus  
-- ✅ Mitmepilve ülekantavus  
-- ✅ Täiustatud võrgustik  
-- ❌ Nõuab Kubernetes ekspertiisi  
-- **Kulu**: alates ~150-500 USD kuus  
-
-**Soovitus**: Alusta Container Appsiga (see näide), liigu AKS-i ainult kui vajad Kubernetes-spetsiifilisi võimalusi.  
-
----
-
-## Korduma kippuvad küsimused
-
-**K: Miks kasutada ainult 2 teenust mitte 5+?**  
-V: Hariduslik järjekord. Õpi esmalt põhialused (teenuste suhtlus, jälgimine, skaleerimine) lihtsa näitega enne keerukuse lisamist. Siin õpitu kehtib ka 100-teenuste arhitektuuridele.  
-
-**K: Kas saan ise lisateenuseid lisada?**  
-V: Muidugi! Järgi ülaltoodud laiendusjuhendit. Iga uus teenus järgib sama mustrit: loo src-kaust, bicep-fail, uuenda azure.yaml, juuruta.  
-
-**K: Kas see on tootmisvalmis?**  
-V: See on tugev alus. Tootmiskeskkonna jaoks lisa: hallatud identiteet, Key Vault, püsivad andmebaasid, CI/CD torujuhe, jälgimishoiatused ja varundusstrateegia.  
-
-**K: Miks mitte kasutada Dapri või muid teenusevõrke?**  
-V: Hoia õppimiseks lihtne. Kui mõistad Container Apps'i natiivset võrgustikku, saad hiljem lisada Dapri keerukamate stsenaariumide jaoks.  
-
-**K: Kuidas ma saan kohapeal siluda?**  
-V: Käivita teenused lokaalselt Dockeriga:  
-```bash
-cd src/api-gateway
-docker build -t local-gateway .
-docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
-```
-  
-**K: Kas saan kasutada erinevaid programmeerimiskeeli?**  
-V: Jah! See näide kasutab Node.js (lüüs) + Python (toote teenus). Võid kombineerida ükskõik milliseid konteinerites töötavaid keeli.  
-
-**K: Mida teha, kui mul pole Azure krediiti?**  
-V: Kasuta Azure tasuta kihti (esimesed 30 päeva uutele kontodele) või juuruta lühiajaliseks testimiseks ja kustuta kohe.  
-
----
-
-> **🎓 Õppimiseteekonna kokkuvõte**: Sa õppisid juurutama mitme teenusega arhitektuuri automaatse skaleerimise, sisemise võrgustiku, tsentraliseeritud jälgimise ja tootmisvalmide mustritega. See alus valmistab sind ette keerukate hajutatud süsteemide ja ettevõtte mikroteenuste arhitektuuride tarbeks.  
-
-**📚 Kursuse navigeerimine:**  
-- ← Eelmine: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)  
-- → Järgmine: [Andmebaasi integreerimise näide](../../../../../examples/database-app)  
-- 🏠 [Kursuse avaleht](../../../README.md)  
-- 📖 [Container Appsi parimad praktikad](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+[Eelmine: Flask API](../../../../../examples/container-app/simple-flask-api) · [Järgmine: Andmebaasi rakendus](../../../../../examples/database-app) ·
+[AI arendus](../../../docs/chapter-02-ai-development/README.md) ·
+[Kursuse avaleht](../../../README.md) · [Teata probleemist](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:
-See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta käesoleva tõlke kasutamisest tingitud arusaamatuste või valesti mõistmiste eest.
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

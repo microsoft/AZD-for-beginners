@@ -1,9 +1,9 @@
 # Vzory koordinace více agentů
 
-⏱️ **Odhadovaný čas**: 60-75 minut čtení; několik hodin implementace | 💰 **Odhadované náklady**: závislé na pracovním zatížení | ⭐ **Složitost**: Pokročilá
+⏱️ **Odhadovaný čas**: 60–75 minut čtení; několik hodin implementace | 💰 **Odhadované náklady**: závislé na pracovním zatížení | ⭐ **Složitost**: Pokročilá
 
-**📚 Výuková cesta:**
-- ← Předchozí: [Plánování kapacit](capacity-planning.md) - Strategie dimenzování a škálování zdrojů
+**📚 Studijní cesta:**
+- ← Předchozí: [Plánování kapacity](capacity-planning.md) - Strategie dimenzování a škálování zdrojů
 - 🎯 **Jste zde**: Vzory koordinace více agentů (orchestrace, komunikace, správa stavu)
 - → Další: [Výběr SKU](sku-selection.md) - Výběr správných služeb Azure
 - 🏠 [Domovská stránka kurzu](../../README.md)
@@ -12,14 +12,14 @@
 
 ## Co se naučíte
 
-Dokončením této lekce budete:
-- Rozumět vzorům **architektury více agentů** a kdy je používat
-- Implementovat **vzory orchestrace** (centralizované, decentralizované, hierarchické)
-- Navrhovat strategie **komunikace agentů** (synchronní, asynchronní, na události)
-- Spravovat **sdílený stav** mezi distribuovanými agenty
-- Nasadit **systémy více agentů** v Azure pomocí AZD
-- Používat **vzory koordinace** pro reálné scénáře AI
-- Monitorovat a ladit distribuované agentní systémy
+Dokončením této lekce:
+- Pochopíte **vzory architektury více agentů** a kdy je používat
+- Implementujete **vzory orchestrace** (centralizovaná, decentralizovaná, hierarchická)
+- Navrhnete **strategie komunikace agentů** (synchronní, asynchronní, událostmi řízené)
+- Budete spravovat **sdílený stav** mezi distribuovanými agenty
+- Nasadíte **systémy více agentů** na Azure pomocí AZD
+- Použijete **vzory koordinace** pro reálné scénáře AI
+- Budete monitorovat a ladit distribuované systémy agentů
 
 ## Proč je koordinace více agentů důležitá
 
@@ -29,11 +29,11 @@ Dokončením této lekce budete:
 ```
 User → Agent → Response
 ```
-- ✅ Snadné porozumění a implementace
-- ✅ Rychlý pro jednoduché úkoly
-- ❌ Omezen schopnostmi jediného modelu
-- ❌ Nelze paralelizovat složité úkoly
-- ❌ Žádná specializace
+- ✅ Snadné pochopit a implementovat
+- ✅ Rychlé pro jednoduché úkoly
+- ❌ Omezené schopnostmi jednoho modelu
+- ❌ Není možné paralelizovat složité úkoly
+- ❌ Bez specializace
 
 **Systém více agentů (pokročilý):**
 ```mermaid
@@ -43,9 +43,9 @@ graph TD
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
 - ✅ Specializovaní agenti na konkrétní úkoly
-- ✅ Paralelní vykonávání pro rychlost
-- ✅ Modularita a snadná údržba
-- ✅ Lepší pro složité pracovní postupy
+- ✅ Paralelní provádění pro rychlost
+- ✅ Modulární a udržovatelný
+- ✅ Lepší pro složité pracovní toky
 - ⚠️ Vyžaduje logiku koordinace
 
 **Analogie**: Jeden agent je jako jedna osoba vykonávající všechny úkoly. Více agentů je jako tým, kde každý člen má specializované dovednosti (výzkumník, programátor, recenzent, spisovatel) a spolupracují.
@@ -56,7 +56,7 @@ graph TD
 
 ### Vzor 1: Sekvenční koordinace (řetězec odpovědnosti)
 
-**Kdy použít**: Úkoly musí být dokončeny v určitém pořadí, každý agent staví na výstupu předchozího.
+**Kdy použít**: Úkoly musí být dokončeny ve specifickém pořadí, každý agent navazuje na výstup předchozího.
 
 ```mermaid
 sequenceDiagram
@@ -80,24 +80,24 @@ sequenceDiagram
 
 **Výhody:**
 - ✅ Jasný tok dat
-- ✅ Snadná laditelnost
-- ✅ Předvídatelné pořadí vykonávání
+- ✅ Snadné ladění
+- ✅ Předvídatelné pořadí provádění
 
 **Omezení:**
 - ❌ Pomalejší (žádná paralelnost)
-- ❌ Jedna chyba zastaví celý řetězec
-- ❌ Nezvládne vzájemně závislé úkoly
+- ❌ Jedna chyba blokuje celý řetězec
+- ❌ Nedokáže řešit vzájemně závislé úkoly
 
 **Příklady použití:**
 - Pipeline tvorby obsahu (výzkum → psaní → úpravy → publikace)
 - Generování kódu (plán → implementace → testování → nasazení)
-- Generování reportů (sběr dat → analýza → vizualizace → shrnutí)
+- Generování zpráv (sběr dat → analýza → vizualizace → shrnutí)
 
 ---
 
-### Vzor 2: Paralelní koordinace (Fan-Out/Fan-In)
+### Vzor 2: Paralelní koordinace (fan-out/fan-in)
 
-**Kdy použít**: Nezávislé úkoly mohou běžet současně, výsledky se nakonec spojí.
+**Kdy použít**: Nezávislé úkoly mohou běžet současně, výsledky se na konci kombinuji.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Výhody:**
-- ✅ Rychlý (paralelní vykonávání)
-- ✅ Odolný proti chybám (akceptovatelné částečné výsledky)
-- ✅ Horizontálně škálovatelný
+- ✅ Rychlé (paralelní provádění)
+- ✅ Odolné vůči chybám (částečné výsledky přijatelné)
+- ✅ Horizontálně škálovatelné
 
 **Omezení:**
-- ⚠️ Výsledky mohou přijít v nesprávném pořadí
-- ⚠️ Vyžaduje logiku agregace
+- ⚠️ Výsledky mohou přicházet mimo pořadí
+- ⚠️ Potřeba logiky agregace
 - ⚠️ Složitá správa stavu
 
 **Příklady použití:**
-- Sběr dat z více zdrojů (API + databáze + web scraping)
+- Shromažďování dat z více zdrojů (API + databáze + web scraping)
 - Konkurenční analýza (více modelů generuje řešení, vybere se nejlepší)
 - Překladatelské služby (současný překlad do více jazyků)
 
 ---
 
-### Vzor 3: Hierarchická koordinace (Manažer-Worker)
+### Vzor 3: Hierarchická koordinace (manažer-pracovník)
 
-**Kdy použít**: Složitější workflow se sub-úkoly, potřeba delegace.
+**Kdy použít**: Složité pracovní toky se subúkoly vyžadujícími delegaci.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Výhody:**
-- ✅ Zvládá složité pracovní postupy
-- ✅ Modularita a snadná údržba
+- ✅ Zvládá složité pracovní toky
+- ✅ Modulární a udržovatelný
 - ✅ Jasné hranice odpovědnosti
 
 **Omezení:**
 - ⚠️ Složitější architektura
 - ⚠️ Vyšší latence (více vrstev koordinace)
-- ⚠️ Vyžaduje sofistikovanou orchestraci
+- ⚠️ Vyžaduje sofistikovanou orchestrace
 
 **Příklady použití:**
-- Firemní zpracování dokumentů (klasifikace → směrování → zpracování → archivace)
+- Zpracování podnikových dokumentů (klasifikace → směrování → zpracování → archivace)
 - Vícefázové datové pipeline (příjem → čištění → transformace → analýza → report)
-- Složité automatizační workflow (plánování → alokace zdrojů → provedení → monitoring)
+- Složité automatizační pracovní toky (plánování → alokace zdrojů → provádění → monitoring)
 
 ---
 
-### Vzor 4: Koordinace řízená událostmi (Publish-Subscribe)
+### Vzor 4: Událostmi řízená koordinace (vydávání-odběr)
 
-**Kdy použít**: Agentům je třeba reagovat na události, požadováno volné propojení.
+**Kdy použít**: Agenti musí reagovat na události, požaduje se volné spojení.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Výhody:**
-- ✅ Volné propojení mezi agenty
-- ✅ Snadné přidání nových agentů (stačí se přihlásit k odběru)
+- ✅ Volné spojení mezi agenty
+- ✅ Snadné přidat nové agenty (stačí se přihlásit k odběru)
 - ✅ Asynchronní zpracování
-- ✅ Odolnost (persistovaná zpráva)
+- ✅ Odolné (perzistence zpráv)
 
 **Omezení:**
-- ⚠️ Nakonec konzistence
+- ⚠️ Konečná konzistence
 - ⚠️ Složité ladění
-- ⚠️ Výzvy v pořadí zpráv
+- ⚠️ Problémy s pořadím zpráv
 
 **Příklady použití:**
-- Systémy monitoringu v reálném čase (upozornění, dashboardy, logy)
-- Vícekanálová upozornění (email, SMS, push, Slack)
-- Datové pipeline (více spotřebitelů stejných dat)
+- Systémy monitoringu v reálném čase (upozornění, panely, logy)
+- Multikanálová oznámení (email, SMS, push, Slack)
+- Pipeline zpracování dat (více spotřebitelů stejných dat)
 
 ---
 
-### Vzor 5: Konsenzuální koordinace (Hlasování/Quorum)
+### Vzor 5: Koordinace na bázi konsensu (hlasování/kvorum)
 
-**Kdy použít**: Potřeba dohody více agentů před pokračováním.
+**Kdy použít**: Potřeba souhlasu od více agentů před pokračováním.
 
 ```mermaid
 graph TB
@@ -249,18 +249,18 @@ graph TB
 
 **Výhody:**
 - ✅ Vyšší přesnost (více názorů)
-- ✅ Odolnost vůči chybám (přijatelné menšinové chyby)
-- ✅ Kontrola kvality zabudovaná
+- ✅ Odolnost vůči chybám (drobné selhání menšiny akceptovatelné)
+- ✅ Zajištění kvality zabudované
 
 **Omezení:**
-- ❌ Nákladné (více volání modelů)
+- ❌ Nákladné (volání více modelů)
 - ❌ Pomalejší (čekání na všechny agenty)
-- ⚠️ Nutné řešení konfliktů
+- ⚠️ Potřeba řešení konfliktů
 
 **Příklady použití:**
-- Moderování obsahu (více modelů hodnotí obsah)
+- Moderace obsahu (více modelů hodnotí obsah)
 - Revize kódu (více linterů/analyzátorů)
-- Lékařská diagnostika (více AI modelů, ověření expertem)
+- Lékařská diagnostika (více AI modelů, expertíza)
 
 ---
 
@@ -318,21 +318,21 @@ graph TB
 
 | Komponenta | Účel | Služba Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Vstupní bod, omezení rychlosti, autentizace | API Management |
-| **Orchestrátor** | Koordinuje workflow agentů | Container Apps |
+| **API Gateway** | Vstupní bod, omezení rychlosti, autorizace | API Management |
+| **Orchestrátor** | Koordinuje pracovní toky agentů | Container Apps |
 | **Message Queue** | Asynchronní komunikace | Service Bus / Event Hubs |
 | **Agenti** | Specializovaní AI pracovníci | Container Apps / Functions |
 | **State Store** | Sdílený stav, sledování úkolů | Cosmos DB |
-| **Ukládání artefaktů** | Dokumenty, výsledky, logy | Blob Storage |
-| **Monitoring** | Distribuované sledování, logy | Application Insights |
+| **Artifact Storage** | Dokumenty, výsledky, logy | Blob Storage |
+| **Monitoring** | Distribuované trasování, logy | Application Insights |
 
-Služby Service Bus queues/topics a Event Hubs jsou odlišné služby s různými modely doručení/konzumace; Event Hubs není přímou náhradou za Service Bus pracovní kód níže. Paralelismus, persistované zprávy a hlasování modelů samy o sobě nezaručují odolnost vůči chybám ani vyšší přesnost.
+Service Bus fronty/témata a Event Hubs jsou různé služby s různými modely doručování/konzumace; Event Hubs není náhradou Service Bus pracovníku kódu níže. Paralelismus, perzistentní zprávy a hlasování modelů samy o sobě nezaručují odolnost vůči chybám či vyšší přesnost.
 
 ---
 
 ## Požadavky
 
-### Požadované nástroje
+### Potřebné nástroje
 
 ```bash
 # Verify Azure Developer CLI
@@ -348,32 +348,32 @@ docker --version
 # ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Požadavky pro Azure
+### Požadavky na Azure
 
 - Aktivní předplatné Azure
 - Oprávnění k vytvoření:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB účty
-  - Storage účty
+  - Jmenné prostory Service Bus
+  - Účty Cosmos DB
+  - Účty pro ukládání
   - Application Insights
 
 ### Požadavky na znalosti
 
-Měli byste mít dokončeno:
+Měli byste dokončit:
 - [Správa konfigurace](../chapter-03-configuration/configuration.md)
 - [Autentizace a zabezpečení](../chapter-03-configuration/authsecurity.md)
-- [Ukázka mikroservis](../../../../examples/microservices)
+- [Příklad mikroslužeb](../../../../examples/microservices)
 
 ---
 
 ## Průvodce implementací
 
-> **Fragmenty návrhu, nikoli nasaditelná laboratoř:** Strom projektu a štítky `File:` níže popisují soubory, které si vytvoříte ve vlastním projektu; tento repozitář neobsahuje kompletní aplikaci `multi-agent-system`. Chybějící části zahrnují šablony main/parameter, prostředí/registr Container Apps, Dockerfiles a zámky závislostí, nastavení Cosmos DB kontejneru, nasazení modelů, konfiguraci identity/role, škálovací pravidla a paralelní pracovníky/fronty. Neočekávejte, že `azd init` tyto soubory vygeneruje nebo `azd up` nasadí nezměněné fragmenty. Pro spustitelný výchozí bod dokončete [Základy více agentů](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Návrhové fragmenty, ne plně nasaditelný laboratoř:** Struktura projektu a štítky `File:` níže popisují soubory k vytvoření ve vašem projektu; tento repozitář neobsahuje kompletní aplikaci `multi-agent-system`. Chybějící části zahrnují hlavní/parametrické šablony, prostředí/registr Container Apps, Dockerfile a zámky závislostí, nastavení Cosmos databáze/kontejneru, nasazení modelů, konfiguraci identity/rollí, škálovací pravidla a paralelní pracovníky/fronty. Neočekávejte, že `azd init` vygeneruje tyto soubory, ani že `azd up` nasadí úryvky beze změny. Pro spustitelný výchozí bod dokončete [Základy více agentů](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Předpoklady běhu:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask a (pro monitoring) `azure-monitor-opentelemetry`; umístěte `shared` do importovací cesty Pythonu v každém obrázku služby. Cosmos kontejner `agent-state/tasks` musí již existovat s partition key `/id`. Připojení na základě klíčů usnadňuje tyto fragmenty, nikoli však doporučení do produkce: preferujte spravované identity s řízenými rolemi pro Service Bus/Cosmos/OpenAI data-plane. Nezveřejňujte klíče ve výstupech ani logech.
+**Předpoklady běhu:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask a (pro monitoring) `azure-monitor-opentelemetry`; umístěte `shared` do import cesty Pythonu v každém službním image. Cosmos `agent-state/tasks` kontejner už musí existovat s partition key `/id`. Připojování na základě klíče usnadňuje tyto fragmenty, není však produkční doporučení: upřednostňujte spravované identity s oprávněními na Service Bus/Cosmos/OpenAI data-plane. Nezobrazujte klíče ve výstupech ani logech.
 
-Doručení Service Bus je **alespoň jednou**. Zachovejte idempotenci pro každý úkol **a krok**, použijte optimistickou konkurenci (ETags) pro čtení/upravení/zápis stavu a obnovujte zámky zpráv během dlouhého zpracování. Níže uvedený jednoduchý správce stavu je pouze sekvenční a tyto produkční záruky neimplementuje.
+Doručování Service Bus je **alespoň jednou**. Zachovejte idempotenci pro každý úkol **a krok**, používejte optimistickou konkurenci (ETags) pro čtení/upravení/zapsání stavu a obnovujte zámky zpráv během dlouhého zpracování. Jednoduchý správce stavu níže je pouze sekvenční a tyto produkční záruky neimplementuje.
 
 ### Struktura projektu
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Lekce 1: Vzor sekvenční koordinace
+## Lekce 1: Sekvenční vzor koordinace
 
 ### Implementace: Pipeline tvorby obsahu
 
-Navrhneme sekvenční pipeline: Výzkum → Psaní → Úpravy. Publikace je mimo tento příklad.
+Navrhneme sekvenční pipeline: Výzkum → Psaní → Úprava. Publikování není v tomto příkladu zahrnuto.
 
 ### 1. Konfigurace AZD
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Manažer sdíleného stavu
+### 3. Správce sdíleného stavu
 
 **Soubor: `src/shared/state_manager.py`**
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Služba orchestrátoru
+### 4. Služba orchestrátora
 
 **Soubor: `src/orchestrator/app.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Agent pisatel
+### 6. Agent psaní
 
 **Soubor: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Agent editor
+### 7. Agent úprav
 
 **Soubor: `src/agents/editor/app.py`**
 
@@ -895,19 +895,19 @@ if __name__ == '__main__':
 
 ### 8. Nasazení a testování
 
-Tyto příkazy použijte **pouze poté, co implementujete chybějící soubory projektu**. Iniciace agenta Foundry pro interakci je samostatný pracovní postup; tento Service Bus návrh nevygeneruje.
+Tyto příkazy se aplikují **až po implementaci chybějících souborů projektu**. Interaktivní inicializace agenta Foundry je samostatný pracovní postup; nevytváří tento návrh Service Bus.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Viz [AZD AI CLI příkazy](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro všechny příznaky a volby `azd ai`.
+> Viz [Příkazy AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro všechny příznaky a možnosti `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -930,7 +930,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Zkontrolujte průběh úkolu:**
+**Kontrola průběhu úkolu:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -964,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lekce 2: Vzor paralelní koordinace
+## Lekce 2: Paralelní vzor koordinace
 
-### Implementace: Aggregátor výzkumu z více zdrojů
+### Implementace: Agregátor výzkumu z více zdrojů
 
-Vytvoříme paralelní systém, který současně shromažďuje informace z více zdrojů.
+Postavme paralelní systém, který současně shromažďuje informace z více zdrojů.
 
 ### Paralelní orchestrátor
 
@@ -1042,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Agregační logika
+### Logika agregace
 
 **Soubor: `src/agents/aggregator/app.py`**
 
@@ -1124,21 +1124,21 @@ if __name__ == '__main__':
 ```
 
 **Výhody paralelního vzoru:**
-- ⚡ **Potenciálně nižší latence** (omezeno nejpomalejším pracovníkem plus režijní náklady koordinace)
-- 🔄 **Podpora částečných výsledků** s explicitními termíny a pravidly pro chyby (základní agregátor to neimplementuje)
+- ⚡ **Potenciálně nižší latence** (omezené nejslabším pracovníkem plus režie koordinace)
+- 🔄 **Podpora částečných výsledků** s explicitními termíny a politikou selhání (základní agregátor neimplementuje)
 - 📈 **Škálovatelné** (snadné přidání dalších agentů)
 
 ---
 
 ## Praktická cvičení
 
-### Cvičení 1: Přidat timeout handling ⭐⭐ (Střední)
+### Cvičení 1: Přidání řešení timeoutu ⭐⭐ (střední)
 
-**Cíl**: Implementovat logiku timeoutu, aby agregátor nečekal nekonečně na pomalé agenty.
+**Cíl**: Implementovat logiku timeoutu, aby agregátor nečekal věčně na pomalé agenty.
 
-**Výchozí bod:** Spusťte tuto lokální simulaci deadline před integrací do pracovníka fronty. Timeout kontrolovaný pouze při příchodu jiné zprávy nikdy nevyprší, pokud chybějící pracovník nepošle nic.
+**Výchozí bod:** Spusťte tuto lokální simulaci termínu před integrací do frontového pracovníka. Timeout kontrolovaný pouze při příjezdu jiné zprávy nikdy nevyprší, pokud chybějící pracovník nic neposílá.
 
-**Kroky**:
+**Kroky:**
 
 1. **Přidejte sledování timeoutu do agregátoru:**
 
@@ -1170,7 +1170,7 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integrace s frontou (návrhový úkol):** Uchovávejte deadline rozdesílky a očekávané agenty při vytváření úkolu, pravidelně procházejte deadline nezávisle na přicházejících výsledcích, atomicky dokončujte částečné výsledky a ignorujte pozdní/duplictní zprávy u dokončených úkolů. Lokální timeout nezruší vzdálené pracovníky.
+3. **Integrace se systémem front (návrhový úkol):** Ukládejte termín odeslání a očekávané agenty při vytváření úkolu, pravidelně prohledávejte termíny nezávisle na příjmu výsledků, atomicky dokončete částečné výsledky a ignorujte pozdní/duplicitní zprávy u dokončených úkolů. Lokální timeout neukončuje vzdálené pracovníky.
 
 Pouze pro váš implementovaný projekt:
 
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Kritéria úspěchu:**
-- ✅ Lokální test vrátí výsledek po jednom sekundovém limitu, i když agent není kompletní
-- ✅ Odezva obsahuje částečné výsledky (`"timed_out": true`)
-- ✅ Vráceny jsou dostupné výsledky (3 z 4 agentů)
+- ✅ Lokální test vrátí výsledek po termínu jedné sekundy i když agent není kompletní
+- ✅ Odpověď indikuje částečné výsledky (`"timed_out": true`)
+- ✅ Vráceny jsou dostupné výsledky (3 ze 4 agentů)
 
-**Čas**: 20-25 minut
+**Čas**: 20–25 minut
 
 ---
 
-### Cvičení 2: Implementovat retry logiku ⭐⭐⭐ (Pokročilý)
+### Cvičení 2: Implementace logiky opakování ⭐⭐⭐ (pokročilé)
 
-**Cíl**: Automaticky znovu spouštět neúspěšné úkoly agentů, než se vzdáte.
+**Cíl**: Automaticky opakovat úkoly agentů při selhání před vzdáním se.
 
-**Kroky**:
+**Kroky:**
 
-1. **Použijte počítadla doručení Service Bus místo vlastních retry čítačů:**
+1. **Použijte počty doručení Service Bus místo vlastních počítadel opakování:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Přidejte retry zpracovatele do agentů:**
+2. **Přidejte obsluhu opakování agentům:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Monitorujte frontu mrtvých zpráv:**
+3. **Monitorujte dead letter frontu:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Kritéria úspěchu:**
-- ✅ Neúspěšné úkoly se automaticky opakují (až 3x)
-- ✅ Exponenciální prodleva mezi retry (5s, 10s, 20s) s obnovou zámku zprávy tam, kde je potřeba
-- ✅ Po dosažení max počet retry se zprávy přesunou do fronty mrtvých zpráv
-- ✅ Zprávy ve frontě mrtvých lze zkontrolovat; přehrání vyžaduje samostatný idempotentní obnovovací pracovní postup
+- ✅ Selhané úkoly se automaticky opakují (až 3x)
+- ✅ Exponenciální čekání mezi pokusy (5s, 10s, 20s) s obnovením zámku zprávy, kde je potřeba
+- ✅ Po max. počtu pokusů jsou zprávy odeslány do dead letter fronty
+- ✅ Zprávy v dead letter frontě lze prohlížet; přehrání vyžaduje samostatný idempotentní zotavovací pracovní postup
 
-**Čas**: 30-40 minut
+**Čas**: 30–40 minut
 
 ---
 
-### Cvičení 3: Implementovat Circuit Breaker ⭐⭐⭐ (Pokročilý)
+### Cvičení 3: Implementace circuit breakeru ⭐⭐⭐ (pokročilé)
 
-**Cíl**: Zabránit kaskádovým chybám tak, že zastavíte požadavky na selhávající agenty.
+**Cíl**: Zabránit kaskádovým selháním zastavením požadavků na selhávající agenty.
 
-**Kroky**:
+**Kroky:**
 
-1. **Vytvořte třídu circuit breaker:**
+1. **Vytvořte třídu circuit breakeru:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Aplikujte na volání agentů:**
+2. **Použijte při voláních agentů:**
 
 ```python
 # In orchestrator
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Tento obvod chrání **odesílací operaci**, ne dokončení vzdáleným pracovníkem: úspěšné zařazení zprávy do fronty nic neříká o tom, zda je agent aktivní. `send_message` je odesílací funkce vaší aplikace. Pro obvody provádění předávejte pozorované selhání/timeouty úloh do trvalého koordinátora. Tato třída v paměti je demonstrační jednoročinný příklad, nikoli distribuovaný obvodový přepínač.
+Tento obvod chrání **operaci odeslání**, nikoli dokončení vzdáleným pracovníkem: úspěšné zařazení zprávy do fronty nic neříká o tom, zda je agent aktivní. `send_message` je odesílací funkce vaší aplikace. Pro obvody vykonávání zadejte pozorované chyby úloh/časové limity do trvalého koordinátora. Tato paměťová třída je demonstrací pro jedno vlákno, nikoli distribuovaný jistič obvodu.
 
-3. **Testujte obvodový přepínač lokálně:**
+3. **Otestujte jistič obvodu lokálně:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1369,10 +1369,10 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Kritéria úspěchu:**
-- ✅ Po 5 selháních obvod otevře (zamítá požadavky)
-- ✅ Po 60 sekundách je obvod polootevřený (testuje zotavení)
+- ✅ Po 5 selháních se obvod otevře (zamítá požadavky)
+- ✅ Po 60 sekundách se obvod přepne na polootvorený stav (testuje obnovu)
 - ✅ Ostatní agenti pokračují v normální práci
-- ✅ Obvod se automaticky uzavře, když se agent zotaví
+- ✅ Obvod se automaticky zavře, když se agent zotaví
 
 **Čas**: 40-50 minut
 
@@ -1380,7 +1380,7 @@ print("Circuit breaker recovery verified")
 
 ## Monitorování a ladění
 
-### Distribuované trasování s Application Insights
+### Distribuované trasování pomocí Application Insights
 
 **Soubor: `src/shared/tracing.py`**
 
@@ -1425,7 +1425,7 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
             raise
 ```
 
-### Dotazy Application Insights
+### Dotazy do Application Insights
 
 **Sledování víceagentních pracovních postupů:**
 
@@ -1470,18 +1470,18 @@ exceptions
 
 ### Náklady víceagentního systému (měsíční odhady)
 
-Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565 $ měsíčně**. Ověřte aktuální regionální sazby, aktivní/nečinné hodiny replik, poměr vstupních/výstupních tokenů, úložiště a telemetrii. Serverless nemá minimální kapacitu s přiděleným výkonem, ale stále účtuje za požadavky a úložiště.
+Ilustrační plánovací údaje pouze, ne nabídky: celková částka níže je **240–565 USD/měsíc**. Ověřte aktuální regionální sazby, aktivní/neaktivní hodiny replik, poměr vstupních/výstupních tokenů, úložiště a telemetrii. Serverless nemá minimální rezervovanou propustnost, ale stále účtuje za požadavky a úložiště.
 
 | Komponenta | Konfigurace | Náklady |
 |-----------|--------------|------|
-| **Orchestrátor** | 1 Container App (1 vCPU, 2GB) | 30-50 $ |
-| **4 Agenti** | 4 Container Apps (0,5 vCPU, 1GB každý) | 60-120 $ |
-| **Service Bus** | Standardní úroveň, 10M zpráv | 10-20 $ |
-| **Cosmos DB** | Serverless, 5GB úložiště, 1M RU | 25-50 $ |
-| **Blob Storage** | 10GB úložiště, 100K operací | 5-10 $ |
-| **Application Insights** | 5GB ingest | 10-15 $ |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokenů | 100-300 $ |
-| **Celkem** | | **240-565 $ / měsíc** |
+| **Orchestrátor** | 1 Container App (1 vCPU, 2GB) | 30–50 USD |
+| **4 Agenti** | 4 Container Apps (0,5 vCPU, 1GB každý) | 60–120 USD |
+| **Service Bus** | Standardní úroveň, 10M zpráv | 10–20 USD |
+| **Cosmos DB** | Serverless, 5GB úložiště, 1M RU | 25–50 USD |
+| **Blob Storage** | 10GB úložiště, 100K operací | 5–10 USD |
+| **Application Insights** | 5GB příjem dat | 10–15 USD |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokenů | 100–300 USD |
+| **Celkem** | | **240–565 USD/měsíc** |
 
 ### Strategie optimalizace nákladů
 
@@ -1508,7 +1508,7 @@ Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565�
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache často používaných výsledků:**
+4. **Cacheujte často používané výsledky:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1519,7 +1519,7 @@ Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565�
 
 ## Nejlepší postupy
 
-### ✅ DĚLAT:
+### ✅ DĚLEJTE:
 
 1. **Používejte idempotentní operace**
    ```python
@@ -1528,12 +1528,12 @@ Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565�
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Implementujte komplexní logování**
+2. **Implementujte komplexní protokolování**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Používejte korelační ID**
+3. **Používejte identifikátory korelace**
    ```python
    # Pass task_id through entire workflow
    message_data = {
@@ -1542,20 +1542,20 @@ Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565�
    }
    ```
 
-4. **Nastavte TTL (time-to-live) zpráv**
+4. **Nastavte TTL (doba životnosti) zpráv**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Monitorujte fronty mrtvých zpráv**
+5. **Monitorujte dead letter queue**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ NEDĚLAT:
+### ❌ NEDĚLEJTE:
 
 1. **Nevytvářejte kruhové závislosti**
    ```python
@@ -1578,7 +1578,7 @@ Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565�
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Nepoužívejte nekonečné opakování**
+4. **Nepoužívejte nekonečné opakování pokusů**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1591,9 +1591,9 @@ Ilustrativní plánovací čísla, nikoli nabídky: součet níže je **240-565�
 ### Problém: Zprávy uvízlé ve frontě
 
 **Příznaky:**
-- Zprávy se hromadí ve frontě
+- Ve frontě se hromadí zprávy
 - Agenti nepracují
-- Stav úlohy uvízl na „čekající“
+- Stav úlohy zůstává „čekající“
 
 **Diagnóza:**
 ```bash
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Zkontrolujte frontu mrtvých zpráv:**
+2. **Zkontrolujte dead letter queue:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,7 +1630,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problém: Timeout úlohy/nikdy se nedokončí
+### Problém: Časový limit úlohy / nikdy nedokončí
 
 **Příznaky:**
 - Stav úlohy zůstává „probíhá“
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Řešení:**
 
-1. **Implementujte timeout v agregátoru (Cvičení 1)**
+1. **Implementujte časový limit v agregátoru (Cvičení 1)**
 
 2. **Zkontrolujte selhání agentů pomocí Azure Monitor:**
    ```bash
@@ -1690,23 +1690,23 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ## Shrnutí
 
 **Naučili jste se:**
-- ✅ Pět vzorů koordinace (sekvenční, paralelní, hierarchický, na událostech, konsenzus)
+- ✅ Pět vzorů koordinace (sekvenční, paralelní, hierarchický, událostmi řízený, konsensuální)
 - ✅ Víceagentní architekturu na Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Správu stavu napříč distribuovanými agenty
-- ✅ Zpracování timeoutů, opakování a obvodové přepínače
+- ✅ Zpracování timeoutů, opakování pokusů a jističů obvodu
 - ✅ Monitorování a ladění distribuovaných systémů
 - ✅ Strategie optimalizace nákladů
 
-**Hlavní poznatky:**
-1. **Vyberte správný vzor** – Sekvenční pro uspořádané pracovní postupy, paralelní pro rychlost, na událostech pro flexibilitu
-2. **Pečlivě spravujte stav** – Používejte Cosmos DB nebo podobné pro sdílený stav
-3. **Elegantně řešte selhání** – Timeouty, opakování, obvodové přepínače, fronty mrtvých zpráv
-4. **Monitorujte vše** – Distribuované trasování je zásadní pro ladění
-5. **Optimalizujte náklady** – Škálujte na nulu, používejte serverless, implementujte cache
+**Klíčové poznatky:**
+1. **Vyberte správný vzor** – sekvenční pro uspořádané pracovní postupy, paralelní pro rychlost, řízený událostmi pro flexibilitu
+2. **Pečlivě spravujte stav** – použijte Cosmos DB nebo podobné řešení pro sdílený stav
+3. **Elegantně zpracovávejte selhání** – timeouty, opakování pokusů, jističe obvodu, dead letter queue
+4. **Vše monitorujte** – distribuované trasování je nezbytné pro ladění
+5. **Optimalizujte náklady** – škálujte na nulu, používejte serverless, implementujte cache
 
 **Další kroky:**
 1. Dokončete praktická cvičení
-2. Vybudujte víceagentní systém pro svůj případ použití
+2. Postavte víceagentní systém pro svůj případ použití
 3. Prostudujte [Výběr SKU](sku-selection.md) pro optimalizaci výkonu a nákladů
 
 ---

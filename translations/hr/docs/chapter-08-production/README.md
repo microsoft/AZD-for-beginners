@@ -1,25 +1,25 @@
-# Poglavlje 8: Produkcijski i Enterprise Obrasci
+# Poglavlje 8: Obrasci za proizvodnju i poduzetništvo
 
-**📚 Tečaj**: [AZD za Početnike](../../README.md) | **⏱️ Trajanje**: 2-3 sata | **⭐ Složenost**: Napredno
+**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 2-3 sata | **⭐ Kompleksnost**: Napredno
 
 ---
 
 ## Pregled
 
-Ovo poglavlje obuhvaća obrasce za implementaciju spremnu za enterprise, učvršćivanje sigurnosti, nadzor i optimizaciju troškova za proizvodne AI radne opterećenja.
+Ovo poglavlje pokriva obrasce za implementaciju spremnu za poduzeće, ojačavanje sigurnosti, nadzor i optimizaciju troškova za proizvodne AI radne zadatke.
 
-Ovo je arhitektonska referenca, a ne kompletan spreman proizvodni predložak za implementaciju. Primjeri izostavljaju detalje integracije koje morate osigurati i testirati u vlastitoj aplikaciji; čitanje kontrolnog popisa ne jamči spremnost za proizvodnju.
+Ovo je arhitektonski referentni materijal, a ne potpuni model za implementaciju u proizvodnju. Primjeri izostavljaju detalje integracije koje morate sami osigurati i testirati u svojoj aplikaciji; čitanje kontrolne liste ne jamči spremnost za proizvodnju.
 
-> **Pregled izdanja (2026-11-04):** Upute za AI CLI provjerene su prema dokumentaciji/izvorima `azd 1.37.2`, agenata `1.0.0-beta.23` i evaluacija `1.0.0-beta.2`. Pogledajte [promjene i popravke izdanja](production-ai-practices.md#recent-release-changes-and-fixes) za zahtjeve kompatibilnosti i detalje migracije; ovo nije provjera stvarne proizvodne implementacije.
+> **Foundry GA ažuriranje (2026-11-09):** Koristite `azd >= 1.37.0` i općenito dostupni `microsoft.foundry` 1.0 paket za Foundry tijek rada; evaluacije se instaliraju zasebno. Pogledajte [opseg izdanja i migraciju](production-ai-practices.md#recent-release-changes-and-fixes) i [primjer autentificiranog tijeka](production-ai-practices.md#cicd-pipeline-configuration). Ovo je pregled dokumentacije, a ne validacija stvarne implementacije ili opća GA status za opcionalne značajke u pregledu.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog poglavlja, moći ćete:
-- Implementirati višeregionalne otporne aplikacije
-- Primijeniti enterprise sigurnosne obrasce
-- Konfigurirati opsežan nadzor
-- Optimizirati troškove u velikom opsegu
-- Postaviti CI/CD kanale pomoću AZD-a
+Završetkom ovog poglavlja, moći ćete:
+- Implementirati višeregionalne otpornosti aplikacija
+- Primijeniti sigurnosne obrasce za poduzeće
+- Konfigurirati sveobuhvatan nadzor
+- Optimizirati troškove u velikoj skali
+- Postaviti CI/CD pipelineove s AZD-om
 
 ---
 
@@ -27,25 +27,25 @@ Nakon završetka ovog poglavlja, moći ćete:
 
 | # | Lekcija | Opis | Vrijeme |
 |---|--------|-------------|------|
-| 1 | [Produkcijske AI prakse](production-ai-practices.md) | Enterprise obrasci implementacije | 90 min |
+| 1 | [Prakse za proizvodni AI](production-ai-practices.md) | Obrasci implementacije za poduzeće | 90 min |
 
 ---
 
-## 🚀 Produkcijski Kontrolni Popis
+## 🚀 Kontrolna lista za proizvodnju
 
 - [ ] Višeregionalna implementacija za otpornost
-- [ ] Upravljani identitet za autentikaciju (bez ključeva)
+- [ ] Upravljani identitet za autentifikaciju (bez ključeva)
 - [ ] Application Insights za nadzor
-- [ ] Konfigurirani budžeti troškova i upozorenja
+- [ ] Konfigurirani budžeti i upozorenja za troškove
 - [ ] Omogućeno skeniranje sigurnosti
-- [ ] Integracija CI/CD kanala
-- [ ] Plan za oporavak od katastrofa
+- [ ] Integracija CI/CD pipeline-a
+- [ ] Plan oporavka od katastrofe
 
 ---
 
-## 🏗️ Arhitektonski Obrasci
+## 🏗️ Arhitektonski obrasci
 
-### Obrazac 1: AI Microservices
+### Obrasci 1: Mikroservisi i AI
 
 ```mermaid
 graph LR
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Obrazac 2: Događajem Pogonjeni AI
+### Obrasci 2: AI okidač na događaje
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Najbolje Sigurnosne Prakse
+## 🔐 Najbolje sigurnosne prakse
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -83,20 +83,20 @@ properties: {
 
 ---
 
-## 💰 Optimizacija Troškova
+## 💰 Optimizacija troškova
 
-| Strategija | Glavno Ograničenje |
+| Strategija | Glavno ograničenje |
 |----------|---------|
-| Skaliranje na nulu (Container Apps) | Potreban je prikladan okidač; ostale usluge i dalje stvaraju troškove |
-| Korištenje potrošačkih slojeva za razvoj | Usporedba cijena odabrane usluge i opterećenja |
-| Raspoređeno skaliranje | Skaliranje kroz podržanu infrastrukturu/automatizaciju |
-| Rezervacije/provizionirani kapacitet | Samo kad je podržano; obveze mogu povećati troškove neaktivnosti |
+| Skaliranje na nulu (Container Apps) | Zahtijeva prikladni okidač; ostale usluge i dalje imaju troškove |
+| Korištenje potrošačkih razina za razvoj | Usporedba cijena odabrane usluge i radnog opterećenja |
+| Planirano skaliranje | Skaliranje kroz podržanu infrastrukturu/automatizaciju |
+| Rezervacije/pružena kapacitet | Samo kad je podržano; ugovori mogu povećati troškove kad je neiskorišteno |
 
-Koristite [kompletan obrazac resursa budžeta](production-ai-practices.md#2-cost-monitoring-and-budgets) s valjanim datumom početka, opsegom naplate, primateljima i dopuštenjima. Budžet šalje upozorenja; ne ograničava troškove. Uštede ovise o izmjerenoj iskorištenosti i nisu zajamčeni postoci.
+Koristite [potpuni obrazac budžeta resursa](production-ai-practices.md#2-cost-monitoring-and-budgets) s valjanim datumom početka, opsegom naplate, primateljima i dozvolama. Budžet šalje upozorenja; ne ograničava potrošnju. Uštede ovise o izmjerenoj iskorištenosti i nisu zajamčeni postotci.
 
 ---
 
-## 📊 Postavljanje Nadzora
+## 📊 Postavljanje nadzora
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -116,16 +116,16 @@ az monitor metrics list --resource <resource-id>
 | Smjer | Poglavlje |
 |-----------|---------|
 | **Prethodno** | [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/README.md) |
-| **Tečaj Završio** | [Početna stranica tečaja](../../README.md) |
+| **Završetak tečaja** | [Početna stranica tečaja](../../README.md) |
 
 ---
 
-## 📖 Povezani Resursi
+## 📖 Povezani resursi
 
-- [Vodič za AI Agente](../chapter-02-ai-development/agents.md)
+- [Vodič za AI agente](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Rješenja s Višestrukim Agentima](../chapter-05-multi-agent/README.md)
-- [Primjer Microservices](../../examples/microservices/README.md)
+- [Višestruka agentska rješenja](../chapter-05-multi-agent/README.md)
+- [Primjer mikroservisa](../../examples/microservices/README.md)
 
 ---
 

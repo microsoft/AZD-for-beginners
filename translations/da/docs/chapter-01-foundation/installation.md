@@ -1,93 +1,95 @@
-# Installations- og opsætningsvejledning
+# Installations- & opsætningsvejledning
 
-**Kaptelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 1 - Grundlag & Hurtig start
-- **⬅️ Forrige**: [AZD Basics](azd-basics.md)
-- **➡️ Næste**: [Dit første projekt](first-project.md)
-- **🚀 Næste kapitel**: [Kapitel 2: AI-første udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Kapitelnavigation:**
+- **📚 Kursusforside**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 1 - Fundament & Hurtig start
+- **⬅️ Forrige**: [AZD Grundlæggende](azd-basics.md)
+- **➡️ Næste**: [Dit Første Projekt](first-project.md)
+- **🚀 Næste kapitel**: [Kapitel 2: AI-Først Udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduktion
 
-Denne omfattende vejledning vil guide dig gennem installation og konfiguration af Azure Developer CLI (azd) på dit system. Du vil lære flere installationsmetoder til forskellige operativsystemer, opsætning af autentificering og initial konfiguration for at forberede dit udviklingsmiljø til Azure-udrulninger.
+Denne omfattende vejledning vil guide dig gennem installation og konfiguration af Azure Developer CLI (azd) på dit system. Du lærer flere installationsmetoder for forskellige operativsystemer, opsætning af autentificering samt den indledende konfiguration, der forbereder dit udviklingsmiljø til Azure-udrulninger.
 
 ## Læringsmål
 
-Ved lektionens afslutning vil du kunne:
-- Installere Azure Developer CLI på dit operativsystem med succes
-- Konfigurere autentificering med Azure via flere metoder
-- Sætte dit udviklingsmiljø op med nødvendige forudsætninger
-- Forstå forskellige installationsmuligheder og hvornår hver skal bruges
+Ved afslutningen af denne lektion vil du:
+- Med succes installere Azure Developer CLI på dit operativsystem
+- Konfigurere autentificering med Azure ved brug af flere metoder
+- Opsætte dit udviklingsmiljø med nødvendige forudsætninger
+- Forstå forskellige installationsmuligheder og hvornår du skal bruge hver
 - Fejlsøge almindelige installations- og opsætningsproblemer
 
 ## Læringsresultater
 
-Efter at have gennemført denne lektion vil du være i stand til at:
-- Installere azd ved hjælp af den passende metode for din platform
-- Autentificere med Azure ved hjælp af azd auth login
+Efter at have gennemført denne lektion vil du kunne:
+- Installere azd ved brug af den passende metode til din platform
+- Autentificere med Azure via azd auth login
 - Verificere din installation og teste grundlæggende azd-kommandoer
-- Konfigurere dit udviklingsmiljø for optimal brug af azd
+- Konfigurere dit udviklingsmiljø til optimal brug af azd
 - Selvstændigt løse almindelige installationsproblemer
 
-Denne vejledning hjælper dig med at installere og konfigurere Azure Developer CLI på dit system, uanset operativsystem eller udviklingsmiljø.
+Denne vejledning hjælper dig med at installere og konfigurere Azure Developer CLI på dit system, uanset hvilket operativsystem eller udviklingsmiljø du bruger.
 
 ## Forudsætninger
 
-Før du installerer azd, sørg for at have:
+Før du installerer azd, skal du sikre dig, at du har:
 - **Azure-abonnement** - [Opret en gratis konto](https://azure.microsoft.com/free/)
 - **Azure CLI** (valgfrit) - Til eksempler, der eksplicit kører `az`; azd autentificerer uafhængigt
-- **Git** - Til at klone skabeloner og versionskontrol
+- **Git** - Til kloning af skabeloner og versionskontrol
 - **Docker** (valgfrit) - Til containeriserede applikationer
+
+**Kapitel 2 Foundry GA vej:** Brug AZD **1.37.0 eller senere**, installer bundtet med `azd ext install microsoft.foundry`, og brug Python **3.13+** og nuværende **uv** til hosted-agent-eksemplet. Dets kodeudrulningstilstand bygger eksternt, så det kræver ikke lokal Docker-bygning. Foundry-tilladelser, regional modeltilgængelighed og kvoter er stadig påkrævet; se [hosted-agent opsætning](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize).
 
 ## Installationsmetoder
 
 ### Windows
 
-#### Valgmulighed 1: Windows Package Manager (Anbefalet)
+#### Mulighed 1: Windows Package Manager (Anbefalet)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### Valgmulighed 2: PowerShell-installationsscript
+#### Mulighed 2: PowerShell Installationsscript
 ```powershell
 # Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Valgmulighed 3: Chocolatey
+#### Mulighed 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### Valgmulighed 4: Manuel installation
-1. Download den nyeste udgivelse fra [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Udpak til `C:\Program Files\azd\`
+#### Mulighed 4: Manuel installation
+1. Download den seneste version fra [GitHub](https://github.com/Azure/azure-dev/releases)
+2. Pak ud til `C:\Program Files\azd\`
 3. Tilføj til PATH miljøvariablen
 
 ### macOS
 
-#### Valgmulighed 1: Homebrew (Anbefalet)
+#### Mulighed 1: Homebrew (Anbefalet)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### Valgmulighed 2: Installationsscript
+#### Mulighed 2: Installationsscript
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Valgmulighed 3: Manuel installation
-Download arkivet for din macOS-arkitektur fra [udgivelsesfilerne](https://github.com/Azure/azure-dev/releases), udpakk det, og tilføj `azd` binærfilen til din `PATH`.
+#### Mulighed 3: Manuel installation
+Download arkivet til din macOS-arkitektur fra [udgivelsesfilerne](https://github.com/Azure/azure-dev/releases), pak det ud, og tilføj `azd` binærfilen til din `PATH`.
 
 ### Linux
 
-#### Valgmulighed 1: Installationsscript (Anbefalet)
+#### Mulighed 1: Installationsscript (Anbefalet)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Valgmulighed 2: Pakkehåndteringer
+#### Mulighed 2: Pakkehåndteringer
 
 **Manuel installation fra udgivelsesfiler:**
 ```bash
@@ -98,13 +100,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ### GitHub Codespaces
 
-Nogle Codespaces og udviklingscontainer-miljøer inkluderer allerede `azd`, men du bør verificere det i stedet for at antage det:
+Nogle Codespaces og dev-container-miljøer inkluderer allerede `azd`, men du bør bekræfte det fremfor at antage det:
 
 ```bash
 azd version
 ```
 
-Hvis `azd` mangler, installer det med standardscriptet for miljøet.
+Hvis `azd` mangler, installer det med standardscriptet til miljøet.
 
 ### Docker
 
@@ -116,9 +118,9 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure
 alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-Denne midlertidige container bevarer ikke login-status mellem kørsel. Til gentagne udrulninger, brug [udviklingscontainer-opsætningen](dev-containers.md); containeropbygninger kræver også en Docker-daemon tilgængelig inde i containeren.
+Denne flygtige container bevarer ikke login-status mellem kørsel. Til gentagne udrulninger, brug [dev container opsætning](dev-containers.md); containerbygninger kræver også en Docker-daemon, der er tilgængelig inde i containeren.
 
-## ✅ Verificer installation
+## ✅ Bekræft installation
 
 Efter installation skal du verificere, at azd fungerer korrekt:
 
@@ -138,21 +140,21 @@ Forventet output:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Bemærk**: Det faktiske versionsnummer vil variere. Tjek [Azure Developer CLI-udgivelser](https://github.com/Azure/azure-dev/releases) for den nyeste version.
+**Bemærk**: Det faktiske versionsnummer kan variere. Tjek [Azure Developer CLI-udgivelser](https://github.com/Azure/azure-dev/releases) for den seneste version.
 
-**✅ Tjekliste for installationssucces:**
+**✅ Installations-tjekliste:**
 - [ ] `azd version` viser versionsnummer uden fejl
-- [ ] `azd --help` viser kommandodokumentation
+- [ ] `azd --help` viser kommando-dokumentation
 - [ ] `azd template list` viser tilgængelige skabeloner
 - [ ] Du kan oprette en testmappe og køre `azd init` med succes
 
-**Hvis alle tjek er bestået, er du klar til at fortsætte til [Dit første projekt](first-project.md)!**
+**Hvis alle tjek passerer, er du klar til at fortsætte til [Dit Første Projekt](first-project.md)!**
 
-## Opsætning af autentificering
+## Autentificeringsopsætning
 
-### Anbefalet begynderopsætning
+### Anbefalet begyndeopsætning
 
-For AZD-første arbejdsprocesser, log ind med `azd auth login`.
+Til AZD-første arbejdsflow, log ind med `azd auth login`.
 
 ```bash
 # Required for AZD commands such as azd up
@@ -162,9 +164,9 @@ azd auth login
 azd auth login --check-status
 ```
 
-Brug kun Azure CLI-login, når du planlægger at køre `az` kommandoer selv under kurset.
+Brug Azure CLI-log ind kun, hvis du planlægger selv at køre `az`-kommandoer under kurset.
 
-### Azure CLI-autentificering (valgfrit)
+### Azure CLI-autentificering (valgfri)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -178,19 +180,19 @@ az login
 az account show
 ```
 
-### Hvilken login-flow bør du bruge?
+### Hvilken log-ind-flow bør du bruge?
 
-- Brug `azd auth login`, hvis du følger begyndervenlige AZD-vejen og primært kører `azd` kommandoer.
-- Brug også `az login`, når du vil køre Azure CLI-kommandoer som `az account show` eller inspicere ressourcer direkte.
-- Hvis en øvelse inkluderer både `azd` og `az` kommandoer, så kør begge login-kommandoer én gang i starten.
+- Brug `azd auth login`, hvis du følger begynder-AZD-vej og hovedsageligt kører `azd`-kommandoer.
+- Brug `az login` også, når du vil køre Azure CLI-kommandoer som `az account show` eller inspicere ressourcer direkte.
+- Hvis en øvelse inkluderer både `azd` og `az`-kommandoer, så kør begge log-ind-kommandoer en gang i starten.
 
-### Enhedskodeautentificering
+### Enhedskode-autentificering
 Hvis du er på et hovedløst system eller har browserproblemer:
 ```bash
 azd auth login --use-device-code
 ```
 
-### Serviceprincipal (CI/CD)
+### Service-principal (CI/CD)
 Til automatiserede miljøer:
 ```bash
 azd auth login \
@@ -201,7 +203,7 @@ azd auth login \
 
 ### Valider din komplette opsætning
 
-Hvis du ønsker en hurtig parathedskontrol inden Kapitel 1:
+Hvis du vil have en hurtig parathedskontrol før start på Kapitel 1:
 
 **Windows:**
 ```powershell
@@ -228,7 +230,7 @@ azd config show
 ```
 
 ### Miljøvariabler
-Tilføj til dit shellprofil (`.bashrc`, `.zshrc`, `.profile`):
+Tilføj til din shell-profil (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -251,7 +253,7 @@ Funktioner:
 - IntelliSense til azure.yaml
 - Integrerede terminalkommandoer
 - Skabelon-gennemgang
-- Overvågning af udrulning
+- Udrulningsovervågning
 
 ### GitHub Codespaces
 Opret en `.devcontainer/devcontainer.json`:
@@ -267,11 +269,11 @@ Opret en `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Installer Azure-plugin
+1. Installer Azure-pluginet
 2. Konfigurer Azure-legitimationsoplysninger
 3. Brug integreret terminal til azd-kommandoer
 
-## 🐛 Fejlsøgning af installation
+## 🐛 Fejlfinding af installation
 
 ### Almindelige problemer
 
@@ -295,7 +297,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Netværks-/proxyproblemer
+#### Netværk/Proxy-problemer
 ```bash
 # Configure standard proxy environment variables for the current Bash session
 export HTTP_PROXY="http://proxy:8080"
@@ -328,8 +330,8 @@ azd show
 
 ## Opdatering af azd
 
-### Tjek for opdateringer
-azd advarer, når en nyere version er tilgængelig, og du kan bekræfte din nuværende build med:
+### Opdateringskontrol
+azd advarer, når en nyere version er tilgængelig, og du kan bekræfte din aktuelle build med:
 ```bash
 azd version
 ```
@@ -356,17 +358,17 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 <details>
 <summary><strong>Hvad er forskellen mellem azd og az CLI?</strong></summary>
 
-**Azure CLI (az)**: Lavniveauværktøj til administration af individuelle Azure-ressourcer
+**Azure CLI (az)**: Lav-niveau værktøj til at administrere individuelle Azure-ressourcer
 - `az webapp create`, `az storage account create`
 - Én ressource ad gangen
 - Fokus på infrastrukturadministration
 
-**Azure Developer CLI (azd)**: Højniveauværktøj til komplette applikationsudrulninger
+**Azure Developer CLI (azd)**: Høj-niveau værktøj til komplette applikationsudrulninger
 - `azd up` udruller hele appen med alle ressourcer
-- Arbejdsgange baseret på skabeloner
+- Skabelonbaserede workflows
 - Fokus på udviklerproduktivitet
 
-**De er uafhængige**: azd bruger sin egen autentificering som standard. Installer og log kun ind på Azure CLI for `az` kommandoer, eller vælg eksplicit `azd config set auth.useAzCliAuth true`.
+**De er uafhængige**: azd bruger som standard sin egen autentificering. Installer og log ind på Azure CLI kun for `az`-kommandoer, eller vælg eksplicit `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
@@ -381,7 +383,7 @@ Se [Konfigurationsvejledning](../chapter-03-configuration/configuration.md) for 
 </details>
 
 <details>
-<summary><strong>Virker azd med Azure Government eller Azure China?</strong></summary>
+<summary><strong>Fungerer azd med Azure Government eller Azure Kina?</strong></summary>
 
 Ja, konfigurer skyen:
 ```bash
@@ -394,16 +396,16 @@ azd config set cloud.name AzureChinaCloud
 azd auth login
 ```
 
-Hvis du også bruger Azure CLI, konfigurer `az cloud set --name ...` separat. Skabelontjenester og modeltilgængelighed varierer efter sky.
+Hvis du også bruger Azure CLI, konfigurer `az cloud set --name ...` separat. Skabelontjenester og modellernes tilgængelighed varierer efter sky.
 </details>
 
 <details>
 <summary><strong>Kan jeg bruge azd i CI/CD-pipelines?</strong></summary>
 
-Helt sikkert! azd er designet til automatisering:
+Absolut! azd er designet til automatisering:
 - GitHub Actions-integration
 - Azure DevOps-support
-- Serviceprincipal-autentificering
+- Service principal-autentificering
 - Ikke-interaktiv tilstand
 
 Se [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md) for CI/CD-mønstre.
@@ -412,39 +414,39 @@ Se [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md) for 
 <details>
 <summary><strong>Hvad koster det at bruge azd?</strong></summary>
 
-selve azd er **helt gratis** og open source. Du betaler kun for:
-- Azure-ressourcer du udruller
-- Azure-forbrugsomkostninger (compute, storage osv.)
+azd selv er **helt gratis** og open source. Du betaler kun for:
+- Azure-ressourcer, du udruller
+- Azure-forbrugsomkostninger (compute, lager osv.)
 
-Brug `azd provision --preview` til at inspicere foreslåede ressourcer, og estimer derefter deres omkostninger med [Azure Prisberegner](https://azure.microsoft.com/pricing/calculator/). Preview beregner ikke priser.
+Brug `azd provision --preview` til at inspicere foreslåede ressourcer og anslå derefter omkostningerne med [Azure Priskalkulator](https://azure.microsoft.com/pricing/calculator/). Preview beregner ikke priser.
 </details>
 
-## Næste skridt
+## Næste trin
 
-1. **Afslut autentificering**: Sørg for, at du kan få adgang til dit Azure-abonnement
-2. **Prøv din første udrulning**: Følg [Første projekt vejledning](first-project.md)
+1. **Færdiggør autentificering**: Sørg for, at du kan tilgå dit Azure-abonnement
+2. **Prøv din første udrulning**: Følg [Første Projekt Vejledning](first-project.md)
 3. **Udforsk skabeloner**: Gennemse tilgængelige skabeloner med `azd template list`
-4. **Konfigurer dit IDE**: Opsæt dit udviklingsmiljø
+4. **Konfigurer din IDE**: Opsæt dit udviklingsmiljø
 
 ## Support
 
 Hvis du støder på problemer:
-- [Officiel dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Rapporter problemer](https://github.com/Azure/azure-dev/issues)
-- [Fællesskabsdiskussioner](https://github.com/Azure/azure-dev/discussions)
+- [Officiel Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Rapporter Problemer](https://github.com/Azure/azure-dev/issues)
+- [Community Diskussioner](https://github.com/Azure/azure-dev/discussions)
 - [Azure Support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Få Azure-kommandovejledning direkte i din editor med `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Få Azure-kommando-guidance direkte i din editor med `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 1 - Grundlag & Hurtig start
-- **⬅️ Forrige**: [AZD Basics](azd-basics.md) 
-- **➡️ Næste**: [Dit første projekt](first-project.md)
-- **🚀 Næste kapitel**: [Kapitel 2: AI-første udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Kursusforside**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 1 - Fundament & Hurtig start
+- **⬅️ Forrige**: [AZD Grundlæggende](azd-basics.md) 
+- **➡️ Næste**: [Dit Første Projekt](first-project.md)
+- **🚀 Næste kapitel**: [Kapitel 2: AI-Først Udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installation fuldført!** Fortsæt til [Dit første projekt](first-project.md) for at begynde at bygge med azd.
+**✅ Installation Fuldført!** Fortsæt til [Dit Første Projekt](first-project.md) for at begynde at bygge med azd.
 
 ---
 

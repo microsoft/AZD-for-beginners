@@ -1,22 +1,24 @@
-# Kapitola 2: Vývoj s prioritou AI
+# Kapitola 2: Vývoj orientovaný na AI
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 4-5 hodín vrátane workshopu | **⭐ Zložitosť**: Stredne pokročilý
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 4-5 hodín vrátane workshopu | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou nástroja Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií po inteligentných agentov s nástrojmi.
+Táto kapitola sa zameriava na nasadzovanie aplikácií podporovaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií až po inteligentných agentov s nástrojmi.
 
-> **Revizia vydania (2026-11-04):** AI CLI návod bol overený v publikovanej dokumentácii/zdrojoch `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` a `azure.ai.evaluations` `1.0.0-beta.2`. Použite `azd >= 1.37.0` pre kombinovaný pracovný tok. Hodnotenia teraz používajú samostatný namespace `azd ai eval`; pozrite si [zmeny v vydaní a pokyny na migráciu](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Toto nie je validácia živého nasadenia.
+> **Aktualizácia Foundry GA (2026-11-09):** Balík `microsoft.foundry` 1.0 je [vo všeobecnej dostupnosti](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Používajte `azd >= 1.37.0`; hodnotenia zostávajú samostatnou inštaláciou. [Prehliadka hostovaného agenta](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) pokrýva testovanie lokálneho Agent Inspector a vzdialené nasadenie kódu. Toto je prehľad dokumentácie, nie overenie živého nasadenia; voliteľné náhľadové funkcie si zachovávajú svoj vlastný stav.
 
-## Výukové ciele
+## Výučbové ciele
 
-Po dokončení tejto kapitoly budete:
+Po dokončení tejto kapitoly budete schopní:
 - Nasadzovať AI aplikácie pomocou predpripravených šablón AZD
 - Pochopiť integráciu Microsoft Foundry s AZD
-- Konfigurovať a prispôsobiť AI agentov s nástrojmi
-- Nasadzovať aplikácie RAG (Retrieval-Augmented Generation)
+- Nainštalovať GA balík a otestovať hostovaného agenta lokálne pred nasadením jeho zdrojového kódu do Foundry
+- Preskúmať `azure.yaml`, hodnotiace prostriedky a čistenie nových verzus znovu použitých projektov
+- Konfigurovať a prispôsobovať AI agentov s nástrojmi
+- Nasadzovať RAG (Retrieval-Augmented Generation) aplikácie
 
 ---
 
@@ -24,16 +26,18 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojenie AZD so službami Foundry | 30 min |
-| 2 | [Sprievodca AI agentmi](agents.md) | Nasadzovanie inteligentných agentov s nástrojmi | 45 min |
+| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | GA balík, workflow lokálneho a cloud hostovaného agenta, a hodnotenia | 60 min |
+| 2 | [Sprievodca AI agentmi](agents.md) | Nasadenie inteligentných agentov s nástrojmi | 45 min |
 | 3 | [Nasadenie AI modelu](ai-model-deployment.md) | Nasadenie a konfigurácia AI modelov | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Prakticky: Preskúmajte šablónu a naplánujte konverziu | 2-3 hodiny |
+| 4 | [AI Workshop Laboratórium](ai-workshop-lab.md) | Praktické: Preskúmajte šablónu a naplánujte konverziu | 2-3 hodiny |
 
 ---
 
 ## 🚀 Rýchly štart
 
-Vyberte si jednu možnosť v novom prázdnom adresári. Koncový `.` inicializuje aktuálny adresár; inak AZD môže vytvoriť podadresár bez zmeny pracovného adresára shellu.
+Vyberte jednu možnosť v novom prázdnom adresári. Koncový `.` inicializuje aktuálny adresár; inak môže AZD vytvoriť podadresár bez zmeny pracovného adresára vášho shellu.
+
+Pre **cestu nasadenia kódu GA hostovaného agenta** začnite s [riadenou prehliadkou](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Vyžaduje AZD 1.37.0+, aktuálny uv, Python 3.13+, Foundry oprávnenia a kvótu modelu. Kompletné šablóny aplikácií nižšie sú alternatívy, nie predpoklady pre túto prehliadku.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,19 +55,19 @@ azd up
 
 ---
 
-## 🤖 Odporúčané AI šablóny
+## 🤖 Doporučené AI šablóny
 
 | Šablóna | Popis | Služby |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citáciami | OpenAI + AI Vyhľadávanie |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s nástrojmi | Služba AI agentov |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Základný AI chat | OpenAI + Kontajnerové aplikácie |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citáciami | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s nástrojmi | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Základný AI chat | OpenAI + Container Apps |
 
 ---
 
-## 💰 Povšimnutie nákladov
+## 💰 Povedomie o nákladoch
 
-Toto sú orientačné rozsahy, nie ceny alebo limity; objem modelu, SKU vyhľadávania/výpočtu, región a voliteľné funkcie môžu tieto hodnoty prekročiť. Pred poskytnutím si skontrolujte aktuálne cenové pokyny zvoleného príkladu.
+Toto sú ilustračné rozsahy, nie cenové ponuky alebo limity; premávka modelov, SKU vyhľadávania/výpočtu, región a voliteľné funkcie ich môžu prekročiť. Pred nasadením si overte aktuálne cenové pokyny pre vybraný príklad.
 
 | Prostredie | Odhadované mesačné náklady |
 |-------------|----------------------|
@@ -71,7 +75,7 @@ Toto sú orientačné rozsahy, nie ceny alebo limity; objem modelu, SKU vyhľad�
 | Testovanie | $150-300 |
 | Produkcia | $300-3,500+ |
 
-**Tip:** Spustite `azd down` po testovaní, aby ste sa vyhli poplatkom.
+**Vyčistenie:** Pred potvrdením si preverte `azd down`: pre novo vytvorený projekt Foundry vymaže skupinu zdrojov a všetko v nej. Pre znovu použitý projekt Foundry ponechá zdroje projektu a agenta na mieste; postupujte podľa [návodu na čistenie](microsoft-foundry-integration.md#7-clean-up-deliberately), aby ste neželané zdroje odstránili samostatne.
 
 ---
 
@@ -80,7 +84,7 @@ Toto sú orientačné rozsahy, nie ceny alebo limity; objem modelu, SKU vyhľad�
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
-| **Nasledujúca** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
+| **Ďalšia** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
 | **Preskočiť na** | [Kapitola 8: Produkčné vzory](../chapter-08-production/README.md) |
 
 ---
@@ -88,7 +92,7 @@ Toto sú orientačné rozsahy, nie ceny alebo limity; objem modelu, SKU vyhľad�
 ## 📖 Súvisiace zdroje
 
 - [Riešenie problémov s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Produkčné praktiky AI](../chapter-08-production/production-ai-practices.md)
+- [Produkčné postupy AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

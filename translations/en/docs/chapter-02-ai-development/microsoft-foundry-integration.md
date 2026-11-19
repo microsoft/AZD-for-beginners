@@ -26,19 +26,21 @@ Microsoft Foundry is Microsoft's unified platform for AI development that includ
 | Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
 | **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
-| **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
+| **Infrastructure** | Project and resource configuration | Start from `azure.yaml`; eject Bicep or Terraform when needed |
 | **Environment Management** | Single environment focus | Multi-environment (dev/staging/prod) |
-| **CI/CD Integration** | Limited | Native GitHub Actions support |
+| **CI/CD Integration** | Deployment and evaluation services | Reuse configuration in GitHub Actions or Azure DevOps |
 | **Cost Management** | Basic monitoring | Environment-specific cost optimization |
 
 ## Prerequisites
 
 - Azure subscription with appropriate permissions
-- Azure Developer CLI installed
+- Azure Developer CLI 1.37.0 or later for the GA Foundry workflow
 - Access to Microsoft Foundry Models services
 - Basic familiarity with Microsoft Foundry
 
-> **Release review (2026-11-04):** AI CLI guidance was checked against `azd` `1.37.2`, agents `1.0.0-beta.23`, and evaluations `1.0.0-beta.2` documentation/source. Use `azd >= 1.37.0` for the combined workflow. See [release changes and fixes](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes); this review does not certify every template or SDK example against a live deployment.
+> **Foundry GA update (2026-11-09):** The `microsoft.foundry` extension bundle reached version 1.0 and general availability on [November 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). The walkthrough below follows that announcement and the linked Microsoft Learn quickstart. This is a documentation review, not a live deployment validation. Optional preview features and independently released extensions retain their own release status.
+
+**Learning outcomes:** Install the GA bundle, review an agent's `azure.yaml`, compare local and deployed responses, and explain evaluation, CI/CD, and cleanup boundaries. For a step-by-step agent deployment, go to the [hosted-agent walkthrough](#hosted-agent-walkthrough-ga). The resource fragments below cover other integration patterns.
 
 ## Core Integration Patterns
 
@@ -223,45 +225,128 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### AZD Extensions for Foundry
 
-AZD provides extensions that add AI-specific capabilities for working with Microsoft Foundry services:
+For the GA workflow, install the `microsoft.foundry` bundle rather than assembling the core extensions one at a time:
 
 ```bash
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check the core CLI, then sign in and install the GA bundle
+azd version
+azd auth login
+azd ext install microsoft.foundry
 
-# Install the separate evaluations extension
-azd extension install azure.ai.evaluations
-
-# Install the fine-tuning extension
-azd extension install azure.ai.finetune
-
-# Install the custom models extension
-azd extension install azure.ai.models
-
-# List installed extensions
-azd extension list --installed
-
-# Inspect the currently installed agent extension version
-azd extension show azure.ai.agents
+# Verify installation and update the bundle when needed
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-The AI extensions are still moving quickly in preview. If a command behaves differently than shown here, upgrade the relevant extension before troubleshooting the project itself.
+The bundle installs agents, connections, inspector, projects, routines, skills, and toolboxes. It does not add a `microsoft.foundry` command group. Evaluations, datasets, fine-tuning, and custom models are installed separately when needed. See the [extension packaging reference](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions).
 
-### Agent-First Deployment with `azd ai`
+### Hosted-Agent Walkthrough (GA)
 
-Use `azd ai agent init` interactively, or adopt a current `azure.yaml` agent project template wired to Foundry Agent Service:
+A **hosted agent** runs your agent code on Foundry-managed compute. This exercise uses the upstream basic Python Agent Framework Responses API sample, not the classic Agent Service SDK fragments in other lessons.
+
+#### 1. Prepare and initialize
+
+Use an empty directory outside this course checkout. Install Python 3.13 or later and a current [uv release](https://docs.astral.sh/uv/getting-started/installation/). Standalone uv installations can use `uv self update`. Check [hosted-agent permissions](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions), model availability, and quota in your subscription and region before provisioning. Azure resources and local model calls incur charges.
+
+Complete `azd auth login` and bundle installation above. Local sample code uses `DefaultAzureCredential`; if using Azure CLI credentials, sign in with `az login` using the same account and tenant as AZD. AZD sign-in alone is not an Azure CLI sign-in.
+
+Run this single-line command in Bash or PowerShell:
+
+```text
+azd ai agent init --template https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml --deploy-mode code --src .
+```
+
+Choose a new or existing Foundry project and the intended subscription and region. To reuse a model deployment, add `--model-deployment <existing-deployment-name>` to the initialization command **before running it**, and select the existing project. Stay in the directory containing the generated `azure.yaml` for the remaining commands.
+
+#### 2. Review the deployment definition
+
+Open `azure.yaml` and locate these settings in the [upstream sample](https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml):
+
+| Setting | What to check |
+|---------|---------------|
+| `host: azure.ai.project` and `deployments` | Intended Foundry project and model name, version, deployment SKU, and capacity |
+| `host: azure.ai.agent` and `project` | Hosted agent and the directory containing its source |
+| `codeConfiguration` | Python runtime and entry point; the reviewed sample uses `python_3_13` and `main.py` |
+| `uses` | Dependency on the Foundry project service |
+| `container.resources` | CPU and memory allocation, even though code is built remotely |
+| `env` | Model deployment mapping and `PYTHONNOUSERSITE: "1"` to disable user-site package loading |
+| `infra.provider` | `microsoft.foundry`, which synthesizes the required infrastructure |
+
+Commit the reviewed `azure.yaml` and agent code together. No handwritten infrastructure is required to start; when you need editable provisioning files, follow [infrastructure ejection](https://learn.microsoft.com/azure/foundry/agents/concepts/cli-infrastructure) for Bicep or Terraform and continue using `azd provision`. Do not commit credentials or `.azure/` environment state.
+
+#### 3. Provision and test locally
 
 ```bash
-# Initialize from a current project template (supply your template path)
-azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
+azd provision
+azd ai agent run
+```
 
-# Deploy to Azure
+Provisioning can create missing model deployments **even in a reused project**. Review the model prompts and select an available online deployment type such as Global Standard or Data Zone Standard; quota and regional support vary.
+
+The local run prepares dependencies and opens **Agent Inspector**, where you can inspect requests, responses, and tool/model activity. Keep it running and open a second terminal in the same project directory:
+
+```bash
+azd ai agent invoke --local "Explain one benefit of keeping agent deployment settings with application code."
+```
+
+**Checkpoint:** Confirm you receive a relevant response and can inspect the associated local activity. Local execution still calls your Azure model deployment; it is not an offline or free test. Use synthetic prompts and avoid exposing secrets or sensitive data in inspector output.
+
+#### 4. Deploy and compare
+
+Stop the local run with Ctrl+C when finished. Before remote invocation, configure or verify the project's [Application Insights connection and trace-reading access](https://learn.microsoft.com/azure/foundry/tutorials/quickstart-create-foundry-resources#connect-application-insights-for-agent-tracing).
+
+```bash
+azd deploy
+azd ai agent invoke "Explain one benefit of keeping agent deployment settings with application code."
+```
+
+In code deployment mode, AZD uploads source for a remote Foundry build; you do not need a local container build for this path. Deployment output provides playground and endpoint links. Verify a response from the deployed agent and its cloud trace; local inspector events alone do not prove cloud tracing works.
+
+For subsequent changes, review supported hosted-agent configuration with `azd deploy --preview`. Stream logs with `azd ai agent monitor --follow`, or diagnose setup and access problems with `azd ai agent doctor`. A deployment preview is not a complete infrastructure or security review.
+
+#### 5. Add a repeatable quality check
+
+Install the independently released evaluations extension, then generate draft test assets:
+
+```bash
+azd ext install azure.ai.evaluations
+azd ai eval generate
+```
+
+Describe the agent's intended behavior and select **Dataset and evaluator**, then **Turn**. Review and edit the generated cases and grading rubric, including an unsupported-question case, before configuring the evaluation:
+
+```bash
+azd ai eval init --name quality
+```
+
+Select the reviewed dataset and rubric and confirm the judge model deployment. Inspect `evals/azure.eval.yaml` and its evaluation-service reference in `azure.yaml`, then register the assets and execute:
+
+```bash
 azd up
+azd ai eval run start --eval quality
 ```
 
-`--template`/`-t` replaces the deprecated `--manifest`/`-m` spelling; legacy manifest and nested agent configuration still need migration. Evaluate agents with `azd ai eval` from `azure.ai.evaluations`, not the removed legacy workflow. See [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) for setup, execution, and results.
+Inspect scores and failed or errored cases; a completed evaluation is not automatically a quality pass. Generation and scoring also incur model charges. Commit nonsecret configuration, datasets, and rubrics so teammates can compare changes. `azd ai agent optimize` can reuse a compatible evaluation as a baseline, but review candidates before explicitly deploying one. See [quality gates and migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) for older projects and CI.
 
-See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full command reference and flags.
+#### 6. Reuse the workflow in CI/CD
+
+After a successful `azd up`, run `azd pipeline config` and review the generated GitHub Actions or Azure DevOps workflow. Install `microsoft.foundry` on the runner, plus `azure.ai.evaluations` if running evaluations. Retain generated checkout, sign-in, and environment settings; installation alone does not authenticate the pipeline.
+
+Use a separate AZD environment per stage, grant the pipeline identity the required resource and Foundry permissions, and keep credentials in pipeline secrets or use federated identity. Commit evaluation assets and verify the identity can access referenced datasets/evaluators. See the [course pipeline example](../chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration) and [Foundry CI/CD guide](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli).
+
+#### 7. Clean up deliberately
+
+For a **new project created by this environment**, review the resources listed by `azd down` before confirming: it deletes the resource group and everything in it.
+
+For a **reused project**, `azd down` leaves the project, hosted agent, and other resources in place. Remove only unwanted resources you own using the [quickstart cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources); do not delete a shared resource group to clean up one exercise.
+
+**Completion check:** Explain which settings control local and cloud behavior, show local and deployed responses, review an evaluation result, and identify which resources remain after cleanup.
+
+### Optional: Scaffold with the Microsoft Foundry Skill
+
+Install the [Microsoft Foundry Skill](https://learn.microsoft.com/azure/foundry/how-to/develop/use-microsoft-foundry-skill) for your coding agent host, then open a separate empty folder. Ask it to scaffold the basic Python Agent Framework Responses API sample in code deployment mode, explain the generated `azure.yaml`, and propose the subscription, region, project, and model deployment. Require approval **before creating Azure resources**, request a local test, and stop before deployment. Review its output and continue with the deployment steps above only when ready.
+
+For existing projects, `--template`/`-t` replaces the deprecated `--manifest`/`-m` spelling; changing the flag does not migrate legacy manifests or nested agent configuration. See the [AI CLI reference](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
 ### Single Command Deployment
 
@@ -684,8 +769,8 @@ azd show
 # Monitor AI operations
 azd monitor
 
-# Clean up
-azd down --force --purge
+# Review the listed resources and confirm cleanup
+azd down
 ```
 
 **Success Criteria:**

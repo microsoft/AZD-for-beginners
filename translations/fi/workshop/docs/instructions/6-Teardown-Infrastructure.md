@@ -1,6 +1,6 @@
-# 6. Infra rakenteen purku
+# 6. Peruuta infrastruktuuri
 
-!!! tip "MODUULIN LOPPUUN MENNESSÄ OSAA"
+!!! tip "TÄMÄN MODUULIN LOPUSSA OSAA TOTEUTTAA SEURAAVAA"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Bonus Harjoitukset
+## Bonusharjoitukset
 
-Ennen kuin puret projektin, käytä muutama minuutti avoimeen tutkimiseen.
+Ennen projektin purkamista, käytä muutama minuutti avoimeen tutkimiseen.
 
-!!! info "Kokeile Näitä Tutkimusaiheita"
+!!! info "Kokeile näitä tutkimuskehotteita"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Ennen kuin puret projektin, käytä muutama minuutti avoimeen tutkimiseen.
 
 ---
 
-## Poista infrastruktuuri käytöstä
+## Peruuta infrastruktuuri
 
-1. Infrastruktuurin purku on yhtä helppoa kuin:
+!!! warning "Jos teit myös GA-hosted-agent -harjoituksen"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Infrastruktuurin purkaminen on yhtä helppoa kuin:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Vahvista valittu ympäristö ja tarkista poistettavat resurssit. Tämä poistaa Azuren resurssit ja voi tuhota tietoja. Säilytä vahvistuskehotus tässä oppimistyönkulussa. Kun valmis, näet ulostulon, joka on samanlainen kuin:
+1. Vahvista valittu ympäristö ja tarkista poistettavat resurssit. Tämä poistaa Azure-resursseja ja voi tuhoaa dataa. Pidä vahvistuskehotus tämän oppimisprosessin aikana. Valmiin tehtävän jälkeen näet vastaavaa tulostetta:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Ennen kuin puret projektin, käytä muutama minuutti avoimeen tutkimiseen.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Vahvista poisto portaalissa ja tarkista resurssit jotka ovat käyttöönottoskaalasta ulkopuolella. Kustannusraportointi ja käyttöoikeuksien päivitykset voivat viivästyä. Paikallinen `.azure` kokoonpano säilyy ellet poista sitä erikseen.
+1. Tarkista poistaminen portaalissa ja etsi resursseja, jotka ovat käyttöönottoprojektin ulkopuolella. Kustannusraportointi ja käyttökiintiöiden päivitys voivat viivästyä. Paikallinen `.azure`-määritys säilyy, ellei sitä erikseen poisteta.
 
-1. `azd down --purge` pyytää lisäksi tuettuja pehmeästi poistettuja resursseja poistettavaksi pysyvästi. Käytä tätä vain, kun palautusta ei tarvita ja ymmärrät säilytys-/poistonsuojapolitiikat. Se ei takaa välitöntä käyttöoikeuksien vapautusta.
+1. `azd down --purge` pyytää lisäksi tuetusti pehmeästi poistettujen resurssien pysyvää poistoa. Käytä sitä vain, kun palautusta ei tarvita ja ymmärrät säilytys- ja pyyhintäsuojauskäytännöt. Se ei takaa välitöntä käyttökiintiön vapautusta.
 
-1. Älä ota uudelleen käyttöön vain varmistaaksesi siivouksen. Myöhemmällä tarkoituksellisella `azd up` voi luoda resurssit uudelleen käyttämällä jäljelle jääneitä paikallisia syötteitä, ja aiheuttaa taas kustannuksia. Mallipäivitykset käyttävät normaalisti tuettuja provisiointimuutoksia, eivät purkua.
+1. Älä ota uudelleen käyttöön pelkästään siivouksen varmistamiseksi. Myöhempi tarkoituksellinen `azd up` voi uudelleenluoda resurssit paikallisten tietojen avulla ja aiheuttaa uudelleen kustannuksia. Mallipäivitykset käyttävät tavallisesti tuettuja käyttöönoton muutoksia, eivät purkua.
 
 ---
 

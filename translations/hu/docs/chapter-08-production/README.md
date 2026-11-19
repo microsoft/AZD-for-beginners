@@ -1,51 +1,51 @@
-# 8. fejezet: Termelési és vállalati minták
+# 8. fejezet: Termelési & Vállalati minták
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Összetettség**: Haladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Bonyolultság**: Haladó
 
 ---
 
 ## Áttekintés
 
-Ebben a fejezetben vállalati szintű telepítési mintákat, biztonsági megerősítést, megfigyelést és költségoptimalizálást tárgyalunk éles AI munkafolyamatokhoz.
+Ez a fejezet vállalati szintű üzembe helyezési mintákat, biztonsági megerősítést, monitorozást és költségoptimalizálást tárgyal a termelési AI munkaterhelésekhez.
 
-Ez egy architekturális referencia, nem egy teljesen telepíthető termelési sablon. A példák kihagyják az integrációs részleteket, amelyeket a saját alkalmazásodban kell biztosítani és tesztelni; a listát elolvasni nem jelent termelési készséget.
+Ez egy architekturális referencia, nem egy teljesen telepíthető termelési sablon. A példák mellőzik az integrációs részleteket, amelyeket a saját alkalmazásában kell szolgáltatni és tesztelni; a lista elolvasása nem igazolja a termelési készenlétet.
 
-> **Kiadás átvizsgálás (2026-11-04):** Az AI CLI útmutatót összevetettük az `azd 1.37.2`, az agentek `1.0.0-beta.23` és az értékelések `1.0.0-beta.2` dokumentáció/forrásaival. Lásd a [kiadási változások és hibajavítások](production-ai-practices.md#recent-release-changes-and-fixes) kompatibilitási követelményeit és migrációs részleteit; ez nem élő telepítési érvényesítés.
+> **Foundry GA frissítés (2026-11-09):** Használja az `azd >= 1.37.0` -t és a széles körben elérhető `microsoft.foundry` 1.0 csomagot a Foundry munkafolyamathoz; az értékelések külön kerülnek telepítésre. Lásd a [kiadás terjedelme és migráció](production-ai-practices.md#recent-release-changes-and-fixes) és az [azonosított pipeline példa](production-ai-practices.md#cicd-pipeline-configuration). Ez dokumentációs áttekintés, nem élő telepítési érvényesítés vagy átfogó GA státusz az opcionális előzetes funkciókról.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Több régióra kiterjedő ellenálló alkalmazásokat telepíteni
+E fejezet elvégzése után képes lesz:
+- Több régióban reziliens alkalmazásokat telepíteni
 - Vállalati biztonsági mintákat megvalósítani
-- Átfogó megfigyelést konfigurálni
-- Költségeket méretezve optimalizálni
-- AZD-vel CI/CD csővezetékeket beállítani
+- Átfogó monitorozást konfigurálni
+- Költségeket nagy méretekben optimalizálni
+- CI/CD pipeline-okat beállítani AZD-vel
 
 ---
 
-## 📚 Tananyagok
+## 📚 Tanórák
 
-| # | Lecke | Leírás | Időtartam |
+| # | Tanóra | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Termelési AI gyakorlatok](production-ai-practices.md) | Vállalati telepítési minták | 90 perc |
+| 1 | [Termelési AI gyakorlatok](production-ai-practices.md) | Vállalati üzembe helyezési minták | 90 perc |
 
 ---
 
-## 🚀 Termelési ellenőrzőlista
+## 🚀 Termelési ellenőrző lista
 
-- [ ] Több régiós telepítés az ellenálló képességért
-- [ ] Kezelt identitás hitelesítéshez (kulcsok nélkül)
-- [ ] Application Insights a megfigyeléshez
-- [ ] Költségvetések és riasztások beállítva
+- [ ] Több régióban történő üzembe helyezés a reziliencia érdekében
+- [ ] Kezelt identitás hitelesítéshez (nincs kulcs)
+- [ ] Application Insights monitorozáshoz
+- [ ] Költségkeretek és riasztások beállítása
 - [ ] Biztonsági szkennelés engedélyezve
-- [ ] CI/CD csővezeték integráció
+- [ ] CI/CD pipeline integráció
 - [ ] Katasztrófa-helyreállítási terv
 
 ---
 
 ## 🏗️ Architektúra minták
 
-### Minta 1: Mikroservice AI
+### Minta 1: Microservices AI
 
 ```mermaid
 graph LR
@@ -85,18 +85,18 @@ properties: {
 
 ## 💰 Költségoptimalizálás
 
-| Stratégia | Fő korlát |
+| Stratégia | Fő korlátozás |
 |----------|---------|
-| Skálázás nullára (Container Apps) | Megfelelő kiváltó ok szükséges; más szolgáltatások továbbra is költséget okoznak |
-| Fogyasztási szintek használata fejlesztéshez | Összehasonlítja a kiválasztott szolgáltatás árazását és a munkaterhelést |
-| Ütemezett skálázás | A támogatott infrastruktúrán/automatizáláson keresztül történő skálázás |
-| Foglalások/fenntartott kapacitás | Csak ha támogatott; kötelezettségek növelhetik a tétlen költségeket |
+| Nullára skálázás (Container Apps) | Megfelelő kiváltó esemény szükséges; más szolgáltatások továbbra is költséget okoznak |
+| Fogyasztási szintek használata fejlesztéshez | Választott szolgáltatás árazásának és munkaterhelés összevetése |
+| Ütemezett skálázás | Támogatott infrastruktúrával/automatizálással skáláz |
+| Foglalások/kijelölt kapacitás | Csak ha támogatott; kötelezettségek növelhetik az inaktív költségeket |
 
-Használd a [teljes költségvetési erőforrás-mintát](production-ai-practices.md#2-cost-monitoring-and-budgets) érvényes kezdő dátummal, számlázási hatókörrel, címzettekkel és jogosultságokkal. A költségvetés riasztásokat küld; nem korlátozza a kiadásokat. A megtakarítások a mért használattól függenek és nem garantált százalékok.
+Használja a [teljes költségvetési erőforrás mintát](production-ai-practices.md#2-cost-monitoring-and-budgets) érvényes kezdő dátummal, számlázási hatállyal, címzettekkel és jogosultságokkal. Egy költségvetés riasztásokat küld; nem korlátozza a kiadásokat. A megtakarítások a mért kihasználtságtól függenek, és nem garantált százalékok.
 
 ---
 
-## 📊 Megfigyelés beállítása
+## 📊 Monitorozási beállítás
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -115,17 +115,17 @@ az monitor metrics list --resource <resource-id>
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Előző** | [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md) |
+| **Előző** | [7. fejezet: Hibaelhárítás](../chapter-07-troubleshooting/README.md) |
 | **Tanfolyam befejezve** | [Tanfolyam kezdőlap](../../README.md) |
 
 ---
 
 ## 📖 Kapcsolódó források
 
-- [AI Agentek útmutatója](../chapter-02-ai-development/agents.md)
+- [AI ügynökök útmutató](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Több-agent megoldások](../chapter-05-multi-agent/README.md)
-- [Mikroszolgáltatások példa](../../examples/microservices/README.md)
+- [Több ügynök megoldások](../chapter-05-multi-agent/README.md)
+- [Microservices példa](../../examples/microservices/README.md)
 
 ---
 

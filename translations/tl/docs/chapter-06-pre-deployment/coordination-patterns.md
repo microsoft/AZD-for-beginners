@@ -1,38 +1,38 @@
 # Mga Pattern ng Koordinasyon ng Maramihang Ahente
 
-⏱️ **Tinatayang Oras**: 60-75 minuto ng pagbabasa; ilang oras para magpatupad | 💰 **Tinatayang Gastos**: nakadepende sa gawain | ⭐ **Kahusayan**: Advanced
+⏱️ **Tinatayang Oras**: 60-75 minuto na pagbasa; ilang oras upang ipatupad | 💰 **Tinatayang Gastos**: depende sa dami ng trabaho | ⭐ **Kumplikado**: Advanced
 
-**📚 Landas ng Pagkatuto:**
-- ← Nakaraan: [Capacity Planning](capacity-planning.md) - Mga estratehiya sa pagsukat at pagpapalawak ng resources
+**📚 Daan ng Pagkatuto:**
+- ← Nakaraan: [Capacity Planning](capacity-planning.md) - Mga estratehiya sa pagtukoy ng laki ng mga resource at pag-scale
 - 🎯 **Nandito Ka**: Mga Pattern ng Koordinasyon ng Maramihang Ahente (Orkestrasyon, komunikasyon, pamamahala ng estado)
 - → Susunod: [SKU Selection](sku-selection.md) - Pagpili ng tamang mga serbisyo ng Azure
-- 🏠 [Course Home](../../README.md)
+- 🏠 [Pangunahing Kurso](../../README.md)
 
 ---
 
-## Ano ang iyong Matututuhan
+## Ano ang Iyong Matututunan
 
-Sa pagtatapos ng lektyon na ito, ikaw ay:
-- Mauunawaan ang **arkitektura ng maramihang ahente** at kung kailan ito gagamitin
-- Maipatupad ang **mga pattern ng orkestrasyon** (centralized, decentralized, hierarchical)
-- Makakapagdisenyo ng **estratehiya ng komunikasyon ng ahente** (synchronous, asynchronous, event-driven)
-- Mapamamahalaan ang **ibinahaging estado** ng mga distributed na ahente
-- Maipapakalat ang **mga sistema ng maramihang ahente** sa Azure gamit ang AZD
-- Maiaangkop ang **mga pattern ng koordinasyon** para sa totoong mga senaryo sa AI
-- Mamomonitor at madedebug ang mga distributed na sistema ng ahente
+Sa pagtatapos ng araling ito, matututunan mo kung paano:
+- Unawain ang mga pattern ng **arkitektura ng maramihang ahente** at kung kailan ito gagamitin
+- Ipatupad ang mga pattern ng **orkestrasyon** (sentralisado, desentralisado, hierarkikal)
+- Disenyuhin ang mga estratehiya sa **komunikasyon ng ahente** (synchronous, asynchronous, event-driven)
+- Pamahalaan ang **pinaghahabahaging estado** sa pagitan ng mga distributed na ahente
+- Mag-deploy ng **mga sistema ng maramihang ahente** sa Azure gamit ang AZD
+- Ipatupad ang mga pattern ng **koordinasyon** para sa mga tunay na kaso ng AI
+- Subaybayan at i-debug ang mga distributed na sistema ng ahente
 
 ## Bakit Mahalaga ang Koordinasyon ng Maramihang Ahente
 
-### Ang Ebolusyon: Mula Single Agent hanggang Maramihang Ahente
+### Ang Ebolusyon: Mula Single Agent Hanggang Multi-Agent
 
-**Isang Ahente (Simple):**
+**Single Agent (Simple):**
 ```
 User → Agent → Response
 ```
-- ✅ Madaling intindihin at ipatupad
-- ✅ Mabilis para sa simpleng mga gawain
-- ❌ Limitado ang kakayahan ng iisang modelo
-- ❌ Hindi kayang gawing parallel ang mga komplikadong gawain
+- ✅ Madaling maintindihan at ipatupad
+- ✅ Mabilis para sa mga simpleng gawain
+- ❌ Limitado ng kakayahan ng isang modelo
+- ❌ Hindi maaaring mag-paralelize ng mga kumplikadong gawain
 - ❌ Walang espesyalisasyon
 
 **Sistema ng Maramihang Ahente (Advanced):**
@@ -43,20 +43,20 @@ graph TD
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
 - ✅ Mga espesyalisadong ahente para sa partikular na gawain
-- ✅ Sabay-sabay na pagpapatupad para sa bilis
-- ✅ Modular at madaling panatilihin
-- ✅ Mas mahusay sa mga kumplikadong workflow
-- ⚠️ Nangangailangan ng lohika sa koordinasyon
+- ✅ Paralel na pagpapatupad para sa bilis
+- ✅ Modular at madaling mapanatili
+- ✅ Mas mahusay sa kumplikadong workflows
+- ⚠️ Nangangailangan ng lohika ng koordinasyon
 
-**Pagtutulad**: Ang isang ahente ay parang isang tao na gumagawa ng lahat ng gawain. Ang maramihang ahente ay parang isang koponan kung saan bawat kasapi ay may espesyalisadong kakayahan (mananaliksik, tagakodigo, tagasuri, manunulat) na nagtutulungan.
+**Analohiya**: Ang single agent ay tulad ng isang tao na gumagawa ng lahat ng gawain. Ang multi-agent ay parang isang koponan kung saan ang bawat miyembro ay may espesyal na kasanayan (mananaliksik, tagakodigo, tagasuri, manunulat) na nagtutulungan.
 
 ---
 
-## Pangunahing Mga Pattern ng Koordinasyon
+## Mga Pangunahing Pattern ng Koordinasyon
 
-### Pattern 1: Sunod-sunod na Koordinasyon (Kadena ng Pananagutan)
+### Pattern 1: Sequential Coordination (Chain of Responsibility)
 
-**Kailan gagamitin**: Kailangan matapos ang mga gawain sa partikular na pagkakasunod-sunod, bawat ahente ay nagtatayo sa output ng naunang ahente.
+**Kailan gagamitin**: Kailangang matapos ang mga gawain sa tiyak na pagkakasunod-sunod, bawat ahente ay bumubuo sa output ng nauna.
 
 ```mermaid
 sequenceDiagram
@@ -79,25 +79,25 @@ sequenceDiagram
 ```
 
 **Mga Benepisyo:**
-- ✅ Malinaw na daloy ng datos
+- ✅ Malinaw ang daloy ng datos
 - ✅ Madaling i-debug
-- ✅ Maayos at predictable ang pagkakasunod ng pagpapatupad
+- ✅ Predictable ang pagkakasunod-sunod ng pagpapatupad
 
 **Mga Limitasyon:**
-- ❌ Mabagal (walang parallelism)
-- ❌ Isang pagkabigo ay humahadlang sa buong kadena
-- ❌ Hindi kaya ang interdependent na mga gawain
+- ❌ Mabagal (walang paralelismo)
+- ❌ Isang pagkabigo ay humahadlang sa buong chain
+- ❌ Hindi kayang hawakan ang mga interdependent na gawain
 
-**Mga Halimbawa ng Paggamit:**
-- Pipeline ng paggawa ng nilalaman (pananaliksik → pagsusulat → pag-edit → pag-publish)
-- Paggawa ng code (plano → implementasyon → pagsubok → deployment)
-- Paggawa ng ulat (pagkolekta ng datos → pagsusuri → biswal na presentasyon → buod)
+**Mga Halimbawa ng Gamit:**
+- Pipeline ng paggawa ng nilalaman (pananaliksik → pagsulat → pag-edit → paglalathala)
+- Paggawa ng code (planuhin → ipatupad → subukan → ideploy)
+- Paghahanda ng ulat (pagkolekta ng datos → pagsusuri → pag-visualize → buod)
 
 ---
 
-### Pattern 2: Sabay-sabay na Koordinasyon (Fan-Out/Fan-In)
+### Pattern 2: Parallel Coordination (Fan-Out/Fan-In)
 
-**Kailan gagamitin**: Ang mga independiyenteng gawain ay maaaring isagawa nang sabay-sabay, ang mga resulta ay pinagsama sa huli.
+**Kailan gagamitin**: Puwedeng sabay-sabay tumakbo ang mga independiyenteng gawain, pinagsama ang mga resulta sa dulo.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Mga Benepisyo:**
-- ✅ Mabilis (parallel execution)
-- ✅ Matatag kahit may bahagyang pagkabigo (partial results ay tinatanggap)
-- ✅ Kayang mag-scale nang pahalang
+- ✅ Mabilis (paralel na pagpapatupad)
+- ✅ Fault-tolerant (tanggap ang bahagi ng resulta)
+- ✅ Kayang mag-scale nang horizontal
 
 **Mga Limitasyon:**
-- ⚠️ Maaaring dumating ang mga resulta sa hindi inaasahang pagkakasunod-sunod
-- ⚠️ Kailangan ng lohika para sa pagsasama-sama
+- ⚠️ Mga resulta ay maaaring dumating nang hindi nakaayos
+- ⚠️ Nangangailangan ng lohika ng pagpagsama
 - ⚠️ Kumplikadong pamamahala ng estado
 
-**Mga Halimbawa ng Paggamit:**
-- Pagkuha ng datos mula sa maraming pinagmulan (APIs + databases + web scraping)
-- Pagsusuri ng kompetisyon (maraming modelo ang gumagawa ng solusyon, pinipili ang pinakamahusay)
-- Serbisyo ng pagsasalin (sabayan ang pagsasalin sa maraming wika)
+**Mga Halimbawa ng Gamit:**
+- Pangangalap ng data mula sa maraming pinagmulan (APIs + databases + web scraping)
+- Pagsusuri ng kumpetisyon (maraming modelo ang gumagawa ng mga solusyon, pinipili ang pinakamahusay)
+- Serbisyo sa pagsasalin (isinalin sa maraming wika nang sabay-sabay)
 
 ---
 
 ### Pattern 3: Hierarchical Coordination (Manager-Worker)
 
-**Kailan gagamitin**: Mga kumplikadong workflow na may mga sub-gawain, kailangan ng delegasyon.
+**Kailan gagamitin**: Kumplikadong workflows na may mga sub-gawain, kinakailangan ang pagdelegar.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Mga Benepisyo:**
-- ✅ Kayang hawakan ang kumplikadong workflow
-- ✅ Modular at madaling panatilihin
-- ✅ Malinaw ang pagkakabahagi ng responsibilidad
+- ✅ Kayang pangasiwaan ang mga kumplikadong workflows
+- ✅ Modular at madaling mapanatili
+- ✅ Malinaw ang mga hangganan ng responsibilidad
 
 **Mga Limitasyon:**
 - ⚠️ Mas kumplikadong arkitektura
 - ⚠️ Mas mataas na latency (maraming layer ng koordinasyon)
 - ⚠️ Nangangailangan ng sopistikadong orkestrasyon
 
-**Mga Halimbawa ng Paggamit:**
-- Proseso ng dokumento sa enterprise (classify → ruta → proseso → archive)
-- Multi-stage na pipeline ng datos (ingest → linisin → baguhin → suriin → ulat)
-- Kumplikadong automation workflow (plano → alokasyon ng resources → pagpapatupad → pagmamanman)
+**Mga Halimbawa ng Gamit:**
+- Proseso ng dokumento sa enterprise (klasipikahin → ruta → iproseso → i-archive)
+- Multi-stage na pipeline ng data (ingest → linisin → transform → suriin → ulat)
+- Kumplikadong mga workflow ng automation (pagpaplano → alokasyon ng resource → pagpapatupad → pagmamanman)
 
 ---
 
 ### Pattern 4: Event-Driven Coordination (Publish-Subscribe)
 
-**Kailan gagamitin**: Kailangan tumugon ang mga ahente sa mga kaganapan, nais ang maluwag na pagkakabit.
+**Kailan gagamitin**: Kailangang tumugon ang mga ahente sa mga pangyayari, nais ang maluwag na coupling.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Mga Benepisyo:**
-- ✅ Maluwag ang pagkakabit sa pagitan ng mga ahente
-- ✅ Madaling magdagdag ng bagong ahente (subscribe lang)
+- ✅ Maluwag ang coupling sa pagitan ng mga ahente
+- ✅ Madaling magdagdag ng bagong mga ahente (subscribe lang)
 - ✅ Asynchronous na pagpoproseso
-- ✅ Matatag (persistensya ng mensahe)
+- ✅ Matibay (nagpapanatili ng mga mensahe)
 
 **Mga Limitasyon:**
-- ⚠️ Pagsunod sa huli na konsistensi
-- ⚠️ Kumplikadong pag-debug
-- ⚠️ Hamon sa pag-aayos ng pagkakasunod ng mensahe
+- ⚠️ Eventual consistency
+- ⚠️ Kumplikadong debugging
+- ⚠️ Mga hamon sa pag-aayos ng mensahe
 
-**Mga Halimbawa ng Paggamit:**
-- Sistema ng realtime na pagmamanman (alerts, dashboard, logs)
-- Multi-channel na notipikasyon (email, SMS, push, Slack)
-- Pipeline ng pagproseso ng datos (maraming consumers ng parehong datos)
+**Mga Halimbawa ng Gamit:**
+- Mga sistema ng real-time na pagmamanman (alerts, dashboard, logs)
+- Multi-channel na mga notification (email, SMS, push, Slack)
+- Pipeline ng pagproseso ng data (maraming consumer ng parehong data)
 
 ---
 
 ### Pattern 5: Consensus-Based Coordination (Voting/Quorum)
 
-**Kailan gagamitin**: Kailangan ang kasunduan mula sa maraming ahente bago magpatuloy.
+**Kailan gagamitin**: Kinakailangan ang pagsang-ayon mula sa maramihang ahente bago magpatuloy.
 
 ```mermaid
 graph TB
@@ -249,22 +249,22 @@ graph TB
 
 **Mga Benepisyo:**
 - ✅ Mas mataas na katumpakan (maraming opinyon)
-- ✅ Matatag kahit may minor na pagkabigo
-- ✅ May nakapaloob na quality assurance
+- ✅ Fault-tolerant (tinanggap ang kabiguan ng minoridad)
+- ✅ Nakapaloob na quality assurance
 
 **Mga Limitasyon:**
-- ❌ Magastos (maraming tawag sa modelo)
+- ❌ Mahal (maraming tawag sa modelo)
 - ❌ Mabagal (naghihintay sa lahat ng ahente)
-- ⚠️ Kailangan ng resolusyon sa konflikto
+- ⚠️ Nangangailangan ng pagresolba ng salungatan
 
-**Mga Halimbawa ng Paggamit:**
+**Mga Halimbawa ng Gamit:**
 - Moderasyon ng nilalaman (maraming modelo ang nagsusuri ng nilalaman)
 - Pagsusuri ng code (maraming linters/analyzers)
-- Medikal na diagnosis (maraming AI model, pagsuri ng eksperto)
+- Pagsusuri medikal (maraming AI modelo, validasyon ng eksperto)
 
 ---
 
-## Pangkalahatang Arkitektura
+## Pangkalahatang Tanaw ng Arkitektura
 
 ### Kumpletong Sistema ng Maramihang Ahente sa Azure
 
@@ -314,23 +314,23 @@ graph TB
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 
-**Pangunahing mga Komponent:**
+**Pangunahing Mga Komponente:**
 
 | Komponent | Layunin | Serbisyo ng Azure |
-|-----------|---------|--------------------|
-| **API Gateway** | Pasukan, paglimita ng rate, awtentikasyon | API Management |
-| **Orchestrator** | Nagkokoordina ng workflow ng ahente | Container Apps |
+|-----------|---------|---------------|
+| **API Gateway** | Pasukan, rate limiting, awtentikasyon | API Management |
+| **Orchestrator** | Nagko-coordinate ng workflows ng ahente | Container Apps |
 | **Message Queue** | Asynchronous na komunikasyon | Service Bus / Event Hubs |
-| **Mga Ahente** | Espesyal na mga tagatrabaho ng AI | Container Apps / Functions |
-| **State Store** | Ibinahaging estado, pagsubaybay ng gawain | Cosmos DB |
-| **Artifact Storage** | Mga dokumento, resulta, log | Blob Storage |
-| **Monitoring** | Distributed na pagsubaybay, log | Application Insights |
+| **Mga Ahente** | Mga espesyalisadong AI worker | Container Apps / Functions |
+| **State Store** | Pinaghahabahaging estado, pagsubaybay ng gawain | Cosmos DB |
+| **Artifact Storage** | Mga dokumento, resulta, logs | Blob Storage |
+| **Monitoring** | Distributed tracing, logs | Application Insights |
 
-Ang Service Bus queues/topics at Event Hubs ay magkaibang serbisyo na may magkaibang delivery/consumption models; ang Event Hubs ay hindi palitang pang-direct sa Service Bus worker code sa ibaba. Ang parallelism, persist na mga mensahe, at voting ng modelo ay hindi mismo nangangahulugan ng fault tolerance o mas mataas na katumpakan.
+Ang Service Bus queues/topics at Event Hubs ay magkaibang serbisyo na may iba't ibang modelo ng paghahatid/consumption; ang Event Hubs ay hindi isang drop-in na pamalit para sa Service Bus worker code sa ibaba. Ang paralelismo, pagpapanatili ng mga mensahe, at botohan ng modelo ay hindi awtomatikong nagbibigay ng fault tolerance o mas mataas na katumpakan.
 
 ---
 
-## Mga Kinakailangang Kagamitan
+## Mga Kailangan
 
 ### Mga Kinakailangang Tool
 
@@ -351,16 +351,16 @@ docker --version
 ### Mga Kinakailangan sa Azure
 
 - Aktibong Azure subscription
-- Mga permiso para gumawa ng:
+- Mga permiso upang gumawa ng:
   - Container Apps
   - Service Bus namespaces
   - Cosmos DB accounts
   - Storage accounts
   - Application Insights
 
-### Mga Kinakailangang Kaalaman
+### Mga Kaalamang Kinakailangan
 
-Dapat ay natapos mo na:
+Dapat ay nakumpleto mo na ang:
 - [Configuration Management](../chapter-03-configuration/configuration.md)
 - [Authentication & Security](../chapter-03-configuration/authsecurity.md)
 - [Microservices Example](../../../../examples/microservices)
@@ -369,13 +369,13 @@ Dapat ay natapos mo na:
 
 ## Gabay sa Pagpapatupad
 
-> **Mga disenyo ng bahagi, hindi isang deployable na lab:** Ang project tree at `File:` na mga label sa ibaba ay naglalarawan ng mga files na lilikha sa iyong sariling proyekto; ang repositoryong ito ay walang kumpletong aplikasyon ng `multi-agent-system`. Kulang pa ang mga pangunahing bahagi tulad ng main/parameter templates, Container Apps environment/registry, Dockerfiles at dependency locks, Cosmos database/container setup, deployment ng mga modelo, identity/role configuration, scaling rules, at parallel workers/queues. Huwag asahan na ang `azd init` ay bubuo ng mga files na ito o ang `azd up` ay mag-de-deploy ng mga snippets nang hindi binabago. Para sa isang maipapatupad na panimulang punto, kumpletuhin ang [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Mga disenyo ng bahagi, hindi deployable lab:** Ang punong proyekto at mga label na `File:` sa ibaba ay naglalarawan ng mga file na dapat gawing sa iyong sariling proyekto; ang repositoryong ito ay hindi naglalaman ng kumpletong `multi-agent-system` na aplikasyon. Nawawalang mga piraso ay kinabibilangan ng main/parameter templates, environment/registry ng Container Apps, Dockerfiles at dependency locks, Cosmos database/container setup, deployment ng modelo, identity/role configuration, mga patakaran sa scaling, at mga parallel worker/queue. Huwag asahan na ang `azd init` ay gagawa ng mga file na ito o ang `azd up` ay ide-deploy ang mga snippet nang walang pagbabago. Para sa isang executable na panimula, kumpletuhin ang [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Mga palagay sa runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, at (para sa monitoring) `azure-monitor-opentelemetry`; ilagay ang `shared` sa Python import path sa bawat service image. Ang Cosmos `agent-state/tasks` na container ay dapat na umiiral na may partition key `/id`. Ang mga pagkonekta gamit ang key ay nagpapadali sa mga fragment na ito, hindi ito gabay sa produksyon: mas mainam ang managed identities na may scope sa Service Bus/Cosmos/OpenAI data-plane roles. Huwag ipakilala ang mga key sa outputs o logs.
+**Mga palagay sa runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, at (para sa monitoring) `azure-monitor-opentelemetry`; ilagay ang `shared` sa Python import path sa bawat service image. Ang Cosmos `agent-state/tasks` container ay dapat ay umiiral na na may partition key na `/id`. Ang mga koneksyon gamit ang key ay nagpapadali sa mga bahaging ito, hindi gabay sa produksyon: mas mainam ang paggamit ng managed identities na may scoped Service Bus/Cosmos/OpenAI data-plane roles. Huwag ilantad ang mga key sa outputs o logs.
 
-Ang paghahatid ng Service Bus ay **at least once**. Panatilihin ang idempotency para sa bawat gawain **at hakbang**, gumamit ng optimistic concurrency (ETags) para sa pagbabasa/pagbabago/pagsusulat ng estado, at i-renew ang mga lock ng mensahe sa panahon ng mahabang proseso. Ang simpleng state manager sa ibaba ay sunod-sunod lamang at hindi ipinatutupad ang mga garantiyang ito ng produksyon.
+Ang paghahatid ng Service Bus ay **at least once**. Panatilihin ang idempotency bawat gawain **at hakbang**, gamitin ang optimistic concurrency (ETags) para sa pagbabasa/pagbabago/pagsusulat ng estado, at i-renew ang mga message lock habang matagal ang pagproseso. Ang simpleng state manager sa ibaba ay sequential lamang at hindi nagsasagawa ng mga garantiya sa produksyon.
 
-### Istraktura ng Proyekto
+### Istruktura ng Proyekto
 
 ```
 multi-agent-system/
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Leksyon 1: Pattern ng Sunod-sunod na Koordinasyon
+## Aralin 1: Pattern ng Sequential Coordination
 
 ### Pagpapatupad: Pipeline ng Paggawa ng Nilalaman
 
-Disenyuhin natin ang isang sunod-sunod na pipeline: Pananaliksik → Pagsusulat → Pag-edit. Ang pag-publish ay wala sa halimbawang ito.
+Disenyuhin natin ang isang sequential na pipeline: Pananaliksik → Pagsulat → Pag-edit. Ang paglalathala ay hindi kasama sa halimbawa na ito.
 
 ### 1. Konfigurasyon ng AZD
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Manager ng Ibinahaging Estado
+### 3. Manager ng Pinaghahabahaging Estado
 
 **File: `src/shared/state_manager.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Ahente ng Pananaliksik
+### 5. Ahenteng Pananaliksik
 
 **File: `src/agents/research/app.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Ahente ng Manunulat
+### 6. Ahenteng Manunulat
 
 **File: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Ahente ng Editor
+### 7. Ahenteng Editor
 
 **File: `src/agents/editor/app.py`**
 
@@ -895,19 +895,19 @@ if __name__ == '__main__':
 
 ### 8. I-deploy at Subukan
 
-Ang mga utos na ito ay ilalapat **pagkatapos mong maisakatuparan ang mga kulang na file ng proyekto**. Ang interactive na Foundry agent initialization ay hiwalay na workflow; hindi nito binubuo ang disenyo ng Service Bus na ito.
+Ang mga utos na ito ay inilalapat **kapag naipatupad mo na ang mga nawawalang file ng proyekto**. Ang interactive na pag-initialize ng Foundry agent ay isang hiwalay na workflow; hindi nito ginagawa ang disenyo ng Service Bus na ito.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Tingnan ang [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa lahat ng `azd ai` flag at opsyon.
+> Tingnan ang [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa lahat ng mga flag at opsyon ng `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Tingnan ang progreso ng gawain:**
+**Suriin ang progreso ng gawain:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Inaasahang output (kumpleto na):**
+**✅ Inaasahang output (natapos):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -964,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Leksyon 2: Pattern ng Sabay-sabay na Koordinasyon
+## Aralin 2: Pattern ng Parallel Coordination
 
 ### Pagpapatupad: Multi-Source Research Aggregator
 
-Gumawa tayo ng parallel na sistema na kumukuha ng impormasyon mula sa maraming pinagmulan nang sabay-sabay.
+Gumawa tayo ng parallel na sistema na nangongolekta ng impormasyon mula sa maraming pinagmulan nang sabay-sabay.
 
 ### Parallel Orchestrator
 
@@ -1042,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Lohika ng Pag-aggrup
+### Lohika ng Aggregation
 
 **File: `src/agents/aggregator/app.py`**
 
@@ -1124,23 +1124,23 @@ if __name__ == '__main__':
 ```
 
 **Mga Benepisyo ng Parallel Pattern:**
-- ⚡ **Maaaring mas mababang latency** (nababatasan ng pinakabagal na worker kasama ang overhead ng koordinasyon)
-- 🔄 **Puwedeng suportahan ang bahagyang resulta** na may malinaw na deadline at patakaran sa pagkabigo (hindi ipinatupad sa basic aggregator)
-- 📈 **Scalable** (madaling magdagdag ng mga ahente)
+- ⚡ **Posibleng mas mababang latency** (nakadepende sa pinakamabagal na worker kasama ang overhead ng koordinasyon)
+- 🔄 **Kayang suportahan ang bahagi ng mga resulta** na may tiyak na deadline at patakaran sa kabiguan (hindi ipinatupad ng basic aggregator)
+- 📈 **Kayang mag-scale** (madaling magdagdag ng mga ahente)
 
 ---
 
-## Mga Praktikal na Ehersisyo
+## Mga Praktikal na Pagsasanay
 
-### Ehersisyo 1: Magdagdag ng Timeout Handling ⭐⭐ (Katamtaman)
+### Pagsasanay 1: Magdagdag ng Timeout Handling ⭐⭐ (Katamtaman)
 
-**Layunin**: Ipatupad ang timeout logic upang hindi maghintay magpakailanman ang aggregator para sa mabagal na mga ahente.
+**Layunin**: Ipatupad ang lohika ng timeout para hindi maghintay nang matagal ang aggregator para sa mga mabagal na ahente.
 
-**Panimulang punto:** Patakbuhin ang lokal na simulation ng deadline na ito bago isama sa queue worker. Ang timeout na sinusuri lamang kapag may ibang mensahe na dumating ay hindi tatakbo kung walang mensaheng ipinadala ang nawawalang worker.
+**Panimulang punto:** Patakbuhin ang lokal na deadline simulation bago i-integrate sa queue worker. Ang timeout na tsine-check lang kapag may dumating na bagong mensahe ay hindi kailanman tutugma kung walang ipinapadalang mensahe ang nawawalang worker.
 
 **Mga Hakbang**:
 
-1. **Magdagdag ng pagsunod sa timeout sa aggregator:**
+1. **Magdagdag ng timeout tracking sa aggregator:**
 
 ```python
 import asyncio
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integrasyon sa sistema ng queue (design task):** Panatilihin ang deadline ng dispatch at inaasahang mga ahente sa oras ng paglikha ng gawain, patakbuhin ang pana-panahong pag-sweep ng deadline na independyente sa mga papasok na resulta, atomikong tapusin ang mga bahagyang resulta, at huwag pansinin ang mga huli/duplikadong mensahe para sa mga natapos na gawain. Ang lokal na timeout ay hindi kinakansela ang mga remote na worker.
+3. **Integrasyon sa queue system (disenyong gawain):** Panatilihin ang deadline ng dispatch at inaasahang mga ahente kapag lumilikha ng gawain, patakbuhin ang periodikong pag-sweep ng deadline na independyente sa papasok na mga resulta, atomikong tapusin ang bahagi ng mga resulta, at huwag pansinin ang mga huli/duplicate na mensahe para sa mga tapos na gawain. Ang lokal na timeout ay hindi nagkansela ng mga remote na worker.
 
-Para lamang sa iyong ipinatupad na proyekto:
+Para lamang sa iyong ipinapatupad na proyekto:
 
 ```bash
 azd deploy aggregator
@@ -1186,22 +1186,22 @@ curl -X POST $ORCHESTRATOR_URL/research-parallel \
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Mga Pamantayan sa Tagumpay:**
-- ✅ Bumabalik ang lokal na pagsubok pagkatapos ng isang segundong deadline kahit incomplete ang isang ahente
-- ✅ Nagpapakita ng bahagyang resulta ang tugon (`"timed_out": true`)
+**✅ Mga Kriteriya ng Tagumpay:**
+- ✅ Ang lokal na pagsubok ay nagbabalik pagkatapos ng isang segundong deadline kahit na may hindi tapos na ahente
+- ✅ Ipinapakita ng tugon ang bahagi ng mga resulta (`"timed_out": true`)
 - ✅ Ibinabalik ang mga available na resulta (3 sa 4 na ahente)
 
 **Oras**: 20-25 minuto
 
 ---
 
-### Ehersisyo 2: Ipatupad ang Retry Logic ⭐⭐⭐ (Advanced)
+### Pagsasanay 2: Ipatupad ang Retry Logic ⭐⭐⭐ (Advanced)
 
-**Layunin**: Awtomatikong i-retry ang mga nabigong gawain ng ahente bago sumuko.
+**Layunin**: Awtomatikong ulitin ang mga nabigong gawain ng ahente bago sumuko.
 
 **Mga Hakbang**:
 
-1. **Gamitin ang Service Bus delivery counts sa halip na muling pag-enqueue ng custom retry counters:**
+1. **Gamitin ang service bus delivery counts sa halip na re-enqueue ng custom retry counters:**
 
 ```python
 import json
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **I-monitor ang dead letter queue:**
+3. **Subaybayan ang dead letter queue:**
 
 ```python
 def monitor_dead_letters():
@@ -1258,19 +1258,19 @@ def monitor_dead_letters():
             print(f"Description: {message.dead_letter_error_description}")
 ```
 
-**✅ Mga Pamantayan sa Tagumpay:**
-- ✅ Awtomatikong nirere-try ang mga nabigong gawain (hanggang 3 beses)
-- ✅ Exponential backoff sa pagitan ng mga retry (5s, 10s, 20s), kasama ang pag-renew ng message-lock kung kinakailangan
-- ✅ Pagkatapos ng max retries, pumupunta ang mga mensahe sa dead letter queue
-- ✅ Maaari masuri ang mga dead letter message; ang replay ay nangangailangan ng hiwalay na idempotent na workflow sa recovery
+**✅ Mga Kriteriya ng Tagumpay:**
+- ✅ Awtomatikong inuulit ang nabigong mga gawain (hanggang 3 beses)
+- ✅ Exponential backoff sa pagitan ng retries (5s, 10s, 20s), may pag-renew ng message lock kung kinakailangan
+- ✅ Pagkatapos ng max retries, napupunta ang mga mensahe sa dead letter queue
+- ✅ Maaaring suriin ang mga mensahe sa dead letter; nangangailangan ng hiwalay na idempotent recovery workflow ang replay
 
 **Oras**: 30-40 minuto
 
 ---
 
-### Ehersisyo 3: Ipatupad ang Circuit Breaker ⭐⭐⭐ (Advanced)
+### Pagsasanay 3: Ipatupad ang Circuit Breaker ⭐⭐⭐ (Advanced)
 
-**Layunin**: Pigilan ang pagkalat ng pagkabigo sa pamamagitan ng paghinto ng mga kahilingan sa mga nabigong ahente.
+**Layunin**: Pigilan ang cascading failures sa pamamagitan ng paghinto ng mga request sa mga nabibigong ahente.
 
 **Mga Hakbang**:
 
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **I-apply ito sa mga tawag ng ahente:**
+2. **I-apply sa mga tawag ng ahente:**
 
 ```python
 # In orchestrator
@@ -1348,7 +1348,7 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Pinoprotektahan ng circuit na ito ang **send operation**, hindi ang pagkumpleto ng remote na worker: ang matagumpay na pag-enqueue ng isang mensahe ay hindi nagsasabi kung buhay pa ang isang agent. `send_message` ang sender function ng iyong aplikasyon. Para sa execution circuits, ilabas ang naobserbahang task failures/timeouts sa isang matibay na coordinator. Ang in-memory class na ito ay isang demonstration ng single-thread, hindi isang distributed circuit breaker.
+Pinoprotektahan ng circuit na ito ang **send operation**, hindi ang pagkumpleto ng remote worker: ang matagumpay na pag-enqueue ng mensahe ay hindi nagsasabi kung ang agent ay buhay. `send_message` ang sender function ng iyong aplikasyon. Para sa execution circuits, ipasok ang mga naobserbahang pagkabigo/timeouts ng task sa isang durable coordinator. Ang in-memory na klase na ito ay isang single-thread na demonstrasyon, hindi isang distributed circuit breaker.
 
 3. **Subukan ang circuit breaker nang lokal:**
 
@@ -1368,17 +1368,17 @@ assert circuit.state == CircuitState.CLOSED
 print("Circuit breaker recovery verified")
 ```
 
-**✅ Mga Success Criteria:**
-- ✅ Pagkatapos ng 5 pagkabigo, bumubukas ang circuit (tinanggihan ang mga kahilingan)
-- ✅ Pagkatapos ng 60 segundo, nagiging half-open ang circuit (sinusubok ang pagbawi)
-- ✅ Patuloy na gumagana ang ibang mga agent nang normal
-- ✅ Kusang nagsasara ang circuit kapag bumawi ang agent
+**✅ Mga Pamantayan ng Tagumpay:**
+- ✅ Pagkatapos ng 5 pagkabigo, bubuksan ang circuit (tatanggihan ang mga kahilingan)
+- ✅ Pagkatapos ng 60 segundo, magiging half-open ang circuit (susubukan ang recovery)
+- ✅ Patuloy na gumagana nang normal ang ibang mga agent
+- ✅ Awtomatikong magsasara ang circuit kapag gumaling ang agent
 
 **Oras**: 40-50 minuto
 
 ---
 
-## Pagmo-monitor at Pag-debug
+## Monitoring at Pag-debug
 
 ### Distributed Tracing gamit ang Application Insights
 
@@ -1468,11 +1468,11 @@ exceptions
 
 ## Pagsusuri ng Gastos
 
-### Mga Gastos ng Multi-Agent System (Tantyang Buwanang)
+### Mga Gastos ng Multi-Agent System (Tantiyang Buwanang)
 
-Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa ibaba ay **$240-565/buwan**. Suriin ang kasalukuyang mga regional rates, aktibo/hindi ginagamit na oras ng replicas, halo ng input/output token, storage, at telemetry. Walang minimum na provisioned-throughput ang serverless pero naniningil pa rin para sa mga kahilingan at storage.
+Mga ilustratibong numero lamang, hindi mga quote: ang kabuuang halaga sa ibaba ay **$240-565/buwan**. Siguraduhing i-verify ang kasalukuyang rates sa rehiyon, mga aktibo/idle na oras ng replica, halo ng input/output token, storage, at telemetry. Walang minimum na provisioned-throughput ang serverless ngunit sinisingil pa rin para sa mga kahilingan at storage.
 
-| Component | Configuration | Cost |
+| Komponent | Konfigurasyon | Gastos |
 |-----------|--------------|------|
 | **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB bawat isa) | $60-120 |
@@ -1494,7 +1494,7 @@ Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa iba
    }
    ```
 
-2. **I-scale sa zero ang mga agent kapag idle:**
+2. **I-scale ang mga agent hanggang zero kapag idle:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1508,7 +1508,7 @@ Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa iba
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Mag-cache ng mga madalas gamitin na resulta:**
+4. **I-cache ang madalas na ginagamit na resulta:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1517,23 +1517,23 @@ Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa iba
 
 ---
 
-## Pinakamahusay na Praktis
+## Pinakamahuhusay na Kasanayan
 
-### ✅ GAWIN:
+### ✅ Gawin:
 
-1. **Gamitin ang mga idempotent na operasyon**
+1. **Gumamit ng mga idempotent na operasyon**
    ```python
    # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Magpatupad ng komprehensibong logging**
+2. **Magpatupad ng komprehensibong pag-log**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Gamitin ang correlation IDs**
+3. **Gumamit ng correlation IDs**
    ```python
    # Pass task_id through entire workflow
    message_data = {
@@ -1549,21 +1549,21 @@ Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa iba
    }
    ```
 
-5. **I-monitor ang mga dead letter queue**
+5. **Subaybayan ang dead letter queues**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ HUWAG GAWIN:
+### ❌ Huwag Gawin:
 
-1. **Huwag gumawa ng circular dependencies**
+1. **Huwag gumawa ng mga circular dependency**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Huwag i-block ang mga thread ng agent**
+2. **Huwag i-block ang mga agent thread**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1586,16 +1586,16 @@ Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa iba
 
 ---
 
-## Gabay sa Pag-troubleshoot
+## Gabay sa Pagsasaayos ng Problema
 
-### Problema: Mga mensaheng naipit sa queue
+### Suliranin: Mga mensahe na naipit sa queue
 
 **Sintomas:**
 - Dumadami ang mga mensahe sa queue
 - Hindi nagpoproseso ang mga agent
 - Naka-pending ang status ng task
 
-**Diagnostiko:**
+**Diagnosis:**
 ```bash
 # Check queue depth
 az servicebus queue show \
@@ -1630,14 +1630,14 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problema: Pag-timeout/ngunit hindi natatapos ang task
+### Suliranin: Timeout ng task/hindi natatapos
 
 **Sintomas:**
-- Nananatili ang status ng task sa "in_progress"
-- May ilang agent na nakukumpleto, ang iba hindi
-- Walang error messages
+- Nananatili ang status ng task na "in_progress"
+- May ilang agent na natatapos, ang ilan ay hindi
+- Walang mga mensahe ng error
 
-**Diagnostiko:**
+**Diagnosis:**
 ```bash
 # Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Mga Solusyon:**
 
-1. **Magpatupad ng timeout sa aggregator (Exercise 1)**
+1. **Ipapatupad ang timeout sa aggregator (Exercise 1)**
 
 2. **Suriin ang mga pagkabigo ng agent gamit ang Azure Monitor:**
    ```bash
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Siguraduhin na tumatakbo ang lahat ng agent:**
+3. **Tiyakin na lahat ng agent ay tumatakbo:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1679,7 +1679,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ### Mga Susunod na Hakbang sa Kursong Ito
 - ← Nakaraan: [Capacity Planning](capacity-planning.md)
 - → Susunod: [SKU Selection](sku-selection.md)
-- 🏠 [Course Home](../../README.md)
+- 🏠 [Tahanan ng Kurso](../../README.md)
 
 ### Mga Kaugnay na Halimbawa
 - [Microservices Example](../../../../examples/microservices) - Mga pattern ng komunikasyon ng serbisyo
@@ -1693,21 +1693,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - ✅ Limang coordination pattern (sequential, parallel, hierarchical, event-driven, consensus)
 - ✅ Multi-agent architecture sa Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Pamamahala ng estado sa mga distributed na agent
-- ✅ Pag-handle ng timeout, retries, at circuit breakers
-- ✅ Pagmo-monitor at pag-debug ng mga distributed system
+- ✅ Paghawak ng timeout, retries, at circuit breakers
+- ✅ Monitoring at pag-debug ng mga distributed system
 - ✅ Mga estratehiya sa pag-optimize ng gastos
 
-**Mga Pangunahing Aral:**
-1. **Pumili ng tamang pattern** - Sequential para sa mga nakaayos na workflow, parallel para sa bilis, event-driven para sa kakayahang umangkop
+**Pangunahing Mga Aral:**
+1. **Piliin ang tamang pattern** - Sequential para sa mga nakaayos na workflow, parallel para sa bilis, event-driven para sa pagiging flexible
 2. **Maingat na pamahalaan ang estado** - Gamitin ang Cosmos DB o katulad para sa shared state
-3. **Harapin ang mga pagkabigo nang maayos** - Timeout, retries, circuit breakers, dead letter queue
+3. **I-handle nang maayos ang mga pagkabigo** - Timeouts, retries, circuit breakers, dead letter queues
 4. **I-monitor ang lahat** - Mahalaga ang distributed tracing para sa pag-debug
-5. **I-optimize ang gastos** - I-scale sa zero, gamitin ang serverless, magpatupad ng caching
+5. **I-optimize ang mga gastos** - I-scale hanggang zero, gamitin ang serverless, ipatupad ang caching
 
 **Mga Susunod na Hakbang:**
-1. Kumpletuhin ang mga praktikal na pagsasanay
-2. Bumuo ng isang multi-agent system para sa iyong kaso ng paggamit
-3. Pag-aralan ang [SKU Selection](sku-selection.md) para i-optimize ang performance at gastos
+1. Tapusin ang practical exercises
+2. Bumuo ng multi-agent na sistema para sa iyong use case
+3. Pag-aralan ang [SKU Selection](sku-selection.md) upang i-optimize ang performance at gastos
 
 ---
 

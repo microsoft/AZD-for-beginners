@@ -1,30 +1,30 @@
-# Průvodce řešením problémů specifických pro AI
+# Specifický průvodce řešením problémů s AI
 
 **Navigace kapitolami:**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📚 Domů ke kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
-- **⬅️ Předchozí**: [Průvodce laděním](debugging.md)
+- **⬅️ Předchozí**: [Průvodce laděním chyb](debugging.md)
 - **➡️ Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)
-- **🤖 Související**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Související**: [Kapitola 2: Vývoj s AI na prvním místě](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Tento komplexní průvodce řešením problémů pokrývá časté potíže při nasazování AI řešení s AZD a poskytuje řešení a techniky ladění specifické pro služby Azure AI.
+Tento komplexní průvodce řešením problémů se zabývá běžnými problémy při nasazování AI řešení pomocí AZD a poskytuje specifická řešení a ladicí techniky pro služby Azure AI.
 
-> **Rozsah:** Příkazy používají příklady názvů zdrojů; nahraďte je a vyberte správné předplatné. Bicep bloky jsou fragmenty k začlenění do existující šablony, ne samostatné nasazení. Pythonové úryvky vyžadují uvedené SDK a konfiguraci aplikace. Pro tuto recenzi nebylo provedeno žádné živé nasazení do Azure.
+> **Rozsah:** Příkazy používají příkladné názvy zdrojů; nahraďte je a vyberte správné předplatné. Bloky Bicep jsou fragmenty určené pro sloučení do existující šablony, nikoliv samostatné nasazení. Pythonové úryvky vyžadují uvedené SDK a konfiguraci aplikace. Pro tuto kontrolu nebylo provedeno nasazení naživo v Azure.
 
 ## Obsah
 
-- [Problémy se službou Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
-- [Problémy s Azure AI Search](#azure-ai-search-problems)
-- [Problémy s nasazením Container Apps](#container-apps-deployment-issues)
-- [Autentizace a chyby oprávnění](#authentication-and-permission-errors)
-- [Selhání nasazení modelu](#model-deployment-failures)
-- [Výkon a škálování](#performance-and-scaling-issues)
+- [Problémy služby Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
+- [Problémy s vyhledáváním Azure AI](#azure-ai-search-problems)
+- [Problémy nasazení Container Apps](#container-apps-deployment-issues)
+- [Chyby ověřování a oprávnění](#authentication-and-permission-errors)
+- [Selhání nasazení modelů](#model-deployment-failures)
+- [Problémy s výkonem a škálováním](#performance-and-scaling-issues)
 - [Správa nákladů a kvót](#cost-and-quota-management)
 - [Nástroje a techniky ladění](#debugging-tools-and-techniques)
 
-## Problémy se službou Microsoft Foundry Models
+## Problémy služby Microsoft Foundry Models
 
-### Problém: Služba OpenAI není dostupná v daném regionu
+### Problém: Služba OpenAI není v regionu dostupná
 
 **Příznaky:**
 ```
@@ -32,8 +32,8 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Příčiny:**
-- Služba Microsoft Foundry Models není dostupná ve zvoleném regionu
-- Kvóta ve preferovaných regionech je vyčerpána
+- Modely Microsoft Foundry nejsou v zvoleném regionu k dispozici
+- Vyčerpaná kvóta v preferovaných regionech
 - Regionální kapacitní omezení
 
 **Řešení:**
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Problém: Překročena kvóta nasazení modelu
+### Problém: Překročená kvóta nasazení modelu
 
 **Příznaky:**
 ```
@@ -82,7 +82,7 @@ az cognitiveservices usage list \
 ```
 
 2. **Požádejte o zvýšení kvóty:**
-Využijte workflow správy kvót v portálu Foundry pro dané předplatné, region, model a typ nasazení. Viz [oficiální pokyny ke kvótám](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Požadavek na kvótu pro VM nezvyšuje kvótu modelu.
+Použijte workflow správy kvót na portálu Foundry pro ovlivněné předplatné, region, model a typ nasazení. Viz [oficiální pokyny pro kvóty](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Požadavek na kvótu VM nezvyšuje kvótu modelu.
 
 3. **Optimalizujte kapacitu modelu:**
 ```bicep
@@ -119,12 +119,12 @@ Error: The API version '2023-05-15' is not available for OpenAI
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Zkontrolujte kompatibilitu verze API:**
-Zkontrolujte [referenci životního cyklu Azure OpenAI API](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Verze API poskytovatele zdrojů ARM **neobsahují** verze inference/data-plane API. Noví klienti v1 používají `/openai/v1/` bez datované `api-version`; nekombinujte tyto dvě konfigurace klienta.
+2. **Zkontrolujte kompatibilitu verzí API:**
+Zkontrolujte [referenční životní cyklus API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM verze API poskytovatele zdrojů **ne** uvádějí verze inference/data-plane API. Noví klienti verze v1 používají `/openai/v1/` bez datovaného `api-version`; tyto dvě konfigurace klientů nemíchejte.
 
-## Problémy s Azure AI Search
+## Problémy s vyhledáváním Azure AI
 
-### Problém: Nedostatečná cenová úroveň služby Search
+### Problém: Nedostatečná cenová úroveň vyhledávací služby
 
 **Příznaky:**
 ```
@@ -135,7 +135,7 @@ Error: Semantic search requires Basic tier or higher
 
 1. **Použijte podporovanou cenovou úroveň:**
 
-Sémantický ranker vyžaduje Basic nebo vyšší. Přechod z Free/Basic na jinou úroveň může vyžadovat vytvoření nové vyhledávací služby a přestavění indexů; úprava SKU není zárukou upgrade na místě.
+Sémantický řadící algoritmus vyžaduje Basic nebo vyšší. Přechod z Free/Basic na jinou úroveň může vyžadovat vytvoření nové vyhledávací služby a přestavbu indexů; úprava SKU není zaručený upgrade na místě.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Zakázat sémantické vyhledávání (v vývoji):**
+2. **Zakázat sémantické vyhledávání (vývoj):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -168,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Problém: Selhání při vytváření indexů
+### Problém: Selhání při vytváření indexu
 
 **Příznaky:**
 ```
@@ -177,7 +177,7 @@ Error: Cannot create index, insufficient permissions
 
 **Řešení:**
 
-1. **Ověřte klíče pro vyhledávací službu:**
+1. **Ověřte klíče vyhledávací služby:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -263,7 +263,7 @@ azure-search-documents
 azure-cosmos
 ```
 
-3. **Přidejte kontrolu stavu:**
+3. **Přidejte kontrolu zdravotního stavu:**
 ```python
 # main.py - Add health check endpoint
 from fastapi import FastAPI
@@ -284,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Řešení:**
 
-1. **Zvyšte timeout spuštění:**
+1. **Zvýšte časový limit spuštění:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -350,9 +350,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Chyby autentizace a oprávnění
+## Chyby ověřování a oprávnění
 
-### Problém: Odepřený přístup spravované identity
+### Problém: Odepření oprávnění spravované identity
 
 **Příznaky:**
 ```
@@ -361,7 +361,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Řešení:**
 
-1. **Ověřte přiřazení rolí:**
+1. **Ověřte přidělení rolí:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -386,7 +386,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Testujte autentizaci:**
+3. **Otestujte ověřování:**
 ```python
 # Test managed identity authentication
 from azure.identity import DefaultAzureCredential
@@ -403,9 +403,9 @@ def test_authentication():
 test_authentication()
 ```
 
-Získání tokenu potvrzuje autentizaci, nikoli oprávnění k vyvolání modelu. Otestujte zamýšlenou operaci samostatně. Lokálně může `DefaultAzureCredential` používat přihlašovací údaje vývojáře; v Azure ověřte, že je vybrána správná spravovaná identita.
+Získání tokenu dokazuje ověření, nikoli oprávnění k vyvolání modelu. Otestujte zamýšlenou operaci samostatně. Lokálně může `DefaultAzureCredential` použít vývojářské pověření; v Azure ověřte, že je vybrána správná spravovaná identita.
 
-### Problém: Odepřený přístup k Key Vault
+### Problém: Odepřen přístup ke Key Vault
 
 **Příznaky:**
 ```
@@ -414,9 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Řešení:**
 
-1. **Udělte oprávnění k Key Vault:**
+1. **Udělte oprávnění v Key Vault:**
 
-Použijte následující fragment politiky přístupu pouze pro trezor s `enableRbacAuthorization: false`. Pro trezor povolený RBAC použijte možnost 2; přidání přístupové politiky neuděluje přístup do datové roviny v režimu RBAC.
+Použijte následující fragment přístupové politiky pouze pro vault s `enableRbacAuthorization: false`. Pro vault s RBAC povoleným použijte možnost 2; přidání přístupové politiky v RBAC režimu neposkytuje přístup k datové rovině.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -437,7 +437,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 
 2. **Použijte RBAC místo přístupových politik:**
 
-Trezor musí mít `enableRbacAuthorization: true`; změna modelu oprávnění vyžaduje plánovanou migraci existujícího přístupu.
+Vault musí mít `enableRbacAuthorization: true`; změna modelu oprávnění vyžaduje plánovanou migraci stávajících oprávnění.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -452,7 +452,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## Selhání nasazení modelu
 
-### Problém: Verze modelu není dostupná
+### Problém: Verze modelu není k dispozici
 
 **Příznaky:**
 ```
@@ -471,7 +471,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Explicitně vyberte dostupný model:**
+2. **Výslovně vyberte dostupný model:**
 ```bicep
 // Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
@@ -511,13 +511,13 @@ az cognitiveservices account list-models \
 ### Problém: Vysoká latence odpovědí
 
 **Příznaky:**
-- Časy odezvy > 30 sekund
-- Časové limity (timeouty)
-- Špatná uživatelská zkušenost
+- Doba odezvy > 30 sekund
+- Chyby vypršení časového limitu
+- Špatný uživatelský zážitek
 
 **Řešení:**
 
-1. **Implementujte timeouty požadavků:**
+1. **Implementujte časové limity požadavků:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -586,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problém: Chyby vyčerpání paměti
+### Problém: Chyby "Memory Out"
 
 **Příznaky:**
 ```
@@ -595,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Řešení:**
 
-1. **Zvyšte přidělení paměti:**
+1. **Zvyšte přidělenou paměť:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -646,9 +646,9 @@ class MemoryOptimizedAI:
 ### Problém: Neočekávaně vysoké náklady
 
 **Příznaky:**
-- Azure faktura vyšší než očekávaná
-- Spotřeba tokenů přesahující odhady
-- Aktivace upozornění rozpočtu
+- Vyšší než očekávaný účet za Azure
+- Spotřeba tokenů přesahuje odhady
+- Aktivovány rozpočtové upozornění
 
 **Řešení:**
 
@@ -671,7 +671,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-Tento počítadlo v paměti je jen ilustrativní, nikoli měsíční kontrola výdajů: resetuje se při restartu, nesdílí se napříč replikami a kontroluje využití až po volání. Skutečný limit vyžaduje trvalé účetnictví, při rezervacích bezpečných proti souběžnosti před požadavky a měsíční resetovací politiku. Metriky paměti kontejneru musí také zohledňovat limity cgroup; `psutil.virtual_memory()` není spolehlivým měřítkem limitu kontejneru a garbage collection nepřinucuje limit paměti.
+Tento interní počítadlo představuje ilustrativní příklad, ne je to měsíční kontrola výdajů: resetuje se po restartu, není sdíleno mezi replikami a kontroluje použití pouze po volání. Skutečný limit vyžaduje trvalou evidenci, rezervace bezpečné proti souběžnostem před požadavky a politiku měsíčního resetu. Metriky paměti kontejneru musí také brát v úvahu limity cgroup; `psutil.virtual_memory()` není spolehlivým měřením limitu kontejneru a garbage collection nevnucuje omezení paměti.
 
 2. **Nastavte upozornění na náklady:**
 ```bicep
@@ -699,7 +699,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-V deklaraci šablony uvádějte `budgetStartDate` a `budgetEndDate`. Rozpočty upozorňují; nezastavují zdroje ani neukládají tvrdý limit výdajů.
+Deklarujte `budgetStartDate` a `budgetEndDate` ve své šabloně. Rozpočty upozorňují; nezastaví zdroje ani neukládají tvrdý limit výdajů.
 
 3. **Optimalizujte výběr modelu:**
 ```python
@@ -719,7 +719,7 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 
 ## Nástroje a techniky ladění
 
-### Příkazy ladění AZD
+### Příkazy pro ladění AZD
 
 ```bash
 # Enable verbose logging
@@ -740,17 +740,20 @@ azd env get-values
 
 ### Příkazy rozšíření AZD AI pro diagnostiku
 
-Pokud jste nasadili agenty pomocí `azd ai agent init`, jsou k dispozici tyto další nástroje:
+Pokud jste nasadili agenty pomocí `azd ai agent init`, jsou dostupné tyto doplňkové nástroje:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,11 +762,13 @@ azd mcp start
 azd infra generate
 ```
 
-> **Tip:** Použijte `azd infra generate` k zápisu IaC na disk, abyste mohli přesně zkontrolovat, jaké zdroje byly vytvořeny. To je neocenitelné při ladění konfigurace zdrojů. Viz [referenci AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro podrobnosti.
+> **Tip:** Použijte `azd infra generate` k zápisu IaC na disk, abyste mohli přesně zkontrolovat, jaké zdroje byly provisionovány. To je neocenitelné při ladění problémů s konfigurací zdrojů. Viz [referenční příručka AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro úplné podrobnosti.
 
-**Diagnostika citlivá na verze (2026-11-04):** Agent `1.0.0-beta.23` vyžaduje `azd >= 1.37.0`; aktualizujte jádro CLI před nekompatibilními rozšířeními. Toto vydání agenta zachovává výstrahy RBAC vývojářů ve výstupu finálního nasazení a identifikuje verzi zapojenou při selháních aktivace/timeoutů. Timeout neznamená, že nasazení selhalo: zkontrolujte pokus o verzi před opakováním. Také opravuje zobrazení zpráv životního cyklu u volání A2A 0.3 místo dokončených odpovědí. Jádro `azd 1.37.1` opravuje propagaci zrušení mezi rozšířeními; `1.37.2` zlepšuje kritická potvrzení provisioning a zpracování zrušení.
+**GA diagnostika workflow (2026-11-09):** Ověřte, že `azd version` je minimálně 1.37.0 a prohlédněte si `azd ext list --installed`. Nejprve aktualizujte základní CLI pomocí `azd update` nebo jeho instalačního programu, potom aktualizujte balíček pomocí `azd ext upgrade microsoft.foundry`. Pro lokální chyby zkontrolujte aktuální uv, Python 3.13+ pro základní příklad, `PYTHONNOUSERSITE: "1"` v nastavení služby a Azure pověření používaná `DefaultAzureCredential`. Nechte `azd ai agent run` běžet současně při vyvolání `--local` z druhého terminálu ve složce projektu.
 
-Pokud starší příkaz evaluace tutoriálu tiskne pouze pokyny k migraci, nainstalujte `azure.ai.evaluations` (`1.0.0-beta.2` vyžaduje `azd >= 1.33.0`) a použijte `azd ai eval init`, `generate` a `run start`. Optimalizace `--config` již nepřijímá starší evaluační soubory. Viz [migraci evaluace](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) a [migraci optimalizace](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Úspěšné provisionování nedokazuje, že má vývojář přístup k datové rovině. Prohlédněte si upozornění RBAC a [matici oprávnění hostovaných agentů](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Vypršení časového limitu neznamená selhání nasazení: před opakováním si zkontrolujte pokus o verzi a protokoly. Starší agenti beta.23 tato upozornění a výstup A2A zlepšili; tyto historické opravy jsou popsány v [poznámkách k verzi](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), není nutné instalovat tuto betu.
+
+Pokud `azd ai eval` není k dispozici, nainstalujte `azure.ai.evaluations` samostatně; GA balíček jej neobsahuje. Pokud příkaz agent-evaluation staršího tutoriálu pouze vypisuje informace o migraci, použijte samostatný workflow `azd ai eval`. Optimalizace `--config` již nepřijímá staré evaluační soubory. Viz [migrace evaluace](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) a [migrace optimalizace](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Ladění aplikace
 
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Zdravotní kontrolní koncové body:**
+2. **Endpointy kontroly zdravotního stavu:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -855,39 +860,39 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Běžné chybové kódy a řešení
+## Běžné kódy chyb a řešení
 
-| Chybový kód | Popis | Řešení |
+| Kód chyby | Popis | Řešení |
 |------------|-------------|----------|
-| 401 | Neautorizováno | Zkontrolujte API klíče a konfiguraci spravované identity |
-| 403 | Zakázáno | Ověřte přiřazení rolí v RBAC |
-| 429 | Omezená rychlost | Implementujte logiku opakování s exponenciálním zpomalením |
+| 401 | Nepovolený přístup | Zkontrolujte API klíče a konfiguraci spravované identity |
+| 403 | Zakázáno | Ověřte přidělení rolí RBAC |
+| 429 | Překročení limitu požadavků | Implementujte logiku opakování s exponenciálním zpětným odkladem |
 | 500 | Interní chyba serveru | Zkontrolujte stav nasazení modelu a logy |
 | 503 | Služba nedostupná | Ověřte zdraví služby a dostupnost regionu |
 
 ## Další kroky
 
-1. **Prohlédněte si [Průvodce nasazením AI modelu](../chapter-02-ai-development/ai-model-deployment.md)** pro osvědčené postupy nasazení
-2. **Dokončete [Produkční AI postupy](../chapter-08-production/production-ai-practices.md)** pro řešení připravená na podnikové nasazení
-3. **Přidejte se k [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** pro komunitní podporu
-4. **Podávejte problémy** do [repozitáře AZD na GitHubu](https://github.com/Azure/azure-dev) pro problémy specifické pro AZD
+1. **Projděte si [Průvodce nasazením modelů AI](../chapter-02-ai-development/ai-model-deployment.md)** pro nejlepší postupy nasazení
+2. **Dokončete [Produkční postupy AI](../chapter-08-production/production-ai-practices.md)** pro řešení připravená pro podniky
+3. **Připojte se k [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** pro komunitní podporu
+4. **Nahlaste problémy** do [repozitáře AZD na GitHubu](https://github.com/Azure/azure-dev) pro specifické problémy AZD
 
 ## Zdroje
 
 - [Řešení problémů s kvótami a omezováním Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [Řešení problémů s Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Řešení problémů s Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Dovednost agenta Azure Diagnostiky**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Nainstalujte si dovednosti pro řešení problémů Azure ve vašem editoru: `npx skills add microsoft/github-copilot-for-azure`
+- [Řešení problémů Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Řešení problémů Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Dovednost agenta Azure Diagnostics**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Instalace dovedností pro řešení problémů v editoru: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Navigace kapitolami:**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📚 Domů ke kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
-- **⬅️ Předchozí**: [Průvodce laděním](debugging.md)
+- **⬅️ Předchozí**: [Průvodce laděním chyb](debugging.md)
 - **➡️ Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)
-- **🤖 Související**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Reference**: [Řešení problémů Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **🤖 Související**: [Kapitola 2: Vývoj s AI na prvním místě](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Reference**: [Řešení problémů s Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

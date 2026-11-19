@@ -31,6 +31,10 @@ Before we tear down the project, take a few minutes to do some open-ended explor
 
 ## Deprovision Infra
 
+!!! warning "If you also completed the GA hosted-agent exercise"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
 1. Tearing down infrastructure is as easy as:
       
       ```bash title="" linenums="0"

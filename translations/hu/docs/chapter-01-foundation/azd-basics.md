@@ -1,120 +1,122 @@
-# AZD Alapok - Az Azure Developer CLI megértése
-
-# AZD Alapok - Alapfogalmak és alapelvek
+# AZD Alapok - Alapvető Fogalmak és Alapismeretek
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam főoldal**: [AZD Kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 1. fejezet - Alapok és gyorsindítás
-- **⬅️ Előző**: [Tanfolyam áttekintése](../../README.md#-chapter-1-foundation--quick-start)
+- **📚 Tanfolyam főoldal**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok és Gyors Kezdés
+- **⬅️ Előző**: [Tanfolyam áttekintés](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Következő**: [Telepítés és beállítás](installation.md)
 - **🚀 Következő fejezet**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Bevezetés
 
-Ez a lecke bemutatja az Azure Developer CLI-t (azd), egy hatékony parancssori eszközt, amely felgyorsítja az utadat a helyi fejlesztéstől az Azure telepítésig. Megtudhatod az alapvető fogalmakat, a főbb funkciókat, és megértheted, hogyan egyszerűsíti az azd a felhőnatív alkalmazások telepítését.
+> Átvizsgálva `azd 1.37.2` (2026. november). A Bash parancsok idézett helyőrzőket használnak, amelyeket ki kell cserélned. A sablon workflow-k `.` használatával inicializálják az aktuális könyvtárat; könyvtár argumentum hiányában a sablon inicializálása alkönyvtárat hoz létre, és nem változtatja meg a shell munkakönyvtárát. A haladó snippetek illusztratívak, nem teljes projektek.
+
+Ez a lecke bemutatja az Azure Developer CLI-t (azd), egy erőteljes parancssori eszközt, amely felgyorsítja a helyi fejlesztéstől az Azure telepítéséig tartó utadat. Megtanulod az alapfogalmakat, az alapvető funkciókat, és megérted, hogyan egyszerűsíti az azd a felhőalapú alkalmazások telepítését.
 
 ## Tanulási célok
 
 A lecke végére képes leszel:
 - Megérteni, mi az Azure Developer CLI és mi a fő célja
 - Megismerni a sablonok, környezetek és szolgáltatások alapfogalmait
-- Felfedezni a kulcsfontosságú funkciókat, beleértve a sablonvezérelt fejlesztést és az infrastruktúrát kód formájában
-- Megérteni az azd projektstruktúrát és munkafolyamatot
+- Felfedezni a kulcsfontosságú funkciókat, beleértve a sablon-alapú fejlesztést és az Infrastructure as Code-ot
+- Megérteni az azd projektstruktúrát és a workflow-t
 - Felkészülni az azd telepítésére és konfigurálására a fejlesztői környezetedben
 
 ## Tanulási eredmények
 
 A lecke elvégzése után képes leszel:
 - Elmagyarázni az azd szerepét a modern felhőfejlesztési munkafolyamatokban
-- Azonosítani az azd projekt struktúrájának összetevőit
+- Azonosítani az azd projektstruktúra összetevőit
 - Leírni, hogyan működnek együtt a sablonok, környezetek és szolgáltatások
-- Megérteni az Infrastructure as Code előnyeit az azddal
-- Felismerni az azd különböző parancsait és azok célját
+- Megérteni az Infrastructure as Code előnyeit az azd-vel
+- Felismerni az eltérő azd parancsokat és azok céljait
 
 ## Mi az Azure Developer CLI (azd)?
 
-Az Azure Developer CLI (azd) egy parancssori eszköz, amely felgyorsítja az utadat a helyi fejlesztéstől az Azure telepítésig. Egyszerűsíti a felhőnatív alkalmazások építését, telepítését és kezelését az Azure-on.
+Az Azure Developer CLI (azd) egy parancssori eszköz, amely a helyi fejlesztéstől az Azure telepítésig tartó utadat gyorsítja. Megkönnyíti a felhőalapú natív alkalmazások építését, telepítését és kezelését az Azure-on.
 
-### Mit telepíthetsz az azddal?
+### Mit telepíthetsz az azd-vel?
 
-Az azd sokféle munkaterhelést támogat – és a lista folyamatosan bővül. Ma az azd használható például:
+Az azd számos munkaterhelést támogat – és a lista folyamatosan bővül. Ma az azd-vel telepíthetsz:
 
-| Munkaterhelés típusa | Példák | Ugyanaz a munkafolyamat? |
-|----------------------|--------|--------------------------|
+| Munkaterhelés típusa | Példák | Ugyanaz a workflow? |
+|---------------|----------|----------------|
 | **Hagyományos alkalmazások** | Webalkalmazások, REST API-k, statikus oldalak | ✅ `azd up` |
-| **Szolgáltatások és mikroszolgáltatások** | Konténeralkalmazások, Function Apps, több szolgáltatásos backendek | ✅ `azd up` |
-| **AI-alapú alkalmazások** | Chat alkalmazások Microsoft Foundry modellekkel, RAG megoldások AI kereséssel | ✅ `azd up` |
-| **Intelligens ügynökök** | Foundry hosztolt ügynökök, több ügynökös koordinációk | ✅ `azd up` |
+| **Szolgáltatások és mikroszolgáltatások** | Container Apps, Function Apps, többszolgáltatásos backendek | ✅ `azd up` |
+| **AI-által támogatott alkalmazások** | Csevegőalkalmazások Microsoft Foundry modellekkel, RAG megoldások AI Search-sel | ✅ `azd up` |
+| **Intelligens ügynökök** | Foundry által hosztolt ügynökök, többügynökös összehangolás | ✅ `azd up` |
 
-A legfontosabb felismerés, hogy **az azd életciklusa ugyanaz marad, függetlenül attól, hogy mit telepítesz**. Elindítod a projektet, előkészíted az infrastruktúrát, telepíted a kódod, figyelemmel kíséred az alkalmazást, és takarítasz – akár egyszerű weboldal, akár fejlett AI ügynök.
+A kulcsfontosságú felismerés, hogy **az azd életciklusa ugyanaz marad, bármilyen típusú telepítést végzel**. Inicializálsz egy projektet, előállítod az infrastruktúrát, telepíted a kódot, figyeled az alkalmazást, és törlöd a környezetet – legyen az egyszerű weboldal vagy fejlett AI ügynök.
 
-Ez a folytonosság szándékos. Az azd az AI képességeket egy másik szolgáltatásként kezeli, amit az alkalmazásod használhat, nem pedig alapvetően különbözőként. Egy Microsoft Foundry modellekkel támogatott chat végpont az azd szemszögéből egy egyszerűen konfigurálandó és telepítendő szolgáltatás.
+Ez a folytonosság a tervezés része. azd az AI képességeket egy másik szolgáltatásnak tekinti, amelyet az alkalmazás használhat, nem pedig valami alapvetően különbözőnek. Egy csevegési végpont Microsoft Foundry modellekkel az azd szemszögéből csak egy másik konfigurálandó és telepítendő szolgáltatás.
 
-### 🎯 Miért használd az AZD-t? Egy valós összehasonlítás
+### 🎯 Miért használjuk az AZD-t? Egy valós összehasonlítás
 
-Nézzük meg egy egyszerű webalkalmazás adatbázissal történő telepítését:
+Hasonlítsuk össze egy egyszerű webalkalmazás adatbázissal való telepítését:
 
-#### ❌ AZD NÉLKÜL: Manuális Azure telepítés (30+ perc)
+#### ❌ AZD NÉLKÜL: Kézi Azure telepítés (30+ perc)
+
+**Illusztratív Bash összehasonlítás, nem futtatható alkalmazásindító.** Feltételezi a meglévő alkalmazáskódot, egyedi erőforrásneveket, Azure CLI hitelesítést, és szükséges CLI kiterjesztéseket. Használd az alábbi sablon gyakorlatot a támogatott végpont-igút követve.
 
 ```bash
-# 1. lépés: Hozzon létre erőforráscsoportot
+# Step 1: Create resource group
 az group create --name myapp-rg --location eastus
 
-# 2. lépés: Hozzon létre App Service tervet
+# Step 2: Create App Service Plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# 3. lépés: Hozzon létre Webalkalmazást
+# Step 3: Create Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
-  --runtime "NODE:18-lts"
+  --runtime "NODE:22-lts"
 
-# 4. lépés: Hozzon létre Cosmos DB fiókot (10-15 perc)
+# Step 4: Create Cosmos DB account (10-15 minutes)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# 5. lépés: Hozzon létre adatbázist
+# Step 5: Create database
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# 6. lépés: Hozzon létre gyűjteményt
+# Step 6: Create collection
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --database-name tododb \
   --name todos
 
-# 7. lépés: Szerezze be a kapcsolati karakterláncot
+# Step 7: Get connection string
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# 8. lépés: Állítsa be az alkalmazás beállításait
+# Step 8: Configure app settings
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# 9. lépés: Engedélyezze a naplózást
+# Step 9: Enable logging
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# 10. lépés: Állítsa be az Application Insights szolgáltatást
+# Step 10: Set up Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# 11. lépés: Kapcsolja össze az App Insights-ot a Webalkalmazással
+# Step 11: Link App Insights to Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -125,230 +127,240 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# 12. lépés: Építse meg az alkalmazást helyileg
+# Step 12: Build application locally
 npm install
 npm run build
 
-# 13. lépés: Hozzon létre telepítési csomagot
+# Step 13: Create deployment package
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# 14. lépés: Telepítse az alkalmazást
+# Step 14: Deploy application
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# 15. lépés: Várjon és imádkozzon, hogy működik 🙏
-# (Nincs automatikus ellenőrzés, kézi tesztelés szükséges)
+# Step 15: Wait and pray it works 🙏
+# (No automated validation, manual testing required)
 ```
 
 **Problémák:**
-- ❌ 15+ parancs megjegyzése és sorrendben végrehajtása
-- ❌ 30-45 perc manuális munka
-- ❌ Hibázás könnyen előfordul (elírások, rossz paraméterek)
-- ❌ Kapcsolati adatok a terminál előzményeiben láthatóak
-- ❌ Nincs automatikus visszagörgetés hiba esetén
-- ❌ Nehéz lemásolni más csapattagoknak
+- ❌ Több mint 15 parancs megjegyzése és sorrendben végrehajtása
+- ❌ 30-45 perc kézi munka
+- ❌ Könnyen hibázhatsz (gépelési hibák, helytelen paraméterek)
+- ❌ A hitelesítő adatok explicit kezelést igényelnek; a hibakeresési naplók és a shell követése feltárhatja azokat
+- ❌ Nincs automatikus visszagörgetés hibák esetén
+- ❌ Nehéz reprodukálni a csapat többi tagja számára
 - ❌ Minden alkalommal más (nem reprodukálható)
 
-#### ✅ AZD-vel: Automatizált telepítés (5 parancs, 10-15 perc)
+#### ✅ AZD-VEL: Automatikus telepítés (5 parancs, 10-15 perc)
 
 ```bash
-# 1. lépés: Inicializálás sablonból
-azd init --template todo-nodejs-mongo
+# Step 1: Initialize from template
+azd init --template todo-nodejs-mongo .
 
-# 2. lépés: Hitelesítés
+# Step 2: Authenticate
 azd auth login
 
-# 3. lépés: Környezet létrehozása
-azd env new dev
+# Step 3: Select the environment created during init
+azd env select dev
 
-# 4. lépés: Változtatások előnézete (opcionális, de ajánlott)
+# Step 4: Preview changes (optional but recommended)
 azd provision --preview
 
-# 5. lépés: Minden telepítése
+# Step 5: Deploy everything
 azd up
 
-# ✨ Kész! Minden telepítve, konfigurálva és figyelve van
+# ✨ Done! Everything is deployed, configured, and monitored
 ```
 
 **Előnyök:**
-- ✅ **5 parancs** vs. 15+ manuális lépés
-- ✅ **10-15 perc** összesen (főként Azure várakozás)
-- ✅ **Kevesebb manuális hiba** - következetes, sablonvezérelt munkafolyamat
-- ✅ **Biztonságos titkok kezelése** - sok sablon használ Azure által kezelt titoktárolót
-- ✅ **Ismételhető telepítések** - minden alkalommal ugyanaz a munkafolyamat
-- ✅ **Teljesen reprodukálható** - minden alkalommal ugyanaz az eredmény
-- ✅ **Csapatbarát** - bárki telepíthet ugyanazokkal a parancsokkal
+- ✅ **5 parancs** vs. több mint 15 kézi lépés
+- ✅ **10-15 perc** összesen (főleg az Azure várása)
+- ✅ **Kevesebb kézi hiba** - következetes, sablon-alapú folyamat
+- ✅ **Biztonságos titkos kezelés** - sok sablon Azure által kezelt titkos tárolót használ
+- ✅ **Ismételhető telepítések** - minden alkalommal ugyanaz a folyamat
+- ✅ **Ismételhető infrastruktúra definíciók** - kvótákhoz, régió elérhetőséghez és sablon verziókhoz kötött
+- ✅ **Csapatra kész** - bárki telepíthet ugyanazzal a parancssal
 - ✅ **Infrastructure as Code** - verziókövetett Bicep sablonok
-- ✅ **Beépített monitoring** - Application Insights automatikusan konfigurálva
+- ✅ **Sablon által definiált monitoring** - Application Insights, ha benne van a sablonban
 
-### 📊 Idő- és hibacsökkentés
+### Idő és megbízhatóság
 
-| Mutató | Manuális telepítés | AZD telepítés | Fejlesztés |
-|:--------|:------------------|:--------------|:-----------|
-| **Parancsok száma** | 15+ | 5 | 67%-kal kevesebb |
-| **Idő** | 30-45 perc | 10-15 perc | 60%-kal gyorsabb |
-| **Hibaarány** | ~40% | <5% | 88%-kal kevesebb |
-| **Következetesség** | Alacsony (manuális) | 100% (automatizált) | Tökéletes |
-| **Csapat bevonás** | 2-4 óra | 30 perc | 75%-kal gyorsabb |
-| **Visszagörgetési idő** | 30+ perc (manuális) | 2 perc (automatizált) | 93%-kal gyorsabb |
+A fentiek becsült idők, nem benchmarkok. azd csökkenti a koordinálandó parancsokat, de nem garantálja a telepítés időtartamát, nem szünteti meg a hibákat, és nem biztosít automatikus alkalmazás/adata bázis visszagörgetést. Tartsd a működő verziókat verziókezelésben és teszteld a helyreállítási eljárásokat.
 
 ## Alapfogalmak
 
 ### Sablonok
 A sablonok az azd alapjai. Tartalmazzák:
-- **Alkalmazáskód** - Forráskódod és függőségek
-- **Infrastruktúra definíciók** - Azure erőforrások Bicep vagy Terraform formában
+- **Alkalmazáskód** - A forráskódod és a függőségek
+- **Infrastruktúra definíciók** - Azure erőforrások Bicep vagy Terraform formátumban
 - **Konfigurációs fájlok** - Beállítások és környezeti változók
 - **Telepítési szkriptek** - Automatizált telepítési munkafolyamatok
 
 ### Környezetek
-A környezetek különböző célra történő telepítési célpontokat jelentenek:
+A környezetek eltérő telepítési célokat jelentenek:
 - **Fejlesztés** - Teszteléshez és fejlesztéshez
-- **Teszt (Staging)** - Előéles környezet
-- **Éles (Production)** - Élő éles környezet
+- **Előkészítés** - Éles előtti környezet
+- **Éles** - Élő, éles környezet
 
-Minden környezet saját:
-- Azure erőforráscsoportot tart fenn
+Minden környezet megőrzi:
+- A környezet nevét és értékeit; az erőforrás-elhatárolás az infrastruktúra sablontól függ
 - Konfigurációs beállításokat
 - Telepítési állapotot
 
 ### Szolgáltatások
-A szolgáltatások az alkalmazásod építőelemei:
+A szolgáltatások az `azure.yaml` deployolható alkalmazás összetevőit írják le:
 - **Frontend** - Webalkalmazások, SPA-k
 - **Backend** - API-k, mikroszolgáltatások
-- **Adatbázis** - Adattároló megoldások
-- **Tárhely** - Fájl- és blobtárolás
 
-## Főbb funkciók
+Az adatbázisok és tárolók jellemzően infrastruktúra erőforrásokként kerülnek előállításra, nem pedig kitalált szolgáltatásszolgáltatóként, mint például az `host: postgres`.
 
-### 1. Sablonvezérelt fejlesztés
+## Kulcsfontosságú funkciók
+
+### 1. Sablon-alapú fejlesztés
 ```bash
-# Elérhető sablonok böngészése
+# Browse available templates
 azd template list
 
-# Inicializálás sablon alapján
-azd init --template <template-name>
+# Initialize from a template
+azd init --template "<template-name>" .
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Azure domain-specifikus nyelv
-- **Terraform** - Többfelhős infrastruktúra eszköz
-- **ARM sablonok** - Azure Resource Manager sablonok
+- **Bicep** - Az Azure domain-specifikus nyelve
+- **Terraform** - Multi-cloud infrastruktúra eszköz
+- A Bicep ARM sablonokra fordít; a natív ARM JSON nem külön beépített `infra.provider`.
 
 ### 3. Integrált munkafolyamatok
 ```bash
-# Teljes telepítési munkafolyamat
-azd up            # Előkészítés + Telepítés, ez automatikus az első beállításkor
+# Complete deployment workflow
+azd up            # Provision + Deploy this is hands off for first time setup
 
-# 🧪 ÚJ: Tekintse meg az infrastruktúra változásait telepítés előtt (BIZTONSÁGOS)
-azd provision --preview    # Infrastruktúra telepítésének szimulálása változtatások nélkül
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
 
-azd provision     # Azure erőforrások létrehozása, ha frissíti az infrastruktúrát, ezt használja
-azd deploy        # Alkalmazáskód telepítése vagy újbóli telepítése frissítés után
-azd down          # Erőforrások tisztítása
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
+azd down          # Clean up resources
 ```
 
-#### 🛡️ Biztonságos infrastruktúra-tervezés előnézettel
-Az `azd provision --preview` parancs nagy előrelépés a biztonságos telepítésekhez:
-- **Száraz futtatás elemzés** - Megmutatja, mi lesz létrehozva, módosítva vagy törölve
-- **Zéró kockázat** - Nincs tényleges változtatás az Azure környezetben
-- **Csapatmunka** - Az előnézeti eredmények megoszthatók telepítés előtt
-- **Költségbecslés** - Megérted az erőforrás költségeket előzetesen
+#### 🛡️ Biztonságos infrastruktúra tervezés előnézettel
+Az `azd provision --preview` parancs áttörést jelent a biztonságos telepítéshez:
+- **Próbaelemzés** - Megmutatja, mit fognak létrehozni, módosítani vagy törölni
+- **Nincs infrastruktúra alkalmazás** - Áttekinti a szolgáltató változásokat; először nézd meg a projekt hook-ok parancsait, mert azok mellékhatásokat okozhatnak
+- **Csapat együttműködés** - Oszd meg az előnézet eredményeket telepítés előtt
+- **Költségtervezési input** - Vizsgáld meg a javasolt SKU-kat, majd árazzad őket az Azure Árkalkulátorral; az előnézet nem számolja a költségeket
 
 ```bash
-# Példa előnézeti munkafolyamat
-azd provision --preview           # Lásd, mi fog változni
-# Tekintsd át az eredményt, beszéljétek meg a csapattal
-azd provision                     # Alkalmazd a változtatásokat magabiztosan
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
-### 📊 Ábra: AZD fejlesztési munkafolyamat
+### 📊 Vizualizáció: AZD fejlesztési munkafolyamat
 
 ```mermaid
 graph LR
-    A[azd init] -->|Projekt inicializálása| B[azd auth login]
-    B -->|Hitelesítés| C[azd env new]
-    C -->|Környezet létrehozása| D{Első telepítés?}
-    D -->|Igen| E[azd up]
-    D -->|Nem| F[azd provision --preview]
-    F -->|Változások áttekintése| G[azd provision]
-    E -->|Felszerel és telepít| H[Erőforrások futnak]
-    G -->|Infrastruktúra frissítése| H
-    H -->|Monitorozás| I[azd monitor]
-    I -->|Kód módosítások| J[azd deploy]
-    J -->|Csak a kód újratelepítése| H
-    H -->|Takarítás| K[azd down]
+    %% Initialization Phase
+    subgraph Setup & Init
+        A[azd init] -->|Initialize project| B[azd auth login]
+        B -->|Authenticate| C[azd env new]
+        C -->|Create environment| D{First deployment?}
+    end
+
+    %% Deployment Phase
+    D -->|Yes| E[azd up]
+    D -->|No| F[azd provision --preview]
     
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
-    style F fill:#fff9c4
-    style H fill:#c5e1a5
-    style K fill:#ffcdd2
+    F -->|Review changes| G[azd provision]
+    
+    %% Operational Phase
+    E -->|Provisions & deploys| H((Resources running))
+    G -->|Updates infrastructure| H
+    
+    H -->|Monitor logs/metrics| I[azd monitor]
+    
+    %% Daily Dev Loop
+    J[azd deploy] -->|Redeploy code only| H
+    H -->|Make code changes| J
+    
+    %% Cleanup
+    H -->|Teardown resources| K[azd down]
+
+    %% Styling
+    style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style E fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style H fill:#d1c4e9,stroke:#512da8,stroke-width:2px
+    style J fill:#e1f5fe,stroke:#01579b,stroke-width:1px
+    style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
 **Munkafolyamat magyarázat:**
-1. **Init** - Kezdd sablonnal vagy új projekttel
-2. **Auth** - Hitelesítés az Azure-hoz
-3. **Environment** - Izolált telepítési környezet létrehozása
-4. **Preview** - 🆕 Mindig előnézet az infrastruktúra változásokra (biztonságos gyakorlat)
+1. **Init** - Sablonnal vagy új projekttel indít
+2. **Auth** - Azure autentikáció
+3. **Környezet** - Izolált telepítési környezet létrehozása
+4. **Preview** - 🆕 Mindig előnézet az infrastruktúra változásokról (biztonságos gyakorlat)
 5. **Provision** - Azure erőforrások létrehozása/frissítése
 6. **Deploy** - Alkalmazáskód feltöltése
-7. **Monitor** - Alkalmazás teljesítményének figyelése
-8. **Iterate** - Változtatások végrehajtása és újratelepítés
-9. **Cleanup** - Erőforrások eltávolítása befejezéskor
+7. **Monitor** - Az alkalmazás teljesítményének megfigyelése
+8. **Iterate** - Változtatások végrehajtása és kód újratelepítése
+9. **Cleanup** - Erőforrások eltávolítása, ha kész vagy
 
-### 4. Környezetkezelés
+### 4. Környezet kezelés
 ```bash
-# Környezetek létrehozása és kezelése
-azd env new <environment-name>
-azd env select <environment-name>
+# Create and manage environments
+azd env new "<environment-name>"
+azd env select "<environment-name>"
 azd env list
 ```
 
-### 5. Bővítmények és AI parancsok
+### 5. Kiterjesztések és AI parancsok
 
-Az azd bővítményrendszeren keresztül tud további képességeket hozzáadni a CLI-hez. Ez különösen hasznos AI munkaterhelésekhez:
+Az azd kiterjesztési rendszert használ, hogy magán túlmenő képességeket adjon hozzá. Ez különösen hasznos az AI munkaterhelésekhez:
 
 ```bash
-# Elérhető kiterjesztések listázása
+# List available extensions
 azd extension list
 
-# Telepítse a Foundry agents kiterjesztést
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
-# AI ügynök projekt inicializálása egy manifestből
-azd ai agent init -m agent-manifest.yaml
+# Initialize an AI agent project interactively
+azd ai agent init
 
-# Telepített ügynök tesztelése (késleltetés és első bájt idejének megjelenítése)
+# Test a deployed agent (shows latency and time-to-first-byte)
 azd ai agent invoke
 
-# MCP szerver indítása AI-támogatott fejlesztéshez (Alpha)
+# Start the MCP server for AI-assisted development (Alpha)
 azd mcp start
 ```
 
-**Az ügynök életciklusa, lépésről lépésre.** Miután telepítetted az `azure.ai.agents`-t, egyetlen munkafolyamat vitt el az ötlettől egy futó, figyelt ügynökig. Nem kell az összeset az első napon használni – csak tudd, hogy léteznek:
+**Az ügynök életciklusa, elejétől végéig.** A GA `microsoft.foundry` csomag tartalmazza az `azure.ai.agents` és további hat core kiterjesztést. Az `azure.ai.evaluations` külön telepítendő értékeléshez. Használd az `azd >= 1.37.0` a workflow-hoz. Nem kell mindez az első napon:
 
-| Fázis | Parancs | Funkció |
-|-------|---------|---------|
-| **Sablon generálása** | `azd ai agent init -m <manifest>` | Ügynök projekt generálása manifestből |
+| Fázis | Parancs | Mit csinál? |
+|-------|---------|--------------|
+| **Sablon létrehozás** | `azd ai agent init --template <path-to-azure.yaml>` | Egy aktuális ügynök projekt sablon átvétele |
+| **Helyi futtatás** | `azd ai agent run`, majd `azd ai agent invoke --local "Test prompt"` egy másik terminálban | Helyi aktivitás ellenőrzése Agent Inspector-ban; modell hívások továbbra is Azure-t használnak |
+| **Telepítés** | `azd deploy` | Kód-mód hosztolt ügynököknek, forrás feltöltése távoli Foundry buildhez |
 | **Tesztelés** | `azd ai agent invoke` | Ügynök meghívása és válaszidő megtekintése |
-| **Mérés** | `azd ai agent eval generate` | Értékelési adatállomány létrehozása |
-| **Javítás** | `azd ai agent optimize` | Az ügynök utasításainak optimalizálása az adatok alapján |
+| **Mérés** | `azd ai eval init`, `generate`, `run start` | Konfigurálás, telepítés, értékelések futtatása külön kiterjesztéssel |
+| **Fejlesztés** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Kompatibilis értékelés újrafelhasználása az optimalizáláshoz |
 | **Ellenőrzés** | `azd ai agent endpoint show` | Élő végpont konfiguráció megtekintése |
-| **Takarítás** | `azd ai agent delete` | Hosztolt ügynök és minden verzió törlése |
+| **Takarítás** | `azd ai agent delete` | Egy hosztolt ügynök és minden verziójának törlése |
 
-> A bővítmények részletesen tárgyalva vannak a [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/agents.md) és az [AZD AI CLI parancsok](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) referencia fejezetekben.
+> Kezdd a [GA hosztolt ügynök útmutatójával](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga), amely lefedi az előfeltételeket, előállítást, és biztonságos takarítást. A kiterjesztések részletesebben a [AZD AI CLI Parancsok](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) referencia fejezetben vannak.
 
-## 📁 Projektstruktúra
+## 📁 Projekt struktúra
 
 Egy tipikus azd projektstruktúra:
 ```
 my-app/
-├── .azd/                    # azd configuration
-│   └── config.json
-├── .azure/                  # Azure deployment artifacts
+├── .azure/                  # Local environments and selected-environment config
+│   ├── config.json
+│   └── dev/.env
 ├── .devcontainer/          # Development container config
 ├── .github/workflows/      # GitHub Actions
 ├── .vscode/               # VS Code settings
@@ -389,305 +401,298 @@ hooks:
 ```
 
 ### .azure/config.json
-Környezetspecifikus konfiguráció:
+Projekt-lokális alapértelmezett környezet választás (illusztratív; az azd kezeli):
 ```json
 {
-  "version": 1,
-  "defaultEnvironment": "dev",
-  "environments": {
-    "dev": {
-      "subscriptionId": "your-subscription-id",
-      "location": "eastus"
-    }
-  }
+  "defaultEnvironment": "dev"
 }
 ```
 
-## 🎪 Gyakori munkafolyamatok gyakorlattal
+## 🎪 Gyakori workflow-k kézzel fogható gyakorlatokkal
 
-> **💡 Tanulási tipp:** Végezze el ezeket a gyakorlatokat sorrendben, hogy fokozatosan fejlessze AZD képességeit.
+> **💡 Tanulási tipp:** Kövesd ezeket a gyakorlatokat sorrendben, hogy fokozatosan fejleszd AZD képességeidet.
 
-### 🎯 Gyakorlat 1: Az első projekt inicializálása
+### 🎯 Gyakorlat 1: Első projekted inicializálása
 
-**Cél:** Hozz létre egy AZD projektet és fedezd fel a szerkezetét
+**Cél:** Hozz létre egy AZD projektet és fedezd fel a struktúráját
 
 **Lépések:**
 ```bash
-# Használjon bevált sablont
-azd init --template todo-nodejs-mongo
+# Use a proven template
+mkdir azd-basics-practice
+cd azd-basics-practice
+# Choose "dev" for the environment name when prompted
+azd init --template todo-nodejs-mongo .
 
-# Vizsgálja meg a generált fájlokat
-ls -la  # Tekintse meg az összes fájlt, beleértve a rejtetteket is
+# Explore the generated files
+ls -la  # View all files including hidden ones
 
-# Létrehozott kulcsfájlok:
-# - azure.yaml (fő konfiguráció)
-# - infra/ (infrastruktúra kód)
-# - src/ (alkalmazáskód)
+# Key files created:
+# - azure.yaml (main config)
+# - infra/ (infrastructure code)
+# - src/ (application code)
 ```
 
-**✅ Siker:** Megvannak az azure.yaml, infra/ és src/ mappák
+**✅ Siker:** Megvannak az azure.yaml, infra/, és src/ könyvtárak
 
 ---
 
 ### 🎯 Gyakorlat 2: Telepítés Azure-ba
 
-**Cél:** Teljes körű telepítés végrehajtása
+**Cél:** Végezd el a teljes telepítést
 
 **Lépések:**
 ```bash
-# 1. Hitelesítés
-az login && azd auth login
+# 1. Authenticate
+azd auth login
 
-# 2. Környezet létrehozása
-azd env new dev
+# 2. Select the dev environment created in Exercise 1
+azd env select dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Változások előnézete (AJÁNLOTT)
+# 3. Preview changes (RECOMMENDED)
 azd provision --preview
 
-# 4. Minden telepítése
+# 4. Deploy everything
 azd up
 
-# 5. A telepítés ellenőrzése
-azd show    # Az alkalmazásod URL-címének megtekintése
+# 5. Verify deployment
+azd show    # View your app URL
 ```
 
 **Várt idő:** 10-15 perc  
-**✅ Siker:** Az alkalmazás URL megnyílik a böngészőben
+**✅ Siker:** Az alkalmazás URL-je megnyílik a böngészőben
 
 ---
 
 ### 🎯 Gyakorlat 3: Több környezet
 
-**Cél:** Telepíts dev és staging környezetekbe
+**Cél:** Telepítés dev és staging környezetbe
 
 **Lépések:**
 ```bash
-# Már létezik fejlesztés, létrehozás előkészítés
+# Already have dev, create staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Váltás közöttük
+# Switch between them
 azd env list
 azd env select dev
 ```
 
-**✅ Siker:** Két különálló erőforráscsoport az Azure portálban
+**✅ Siker:** Két külön erőforrás csoport az Azure Portalban
+
+**Takarítás:** A 3. gyakorlat második számlázható telepítést hoz létre. Mindkettőt töröld, ha végeztél:
+
+```bash
+azd down --environment dev
+azd down --environment staging
+```
 
 ---
 
-### 🛡️ Tiszta lap: `azd down --force --purge`
+### 🛡️ Destruktív takarítás: `azd down --force --purge`
 
-Ha teljes resetre van szükség:
+Amikor szándékosan törölni akarod a kiválasztott környezet Azure erőforrásait:
 
 ```bash
 azd down --force --purge
 ```
 
-**Funkciói:**
-- `--force`: Nincs megerősítő kérdés
-- `--purge`: Törli az összes helyi állapotot és Azure erőforrást
+**Mit csinál:**
+- `--force`: Nincsenek megerősítő felugró ablakok
+- `--purge`: Továbbá végleg törli a támogatott, lágy törölt erőforrásokat (például Key Vaultokat), ahol a purge védelem megengedi. Nem törli a helyi `.azure/` könyvtárat.
 
-**Használat esetén:**
-- Sikertelen telepítés félúton
-- Projektváltáskor
-- Friss kezdéshez
+**Használd, ha:** kész vagy egy eldobható környezettel. Ne tekints destruktív takarításra első válaszként hitelesítési, kvóta vagy konfigurációs hiba esetén.
 
 ---
 
-## 🎪 Eredeti munkafolyamat hivatkozás
+## 🎪 Eredeti munkafolyamat referencia
 
 ### Új projekt indítása
 ```bash
-# Módszer 1: Használjon meglévő sablont
-azd init --template todo-nodejs-mongo
+# Method 1: Use existing template
+azd init --template todo-nodejs-mongo .
 
-# Módszer 2: Kezdje nulláról
+# Method 2: Start from scratch
 azd init
 
-# Módszer 3: Használja a jelenlegi könyvtárat
+# Method 3: Use current directory
 azd init .
 ```
 
 ### Fejlesztési ciklus
 ```bash
-# Fejlesztői környezet beállítása
+# Set up development environment
 azd auth login
 azd env new dev
 azd env select dev
 
-# Minden telepítése
+# Deploy everything
 azd up
 
-# Változtatások végrehajtása és újratelepítés
+# Make changes and redeploy
 azd deploy
 
-# Takarítás befejezéskor
-azd down --force --purge # Az Azure Developer CLI parancsa egy **kemény visszaállítás** a környezeted számára – különösen hasznos, ha hibás telepítéseket hibaelhárítasz, elhagyott erőforrásokat tisztítasz, vagy friss újratelepítésre készülsz.
+# Clean up when done
+azd down --force --purge # Deletes this environment's discovered Azure resources; review before forcing deletion.
 ```
 
-## Az `azd down --force --purge` megértése
-Az `azd down --force --purge` parancs egy erőteljes módja annak, hogy teljesen leszedd az azd környezetedet és minden hozzá kapcsolódó erőforrást. Íme, mit csinál minden kapcsoló:
+## `azd down --force --purge` megértése
+Az `azd down --force --purge` parancs egy erőteljes módja az azd környezeted és minden kapcsolódó erőforrás teljes bontásának. Az egyes kapcsolók jelentése:
 ```
 --force
 ```
-- Megkerüli a megerősítő kérdéseket.
-- Hasznos automatizálás vagy szkriptelés esetén, amikor nem lehetséges a manuális beavatkozás.
-- Biztosítja, hogy a bontás megszakítás nélkül folytatódjon, még ha a CLI inkonzisztenciákat is észlel.
+- Kikerüli a megerősítő felugró ablakokat.
+- Automatikus vagy szkriptelt használatra alkalmas, ahol a kézi bevitel nem lehetséges.
+- Nem lépi át a jogosultságokat, purge védelmet vagy törlési hibákat.
 
 ```
 --purge
 ```
-Törli **összes kapcsolódó metaadatot**, beleértve:
-- Környezeti állapotot
-- Helyi `.azure` mappát
-- Gyorsított telepítési információkat
-Megakadályozza, hogy az azd "emlékezzen" az előző telepítésekre, amelyek problémákat okozhatnak, például eltérő erőforráscsoportokat vagy elavult regisztrációs hivatkozásokat.
+Véglegesen törli a támogatott, lágyan törölt Azure-erőforrásokat további megerősítés nélkül. A szennyezés elleni védelem és az engedélyek továbbra is érvényesek. **Nem** távolítja el a helyi környezeteket vagy az `.azure/` mappát.
+
 
 ### Miért használjuk mindkettőt?
-Ha megakadsz az `azd up`-pal az ott maradt állapot vagy részleges telepítések miatt, ez a kombináció biztosítja a **tiszta lapot**.
+Mindkettőt csak akkor használja, ha a kiválasztott környezet Azure-erőforrásait törölni kívánja, és a helyreállítható erőforrásokat is eltávolítani szeretné. Ez egy destruktív takarítás, nem általános javítás vagy helyi állapot visszaállítás.
 
-Ez különösen hasznos kézi erőforrás-törlések után az Azure portálban vagy sablonok, környezetek, illetve erőforráscsoport elnevezési konvenciók váltásakor.
+Különösen hasznos ez kézi erőforrás-törlések után az Azure portálon, vagy amikor sablonokat, környezeteket vagy erőforráscsoport-azonosító konvenciókat vált.
+
 
 ### Több környezet kezelése
 ```bash
-# Létrehozás előkészítő környezetet
+# Create staging environment
 azd env new staging
 azd env select staging
 azd up
 
-# Visszaváltás fejlesztői környezetre
+# Switch back to dev
 azd env select dev
 
-# Környezetek összehasonlítása
+# Compare environments
 azd env list
 ```
 
 ## 🔐 Hitelesítés és hitelesítő adatok
 
-A hitelesítés megértése létfontosságú a sikeres azd telepítésekhez. Az Azure több hitelesítési módot használ, és az azd ugyanazt a hitelesítő láncot használja, mint más Azure eszközök.
+Különböztesse meg a telepítési hitelesítést (`azd auth login`) az alkalmazás SDK hitelesítésétől (`DefaultAzureCredential`). Ezek különállóak. Az azd alapértelmezés szerint nem használja az Azure CLI hitelesítő adatait.
 
 ### Azure CLI hitelesítés (`az login`)
 
-Az azd használata előtt hitelesítened kell az Azure-ban. A leggyakrabban használt módszer az Azure CLI:
+Futtassa az `azd auth login` az azd számára. Az alábbi Azure CLI parancsok opcionálisak és a `az` parancsokat külön hitelesítik:
 
 ```bash
-# Interaktív bejelentkezés (megnyitja a böngészőt)
+# Interactive login (opens browser)
 az login
 
-# Bejelentkezés egy adott bérlővel
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Bejelentkezés szolgáltatói főfelhasználóval
-az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+# Login with service principal
+az login --service-principal -u "<app-id>" -p "<password>" --tenant "<tenant-id>"
 
-# Aktuális bejelentkezési státusz ellenőrzése
+# Check current login status
 az account show
 
-# Elérhető előfizetések listázása
+# List available subscriptions
 az account list --output table
 
-# Alapértelmezett előfizetés beállítása
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
 ### Hitelesítési folyamat
-1. **Interaktív bejelentkezés**: Megnyitja az alapértelmezett böngészőt hitelesítéshez
-2. **Eszközkódos folyamat**: Böngésző nélküli környezetekhez
-3. **Szolgáltatás főnök (Service Principal)**: Automatizáláshoz és CI/CD esetén
-4. **Kezelt identitás**: Azure-ban hosztolt alkalmazásokhoz
+1. **Interaktív bejelentkezés**: Megnyitja az alapértelmezett böngészőt a hitelesítéshez
+2. **Eszközkód folyamat**: Böngésző nélküli környezetekhez
+3. **Szolgáltatási főfelhasználó**: Automatizálási és CI/CD esetekhez
+4. **Felügyelt azonosító**: Azure-ban futó alkalmazásokhoz
 
 ### DefaultAzureCredential lánc
 
-A `DefaultAzureCredential` egy olyan hitelesítő típus, amely egyszerűsített bejelentkezést biztosít azáltal, hogy automatikusan több hitelesítő forrást próbál meg egy adott sorrendben:
+`DefaultAzureCredential` egy hitelesítési típus, amely egyszerűsített autentikációs élményt nyújt azzal, hogy automatikusan több hitelesítési forrást próbál meg egy adott sorrendben:
 
-#### Hitelesítő lánc sorrend
+#### Alkalmazás SDK hitelesítési lánc
+
+A pontos lánc az Azure Identity SDK nyelvétől, verziójától, telepített bővítményektől és opcióktól függ. Ez az ábra fogalmi jellegű, nem egy fix azd hitelesítési sorrend; az újabb SDK-k az Azure Developer CLI hitelesítéseit is tartalmazhatják.
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[Környezeti változók]
-    B --> C[Munkahelyi azonosító]
-    C --> D[Ke kezelt azonosító]
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[Interaktív böngésző]
+    H --> I[Interactive Browser]
 ```
 
 #### 1. Környezeti változók
 ```bash
-# Környezeti változók beállítása a szolgáltatás fiókhoz
+# Set environment variables for service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
+#### 2. Munkaterhelés azonosító (Kubernetes/GitHub Actions)
 Automatikusan használva:
-- Azure Kubernetes Service (AKS) Workload Identity-vel
+- Azure Kubernetes Service (AKS) munkaterhelés azonosítóval
 - GitHub Actions OIDC szövetséggel
-- Egyéb szövetséges identitás helyzetekben
+- Egyéb szövetséges identitás forgatókönyvek
 
-#### 3. Kezelt identitás
-Azure erőforrásokra, mint pl.:
+#### 3. Felügyelt azonosító
+Azure erőforrásokhoz, mint például:
 - Virtuális gépek
 - App Service
 - Azure Functions
-- Konténer példányok
+- Konténerpéldányok
 
 ```bash
-# Ellenőrizze, hogy Azure erőforráson fut-e kezelt identitással
-az account show --query "user.type" --output tsv
-# Visszatérési érték: "servicePrincipal" ha kezelt identitás van használatban
+# Inspect a deployed Container App's configured identity (requires az login)
+az containerapp show --name "<app-name>" --resource-group "<rg-name>" --query identity
 ```
 
 #### 4. Fejlesztői eszközök integrációja
 - **Visual Studio**: Automatikusan használja a bejelentkezett fiókot
-- **VS Code**: Az Azure Account bővítmény hitelesítő adatait használja
-- **Azure CLI**: Használja az `az login` hitelesítő adatait (leggyakoribb helyi fejlesztéshez)
+- **VS Code**: A támogatás az SDK-tól és annak támogatott közvetítő/bővítmény felállásától függ
+- **Azure CLI**: `az login` hitelesítést használ (helyi fejlesztéshez leggyakoribb)
 
-### AZD hitelesítési beállítás
+### AZD hitelesítés beállítása
 
 ```bash
-# 1. módszer: Azure CLI használata (Fejlesztéshez ajánlott)
-az login
-azd auth login  # Meglévő Azure CLI hitelesítő adatok használata
+# Method 1: Direct azd authentication (recommended)
+azd auth login
 
-# 2. módszer: Közvetlen azd hitelesítés
-azd auth login --use-device-code  # Fej nélküli környezetekhez
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
 
-# 3. módszer: Hitelesítési állapot ellenőrzése
+# Method 3: Check authentication status
 azd auth login --check-status
 
-# 4. módszer: Kijelentkezés és újbóli hitelesítés
+# Method 4: Logout and re-authenticate
 azd auth logout
 azd auth login
 ```
 
-### Hitelesítési bevált gyakorlatok
+### Hitelesítési jó gyakorlatok
 
 #### Helyi fejlesztéshez
 ```bash
-# 1. Bejelentkezés az Azure CLI-vel
-az login
-
-# 2. Az előfizetés helyességének ellenőrzése
-az account show
-az account set --subscription "Your Subscription Name"
-
-# 3. Az azd használata meglévő hitelesítő adatokkal
+# 1. Log in to azd
 azd auth login
+
+# 2. Select the subscription for this initialized environment
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+
+# 3. Check azd sign-in details (read the status message)
+azd auth login --check-status
 ```
 
-#### CI/CD folyamatokhoz
+#### CI/CD pipeline-okhoz
 ```yaml
-# GitHub Actions example
-- name: Azure Login
-  uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+# Partial GitHub Actions steps: assumes checkout, azd installation,
+# required AZURE_* environment values, and pipeline secret configuration.
 - name: Deploy with azd
   run: |
     azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
@@ -696,172 +701,177 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### Éles környezetekhez
-- Használja a **Kezelt Identitást**, amikor Azure erőforrásokon futtatja
-- Automatizálási forgatókönyvekhez használjon **Szolgáltatás-princípiumot**
-- Kerülje a hitelesítő adatok kódba vagy konfigurációs fájlokba való tárolását
-- Használja az érzékeny konfigurációhoz az **Azure Key Vault**-ot
+#### Üzemeltetési környezetekhez
+- Használj **felügyelt azonosítót**, ha Azure erőforrásokon fut
+- Automatizálási esetekhez használj **szolgáltatási főfelhasználót**
+- Kerüld el a hitelesítési adatok kódba vagy konfigurációs fájlba való mentését
+- Használj **Azure Key Vault**-ot érzékeny konfigurációhoz
 
 ### Gyakori hitelesítési problémák és megoldások
 
-#### Probléma: „Nincs előfizetés”
+#### Probléma: "Nem található előfizetés"
 ```bash
-# Megoldás: Állítsa be az alapértelmezett előfizetést
+# Solution: Set default subscription
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Probléma: „Elégtelen jogosultságok”
+#### Probléma: "Elégtelen jogosultságok"
 ```bash
-# Megoldás: Ellenőrizze és rendelje hozzá a szükséges szerepköröket
+# Solution: Check and assign required roles
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Gyakori szükséges szerepkörök:
-# - Közreműködő (erőforrás-kezeléshez)
-# - Felhasználói hozzáférés-kezelo (szerepkör-hozzárendelésekhez)
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
 ```
 
-#### Probléma: „A token lejárt”
+#### Probléma: "Token lejárt"
 ```bash
-# Megoldás: Újra hitelesítés
+# Solution: Re-authenticate
 az logout
 az login
 azd auth logout
 azd auth login
 ```
 
-### Hitelesítés különböző forgatókönyvekben
+### Hitelesítés különféle forgatókönyvekben
 
 #### Helyi fejlesztés
 ```bash
-# Személyes fejlesztési számla
+# Personal development account
 az login
 azd auth login
 ```
 
 #### Csapatfejlesztés
 ```bash
-# Használjon specifikus bérlőt a szervezethez
+# Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
-azd auth login
+azd auth login --tenant-id "<tenant-id>"
 ```
 
 #### Többbérlős forgatókönyvek
 ```bash
-# Váltás bérlők között
+# Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
-# Telepítés az 1-es bérlőhöz
+azd auth login --tenant-id "<tenant-1-id>"
+# Select an environment configured with tenant 1's subscription
+azd env select tenant1-dev
+# Deploy to tenant 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Telepítés a 2-es bérlőhöz
+azd auth login --tenant-id "<tenant-2-id>"
+azd env select tenant2-dev
+# Deploy to tenant 2
 azd up
 ```
 
 ### Biztonsági szempontok
 
-1. **Hitelesítő adatok tárolása**: Soha ne tárolja hitelesítő adatait forráskódban
-2. **Hatókör korlátozása**: A szolgáltatás-princípiumok esetén használja a legkisebb jogosultság elvét
-3. **Token forgatás**: Rendszeresen forgassa a szolgáltatás-princípium titkait
-4. **Ellenőrzési nyom**: Figyelje a hitelesítési és telepítési tevékenységeket
-5. **Hálózati biztonság**: Használjon privát végpontokat, ahol csak lehetséges
+1. **Hitelesítési adatok tárolása**: Soha ne tárolj hitelesítő adatokat forráskódban
+2. **Hatókör korlátozása**: Használj minimális jogosultság elvét szolgáltatási főfelhasználók számára
+3. **Token forgatás**: Rendszeresen cseréld a szolgáltatási főfelhasználói titkokat
+4. **Audit naplózás**: Kövesd nyomon a hitelesítési és telepítési tevékenységeket
+5. **Hálózati biztonság**: Használj privát végpontokat, amikor lehetséges
 
-### Hitelesítési hibakeresés
+### Hibakeresés hitelesítéskor
 
 ```bash
-# Hitelesítési problémák hibakeresése
+# Debug authentication issues
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# Gyakori diagnosztikai parancsok
-whoami                          # Jelenlegi felhasználói kontextus
-az ad signed-in-user show      # Microsoft Entra ID felhasználói adatok
-az group list                  # Erőforrás-hozzáférés tesztelése
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Microsoft Entra ID user details
+az group list                  # Test resource access
 ```
 
-## Az `azd down --force --purge` parancs megértése
+## Parancs felfedezés
 
-### Felderítés
+### Felfedezés
 ```bash
-azd template list              # Sablonok böngészése
-azd template show <template>   # Sablon részletei
-azd init --help               # Inicializálási beállítások
+azd template list              # Browse templates
+azd template list --help       # Template discovery options
+azd init --help               # Initialization options
 ```
 
-### Projektkezelés
+### Projekt menedzsment
 ```bash
-azd show                     # Projekt áttekintése
-azd env list                # Elérhető környezetek és kiválasztott alapértelmezett
-azd config show            # Konfigurációs beállítások
+azd show                     # Project overview
+azd env list                # Available environments and selected default
+azd config show            # Configuration settings
 ```
 
 ### Monitorozás
 ```bash
-azd monitor                  # Azure portál megnyitása a felügyelethez
-azd monitor --logs           # Alkalmazás naplók megtekintése
-azd monitor --live           # Élő metrikák megtekintése
-azd pipeline config          # CI/CD beállítása
+azd monitor                  # Open Azure portal monitoring
+azd monitor --logs           # View application logs
+azd monitor --live           # View live metrics
+azd pipeline config          # Set up CI/CD
 ```
 
 ## Legjobb gyakorlatok
 
-### 1. Jelentőségteljes nevek használata
+### 1. Használj értelmes neveket
 ```bash
-# Jó
+# Good
 azd env new production-east
-azd init --template web-app-secure
+azd init --template todo-nodejs-mongo .
 
-# Kerülje
+# Avoid
 azd env new env1
-azd init --template template1
+azd init --template template1 .
 ```
 
-### 2. Sablonok kihasználása
-- Kezdje meglévő sablonokkal
-- Testreszabás igényei szerint
-- Hozzon létre újrafelhasználható sablonokat szervezete számára
+### 2. Használj sablonokat
+- Kezdd létező sablonokkal
+- Testre szabhatod az igényeid szerint
+- Hozz létre újrahasznosítható sablonokat szervezeted számára
 
 ### 3. Környezetek izolálása
-- Használjon külön környezeteket fejlesztéshez/teszteléshez/éleshez
-- Soha ne telepítsen közvetlenül éles környezetbe a helyi gépről
-- Éles telepítéshez használjon CI/CD folyamatokat
+- Használj külön környezeteket fejlesztéshez/próbához/üzemeltetéshez
+- Soha ne telepítsd közvetlenül a gyártásba helyi gépről
+- Használj CI/CD pipeline-okat gyártási telepítésre
 
-### 4. Konfigurációkezelés
-- Az érzékeny adatokhoz használjon környezeti változókat
-- Tartsa a konfigurációt verziókezelés alatt
-- Dokumentálja a környezetspecifikus beállításokat
+### 4. Konfiguráció menedzsment
+- Használj felügyelt azonosítót és Key Vault-ot titkokhoz; egyszerű `azd env set` értékek helyi egyszerű szövegesek
+- Tartsd verziókezelés alatt a konfigurációt
+- Dokumentáld a környezet-specifikus beállításokat
 
-## Tanulási folyamat
+## Tanulási Ütemterv
 
-### Kezdő (1–2. hét)
-1. Telepítse az azd-t és hitelesítsen
-2. Telepítsen egy egyszerű sablont
-3. Értse meg a projekt felépítését
-4. Tanulja meg az alapvető parancsokat (up, down, deploy)
+### Kezdő (1-2. hét)
+1. Telepítsd az azd-t és hitelesítsd magad
+2. Telepíts egy egyszerű sablont
+3. Értsd meg a projekt szerkezetét
+4. Tanuld meg a fő parancsokat (up, down, deploy)
 
-### Középhaladó (3–4. hét)
-1. Testreszabja a sablonokat
-2. Több környezetet kezel
-3. Értse az infrastruktúra-kódot
-4. Állítsa be a CI/CD folyamatokat
+### Középhaladó (3-4. hét)
+1. Testre szabhatod a sablonokat
+2. Kezelhetsz több környezetet
+3. Értsd meg az infrastruktúra kódot
+4. Állíts be CI/CD pipeline-okat
 
 ### Haladó (5. hét+)
-1. Hozzon létre egyedi sablonokat
+1. Készíts egyedi sablonokat
 2. Haladó infrastruktúra minták
-3. Több régióba telepítés
+3. Több régiós telepítések
 4. Vállalati szintű konfigurációk
 
 ## Következő lépések
 
-**📖 Folytassa az 1. fejezet tanulását:**
-- [Telepítés & Beállítás](installation.md) – Az azd telepítése és konfigurálása
-- [Az első projektje](first-project.md) – Gyakorlati útmutató
-- [Konfigurációs útmutató](configuration.md) – Haladó konfigurációs lehetőségek
+**📖 Folytasd az 1. fejezet tanulását:**
+- [Telepítés & Beállítás](installation.md) - Telepítsd és konfiguráld az azd-t
+- [Az első projekted](first-project.md) - Fejezd be a gyakorlati oktatóanyagot
+- [Konfigurációs útmutató](../chapter-03-configuration/configuration.md) - Haladó beállítási opciók
 
-**🎯 Készen áll a következő fejezetre?**
-- [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md) – AI alkalmazások építése
+**🎯 Készen állsz a következő fejezetre?**
+- [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md) - Kezdd el az AI alkalmazások építését
 
 ## További források
 
@@ -871,166 +881,168 @@ azd init --template template1
 
 ---
 
-## 🙋 Gyakran ismételt kérdések
+## 🙋 Gyakran Ismételt Kérdések
 
 ### Általános kérdések
 
 **K: Mi a különbség az AZD és az Azure CLI között?**
 
-V: Az Azure CLI (`az`) az egyedi Azure erőforrások kezelésére szolgál. Az AZD (`azd`) az egész alkalmazás kezelésére szolgál:
+V: Az Azure CLI (`az`) egyedi Azure erőforrások kezelésére szolgál. Az AZD (`azd`) egész alkalmazások kezelésére:
 
 ```bash
-# Azure CLI - Alacsony szintű erőforrás-kezelés
+# Azure CLI - Low-level resource management
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...sok más parancs is szükséges
+# ...many more commands needed
 
-# AZD - Alkalmazásszintű menedzsment
-azd up  # Az egész alkalmazás telepítése az összes erőforrással
+# AZD - Application-level management
+azd up  # Deploys entire app with all resources
 ```
 
-**Így gondoljon rá:**
-- `az` = Egyedi Lego kockákkal dolgozni
-- `azd` = Teljes Lego készletekkel dolgozni
+**Így gondolj rá:**
+- `az` = Egyéni Lego téglákkal dolgozol
+- `azd` = Teljes Lego készletekkel dolgozol
 
 ---
 
-**K: Kell-e ismernem a Bicep-et vagy a Terraform-ot az AZD használatához?**
+**K: Kell-e ismernem a Bicep-et vagy a Terraformot az AZD használatához?**
 
-V: Nem! Kezdje sablonokkal:
+V: Nem! Kezdd sablonokkal:
 ```bash
-# Használja a meglévő sablont - IaC ismeretek nem szükségesek
-azd init --template todo-nodejs-mongo
+# Use existing template - no IaC knowledge needed
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-Később tanulhat Bicep-et az infrastruktúra testreszabásához. A sablonok működő példákat nyújtanak tanuláshoz.
+Később megtanulhatod a Bicep-et az infrastruktúra testreszabására. A sablonok működő példákat adnak tanuláshoz.
 
 ---
 
 **K: Mennyibe kerül az AZD sablonok futtatása?**
 
-V: A költségek sablononként változnak. A legtöbb fejlesztői sablon havi 50-150 USD-be kerül:
+V: A költségek régió, SKU, működési idő, adatbázis mód és modellhasználat szerint változnak. Egy fejlesztői környezet jelentős havi díjakat generálhat még tétlen állapotban is; ne feltételezz univerzális 50-150 dolláros tartományt:
 
 ```bash
-# Költségek előnézete telepítés előtt
+# Preview resource changes (not prices)
 azd provision --preview
 
-# Mindig takarítsd el, ha nem használod
-azd down --force --purge  # Minden erőforrást eltávolít
+# Always cleanup when not using
+azd down --force --purge  # Removes all resources
 ```
 
-**Pro tipp:** Használja a rendelkezésre álló ingyenes szinteket:
+**Pro tipp:** Használj ingyenes szinteket, ahol elérhetők:
 - App Service: F1 (ingyenes) szint
-- Microsoft Foundry Modellek: Azure OpenAI havi 50 000 token ingyen
-- Cosmos DB: 1000 RU/s ingyenes szint
+- Azure OpenAI: általános havi ingyenes token keret nincs garantálva; ellenőrizd az aktuális modellt és árazást
+- Cosmos DB: jogosult provisioned-throughput fiókok választhatnak ingyenes szintet; a szerver nélküli sablonok nem automatikusan jogosultak
 
 ---
 
-**K: Használhatom AZD-t meglévő Azure erőforrásokkal?**
+**K: Használhatom az AZD-t meglévő Azure erőforrásokkal?**
 
-V: Igen, de könnyebb újonnan kezdeni. Az AZD akkor működik legjobban, ha a teljes életciklust kezeli. Meglévő erőforrások esetén:
+V: Igen, de egyszerűbb tiszta lappal kezdeni. Az AZD akkor működik a legjobban, ha teljes életciklust kezel. Meglévő erőforrások esetén:
 
 ```bash
-# 1. lehetőség: Létező erőforrások importálása (haladó)
+# Option 1: Import existing resources (advanced)
 azd init
-# Ezután módosítsa az infra/ könyvtárat, hogy hivatkozzon a létező erőforrásokra
+# Then modify infra/ to reference existing resources
 
-# 2. lehetőség: Új kezdés (ajánlott)
-azd init --template matching-your-stack
-azd up  # Új környezet létrehozása
+# Option 2: Start fresh (recommended)
+azd init --template "<verified-template-name>" .
+azd up  # Creates new environment
 ```
 
 ---
 
-**K: Hogyan oszthatom meg a projektemet a csapattagokkal?**
+**K: Hogyan oszthatom meg a projektemet a csapattársaimmal?**
 
-V: Kötelezze el az AZD projektet Git-ben (DE NE a .azure mappát):
+V: Kötelezd a AZD projektet Git-re (de NEM a .azure mappát):
 
 ```bash
-# Alapértelmezés szerint már a .gitignore-ban van
-.azure/        # Titkokat és környezeti adatokat tartalmaz
-*.env          # Környezeti változók
+# Already in .gitignore by default
+.azure/        # Contains secrets and environment data
+*.env          # Environment variables
 
-# A csapattagok akkor:
-git clone <your-repo>
+# Team members then:
+git clone "<your-repo>"
+# Change into the cloned repository before running the remaining commands.
 azd auth login
-azd env new <their-name>-dev
+azd env new "<their-name>-dev"
 azd up
 ```
 
-Mindenki azonos infrastruktúrát kap ugyanabból a sablonból.
+Mindenki ugyanazt az infrastruktúrát kapja ugyanabból a sablonból.
 
 ---
 
 ### Hibakeresési kérdések
 
-**K: Az „azd up” parancs félig lefutott. Mit tegyek?**
+**K: Az "azd up" félig hibával leállt. Mit tegyek?**
 
-V: Ellenőrizze a hibát, javítsa ki, majd próbálja újra:
+V: Nézd meg a hibát, javítsd ki, majd próbáld újra:
 
 ```bash
-# Részletes naplók megtekintése
-azd show
+# Capture detailed diagnostics (redact sensitive values before sharing)
+azd up --debug
 
-# Gyakori javítások:
+# Common fixes:
 
-# 1. Ha túllépte a kvótát:
-azd env set AZURE_LOCATION "westus2"  # Próbáljon meg más régiót
+# 1. If quota exceeded:
+azd env set AZURE_LOCATION "westus2"  # Try different region
 
-# 2. Ha erőforrásnév ütközés van:
-azd down --force --purge  # Tiszta lap
-azd up  # Próbálkozzon újra
+# 2. If resource name conflict:
+azd down --force --purge  # Clean slate
+azd up  # Retry
 
-# 3. Ha az engedély lejárt:
+# 3. If auth expired:
 az login
 azd auth login
 azd up
 ```
 
-**Leggyakoribb probléma:** Rossz Azure előfizetés van kiválasztva
+**Leggyakoribb hiba:** Hibás Azure előfizetés kiválasztva
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
+azd env set AZURE_SUBSCRIPTION_ID "<correct-subscription-id>"
 ```
 
 ---
 
-**K: Hogyan telepíthetek csak kódváltozásokat anélkül, hogy újra létrehoznám az infrastruktúrát?**
+**K: Hogyan telepíthetem csak a kódváltozásokat reprovisionálás nélkül?**
 
-V: Használja az `azd deploy` parancsot az `azd up` helyett:
+V: Használd a `azd deploy`-t a `azd up` helyett:
 
 ```bash
-azd up          # Első alkalom: előkészítés + telepítés (lassú)
+azd up          # First time: provision + deploy (slow)
 
-# Kód módosítása...
+# Make code changes...
 
-azd deploy      # Következő alkalmak: csak telepítés (gyors)
+azd deploy      # Subsequent times: deploy only (fast)
 ```
 
-Gyorsasági összehasonlítás:
-- `azd up`: 10-15 perc (infrastruktúra létrehozása)
+Sebesség összehasonlítás:
+- `azd up`: 10-15 perc (infrastruktúrát telepít)
 - `azd deploy`: 2-5 perc (csak kód)
 
 ---
 
-**K: Testreszabhatom az infrastruktúra sablonokat?**
+**K: Testre szabhatom az infrastruktúra sablonokat?**
 
-V: Igen! Szerkessze a Bicep fájlokat az `infra/` mappában:
+V: Igen! Szerkeszd a Bicep fájlokat az `infra/` helyen:
 
 ```bash
-# Azd init után
+# After azd init
 cd infra/
-code main.bicep  # Szerkesztés VS Code-ban
+code main.bicep  # Edit in VS Code
 
-# Változások előnézete
+# Preview changes
 azd provision --preview
 
-# Változtatások alkalmazása
+# Apply changes
 azd provision
 ```
 
-**Tipp:** Kezdje kicsiben - először módosítsa az SKU-kat:
+**Tipp:** Kezdd kicsiben - először változtasd meg az SKU-kat:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1040,49 +1052,48 @@ sku: {
 
 ---
 
-**K: Hogyan törölhetem az összes AZD által létrehozott erőforrást?**
+**K: Hogyan törölhetek mindent, amit az AZD létrehozott?**
 
 V: Egy parancs eltávolít minden erőforrást:
 
 ```bash
 azd down --force --purge
 
-# Ez törli:
-# - Minden Azure erőforrást
-# - Erőforráscsoportot
-# - Helyi környezeti állapotot
-# - Gyorsítótárazott telepítési adatokat
+# This deletes:
+# - Azure resources/resource groups discovered for the selected environment
+# - Supported soft-deleted resources, if purge protection allows
+# Local .azure files remain; shared/external resources may remain too.
 ```
 
-**Ezt mindig futtassa, ha:**
-- Végez a sablon tesztelésével
-- Más projektre vált
-- Frissen szeretne kezdeni
+**Mindig futtasd ezt, amikor:**
+- Befejezted egy sablon tesztelését
+- Más projektre váltasz
+- Tiszta lappal akarsz kezdeni
 
-**Költségmegtakarítás:** Használaton kívüli erőforrások törlése = 0 Ft költség
+**Költség ellenőrzés:** Erősítsd meg az Azure-ban a törlést, és ellenőrizd megtartott/megosztott erőforrásokat. A korábban keletkezett díjak továbbra is érvényesek.
 
 ---
 
 **K: Mi van, ha véletlenül töröltem erőforrásokat az Azure Portálon?**
 
-V: Az AZD állapota szinkronizálatlan lehet. Alapos tisztítás:
+V: Az AZD állapota kicsúszhat a szinkronból. Tisztítsd meg az állapotot:
 
 ```bash
-# 1. Távolítsa el a helyi állapotot
+# 1. Delete remaining resources only if that is your intent
 azd down --force --purge
 
-# 2. Induljon tiszta lappal
+# 2. Start fresh
 azd up
 
-# Alternatíva: Hagyja, hogy az AZD észlelje és javítsa
-azd provision  # Létrehozza a hiányzó erőforrásokat
+# Alternative: Let AZD detect and fix
+azd provision  # Will create missing resources
 ```
 
 ---
 
 ### Haladó kérdések
 
-**K: Használhatom az AZD-t CI/CD folyamatokban?**
+**K: Használhatom az AZD-t CI/CD pipeline-okban?**
 
 V: Igen! GitHub Actions példa:
 
@@ -1098,7 +1109,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Install azd
         run: curl -fsSL https://aka.ms/install-azd.sh | bash
@@ -1111,6 +1122,10 @@ jobs:
             --tenant-id ${{ secrets.AZURE_TENANT_ID }}
       
       - name: Deploy
+        env:
+          AZURE_ENV_NAME: dev
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
         run: azd up --no-prompt
 ```
 
@@ -1118,90 +1133,86 @@ jobs:
 
 **K: Hogyan kezelem a titkokat és érzékeny adatokat?**
 
-V: Az AZD automatikusan integrálódik az Azure Key Vault-tal:
+V: Használd explicit módon a Key Vault-ot. `azd env set` egyszerű értékeket ír a helyi környezeti fájlba; nem hoz automatikusan létre kulcstartót, nem rendel szerepeket, és nem injektál titkokat az alkalmazásba.
 
 ```bash
-# A titkokat a Key Vault tárolja, nem a kódban
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
-
-# AZD automatikusan:
-# 1. Létrehozza a Key Vaultot
-# 2. Elmenti a titkot
-# 3. Hozzáférést ad az alkalmazásnak Managed Identity-n keresztül
-# 4. Futtatás közben beilleszti
+# Interactive: create/select a Key Vault secret and save its reference
+azd env set-secret DATABASE_PASSWORD
 ```
 
-**Soha ne kötelezzen el:**
+Megfelelő kulcstartó jogosultságokra van szükség. Infrastruktúrának/alkalmazásnak még mindig össze kell kötni a titkot a fogyasztóval és engedélyeznie kell a futtatási azonosítónak a hozzáférést. Ne írd ki a feloldott titkok értékeit a naplókba.
+
+**Sose kötelezd el:**
 - `.azure/` mappa (környezeti adatok)
 - `.env` fájlok (helyi titkok)
-- Kapcsolati karakterláncok
+- Kapcsolati adatsorok
 
 ---
 
 **K: Telepíthetek több régióba?**
 
-V: Igen, hozzon létre környezetet régiónként:
+V: Igen, hozz létre környezetet régiónként:
 
 ```bash
-# Kelet USA környezet
+# East US environment
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# Nyugat Európa környezet
+# West Europe environment
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Minden környezet független
+# Each environment is independent
 azd env list
 ```
 
-Tényleges több régiós alkalmazásokhoz testreszabhatja a Bicep sablonokat, hogy egyszerre több régióba telepítsen.
+Több régiós alkalmazásokhoz testreszabhatod a Bicep sablonokat több régióba egyidejű telepítéshez.
 
 ---
 
-**K: Hol kaphatok segítséget, ha elakadok?**
+**K: Hol kérhetek segítséget, ha elakadok?**
 
 1. **AZD dokumentáció:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) – #azure-developer-cli csatorna
-4. **Stack Overflow:** `azure-developer-cli` címke
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli csatorna
+4. **Stack Overflow:** Címke `azure-developer-cli`
 5. **Ez a tanfolyam:** [Hibakeresési útmutató](../chapter-07-troubleshooting/common-issues.md)
 
-**Pro tipp:** Kérdezés előtt futtassa:
+**Pro tipp:** Kérdezés előtt futtasd:
 ```bash
-azd show       # Jelenlegi állapot megjelenítése
-azd version    # A te verziód megjelenítése
+azd show       # Shows current state
+azd version    # Shows your version
 ```
-Gyorsabb segítség érdekében adja meg ezt az információt kérdésében.
+Ezt az információt add meg a kérdésedhez gyorsabb segítséghez.
 
 ---
 
-## 🎓 Mi a következő?
+## 🎓 Mi a következő lépés?
 
-Most már érti az AZD alapjait. Válassza ki az Ön útját:
+Most már érted az AZD alapjait. Válaszd az utadat:
 
 ### 🎯 Kezdőknek:
-1. **Következő:** [Telepítés & Beállítás](installation.md) – Telepítse az AZD-t gépére
-2. **Utána:** [Az első projektje](first-project.md) – Telepítse első alkalmazását
-3. **Gyakorlat:** Teljesítse a lecke összes 3 feladatát
+1. **Következő:** [Telepítés & Beállítás](installation.md) - Telepítsd az AZD-t a gépedre
+2. **Aztán:** [Az első projekted](first-project.md) - Telepítsd az első alkalmazásodat
+3. **Gyakorlás:** Teljesítsd a 3 gyakorlatot ebben a leckében
 
 ### 🚀 AI fejlesztőknek:
-1. **Ugorjon:** [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Telepítsen:** Kezdje az `azd init --template get-started-with-ai-chat` paranccsal
-3. **Tanuljon:** Építsen miközben telepít
+1. **Ugorj a következőre:** [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Telepíts:** Egy üres projektmappában kezdd a `azd init --template get-started-with-ai-chat .`-val
+3. **Tanulj:** Építs miközben telepítesz
 
 ### 🏗️ Tapasztalt fejlesztőknek:
-1. **Ismétlés:** [Konfigurációs útmutató](configuration.md) – Haladó beállítások
-2. **Felfedezés:** [Infrastruktúra kódként](../chapter-04-infrastructure/provisioning.md) – Mély Bicep áttekintés
-3. **Építés:** Készítsen egyedi sablonokat stackjéhez
+1. **Ismételd át:** [Konfigurációs útmutató](../chapter-03-configuration/configuration.md) - Haladó beállítások
+2. **Fedezd fel:** [Infrastruktúra kód formájában](../chapter-04-infrastructure/provisioning.md) - Bicep mélyreható
+3. **Építs:** Készíts egyedi sablonokat a stack-edhez
 
 ---
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlap**: [AZD kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 1. fejezet – Alapok és gyors indulás  
+- **📚 Tanfolyam főoldal**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok & Gyors kezdet  
 - **⬅️ Előző**: [Tanfolyam áttekintés](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Következő**: [Telepítés & Beállítás](installation.md)
 - **🚀 Következő fejezet**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)

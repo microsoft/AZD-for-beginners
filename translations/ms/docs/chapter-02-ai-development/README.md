@@ -1,22 +1,24 @@
 # Bab 2: Pembangunan AI-Pertama
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 4-5 jam termasuk bengkel | **⭐ Kerumitan**: Sederhana
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 4-5 jam termasuk bengkel | **⭐ Kerumitan**: Pertengahan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini memberi tumpuan kepada penyebaran aplikasi berkuasa AI menggunakan Azure Developer CLI dan perkhidmatan Microsoft Foundry. Dari aplikasi chat AI yang mudah hingga ejen pintar dengan alat.
+Bab ini memfokuskan kepada penyebaran aplikasi berasaskan AI menggunakan Azure Developer CLI dan perkhidmatan Microsoft Foundry. Dari aplikasi chat AI mudah hingga ejen pintar dengan alat.
 
-> **Ulasan keluaran (2026-11-04):** Panduan AI CLI telah diperiksa terhadap dokumentasi/sumber diterbitkan `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, dan `azure.ai.evaluations` `1.0.0-beta.2`. Gunakan `azd >= 1.37.0` untuk aliran kerja gabungan. Penilaian kini menggunakan namespace `azd ai eval` berasingan; lihat [perubahan keluaran dan panduan migrasi](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ini bukan pengesahan penyebaran langsung.
+> **Kemas kini Foundry GA (2026-11-09):** Bundel `microsoft.foundry` 1.0 adalah [secara umumnya tersedia](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Gunakan `azd >= 1.37.0`; penilaian kekal sebagai pemasangan berasingan. [Panduan ejen yang dihos](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) merangkumi ujian Inspector Ejen tempatan dan penyebaran kod dari jauh. Ini adalah ulasan dokumentasi, bukan pengesahan penyebaran langsung; ciri pratonton pilihan mengekalkan status tersendiri.
 
 ## Objektif Pembelajaran
 
-Dengan melengkapkan bab ini, anda akan:
-- Menyebarkan aplikasi AI menggunakan templat AZD yang telah dibina
+Dengan menyiapkan bab ini, anda akan:
+- Menyebarkan aplikasi AI menggunakan templat AZD sedia ada
 - Memahami integrasi Microsoft Foundry dengan AZD
-- Mengkonfigurasi dan menyesuaikan ejen AI dengan alat
-- Menyebarkan aplikasi RAG (Retrieval-Augmented Generation)
+- Pasang bundel GA dan uji ejen yang dihos secara tempatan sebelum menyebarkan sumbernya ke Foundry
+- Semak `azure.yaml`, aset penilaian, dan pembersihan projek baru berbanding projek guna semula
+- Konfigurasi dan sesuaikan ejen AI dengan alat
+- Menyebarkan aplikasi RAG (Generasi Augmented Retrieval)
 
 ---
 
@@ -24,16 +26,18 @@ Dengan melengkapkan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|--------|-------------|------|
-| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Sambungkan AZD dengan perkhidmatan Foundry | 30 minit |
-| 2 | [Panduan Ejen AI](agents.md) | Menyebarkan ejen pintar dengan alat | 45 minit |
-| 3 | [Penyebaran Model AI](ai-model-deployment.md) | Menyebarkan dan mengkonfigurasi model AI | 30 minit |
-| 4 | [Makmal Bengkel AI](ai-workshop-lab.md) | Amali: Terokai templat dan rancang penukaran anda | 2-3 jam |
+| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Bundel GA, aliran kerja ejen yang dihos dari tempatan ke awan, dan penilaian | 60 min |
+| 2 | [Panduan Ejen AI](agents.md) | Menyebarkan ejen pintar dengan alat | 45 min |
+| 3 | [Penyebaran Model AI](ai-model-deployment.md) | Menyebar dan konfigurasi model AI | 30 min |
+| 4 | [Makmal Bengkel AI](ai-workshop-lab.md) | Hands-on: Terokai templat dan rancang penukaran anda | 2-3 jam |
 
 ---
 
 ## 🚀 Mula Pantas
 
-Pilih satu pilihan dalam direktori kosong yang baru. `.` di hujungnya menginisialisasi direktori semasa; jika tidak AZD boleh mencipta subdirektori tanpa menukar direktori kerja shell anda.
+Pilih satu pilihan dalam direktori kosong baru. `.` yang diapit memulakan direktori semasa; jika tidak AZD boleh mencipta subdirektori tanpa menukar direktori kerja shell anda.
+
+Untuk **laluan penyebaran kod ejen yang dihos GA**, mulakan dengan [panduan langkah demi langkah](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Ia memerlukan AZD 1.37.0+, uv terkini, Python 3.13+, kebenaran Foundry, dan kuota model. Templat aplikasi penuh di bawah adalah alternatif, bukan prasyarat untuk panduan itu.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -57,21 +61,21 @@ azd up
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG dengan sitasi | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Ejen AI dengan alat | Perkhidmatan Ejen AI |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI asas | OpenAI + Aplikasi Kontena |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI Asas | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Kesedaran Kos
 
-Ini adalah julat ilustrasi, bukan sebut harga atau had; trafik model, Search/compute SKU, rantau, dan ciri pilihan boleh melebihi mereka. Semak panduan harga semasa sampel pilihan anda sebelum menyediakan.
+Ini adalah julat ilustratif, bukan sebut harga atau had; trafik model, SKU Pengiraan/Carian, rantau, dan ciri pilihan boleh melebihi mereka. Semak panduan harga terkini sampel pilihan anda sebelum menyediakan.
 
 | Persekitaran | Anggaran Kos Bulanan |
 |-------------|----------------------|
 | Pembangunan | $80-150 |
-| Penstaging | $150-300 |
+| Staging | $150-300 |
 | Pengeluaran | $300-3,500+ |
 
-**Petua:** Jalankan `azd down` selepas ujian untuk mengelakkan caj.
+**Pembersihan:** Semak `azd down` sebelum mengesahkan: untuk projek Foundry yang baru dibuat ia memadamkan kumpulan sumber dan segala isinya. Untuk projek Foundry yang digunakan semula, ia meninggalkan projek dan sumber ejen di tempatnya; ikut [panduan pembersihan langkah demi langkah](microsoft-foundry-integration.md#7-clean-up-deliberately) untuk mengalih keluar sumber yang tidak diingini secara berasingan.
 
 ---
 

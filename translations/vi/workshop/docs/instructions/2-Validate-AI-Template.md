@@ -1,295 +1,152 @@
 # 2. Xác thực một Mẫu
 
-> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
+> Hướng dẫn nguồn được xem xét dựa trên AZD 1.37.2 và mẫu hiện tại vào ngày 4 tháng 11 năm 2026. Ảnh chụp màn hình mang tính minh họa; điều hướng cổng, mặc định mẫu và dịch vụ có thể thay đổi. Đánh giá này không thực hiện triển khai Azure trực tiếp.
 
-!!! tip "VỀ CUỐI MODULE NÀY BẠN SẼ CÓ THỂ"
+!!! tip "CUỐI MODULE NÀY BẠN SẼ CÓ KHẢ NĂNG"
 
-    - [ ] Phân tích Kiến trúc Giải pháp AI
-    - [ ] Hiểu Quy trình Triển khai AZD
-    - [ ] Sử dụng GitHub Copilot để được trợ giúp về cách dùng AZD
-    - [ ] **Bài tập 2:** Triển khai & Xác thực mẫu AI Agents
-
----
-
-
-## 1. Giới thiệu
-
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) hay `azd` là công cụ dòng lệnh mã nguồn mở giúp tối ưu hóa quy trình làm việc của nhà phát triển khi xây dựng và triển khai ứng dụng lên Azure.
-
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) là các kho chuẩn hóa bao gồm mã ứng dụng mẫu, tài sản _hạ tầng như mã_, và các file cấu hình `azd` cho một kiến trúc giải pháp thống nhất. Việc cấp phát hạ tầng trở nên đơn giản chỉ với lệnh `azd provision` – và lệnh `azd up` cho phép bạn vừa cấp phát hạ tầng **vừa** triển khai ứng dụng chỉ với một bước!
-
-Do đó, khởi đầu cho quá trình phát triển ứng dụng của bạn có thể chỉ là tìm một _mẫu AZD Starter_ phù hợp nhất với yêu cầu ứng dụng và hạ tầng của bạn – sau đó tùy chỉnh kho cho phù hợp với kịch bản của bạn.
-
-Trước khi bắt đầu, hãy chắc chắn rằng bạn đã cài đặt Azure Developer CLI.
-
-1. Mở terminal trong VS Code và gõ lệnh sau:
-
-      ```bash title="" linenums="0"
-      azd version
-      ```
-
-1. Bạn sẽ thấy kết quả như sau!
-
-      ```bash title="" linenums="0"
-      azd version 1.27.1 (commit <current-build>)
-      ```
-
-**Bạn đã sẵn sàng chọn và triển khai một mẫu với azd**
+    - [ ] Identify the sample's prerequisites and intended resources
+    - [ ] Deploy the selected template into an intentional environment
+    - [ ] Verify the application and agent behavior separately from deployment success
+    - [ ] **Lab 2:** Record evidence of a working baseline, or an actionable deployment blocker
 
 ---
 
-## 2. Lựa chọn Mẫu
+## 1. Kiểm tra điều kiện tiên quyết
 
-Nền tảng Microsoft Foundry đi kèm với [bộ mẫu AZD được đề xuất](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) bao phủ các kịch bản giải pháp phổ biến như _tự động hóa quy trình đa tác nhân_ và _xử lý nội dung đa phương tiện_. Bạn cũng có thể khám phá các mẫu này qua trang Microsoft Foundry portal.
+Công cụ [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) quản lý việc triển khai ứng dụng sử dụng cấu hình, hạ tầng và mã nguồn của mẫu. Kiểm tra phiên bản đã cài đặt của bạn:
 
-1. Truy cập [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Đăng nhập vào portal Microsoft Foundry khi được yêu cầu – bạn sẽ thấy giao diện như bên dưới.
+```bash
+azd version
+```
 
-![Pick](../../../../../translated_images/vi/01-pick-template.60d2d5fff5ebc374.webp)
+Sử dụng [hướng dẫn cài đặt/cập nhật hiện tại](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) nếu cần thiết. Mẫu được đánh giá khai báo AZD `>=1.14.0`, nhưng nên sử dụng phiên bản phát hành được hỗ trợ hiện tại. Các phần mở rộng AI tùy chọn có yêu cầu phiên bản riêng; quy trình `azd up` bình thường của mẫu này không yêu cầu phần mở rộng agents.
 
+Trước khi cấp phát, hãy đọc [thiết lập tài khoản Azure](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/azure_account_setup.md) và [hướng dẫn triển khai](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) của mẫu. Xác nhận thuê bao, quyền, tính khả dụng mô hình, hạn mức khu vực và chi phí dự kiến. Tài khoản Azure miễn phí không đảm bảo truy cập hoặc sử dụng miễn phí cho mọi dịch vụ cần thiết.
 
-Các tuỳ chọn **Basic** là mẫu khởi đầu của bạn:
+## 2. Mở mẫu đã chọn
 
-1. [ ] [Bắt đầu với AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) triển khai ứng dụng chat cơ bản _với dữ liệu của bạn_ lên Azure Container Apps. Dùng để khám phá kịch bản chatbot AI cơ bản.
-1. [X] [Bắt đầu với AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) triển khai một AI Agent chuẩn (với các Foundry Agents). Dùng để làm quen với giải pháp AI theo dạng agent có sử dụng công cụ và mô hình.
+Sử dụng kho lưu trữ [Bắt đầu với AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) đã khởi tạo trong Module 1. Nếu bạn chưa khởi tạo, chọn một trong các lựa chọn sau:
 
-Mở liên kết thứ hai ở tab trình duyệt mới (hoặc nhấn `Open in GitHub` trên thẻ liên quan). Bạn sẽ thấy kho mẫu AZD này. Dành vài phút khám phá README. Kiến trúc ứng dụng trông như sau:
+- Mở một [Codespace cho mẫu](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents).
+- Sao chép mẫu và làm theo hướng dẫn thiết lập tại chỗ/dev-container.
+- Trong một **thư mục trống**, chạy:
 
-![Arch](../../../../../translated_images/vi/architecture.8cec470ec15c65c7.webp)
+```bash
+azd init --template Azure-Samples/get-started-with-ai-agents .
+```
 
----
+Không khởi tạo một mẫu thứ hai lên dự án hiện có. Chạy các lệnh tiếp theo từ thư mục gốc của mẫu chứa `azure.yaml`, không phải thư mục gốc kho lưu trữ khóa học.
 
-## 3. Kích hoạt Mẫu
+Mẫu chứa ứng dụng chat hỗ trợ agent chạy trên Container Apps và cấp phát tài nguyên Foundry hỗ trợ. Xem lại kiến trúc hiện tại và các dịch vụ tùy chọn thay vì xem một ảnh chụp màn hình cũ như là danh mục chính xác của tài nguyên.
 
-Hãy thử triển khai mẫu này và xác thực rằng nó hợp lệ. Chúng ta sẽ theo hướng dẫn trong phần [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+![Kiến trúc minh họa](../../../../../translated_images/vi/architecture.8cec470ec15c65c7.webp)
 
-1. Chọn môi trường làm việc cho kho mẫu:
+## 3. Triển khai một cách có chủ ý
 
-      - **GitHub Codespaces**: Nhấp [liên kết này](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) và xác nhận `Create codespace`
-      - **Bản clone local hoặc container phát triển**: Clone `Azure-Samples/get-started-with-ai-agents` rồi mở trong VS Code
+```bash
+azd auth login
+azd up
+```
 
-1. Chờ terminal VS Code sẵn sàng, rồi gõ lệnh sau:
+Xem lại các lời nhắc:
 
-   ```bash title="" linenums="0"
-   azd up
-   ```
+1. Chọn một tên môi trường AZD duy nhất.
+2. Chọn thuê bao mong muốn, không đơn giản là thuê bao được đề xuất đầu tiên.
+3. Chọn một khu vực được hỗ trợ bởi mô hình/phiên bản/SKU yêu cầu và hạn mức của bạn.
+4. Đọc đầu ra của quá trình cấp phát, triển khai và hook sau triển khai.
 
-Hoàn thành các bước trong quy trình làm việc mà lệnh này kích hoạt:
+Các giá trị mặc định được đánh giá bao gồm `gpt-5-mini`, phiên bản `2025-08-07` và `GlobalStandard`. Kiểm tra mẫu đã khởi tạo của bạn và [các kết hợp mô hình/khu vực được hỗ trợ](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support). Không có khu vực nào được đảm bảo hoạt động toàn diện.
 
-1. Bạn sẽ được nhắc đăng nhập Azure – làm theo hướng dẫn để xác thực
-1. Nhập tên môi trường duy nhất cho bạn – ví dụ, tôi dùng `nitya-mshack-azd`
-1. Lệnh này sẽ tạo thư mục `.azure/` – bạn sẽ thấy thư mục con tên theo môi trường
-1. Bạn sẽ được yêu cầu chọn tên subscription – chọn mặc định
-1. Bạn sẽ được hỏi vị trí – chọn `East US 2`
+Thời gian triển khai có thể khác nhau. Nếu cấp phát thất bại, lưu giữ lỗi và sửa nguyên nhân trước khi thử lại. Không xóa triển khai hoặc xóa tài nguyên vĩnh viễn như một bước xử lý sự cố chung.
 
-Giờ bạn chờ cho việc cấp phát hoàn tất. **Quá trình này mất khoảng 10-15 phút**
+## 4. Xác thực ứng dụng
 
-1. Khi xong, bảng điều khiển sẽ hiển thị thông báo THÀNH CÔNG như sau:
-      ```bash title="" linenums="0"
-      SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
-      ```
-1. Azure Portal của bạn sẽ có nhóm tài nguyên được cấp phát với tên môi trường:
+```bash
+azd show
+```
 
-      ![Infra](../../../../../translated_images/vi/02-provisioned-infra.46c706b14f56e0bf.webp)
+Mở điểm cuối cho `api_and_frontend`, hoặc tìm Container App trong nhóm tài nguyên triển khai trên [cổng Azure](https://portal.azure.com/). Làm theo hướng dẫn truy cập/xác thực của mẫu nếu yêu cầu đăng nhập; không vô hiệu hóa xác thực để làm cho kiểm tra nhanh thành công.
 
-1. **Bạn đã sẵn sàng xác thực hạ tầng và ứng dụng đã được triển khai**.
+![Màn hình ứng dụng minh họa](../../../../../translated_images/vi/03-test-application.471910da12c3038e.webp)
 
----
+Thử một vài [câu hỏi mẫu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md):
 
-## 4. Xác thực Mẫu
+- Một câu hỏi chung có tính thực tế.
+- Một câu hỏi có câu trả lời nên có trong các tài liệu tải lên của mẫu.
+- Một câu hỏi không thể trả lời từ các tài liệu đó.
 
-1. Truy cập trang [Resource Groups](https://portal.azure.com/#browse/resourcegroups) Azure Portal – đăng nhập nếu được yêu cầu
-1. Nhấp vào RG theo tên môi trường của bạn – bạn sẽ thấy trang như trên
+Xác minh rằng giao diện người dùng tải lên, API phản hồi, việc truy xuất sử dụng dữ liệu mong đợi, trích dẫn phù hợp với nội dung nguồn, và các câu hỏi không được hỗ trợ được xử lý đúng cách. Một tin nhắn `azd up` thành công một mình không đảm bảo những kết quả này.
 
-      - nhấp vào Azure Container Apps resource
-      - nhấp vào URL ứng dụng trong phần _Essentials_ (góc phải phía trên)
+## 5. Kiểm tra đại lý đã triển khai
 
-1. Bạn sẽ thấy giao diện front-end ứng dụng host như sau:
+Mở dự án của bạn trong [cổng Foundry](https://ai.azure.com/). Trong luồng cổng đã xem xét, chọn **Build**, sau đó **Agents**, và tìm đại lý được tạo bởi mẫu. Nhãn điều hướng có thể thay đổi.
 
-   ![App](../../../../../translated_images/vi/03-test-application.471910da12c3038e.webp)
+Ghi lại:
 
-1. Thử đặt một vài [câu hỏi mẫu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+- Tên đại lý và phiên bản.
+- Việc triển khai mô hình được cấu hình.
+- Các hướng dẫn thực tế và công cụ được bật.
+- Các tệp hoặc chỉ mục tìm kiếm nào được kết nối, và liệu thiết lập có hoàn tất thành công hay không.
 
-      1. Hỏi: ```Thủ đô của Pháp là gì?```
-      1. Hỏi: ```Lều tốt nhất dưới $200 cho hai người là gì, và nó có những tính năng nào?```
+Mẫu đã xem xét sử dụng định danh đại lý ở dạng `agent_name:agent_version` cho các bài kiểm tra đánh giá của nó. Không sao chép định danh đại lý/classic thread từ ảnh chụp màn hình cũ vào quy trình làm việc API mới hơn.
 
-1. Bạn sẽ nhận được câu trả lời tương tự như hình dưới đây. _Nhưng điều này hoạt động thế nào?_
+So sánh các tài liệu đã tải lên với `src/files/` trong bản sửa đổi bạn đã khởi tạo. Các ảnh chụp màn hình trước đây cho thấy 32 tệp; con số đó không phải là mặc định hiện tại được đảm bảo. Xác minh bất kỳ câu trả lời nào về khách hàng/sản phẩm mẫu với dữ liệu nguồn tổng hợp thực tế, và không tải lên dữ liệu khách hàng thật cho bài tập này.
 
-      ![App](../../../../../translated_images/vi/03-test-question.521c1e863cbaddb6.webp)
+## 6. So sánh với khu vui chơi
 
----
+Mở khu vui chơi của đại lý được chọn trong Foundry và đặt cùng câu hỏi truy xuất. So sánh phiên bản đại lý, công cụ, trích dẫn và chất lượng câu trả lời đã cấu hình với ứng dụng đã triển khai.
 
-## 5. Xác thực Agent
+Các câu trả lời mang tính xác suất; không yêu cầu trùng khớp từng từ một. Nếu kết quả khác biệt đáng kể, kiểm tra xem ứng dụng và khu vui chơi có cùng nhắm tới dự án, đại lý/phiên bản và nguồn kiến thức không.
 
-Azure Container App triển khai một endpoint kết nối tới AI Agent được cấp phát trong dự án Microsoft Foundry cho mẫu này. Hãy cùng xem điều đó nghĩa là gì.
+## 7. Kiểm tra các điều kiện tiên quyết quan sát được
 
-1. Quay lại trang _Overview_ trong Azure Portal cho nhóm tài nguyên của bạn
+Hướng dẫn [quan sát](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md) của mẫu là nguồn thông tin chính xác cho việc theo dõi, đánh giá và thiết lập red-teaming.
 
-1. Nhấp vào tài nguyên `Microsoft Foundry` trong danh sách đó
+Trong cấu hình cơ sở hạ tầng được xem xét, Application Insights được bật nhưng **theo dõi phía khách hàng bị vô hiệu hóa** (`ENABLE_AZURE_MONITOR_TRACING=false`). Việc tạo tài nguyên giám sát không chứng minh rằng ứng dụng đang xuất bản các dấu vết. Module 5 đề cập đến việc bật theo dõi và tạo yêu cầu thử nghiệm.
 
-1. Bạn sẽ thấy như bên dưới. Nhấp nút `Go to Microsoft Foundry Portal`.
-   ![Foundry](../../../../../translated_images/vi/04-view-foundry-project.fb94ca41803f28f3.webp)
+Sử dụng nhật ký ứng dụng của Container App để điều tra lỗi khởi động/API. Trong Foundry, kiểm tra các chế độ xem theo dõi và giám sát có sẵn của đại lý. Các mục đánh giá yêu cầu cấu hình liên quan, các trình đánh giá/khu vực được hỗ trợ và các yêu cầu thực tế; chúng không đảm bảo sẽ xuất hiện tự động cho mọi lần chạy.
 
-1. Bạn sẽ thấy trang Dự án Foundry cho ứng dụng AI của bạn
-   ![Project](../../../../../translated_images/vi/05-visit-foundry-portal.d734e98135892d7e.webp)
+Giữ chế độ ghi lại nội dung nhắc/lời đáp tắt trừ khi các yêu cầu về quyền riêng tư, lưu giữ, truy cập và chỉnh sửa đã được xem xét.
 
-1. Nhấp vào `Agents` - bạn sẽ thấy agent mặc định đã được cấp phát trong dự án
-   ![Agents](../../../../../translated_images/vi/06-visit-agents.bccb263f77b00a09.webp)
+## 8. Hiểu các giá trị môi trường
 
-1. Chọn agent đó – bạn sẽ thấy chi tiết agent. Lưu ý các điểm sau:
+AZD lưu trữ môi trường được chọn trong `.azure/<environment-name>/`. Các đầu vào bền vững và đầu ra triển khai có thể được đọc bằng:
 
-      - Agent mặc định sử dụng File Search (tìm kiếm file) luôn
-      - Thông tin `Knowledge` của agent chỉ ra có 32 file được tải lên (dùng cho tìm kiếm file)
-      ![Agents](../../../../../translated_images/vi/07-view-agent-details.0e049f37f61eae62.webp)
+```bash
+azd env list
+azd env get-value AZURE_ENV_NAME
+azd env get-value AZURE_LOCATION
+```
 
-1. Tìm tùy chọn `Data+indexes` trên menu bên trái và nhấp để xem chi tiết.
+`azd env get-values` liệt kê tất cả các giá trị, có thể bao gồm cấu hình nhạy cảm. Không dán kết quả đó vào các vấn đề hoặc nhật ký công khai.
 
-      - Bạn sẽ thấy 32 file dữ liệu được tải lên cho kiến thức.
-      - Các file này tương ứng với 12 file khách hàng và 20 file sản phẩm trong `src/files`
-      ![Data](../../../../../translated_images/vi/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+AZD sử dụng môi trường được chọn khi chạy các lệnh/hooks của nó, trong khi các biến môi trường của quá trình cũng có thể ảnh hưởng đến các lệnh và mẫu. Điều này **không** xuất các giá trị ra shell cha mẹ của bạn hoặc mọi tiến trình Python được khởi động độc lập. Theo dõi hướng dẫn [phát triển cục bộ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/local_development.md) của mẫu.
 
-**Bạn đã xác thực hoạt động của Agent!**
+Các mặc định mẫu có thể được áp dụng trong `infra/main.parameters.json` mà không xuất hiện như các giá trị cục bộ rõ ràng. Việc đặt một biến bất kỳ không thay đổi cơ sở hạ tầng trừ khi mẫu sử dụng nó.
 
-1. Các phản hồi của agent dựa trên kiến thức trong các file đó.
-1. Bạn có thể đặt câu hỏi liên quan đến dữ liệu và nhận được câu trả lời dựa trên kiến thức.
-1. Ví dụ: file `customer_info_10.json` mô tả 3 giao dịch mua của "Amanda Perez"
+Ví dụ, để chọn rõ ràng các mặc định mô hình được xem xét:
 
-Quay lại tab trình duyệt với endpoint Container App và hỏi: `Amanda Perez sở hữu những sản phẩm nào?` Bạn sẽ thấy kết quả như sau:
+```bash
+azd env set AZURE_AI_AGENT_MODEL_NAME gpt-5-mini
+azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-08-07
+azd env set AZURE_AI_AGENT_DEPLOYMENT_SKU GlobalStandard
+azd provision --preview
+azd up
+```
 
-![Data](../../../../../translated_images/vi/09-ask-in-aca.4102297fc465a4d5.webp)
+Đầu tiên hãy xem xét khả năng tương thích, dung lượng, tính khả dụng và các thay đổi đã lên kế hoạch. Cập nhật cơ sở hạ tầng đòi hỏi phải cung cấp tài nguyên; chỉ dùng `azd deploy` là chưa đủ. Thay đổi mô hình được hỗ trợ thường không cần phải phá hủy toàn bộ ứng dụng.
 
----
+`azd env refresh` lấy các kết quả triển khai cho một môi trường có thể truy cập; nó không xây dựng lại tất cả các đầu vào tùy chỉnh, đồng bộ hóa bí mật hoặc thay thế quản lý cấu hình.
 
-## 6. Khu vui chơi Agent
+## 9. Ghi lại điểm chuẩn của bạn
 
-Hãy tạo thêm cảm nhận về khả năng của Microsoft Foundry bằng cách thử Agent trong Agents Playground.
+- [ ] Môi trường, đăng ký, khu vực và mô hình đã được xác minh đúng.
+- [ ] Cung cấp, triển khai và các hook cài đặt cần thiết đã hoàn tất mà không có lỗi chưa giải quyết.
+- [ ] Đã kiểm tra quyền truy cập ứng dụng, trò chuyện, truy xuất và trích dẫn.
+- [ ] Đã xác định đại lý/phiên bản và nguồn kiến thức.
+- [ ] Các điều kiện tiên quyết quan sát và bất kỳ chướng ngại còn lại đã được ghi chép.
 
-1. Quay lại trang `Agents` trong Microsoft Foundry - chọn agent mặc định
-1. Nhấp tùy chọn `Try in Playground` - bạn sẽ thấy giao diện Playground như sau
-1. Hỏi lại câu hỏi: `Amanda Perez sở hữu những sản phẩm nào?`
-
-    ![Data](../../../../../translated_images/vi/09-ask-in-playground.a1b93794f78fa676.webp)
-
-Bạn sẽ nhận được câu trả lời tương tự (hoặc gần giống) - đồng thời có thêm thông tin giúp bạn đánh giá chất lượng, chi phí và hiệu suất ứng dụng agentic của bạn. Ví dụ:
-
-1. Lưu ý câu trả lời trích dẫn các file dữ liệu dùng để "trang bị kiến thức" cho phản hồi
-1. Di chuột lên nhãn file để xem dữ liệu có phù hợp với câu hỏi và phản hồi hiển thị không?
-
-Bạn cũng thấy một hàng _thống kê_ bên dưới câu trả lời.
-
-1. Di chuột lên bất kỳ chỉ số nào – ví dụ, Safety. Bạn sẽ thấy như hình
-1. Xếp hạng đánh giá có phù hợp với trực giác của bạn về mức độ an toàn câu trả lời không?
-
-      ![Data](../../../../../translated_images/vi/10-view-run-info-meter.6cdb89a0eea5531f.webp)
-
----
-
-## 7. Khả năng giám sát tích hợp sẵn
-
-Khả năng giám sát liên quan tới việc trang bị công cụ cho ứng dụng của bạn để tạo dữ liệu có thể dùng để hiểu, gỡ lỗi và tối ưu hóa hoạt động. Để cảm nhận điều này:
-
-1. Nhấp nút `View Run Info` - bạn sẽ thấy giao diện này. Đây là ví dụ về [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground). _Bạn cũng có thể xem qua tùy chọn Thread Logs trong menu cấp cao_.
-
-   - Cảm nhận các bước chạy và công cụ agent sử dụng
-   - Hiểu tổng số Token (đối với token đầu ra)
-   - Hiểu độ trễ và vị trí tiêu tốn thời gian khi chạy
-
-      ![Agent](../../../../../translated_images/vi/10-view-run-info.b20ebd75fef6a1cc.webp)
-
-1. Nhấp tab `Metadata` để xem các thuộc tính bổ sung cho phiên chạy, có thể hữu ích khi gỡ lỗi sau này.
-
-      ![Agent](../../../../../translated_images/vi/11-view-run-info-metadata.7966986122c7c2df.webp)
-
-
-1. Nhấp tab `Evaluations` để xem các đánh giá tự động về phản hồi của agent. Bao gồm đánh giá an toàn (ví dụ, Tự làm hại bản thân) và đánh giá riêng cho agent (ví dụ, Giải quyết ý định, Tuân thủ nhiệm vụ).
-
-      ![Agent](../../../../../translated_images/vi/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
-
-1. Cuối cùng, nhấp tab `Monitoring` trong menu bên.
-
-      - Chọn tab `Resource usage` trong trang hiện ra – và xem các số liệu.
-      - Theo dõi việc sử dụng ứng dụng về chi phí (token) và tải (yêu cầu).
-      - Theo dõi độ trễ ứng dụng tới byte đầu tiên (xử lý đầu vào) và byte cuối cùng (đầu ra).
-
-      ![Agent](../../../../../translated_images/vi/13-monitoring-resources.5148015f7311807f.webp)
-
----
-
-## 8. Biến Môi trường
-
-Cho đến nay, chúng ta đã triển khai trên trình duyệt - và xác thực rằng hạ tầng đã được cấp phát và ứng dụng vận hành. Nhưng để làm việc với mã nguồn ứng dụng _trước tiên_, chúng ta cần cấu hình môi trường phát triển local với các biến cần thiết để thao tác với tài nguyên. Sử dụng `azd` làm điều này trở nên dễ dàng.
-
-1. Azure Developer CLI [sử dụng biến môi trường](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) để lưu trữ và quản lý các cài đặt cấu hình cho việc triển khai ứng dụng.
-
-1. Các biến môi trường được lưu trong `.azure/<env-name>/.env` – phạm vi biến theo môi trường `env-name` dùng trong triển khai, giúp tách biệt các môi trường trên các đích triển khai khác nhau trong cùng một kho.
-
-1. Các biến môi trường được tự động tải bởi lệnh `azd` mỗi khi thực hiện một lệnh cụ thể (ví dụ, `azd up`). Lưu ý `azd` không tự đọc biến môi trường ở cấp độ hệ điều hành (ví dụ, thiết lập trong shell) – thay vào đó dùng `azd set env` và `azd get env` để chuyển thông tin trong scripts.
-
-
-Hãy thử một vài lệnh:
-
-1. Lấy tất cả biến môi trường được thiết lập cho `azd` trong môi trường này:
-
-      ```bash title="" linenums="0"
-      azd env get-values
-      ```
-      
-      Bạn sẽ thấy kết quả như sau:
-
-      ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
-      AZURE_AI_AGENT_NAME="agent-template-assistant"
-      AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
-      AZURE_AI_EMBED_DIMENSIONS=100
-      ...
-      ```
-
-1. Lấy giá trị cụ thể – ví dụ, tôi muốn biết có đặt giá trị `AZURE_AI_AGENT_MODEL_NAME` không
-
-      ```bash title="" linenums="0"
-      azd env get-value AZURE_AI_AGENT_MODEL_NAME 
-      ```
-      
-      Bạn sẽ thấy như hình – giá trị chưa được đặt mặc định!
-
-      ```bash title="" linenums="0"
-      ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
-      ```
-
-1. Đặt biến môi trường mới cho `azd`. Ở đây ta cập nhật tên mô hình agent. _Lưu ý: mọi thay đổi sẽ được phản chiếu ngay lập tức trong file `.azure/<env-name>/.env`.
-
-      ```bash title="" linenums="0"
-      azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
-      azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-04-14
-      azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-      ```
-
-      Giờ ta sẽ thấy giá trị đã được đặt:
-
-      ```bash title="" linenums="0"
-      azd env get-value AZURE_AI_AGENT_MODEL_NAME 
-      ```
-
-1. Lưu ý một số tài nguyên có tính bền vững (ví dụ, việc triển khai mô hình) và sẽ cần nhiều hơn một lệnh `azd up` để buộc triển khai lại. Ta thử tháo gỡ triển khai ban đầu và triển khai lại với biến môi trường mới.
-
-1. **Làm mới** Nếu trước đây bạn đã triển khai hạ tầng bằng mẫu azd – bạn có thể _làm mới_ trạng thái biến môi trường local dựa trên trạng thái hiện tại của triển khai Azure bằng lệnh này:
-
-      ```bash title="" linenums="0"
-      azd env refresh
-      ```
-
-
-      Đây là một cách mạnh mẽ để _đồng bộ_ các biến môi trường giữa hai hoặc nhiều môi trường phát triển cục bộ (ví dụ: nhóm với nhiều nhà phát triển) - cho phép hạ tầng đã triển khai làm cơ sở thực tế cho trạng thái biến môi trường. Các thành viên trong nhóm chỉ cần _làm mới_ biến để đồng bộ lại.
-
----
-
-## 9. Chúc mừng 🏆
-
-Bạn vừa hoàn thành một quy trình làm việc từ đầu đến cuối, trong đó bạn đã:
-
-- [X] Chọn mẫu AZD bạn muốn sử dụng
-- [X] Mở mẫu trong một môi trường phát triển được hỗ trợ
-- [X] Triển khai mẫu và xác thực nó hoạt động
+Tiếp tục tới [Phá giải một Mẫu](3-Deconstruct-AI-Template.md).
 
 ---
 

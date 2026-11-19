@@ -321,23 +321,22 @@ azd show --output json | jq '.services'
 
 ### AZD Extensions
 
-AI CLI reference reviewed 2026-11-04: `azd 1.37.2`, agents `1.0.0-beta.23`, evaluations `1.0.0-beta.2`. Use `azd >= 1.37.0` for the combined workflow; upgrade the core CLI before incompatible extensions.
+Foundry GA reference updated 2026-11-09: `microsoft.foundry` bundle 1.0, announced [November 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use `azd >= 1.37.0`; components are independently versioned and optional preview features retain their own status.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,9 +344,12 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
+
+The bundle does not include evaluations, datasets, fine-tuning, or custom models. Installing individual core extensions remains supported. Follow the [GA hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) for a runnable sample with Python 3.13+, current uv, permissions, and model quota.
 
 ### AI Agent Commands
 ```bash
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -378,17 +396,19 @@ azd ai agent delete --force
 
 `--template`/`-t` replaces the deprecated `--manifest`/`-m` spelling; legacy manifests need migration. There is no current agent-init `--host containerapp` option. Managed-harness, voice, and long-running previews need independent shell/CI environment opt-ins; see the [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
+Local testing still uses Azure model deployments and incurs charges. For cleanup, `azd down` deletes a newly created Foundry project's resource group, but leaves reused-project resources in place; remove only unwanted resources you own separately.
+
 ### AI Evaluations and Optimization
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -398,6 +418,21 @@ azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-n
 ```
 
 Agents beta.22 replaced legacy evaluation commands with `azd ai eval` from `azure.ai.evaluations`. New evaluation configuration uses camelCase keys. Optimization `--config` takes a standalone optimization API request, **not** legacy `eval.yaml` or new `azure.eval.yaml`; use `--eval`/`--eval-config` for evaluation reuse. See [evaluation setup](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+The runner fragment is not a complete workflow. Commit reviewed evaluation configuration and nonsecret assets, grant dataset/evaluator/model access, and use an environment per stage. See the [authenticated CI/CD example](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### MCP Server (Alpha)
 ```bash

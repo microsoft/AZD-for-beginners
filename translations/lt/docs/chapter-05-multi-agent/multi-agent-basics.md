@@ -1,44 +1,44 @@
-# Daugiaagentė esmė – diegkite savo pirmąją koordinuotą DI sistemą
+# Daugiaprogramė sistema – Įdiekite savo pirmą koordinuotą DI sistemą
 
 **Skyriaus navigacija:**
-- **📚 Kursų pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 5 skyrius – daugiaagentės DI sprendimai
-- **⬅️ Ankstesnis**: [4 skyrius: infrastruktūra](../chapter-04-infrastructure/README.md)
-- **➡️ Kitas**: [Koordinacijos modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 5 skyrius – Daugiaprogramės DI sprendimai
+- **⬅️ Ankstesnis**: [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md)
+- **➡️ Kitas**: [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Komandų instrukcijos peržiūrėtos pagal išleistą `azd 1.37.2` referenciją. Debesų diegimai nebuvo vykdyti.
+> Komandų nurodymas patikrintas pagal paskelbtą `azd 1.37.2` šaltinį. Debesuotieji diegimai nebuvo vykdomi.
 
 ## Įvadas
 
-Ankstesniuose skyriuose jūs įdiegėte vieną programą, o 2 skyriuje – vieną DI agentą. Ši pamoka žengia kitą žingsnį: diegiate **daugiaagentę sistemą**, kur kelis specializuoti agentai bendradarbiauja spręsdami problemą, kurios vienas agentas negalėtų gerai išspręsti pats.
+Ankstesniuose skyriuose įdiegėte vieną programą – o 2 skyriuje įdiegėte vieną DI agentą. Ši pamoka žengia kitą žingsnį: įdiegti **daugiaprogramę sistemą**, kur keli specializuoti agentai dirba kartu, kad išspręstų problemą, kurios vienas agentas vienas pats negalėtų gerai atlikti.
 
-Gera naujiena pradedantiesiems: **nereikia naujų komandų.** Daugiaagentis sprendimas vis dar yra azd projektas. Jūs naudosite `azd init`, `azd up`, testuosite ir `azd down` — tiksliai tą darbo eigą, kurią jau žinote. Kinta tik programos *forma* viduje.
+Geros naujienos pradedantiesiems: **nereikia naujų komandų.** Daugiaprogramis sprendimas vis tiek yra azd projektas. Jūs naudosite `azd init`, `azd up`, testuosite ir `azd down` — būtent tą darbo eigą, kurią jau pažįstate. Pakeičia tik programos vidinė *struktūra*.
 
 ## Mokymosi tikslai
 
 Šios pamokos pabaigoje jūs:
-- Suprasite, ką reiškia „daugiaagentė“ ir kada verta papildoma sudėtingumas
-- Atpažinsite įprastas daugiaagentės sistemos roles (koordinatorius + specialistai)
-- Įdiegsite veikiantį daugiaagentį šabloną su `azd up`
-- Suprasite Azure išteklius, kurie palaiko daugiaagentę programą
-- Žinosite, kaip saugiai patikrinti, pritaikyti ir išardyti sprendimą
+- Suprasite, ką reiškia "daugiaprogramis" ir kada verta priimti didesnį sudėtingumą
+- Atpažinsite dažniausias daugiaprogramės sistemos roles (organizatorius + specialistai)
+- Įdiegsite tikrą veikiančią daugiaprogramę šabloną su `azd up`
+- Suprasite Azure išteklius, kurie palaiko daugiaprogramę programą
+- Žinosite, kaip patikrinti, pritaikyti ir saugiai pašalinti sprendimą
 
 ## Mokymosi rezultatai
 
-Įvykdę šią pamoką galėsite:
-- Paaiškinti skirtumą tarp vieno agento ir daugiaagentės sistemos
-- Pasirinkti tarp vieno agente su įrankiais ir tikros daugiaagentės architektūros
-- Išdiegti ir išbandyti daugiaagentį šabloną nuo pradžios iki pabaigos su azd
-- Nustatyti, kur veikia kiekvienas agentas ir kaip jie komunikuoja
-- Išvalyti visus išteklius, kad būtų išvengta nuolatinių išlaidų
+Įveikę šią pamoką sugebėsite:
+- Paaiškinti skirtumą tarp vieno agento ir daugiaprogramės sistemos
+- Pasirinkti tarp vieno agento su įrankiais ir tikro daugiaprogramio dizaino
+- Įdiegti ir testuoti daugiaprogramį šabloną nuo pradžios iki pabaigos naudojant azd
+- Nustatyti, kur vykdomas kiekvienas agentas ir kaip jie bendrauja
+- Išvalyti visus išteklius, kad išvengtumėte tęstinių mokesčių
 
 ---
 
-## Kas yra daugiaagentė sistema?
+## Kas yra daugiaprogramė sistema?
 
-Vienas DI agentas yra vienas modelis su instrukcijų rinkiniu ir (pasirenkamai) kai kuriais įrankiais. Tai veikia gerai susitelktiems užduotims. Tačiau užduočiai augant — tyrimas, rašymas, taisymas, faktų tikrinimas — viską sutalpinti į vieną užklausą daro agentą lėtesnį, mažiau patikimą ir sunkiau išsigryninti klaidas.
+Vienas DI agentas yra vienas modelis su instrukcijų rinkiniu ir (nebūtinai) kai kuriais įrankiais. Tai gerai veikia sutelktiems užduotims. Tačiau kai užduotis didėja – tyrimai, rašymas, redagavimas, faktų tikrinimas – viską sudėti į vieną užklausą daro agentą lėtesnį, mažiau patikimą ir sunkiau derinamą.
 
-**Daugiaagentė sistema** daro darbą, kad kiekvienas specialistas gerai atlieka vieną užduotį, koordinuojamą koordinatoriaus:
+**Daugiaprogramė sistema** daro darbą specialistais, kurie kiekvienas gerai atlieka vieną užduotį, koordinuojami organizatoriaus:
 
 ```mermaid
 graph TD
@@ -52,42 +52,42 @@ graph TD
     Orchestrator --> Result([Final answer])
 ```
 
-### Dvi roles, kurias visada matysite
+### Dvi rolės, kurias visada matysite
 
-| Rolis | Užduotis | Pavyzdys |
+| Rolė | Užduotis | Pavyzdys |
 |------|----------|----------|
-| **Koordinatorius** | Nusprendžia *ką daryti toliau* ir nukreipia darbą tarp agentų | „Pirmiausia tyrinėk, tada rašyk, tada redaguok“ |
-| **Specialistas** | Atlieka vieną sutelktą darbą ir pateikia rezultatą | „Tyrėjas“, kuris tik renka faktus |
+| **Organizatorius** | Nustato *kas toliau vyksta* ir paskirsto darbą tarp agentų | „Pirmiausia tyrimai, tada rašymas, paskui redagavimas“ |
+| **Specialistas** | Atlieka vieną sutelktą užduotį ir pateikia rezultatą | „Tyrėjas“, kuris tik renka faktus |
 
-### Ar iš tiesų reikia kelių agentų?
+### Ar tikrai reikia kelių agentų?
 
-Pradėkite paprastai. Pasirinkite daugiaagentę **tik** kai kuris nors iš šių teisingas:
+Pradėkite paprastai. Imkitės daugiaprogramio **tik tada**, kai galioja bent vienas iš šių punktų:
 
-- ✅ Užduotis turi **atskirus etapus**, kurie naudingai naudoja skirtingas instrukcijas (tyrimas vs. rašymas vs. peržiūra)
-- ✅ Norite, kad specialistai dirbtų **lygiagrečiai**, kad sutaupytumėte laiko
-- ✅ Skirtingiems žingsniams reikia **skirtingų įrankių ar duomenų šaltinių**
-- ✅ Kiekvienam etapui reikia būti **atskirose testavimo ir gedimų šalinimo galimybėse**
+- ✅ Užduotis turi **aiškias stadijas**, kurios naudingos su skirtingomis instrukcijomis (tyrimai, rašymas, peržiūra)
+- ✅ Norite, kad specialistai veiktų **paraleliai**, kad taupytų laiką
+- ✅ Skirtingiems veiksmams reikia **skirtingų įrankių ar duomenų šaltinių**
+- ✅ Kiekvienas žingsnis turi būti **nepriklausomai testuojamas ir derinamas**
 
-Jei jūsų užduotis – vienas klausimas-atsakymas arba paprastas įrankio kvietimas, **vieno agento su įrankiais** (2 skyrius) sprendimas yra paprastesnis, pigesnis ir lengviau valdomas.
+Jei jūsų užduotis yra vienas klausimas ir atsakymas arba paprastas įrankio kvietimas, **vienas agentas su įrankiais** (2 skyrius) yra paprastesnis, pigesnis ir lengviau valdomas.
 
-> **Pradedančiojo patarimas:** „Daugiau agentų“ nereiškia „geriau.“ Kiekvienas agentas prideda vėlavimą, kainą ir dar vieną stebimą dalyką. Agentus pridėkite tik tada, kai problema aiškiai suskyla į dalis.
+> **Pradedančiojo patarimas:** „Daugiau agentų“ nereiškia „geriau“. Kiekvienas agentas prideda delsą, kainą ir naują stebėtiną dalyką. Pridėkite agentus tik tada, kai problema aiškiai suskaidoma į dalis.
 
 ---
 
-## Du būdai sukurti daugiaagentę Azure aplinkoje
+## Du būdai kurti daugiaprogramį Azure aplinkoje
 
-| Požiūris | Kas tai yra | Geriausia skirta |
-|----------|------------|----------------|
+| Požiūris | Kas tai yra | Geriausia taikyti |
+|----------|-------------|------------------|
 | **Vienas agentas + įrankiai** | Vienas Foundry agentas, kuris kviečia funkcijas/įrankius | Paprastos darbo eigos, pradžia |
-| **Keli koordinuoti agentai** | Keli agentai su koordinatoriumi | Atskiri etapai, lygiagretus darbas, specializacija |
+| **Daug kelių koordinuotų agentų** | Keli agentai su organizatoriumi | Aiškios stadijos, paralelinis darbas, specializacija |
 
-Ši pamoka daugiausia dėmesio skiria antrajai strategijai, naudojant **paruoštą šabloną**, kad galėtumėte pamatyti veikiančią daugiaagentę sistemą prieš kurdami savo.
+Ši pamoka orientuota į antrą požiūrį, naudojant **paruoštą šabloną**, kad pamatytumėte tikrą daugiaprogramę sistemą veikiančią prieš kurdami savo.
 
 ---
 
-## Praktika: įdiekite veikiantį daugiaagentę programą
+## Praktinė užduotis: įdiekite veikiančią daugiaprogramę programą
 
-Diegsime **Contoso Creative Writer**, oficialų Azure pavyzdį, kuris koordinuoja tyrimo, produkto, rašymo ir redagavimo agentus straipsniui sukurti. Prieš tęsdami, patikrinkite [pavyzdžio reikalavimus ir išlaidas](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): reikalingas modelio kvotas, Azure AI Search, Bing Grounding prieiga, Python, Docker ir Bash palaikymas. Modelio ir regiono prieinamumas priklauso nuo jūsų prenumeratos; diegimas ne visada garantuotas pasirinkus konkretų regioną.
+Įdiegsime **Contoso Creative Writer** – oficialų Azure pavyzdį, koordinuojantį tyrimų, produkto, rašymo ir redagavimo agentus straipsnio išleidimui. Prieš tęsdami, patikrinkite [pavyzdžio reikalavimus ir kainas](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): reikia modelio kvotos, Azure AI Search, Bing Grounding prieigos, Python, Docker ir Bash suderinamų įrankių. Modelių ir regionų prieinamumas priklauso nuo jūsų prenumeratos; diegimas nebus garantuotas pasirinkus tam tikrą regioną.
 
 ### 1 žingsnis: inicializuokite šabloną
 
@@ -99,7 +99,7 @@ mkdir creative-writer && cd creative-writer
 azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Daugiau daugiaagentžių šablonų galite rasti bet kada [Awesome AZD AI galerijoje](https://azure.github.io/awesome-azd/?tags=ai). Kitos pradedantiesiems draugiškos galimybės yra `get-started-with-ai-agents` ir `azure-ai-travel-agents`.
+> Bet kada galite peržiūrėti daugiau daugiaprogramių šablonų [Awesome AZD AI galerijoje](https://azure.github.io/awesome-azd/?tags=ai). Kiti pradedančiajam draugiški variantai: `get-started-with-ai-agents` ir `azure-ai-travel-agents`.
 
 ### 2 žingsnis: autentifikuokitės
 
@@ -120,7 +120,7 @@ azd env list
 # azd env new dev
 ```
 
-### 4 žingsnis: peržiūrėkite, tada diegkite
+### 4 žingsnis: peržiūra ir diegimas
 
 ```bash
 # See what will be created before spending anything (recommended)
@@ -130,45 +130,45 @@ azd provision --preview
 azd up
 ```
 
-`azd up` paprašys trūkstamų prenumeratos ir regiono nustatymų, tada paskirstys išteklius ir įdiegs programą. Peržiūra nerezervuoja kvotos ir negarantuoja sėkmės; šablono kabliai gali veikti per paskirstymo peržiūrą, todėl juos pirmiausia peržiūrėkite. Norėdami pratęsti azd laukimo laiką kiekvienam **paslaugos diegimui** (ne modelio įvedimui):
+`azd up` paprašys trūkstamų prenumeratos ir regiono nustatymų, tada paruoš išteklius ir įdiegs programą. Peržiūra neužrezervuoja kvotos ir negarantuoja sėkmės; šablono įrankiai gali veikti ir peržiūros metu – patikrinkite juos pirmiausia. Norėdami pratęsti laukimo laiką kiekvienam **paslaugos diegimui** (o ne modelio paruošimui):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-Laiko limitas sustabdo azd laukimą; jis neatšaukia diegimo Azure. Prieš bandydami dar kartą patikrinkite išteklių būseną.
+Laukimo laiko viršijimas stabdo azd laukimą; jis neatšaukia diegimo Azure aplinkoje. Prieš bandydami dar kartą, patikrinkite išteklių būseną.
 
-> **Dėmesio dėl sąnaudų ir pajėgumų:** daugiaagentės programos diegia DI modelius, kurie naudoja kvotą ir sukelia išlaidas. Jei `azd up` nepavyksta dėl modelio kvotos, žiūrėkite [DI trikčių šalinimą](../chapter-07-troubleshooting/ai-troubleshooting.md) dėl regiono ir kvotų pataisymų, taip pat 6 skyrių [Pajėgumų planavimas](../chapter-06-pre-deployment/capacity-planning.md).
+> **Dėmesio į kainą ir talpą:** Daugiaprogramės programos įdiegia DI modelius, kurie naudoja kvotą ir generuoja išlaidas. Jei `azd up` nepavyksta modelio kvotos, žr. [DI trikčių šalinimą](../chapter-07-troubleshooting/ai-troubleshooting.md) dėl regiono ir kvotos pataisymų bei 6 skyrių [Talpos planavimas](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Supratimas, ką įdiegėte
+## Supraskite, ką įdiegėte
 
-Tipinė daugiaagentė programa tokia paskiria Azure išteklių rinkinį, kuris tiesiogiai atspindi atsakomybę pagal aukščiau esančią schemą:
+Tokia tipiška daugiaprogramė programa paruošia Azure išteklių rinkinį, kuris tiesiogiai atitinka anksčiau parodytą atsakomybės schemą:
 
 | Išteklius | Kodėl jis reikalingas |
-|-----------|---------------------|
+|----------|-----------------------|
 | **Microsoft Foundry / Modeliai** | Talpina kalbos modelius, kuriuos naudoja kiekvienas agentas |
-| **Azure AI Search** | Suteikia tyrimo agentui išgrįstas duomenų paieškas |
-| **Container Apps** (arba App Service) | Talpina koordinatoriumi ir agentų kodą |
-| **Cosmos DB** (kai kuriuose pavyzdžiuose) | Laiko bendrą būseną / atmintį, kurią perduoda agentai |
-| **Application Insights** | Seką užklausas *per* agentus, kad galėtumėte derinti srautą |
+| **Azure AI Search** | Tyrimo agentui suteikia prieigą prie pagrįstų duomenų paieškoms |
+| **Container Apps** (arba App Service) | Talpina organizatoriaus ir agentų kodą |
+| **Cosmos DB** (kai kuriuose pavyzdžiuose) | Saugo bendrą būseną/atmintį, perduodamą tarp agentų |
+| **Application Insights** | Sekite užklausas *tarp* agentų, kad galėtumėte derinti srautą |
 
-### Kaip agentai tarpusavyje kalbasi
+### Kaip agentai bendrauja tarpusavyje
 
-Daugelyje azd daugiaagentžių pavyzdžių **koordinatorius veikia jūsų programos kode** (pvz., naudodamas Semantic Kernel arba Microsoft Agent Framework). Koordinatorius paeiliui kviečia specialistus agentus, perduoda rezultatus ir surenka galutinį atsakymą. Agentai dalijasi kontekstu per:
+Daugumoje azd daugiaprogramių pavyzdžių **organizatorius veikia jūsų programos kode** (pvz., naudojant Semantic Kernel arba Microsoft Agent Framework). Organizatorius paeiliui kviečia kiekvieną specialistą, perduoda rezultatus ir sujungia galutinį atsakymą. Agentai dalijasi kontektu per:
 
-- **Funkcijų/įrankių kvietimus** — koordinatorius iškviečia specialistą ir gauna atsakymą
-- **Bendrą atmintį** — duomenų bazė (dažnai Cosmos DB) laiko būseną, kurią skaito abu agentai
-- **Žinutes/įvykius** — laisvesniam susiejimui agentai komunikuoja per eilę arba Service Bus
+- **Funkcijų/įrankių kvietimus** — organizatorius kviečia specialistą ir gauna rezultatą
+- **Bendrą atmintį** — duomenų bazę (dažnai Cosmos DB), kurį galima skaityti abiem agentams
+- **Žinutes/įvykius** — siekiant mažesnio susiejimo, agentai komunikuoja per eilę ar Service Bus
 
-> **Kodėl tai svarbu derinimui:** kadangi kiekvienas žingsnis yra atskiras, Application Insights parodo *koks* agentas buvo lėtas ar nepavyko. Tai viena pagrindinių priežasčių darbą skaldyti tarp agentų.
+> **Kodėl tai svarbu derinimui:** kadangi kiekvienas žingsnis atskiras, Application Insights parodo *kuris* agentas buvo lėtas ar nepavyko. Tai pagrindinė priežastis, kodėl verta dalyti darbą tarp agentų.
 
 ---
 
 ## Patikrinkite diegimą
 
-Patvirtinkite, kad sistema išties veikia prieš einant toliau:
+Patvirtinkite, kad sistema tikrai veikia prieš tęsdami:
 
 ```bash
 # Show the deployed endpoints
@@ -181,66 +181,68 @@ azd monitor
 azd monitor --logs
 ```
 
-Tada atidarykite programos URL iš `azd show` ir paprašykite trumpą straipsnį. Naudokite pavyzdžio derinimo rodinį agentų darbo eigai patikrinti. Application Insights užklausų paieška gali parodyti atskirus žingsnius, jei pavyzdys juos instrumentuoja ir koreliuoja; azd automatiškai neprideda agentų spanų.
+Tada atidarykite programos URL iš `azd show` ir paprašykite trumpo straipsnio. Naudokite pavyzdžio derinimo peržiūrą, kad apžiūrėtumėte agentų darbo eigą. Application Insights užklausų paieška rodo atskirus žingsnius tik jei pavyzdys juos instrumentuoja ir koreliuoja; azd automatiškai neprideda agentų žymių.
 
 **Sėkmės kriterijai:**
-- ✅ `azd show` pateikia pasiekiamą galinį tašką
-- ✅ Užklausa duoda rezultatą, kuris aiškiai praėjo kelis etapus
-- ✅ Derinimo rodinyje matosi keli agentų veiksmai; jei įtraukta stebėsena, patikrinkite atitinkamą telemetriją po įvedimo
+- ✅ `azd show` rodo pasiekiamą galinę tašką
+- ✅ Užklausa sukuria rezultatą, kuris aiškiai praėjo keliomis stadijomis
+- ✅ Derinimo peržiūroje matosi keli agentų žingsniai; jei įjungta sekimas, patikrinkite atitinkamą telemetriją po užkrovimo
 
 ---
 
-## Tinkinkite: pridėkite arba pakoreguokite agentą
+## Pritaikykite: pridėkite arba pakoreguokite agentą
 
-Kadangi kiekvienas agentas yra tik instrukcijos plius įrankiai, tinkinimas yra prieinamas:
+Kadangi kiekvienas agentas yra instrukcijos plius įrankiai, pritaikyti nėra sunku:
 
-1. **Suraskite agentų aprašymus** šablone (dažnai `prompts/`, `agents/` arba `*.prompty` bylų rinkinyje).
-2. **Pakeiskite agente instrukcijas** – pavyzdžiui, nurodykite redaktoriaus agentui laikytis tam tikro tono ar žodžių skaičiaus.
-3. **Perdiegi tik kodą** (infrastruktūra nesikeičia):
+1. **Raskite agentų aprašus** šablone (dažnai `prompts/`, `agents/` arba `*.prompty` failų rinkinys).
+2. **Patikslinkite agento instrukcijas** – pvz., nurodykite redaktoriui laikytis konkretaus tono ar žodžių skaičiaus.
+3. **Perdiegi tik kodą** (infrastruktūra lieka nepakitusi):
 
    ```bash
    azd deploy
    ```
 
-Norėdami kurti *savo* Foundry agentų projektą, naudokite agentų plėtinio interaktyvų inicializavimą:
+Norėdami giliau pažinti *savo* Foundry agentų projektą, naudokite GA paketą su AZD 1.37.0+ atskirame tuščiame kataloge:
 
 ```bash
-azd extension install azure.ai.agents
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 azd ai agent invoke      # test, with response timing
 ```
 
-Žr. [2 skyrių: agentai](../chapter-02-ai-development/agents.md) ir [AZD DI CLI referenciją](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dėl viso gyvavimo ciklo: agentas `invoke`, atskiras vertinimo plėtinys `azd ai eval` darbo eiga, agento `optimize` ir agento `delete`.
+Žiūrėkite [GA valdomo agento žingsnis po žingsnio vadovą](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) vietiniam Agent Inspector testavimui, nuotoliniam kodo diegimui ir išvalymo valdymui. [AZD DI CLI referencija](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) aptaria ir atskirą vertinimo plėtinį, optimizavimą bei agento naikinimą.
 
 ---
 
 ## Išvalykite
 
-Daugiaagentės programos veikia kelias mokamas paslaugas. Išardykite viską, kai baigsite:
+Daugiaprogramės programos paleidžia kelias apmokestinamas paslaugas. Išvalykite viską, kai baigsite:
 
 ```bash
 # Review the resources and confirm deletion interactively
 azd down
 ```
 
-Trinimas yra destruktyvus. Laikinuose laboratorijose `azd down --force --purge` praleidžia trynimą ir palaiko švelnaus trinimo patvirtinimus; ištrynimas yra negrįžtamas ten, kur palaikomas, ir gali būti blokuojamas purvo apsauga. Švelnus trynimas susijęs su atkūrimu/pavadinimo pakartotiniu panaudojimu, o ne tiesioginių mokesčių įrodymu. Po išvalymo patikrinkite išlaikytus išteklius ir atsiskaitymą.
+Ištrynimas yra destruktyvus. Dėl laikinųjų laboratorijų, `azd down --force --purge` praleidžia ištrynimą ir palaiko minkšto ištrynimo patvirtinimus; tokie ištrynimai yra neatšaukiami ir gali būti blokuojami apsaugos nuo ištrynimo. Minkštas ištrynimas susijęs su atkūrimu/pavadinimų pakartotiniu naudojimu, o ne su tęstiniais mokesčiais. Pasitikrinkite išlaikytus išteklius ir apmokėjimą po išvalymo.
+
+Jei taip pat inicializavote valdomą agentą esamam Foundry projektui, `azd down` palieka to projekto agentą ir kitus išteklius vietoje. Pašalinkite tik nepageidaujamus savo nuosavybėje esančius resursus atskirai. Naujam Foundry projektui, sukurtam jo AZD aplinkos, `azd down` ištrina išteklių grupę ir viską joje.
 
 ---
 
-## Pastaba apie daugiaagentes gamybos sistemas
+## Pastaba apie gamybines daugiaprogrames sistemas
 
-Šiame repozitoriume esantis [Mažmeninės prekybos daugiabrolio agento sprendimas](../../examples/retail-scenario.md) yra **architektūrinis planas**, o ne vieno komandos šablonas—jame dokumentuojama, kaip *galėtų* būti sukuriama gamybinė mažmeninės prekybos sistema (ir aiškiai nurodoma, kad pilnas kūrimas yra reikšmingas darbas). Naudokite jį kaip dizaino nuorodą *tik po* to, kai čia sudiegsite veikiantį pavyzdį. Dėl gamybai svarbių klausimų (patvarumas, kaštai, stebėjimas, valdymas) žiūrėkite [8 skyrių: Gamybinės DI praktikos](../chapter-08-production/production-ai-practices.md).
+Šiame repozitorijoje esanti [Mažmeninės prekybos daugiaprogramė sprendimas](../../examples/retail-scenario.md) yra **architektūrinė schema**, o ne vieno komandos šablonas – ji dokumentuoja, kaip *būtų* sukuriama gamybinė mažmeninės prekybos sistema (ir aiškiai nurodo, kad pilnas kūrimas yra reikšmingas darbas). Naudokite ją kaip dizaino nuorodą *po* to, kai čia įdiegsite veikiančią pavyzdinę versiją. Dėl gamybos aspektų (atsparumo, išlaidų, stebėjimo, valdymo) tęskite skaitymą [8 skyriuje: Gamybinio AI praktikos](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Santrauka
 
-- Daugiabrolis agentų sistema paskirsto darbus tarp specialistų, kuriuos koordinuoja orkestratorius.
-- Naudokite tai tik, kai užduotis turi atskirus etapus, lygiagretiškumą arba skirtingus įrankius kiekviename žingsnyje—priešingu atveju geriau naudoti vieną agentą.
-- azd darbo eiga nesikeičia: `azd init` → `azd up` → testavimas → `azd down`.
-- Tikras šablonas kaip `contoso-creative-writer` leidžia šiandien pamatyti ir pritaikyti veikiantį daugiabrolio agento programą.
-- Application Insights stebėjimas tarp agentų yra viena svarbiausių praktinių daugiabrolio agento dizaino naudų.
+- Daugiaprogramė sistema paskirsto darbą specialistams, koordinuojama organizatoriaus.
+- Naudokite ją tik kai užduotyje yra aiškios stadijos, lygiagretumas arba skirtingi įrankiai kiekviename žingsnyje – kitu atveju geriau naudoti vieną agentą.
+- „azd“ darbo eiga nesikeičia: `azd init` → `azd up` → testas → `azd down`.
+- Tikras šablonas, kaip `contoso-creative-writer`, leidžia šiandien pamatyti ir pritaikyti veikiančią daugiaprogramę programėlę.
+- „Application Insights“ sekimas tarp agentų yra vienas didžiausių praktinių daugiaprogramės dizaino privalumų.
 
 ---
 
@@ -249,14 +251,14 @@ Trinimas yra destruktyvus. Laikinuose laboratorijose `azd down --force --purge` 
 | Kryptis | Pamoka |
 |-----------|--------|
 | **Ankstesnė** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
-| **Kita** | [Koordinavimo Modeliai](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Kita** | [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Susiję Šaltiniai
+## 📖 Susiję ištekliai
 
-- [DI Agentų Vadovas](../chapter-02-ai-development/agents.md)
-- [Koordinavimo Modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
-- [DI Kūrimo Praktikos](../chapter-08-production/production-ai-practices.md)
-- [DI Problemų Sprendimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI agentų vadovas](../chapter-02-ai-development/agents.md)
+- [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Gamybinio AI praktikos](../chapter-08-production/production-ai-practices.md)
+- [AI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

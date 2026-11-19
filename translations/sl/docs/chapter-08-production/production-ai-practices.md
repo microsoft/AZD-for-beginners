@@ -1,27 +1,27 @@
-# Prakse za najboljše delo z AI v produkciji z AZD
+# Najboljše prakse za proizvodno obremenitev AI z AZD
 
 **Navigacija po poglavjih:**
-- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 8 - Producentni & Enterprise vzorci
+- **📚 Domača stran tečaja**: [AZD Za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 8 - Proizvodni & podjetniški vzorci
 - **⬅️ Prejšnje poglavje**: [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Prav tako povezano**: [Delavnica AI Laboratorij](../chapter-02-ai-development/ai-workshop-lab.md)
-- **🎯 Zaključek tečaja**: [AZD za začetnike](../../README.md)
+- **⬅️ Povezano tudi**: [Delavnica AI Laboratorij](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Zaključek tečaja**: [AZD Za začetnike](../../README.md)
 
 ## Pregled
 
-Ta vodnik pojasnjuje produktivne AI oblikovne vzorce z uporabo ukazne vrstice Azure Developer CLI (AZD). Gre za oblikovni referenčni okvir, ne pa za nameščljivo aplikacijo ali produkcijsko certifikacijo.
+Ta vodič pojasnjuje proizvodne vzorce za AI z uporabo Azure Developer CLI (AZD). Gre za referenco za oblikovanje, ne pa za aplikacijo, ki jo je mogoče namestiti, ali za proizvodno certifikacijo.
 
-**Meje primerov:** Razen če ni izrecno opisano kot popolno, Bicep fragmenti predvidevajo parametre in referencirane vire iz vsebinske predloge. Izpuščajo gostiteljske slike/plane, identitete, dodelitve vlog, DNS, izhode in drugo potrebno integracijo. YAML službene poti in skripte za hook/test so ilustrativne datoteke za ustvarjanje v **vaši lastni aplikaciji**; niso priložene v tem tečaju. Uporabite delujoč AZD vzorec kot osnovo, sestavite celotno infrastrukturo in jo preizkusite v izoliranem okolju pred uporabo v produkciji.
+**Meje primera:** Če ni izrecno opisano kot popolno, Bicep fragmenti predpostavljajo parametre in navedene vire iz vsebujejoče predloge. Izpuščajo gostiteljske slike/plane, identitete, dodelitve vlog, DNS, izhode in drugo zahtevano integracijo. YAML poti storitev in skripti za kljuke/preteke so ilustrativne datoteke za ustvarjanje v **vaši lastni aplikaciji**; niso priložene v tem tečaju. Uporabite delujoč vzorec AZD kot osnovo, sestavite celotno infrastrukturo in jo preizkusite v izoliranem okolju pred produkcijo.
 
-## Ključni izzivi, ki jih naslovimo
+## Ključne izzive, ki jih obravnavamo
 
-Pogoste skrbi v produkciji vključujejo večstoritvene namestitve, upravljanje identitet in skrivnosti, skaliranje, stroškovni nadzor ter spremljanje. Tu ni trditev o izmerjeni pogostosti.
+Pogosti problemi proizvodnje vključujejo uvajanje več storitev, upravljanje identitet in skrivnosti, skaliranje, nadzor stroškov in spremljanje. Tukaj ni trditev o pogostosti.
 
-## Arhitekturni vzorci za produkcijski AI
+## Arhitekturni vzorci za proizvodno AI
 
-### Vzorec 1: Arhitektura AI mikro storitev
+### Vzorec 1: Arhitektura AI mikrostoritev
 
-**Kdaj uporabiti**: Kompleksne AI aplikacije z več funkcionalnostmi
+**Kdaj uporabljati**: Kompleksne AI aplikacije z več možnostmi
 
 ```mermaid
 graph TD
@@ -57,9 +57,9 @@ services:
     host: containerapp
 ```
 
-### Vzorec 2: Dogodkovno vodeno AI procesiranje
+### Vzorec 2: AI procesiranje, ki se sproža z dogodki
 
-**Kdaj uporabiti**: Paketno obdelavo, analizo dokumentov, asinhrone delovne tokove
+**Kdaj uporabljati**: Serijsko procesiranje, analiza dokumentov, asinhroni delovni tokovi
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -106,48 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-Ta vzorec ustvari prekide imenskih prostorov, ne vozlišč, čakalnih vrst, naročnin ali sprožilcev Functions. Za izvedljivo funkcijo je potreben gostiteljski načrt, konfiguracija runtime/shranjevanja, pripeta identiteta, RBAC in dostop do omrežja. Referenca Key Vault zahteva dovoljenje za branje skrivnosti; URL končne točke sam po sebi ni poverilnica.
+To ustvari fragmente imenskega prostora, ne vozlišč, čakalnih vrst, naročnin ali sprožilcev za funkcije. Za izvedljivo funkcijo je potreben tudi gostiteljski načrt, konfiguracija izvajanja/shranjevanja, pripeta identiteta, RBAC in dostop do omrežja. Referenca Key Vault zahteva dovoljenje za branje skrivnosti; sam URL končne točke ni poverilnica.
 
 ## Razmišljanje o zdravju AI agenta
 
-Ko se tradicionalna spletna aplikacija pokvari, so simptomi znani: stran se ne naloži, API vrne napako ali namestitev ne uspe. AI-podprte aplikacije se lahko pokvarijo na enake načine — a se lahko tudi nepravilno obnašajo na subtilnejše načine, ki ne pokažejo očitnih sporočil o napaki.
+Ko tradicionalna spletna aplikacija odpove, so simptomi znani: stran se ne naloži, API vrne napako ali uvajanje odpove. AI-podprte aplikacije lahko odpovedo na vse te načine—lahko pa se obnašajo tudi bolj subtilno, brez očitnih sporočil o napakah.
 
-Ta razdelek vam pomaga zgraditi mentalni model spremljanja AI delovnih obremenitev, da boste vedeli, kje iskati, če se zdi, da nekaj ni v redu.
+Ta oddelek vam pomaga zgraditi mentalni model za spremljanje AI obremenitev, da boste vedeli, kje iskati, ko se stvari ne zdijo prav.
 
-### Kako se zdravje agenta razlikuje od zdravja tradicionalne aplikacije
+### Kako se zdravje agenta razlikuje od zdravja tradicionalnih aplikacij
 
-Tradicionalne aplikacije lahko prav tako doživljajo subtilne neuspehe pravilnosti. AI agent uvaja nedeterministično kakovost odgovorov poleg običajnih skrbi glede razpoložljivosti in pravilnosti. Zdravje agenta lahko razumemo v dveh plasteh:
+Tudi tradicionalne aplikacije imajo lahko subtilne težave z pravilnostjo. AI agent doda nedeterministično kakovost odziva k običajnim skrbi glede razpoložljivosti in pravilnosti. Razmišljajte o zdravju agenta v dveh slojih:
 
-| Plast | Na kaj paziti | Kje iskati |
+| Sloj | Kaj spremljati | Kje iskati |
 |-------|--------------|---------------|
-| **Zdravje infrastrukture** | Ali storitev deluje? Ali so viri zagotovljeni? Ali so končne točke dosegljive? | `azd monitor`, stanje vira v Azure portalu, dnevnik kontejnerja/aplikacije |
-| **Zdravje vedenja** | Ali agent pravilno odgovarja? So odgovori pravočasni? Ali je klic modela pravilen? | sledi Application Insights, meritve zakasnitve klica modela, dnevniki kakovosti odgovorov |
+| **Zdravje infrastrukture** | Ali storitev deluje? So viri zagotovljeni? So končne točke dosegljive? | `azd monitor`, zdravje vira v Azure portalu, dnevniki vseh vsebnikov/aplikacij |
+| **Zdravje vedenja** | Ali agent odgovarja natančno? Ali so odgovori pravočasni? Ali je model pravilno klican? | Application Insights sledi, meritve latence klicev modela, dnevniki kakovosti odziva |
 
-Zdravje infrastrukture je znano — isto velja za vse aplikacije azd. Zdravje vedenja je nova plast, ki jo uvajajo AI delovne obremenitve.
+Zdravje infrastrukture je znano—enako velja za katerokoli azd aplikacijo. Zdravje vedenja je nov sloj, ki ga uvajajo AI obremenitve.
 
 ### Kje iskati, ko se AI aplikacije ne obnašajo kot pričakovano
 
-Če vaša AI aplikacija ne daje pričakovanih rezultatov, je tu konceptualni kontrolni seznam:
+Če vaša AI aplikacija ne proizvaja pričakovanih rezultatov, je tukaj konceptualni seznam:
 
-1. **Začnite z osnovami.** Ali aplikacija deluje? Ali lahko doseže svoje odvisnosti? Preverite `azd monitor` in stanje vira tako kot pri kateri koli aplikaciji.
-2. **Preverite povezavo z modelom.** Ali vaša aplikacija uspešno kliče AI model? Neuspešni ali pretečeni klici modela so najpogostejši vzrok težav pri AI aplikacijah in bodo vidni v dnevnikih vaše aplikacije.
-3. **Varnostno preglejte vhodne podatke in podlage.** Napačni odgovori lahko izhajajo iz pridobivanja, navodil, omejitev modela ali izvrševanja orodij. Uporabljajte diagnostične podatke z nadzorovanim dostopom in rdeče označene; ne omogočajte nediskriminatornega beleženja pozivov/odgovorov v produkciji.
-4. **Preglejte zamudo odgovorov.** Klici AI modelov so počasnejši od običajnih API klicev. Če se zdi, da je aplikacija počasna, preverite, ali se je čas odziva modela povečal — to lahko kaže na omejitve, preobremenjenost ali regijsko zasičenost.
-5. **Bodite pozorni na signale stroškov.** Nenadni skoki v uporabi tokenov ali API klicih lahko kažejo na zanko, nepravilno konfiguriran poziv ali prekomerno ponavljanje.
+1. **Začnite z osnovami.** Aplikacija deluje? Ali doseže svoje odvisnosti? Preverite `azd monitor` in zdravje vira kot pri vsaki aplikaciji.
+2. **Preverite povezavo z modelom.** Ali vaša aplikacija uspešno kliče AI model? Neuspešni ali potekli klici modela so najpogostejši vzrok težav AI aplikacij in se bodo prikazali v vaših aplikacijskih dnevnikih.
+3. **Preverite vhod in ozadje z varnostjo.** Napačni odgovori lahko izvirajo iz iskanja, navodil, omejitev modela ali izvajanja orodij. Uporabljajte podatke za diagnostiko z nadzorom dostopa in cenzurirane; ne omogočajte neselektivnega dnevnikovanja pozivov/odgovorov v produkciji.
+4. **Preverite latenco odziva.** Klici AI modela so počasnejši od običajnih API klicev. Če se aplikacija zdi počasna, preverite, ali so se časi odziva modela povečali—to lahko kaže na omejevanje, kapacitete ali zasičenost na ravni regije.
+5. **Spremljajte signal stroškov.** Nepričakovani porasti v uporabi žetonov ali API klicih lahko kažejo zanko, nepravilno nastavljen poziv ali prekomerne ponovitve.
 
-Ni vam treba takoj obvladati orodij za opazovanje. Ključni zaključek je, da AI aplikacije uvajajo dodaten sloj vedenja za spremljanje, in vgrajeno spremljanje azd (`azd monitor`) vam daje izhodišče za raziskovanje obeh slojev.
+Ni vam treba takoj obvladati orodij za opazovanje. Ključna ugotovitev je, da AI aplikacije uvajajo dodatni sloj vedenja za spremljanje, azd vgrajeno spremljanje (`azd monitor`) pa vam nudi izhodišče za preiskovanje obeh slojev.
 
 ---
 
-## Najboljše varnostne prakse
+## Najboljše prakse varnosti
 
-### 1. Model varnosti z ničelnim zaupanjem (Zero-Trust)
+### 1. Model varnosti brez zaupanja (Zero-Trust)
 
-**Strategija implementacije**:
-- Brez komunikacije med storitvami brez overjanja
+**Strategija izvajanja**:
+- Brez komunikacije med storitvami brez overitve
 - Vsi API klici uporabljajo upravljane identitete
 - Omrežna izolacija z zasebnimi končnimi točkami
-- Nadzor dostopa z najmanjšimi pravicami
+- Dostop z najmanjšimi potrebnimi privilegiji
 
 ```bicep
 // Managed Identity for each service
@@ -168,9 +168,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Varnostno upravljanje skrivnosti
+### 2. Varen upravljavec skrivnosti
 
-**Vzorec integracije Key Vault**:
+**Vzorčni vzorec integracije Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -203,7 +203,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-Dodelite identiteto runtime `Key Vault Secrets User` na ustreznem obsegu in jo pripnite gostitelju; `enableRbacAuthorization` sam po sebi ne daje dostopa. Raje uporabite upravljano identiteto OpenAI z `disableLocalAuth: true`. Izbirni ključ skrivnosti smisel ima le za namenoma omogočen račun, ustvarjalec profila pa mora imeti dovoljenje za pisanje skrivnosti.
+Dodelite identiteto za izvajanje `Key Vault Secrets User` na ustreznem obsegu in jo pripnite gostitelju; `enableRbacAuthorization` sam ne podeli dostopa. Prednost dajte overjanju z upravljano identiteto OpenAI z `disableLocalAuth: true`. Izbirna skrivnost ključa smiselno obstaja le za račun, ki je namensko omogočen s ključem, glavni ponudnik mora imeti tudi dovoljenje za pisanje skrivnosti.
 
 ### 3. Omrežna varnost
 
@@ -265,9 +265,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-Zasebne končne točke zahtevajo tudi zasebne skupine DNS con/povezave VNet in integracijo aplikacije v VNet. Same po sebi ne blokirajo javnega dostopa: javni dostop AI računa izklopite šele po potrditvi zasebne povezljivosti in dostopa do namestitve.
+Zasebne končne točke prav tako zahtevajo skupine zasebnih DNS con/povezave VNet in integracijo aplikacije VNet. Ne blokirajo samodejno javnega dostopa: izrecno onemogočite javni omrežni dostop do AI računa po potrditvi zasebne povezljivosti in dostopa do uvajanja.
 
-## Zmogljivost in skaliranje
+## Izvedba in skaliranje
 
 ### 1. Strategije samodejnega skaliranja
 
@@ -344,11 +344,11 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-Azure Cache for Redis Basic/Standard/Premium je na [poti do ukinitve](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Za nove zasnove uporabljajte Azure Managed Redis in njegovo dokumentirano konfiguracijo SKU, identitete in TLS, namesto da kopirate ta zapuščinski vir v nov produkcijski sistem. Vrstica z nizom povezave je nepomembno nadomestilo, ne poverilnica. Ključe predpomnilnika razdelite po avtorizaciji, modelu/navodilih in različici pridobivanja, z datumom poteka; skupni predpomnilnik samo za poizvedbe lahko razkrije podatke drugih uporabnikov.
+Azure Cache za Redis Basic/Standard/Premium je na [poti upokojevanja](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Uporabite Azure Managed Redis za nove zasnove in njeno dokumentirano SKU, identiteto in TLS konfiguracijo, namesto da kopirate ta stari vir v nov proizvodni sistem. Vrstica s povezovalno nizko je nefunkcionalni nadomestek, ne poverilnica. Razdelite ključne predpomnilnike glede na pooblastila, model/navodila in različico iskanja, s časovno potekom; skupni predpomnilnik samo za poizvedbe lahko razkrije podatke drugega uporabnika.
 
-### 3. Uravnoteženje obremenitve in upravljanje prometa
+### 3. Uravnoteženje obremenitve in upravljanje s prometom
 
-**Aplikacijski Gateway z WAF**:
+**Aplikacijski prehod z WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -384,15 +384,15 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-To je delni vir gatewayja: prava namestitev zahteva tudi konfiguracijo podsistema/gatewaja IP, frontend IP in porte, TLS poslušalce/sertifikate, nastavitve/probe backend HTTP, pravila usmerjanja in prioritete ter pregledano WAF politiko. TLS ime gostitelja/SNI in overjanje morata ustrezati backendu Container App.
+To je delni vir prehoda: za resnično uvajanje potrebujete tudi podomrežje prehoda/IP konfiguracijo, frontend IP-je in porte, TLS poslušalce/sertifikate, backend HTTP nastavitve/probe, pravila in prioritete usmerjanja ter pregledano WAF politiko. TLS domena/SNI in overitev morata ustrezati backendu Container App.
 
 ## 💰 Optimizacija stroškov
 
-### 1. Pravilna velikost virov
+### 1. Pravilna izbira velikosti vira
 
-**Nastavitve za specifično okolje**:
+**Okoljsko-specifične konfiguracije**:
 
-Ta imena so **prikazni vhodi po meri v predlogi**, ne samodejne nastavitve AZD. Vsak naj se preslika v `infra/main.parameters.json`/Bicep in konfiguracijo gostitelja najprej. Na primer vzorec RAG uporablja `AZURE_SEARCH_SERVICE_SKU` in `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, ne splošnih imen spodaj. Za Container Apps dodelite pomnilnik s podprto enoto, kot je `1Gi` znotraj dejanskega vira. Infrastrukturistične spremembe uporabite z `azd up` ali `azd provision`; samo `azd deploy` ne uporablja Bicep sprememb.
+Ta imena so **ilustrativni vhodi v prilagojene predloge**, ne samodejne nastavitve AZD. Vsakega najprej preslikajte v `infra/main.parameters.json`/Bicep in gostiteljsko konfiguracijo. Na primer, vzorec RAG uporablja `AZURE_SEARCH_SERVICE_SKU` in `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, ne spodnja generična imena. Dajte Container Apps pomnilnik v podprto enoto, kot je `1Gi` v dejanskem viru. Infrastrukturne spremembe izvedite z `azd up` ali `azd provision`; `azd deploy` sam ne uporabi sprememb Bicep.
 
 ```bash
 # Development environment
@@ -455,13 +455,13 @@ resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
 }
 ```
 
-Zamenjajte vzorne prejemnike in preverite obseg/dovoljenja. Alarmi proračuna uporabljajo zamujene obračunske podatke in ne uveljavljajo omejitve porabe.
+Zamenjajte primerne prejemnike in preverite obseg/dovoljenja. Opozorila o proračunu uporabljajo zastoje podatkov o stroških in ne izvajajo omejitve porabe.
 
-### 3. Optimizacija rabe tokenov
+### 3. Optimizacija uporabe žetonov
 
 **Upravljanje stroškov OpenAI**:
 
-To je le heuristika na osnovi znakov za predogled uporabniškega vmesnika, **ne** validator omejitve modelnih tokenov. Produkcijska koda mora uporabljati razčlenjevalnik, primeren za nameščeni model in upoštevati sistemska navodila, orodne sheme, zgodovino in proračun izhoda. Preveliko uporabniško sporočilo zavrnite raje kot tiho skrajšajte.
+To je samo heuristika, ki temelji na znakovni dolžini za predogled UI, **ne** preverjevalnik omejitve žetonov modela. Proizvodna koda mora uporabiti razdeljevalnik tokenov ustrezen za nameščeni model in upoštevati sistemska navodila, sheme orodij, zgodovino in izhodni proračun. Zavrnite preveliko uporabniško sporočilo namesto tihega skrajšanja.
 
 ```typescript
 // Application-level token optimization
@@ -495,9 +495,9 @@ class TokenOptimizer {
 }
 ```
 
-## Spremljanje in vidljivost
+## Spremljanje in opazovanje
 
-### 1. Celoviti Application Insights
+### 1. Celovit Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -544,7 +544,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI-specifično spremljanje
 
-**Prilagojene nadzorne plošče za AI metrike**:
+**Prilagojene nadzorne plošče za AI meritve**:
 
 ```json
 {
@@ -572,9 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-Ta JSON je skica, definirana z aplikacijo, ne uvozni model za Azure portal nadzorno ploščo. Poizvedbe po tokenih/stroških zahtevajo, da vaša aplikacija pošilja točne prilagojene meritve; niso ustvarjene z AZD. Prilagodite filtre odvisnosti za dejanske modelne končne točke/poimenovanja razpona.
+Ta JSON je skica, določena z aplikacijo, ne uvozljiva shema nadzorne plošče Azure portala. Poizvedbe za žetone/stroške zahtevajo, da vaša aplikacija oddaja točno te prilagojene metrike; niso ustvarjene z AZD. Prilagodite filtre odvisnosti za dejanske končne točke/ime razpona modela.
 
-### 3. Preverjanje zdravja in spremljanje uptime
+### 3. Preverjanje zdravja in spremljanje dosegljivosti
 
 ```bicep
 // Application Insights availability tests
@@ -615,11 +615,11 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Obnova ob nesrečah in visoka razpoložljivost
+## Obnova po nesrečah in visoka razpoložljivost
 
-Preizkus predvideva obstoječ App Service `webApp` in vir Application Insights. Standardni preizkusi razpoložljivosti so zaračunljivi in zahtevajo dosegljivo končno točko; samo zasebne aplikacije potrebujejo ustrezno zasnovo zasebnega spremljanja. URL ping preizkusi so zastareli; uporabite [standardne preizkuse razpoložljivosti](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+Prejšnji test predpostavlja obstoječo storitev App Service `webApp` in vir Application Insights. Standardni testi razpoložljivosti so plačljivi in zahtevajo dosegljivo končno točko; samo zasebne aplikacije potrebujejo ustrezno zasnovo zasebnega spremljanja. URL ping testi so zastareli; uporabljajte [standardne teste razpoložljivosti](https://learn.microsoft.com/azure/azure-monitor/app/availability).
 
-### 1. Namestitev v več regijah
+### 1. Večregijska uvajanja
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -681,9 +681,9 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-Okoljske spremenljivke ne določajo lokacije virov. IaC mora zagotoviti ločene regionalne gostitelje in vezati vsako storitev s oznakami `resourceName` ali `azd-service-name`. Primer Traffic Managerja je **loča topologija App Servisa** (`primaryAppService`/`secondaryAppService`), ne usmerjanje za deklaracije Container Apps. Container Apps zahteva ustrezno konfigurirano zunanjo točko/vhodna vrata, TLS/lastno usmerjanje domen in zdravstvene preizkuse.
+Okoljske spremenljivke ne izbirajo lokacije virov. IaC mora zagotoviti ločene regionalne gostitelje in vsak servis povezati z `resourceName` ali `azd-service-name` oznakami. Primer Traffic Managerja je **loča topologija App Service** (`primaryAppService`/`secondaryAppService`), ne usmerjanje za izjave Container Apps. Container Apps potrebuje ustrezno konfigurirano zunanjo končno točko/vhodna vrata, TLS/usmerjanje po meri domene in preglede zdravja.
 
-### 2. Varnostno kopiranje in obnova podatkov
+### 2. Varnostna kopija in obnova podatkov
 
 ```bicep
 // Backup configuration for critical data
@@ -705,11 +705,11 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
 
 ```
 
-Sam vault ne naredi varnostne kopije. Konfigurirajte **delovno obremenitveno podporno politiko in varnostno kopijo**, dovoljenja vira, hrambo in preizkuse obnove z uporabo [matrike podpore Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Ni splošne politike Azure Backup za gostujoče namestitve Azure OpenAI modelov. Definicije infrastrukture/modela naj bodo v nadzoru vira; zaščitite naložene dokumente, aplikacijske podatke in artefakte za fino nastavljanje z uporabo funkcij podpore varnostne kopije/izvoza vsakega podpornega servisa. Izrecno določite in preizkusite RPO/RTO.
+Sam ključ ni varnostna kopija ničesar. Konfigurirajte **politiko in primer varnostne kopije, ki je podprt za določeno obremenitev**, dovoljenja vira, hrambo in teste obnovitve z uporabo [matrik podprtosti Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Ni splošne politike Azure Backup za gostujoča uvajanja Azure OpenAI modelov. Definicije infrastrukture/modela hranite v nadzoru vira; zaščitite naložene dokumente, aplikacijske podatke in artefakte prilagoditve s podprtimi funkcijami varnostne kopije/izvoza vsake storitve. Izrecno določite in testirajte RPO/RTO.
 
-## Integracija DevOps in CI/CD
+## DevOps in integracija CI/CD
 
-### 1. GitHub Actions potek dela
+### 1. GitHub Actions delovni tok
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -747,9 +747,9 @@ jobs:
 
 ```
 
-To je **samo testni del** poteka dela in predvideva, da ste ustvarili `requirements.txt`, `tests/` in dve varnostni skripti. Dodajte overjene naloge za upravljanje/provizijo OIDC iz [Nastavitve CI/CD cevi](#cicd-pipeline-configuration), z `needs: test`, zaupanja vrednim sprožilcem push/ročno, in zaščitenimi okolji GitHub. Ne nameščajte nezaupljive kode iz pull-requestov z oblačnimi poverilnicami. Svež izvajalec nima izbranega lokalnega AZD okolja; zagotovite vnose za okolje/številko naročnine/lokacijo in uporabite `azd auth login`, ne samo `azure/login`.
+To je **delovni tok samo za testiranje** in predpostavlja, da ste ustvarili `requirements.txt`, `tests/` in dva varnostna skripta. Dodajte overjene naloge OIDC za uvajanje/namestitev iz [nastavitve CI/CD cevovoda](#cicd-pipeline-configuration), z `needs: test`, zaupanja vrednim sprožilcem push/ročno in zaščitenim okoljem GitHub. Ne uvajajte nepregledane kode pull requesta z oblačnimi poverilnicami. Nov zaganjalnik nima izbranega lokalnega AZD okolja; priskrbite vnose okolja/odjemalca/območja in uporabite `azd auth login`, ne samo `azure/login`.
 
-### 2. Validacija infrastrukture
+### 2. Preverjanje infrastrukture
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -789,76 +789,76 @@ fi
 echo "Infrastructure validation completed successfully!"
 ```
 
-Pričakovano: ničelna koda izhoda in sporočilo o zaključku samo, če obstajajo vsi pričakovani tipi in je dodeljena imenovana namestitev modela. To preverja stanje inventarja/provizije, **ne** zdravje vira, natančno topologijo, RBAC, dosegljivost omrežja ali vedenje modela. Prilagodite pričakovane tipe vaši arhitekturi, nato izvedite ločen overjeni test pripravljenosti aplikacije.
+Pričakovano: ničelna napaka in sporočilo o zaključku le, če obstajajo vsi pričakovani tipi in če je določeno uvajanje modela zagotovljeno. To preverja stanje inventarja/namestitve, **ne** zdravje vira, natančno topologijo, RBAC, dosegljivost omrežja ali vedenje modela. Prilagodite pričakovane tipe svoji arhitekturi, nato izvedite ločen overjen test pripravljenosti aplikacije.
 
-## Kontrolni seznam pripravljenosti za produkcijo
+## Seznam preverjanja pripravljenosti za proizvodnjo
 
 ### Varnost ✅
 - [ ] Vse storitve uporabljajo upravljane identitete
-- [ ] Skrivnosti so shranjene v Key Vault
-- [ ] Zasebne končne točke so konfigurirane
-- [ ] Implementirane so skupine omrežne varnosti
-- [ ] RBAC z najmanjše pravice
+- [ ] Skrivnosti shranjene v Key Vault
+- [ ] Zasebne končne točke konfigurirane
+- [ ] Omrežne varnostne skupine uporabljene
+- [ ] RBAC z najmanjšimi privilegiji
 - [ ] WAF omogočen na javnih končnih točkah
 
-### Zmogljivost ✅
+### Izvedba ✅
 - [ ] Samodejno skaliranje konfigurirano
-- [ ] Predpomnjenje implementirano
-- [ ] Nastavljeno uravnoteženje obremenitve
-- [ ] CDN za statično vsebino
-- [ ] Povezovanje podatkovnih baz v sklade
+- [ ] Predpomnilnik uveden
+- [ ] Nastavitev uravnoteženja obremenitve
+- [ ] CDN za statične vsebine
+- [ ] Uporaba povezav podatkovnih baz v skupni rabi
 - [ ] Optimizacija uporabe tokenov
 
 ### Spremljanje ✅
-- [ ] Konfiguriran Application Insights
-- [ ] Definirane prilagojene meritve
-- [ ] Nastavljena pravila opozoril
+- [ ] Application Insights konfiguriran
+- [ ] Opredeljene prilagojene metrike
+- [ ] Nastavljene opozorilne vrstice
 - [ ] Ustvarjena nadzorna plošča
-- [ ] Implementirani zdravstveni pregledi
-- [ ] Politike hrambe dnevnikov
+- [ ] Izvedeni zdravstveni pregledi
+- [ ] Politike hranjenja dnevnikov
 
 ### Zanesljivost ✅
-- [ ] Namestitev v več regijah
-- [ ] Načrt varnostnih kopij in obnov
-- [ ] Implementirani circuit breaker-ji
-- [ ] Konfigurirane politike ponovnih poizkusov
-- [ ] Prijazno degradiranje
-- [ ] Končne točke zdravstvenih pregledov
+- [ ] Večregijsko uvajanje
+- [ ] Načrt varnostnih kopij in obnovitev
+- [ ] Izvedeni varovalni mehanizmi
+- [ ] Konfigurirane politike ponavljanja
+- [ ] Prijazna degradacija
+- [ ] Končne točke preverjanja zdravja
 
 ### Upravljanje stroškov ✅
-- [ ] Nastavljeni opozorilniki proračuna
+- [ ] Nastavljena opozorila o proračunu
 - [ ] Pravilna velikost virov
-- [ ] Uporabniški popusti za razvoj/testiranje
+- [ ] Uporabljene razvojne/testne ugodnosti
 - [ ] Nakup rezerviranih primerkov
-- [ ] Nadzorna plošča za stroške
+- [ ] Nadzorna plošča za spremljanje stroškov
 - [ ] Redni pregledi stroškov
 
 ### Skladnost ✅
-- [ ] Izpolnjene zahteve za lokacijo podatkov
-- [ ] Omogočeno beleženje revizijskih dogodkov
-- [ ] Uveljavljene skladnostne politike
-- [ ] Implementirane varnostne osnovne nastavitve
-- [ ] Redne varnostne ocene
-- [ ] Načrt odziva na incidente
+- [ ] Izpolnjene zahteve glede lokacije podatkov
+- [ ] Omogočeno revizijsko beleženje
+- [ ] Uvedene politike skladnosti
+- [ ] Izvedene varnostne osnove
+- [ ] Redni varnostni pregledi
+- [ ] Načrt ukrepanja ob incidentih
 
 ## Merila zmogljivosti
 
-### Ilustrativni produkcijski cilji
+### Ilustrativni proizvodni cilji
 
-To so primeri SLO-jev za pogajanja in load-testiranje, ne izmerjeni kriteriji ali garancije. Zamuda odziva je odvisna od modela/dolžine izhoda; mesečna poraba tokenov je odvisna od prometa in cen, ne samo od števila tokenov.
+To so primerne SLO za pogajanje in testiranje obremenitev, ne merjena merila ali zagotovila. Latenca odziva je odvisna od dolžine modela/izhoda; mesečni strošek žetonov je odvisen od prometa in cen, ne samo števila žetonov.
 
 | Merilo | Cilj | Spremljanje |
 |--------|--------|------------|
 | **Čas odziva** | < 2 sekundi | Application Insights |
-| **Razpoložljivost** | 99,9 % | Spremljanje uptime |
-| **Stopnja napak** | < 0,1 % | Dnevniki aplikacije |
-| **Poraba modela** | < 500 $/mesec (vzorec proračuna) | Upravljanje stroškov |
-| **Sočasni uporabniki** | 1000+ | Testiranje obremenitve |
-| **Čas okrevanja** | < 1 ura | Preizkusi oskrbe po nesrečah |
+| **Razpoložljivost** | 99,9 % | Spremljanje dosegljivosti |
+| **Stopnja napak** | < 0,1 % | Aplikacijski dnevniki |
+| **Poraba modela** | < 500 USD/mesec (primer proračuna) | Upravljanje stroškov |
+| **Hkratni uporabniki** | 1000+ | Testiranje obremenitve |
+| **Čas okrevanja** | < 1 ura | Preizkusi obnovitve po nesreči |
 
-### Preizkušanje obremenitve
+### Testiranje obremenitve
 
-Spodaj je skica vmesnika za skripto za preizkušanje obremenitve, ki jo **morate implementirati**; ta repozitorij ne zagotavlja `scripts/load_test.py`. Pred zagonom v svojem orodju za preizkušanje obremenitve definirajte vsebine zahtevkov, preverjanje pristnosti, reprezentativne obremenitve, trditve o latenci/predenostih napak ter zgornjo mejo stroškov:
+Spodaj je prikazana skica vmesnika za skripto za testiranje obremenitve, **ki jo morate sami implementirati**; ta repozitorij ne vsebuje `scripts/load_test.py`. Pred zagonom v izbranem orodju za testiranje obremenitve definirajte vsebino zahtevkov, overjanje, reprezentativne delovne obremenitve, preverjanja latence/napak glede na percentile in omejitev porabe:
 
 ```bash
 # Load testing script for AI applications
@@ -871,44 +871,44 @@ python scripts/load_test.py \
 
 ## 🤝 Najboljše prakse skupnosti
 
-Na podlagi povratnih informacij iz skupnosti Microsoft Foundry Discord:
+Glede na povratne informacije skupnosti na Microsoft Foundry Discord:
 
-### Najpomembnejša priporočila skupnosti:
+### Glavna priporočila skupnosti:
 
-1. **Začnite z malim, postopoma povečujte**: Začnite z osnovnimi SKU-ji in povečujte glede na dejansko uporabo
-2. **Nadzorujte vse**: Vzpostavite celovit nadzor že od prvega dne
-3. **Avtomatizirajte varnost**: Uporabljajte infrastrukturo kot kodo za dosledno varnost
-4. **Temeljito testirajte**: Vključite AI-specifično testiranje v vaše procese
-5. **Načrtujte stroške**: Spremljajte uporabo tokenov in zgodaj nastavite opozorila o proračunu
+1. **Začnite z majhnim, postopoma širite**: začnite z osnovnimi SKU-ji in povečujte glede na dejansko uporabo
+2. **Spremljajte vse**: vzpostavite celovito spremljanje od prvega dne
+3. **Avtomatizirajte varnost**: uporabite infrastrukturo kot kodo za dosledno varnost
+4. **Temeljito testirajte**: vključite specifično testiranje za AI v svojo cevovod
+5. **Načrtujte stroške**: spremljajte porabo žetonov in zgodaj nastavite opozorila o proračunu
 
-### Pogoste napake, ki se jih je treba izogibati:
+### Pogoste napake, ki se jim je treba izogniti:
 
 - ❌ Trdo kodiranje API ključev v kodi
-- ❌ Nepravilno nastavljen nadzor
+- ❌ Nepostavitev ustreznega spremljanja
 - ❌ Ignoriranje optimizacije stroškov
-- ❌ Ne testiranje scenarijev napak
-- ❌ Razmestitev brez preverjanj zdravja
+- ❌ Netestiranje scenarijev napak
+- ❌ Uvajanje brez preverjanja zdravja
 
-## AZD AI CLI ukazi in razširitve
+## Ukazi in razširitve AI v AZD CLI
 
-AZD vključuje naraščajoč nabor AI-specifičnih ukazov in razširitev, ki poenostavljajo produkcijske delovne tokove AI. Ta orodja premoščajo vrzel med lokalnim razvojem in produkcijsko razmestitvijo AI obremenitev.
+AZD vključuje vse več ukazov in razširitev specifičnih za AI, ki poenostavljajo proizvodne delovne procese za AI. Ta orodja premostijo vrzel med lokalnim razvojem in proizvodnim uvajanjem za delovne obremenitve AI.
 
-> **Pregled različice (2026-11-04):** Spodnje smernice CLI so bile preverjene z objavljenimi različicami `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23** in `azure.ai.evaluations` **1.0.0-beta.2**. Agent beta.23 zahteva `azd >= 1.37.0`; evaluations beta.2 zahteva `azd >= 1.33.0`. Uporabite najmanj 1.37.0 za združen delovni tok. To je pregled dokumentacije/izvora, ne validacija žive Azure razmestitve.
+> **Posodobitev Foundry GA (2026-11-09):** Paket `microsoft.foundry` je dosegel **1.0 / splošno dostopnost** dne [5. novembra 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Za ta delovni tok uporabite **`azd >= 1.37.0`**. Prejšnji pregled beta različic `azd 1.37.2`, agents beta.23 in evaluations beta.2 je spodaj ohranjen kot zgodovina migracij, ne pa kot trenutna različica paketa. Gre za pregled dokumentacije/izvorne kode, ne pa za preverjanje uvajanja v živo ali trditev, da je vsak neobvezen razširitveni ukaz, API ali predogledna funkcija GA.
 
 ### AZD razširitve za AI
 
-AZD uporablja sistem razširitev za dodajanje AI-specifičnih zmogljivosti. Namestite in upravljajte razširitve z:
+AZD uporablja sistem razširitev za dodajanje specifik za AI. Namestite in upravljajte razširitve z:
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Inspect installed extension details
+# Inspect installed versions
 azd version
-azd extension show azure.ai.agents
+azd ext list --installed
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle
+azd ext install microsoft.foundry
 
 # Install the separate Foundry evaluations extension
 azd extension install azure.ai.evaluations
@@ -919,51 +919,61 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Upgrade the Foundry bundle
+azd ext upgrade microsoft.foundry
 ```
 
 **Razpoložljive AI razširitve:**
 
 | Razširitev | Namen | Status |
-|-----------|---------|--------|
-| `azure.ai.agents` | Upravljanje Foundry Agent Service | Predogled |
-| `azure.ai.evaluations` | Evalvacijski nabori, ocenjevalci, eval skupine in zagoni | Predogled |
-| `azure.ai.skills` | Ponovno uporabne veščine agentov | Predogled |
-| `azure.ai.connections` | Foundry povezave (viri podatkov, orodja) | Predogled |
-| `azure.ai.finetune` | Dopolnjevanje Foundry modelov | Predogled |
-| `azure.ai.models` | Uporabniški Foundry modeli | Predogled |
-| `azure.coding-agent` | Konfiguracija kodirajočih agentov | Na voljo |
+|-----------|-------|--------|
+| `microsoft.foundry` | Meta-paket, ki namešča sedem osnovnih razširitev spodaj; nima lastne skupine ukazov | GA paket 1.0 |
+| `azure.ai.agents` | `azd ai agent`: nastavitev agentov, lokalno izvajanje in upravljanje | Vključeno; samostojno verzionirano |
+| `azure.ai.connections` | `azd ai connection`: povezave projektov | Vključeno; samostojno verzionirano |
+| `azure.ai.inspector` | `azd ai inspector`: lokalni uporabniški vmesnik za Agent Inspector | Vključeno; samostojno verzionirano |
+| `azure.ai.projects` | `azd ai project`: viri projektov in uvajanja modelov | Vključeno; samostojno verzionirano |
+| `azure.ai.routines` | `azd ai routine`: urniki in sprožilci | Vključeno; samostojno verzionirano |
+| `azure.ai.skills` | `azd ai skill`: ponovno uporabna pravila vedenja | Vključeno; samostojno verzionirano |
+| `azure.ai.toolboxes` | `azd ai toolbox`: zbirke orodij z verzijami | Vključeno; samostojno verzionirano |
+| `azure.ai.evaluations` | Nabori podatkov za ocenjevanje, ocenjevalci, eval skupine in izvedbe | Ločena namestitev/izdaja |
+| `azure.ai.dataset` | Registracija in verzioniranje podatkovnih zbirk | Ločena namestitev/izdaja |
+| `azure.ai.finetune` | Prilagajanje modelov Foundry | Ločena namestitev/izdaja |
+| `azure.ai.models` | Prilagojeni modeli Foundry | Ločena namestitev/izdaja |
 
-> Za ogled nameščenih različic zaženite `azd extension list --installed` in `azd extension show azure.ai.evaluations`. Najprej nadgradite jedro CLI po [navodilih za namestitev/nadgradnjo](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (za Windows winget namestitev: `winget upgrade Microsoft.Azd`), nato zaženite `azd extension upgrade --all`. Ni jedrnega `azd upgrade` ukaza. Pred nadgradnjo produkcijske avtomatizacije preglejte spremembe, ki bi lahko prekinile delovanje; nadgradnja razširitve ne zagotavlja ohranitev starih oblik ukazov ali nastavitev.
+Še vedno je podprta posamezna namestitev `azure.ai.agents` in namesti njegove odvisnosti; paket pa je privzet za potek GA v tem tečaju. GA različica paketa ni univerzalna garancija statusa izdaje za izbirne funkcije njegovih komponent. Glejte [paketiranje in preverjanje razširitev](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions) in si pred uporabo oglejte pomoč za nameščene ukaze.
 
-### Nedavne spremembe in popravki izdaje
+> Najprej nadgradite osnovni CLI z `azd update` ali ustrezno [metodo namestitve/nadgradnje](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd), nato zaženite `azd ext upgrade microsoft.foundry`. Po potrebi posodobite ločeno nameščena ocenjevanja z `azd ext upgrade azure.ai.evaluations`. Ni osnovnega `azd upgrade` ukaza. V proizvodnji evidentirajte in pregledujte samostojno verzionirane razširitve; nadgradnja ne migrira samodejno stare konfiguracije.
+
+### Nedavne spremembe in popravki izdaj
 
 | Izdaja | Kaj se spremeni za ta tečaj |
-|---------|------------------------------|
-| `azd 1.37.0` | Dodaja stabilne API-je za deployment-predogled in popravlja prepisovanje nepovezanih nastavitev `azure.yaml` med urejanjem razširitev. |
-| `azd 1.37.1` | Popravlja prenos Ctrl+C med razširitvami in ločuje preklic/casue timeout od splošnih napak. |
-| `azd 1.37.2` | Izboljšuje validacijo provisioning-a: kritična opozorila so privzeto **Ne**, neuspeh brez potrditve pri nenadzorovanih zagonih in preklic preskoči post-provision hooke. Popravlja tudi nerešene vrednosti okolja v Deployment Stacks seznamih prepovedi, ko je ta alfa funkcija omogočena. |
-| Agent beta `beta.22` | Migrira evaluacije na `azd ai eval`, spreminja optimizacijo na GA v1 API, zahteva množinsko `toolboxes`, in ločuje managed-harness, glas in dolgoročne predoglede prijave. Popravlja izbiro modelov za okolje in preverjanje pristnosti orodjarne. |
-| Agent beta `beta.23` | Razkriva `init --harness`; popravlja izhod odgovorov A2A 0.3, neveljavne poti/module za agent-prompt prek plasti infrastrukture, diagnostiko časovne omejitve aktivacije in ohranjena opozorila za razvijalčevo RBAC. |
-| Evaluations beta `beta.2` | Zahteva konfiguracijo evalvacije v camelCase, dodaja statično/simulirano avtorstvo pogovorov in eksplicitne lokalne vire datotek, ter popravlja ročne/analitične podatke o identiteti/verziji naborov, število kakovostnih vrat, in diagnostiko neuspešnih zagonov. |
+|--------|----------------------------|
+| `microsoft.foundry` 1.0 GA (2026-11-05) | Privzeto sedemrazširitveni paket, ohrani nastavitve agentov/uvajanja v `azure.yaml`, lokalno testiranje z Agent Inspectorjem in nalaganje kode za oddaljeno gradnjo Foundry. Ocenjevanja namestite posebej in ponovno namestite zahtevane razširitve na CI-ognjiščih. |
+| `azd 1.37.0` | Doda stabilne API-je za predogled uvajanja in popravi prepisovanje nastavitev `azure.yaml` pri urejanju razširitev, ki niso povezane. |
+| `azd 1.37.1` | Popravi širjenje Ctrl+C prek razširitev in razlikuje preklic/casovne prekinitve od splošnih napak. |
+| `azd 1.37.2` | Izboljša preverjanje oskrbe: kritična opozorila so privzeto **Ne**, na neuspeh brez potrditve v nebzoranih zagonih in preklic preskoči post-provizijske kuke. Popravi tudi nerešene vrednosti okolja na seznamih prepovedi Deployment Stacks, ko je ta alfa funkcija omogočena. |
+| Agent `beta.22` | Migrira ocenjevanje v `azd ai eval`, spremeni optimizacijo na GA v1 API, zahteva množinske `toolboxes`, loči upravljanje ogrodja, glas in daljše predoglede. Popravlja izbor modela glede na okolje in overjanje orodnih kompletov. |
+| Agent `beta.23` | Razkrije `init --harness`; popravi izhod A2A 0.3, neveljavne poti/moduli za agent-podpora na plasteh infrastrukture, diagnostiko časovne omejitve aktivacije in shranjena RBAC opozorila razvijalcev. |
+| Ocenjevanje `beta.2` | Zahteva konfiguracijo ocenjevanja camelCase, dodaja statično/simulirano ustvarjanje pogovorov in eksplicitne lokalne vire datotek ter popravlja upravljanje identitete/verzije podatkovnih zbirk, štetje kontrol kakovosti in diagnostiko neuspelih zagonov. |
 
-Časovna omejitev aktivacije agenta **ne dokazuje** napake pri razmestitvi: preglejte poskušano različico in njen status pred ponovnim poskusom. Opozorila za razvijalčevo RBAC se lahko ohranijo tudi če provisioning uspe; pred klicem kot ta razvijalec odpravite manjkajoč dostop.
+Časovna omejitev aktivacije agenta **ne** dokazuje neuspeha uvajanja: pred ponovnim poskusom preglejte različico in njen status. RBAC opozorila razvijalcev lahko ostanejo tudi ob uspešni oskrbi; odpravite manjkajoči dostop pred izvajanjem kot ta razvijalec.
 
-Viri: [AZD izdaje](https://github.com/Azure/azure-dev/releases), [agents beta.23 izdaja](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migracija](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22) in [evaluations beta.2 izdaja](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
+Zgornje vrstice beta opisujejo prej izvedene popravke in meje migracij, ne obveznost pritrjevanja novih projektov na te različice.
 
-**Kaj sta novi razširitvi `skills` in `connections`?**
+Viri: [Objava Foundry GA](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/), [izdaje AZD](https://github.com/Azure/azure-dev/releases), [izdaja agents beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [migracija agents beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22) in [izdaja evaluations beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-Dve predogledni razširitvi sta se pojavili skupaj z orodji za agente in ju je vredno razumeti tudi kot začetnik:
+**Kaj sta pakirana `skills` in `connections` razširitev?**
 
-- **`azure.ai.skills`** — **Veščina** je ponovno uporabna zmogljivost (pakirano orodje ali vedenje), ki ga lahko pripnete na enega ali več agentov, namesto da bi jo vsakič znova implementirali. Pomislite nanjo kot na skupen gradnik: enkrat definirajte veščino »iskanje dokumentacije« ali »iskanje naročila« in jo večkrat uporabite med agenti. To ohranja sisteme več agentov (Poglavje 5) skladne in preprečuje kopiranje.
-- **`azure.ai.connections`** — **Povezava** je upravljana povezava med vašim Foundry projektom in zunanjim virom, ki ga agenti potrebujejo – vir podatkov (npr. Azure AI Search), orodje, ali druga storitev. Povezave centralizirajo *kje* in *kako* agenti dostopajo do podatkov, zato poverilnice in končne točke živijo na enem nadzorovanem mestu, ne pa posuto po kodi.
+Nameščeni sta s privzetim paketom, vendar imata različne namene:
 
-Te razširitve ne potrebujete za razmestitev prvih agentov – držite se `azure.ai.agents` med učenjem. Uporabite `skills`, ko opažate podvajanje istega orodja med agenti, in `connections`, ko ima več agentov skupen vir podatkov.
+- **`azure.ai.skills`** — **Znanje**, ki pakira ponovno uporabna pravila vedenja za agente. Delite pregledana navodila med agenti namesto, da jih kopirate. Znanje samo po sebi ne implementira orodja ali zagotavlja dostopa do podatkov; za izvajanje orodij uporabite orodne komplete in programsko kodo aplikacije.
+- **`azure.ai.connections`** — **Povezava** je upravljana povezava iz vašega Foundry projekta do zunanjega vira, ki ga agenti potrebujejo—vir podatkov (kot je Azure AI Search), končni točki orodja ali druga storitev. Povezave centralizirajo *kje* in *kako* agenti dostopajo do podatkov, tako da poverilnice in končne točke živijo na enem nadzorovanem mestu namesto, da so razpršene po kodi.
+
+Ni vam treba konfigurirati vseh pakiranih zmogljivosti, da uvedete svojega prvega agenta. Uporabite znanja, ko agenti delijo pravila vedenja, in povezave, ko delijo zunanje vire.
 
 ### Inicializacija projektov agentov z `azd ai agent init`
 
-Ukaz `azd ai agent init` postavi ogrodje projekta Microsoft Foundry agenta. Uporabite trenutni `azure.yaml` predlogo projekta, ne implicitni stari agent manifest:
+Ukaz `azd ai agent init` postavi okvir projekta agenta Microsoft Foundry. Za primer delujočega uvajanja kode s Python 3.13+ in trenutnim uv sledite [navodilu za GA gostujočega agenta](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Spodnji ukazi namesto tega prikazujejo sprejetje **svoje** trenutne predloge projekta `azure.yaml`; navedena lokalna predloga ni vključena v ta tečaj:
 
 ```bash
 # Initialize a new agent project from a local project template
@@ -979,37 +989,45 @@ azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents
 **Ključne zastavice:**
 
 | Zastavica | Opis |
-|------|-------------|
-| `-t, --template` | Pot ali podprta GitHub URI do dokumenta projekta `azure.yaml` |
-| `-p, --project-id` | Obstoječi Microsoft Foundry Project ID za vaše azd okolje |
-| `-s, --src` | Izvorna mapa za ustvarjene agente ali ciljna mapa pri prevzemu projekta |
-| `--kind` | Inicializira `hosted`, `prompt` ali predogledni `prompt-voice` agent |
-| `--harness` | Izbirni izvršilni harness za `--kind prompt`; zahteva njegov predogledni opt-in |
+|----------|-------|
+| `-t, --template` | Pot ali podprt URI GitHub do dokumenta projekta `azure.yaml` |
+| `-p, --project-id` | Obstajajoči Microsoft Foundry Project ID za vaše okolje azd |
+| `-s, --src` | Izhodna mapa za generirane agente ali ciljna mapa ob sprejemu projekta |
+| `--deploy-mode code` | Naloži izvor za oddaljeno gradnjo Foundry namesto lokalne izdelave kontejnerja |
+| `--model-deployment` | Ponovna uporaba imenovane obstoječe uvajalne verzije modela med inicializacijo |
+| `--kind` | Inicializiraj `hosted`, `prompt` ali predoglednega `prompt-voice` agenta |
+| `--harness` | Izbirni izvršilni okvir za `--kind prompt`; zahteva predogledno potrditev |
 | `-e, --environment` | Okolje azd za uporabo |
 
-`--manifest`/`-m` je zastarela oznaka za `--template`/`-t`; preimenovanje zastavice ne pretvori starega manifesta v trenutni dokument projekta. `--host containerapp` ni trenutna zastavica agent-init. Za običajne aplikacije Container Apps uporabite `azd init --template` s predlogo, ki ima `host: containerapp`.
+`--manifest`/`-m` je zastarela nadomestna oznaka za `--template`/`-t`; preimenovanje zastavice ne pretvori starega manifesta v trenutni dokument projekta. `--host containerapp` ni trenutna zastavica za agent-init. Za običajno aplikacijo Container Apps uporabite `azd init --template` s predlogo, ki razglasi `host: containerapp`.
 
-Za obstoječ projekt z natanko enim `azure.ai.project` servisom, `azd ai agent add support-agent --file ./agents/support-agent.yaml` doda ali posodobi direktno definicijo agenta brez provisioning-a ali razmestitve. Ukazi runtime zavrnejo stare implicitne `agent.yaml`/AgentManifest in vgrajene definicije servisa `config:`; migrirajte jih v trenutni `azure.ai.agent` servis. Ko init izpiše `cd` naslednji korak, ga izvedite pred `azd up`: init ne spremeni vaše trenutne mape lupine.
+Za obstoječi projekt z natanko eno storitvijo `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` doda ali posodobi direktno definicijo agenta brez provizije ali uvajanja. Ukazi v času izvajanja zavrnejo stare implicitne definicije `agent.yaml`/AgentManifest in gnezdene storitvene `config:`; migrirajte jih v trenutno storitev `azure.ai.agent`. Ko init izpiše `cd` naslednji korak, ga izvedite pred `azd up`: init ne spremeni vaše ukazne poti.
 
-**Nasvet za produkcijo**: Uporabite `--project-id` za neposredno povezavo z obstoječim Foundry projektom, da od začetka povežete kodo in oblake vire svojega agenta.
+**Nasvet za proizvodnjo**: Uporabite `--project-id` za neposredno povezavo z obstoječim Foundry projektom, tako da vaša koda agenta in oblačni viri ostanejo povezani že od začetka.
 
 #### Izbirne predogledne funkcije
 
-Upravljani harness, glas in dolgoročni poklic so privzeto neodvisno onemogočeni. Nastavite samo stikalo za funkcijo, ki jo potrebujete, v **okolju lupine/CI procesa**, ne z `azd env set`:
+Upravljano ogrodje, glas in dolgotrajno klicanje so privzeto neodvisno onemogočeni. Nastavite samo stikalo za funkcijo, ki jo potrebujete, v **okolju ukazne vrstice/CI procesa**, ne z `azd env set`:
 
-| Funkcija | Spremenljivka okoljskega procesa |
-|---------|------------------------------|
-| Upravljani harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Funkcija | Spremenljivka okolja procesa |
+|----------|-----------------------------|
+| Upravljano ogrodje (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
 | Glas (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
-| Dolgoročni poklic | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+| Dolgotrajno klicanje | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
 
-Na primer, uporabite `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` v Bash ali `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` v PowerShellu pred zagonom ustreznega ukaza. Ena stikala ne omogoča drugih. Oglejte si [README za izdane agente](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) za vsa predogledna stikala in omejitve.
+Na primer, uporabite `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` v Bash ali `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` v PowerShell pred zagonom ustreznega ukaza. Eno stikalo ne omogoči drugih. Glejte [README izdanih agentov](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) za vse predogledne stikalne in omejitve.
 
-### Upravljanje življenjskega cikla agentov
+### Upravljanje življenjskega cikla agenta
 
-Uporabite `azure.ai.agents` za testiranje, pregled, optimizacijo in upokojitev agentov ter ločeno razširitev `azure.ai.evaluations` za merjenje kakovosti:
+Razširitev `azure.ai.agents` paketa podpira lokalno testiranje in upravljanje uvajenih agentov. Ločeno namestite `azure.ai.evaluations` za merjenje kakovosti:
 
 ```bash
+# Start the local agent and Agent Inspector (leave running)
+azd ai agent run
+
+# From a second terminal in the project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
 # Invoke a deployed agent and view server response timing
 # (total latency and time to first byte)
 azd ai agent invoke
@@ -1026,39 +1044,42 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-**Življenjski cikel na hitro:**
+**Življenjski cikel na kratko:**
 
-| Faza | Ukaz | Produkcijska uporaba |
-|-------|---------|----------------|
-| Test | `azd ai agent invoke` | Potrdite odzive in izmerite latenco pred izdajo |
-| Pregled | `azd ai agent endpoint show` | Preglejte avtentikacijo/konfiguracijo končne točke; zgodaj zaznajte večje spremembe |
-| Merjenje | `azd ai eval init`, `generate`, `run start` | Definirajte, razmestite in izvajajte ponovljive evaluacije |
-| Izboljšanje | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Znova uporabite združljivo evaluacijo za optimizacijo agenta |
-| Okrevanje | `azd ai agent code download` | Pridobite točno razmestljen izvor za revizijo/povrnitev |
-| Upokojitev | `azd ai agent delete --force` | Čisto odstranite agenta in njegove različice |
+| Faza | Ukaz | Uporaba v proizvodnji |
+|-------|-------|-----------------------|
+| Lokalni test | `azd ai agent run`, nato `azd ai agent invoke --local "Test prompt"` | Preglejte zahtevke in odgovore pred uvajanjem; klici Azure modelov pa še vedno povzročajo stroške |
+| Uvajanje | `azd deploy` | V načinu kode zgradite naloženi izvor na daljavo v Foundry |
+| Testiranje | `azd ai agent invoke` | Preverite odzive in izmerite latenco pred izdajo |
+| Diagnostika | `azd ai agent doctor`, `azd ai agent monitor --follow` | Preverite nastavitve/dovoljenja in spremljajte dnevnike agentov |
+| Pregled | `azd ai agent endpoint show` | Preglejte avtentikacijo/konfiguracijo končne točke; zgodaj zaznajte spremembe |
+| Meritve | `azd ai eval init`, `generate`, `run start` | Definirajte, uvajal in izvajajte ponovljiva ocenjevanja |
+| Izboljšave | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Ponovno uporabite združljivo ocenjevanje za optimizacijo agenta |
+| Okrevanje | `azd ai agent code download` | Pridobite natančen uvajajoči izvor za revizijo/vračilo |
+| Umik | `azd ai agent delete --force` | Čisto odstranite agenta in njegove različice |
 
-> To so ukazi v predogledu in se lahko spremenijo med izdajami razširitev. Za prikaz natančnih podukazov v vaši nameščeni različici zaženite `azd ai agent --help`.
+> Za ogled ukazov v nameščeni različici zaženite `azd ai agent --help`. Paket je GA; samostojno omejene predogledne funkcije so še vedno na voljo kot izbira. Pred čiščenjem ločite brisanje agenta od brisanja projekta: `azd down` izbriše skupino virov pravkar ustvarjenega projekta, a pusti vire ponovno uporabljenega projekta. Upoštevajte [navodila za čiščenje](../chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately).
 
-`endpoint show` podpira gostovane, promptne in glasovne agente, ampak posodobitve končne točke so samo gostovane; agenti v delovnem toku niso podprti. Prenos kode in zgornji primer upokojitve gostovanega agenta nista splošni operaciji za vsak tip agenta.
+`endpoint show` podpira gostujoče, pozive in glasovne agente, a posodobitve končnih točk so samo za gostujoče; delovni agenti niso podprti. Prenos kode in prikaz primera umika gostujočega agenta zgoraj ni splošna operacija za vse vrste agentov.
 
-#### Migracija evaluacije in kakovostne preverbe
+#### Migracija ocenjevanja in kontrole kakovosti
 
-Začelo se je z agenti **1.0.0-beta.22 (2026-10-23)**, legacy `azd ai agent eval` ukazi namesto nekdanjega evaluacijskega delovnega toka nudijo smernice za migracijo. Ne kopirajte starih primerov `eval generate --dataset ...`: evalvacija zdaj živi pod **`azd ai eval`**.
+Začne se z agenti **1.0.0-beta.22 (2026-10-23)**, stari ukazi `azd ai agent eval` nudijo navodila za migracijo namesto prejšnjega poteka ocenjevanja. Ne kopirajte starih primerov `eval generate --dataset ...`: ocenjevanje zdaj živi pod **`azd ai eval`**.
 
-V inicializiranem agentskem projektu se prijavite z `azd auth login`, potrdite izbrano okolje/Foundry projekt in namestite `azure.ai.evaluations`. Za ocenjevanje na osnovi modela je potrebna razmestitev modela sodnika; generacija in simulacija pogovora lahko zahtevata svoje izbire modelov in povzročita dodatne stroške.
+V inicializiranem agentnem projektu se prijavite z `azd auth login`, potrdite izbrano okolje/projekt Foundry in namestite `azure.ai.evaluations`. Za ocenjevanje na osnovi modela je potrebna implementacija sodnikovega modela; generiranje in simulacija pogovorov pa lahko zahtevata posamezne izbire modelov in povzročita dodatne stroške.
 
 ```bash
-# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
-azd ai eval init
-
-# Optionally synthesize a rubric and dataset from the agent
+# Generate a draft rubric and dataset from the deployed agent
 azd ai eval generate
+
+# After reviewing the assets, configure a named evaluation
+azd ai eval init --name quality
 
 # Review generated files, then register datasets, evaluators, and eval groups
 azd up
 
 # Start an evaluation and wait for its results
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 
 # Inspect runs and available test-case output
 azd ai eval run list
@@ -1066,45 +1087,45 @@ azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
 ```
 
-Sledite interaktivnim izbiro in izpisanim naslednjim korakom in ne predpostavljajte, da so generirani viri že registrirani. Konfiguracija evaluacije običajno živi v `evals/azure.eval.yaml`, nanjo se sklicuje storitev `azure.ai.eval` v `azure.yaml`. Ključi so **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); stari ključi v snake_case konfiguraciji so zavrnjeni. Poti znotraj sklicane konfiguracije so relativne na to datoteko, ne na koren repozitorija.
+Za primer oznanitve GA izberite **Dataset and evaluator** in **Turn** med generiranjem, nato pa izberite pregledane vire in sodnikov model med inicializacijo. Sledite navedenim naslednjim korakom namesto da predpostavite, da so generirani viri že registrirani. Prav tako lahko inicializirate na podlagi obstoječega pregledanega nabora podatkov/rubrike brez generiranja novih podatkov. Konfiguracija ocenjevanja običajno živi v `evals/azure.eval.yaml`, nanjo pa se sklicuje storitev `azure.ai.eval` v `azure.yaml`. Ključi so **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); stari ključi v snake_case obliki niso sprejeti. Poti znotraj referencirane konfiguracije se rešujejo glede na to datoteko, ne koren repozitorija.
 
-Za evaluacije pogovorov izberite **statične**, da ocenite dokončane prepise brez klica agenta, ali **simulacijo**, da ustvarite pogovore iz scenarijskih začetkov. Simulacija potrebuje tarčo agenta, simulatorni model in ločeno izbiro modela sodnika. Za nenadzorovane ukaze zagotovite vnose opisane pri `azd ai eval init --help` in `azd ai eval generate --help`; ne predpostavljajte, da je generacijski model tudi sodnik ali simulator.
+Za ocenjevanja pogovorov izberite **static** za ocenjevanje zaključenih prepisov brez zagona agenta, ali **simulation** za generiranje pogovorov iz začetnih scenarijev. Simulacija zahteva ciljni agent, simulacijski model in ločeno izbiro sodnikovega modela. Za neodzivne ukaze zagotovite vhodne podatke, navedene v `azd ai eval init --help` in `azd ai eval generate --help`; ne predpostavljajte, da je model generiranja istočasno tudi sodnik ali simulator.
 
-Za CI konfigurirajte eksplicitno kakovostno politiko z `azd ai eval run start --help` (`--fail-on`) in obravnavajte ne-nicelni izhod gostitelja kot neuspeh. Dokončan zagon ni samodejno kakovostni prehod. Preverite neuspele/napake vrstice in diagnostiko; manjkajoče ali nedosledne rezultate ni dokaz uspeha. Registrirani nabori ohranijo svojo identiteto/verzijo storitve; `--max-samples` ne more podmnožiti registriranega nabora. Objavite manjši nabor namensko ali uporabite podprt lokalni vir datotek.
+Za CI konfigurirajte eksplicitno politiko kakovosti z uporabo `azd ai eval run start --help` (`--fail-on`) in obravnavajte nenici izhod gostitelja kot napako. Zaključen zagon ni samodejno prehod kakovosti. Preverite neuspešne/napake vrstice in diagnostične podatke; manjkajoči ali neskladni števci rezultatov niso dokaz uspeha. Registrirani nabori podatkov ohranijo svojo identiteto/storitev različice; `--max-samples` ne more podniza registriranega nabora podatkov. Namenoma objavite manjši nabor podatkov ali uporabite podprti lokalni viri datotek.
 
 ```bash
 # Example CI policy: at least 90% of all test cases must pass
-azd ai eval run start --wait --fail-on "pass-rate=0.9"
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
-Prehodna stopnja uporablja uspešne testne primere deljeno s skupnim številom testnih primerov; neuspešni, z napako, preskočeni in ostali neuspešni zapisi štejejo proti njej. Ne kombinirajte stopnji s `--no-wait`, ki vrne rezultat pred razpoložljivostjo sodbe.
+Vrata za stopnjo prehoda uporabljajo delež opravljenih testnih primerov deljeno s skupnim številom testov; neuspešne, napake, preskočene in druge neprejete vrstice štejejo proti temu. Ne kombinirajte vrat z `--no-wait`, ki se vrne pred razpoložljivostjo sodbe.
 
 #### Migracija konfiguracije optimizacije
 
-Optimizacija zdaj uporablja GA v1 API. Za ponovno uporabo združljive **nivoa potez, podprte z nabori podatkov** evaluacije iz novega delovnega toka:
+Optimizacija sedaj uporablja GA v1 API. Za ponovno uporabo združljivega **ocenjevanja na ravni poteze, podprtega z naborom podatkov** iz novega poteka dela:
 
 ```bash
 # Replace placeholders with the evaluation name and optimizer model deployment
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-`--eval` izbere oceno; `--eval-config` izbere konfiguracijsko datoteko (vključno z definicijami, ki podpirajo datoteke). `--config` namesto tega prejme **samostojen zahtevek za optimizacijo prek API** v YAML ali JSON. Ne pošiljajte starega agentu `eval.yaml` ali novega `azure.eval.yaml` v `--config` in ne kombinirajte `--config` z `--eval`/`--eval-config`. Pogovorne, sledljene ali simulirane ocene niso zamenljive s hitrim optimizacijskim ukazom, ki temelji na naboru podatkov; za te primere uporabite podprto obliko zahtevka za optimizacijo. Pred uporabo ali uvajanjem preglejte kandidate.
+`--eval` izbere ocenjevanje; `--eval-config` izbere njegovo konfiguracijsko datoteko (vključno s definicijami na osnovi datotek). `--config` namesto tega prejme **samostojno zahtevo API za optimizacijo** v YAML ali JSON formatu. Ne posredujte starega agentnega `eval.yaml` ali novega `azure.eval.yaml` k `--config` in ne kombinirajte `--config` z `--eval`/`--eval-config`. Ocenjevanja pogovorov, sledena s sledmi ali simulacijska niso zamenljiva s prečico optimizacije, ki uporablja nabor podatkov; za te scenarije uporabite podprto obliko zahteve optimizacije. Pred uporabo ali uvajanjem preglejte kandidate.
 
-Oglejte si [referenco ocen za pregledano izdajo](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) in [izvor ukaza za optimizacijo za pregledano izdajo](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) za natančne možnosti.
+Oglejte si [referenco ocenjevanj za pregledano izdajo](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) in [izvor ukaza optimizacije za pregledano izdajo](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) za natančne možnosti.
 
-#### Predogled uvajanja gostujočega agenta samo za branje
+#### Predogled uvajanja gostovanega agenta samo za branje
 
-Za obstoječe okolje, vezano na Foundry, z združeno storitvijo `azure.ai.agent` `kind: hosted`, primerjajte podprto konfiguracijo pred uvajanjem:
+Za obstoječe okolje povezano z Foundry z združeno `azure.ai.agent` storitvijo `kind: hosted`, primerjajte podprto konfiguracijo pred uvajanjem:
 
 ```bash
 azd deploy <service-name> --preview --no-prompt
 ```
 
-Ta predogled ne uvaja agenta. Ni popolna primerjava infrastrukture/varnosti: agenti za pozive/glasovne/izvedbene tokove, zastarele postavitve konfiguracije in nekateri gostujoči nastavitveni parametri so izven njegovega obsega. Rezultat `unknown` ni odobritev uvajanja. Ni samostojnega ukaza `azd ai agent deploy` ali agentov `--dry-run`; uporabite osnovni potek uvajanja.
+Ta predogled ne uvaja agenta. Ni popolna razlika infrastrukture/varnosti: agenti za pozive/glas delovnih tokov, dediščinske konfiguracijske postavitve in nekateri gostovani nastavitveni elementi so izven njegovega obsega. Rezultat `unknown` ni odobritev za uvajanje. Ni samostojnega ukaza `azd ai agent deploy` ali agentnega `--dry-run`; uporabite osnovni potek uvajanja.
 
-### Protokol konteksta modela (MCP) z `azd mcp`
+### Protokol modelnega konteksta (MCP) z `azd mcp`
 
-AZD vključuje vgrajeno podporo za MCP strežnik (alfa), ki omogoča AI agentom in orodjem, da komunicirajo z vašimi Azure viri preko standardiziranega protokola:
+AZD vključuje vgrajeno podporo MCP strežniku (Alpha), ki omogoča AI agentom in orodjem interakcijo z vašimi Azure viri preko standardiziranega protokola:
 
 ```bash
 # Start the MCP server for your project
@@ -1114,30 +1135,30 @@ azd mcp start
 azd copilot consent list
 ```
 
-MCP strežnik razkriva kontekst vašega azd projekta — okolja, storitve in Azure vire — AI-pogonjenim razvojnim orodjem. To omogoča:
+MCP strežnik izpostavlja kontekst vašega azd projekta—okolja, storitve in Azure vire—AI-pogonjenim razvojnim orodjem. To omogoča:
 
-- **AI-podprto uvajanje**: Agenti za kodiranje lahko poizvedujejo stanje projekta in sprožijo uvajanja
+- **AI-podprto uvajanje**: Dovolite, da kodirni agenti poizvedujejo stanje vašega projekta in sprožajo uvedbe
 - **Odkritje virov**: AI orodja lahko odkrijejo, katere Azure vire vaš projekt uporablja
-- **Upravljanje okolij**: Agenti se lahko preklapljajo med dev/staging/production okolji
+- **Upravljanje okolja**: Agenti se lahko preklapljajo med razvojnim, preskusnim in proizvodnim okoljem
 
 ### Generiranje infrastrukture z `azd infra generate`
 
-Za produkcijske AI delovne obremenitve lahko ustvarite in prilagodite infrastrukturo kot kodo, namesto da bi se zanašali na samodejno zagotavljanje:
+Za proizvodne AI delovne obremenitve lahko ustvarite in prilagodite infrastrukturo kot kodo namesto da se zanašate na samodejno zagotavljanje:
 
 ```bash
 # Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Podpora je odvisna od projekta/gostitelja in nameščenih ponudnikov; to ni splošni ukaz za inženiring na povratni način za poljubne Azure vire ali obljuba generiranja tako Bicep kot Terraform. Zaženite `azd infra generate --help` in preverite ustvarjeno obliko. Kjer je podprto, pisanje IaC na disk omogoča:
-- Pregled in revizijo infrastrukture pred uvajanjem
-- Dodajanje lastnih varnostnih pravilnikov (mrežna pravila, zasebni končni točki)
-- Integracijo z obstoječimi postopki pregleda IaC
-- Razširjanje sprememb infrastrukture ločeno od kode aplikacije
+Podpora je odvisna od projekta/gostitelja in nameščenih ponudnikov; to ni splošni ukaz za reverzno inženirstvo poljubnih Azure virov ali obljuba, da se bosta generirala tako Bicep kot Terraform. Zaženite `azd infra generate --help` in preglejte ustvarjen format. Kjer je podprto, vam pisanje IaC na disk omogoča:
+- pregledati in revidirati infrastrukturo pred uvajanjem
+- dodati prilagojene varnostne politike (mrežna pravila, zasebne končne točke)
+- integrirati se z obstoječimi postopki pregleda IaC
+- upravljati različice infrastrukturnih sprememb ločeno od kode aplikacije
 
-### Produkcijski presledki življenjskega cikla
+### Kaveljčki življenjskega cikla proizvodnje
 
-AZD presledki vam omogočajo vstavljanje lastne logike v vsaki fazi življenjskega cikla uvajanja — ključnega pomena za produkcijske AI delovne tokove:
+AZD kaveljčki vam dovolijo vstavljanje lastne logike v vsakem koraku življenjskega cikla uvajanja—kritično za proizvodne AI delovne tokove:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1170,18 +1191,18 @@ services:
 azd hooks run predeploy
 ```
 
-**Priporočeni produkcijski presledki za AI delovne obremenitve:**
+**Priporočeni kaveljčki za proizvodne AI delovne obremenitve:**
 
-| Presledek | Primer uporabe |
-|---------|----------------|
-| `preprovision` | Preverjanje omejitev naročnine za kapaciteto AI modela |
-| `postprovision` | Preverjanje zasebne povezljivosti in zahtevanih izhodov virov |
-| `predeploy` | Izvajanje varnostnih testov AI, preverjanje predlog predlogov |
-| `postdeploy` | Testiranje odzivov agenta in preverjanje povezljivosti modela |
+| Kaveljček | Uporaba |
+|------|----------|
+| `preprovision` | Preverjanje kvot naročniških zmogljivosti za modele AI |
+| `postprovision` | Preverjanje zasebne povezljivosti in zahtevanih outputov virov |
+| `predeploy` | Izvedba varnostnih testov AI, preverjanje predlog pozivov |
+| `postdeploy` | Preizkus odgovorov agenta, preverjanje povezanosti modelov |
 
 ### Konfiguracija CI/CD cevovoda
 
-Uporabite `azd pipeline config` za povezavo vašega projekta z GitHub Actions ali Azure Pipelines z varno Azure avtentikacijo:
+Najprej lokalno preverite projekt in dokončajte uspešen `azd up`. Nato uporabite `azd pipeline config` za povezavo s GitHub Actions ali Azure Pipelines z varno avtentikacijo Azure:
 
 ```bash
 # Configure CI/CD pipeline (interactive)
@@ -1192,16 +1213,16 @@ azd pipeline config --provider github
 ```
 
 Ta ukaz:
-- Ustvari ali konfigurira identiteto cevovoda; preglejte obseg/pooblastila njegove vloge namesto, da bi predpostavljali najmanjše privilegije
-- Konfigurira federirane poverilnice (ni shranjenih skrivnosti)
-- Ustvari ali posodobi vašo definicijsko datoteko cevovoda
-- Nastavi potrebne okoljske spremenljivke v vašem CI/CD sistemu
+- ustvari ali konfigurira identiteto cevovoda; preglejte ustvarjeni obseg vlog/dovoljenj namesto da predpostavljate najmanjše privilegije
+- konfigurira federirane poverilnice (brez shranjenih skrivnosti)
+- ustvari ali posodobi datoteko definicije cevovoda
+- nastavi potrebne spremenljivke okolja v sistemu CI/CD
 
 #### Korak za korakom: vaš prvi GitHub Actions cevovod
 
-Tukaj je celoten potek od delujočega azd projekta do avtomatiziranih uvajanj ob vsakem potisku.
+Tukaj je celoten vodnik od delujočega azd projekta do avtomatiziranih uvedb ob vsakem potisku.
 
-**1. Poskrbite, da je vaš projekt na GitHubu**
+**1. Prepričajte se, da je vaš projekt na GitHub**
 
 ```bash
 git init
@@ -1217,14 +1238,14 @@ azd pipeline config --provider github
 ```
 
 azd bo interaktivno:
-- Vprašal, katero naročnino Azure in okolje ciljati
-- Ustvaril Entra **registracijo aplikacije + servisno glavo** za cevovod
-- Nastavil **federirane poverilnice (OIDC)** — tako da se GitHub avtenticira pri Azure z začasnimi žetoni in **ni shranjenih skrivnosti**
-- Potisnil potrebne **spremenljivke** v vaš GitHub repozitorij (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+- vprašal, kateri Azure naročniški račun in okolje uporabiti
+- ustvaril Entra **registracijo aplikacije + servisnega principala** za cevovod
+- nastavil **federirane poverilnice (OIDC)**—tako da se GitHub prijavi v Azure z začasnimi žetoni in se **ne shranjujejo skrivnosti**
+- potisnil zahtevane **spremenljivke** v vaš GitHub repozitorij (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
-**3. Razumite ustvarjen potek**
+**3. Razumite ustvarjeni potek dela**
 
-Za podprt predlog konfigurirajte/preglejte `.github/workflows/azure-dev.yml`. Ključni deli izgledajo tako (predloga mora zagotoviti orodjarno aplikacije in parametre okolja):
+Za podprt predlog konfigurirajte/preglejte `.github/workflows/azure-dev.yml`. Naslednji primer Foundry ohranja checkout, OIDC prijavo in nastavitve ciljnega okolja ter namesti GA paket in ocenjevanja na runnerju. Dodajte orodjarno vaše aplikacije in zahteve ponudnikov infrastrukture; za Terraform ohranite njegovo ustvarjeno nastavitev, oddaljeno stanje in avtentikacijske korake. Izberite in pritrdite ocenjeno različico AZD 1.37.0 ali višjo; odsek uporablja minimalno različico oznanitve.
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1236,6 +1257,10 @@ on:
 permissions:
   id-token: write           # required for OIDC federated login
   contents: read
+
+concurrency:
+  group: foundry-production-deployment
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -1250,15 +1275,25 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install azd
         uses: Azure/setup-azd@v2
+        with:
+          version: 1.37.0
+      - name: Install Foundry extensions
+        run: azd ext install microsoft.foundry azure.ai.evaluations
       - name: Log in with OIDC
         run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
       - name: Provision infrastructure
         run: azd provision --no-prompt
       - name: Deploy application
         run: azd deploy --no-prompt
+      - name: Evaluate deployed agent
+        run: azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
-**4. Preverite, da deluje**
+Korak ocenjevanja zahteva zavezan `evals/azure.eval.yaml`, sklic nanj v `azure.yaml`, pregledane ne-tajne testne vire in dostop cevovoda do referenciranih naborov podatkov, ocenjevalcev ter modelov sodnikov. Pred omogočitvijo tega koraka konfigurirajte ocenjevanje `quality`; izpustite tako korak kot namestitev ocenjevanj, če jih vaš projekt ne uporablja. Sam dokončan zagon ni vrata kakovosti: ta primer zahteva vsaj 90 % opravljenih primerov.
+
+Uporabite ločeno AZD okolje in ustrezna dovoljenja za vsak korak. Skupina vzporednosti serializira samo ta potek dela, ne drugih orodij ali repozitorijev, ki posodabljajo iste agente. Dodelite zahtevana dovoljenja do virov in Foundry servisne pravice identiteti cevovoda ter shranjujte potrebne podatke za zagon kot skrivnosti, ne kot zavezanih konfiguracij. Oglejte si [celovit vodnik Foundry CI/CD](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli) za zahteve specifične za ponudnika.
+
+**4. Preverite, ali deluje**
 
 ```bash
 # Push a change to trigger the pipeline
@@ -1266,13 +1301,13 @@ git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Odprite zavihek **Actions** v vašem GitHub repozitoriju in spremljajte samodejno izvajanje poteka `azd provision` in `azd deploy`.
+Odprite zavihek **Actions** v vašem GitHub repozitoriju in spremljajte, kako se potek dela `azd provision` in `azd deploy` samodejno izvaja.
 
-> **Zakaj so federirane poverilnice pomembne:** starejši cevovodi so shranjevali odjemalsko skrivnost v GitHub. OIDC federirane poverilnice popolnoma odstranijo to skrivnost — GitHub ob zagonu zahteva začasni žeton, kar je varneje in nima potrebe po rotaciji ali uhajanju. To je privzeto, kar nastavi `azd pipeline config`.
+> **Zakaj so federirane poverilnice pomembne:** starejši cevovodi so shranjevali skrivnost odjemalca v GitHub. OIDC federirane poverilnice odstranijo to skrivnost povsem—GitHub ob zagonu zahteva kratek žeton, ki je varnejši in ni treba ničesar obračati ali puščati. To je privzeta konfiguracija, ki jo postavi `azd pipeline config`.
 
-> **Skrivnosti proti spremenljivkam:** neobčutljive identifikatorje (`AZURE_CLIENT_ID` itd.) shranite v repozitorijske **spremenljivke**. Če vaša aplikacija resnično potrebuje skrivnost med gradnjo, jo dodajte kot GitHub **skrivnost** in jo referencirajte z `${{ secrets.NAME }}` — vendar raje uporabite Key Vault + upravljano identiteto med izvajanjem (glejte [poglavje 3](../chapter-03-configuration/authsecurity.md)).
+> **Skrivnosti vs. spremenljivke:** nesenzitivni identifikatorji (`AZURE_CLIENT_ID` itd.) so shranjeni kot **spremenljivke** v repozitoriju. Če vaša aplikacija resnično potrebuje skrivnost med gradnjo, ga dodajte kot GitHub **skrivnost** in se nanjo sklicujte z `${{ secrets.NAME }}`—vendar raje uporabite Key Vault + upravljano identiteto med zagonom (glejte [Poglavje 3](../chapter-03-configuration/authsecurity.md)).
 
-**Produkcijski potek z konfiguracijo cevovoda:**
+**Proizvodni potek dela s konfiguracijo cevovoda:**
 
 ```bash
 # 1. Set up production environment
@@ -1287,11 +1322,11 @@ azd pipeline config --provider github
 
 #### Korak za korakom: Azure DevOps Pipelines
 
-Raje uporabljate Azure DevOps kot GitHub Actions? azd ga nativno podpira z `azdo` ponudnikom. Postopek je skoraj enak — azd ustvari datoteko cevovoda, vzpostavi servisno povezavo in uredi avtentikacijo.
+Raje uporabljate Azure DevOps pred GitHub Actions? azd ga podpira nativno s ponudnikom `azdo`. Potek je skoraj enak—azd generira datoteko cevovoda, ustvari storitveni povezovalnik in nastavi avtentikacijo.
 
 **1. Prepričajte se, da imate projekt Azure DevOps**
 
-Potrebujete organizacijo in projekt na `https://dev.azure.com/<your-org>`. Ustvarite osebni dostopni žeton (PAT) z obsegom **Build (beri in izvaja)**, **Code (beri in piši)** in **Service Connections (beri, poizveduj in upravljaj)** — azd vas bo nanj vprašal.
+Potrebujete organizacijo in projekt na `https://dev.azure.com/<your-org>`. Ustvarite osebni dostopni žeton (PAT) z dovoljenji **Build (Read & execute)**, **Code (Read & write)** in **Service Connections (Read, query & manage)**—azd vas bo pozval po njem.
 
 **2. Konfigurirajte cevovod**
 
@@ -1300,14 +1335,14 @@ azd pipeline config --provider azdo
 ```
 
 azd bo:
-- Vprašal za organizacijo in projekt Azure DevOps
-- Ustvaril (ali ponovno uporabil) **servisno povezavo** z Azure z uporabo servisne glave
-- Konfiguriral **federacijo identitete delovnih obremenitev (OIDC)**, tako da ni shranjene odjemalske skrivnosti
-- Konfiguriral definicijo cevovoda (pogosto `.azdo/pipelines/azure-dev.yml`) iz predloge cevovoda projekta
+- vprašal za organizacijo in projekt Azure DevOps
+- ustvaril (ali ponovno uporabil) **storitev povezave** do Azure z uporabo servisnega principala
+- nastavil **zvezno prijavo dela (OIDC)**, da se ne shranjuje nobena skrivnost odjemalca
+- konfiguriral definicijo cevovoda (pogosto `.azdo/pipelines/azure-dev.yml`) iz predloge projekta
 
 **3. Preglejte ustvarjeni cevovod**
 
-Uporabite ustvarjeni cevovod projekta, vključno z njegovimi **Azure servisno povezavo in koraki avtentikacije AZD**. Uradni [vodnik za namestitev Azure Pipelines](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) prikazuje spodnji namestitveni fragment; to je samo **namestitev**, ne zagnan avtenticiran potek uvajanja:
+Uporabite ustvari cevovod projekta, vključno z **Azure storitveno povezavo in koraki avtentikacije AZD**. Uradni [vodnik za namestitev Azure Pipelines](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) prikaže spodnji namestitveni fragment; to je le **namestitev**, ne sam potek za uvajanje z avtentikacijo:
 
 ```yaml
 # .azdo/pipelines/azure-dev.yml (installer fragment only)
@@ -1322,13 +1357,13 @@ steps:
     displayName: Install azd
 ```
 
-Namestite razširitev AZD Azure DevOps, če ta naloga ni na voljo v vaši organizaciji. Ne kopirajte surovih ukazov `azd provision`/`azd deploy` brez avtentikacije: konfiguriranje servisne povezave ne prijavi samodejno vseh procesov v AZD. Sledite OIDC prijavi in pooblaščenemu kontekstu naloge v ustvarjeni predlogi in navedite izbrano okolje/naročnino/območje.
+Namestite razširitev AZD Azure DevOps, če ta naloga ni na voljo v vaši organizaciji. Za Foundry opravila preverite AZD 1.37.0+ in namestite `microsoft.foundry` na runner, plus `azure.ai.evaluations`, ko so ocenitve zahtevane. Ne kopirajte surovih ukazov `azd provision`/`azd deploy` brez avtentikacije: imeti konfigurirano storitveno povezavo ne pomeni, da se vsak proces samodejno prijavi v AZD. Sledite predlogi prijave OIDC in kontekstu pooblaščenega opravila ter zagotovite izbrano okolje/naročnino/lokacijo.
 
 **4. Od kod prihajajo spremenljivke**
 
-azd shranjuje vrednosti okolja (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) kot **skupino spremenljivk** v Azure DevOps, tako da jih cevovod lahko prebere. Ogledate si jih lahko in urejate v **Pipelines → Library**.
+azd shranjuje vrednosti okolja (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) kot **skupino spremenljivk** v Azure DevOps, da jih cevovod lahko prebere. Pregledate in urejate jih lahko pod **Pipelines → Library**.
 
-> **Enaka prednost OIDC kot GitHub:** `azdo` ponudnik privzeto konfigurira federacijo identitete delovnih obremenitev, zato v servisni povezavi ni shranjene odjemalske skrivnosti — Azure DevOps zamenja začasni žeton med izvajanjem. Povejte `--auth-type client-credentials` samo, če vaša organizacija še ne more uporabljati OIDC.
+> **Enaka prednost OIDC kot GitHub:** ponudnik `azdo` privzeto nastavi zvezno prijavo dela, zato ni shranjene skrivnosti odjemalca v storitveni povezavi—Azure DevOps izmenja začasen žeton med zagonom. Prekličite podatek `--auth-type client-credentials` samo, če vaša organizacija še ne more uporabiti OIDC.
 
 **5. Zaženite ga**
 
@@ -1337,40 +1372,40 @@ git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Odprite **Pipelines** v Azure DevOps, da spremljate izvajanje `azd provision` in `azd deploy`.
+Odprite **Pipelines** v Azure DevOps in spremljajte izvajanje `azd provision` in `azd deploy`.
 
 ### Dodajanje komponent z `azd add`
 
-Postopno dodajajte Azure storitve obstoječemu projektu:
+Postopoma dodajajte Azure storitve obstoječemu projektu:
 
 ```bash
 # Add a new service component interactively
 azd add
 ```
 
-To je še posebej koristno za razširjanje produkcijskih AI aplikacij — na primer, dodajanje storitve vektorskega iskanja, novega končnega točka agenta ali komponente za nadzor obstoječemu uvajanju.
+To je še posebej uporabno za širitev proizvodnih AI aplikacij—na primer dodajanje storitve iskanja vektorjev, novega agentnega končnega mesta ali spremljevalne komponente obstoječi implementaciji.
 
 ## Dodatni viri
 
-- **Azure Okvir za dobro arhitekturo**: [Smernice za AI delovne obremenitve](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Smernice za AI delovne obremenitve](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry dokumentacija**: [Uradni dokumenti](https://learn.microsoft.com/azure/ai-studio/)
-- **Predloge skupnosti**: [Azure Primeri](https://github.com/Azure-Samples)
-- **Discord Skupnost**: [#Azure kanal](https://discord.gg/microsoft-azure)
-- **Agentove veščine za Azure**: [microsoft/github-copilot-for-azure na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Ponovno uporabne agentove veščine za Azure AI, Foundry, uvajanje, optimizacijo stroškov in diagnostiko. Namestite v vaš urejevalnik:
+- **Skupnostni predlogi**: [Azure primeri](https://github.com/Azure-Samples)
+- **Discord skupnost**: [#Azure kanal](https://discord.gg/microsoft-azure)
+- **Veščine agentov za Azure**: [microsoft/github-copilot-for-azure na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Ponovno uporabne veščine agentov za Azure AI, Foundry, uvajanje, optimizacijo stroškov in diagnostiko. Namestite v vaš urejevalnik:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigacija po poglavju:**
-- **📚 Začetna stran tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 8 - Produkcijski in podjetniški vzorci
-- **⬅️ Prejšnje poglavje**: [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Prav tako povezano**: [AI delavnica laboratorij](../chapter-02-ai-development/ai-workshop-lab.md)
-- **🎯 Zaključek tečaja**: [AZD za začetnike](../../README.md)
+**Navigacija po poglavjih:**
+- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 8 - Proizvodni in podjetniški vzorci
+- **⬅️ Predhodno poglavje**: [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Prav tako povezano**: [Delavnica AI](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Tečaj zaključen**: [AZD za začetnike](../../README.md)
 
-**Zapomnite si**: Produkcijske AI delovne obremenitve zahtevajo skrbno načrtovanje, spremljanje in neprekinjeno optimizacijo. Začnite s temi vzorci in jih prilagodite vašim specifičnim zahtevam.
+**Zapomnite si**: Produkcijske naloge AI zahtevajo skrbno načrtovanje, spremljanje in neprekinjeno optimizacijo. Začnite s temi vzorci in jih prilagodite svojim specifičnim zahtevam.
 
 ---
 

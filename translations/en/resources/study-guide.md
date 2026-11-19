@@ -57,10 +57,11 @@ After completing all sections of this study guide, you will be able to:
 ---
 
 ### Chapter 2: AI-First Development (Week 2)
-**Duration**: 1-2 hours | **Complexity**: ⭐⭐
+**Duration**: 4-5 hours including the workshop | **Complexity**: ⭐⭐
 
 #### Learning Objectives
 - Integrate Microsoft Foundry services with AZD workflows
+- Use the GA `microsoft.foundry` bundle with AZD 1.37.0+ for hosted-agent development
 - Deploy and configure AI-powered applications
 - Understand RAG (Retrieval-Augmented Generation) implementation patterns
 - Manage AI model deployments and scaling
@@ -70,18 +71,23 @@ After completing all sections of this study guide, you will be able to:
 - AI Search configuration and vector indexing
 - Model deployment strategies and capacity planning
 - AI application monitoring and performance optimization
+- Local Agent Inspector versus cloud traces, source-code deployment, and evaluation assets in version control
 
 #### Practical Exercises
 1. **AI Chat Deployment**: Deploy azure-search-openai-demo template
 2. **RAG Implementation**: Configure document indexing and retrieval
 3. **Model Configuration**: Set up multiple AI models with different purposes
 4. **AI Monitoring**: Implement Application Insights for AI workloads
+5. **GA Hosted Agent**: Follow the [hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga); compare local and cloud responses, review an evaluation result, and verify cleanup ownership
 
 #### Assessment Questions
 - How do you configure Microsoft Foundry Models services in an AZD template?
 - What are the key components of a RAG architecture?
 - How do you manage AI model capacity and scaling?
 - What monitoring metrics are important for AI applications?
+- Which extensions are included in `microsoft.foundry`, and why are evaluations installed separately?
+- Why do local agent tests still incur Azure model charges?
+- What does `azd down` leave behind when you reuse an existing Foundry project?
 
 ---
 

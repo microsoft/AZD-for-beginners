@@ -1,39 +1,43 @@
 # Capitolo 2: Sviluppo AI-First
 
-**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 4-5 ore inclusi workshop | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 4-5 ore incluso il workshop | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo si concentra sul deployment di applicazioni potenziate da AI usando Azure Developer CLI e i servizi Microsoft Foundry. Da semplici app di chat AI ad agenti intelligenti con strumenti.
+Questo capitolo si concentra sul deployment di applicazioni potenziate dall'AI utilizzando Azure Developer CLI e i servizi Microsoft Foundry. Da semplici app di chat AI ad agenti intelligenti con strumenti.
 
-> **Revisione rilascio (2026-11-04):** Le linee guida AI CLI sono state verificate rispetto alla documentazione/fonte pubblicata `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, e `azure.ai.evaluations` `1.0.0-beta.2`. Usare `azd >= 1.37.0` per il workflow combinato. Le valutazioni ora usano il namespace separato `azd ai eval`; vedi [cambiamenti rilascio e guida alla migrazione](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Questa non è una convalida di deployment live.
+> **Aggiornamento Foundry GA (2026-11-09):** Il bundle `microsoft.foundry` 1.0 è [generalmente disponibile](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Usa `azd >= 1.37.0`; le valutazioni rimangono una installazione separata. Il [walkthrough dell'hosted-agent](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) copre il testing locale con Agent Inspector e il deployment remoto del codice. Questa è una revisione della documentazione, non una convalida di deployment live; le funzionalità in anteprima opzionali mantengono il proprio status.
 
 ## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
-- Distribuire applicazioni AI usando template AZD predefiniti
-- Comprendere l'integrazione di Microsoft Foundry con AZD
+- Deployare applicazioni AI usando template AZD predefiniti
+- Comprendere l'integrazione Microsoft Foundry con AZD
+- Installare il bundle GA e testare un agente hostato localmente prima di deployare il suo codice sorgente su Foundry
+- Rivedere `azure.yaml`, asset di valutazione, e pulizia tra progetti nuovi e riutilizzati
 - Configurare e personalizzare agenti AI con strumenti
-- Distribuire applicazioni RAG (Retrieval-Augmented Generation)
+- Deployare applicazioni RAG (Retrieval-Augmented Generation)
 
 ---
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Tempo |
+| # | Lezione | Descrizione | Durata |
 |---|--------|-------------|------|
-| 1 | [Integrazione Microsoft Foundry](microsoft-foundry-integration.md) | Connettere AZD con i servizi Foundry | 30 min |
-| 2 | [Guida agli Agenti AI](agents.md) | Distribuire agenti intelligenti con strumenti | 45 min |
-| 3 | [Deployment Modello AI](ai-model-deployment.md) | Distribuire e configurare modelli AI | 30 min |
-| 4 | [Laboratorio Workshop AI](ai-workshop-lab.md) | Pratica: Esplora un template e pianifica la tua conversione | 2-3 ore |
+| 1 | [Integrazione Microsoft Foundry](microsoft-foundry-integration.md) | Bundle GA, workflow locale-cloud hosted-agent, e valutazioni | 60 min |
+| 2 | [Guida agli Agenti AI](agents.md) | Deploy di agenti intelligenti con strumenti | 45 min |
+| 3 | [Deployment Modelli AI](ai-model-deployment.md) | Deploy e configurazione di modelli AI | 30 min |
+| 4 | [Laboratorio Workshop AI](ai-workshop-lab.md) | Pratica: Esplora un template e pianifica la conversione | 2-3 ore |
 
 ---
 
 ## 🚀 Avvio Rapido
 
-Scegli un'opzione in una nuova directory vuota. Il `.` finale inizializza la directory corrente; altrimenti AZD può creare una sottodirectory senza cambiare la directory di lavoro del terminale.
+Scegli un'opzione in una nuova directory vuota. Il trailing `.` inizializza la directory corrente; altrimenti AZD può creare una sottodirectory senza cambiare la directory di lavoro della shell.
+
+Per il **percorso GA di deployment codice hosted-agent**, inizia con il [walkthrough guidato](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Richiede AZD 1.37.0+, uv corrente, Python 3.13+, permessi Foundry, e quota modelli. I template di applicazioni complete qui sotto sono alternative, non prerequisiti per quel walkthrough.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -63,15 +67,15 @@ azd up
 
 ## 💰 Consapevolezza dei Costi
 
-Questi sono intervalli illustrativi, non preventivi né limiti; traffico modello, SKU di Search/compute, regione e funzionalità opzionali possono superarli. Verifica i prezzi aggiornati del campione scelto prima di provisionare.
+Questi sono range illustrativi, non preventivi o limiti; traffico modello, SKU di Search/compute, regione e funzionalità opzionali possono superarli. Controlla la guida alla tariffazione corrente del campione scelto prima di effettuare il provisioning.
 
 | Ambiente | Costo Mensile Stimato |
 |-------------|----------------------|
 | Sviluppo | $80-150 |
 | Staging | $150-300 |
-| Produzione | $300-3.500+ |
+| Produzione | $300-3,500+ |
 
-**Suggerimento:** Esegui `azd down` dopo i test per evitare addebiti.
+**Pulizia:** Rivedi `azd down` prima di confermare: per un progetto Foundry appena creato cancella il gruppo di risorse e tutto il suo contenuto. Per un progetto Foundry riutilizzato, lascia in posto progetto e risorse dell'agente; segui la [guida alla pulizia del walkthrough](microsoft-foundry-integration.md#7-clean-up-deliberately) per rimuovere risorse indesiderate separatamente.
 
 ---
 
@@ -79,7 +83,7 @@ Questi sono intervalli illustrativi, non preventivi né limiti; traffico modello
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Capitolo 1: Fondazioni](../chapter-01-foundation/README.md) |
+| **Precedente** | [Capitolo 1: Fondamenti](../chapter-01-foundation/README.md) |
 | **Successivo** | [Capitolo 3: Configurazione](../chapter-03-configuration/README.md) |
 | **Salta a** | [Capitolo 8: Pattern di Produzione](../chapter-08-production/README.md) |
 
@@ -88,7 +92,7 @@ Questi sono intervalli illustrativi, non preventivi né limiti; traffico modello
 ## 📖 Risorse Correlate
 
 - [Risoluzione Problemi AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Pratiche di Produzione AI](../chapter-08-production/production-ai-practices.md)
+- [Pratiche AI in Produzione](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

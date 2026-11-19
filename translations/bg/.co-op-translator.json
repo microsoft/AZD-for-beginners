@@ -31,10 +31,10 @@
   },
   "__translation_failures__": {
     "resources/study-guide.md": {
-      "original_hash": "15cd1e658f9b76ef86f2f5508f911dcc",
+      "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "bg",
-      "failure_date": "2026-11-10T02:53:12+00:00",
+      "failure_date": "2026-11-18T00:50:43+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
@@ -45,7 +45,7 @@
       "original_hash": "a1cbc39623d29f76aefe40099c5c890e",
       "source_file": "workshop/docs/index.md",
       "language_code": "bg",
-      "failure_date": "2026-11-10T03:40:28+00:00",
+      "failure_date": "2026-11-18T01:10:40+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2 of 'index.md', and the chunk could not be split further.",
@@ -56,7 +56,7 @@
       "original_hash": "08d94072fd61ef49bd86481689cb0484",
       "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
       "language_code": "bg",
-      "failure_date": "2026-11-10T03:43:24+00:00",
+      "failure_date": "2026-11-18T01:13:34+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
@@ -67,23 +67,34 @@
       "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
       "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
       "language_code": "bg",
-      "failure_date": "2026-11-10T03:46:28+00:00",
+      "failure_date": "2026-11-18T01:16:09+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '1-Select-AI-Template.md', and the chunk could not be split further.",
       "translator_version": "0.24.0",
       "failure_policy_version": 1
+    },
+    "README.md": {
+      "original_hash": "7d76d299c366c5dc2fda84482bcaab5b",
+      "source_file": "README.md",
+      "language_code": "bg",
+      "failure_date": "2026-11-18T00:34:29+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
     }
   },
   "changelog.md": {
-    "original_hash": "247312270281a91d52d3198c1c948971",
-    "translation_date": "2026-11-10T02:46:11+00:00",
+    "original_hash": "45f2542dffc811fc8e0c6cf7f4ab083b",
+    "translation_date": "2026-11-18T00:41:37+00:00",
     "source_file": "changelog.md",
     "language_code": "bg"
   },
   "course-outline.md": {
-    "original_hash": "6353a81effc8c2ab34944d3fef689129",
-    "translation_date": "2026-11-10T02:47:46+00:00",
+    "original_hash": "6680d785432a680c17011e9ed9f22a69",
+    "translation_date": "2026-11-18T00:43:20+00:00",
     "source_file": "course-outline.md",
     "language_code": "bg"
   },
@@ -94,8 +105,8 @@
     "language_code": "bg"
   },
   "docs/chapter-01-foundation/azd-basics.md": {
-    "original_hash": "f0b678263ead0764a6529842e7bc2154",
-    "translation_date": "2026-11-10T03:33:06+00:00",
+    "original_hash": "edf4e3abc9f981212b54ebab3f416e44",
+    "translation_date": "2026-11-18T01:08:39+00:00",
     "source_file": "docs/chapter-01-foundation/azd-basics.md",
     "language_code": "bg"
   },
@@ -118,20 +129,20 @@
     "language_code": "bg"
   },
   "docs/chapter-01-foundation/installation.md": {
-    "original_hash": "486f39356b135590491e05d97c047968",
-    "translation_date": "2026-11-10T03:39:39+00:00",
+    "original_hash": "e8b4f7bac9f25c6c1e850ae1524992ad",
+    "translation_date": "2026-11-18T01:09:25+00:00",
     "source_file": "docs/chapter-01-foundation/installation.md",
     "language_code": "bg"
   },
   "docs/chapter-02-ai-development/README.md": {
-    "original_hash": "fb9c8fc4d431094e94dc64d9bec2fe83",
-    "translation_date": "2026-11-10T03:16:08+00:00",
+    "original_hash": "1fd1cacdbeb46c66a77669e2bf598ec3",
+    "translation_date": "2026-11-18T01:01:55+00:00",
     "source_file": "docs/chapter-02-ai-development/README.md",
     "language_code": "bg"
   },
   "docs/chapter-02-ai-development/agents.md": {
-    "original_hash": "14c42007951064e0227c231ed4781667",
-    "translation_date": "2026-11-10T03:22:56+00:00",
+    "original_hash": "aef0453a1d0a794503f7712a90e6ab47",
+    "translation_date": "2026-11-18T01:02:59+00:00",
     "source_file": "docs/chapter-02-ai-development/agents.md",
     "language_code": "bg"
   },
@@ -148,8 +159,8 @@
     "language_code": "bg"
   },
   "docs/chapter-02-ai-development/microsoft-foundry-integration.md": {
-    "original_hash": "1ded646a4aa65d197890c4af5f129903",
-    "translation_date": "2026-11-10T03:24:08+00:00",
+    "original_hash": "a06e914b625f8c251fa2bfcab0d01057",
+    "translation_date": "2026-11-18T01:05:27+00:00",
     "source_file": "docs/chapter-02-ai-development/microsoft-foundry-integration.md",
     "language_code": "bg"
   },
@@ -196,14 +207,14 @@
     "language_code": "bg"
   },
   "docs/chapter-05-multi-agent/README.md": {
-    "original_hash": "1d8774a7a38b4a595cb18516f89df830",
-    "translation_date": "2026-11-10T03:11:44+00:00",
+    "original_hash": "5bbef9555e34f6ebdc22ea9a3e666f32",
+    "translation_date": "2026-11-18T00:57:31+00:00",
     "source_file": "docs/chapter-05-multi-agent/README.md",
     "language_code": "bg"
   },
   "docs/chapter-05-multi-agent/multi-agent-basics.md": {
-    "original_hash": "7f55ab87aae10e3ccc8c4c4a7d700c40",
-    "translation_date": "2026-11-10T03:14:07+00:00",
+    "original_hash": "df4c2763597c44723e5e646dcac629ca",
+    "translation_date": "2026-11-18T01:00:50+00:00",
     "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
     "language_code": "bg"
   },
@@ -226,8 +237,8 @@
     "language_code": "bg"
   },
   "docs/chapter-06-pre-deployment/coordination-patterns.md": {
-    "original_hash": "5b3ae58f84b3a4f8e5c29955c38b7e56",
-    "translation_date": "2026-11-10T03:29:46+00:00",
+    "original_hash": "e08e96e19b5b229864c77cc69b608210",
+    "translation_date": "2026-11-18T01:06:56+00:00",
     "source_file": "docs/chapter-06-pre-deployment/coordination-patterns.md",
     "language_code": "bg"
   },
@@ -250,8 +261,8 @@
     "language_code": "bg"
   },
   "docs/chapter-07-troubleshooting/ai-troubleshooting.md": {
-    "original_hash": "eb5705b743dd6928965ca5446536e149",
-    "translation_date": "2026-11-10T03:15:54+00:00",
+    "original_hash": "0bb7e3e034048c280837e12e66840af2",
+    "translation_date": "2026-11-18T01:01:37+00:00",
     "source_file": "docs/chapter-07-troubleshooting/ai-troubleshooting.md",
     "language_code": "bg"
   },
@@ -268,14 +279,14 @@
     "language_code": "bg"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "c7220e4d731c823c1f1f715edb287a20",
-    "translation_date": "2026-11-10T03:00:38+00:00",
+    "original_hash": "9ce42d1a39b37055cc2782efbfbda23c",
+    "translation_date": "2026-11-18T00:52:19+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "bg"
   },
   "docs/chapter-08-production/production-ai-practices.md": {
-    "original_hash": "5607d88a9ca9fcb5d9d396e3dcc804d2",
-    "translation_date": "2026-11-10T03:02:40+00:00",
+    "original_hash": "9fbedacd6668e71b42c90685832ae72c",
+    "translation_date": "2026-11-18T00:56:19+00:00",
     "source_file": "docs/chapter-08-production/production-ai-practices.md",
     "language_code": "bg"
   },
@@ -334,14 +345,14 @@
     "language_code": "bg"
   },
   "resources/cheat-sheet.md": {
-    "original_hash": "e70f4fb2afc355e88a544a7e8d939879",
-    "translation_date": "2026-11-10T02:53:37+00:00",
+    "original_hash": "48c1c3c2e2e9d6cd67232d606634a40b",
+    "translation_date": "2026-11-18T00:51:15+00:00",
     "source_file": "resources/cheat-sheet.md",
     "language_code": "bg"
   },
   "resources/faq.md": {
-    "original_hash": "c37343ff1dfac95501c1af3bb297bac9",
-    "translation_date": "2026-11-10T02:49:04+00:00",
+    "original_hash": "1f8cb1cf82acc313df97672ab50bda52",
+    "translation_date": "2026-11-18T00:46:46+00:00",
     "source_file": "resources/faq.md",
     "language_code": "bg"
   },
@@ -400,14 +411,14 @@
     "language_code": "bg"
   },
   "workshop/docs/instructions/5-Customize-AI-Template.md": {
-    "original_hash": "d826ff36ca4a124c846145198d369388",
-    "translation_date": "2026-11-10T03:47:39+00:00",
+    "original_hash": "410e2d90e99dd859ab507e0b479a5224",
+    "translation_date": "2026-11-18T01:18:40+00:00",
     "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
     "language_code": "bg"
   },
   "workshop/docs/instructions/6-Teardown-Infrastructure.md": {
-    "original_hash": "707b8a770cd716934ca04f3d1171c638",
-    "translation_date": "2026-11-10T03:48:03+00:00",
+    "original_hash": "f2aa918226e9dbeb7b96ebd4f013247f",
+    "translation_date": "2026-11-18T01:18:46+00:00",
     "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
     "language_code": "bg"
   },

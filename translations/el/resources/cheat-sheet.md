@@ -1,36 +1,36 @@
-# Φύλλο Απάτης Εντολών - Βασικές Εντολές AZD
+# Συντομευμένος Οδηγός Εντολών - Απαραίτητες Εντολές AZD
 
 **Γρήγορη Αναφορά για Όλα τα Κεφάλαια**
-- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../README.md)
-- **📖 Γρήγορη Εκκίνηση**: [Κεφάλαιο 1: Θεμέλια & Γρήγορη Εκκίνηση](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Εντολές Τεχνητής Νοημοσύνης**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην ΤΝ](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../README.md)
+- **📖 Γρήγορη Εκκίνηση**: [Κεφάλαιο 1: Βάση & Γρήγορη Εκκίνηση](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Εντολές Τεχνητής Νοημοσύνης**: [Κεφάλαιο 2: Ανάπτυξη AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Προχωρημένα**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Εισαγωγή
 
-Αυτό το ολοκληρωμένο φύλλο απάτης παρέχει γρήγορη αναφορά για τις πιο συχνά χρησιμοποιούμενες εντολές Azure Developer CLI, οργανωμένες κατά κατηγορία με πρακτικά παραδείγματα. Ιδανικό για γρήγορη αναζήτηση κατά την ανάπτυξη, την αντιμετώπιση προβλημάτων και τις καθημερινές λειτουργίες με έργα azd.
+Αυτός ο ολοκληρωμένος οδηγός παρέχει γρήγορη αναφορά για τις πιο συχνά χρησιμοποιούμενες εντολές Azure Developer CLI, οργανωμένες κατά κατηγορία με πρακτικά παραδείγματα. Ιδανικός για γρήγορη αναζήτηση κατά την ανάπτυξη, την αντιμετώπιση προβλημάτων και τις καθημερινές λειτουργίες με έργα azd.
 
 ## Στόχοι Μάθησης
 
-Χρησιμοποιώντας αυτό το φύλλο απάτης, θα:
-- Έχετε άμεση πρόσβαση σε βασικές εντολές και σύνταξη Azure Developer CLI
-- Κατανοείτε την οργάνωση εντολών κατά λειτουργικές κατηγορίες και περιπτώσεις χρήσης
-- Ανατρέχετε σε πρακτικά παραδείγματα για κοινά σενάρια ανάπτυξης και παράδοσης
+Χρησιμοποιώντας αυτόν τον οδηγό, θα:
+- Έχετε άμεση πρόσβαση σε ουσιώδεις εντολές και σύνταξη του Azure Developer CLI
+- Κατανοήσετε την οργάνωση εντολών κατά λειτουργικές κατηγορίες και περιπτώσεις χρήσης
+- Ανατρέξετε σε πρακτικά παραδείγματα για συνήθη σενάρια ανάπτυξης και εγκατάστασης
 - Έχετε πρόσβαση σε εντολές αντιμετώπισης προβλημάτων για γρήγορη επίλυση ζητημάτων
-- Βρίσκετε αποδοτικά προχωρημένες επιλογές διαμόρφωσης και προσαρμογής
-- Εντοπίζετε εντολές διαχείρισης περιβάλλοντος και ροές εργασίας πολλαπλών περιβαλλόντων
+- Βρείτε αποδοτικά προχωρημένες επιλογές ρύθμισης και προσαρμογής
+- Εντοπίσετε εντολές διαχείρισης περιβάλλοντος και ροής εργασίας πολλαπλών περιβαλλόντων
 
 ## Αποτελέσματα Μάθησης
 
-Με τακτική αναφορά σε αυτό το φύλλο απάτης, θα μπορείτε:
-- Να εκτελείτε εντολές azd με σιγουριά χωρίς να ανατρέχετε στην πλήρη τεκμηρίωση
-- Να επιλύετε γρήγορα κοινά προβλήματα χρησιμοποιώντας κατάλληλες διαγνωστικές εντολές
-- Να διαχειρίζεστε αποδοτικά πολλαπλά περιβάλλοντα και σενάρια ανάπτυξης
-- Να εφαρμόζετε προχωρημένες λειτουργίες και επιλογές διαμόρφωσης azd ανάλογα με τις ανάγκες
-- Να αντιμετωπίζετε προβλήματα ανάπτυξης χρησιμοποιώντας συστηματικές αλληλουχίες εντολών
-- Να βελτιστοποιείτε ροές εργασίας μέσω αποτελεσματικής χρήσης συντομεύσεων και επιλογών azd
+Με τακτική αναφορά σε αυτόν τον οδηγό, θα είστε σε θέση να:
+- Εκτελείτε εντολές azd με σιγουριά χωρίς να ανατρέχετε σε ολόκληρη την τεκμηρίωση
+- Επίλυση γρήγορων συνηθισμένων προβλημάτων με κατάλληλες διαγνωστικές εντολές
+- Διαχειρίζεστε αποτελεσματικά πολλαπλά περιβάλλοντα και σενάρια ανάπτυξης
+- Εφαρμόζετε προχωρημένες λειτουργίες azd και επιλογές ρύθμισης κατά περίπτωση
+- Αντιμετωπίζετε προβλήματα εγκατάστασης με συστηματικές ακολουθίες εντολών
+- Βελτιστοποιείτε ροές εργασίας με αποτελεσματική χρήση συντομεύσεων και επιλογών azd
 
-## Εντολές Έναρξης
+## Εντολές Ξεκινήματος
 
 ### Πιστοποίηση
 ```bash
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Κατασκευή και Συσκευασία
+### Κατασκευή και Πακετάρισμα
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,14 +128,14 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** κατεβάζει τις εξαρτήσεις της εφαρμογής σας (npm, pip, NuGet, Maven, κ.ά.). Εκτελείται αυτόματα κατά τη `azd package` και `azd deploy`, οπότε σπάνια την καλείτε απευθείας — εκτελέστε την χειροκίνητα για να προ-φορτώσετε τις εξαρτήσεις (για παράδειγμα, για να ζεστάνετε μια cache CI ή να εργαστείτε εκτός σύνδεσης μετά).
+> **`azd restore`** κατεβάζει τις εξαρτήσεις της εφαρμογής σας (npm, pip, NuGet, Maven, κ.ά.). Εκτελείται αυτόματα κατά τη διάρκεια `azd package` και `azd deploy`, οπότε σπάνια το καλείτε απευθείας—τρέξτε το χειροκίνητα για προφόρτωση εξαρτήσεων (π.χ. για ζέσταμα cache CI ή για εργασία εκτός σύνδεσης αργότερα).
 
-> **`azd package`** προετοιμάζει ένα αναπτυσσόμενο αρχείο χωρίς να προωθεί την υπηρεσία εφαρμογής. Η συμπεριφορά εξαρτάται από τη γλώσσα και τον κεντρικό υπολογιστή: η συσκευασία container μπορεί να χρησιμοποιεί απομακρυσμένες κατασκευές Azure και να δημοσιεύει εικόνες σε ρετζίστρι, οπότε δεν είναι απαραίτητα εκτός σύνδεσης ή χωρίς εγγραφές στο Azure. Η `azd deploy` μπορεί να συσκευάζει αυτόματα· χρησιμοποιήστε ξεχωριστό βήμα συσκευασίας όταν χρειάζεστε αρχείο ή έλεγχο κατασκευής.
+> **`azd package`** προετοιμάζει ένα αναπτυξιμο αρτίφακτ χωρίς να αναπτύσσει την υπηρεσία εφαρμογής. Η συμπεριφορά εξαρτάται από τη γλώσσα και τον οικοδεσπότη: το πακετάρισμα container μπορεί να χρησιμοποιεί απομακρυσμένες κατασκευές Azure και να δημοσιεύει εικόνες σε registry, οπότε δεν είναι αναγκαστικά offline ή χωρίς εγγραφές στο Azure. Το `azd deploy` μπορεί να πακετάρει αυτόματα· χρησιμοποιήστε ξεχωριστό βήμα πακεταρίσματος όταν χρειάζεστε αρτίφακτ ή έλεγχο κατασκευής.
 
 
 ## 🌍 Διαχείριση Περιβάλλοντος
 
-### Λειτουργίες Περιβάλλοντος
+### Ενέργειες Περιβάλλοντος
 ```bash
 # List all environments
 azd env list
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Τα αρχεία περιβάλλοντος είναι απλό κείμενο. Μην θεωρείτε την `azd env set` αποθήκη μυστικών· χρησιμοποιήστε αναφορές Key Vault ή διαχειριζόμενη ταυτότητα όπου απαιτείται.
+Τα αρχεία περιβάλλοντος είναι απλό κείμενο. Μην αντιμετωπίζετε το `azd env set` ως αποθήκη μυστικών· χρησιμοποιήστε αναφορές Key Vault ή managed identity όπου απαιτείται.
 
-## ⚙️ Εντολές Διαμόρφωσης
+## ⚙️ Εντολές Ρύθμισης
 
-### Παγκόσμια Διαμόρφωση
+### Παγκόσμια Ρύθμιση
 ```bash
 # List all configuration
 azd config show
@@ -190,7 +190,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Διαμόρφωση Έργου
+### Ρύθμιση Έργου
 ```bash
 # Inspect user configuration (this is not azure.yaml validation)
 azd config show
@@ -202,7 +202,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 Παρακολούθηση και Διαγνωστικά
+## 📊 Παρακολούθηση και Διάγνωση
 
 ### Πίνακας Ελέγχου Παρακολούθησης
 ```bash
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Το Application Insights πρέπει να διαμορφωθεί από το πρότυπο. Η επιλογή Live Metrics της AZD δεν υποστηρίζεται προς το παρόν για εφαρμογές Python· χρησιμοποιήστε την επισκόπηση, τα αρχεία καταγραφής ή την τεκμηριωμένη ροή εργασίας ιχνηλάτησης του δείγματος αντ’ αυτού.
+Το Application Insights πρέπει να έχει ρυθμιστεί από το πρότυπο. Η επιλογή Live Metrics του AZD δεν υποστηρίζεται προς το παρόν για εφαρμογές Python· χρησιμοποιήστε την επισκόπηση, τα logs, ή την τεκμηριωμένη ροή εργασίας ιχνών του δείγματος αντ' αυτού.
 
-### Προβολή Αρχείων Καταγραφής Container
+### Προβολή Καταγραφών Container
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -246,7 +246,7 @@ az monitor log-analytics query \
 
 ## 🛠️ Εντολές Συντήρησης
 
-### Εκκαθάριση
+### Καθαρισμός
 ```bash
 # Remove all Azure resources
 azd down
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 Εντολές ΤΝ & Επεκτάσεις
+## 🤖 Εντολές AI & Επεκτάσεις
 
 ### Επεκτάσεις AZD
 
-Αναφορά CLI ΤΝ ελέγχθηκε 2026-11-04: `azd 1.37.2`, agents `1.0.0-beta.23`, αξιολογήσεις `1.0.0-beta.2`. Χρησιμοποιήστε `azd >= 1.37.0` για την ενιαία ροή εργασίας· αναβαθμίστε τον πυρήνα CLI πριν από μη συμβατές επεκτάσεις.
+Αναφορά Foundry GA ενημερώθηκε 2026-11-09: `microsoft.foundry` bundle 1.0, ανακοινώθηκε [5 Νοεμβρίου 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Χρησιμοποιήστε `azd >= 1.37.0`· τα συστατικά έχουν ανεξάρτητη έκδοση και οι προαιρετικές λειτουργίες preview διατηρούν τη δική τους κατάσταση.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### Εντολές Agent ΤΝ
+Το bundle δεν περιλαμβάνει αξιολογήσεις, σύνολα δεδομένων, fine-tuning ή προσαρμοσμένα μοντέλα. Η εγκατάσταση μεμονωμένων βασικών επεκτάσεων εξακολουθεί να υποστηρίζεται. Ακολουθήστε το [GA hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) για ένα εκτελέσιμο παράδειγμα με Python 3.13+, τρέχον uv, δικαιώματα και όριο μοντέλου.
+
+### Εντολές AI Agent
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` αντικαθιστά την αποσυρμένη ορθογραφία `--manifest`/`-m`· τα παλιά manifests χρειάζονται μετανάστευση. Δεν υπάρχει τωρινή επιλογή agent-init `--host containerapp`. Οι managed-harness, voice, και μακροχρόνιες προεπισκοπήσεις απαιτούν ανεξάρτητα αποδοχή στο shell/περιβάλλον CI· δείτε την [αναφορά AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` αντικαθιστά την παρωχημένη ορθογραφία `--manifest`/`-m`· οι παλιοί manifests χρειάζονται μετανάστευση. Δεν υπάρχει τρέχουσα επιλογή agent-init `--host containerapp`. Οι managed-harness, voice και long-running previews χρειάζονται ανεξάρτητη επιλογή shell/CI περιβάλλοντος· δείτε την [αναφορά AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### Αξιολογήσεις και Βελτιστοποίηση ΤΝ
+Οι τοπικές δοκιμές εξακολουθούν να χρησιμοποιούν αναπτύξεις μοντέλων Azure και επιφέρουν χρεώσεις. Για καθαρισμό, `azd down` διαγράφει το νεοδημιουργημένο Foundry project resource group, αλλά αφήνει πόρους επαναχρησιμοποιούμενων έργων ανέπαφους· αφαιρέστε μόνο ανεπιθύμητους πόρους που σας ανήκουν ξεχωριστά.
+
+### Αξιολογήσεις και Βελτιστοποίηση AI
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agents beta.22 αντικατέστησε τις παλιές εντολές αξιολόγησης με `azd ai eval` από `azure.ai.evaluations`. Η νέα διαμόρφωση αξιολόγησης χρησιμοποιεί κλειδιά camelCase. Η βελτιστοποίηση `--config` απαιτεί ανεξάρτητο αίτημα API βελτιστοποίησης, **όχι** παλιό `eval.yaml` ή νέο `azure.eval.yaml`· χρησιμοποιήστε `--eval`/`--eval-config` για επανάχρηση αξιολόγησης. Δείτε [ρύθμιση αξιολόγησης](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) και [μετανάστευση βελτιστοποίησης](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Οι Agents beta.22 αντικατέστησαν τις παλιές εντολές αξιολόγησης με `azd ai eval` από `azure.ai.evaluations`. Η νέα ρύθμιση αξιολόγησης χρησιμοποιεί camelCase κλειδιά. Η βελτιστοποίηση `--config` παίρνει ανεξάρτητο αίτημα optimization API, **όχι** τις παλιές `eval.yaml` ή νέες `azure.eval.yaml`· χρησιμοποιήστε `--eval`/`--eval-config` για επαναχρησιμοποίηση αξιολόγησης. Δείτε [ρύθμιση αξιολόγησης](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) και [μετανάστευση βελτιστοποίησης](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Το κομμάτι runner δεν αποτελεί ολοκληρωμένη ροή εργασίας. Κάντε commit την αξιολόγηση ρύθμισης που έχει ελεγχθεί και μη μυστικά στοιχεία, παραχωρήστε πρόσβαση σε dataset/evaluator/model και χρησιμοποιήστε ένα περιβάλλον ανά στάδιο. Δείτε το [παράδειγμα authenticated CI/CD](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### MCP Server (Άλφα)
 ```bash
@@ -421,7 +456,7 @@ azd infra --help
 
 ## 🎯 Γρήγορες Ροές Εργασίας
 
-### Ροή Εργασίας Ανάπτυξης
+### Ροή Ανάπτυξης
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Ροή Εργασίας Πολλαπλών Περιβαλλόντων
+### Ροή Πολλαπλών Περιβαλλόντων
 ```bash
 # Set up environments
 azd env new dev
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### Ροή Εργασίας Αντιμετώπισης Προβλημάτων
+### Ροή Αντιμετώπισης Προβλημάτων
 ```bash
 # Check deployment status
 azd show --debug
@@ -540,7 +575,7 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Κοινά Συνδυασμοί Εντολών
+## 🔧 Συνδυασμοί Συνηθισμένων Εντολών
 
 ### Σενάριο Έλεγχου Υγείας
 ```bash
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### Σενάριο Εκκαθάρισης Πόρων
+### Σενάριο Καθαρισμού Πόρων
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -580,7 +615,7 @@ azd down --environment <environment-name>
 
 ## 📝 Μεταβλητές Περιβάλλοντος
 
-### Κοινές Μεταβλητές Περιβάλλοντος
+### Συνήθεις Μεταβλητές Περιβάλλοντος
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 Επαγγελματικές Συμβουλές
 
-### Συντομεύσεις για Ταχύτερη Ροή Εργασίας
+### Ψευδώνυμα για Γρηγορότερη Ροή Εργασίας
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Συμβουλή**: Σελιδοδείκτης αυτό το φύλλο απάτης και χρησιμοποιήστε `Ctrl+F` για να βρείτε γρήγορα τις εντολές που χρειάζεστε!
+**Συμβουλή**: Αγαπημένο αυτόν τον οδηγό και χρησιμοποιήστε `Ctrl+F` για να βρείτε γρήγορα τις εντολές που χρειάζεστε!
 
 ---
 
 **Πλοήγηση**
-- **Προηγούμενο Μάθημα**: [Προέλεγχοι](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Προηγούμενο Μάθημα**: [Preflight Checks](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Επόμενο Μάθημα**: [Γλωσσάριο](glossary.md)
 
 ---
 
-> **💡 Θέλετε βοήθεια εντολών Azure στον επεξεργαστή σας;** Εγκαταστήστε τα [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) με `npx skills add microsoft/github-copilot-for-azure` — 37 δεξιότητες για ΤΝ, Foundry, ανάπτυξη, διαγνωστικά, και άλλα.
+> **💡 Θέλετε βοήθεια εντολών Azure στον επεξεργαστή σας;** Εγκαταστήστε [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) με `npx skills add microsoft/github-copilot-for-azure` — 37 δεξιότητες για AI, Foundry, ανάπτυξη, διαγνωστικά και άλλα.
 
 ---
 

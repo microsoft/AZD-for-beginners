@@ -1,309 +1,315 @@
-# Study Guide - Comprehensive Learning Objectives
+# သင်ယူမှုလမ်းညွှန် - အပြည့်အစုံသင်ယူရန်ရည်မှန်းချက်များ
 
-**Learning Path Navigation**
-- **📚 Course Home**: [AZD For Beginners](../README.md)
-- **📖 Start Learning**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Progress Tracking**: [Course Completion](../README.md#-course-completion--certification)
+**သင်ယူမှုလမ်းကြောင်းလမ်းညွှန်ခြင်း**
+- **📚 သင်တန်းအိမ်**: [AZD အခြေခံ](../README.md)
+- **📖 သင်ယူမှုစတင်ရန်**: [ဒေသန 1: အခြေခံနှင့် အလျင်အမြန် စတင်ခြင်း](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 တိုးတက်မှု လိုက်လံခြင်း**: [သင်တန်းပြီးမြောက်ခြင်း](../README.md#-course-completion--certification)
 
-## Introduction
+## မိတ်ဆက်ခြင်း
 
-ဤ ပြည့်စုံသော study guide သည် Azure Developer CLI (azd) ကိုကျွမ်းကျင်ရန် အဆင်သင့် ဖွဲ့စည်းထားသော သင်ယူရန် ရည်ရွယ်ချက်များ၊ အဓိက အကြောင်းအရာများ၊ လေ့ကျင့်မှုလေ့ရဲ့ လက်တွေ့ လက်မှတ်ပေးအရာများနှင့် သုံးသပ် စစ်ဆေးမှု ပစ္စည်းများကို ဖော်ပြထားသည်။ သင်၏ တိုးတက်မှုကို လိုက်ကြည့်ရန်နှင့် မလိုလားအပ်သော အချက်များကို ကြည့်ရန် ဤလမ်းညွှန်ကို အသုံးပြုပါ။
+ဤအပြည့်အစုံသင်ယူမှုလမ်းညွှန်သည် Azure Developer CLI (azd) ကို ကျွမ်းကျင်စွာ ကျင့်သုံးနိုင်ရန် စနစ်တကျသင်ယူရန်ရည်မှန်းချက်များ၊ အဓိကအယူအဆများ၊ လေ့ကျင့်ခန်းများနှင့် သုံးသပ်ခြင်းပစ္စည်းများကို ပံ့ပိုးပေးသည်။ သင်၏တိုးတက်မှုကို လိုက်လံပြီး အရေးကြီးသောအကြောင်းအရာအားလုံးကို ကောင်းစွာ ဖုံးလွှမ်း သေချာစေရန် ဤလမ်းညွှန်ကို အသုံးပြုပါ။
 
-## Learning Goals
+## သင်ယူရန်ရည်မှန်းချက်များ
 
-ဤ study guide ကို ပြီးစီးလျှင် သင်သည်-
-- Azure Developer CLI ၏ အခြေခံ နှင့် အဆင့်မြင့် အကြောင်းအရာများအားလုံးကို ကျွမ်းကျင်နိုင်မည်
-- Azure လျှပ်စစ်လျှောက်လွှာများကို တပ်ဆင်ခြင်းနှင့် စီမံခန့်ခွဲခြင်း ဆိုင်ရာ လက်တွေ့ကျကျ ကျွမ်းကျင်မှုများ ရရှိမည်
-- တပ်ဆင်မှုများကို ပြန်လည်ဖြေရှင်းခြင်းနှင့် အထိရောက်စွာ အကောင်းကောင်းလုပ်ဆောင်နိုင်မှု တွင် ယုံကြည်မှု တည်ဆောက်မည်
-- ထုတ်လုပ်ရေးတင်သွင်းနိုင်စွမ်းရှိသော deployment လက်နက်များနှင့် လုံခြုံရေး စဉ်းစားချက်များကို နားလည်မည်
+ဤလမ်းညွှန်ကို ပြီးမြောက်သည်နှင့်၊ သင်သည်
+- Azure Developer CLI ၏ အခြေခံနှင့် အဆင့်မြင့် အယူအဆအားလုံးကို ကျွမ်းကျင်နိုင်မည်
+- Azure အပလီကေးရှင်းများအသုံးပြု၍ တက်မြောက်စွာ တီထွင်နှင့် စီမံခန့်ခွဲခြင်း လက်တွေ့ကျကျ ကျင့် သုံးနိုင်မည်
+- ပြဿနာဖြေရှင်းခြင်းနှင့် deployment များကို အ tối ưu ပြုလုပ်သွားရန် ယုံကြည်မှု ရရှိမည်
+- ထုတ်ကုန်သုံး deployment လုပ်ငန်းစဉ်များနှင့် လုံခြုံရေးအချက်များကို နားလည်မည်
 
-## Learning Outcomes
+## သင်ယူပြီးရရှိမည့်ရလဒ်များ
 
-ဤ study guide ၏ အပိုင်းအားလုံးကို ပြီးစီးလျှင် သင်သည်-
-- azd ကို အသုံးပြုကာ ပြည့်စုံသော application architecture များကို ဒီဇိုင်းရေးဆွဲ၊ တပ်ဆင်နှင့် စီမံခန့်ခွဲနိုင်မည်
-- နာရီလုံး monitoring, security, cost optimization များကို အကောင်အထည်ဖော်နိုင်မည်
-- အဆင်ပြေစွာ စီမံခန့်ခွဲ၍ deployment ပြဿနာရှာဖွေရန် သဘောတရားပြေကျစွာ ဖြေရှင်းနိုင်မည်
-- custom templates များ ဖန်တီး၍ azd community ထဲသို့ အကူအညီပေးနိုင်မည်
+ဤလမ်းညွှန်၏ အပိုင်းအားလုံးကို ပြီးဆုံးသည်နှင့်၊ သင်သည်
+- azd အသုံးပြု၍ အပလီကေးရှင်း အစိတ်အပိုင်းများကို ဒီဇိုင်းဆွဲ၊ တပ်ဆင်နှင့် စီမံခန့်ခွဲနိုင်မည်
+- စုံလင်သော စောင့်ကြည့်မှု၊ လုံခြုံရေးနှင့် ကုန်ကျစရိတ် တှည်းညှိမှု မူဝါဒများဖြင့် လက်တွေ့တည်ဆောက်နိုင်မည်
+- ကွက်တိ ကွက်မှန် သိုင်းတောင်နှင့် deployment ပြဿနာများကို မိမိတိုင် ဖြေရှင်းနိုင်မည်
+- အထူးပြု ဖောင်ထိပ် များရေးဆွဲပြီး azd လူ့အသိုင်းအဝိုင်းအား ပံ့ပိုးနိုင်မည်
 
-## 8-Chapter Learning Structure
+## ၈ ဌာနချုပ် သင်ယူမှု ဖွဲ့စည်းပုံ
 
-### Chapter 1: Foundation & Quick Start (Week 1)
-**Duration**: 30-45 minutes | **Complexity**: ⭐
+### ဒေသန ၁: အခြေခံနှင့် အလျင်အမြန် စတင်ခြင်း (အပတ် ၁)
+**ကြာချိန်**: ၃၀-၄၅ မိနစ် | **အခက်အခဲ**: ⭐
 
-#### Learning Objectives
-- Azure Developer CLI ၏ အဓိက အယူအဆများနှင့် အသုံးအနှုန်းများကို နားလည်ရန်
-- သင်၏ ဖွံ့ဖြိုးရေး platform ပေါ်တွင် AZD ကို မအောင်မြင်စွာ install လုပ်၍ ဖွဲ့စည်းရန်
-- ရှိပြီးသား template တစ်ခုကို အသုံးပြုကာ ပထမဆုံး application ကို deploy ပြုလုပ်ရန်
-- AZD command-line interface ကို ထိရောက်စွာ တရားဝင်သိရှိရန်
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- Azure Developer CLI ၏ အဓိက အယူအဆများနှင့် အသုံးဝေါဟာရများကို နားလည်ရန်
+- AZD ကို သင်၏ဖွံ့ဖြိုးရေးပလက်ဖောင်းတွင် ထောက်လှမ်းထည့် သွင်းနိုင်ရန် အောင်မြင်စွာ ချိန်းဆက် configure လုပ်ရန်
+- ရှိပြီးသားဖောင်ထိပ်တစ်ခုကို အသုံးပြုကာ သင်၏ပထမဆုံးအပလီကေးရှင်း ကို ထုတ်လွှင့်နိုင်ရန်
+- AZD command-line interface ကို ထိရောက်စွာ သွားလာနိုင်ရန်
 
-#### Key Concepts to Master
-- AZD project အဖွဲ့စည်းနှင့် component များ (azure.yaml, infra/, src/)
-- Template အခြေပြု deployment workflow များ
-- Environment configuration အခြေခံများ
-- Resource group နှင့် subscription စီမံခန့်ခွဲမှု
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- AZD project ဖွဲ့စည်းပုံနှင့် အစိတ်အပိုင်းများ (azure.yaml, infra/, src/)
+- ဖောင်ထိပ်အခြေခံ deployment ကိစ္စရပ်များ
+- ပတ်ဝန်းကျင် အချိန်ညှိခြင်း မူဝါဒများ
+- Resource group နှင့် subscription စီမံခန့်ခွဲမှု
 
-#### Practical Exercises
-1. **Installation Verification**: Install AZD and verify with `azd version`
-2. **First Deployment**: Deploy todo-nodejs-mongo template successfully
-3. **Environment Setup**: Configure your first environment variables
-4. **Resource Exploration**: Navigate deployed resources in Azure Portal
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **ထောက်လှမ်းထည့် သွင်းခြင်းစစ်ဆေးမှု**: AZD ထည့်သွင်းပြီး `azd version` ဖြင့် စစ်ဆေးပါ
+2. **ပထမဆုံး Deployment**: todo-nodejs-mongo ဖောင်ထိပ်တစ်ခုကို အောင်မြင်စွာ ထုတ်လွှင့်ပါ
+3. **ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှု**: သင်၏ ပထမဆုံး ပတ်ဝန်းကျင် အပြောင်းအလဲများကို ပြင်ဆင်ပါ
+4. **အရင်းမြစ်ရှာဖွေခြင်း**: Azure Portal တွင် ထုတ်လွှင့်ထားသော အရင်းမြစ်များကို သွားလည်ကြည့်ပါ
 
-#### Assessment Questions
-- AZD project ၏ အဓိက component များ ဘာတွေဖြစ်သနည်း?
-- Template မှာနေ၍ project အသစ်ကို ဘယ်လို initialize လုပ်နိုင်သလဲ?
-- `azd up` နဲ့ `azd deploy` ရဲ့ ကွာခြားချက်က ဘာလဲ?
-- AZD ဖြင့် အမျိုးမျိုးသော environments များကို ဘယ်လိုစီမံခန့်ခွဲရမယ်?
-
----
-
-### Chapter 2: AI-First Development (Week 2)
-**Duration**: 1-2 hours | **Complexity**: ⭐⭐
-
-#### Learning Objectives
-- Microsoft Foundry services များကို AZD workflows နှင့် ပေါင်းစည်းခြင်း
-- AI အင်အားဖြင့် အက်ပလီကေးရှင်းများကို deploy နှင့် configure ပြုလုပ်ခြင်း
-- RAG (Retrieval-Augmented Generation) အကောင်အထည်ဖော်မှု pattern များကို နားလည်ရန်
-- AI model များ၏ deployment နှင့် scaling ကို စီမံခန့်ခွဲရန်
-
-#### Key Concepts to Master
-- Microsoft Foundry Models service integration နှင့် API ကိုစီမံခြင်း
-- AI Search configuration နှင့် vector indexing
-- Model deployment ညွှန်ကြားချက်များနှင့် capacity planning
-- AI application များအတွက် monitoring နှင့် performance optimization
-
-#### Practical Exercises
-1. **AI Chat Deployment**: Deploy azure-search-openai-demo template
-2. **RAG Implementation**: Configure document indexing and retrieval
-3. **Model Configuration**: Set up multiple AI models with different purposes
-4. **AI Monitoring**: Implement Application Insights for AI workloads
-
-#### Assessment Questions
-- AZD template တွင် Microsoft Foundry Models services ကို ဘယ်လို configure လုပ်ရမည်နည်း?
-- RAG architecture ၏ အဓိက component များ ဘာတွေရှိသနည်း?
-- AI model capacity နှင့် scaling ကို ဘယ်လို စီမံရမည်နည်း?
-- AI application များအတွက် အရေးကြီး monitoring metrics များ ဘာတွေဖြစ်သနည်း?
+#### သုံးသပ်မေးခွန်းများ
+- AZD project ၏ အဓိကအစိတ်အပိုင်းများမှာ ဘာများလဲ?
+- ဖောင်ထိပ်မှ အသစ်သော project ကို မည်သို့ စတင်ဖြစ်ထွန်းလဲ?
+- `azd up` နှင့် `azd deploy` တို့အကြားကွာခြားချက်ကဘာလဲ?
+- AZD ဖြင့် ပတ်ဝန်းကျင်မျိုးစုံကို မည်သို့ စီမံခန့်ခွဲနိုင်သနည်း?
 
 ---
 
-### Chapter 3: Configuration & Authentication (Week 3)
-**Duration**: 45-60 minutes | **Complexity**: ⭐⭐
+### ဒေသန ၂: AI ပထမဆုံး ဖွံ့ဖြိုးတိုးတက်မှု (အပတ် ၂)
+**ကြာချိန်**: ၄-၅ နာရီ (ပြန်ကြားပွဲအပါအဝင်) | **အခက်အခဲ**: ⭐⭐
 
-#### Learning Objectives
-- Environment configuration နှင့် management နည်းဗျူဟာများအား ကျွမ်းကျင်ရန်
-- လုံခြုံသော authentication နမူနာများနှင့် managed identity ကို အကောင်အထည်ဖော်ရန်
-- သင့် resource များကို မှန်ကန်သည့် နာမည်ပေးခြင်း နည်းလမ်းများဖြင့် စီမံရန်
-- Multi-environment deployments (dev, staging, prod) ကို configure လုပ်ရန်
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- Microsoft Foundry ဝန်ဆောင်မှုများကို AZD workflow များနှင့် ပေါင်းစပ်၍ အသုံးပြုနိုင်ရန်
+- AZD 1.37.0+ တွင် GA `microsoft.foundry` bundle ကို hosted-agent ဖွံ့ဖြိုးရေးအတွက် အသုံးပြုပါ
+- AI ထောက်ပံ့ထားသော အပလီကေးရှင်းများကို တပ်ဆင်ပေးပြီး configure လုပ်ပါ
+- RAG (Retrieval-Augmented Generation) ဆောင်ရွက်မှု ပုံစံများကို နားလည်ရန်
+- AI model များတပ်ဆင်မှုနှင့် အတိုင်းအတာတိုးမြှင့်မှု မူဝါဒများကို စီမံခန့်ခွဲနိုင်ရန်
 
-#### Key Concepts to Master
-- Environment hierarchy နှင့် configuration precedence
-- Managed identity နှင့် service principal authentication
-- Key Vault integration မှတဆင့် secrets management
-- Environment-specific parameter management
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- Microsoft Foundry Models ဝန်ဆောင်မှု ပေါင်းစပ်မှုနှင့် API စီမံခန့်ခွဲမှု
+- AI ရှာဖွေမှု ဖော်ပြချက်နှင့် vector စာရင်းချုပ်ခြင်း
+- Model deployment မူဝါဒများနှင့် စွမ်းဆောင်ရည် စီမံခန့်ခွဲမှု
+- AI အပလီကေးရှင်း စောင့်ကြည့်မှုနှင့် ကြိုးပမ်းအောင်မြင်မှု တိုးတက်မှု
+- Local Agent Inspector နှင့် cloud traces, source-code deployment, version control တွင် အကဲဖြတ်ပစ္စည်းများ
 
-#### Practical Exercises
-1. **Multi-Environment Setup**: Configure dev, staging, and prod environments
-2. **Security Configuration**: Implement managed identity authentication
-3. **Secrets Management**: Integrate Azure Key Vault for sensitive data
-4. **Parameter Management**: Create environment-specific configurations
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **AI စကားပြော ထုတ်လွှင့်ခြင်း**: azure-search-openai-demo ဖောင်ထိပ်ကို ထုတ်လွှင့်ပါ
+2. **RAG ဆောင်ရွက်မှု**: စာရွက်စာတမ်း မြောက်မြက်ခြင်းနှင့် အချက်အလက် ရယူခြင်းကို တပ်ဆင်ပါ
+3. **Model စီမံခန့်ခွဲမှု**: ရည်ရွယ်ချက် မတူသော AI model များ မျိုးစုံကို သတ်မှတ်ပါ
+4. **AI စောင့်ကြည့်မှု**: AI အလုပ်လုပ်မှုများအတွက် Application Insights ကို အသုံးပြုပါ
+5. **GA Hosted Agent**: [hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) ကို လိုက်နာပြီး၊ လုပ်ငန်းစဉ်များကို စစ်ဆေးပါ၊ cloud response နှင့် မူရင်း response များနှိုင်းယှဉ်ပြီး ၊ အကဲဖြတ်ရှု့ဖွယ် များအား ပြန်လည်စစ်ဆေးပြီး သန့်ရှင်းရေးအပိုင်အခြေအနေများကို စစ်ဆေးပါ
 
-#### Assessment Questions
-- AZD ဖြင့် ကွဲပြားသော environments များကို ဘယ်လို configure လုပ်ရမည်နည်း?
-- managed identity ကို service principals ထက် အသုံးချရသည့် အကျိုးကျေးဇူးများက ဘာလဲ?
-- application secrets များကို ဘယ်လိုလုံခြုံစွာ စီမံသိမ်းဆည်းရမည်နည်း?
-- AZD တွင် configuration hierarchy ဆိုသည်မှာ ဘာလဲ?
-
----
-
-### Chapter 4: Infrastructure as Code & Deployment (Week 4-5)
-**Duration**: 1-1.5 hours | **Complexity**: ⭐⭐⭐
-
-#### Learning Objectives
-- Bicep infrastructure templates များ ဖန်တီး နိုင်ခြင်း နှင့် ထပ်တိုးပြင်ဆင်နိုင်ခြင်း
-- တပ်ဆင်မှု pattern များနှင့် workflow များ အဆင့်မြှင့် အကောင်အထည်ဖော်ခြင်း
-- resource provisioning strategies များကို နားလည်ရန်
-- scalable multi-service architectures များ ဒီဇိုင်းရေးဆွဲရန်
-
-- Deploy containerized applications using Azure Container Apps and AZD
-
-
-#### Key Concepts to Master
-- Bicep template structure နှင့် အကောင်းဆုံးလက်တွေ့ကျကျ အသုံးချနည်းများ
-- Resource dependencies နှင့် deployment ordering
-- Parameter files နှင့် template modularity
-- Custom hooks နှင့် deployment automation
-- Container app deployment pattern များ (quick start, production, microservices)
-
-#### Practical Exercises
-1. **Custom Template Creation**: Build a multi-service application template
-2. **Bicep Mastery**: Create modular, reusable infrastructure components
-3. **Deployment Automation**: Implement pre/post deployment hooks
-4. **Architecture Design**: Deploy complex microservices architecture
-5. **Container App Deployment**: Deploy the [Simple Flask API](../../../examples/container-app/simple-flask-api) and [Microservices Architecture](../../../examples/container-app/microservices) examples using AZD
-
-#### Assessment Questions
-- AZD အတွက် custom Bicep templates များကို ဘယ်လို ဖန်တီးရမည်နည်း?
-- infrastructure code ကို အစီအရင်ခံ ဘယ်လို စီစဉ်ရမည်နည်း?
-- templates တွင် resource dependencies များကို ဘယ်လို ကောင်းစွာ ကိုင်တွယ်ရမည်နည်း?
-- zero-downtime updates ကို ဘယ် deployment pattern များမောင်းနှင်နိုင်သလဲ?
+#### သုံးသပ်မေးခွန်းများ
+- AZD ဖောင်ထိပ်တြင် Microsoft Foundry Models ဝန်ဆောင်မှု မည်သို့ configure လုပ်သနည်း?
+- RAG architecture ၏ အဓိကအစိတ်အပိုင်းများ ဘာများလဲ?
+- AI model များ အတိုင်းအတာ နှင့် တိုးချဲ့မှု မည်သို့ စီမံခန့်ခွဲသနည်း?
+- AI အပလီကေးရှင်း များအတွက် စောင့်ကြည့်မှု metrics များ ဘာများလဲ?
+- `microsoft.foundry` တွင် ပါဝင်သော extensions များ၊ အကဲဖြတ်များကို အခွဲခြား ထည့်သွင်းသော အကြောင်း ရှင်းပြပါ
+- ဒေသိယ agent စမ်းသပ်မှုများက Azure model စီမံခန့်ခွဲမှု ငွေချေမှုများကို မည်သို့ ဆောင်ရြက်စေသနည်း?
+- `azd down` သည် ရှိပြီးသား Foundry project အသစ် ပြန်အသုံးချသည့်အခါ ဘယ်လို အကျိုးသက်ရောက်မှုရှိသနည်း?
 
 ---
 
-### Chapter 5: Multi-Agent AI Solutions (Week 6-7)
-**Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
+### ဒေသန ၃: ဖော်ပြချက် သတ်မှတ်ခြင်းနှင့် အတည်ပြုချက် (အပတ် ၃)
+**ကြာချိန်**: ၄၅-၆၀ မိနစ် | **အခက်အခဲ**: ⭐⭐
 
-#### Learning Objectives
-- Multi-agent AI architectures များကို ဒီဇိုင်းရေးဆွဲ၍ အကောင်အထည်ဖော်နိုင်ခြင်း
-- Agent coordination နှင့် ဆက်သွယ်ဆက်ဆံမှုကို စီမံမောင်းမြန်းနိုင်ခြင်း
-- production-ready AI solutions များကို monitoring နဲ့ တပ်ဆင်နိုင်ခြင်း
-- Agent specialization နှင့် workflow pattern များကို နားလည်ရန်
-- Multi-agent solutions ၏ အစိတ်အပိုင်းအဖြစ် containerized microservices များကို ပေါင်းစည်းရန်
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- ပတ်ဝန်းကျင်သတ်မှတ်ခြင်းနှင့် စီမံခန့်ခွဲမှု မူဝါဒများကို ကျွမ်းကျင်စွာ ကျင့်သုံးနိုင်ရန်
+- လုံခြုံရေးအတည်ပြုမှုနည်းလမ်းများနှင့် managed identity ကို ဆောင်ရွက်နိုင်ရန်
+- အရင်းမြစ်များကို အမည်ပေးရမည့် စည်းမျဉ်းများဖြင့် စနစ်တကျ စီမံခန့်ခွဲနိုင်ရန်
+- မျိုးစုံသော ပတ်ဝန်းကျင် တပ်ဆင်မှုများ (dev, staging, prod) ကို configure ပြုလုပ်နိုင်ရန်
 
-#### Key Concepts to Master
-- Multi-agent architecture pattern များနှင့် ဒီဇိုင်း သဘောတရားများ
-- Agent ဆက်သွယ်ရေး ပရိုတိုကောများနှင့် data flow
-- AI agents များအတွက် load balancing နှင့် scaling strategy များ
-- Multi-agent systems အတွက် production monitoring
-- containerized ပတ်ဝန်းကျင်တွင် service-to-service ဆက်သွယ်ရေး
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- ပတ်ဝန်းကျင် အဆင့်များနှင့် configuration အလွန်တူညီမှု စနစ်များ
+- managed identity နှင့် service principal authentication
+- secrets စီမံခန့်ခွဲမှုအတွက် Key Vault ပေါင်းစပ်မှု
+- ပတ်ဝန်းကျင် အလိုက် parameter စီမံခန့်ခွဲမှု
 
-#### Practical Exercises
-1. **Retail Solution Deployment**: Deploy the complete multi-agent retail scenario
-2. **Agent Customization**: Modify Customer and Inventory agent behaviors
-3. **Architecture Scaling**: Implement load balancing and auto-scaling
-4. **Production Monitoring**: Set up comprehensive monitoring and alerting
-5. **Microservices Integration**: Extend the [Microservices Architecture](../../../examples/container-app/microservices) example to support agent-based workflows
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **မျိုးစုံပတ်ဝန်းကျင် တပ်ဆင်မှု**: dev, staging, prod ပတ်ဝန်းကျင်များ configure လုပ်ပါ
+2. **လုံခြုံရေး စီမံခန့်ခွဲမှု**: managed identity အတည်ပြုမှုကို ဆောင်ရွက်ပါ
+3. **လျှို့ဝှက်ချက် စီမံခန့်ခွဲမှု**: Azure Key Vault ကို sensitive data များအတွက် ပေါင်းစပ်ပါ
+4. **parameter စီမံခန့်ခွဲမှု**: ပတ်ဝန်းကျင် အလိုက် သတ်မှတ်မှုများ ဖန်တီးပါ
 
-#### Assessment Questions
-- ထိရောက်သော multi-agent ဆက်သွယ်ရေး pattern များကို ဘယ်လို ဒီဇိုင်းရေးဆွဲရမည်နည်း?
-- AI agent workloads များကို scale လုပ်ရာတွင် အဓိက စဉ်းစားရမည့် အချက်များ ဘာတွေပါသလဲ?
-- multi-agent AI systems များကို ဘယ်လို monitor နဲ့ debug လုပ်ရမည်နည်း?
-- AI agents များအတွက် ယုံကြည်စိတ်ချရမှု ရရှိစေရန် ထုတ်လုပ်ရေး pattern များ ဘာတွေလုပ်ဆောင်သလဲ?
+#### သုံးသပ်မေးခွန်းများ
+- AZD ဖြင့် မတူညီသော ပတ်ဝန်းကျင်များကို မည်သို့ configure လုပ်သနည်း?
+- managed identity ကို service principal များထက် အသုံးချရသည့် အကျိုးကျေးဇူးများ ဘာတွေလဲ?
+- လျှို့ဝှက်ချက်များကို မည်သို့လုံခြုံစွာ စီမံခန့်ခွဲသနည်း?
+- AZD ၌ configuration hierarchy ဆိုသည်မှာ ဘာမျိုးလဲ?
 
 ---
 
-### Chapter 6: Pre-Deployment Validation & Planning (Week 8)
-**Duration**: 1 hour | **Complexity**: ⭐⭐
+### ဒေသန ၄: Infrastructure as Code & Deployment (အပတ် ၄-၅)
+**ကြာချိန်**: ၁-၁.၅ နာရီ | **အခက်အခဲ**: ⭐⭐⭐
 
-#### Learning Objectives
-- လုံလောက်သော capacity planning နှင့် resource validation များကို ပြုလုပ်နိုင်ရန်
-- သင့်ရည်ရွယ်ချက်နှင့် ကိုက်ညီသော Azure SKUs များကို ရွေးချယ်နိုင်ရန်
-- အလိုအလျောက် pre-flight checks နှင့် validation များကို ဆောင်ရွက်နိုင်ရန်
-- cost optimization ကို ထည့်သွင်း၍ deployment များကို စီမံပံ့ပိုးရန်
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- Bicep infrastructure ဖောင်ထိပ်များ ဖန်တီး၍ ပြင်ဆင်နိုင်ရန်
+- တိုးတက်သော deployment ပုံစံများနှင့် workflow များ ဆောင်ရွက်နိုင်ရန်
+- အရင်းအမြစ် ပေးသွင်းမှု မူဝါဒများ နားလည်ရန်
+- တိုးချဲ့နိုင်သော multi-service architecture စီမံချက်များ ရေးဆွဲနိုင်ရန်
 
-#### Key Concepts to Master
-- Azure resource quotas နှင့် capacity ကန့်သတ်ချက်များ
-- SKU ရွေးချယ်မှုเกณฑ์များနှင့် cost optimization
-- အလိုအလျောက် validation scripts နှင့် စမ်းသပ်မှုများ
-- Deployment စီမံကိန်းရေးဆွဲခြင်းနှင့် risk အကဲဖြတ်မှု
+- Azure Container Apps နှင့် AZD တို့ ဖြင့် containerized အပလီကေးရှင်း များ ထုတ်လွှင့်နိုင်ရန်
 
-#### Practical Exercises
-1. **Capacity Analysis**: Analyze resource requirements for your applications
-2. **SKU Optimization**: Compare and select cost-effective service tiers
-3. **Validation Automation**: Implement pre-deployment check scripts
-4. **Cost Planning**: Create deployment cost estimates and budgets
 
-#### Assessment Questions
-- Deployment မလုပ်မီ Azure capacity ကို ဘယ်လို သေချာစစ်ဆေးရမည်နည်း?
-- SKU ရွေးချယ်ရာတွင် သယ်ယူလွှဲပြောင်းမှုကို ထိခိုက်စေသည့် ဖакторများ ဘာတွေပါသလဲ?
-- pre-deployment validation ကို ဘယ်လို အလိုအလျောက် လုပ်ဆောင်နိုင်မည်နည်း?
-- deployment ကုန်ကျစရိတ်များအား အကောင်းဆုံး ဖြတ်တောက်ရန် မည်သည့် နည်းဗျူဟာများကို အသုံးပြုနိုင်သလဲ?
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- Bicep ဖောင်ထိပ် ဖွဲ့စည်းပုံနှင့် အကောင်းဆုံး လေ့လာမှုပုံစံများ
+- အရင်းအမြစ် မူလတည်နေရာများနှင့် deployment အဆင့်ဆင့် စီစဉ်မှု
+- parameter ဖိုင်များနှင့် ဖောင်ထိပ် modularity
+- ဂရုစိုက်မှုတစ်ခုနှင့် ပို့ချမှု အလိုအလျောက် ဖြစ်စဉ်များ
+- container app deployment ပုံစံများ (အလျင်အမြန် စတင်ခြင်း၊ ထုတ်ကုန် အသုံးပြုမှု၊ microservices)
 
----
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **စိတ်ကြိုက် ဖောင်ထိပ် ဖန်တီးခြင်း**: multi-service အပလီကေးရှင်း ဖောင်ထိပ်တစ်ခု တည်ဆောက်ခြင်း
+2. **Bicep ကျွမ်းကျင်မှု**: modular ဖြင့် ပြန်အသုံးပြုနိုင်သော လုပ်ထုံးလုပ်နည်းများ ဖန်တီးခြင်း
+3. **Deployment အလိုအလျောက်ဖြစ်စဉ်များ**: pre/post deployment hooks ဆောင်ရွက်ခြင်း
+4. **Architecture ဒီဇိုင်း**: ရောထွေးသော microservices architecture တပ်ဆင်ခြင်း
+5. **Container App Deployment**: [Simple Flask API](../../../examples/container-app/simple-flask-api) နှင့် [Microservices Architecture](../../../examples/container-app/microservices) နမူနာများကို AZD ဖြင့် ထုတ်လွှင့်ခြင်း
 
-### Chapter 7: Troubleshooting & Debugging (Week 9)
-**Duration**: 1-1.5 hours | **Complexity**: ⭐⭐
-
-#### Learning Objectives
-- AZD deployment များအတွက် စနစ်တကျ debugging နည်းလမ်းများ ဖန်တီးနိုင်ရန်
-- ရိုးရှင်းသော deployment နှင့် configuration ပြဿနာများကို ဖြေရှင်းနိုင်ရန်
-- AI သက်ဆိုင်သော ပြဿနာများနှင့် performance ပြဿနာများကို debug လုပ်နိုင်ရန်
-- အချိန်မီ ပြဿနာရှာဖွေမှုအတွက် monitoring နှင့် alerting ကို ထည့်သွင်းနိုင်ရန်
-
-#### Key Concepts to Master
-- Diagnostic နည်းလမ်းများနှင့် logging အခြေခံနည်းဗျူဟာများ
-- မကြာခဏ ဖြစ်ပေါ်သော မအောင်မြင်မှု ပုံစံများနှင့် ဖြေရှင်းနည်းများ
-- Performance monitoring နှင့် optimization
-- Incident response နှင့် recovery လုပ်ထုံးလုပ်နည်းများ
-
-#### Practical Exercises
-1. **Diagnostic Skills**: Practice with intentionally broken deployments
-2. **Log Analysis**: Use Azure Monitor and Application Insights effectively
-3. **Performance Tuning**: Optimize slow-performing applications
-4. **Recovery Procedures**: Implement backup and disaster recovery
-
-#### Assessment Questions
-- အများအားဖြင့် ဖြစ်ပေါ်သော AZD deployment မအောင်မြင်မှုများက ဘာတွေဖြစ်သနည်း?
-- authentication နှင့် permission ပြဿနာများကို ဘယ်လို debug လုပ်ရမည်နည်း?
-- ထုတ်လုပ်ရေးပြဿနာများကို ကာကွယ်ရန် ဘယ် monitoring နည်းဗျူဟာများ အသုံးပြုသင့်သလဲ?
-- Azure တွင် application performance ကို ဘယ်လို တိုးတက်စေမည်နည်း?
+#### သုံးသပ်မေးခွန်းများ
+- AZD အတွက် မည်သို့ စိတ်ကြိုက် Bicep ဖောင်ထိပ်များ ဖန်တီးသနည်း?
+- infrastructure code ကို စနစ်တကျ စီမံရာတွင် အကောင်းဆုံး လေ့လာမှုပုံစံများ မည်သည်များလဲ?
+- ဖောင်ထိပ်တွင် အရင်းအမြစ် မူလတည်နေရာများကို မည်သို့ ကိုင်တွယ်သနည်း?
+- zero-downtime update များအတွက် ဘယ် deployment ပုံစံများကို ထောက်ပံ့သနည်း?
 
 ---
 
-### Chapter 8: Production & Enterprise Patterns (Week 10-11)
-**Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
+### ဒေသန ၅: multi-agent AI ဖြေရှင်းချက်များ (အပတ် ၆-၇)
+**ကြာချိန်**: ၂-၃ နာရီ | **အခက်အခဲ**: ⭐⭐⭐⭐
 
-#### Learning Objectives
-- စီးပွားရေးအဆင့် deployment ဥပဒ်များကို အကောင်အထည်ဖော်ရန်
-- လုံခြုံရေး pattern များနှင့် compliance ဖွဲ့စည်းချက်များ ဒီဇိုင်းရေးဆွဲရန်
-- monitoring၊ governance နှင့် cost management ကို တည်ဆောက်ရန်
-- AZD အင်တာဂရိတ်ရှိ scalable CI/CD pipeline များ ဖန်တီးရန်
-- production container app deployments အတွက် အကောင်းဆုံးအလေ့အကျင့်များကို (security, monitoring, cost, CI/CD) သုံးနိုင်ရန်
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- Multi-agent AI architecture များကို ဒီဇိုင်းလုပ်ပြီး ဆောင်ရွက်နိုင်ရန်
+- Agent များအကြား ညှိနှိုင်းမှုနှင့် ဆက်သွယ်မှုကို စီမံခန့်ခွဲနိုင်ရန်
+- စောင့်ကြည့်မှုများနှင့် ထုတ်ကုန်အသင့် AI ဖြေရှင်းချက်များ ထုတ်လွှင့်နိုင်ရန်
+- Agent အထူးပြုခြင်းနှင့် workflow ပုံစံများကို နားလည်ရန်
+- multi-agent ဖြေရှင်းချက် အတွက် containerized microservices များ ပေါင်းစပ်သုံးနိုင်ရန်
 
-#### Key Concepts to Master
-- Enterprise security နှင့် compliance လိုအပ်ချက်များ
-- Governance frameworks နှင့် policy အကောင်အထည်ဖော်ခြင်း
-- Advanced monitoring နှင့် cost management
-- CI/CD integration နှင့် အလိုအလျော့ deployment pipeline များ
-- Containerized workloads များအတွက် blue-green နှင့် canary deployment strategy များ
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- multi-agent architecture ပုံစံများနှင့် ဒီဇိုင်း သဘောတရားများ
+- Agent ဆက်သွယ်ရေး ပုံစံနှင့် ဒေတာလည်ပတ်မှု
+- AI agent များအတွက် load balancing နှင့် အတိုင်းအတာတိုးမြှင့်မှု မူဝါဒများ
+- multi-agent စနစ်များအတွက် ထုတ်ကုန် စောင့်ကြည့်မှု
+- containerized ပတ်ဝန်းကျင်တွင် service-to-service ဆက်သွယ်မှု
 
-#### Practical Exercises
-1. **Enterprise Security**: Implement comprehensive security patterns
-2. **Governance Framework**: Set up Azure Policy and resource management
-3. **Advanced Monitoring**: Create dashboards and automated alerting
-4. **CI/CD Integration**: Build automated deployment pipelines
-5. **Production Container Apps**: Apply security, monitoring, and cost optimization to the [Microservices Architecture](../../../examples/container-app/microservices) example
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **Retail Architecture ကို ပြန်လည် သုံးသပ်ခြင်း**: retail blueprint ကို ချိုင်းမှောက်သင့်သည့် အပလီကေးရှင်းအစိတ်အပိုင်းများကို သတ်မှတ်ပါ
+2. **Agent စိတ်ကြိုက် ပြင်ဆင်ခြင်း**: Customer နှင့် Inventory agent ၏ပြုမူများ သတ်မှတ် ပြင်ဆင်ပါ
+3. **Architecture အတိုင်းအတာ တိုးမြှင့်ခြင်း**: load balancing နှင့် auto-scaling စီမံခန့်ခွဲပါ
+4. **ထုတ်ကုန် စောင့်ကြည့်မှု**: စုံလင်စွာ စောင့်ကြည့်မှုနှင့် သတိပေးမှုများ ပြင်ဆင်ပါ
+5. **Microservices ပေါင်းစပ်မှု**: [Microservices Architecture](../../../examples/container-app/microservices) ဥပမာကို agent-based workflow များပံ့ပိုးရန် တိုးချဲ့ပါ
 
-#### Assessment Questions
-- AZD deployments တွင် enterprise security ကို ဘယ်လို အကောင်အထည်ဖော်ရမည်နည်း?
-- compliance နှင့် ကုန်ကျစရိတ်ထိန်းချုပ်မှုအတွက် governance pattern များ ဘာတွေပါသလဲ?
-- ထုတ်လုပ်ရေး စနစ်များအတွက် scalable monitoring ကို ဘယ်လို ဒီဇိုင်းရေးဆွဲရမည်နည်း?
-- AZD workflows များနှင့် အကောင်းဆုံး လက်တွေ့သုံးသော CI/CD pattern များမှာ ဘာတွေလဲ?
+#### သုံးသပ်မေးခွန်းများ
+- multi-agent ဆက်သွယ်မှု ပုံစံများကို မည်သို့ ဒီဇိုင်းလုပ်သနည်း?
+- AI agent အလုပ်ပမာဏ တိုးချဲ့ခြင်းအတွက် အဓိက စဉ်းစားရမည့် အချက်များ ဘာများလဲ?
+- multi-agent AI စနစ်များကို မည်သို့ စောင့်ကြည့်၊ ပြဿနာရှာဖွေ ပြင်ဆင်သနည်း?
+- AI agent များအတွက် ယုံကြည်စိတ်ချရသော ထုတ်ကုန်ပုံစံများ ဘာတွေလဲ?
 
-#### Learning Objectives
-- Azure Developer CLI fundamentals နှင့် အဓိက အယူအဆများကို နားလည်ရန်
-- သင့်ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်ပေါ်တွင် azd ကို အောင်မြင်စွာ install လုပ်၍ configure လုပ်ရန်
-- ရှိပြီးသား template တစ်ခုကို အသုံးပြုကာ ပထမဆုံး deployment ကို ပြီးမြောက်စေရန်
-- azd project structure ကို လမ်းစဉ်ပေါ်တွင် စူးစမ်းနားလည်ပြီး အဓိက component များကို သိရှိရန်
+---
 
-#### Key Concepts to Master
-- Templates, environments, နှင့် services
-- azure.yaml configuration structure
-- အခြေခံ azd တိုက်ရိုက်အသုံးများ (init, up, down, deploy)
-- Infrastructure as Code သဘောတရားများ
-- Azure authentication နှင့် authorization
+### ဒေသန ၆: deployment မဖွင့်ခင် အတည်ပြုစစ်ဆေးမှုနှင့် စီမံခြင်း (အပတ် ၈)
+**ကြာချိန်**: ၁ နာရီ | **အခက်အခဲ**: ⭐⭐
 
-#### Practice Exercises
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- စွမ်းဆောင်ရည် ခန့်မှန်းခြေ နှင့် အရင်းအမြစ် စစ်ဆေးမှု တိကျစွာ ဆောင်ရွက်နိုင်ရန်
+- စျေးကွက်အနည်းဆုံးနှုန်းရှာဖွေရန် Azure SKU များကို ရွေးချယ်နိုင်ရန်
+- အလိုအလျောက် ပျံ့နှံ့မှုစစ်ဆေးမှုများကို ဆောင်ရွက်နိုင်ရန်
+- ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခြင်းနှင့် deployment များကို စီစဉ်နိုင်ရန်
 
-**Exercise 1.1: Installation and Setup**
-```bash
-# အောက်ပါ အလုပ်များကို ပြီးစီးပါ:
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- Azure resource ကိုယ်ပိုင် အတိုးအကျယ် နှင့် အကန့်အသတ်များ
+- SKU ရွေးချယ်မှု စည်းကမ်းများနှင့် ကုန်ကျစရိတ် ဖလှယ်မှု
+- အလိုအလျောက်စစ်ဆေးမှု script များနှင့် စမ်းသပ်မှု
+- deployment စီမံကိန်းနှင့် အန္တရာယ် တွက်ချက်မှု
+
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **စွမ်းဆောင်ရည် ခန့်မှန်းမှု**: သင်၏ အပလီကေးရှင်းများအတွက် အရင်းအမြစ် လိုအပ်ချက်များ စစ်ဆေးပါ
+2. **SKU ဖလှယ်မှု**: စျေးနှုန်းသင့်တော်သော ဝန်ဆောင်မှု သတ်မှတ်ချက်များ နှိုင်းယှဉ်ရွေးချယ်ပါ
+3. **အလိုအလျောက်စစ်ဆေးမှု**: deployment မဖွင့်ခင် စစ်ဆေးမှု script များ ရေးသားပါ
+4. **ကုန်ကျစရိတ် စီမံကိန်း**: deployment ကုန်ကျစရိတ် ခန့်မှန်းချက်များနှင့် ဘတ်ဂျက်များ ဖန်တီးပါ
+
+#### သုံးသပ်မေးခွန်းများ
+- deployment မလုပ်မီ Azure စွမ်းဆောင်ရည်ကို မည်သို့ အတည်ပြုသနည်း?
+- SKU ရွေးချယ်မှု တွေကို ဘယ်အချက်တွေအပေါ် မှီခိုဆုံးဖြတ်သနည်း?
+- deployment မဖွင့်ခင် validation ကို မည်သို့ အလိုအလျောက်လုပ်ဆောင်နိုင်သလဲ?
+- deployment ကုန်ကျစရိတ် ကို မည်သို့ ထိရောက်စွာ စီမံခန့်ခွဲသနည်း?
+
+---
+
+### ဒေသန ၇: ပြဿနာရှာဖွေခြင်းနှင့် ထိုးဖောက်ခြင်း (အပတ် ၉)
+**ကြာချိန်**: ၁-၁.၅ နာရီ | **အခက်အခဲ**: ⭐⭐
+
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- AZD deployment များအတွက် စနစ်တကျ debugging နည်းလမ်းများ ဖွံ့ဖြိုးတိုးတက်စေရန်
+- ပုံမှန်သော deployment နှင့် configuration ပြဿနာများကို ဖြေရှင်းနိုင်ရန်
+- AI သက်ဆိုင်ရာ ပြဿနာများနှင့် စွမ်းဆောင်ရည် ပြဿနာများကို တိုင်းတာ ပြုပြင်နိုင်ရန်
+- ပြဿနာကာကွယ်မှုနှင့် သတိပေးမှုများ စနစ်တကျ ထိန်းချုပ်နိုင်ရန်
+
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- သုံးသပ်စစ်ဆေးနည်းများနှင့် logging မူဝါဒများ
+- ပုံမှန်ပြတ်တောက်မှု များနှင့် ဖြေရှင်းနည်းများ
+- စွမ်းဆောင်ရည် စောင့်ကြည့်မှုနှင့် တိုးတက်အောင်မြင်မှု မူဝါဒများ
+- ဖြစ်ပွားမှုတုံ့ပြန်မှုနှင့် ပြန်လည်ထူထောင်ရေးလုပ်ငန်းစဉ်များ
+
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **စစ်ဆေးခြင်း ကြားနာမှုများ**: ရှင့္ချိုးပြီး deployment များနှင့် လေ့ကျင့်ပါ
+2. **ပုံမှန် log ကြည့်ခြင်း**: Azure Monitor နှင့် Application Insights ကို ထိရောက်စွာ အသုံးပြုပါ
+3. **စွမ်းဆောင်ရည် တိုးတက်မှု**: နည်းလမ်းများဖြင့် သင့်အပလီကေးရှင်းများအား တိုးတက်အောင် ရှာဖွေပါ
+4. **ပြန်လည်ထူထောင်ရေး လုပ်ငန်းစဉ်များ**: backup နှင့် ဒုက္ခပျောက်မှု ပြန်လည် ကုစားခြင်း မူဝါဒများ ဆောင်ရွက်ပါ
+
+#### သုံးသပ်မေးခွန်းများ
+- AZD deployment များအား တွင်များဆုံး ပျက်ကွက်မှုများ မည်သည်များလဲ?
+- အတည်ပြုမှု နှင့် ခွင့်ပြုချက် ပြဿနာများကို မည်သို့ ထောက်ဖြေသနည်း?
+- ထုတ်ကုန်ပြဿနာ များကာကွယ်ရှိရန် စောင့်ကြည့်မှု မူဝါဒများ ဘာတွေလဲ?
+- Azure တွင် အပလီကေးရှင်း စွမ်းဆောင်ရည် မည်သို့ တိုးတက် ပြောင်းလဲနိုင်သလဲ?
+
+---
+
+### ဒေသန ၈: ထုတ်ကုန်နှင့် စီးပွားရေး ပုံစံများ (အပတ် ၁၀-၁၁)
+**ကြာချိန်**: ၂-၃ နာရီ | **အခက်အခဲ**: ⭐⭐⭐⭐
+
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- စီးပွားရေးအဆင့် deployment မူဝါဒများ ဆောင်ရွက်နိုင်ရန်
+- လုံခြုံရေးပုံစံများနှင့် စီးပွားရေးလိုက်နာမှု စနစ်များ စီမံခန့်ခွဲရန်
+- စောင့်ကြည့်မှု၊ အုပ်ချုပ်မှုနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှုကို အကျိုးရှိရှိ တည်ဆောက်ရန်
+- AZD ပေါင်းစပ်ထားသော CI/CD pipeline များ တည်ဆောက်နိုင်ရန်
+- ထုတ်ကုန် container app deployment များတွင် အကောင်းဆုံး လုပ်နည်းများ အသုံးပြုရန် (လုံခြုံရေး၊ စောင့်ကြည့်မှု၊ ကုန်ကျစရိတ်၊ CI/CD)
+
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- စီးပွားရေး လုံခြုံရေးနှင့် စည်းမျဉ်းလိုက်နာမှု လိုအပ်ချက်များ
+- အုပ်ချုပ်မှု စနစ်များနှင့် မူဝါဒအကောင်အထည်ဖော်ခြင်း
+- ကြီးမားသော စောင့်ကြည့်မှုနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု
+- CI/CD ပေါင်းစပ်မှု နှင့် အလိုအလျောက် deployment pipeline များ
+- containerized အလုပ်လုပ်မှုများအတွက် blue-green နှင့် canary deployment မူဝါဒများ
+
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
+1. **စီးပွားရေး လုံခြုံရေး**: အပြည့်အစုံ လုံခြုံရေးပုံစံများ ဆောင်ရွက်ပါ
+2. **အုပ်ချုပ်မှု စနစ်**: Azure Policy နှင့် resource management အခြေခံခြင်းများ ပြုလုပ်ပါ
+3. **ကြီးမားသော စောင့်ကြည့်မှု**: dashboard များ ဖန်တီးပြီး အလိုအလျောက် သတိပေးမှုများ ထားရှိပါ
+4. **CI/CD ပေါင်းစပ်မှု**: အလိုအလျောက် deployment pipeline များ တည်ဆောက်ပါ
+5. **ထုတ်ကုန် container app များ**: security, စောင့်ကြည့်မှု နှင့် ကုန်ကျစရိတ် အတိုင်းအတာဖျော်ဖြေမှုများကို [Microservices Architecture](../../../examples/container-app/microservices) ဥပမာတွင် အသုံးပြုပါ
+
+#### သုံးသပ်မေးခွန်းများ
+- AZD deployment များတွင် စီးပွားရေးလုံခြုံရေးကို မည်သို့ ဆောင်ရွက်သနည်း?
+- Governance ပုံစံများ ဘာတွေလဲ၊ လိုက်နာမှုနှင့် ကုန်ကျစရိတ် ထိန်းချုပ်မှု အတွက် မည်သို့ အတည်ပြုသနည်း?
+- ထုတ်ကုန် စနစ်များအတွက် ကြီးမားသော စောင့်ကြည့်မှုကို မည်သို့ ဒီဇိုင်းဆွဲသနည်း?
+- AZD workflow များနှင့် အကောင်းဆုံး လုပ်ဆောင်သော CI/CD ပုံစံများ ဘာတွေလဲ?
+
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- Azure Developer CLI၏ အခြေခံများနှင့် အဓိကအယူအဆများကို နားလည်ရန်
+- သင်၏ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်တွင် azd ကို ကောင်းစွာ ထည့်သွင်းပြီး configure လုပ်နိုင်ရန်
+- ရှိပြီးသား ဖောင်ထိပ်တစ်ခုကို အသုံးပြုကာ ပထမဆုံး deployment ကို ပြီးမြောက်စွာ ပြုလုပ်ရန်
+- azd project ဖွဲ့စည်းပုံနှင့် အဓိကအစိတ်အပိုင်းများကို နားလည်ရန်
+
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- ဖောင်ထိပ်များ၊ ပတ်ဝန်းကျင်များနှင့် ဝန်ဆောင်မှုများ
+- azure.yaml configuration ဖွဲ့စည်းပုံ
+- အခြေခံ azd command များ (init, up, down, deploy)
+- Infrastructure as Code နယ်ပယ်
+- Azure အတည်ပြုမှုနှင့် ခွင့်ပြုမှု
+
+#### လေ့ကျင့်ခန်းများ
+
+**လေ့ကျင့်ခန်း ၁.၁: ထည့်သွင်းခြင်းနှင့် စတင်ခြင်း**
+```text
+# Complete these tasks:
 1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
+2. Install Azure CLI only for exercises or template hooks that explicitly use `az`; authenticate AZD independently
 3. Verify installation with: azd version
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
 
-**Exercise 1.2: First Deployment**
-```bash
-# ရိုးရှင်းသော ဝက်ဘ် အက်ပလီကေးရှင်း တစ်ခုကို ဖြန့်ချိပါ:
-1. Initialize project: azd init --template todo-nodejs-mongo
+**လေ့ကျင့်ခန်း ၁.၂: ပထမဆုံး Deployment**
+```text
+# Deploy a simple web application:
+1. Initialize project in an empty directory: azd init --template todo-nodejs-mongo .
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
 5. Clean up resources: azd down
 ```
 
-**Exercise 1.3: Project Structure Analysis**
+**လေ့ကျင့်ခန်း ၁.၃: Project ဖွဲ့စည်းပုံ စစ်ဆေးခြင်း**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -312,18 +318,18 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### Self-Assessment Questions
-1. azd architecture ၏ သုံးခု အဓိက အယူအဆများ ဘာတွေလဲ?
-2. azure.yaml ဖိုင်၏ ကိစ္စရည်ရွယ်ချက်က ဘာလဲ?
-3. environments များသည် ကွဲပြားသော deployment target များကို ဘယ်လို ကူညီပေးသလဲ?
-4. azd နှင့် အသုံးပြုနိုင်သော authentication မျိုးများ ဘာတွေလဲ?
-5. ပထမဆုံးအကြိမ် `azd up` ကို chạy လို့ ဘာတွေဖြစ်စေသနည်း?
+#### ကိုယ့်ကိုယ်ကို သုံးသပ်မေးခွန်းများ
+1. azd architecture ၏ အဓိက အယူအဆ သုံးချက် ဘာတွေလဲ?
+2. azure.yaml ဖိုင်ရဲ့ ရည်ရွယ်ချက်ဘာလဲ?
+3. ပတ်ဝန်းကျင်များက မတူညီသော deployment ပစ်မှတ်များ စီမံရာတွင် မည်သို့ အကူအညီဖြစ်သနည်း?
+4. azd နှင့် အသုံးပြုနိုင်သော authentication နည်းလမ်းများ ဘာတွေဖြစ်သနည်း?
+5. `azd up` ကို ပထမဆုံး 실행ချိန် ဘာဖြစ်ပေါ်သနည်း?
 
 ---
 
-## Progress Tracking and Assessment Framework
-```bash
-# ပတ်ဝန်းကျင်အမျိုးမျိုးကို ဖန်တီးပြီး ပြင်ဆင်ပါ:
+## တိုးတက်မှု လိုက်လံခြင်းနှင့် သုံးသပ်ခြင်း စနစ်
+```text
+# Create and configure multiple environments:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -331,8 +337,8 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Exercise 2.2: Advanced Configuration**
-```yaml
+**လေ့ကျင့်ခန်း ၂.၂: တိုးတက်ပြီးသော ဖေါ်ပြချက်**
+```text
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
 2. Pre and post deployment hooks
@@ -340,41 +346,41 @@ Analyze the following components:
 4. Custom resource naming patterns
 ```
 
-**Exercise 2.3: Security Configuration**
-```bash
-# လုံခြုံရေးဆိုင်ရာ အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများကို အကောင်အထည်ဖော်ပါ:
+**လေ့ကျင့်ခန်း ၂.၃: လုံခြုံရေး ဖော်ပြချက်**
+```text
+# Implement security best practices:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Self-Assessment Questions
-1. azd သည် environment variable precedence ကို ဘယ်လို ကိုင်တွယ်ကာ အလုပ်လုပ်သနည်း?
-2. deployment hooks များဆိုတာဘာလဲ၊ မည်သည့်အခါတွင် အသုံးပြုသင့်သနည်း?
-3. ကွဲပြားသော environments များအတွက် မည်သို့ SKUs များ configure လုပ်ရမည်နည်း?
-4. မတူညီသော authentication နည်းလမ်းများ၏ လုံခြုံရေး သက်ရောက်မှုများ များက ဘာတွေလဲ?
-5. secrets နှင့် အလှည့်အပြောင်း configuration ဒေတာများကို ဘယ်လို စီမံရမည်နည်း?
+#### ကိုယ့်ကိုယ်ကို သုံးသပ်မေးခွန်းများ
+1. azd တွင် ပတ်ဝန်းကျင် ရောင်စုံတန်းကို မည်သို့ ကိုင်တွယ်သနည်း?
+2. deployment hooks ဆိုတာ ဘာတွေလဲ၊ ဘယ်အချိန်တွင် အသုံးချသင့်သလဲ?
+3. မတူညီသော ပတ်ဝန်းကျင်များအတွက် SKU များကို မည်သို့ ဖြန့်ချိသနည်း?
+4. authentication နည်းလမ်းမျိုးစုံ၏ လုံခြုံရေး သက်ရောက်မှုများ ဘာတွေလဲ?
+5. လျှို့ဝှက်ချက်များနှင့် အရေးကြီး ဖော်ပြချက်များကို မည်သို့ စီမံခန့်ခွဲသနည်း?
 
-### Module 3: Deployment and Provisioning (Week 4)
+### ကိုယ်ပိုင် သင်ခန်းစာ ၃: Deployment နှင့် Provisioning (အပတ် ၄)
 
-#### Learning Objectives
-- deployment workflows နှင့် အကောင်းဆုံးလက်တွေ့ အကြောင်းအရာများကို ကျွမ်းကျင်ရန်
-- Bicep templates ဖြင့် Infrastructure as Code ကို နားလည်ရန်
-- စုံလင်သော multi-service architectures များကို အကောင်အထည်ဖော်ရန်
-- deployment performance နှင့် ယုံကြည်စိတ်ချမှုကို ကိုင်တွယ် အဆင်ပြေစေရန်
+#### သင်ယူရန် ရည်မှန်းချက်များ
+- deployment workflow များနှင့် အကောင်းဆုံး လုပ်နည်းများ ကျွမ်းကျင်စွာ ဦးဆောင်နိုင်ရန်
+- Infrastructure as Code တွင် Bicep ဖောင်ထိပ်များ နားလည်ရန်
+- အဆင့်မြင့် multi-service architecture များ အကောင်အထည်ဖော်နိုင်ရန်
+- deployment စွမ်းဆောင်ရေးနှင့် ယုံကြည်စိတ်ချရမှု တိုးမြှင့်ရန် optimization ပြုလုပ်နိုင်ရန်
 
-#### Key Concepts to Master
-- Bicep template structure နှင့် modules
-- Resource dependencies နှင့် ordering
-- Deployment strategies (blue-green, rolling updates)
-- Multi-region deployments
-- Database migrations နှင့် data management
+#### တတ်မြောက်စေရန် အဓိက အယူအဆများ
+- Bicep ဖောင်ထိပ် ဖွဲ့စည်းပုံ နှင့် မော်ဂျူးများ
+- resource မူလတည်နေရာများနှင့် အဆင့်ကျတော့မှု
+- deployment မူဝါဒများ (blue-green, rolling update)
+- အတိုင်းအတာ ကြီးမားသော deployment များ
+- ဒေတာဘေ့စ် မိုင်ဂရေးရှင်းနှင့် ဒေတာ စီမံခန့်ခွဲမှု
 
-#### Practice Exercises
+#### လက်တွေ့ လေ့ကျင့်ခန်းများ
 
-**Exercise 3.1: Custom Infrastructure**
-```bicep
+**လေ့ကျင့်ခန်း 3.1: စိတ်ကြိုက်အုတ်မြစ်အခြေခံပုံစံ**
+```text
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
 2. Database with backup and high availability
@@ -383,9 +389,9 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Exercise 3.2: Multi-Service Application**
-```bash
-# မိုက်ခရိုဆာဗစ်စနစ်တစ်ခုကို ဖြန့်ချိပါ:
+**လေ့ကျင့်ခန်း 3.2: အများစိတ်ဝန်ဆောင်မှုလျှောက်လွှာ**
+```text
+# Deploy a microservices architecture:
 1. Frontend web application
 2. Backend API service
 3. Database service
@@ -393,9 +399,9 @@ Analyze the following components:
 5. Background worker service
 ```
 
-**Exercise 3.3: Database Integration**
-```bash
-# ဒေတာဘေ့စ် တပ်ဆင်ရေး ပုံစံများကို အကောင်အထည်ဖော်ပါ:
+**လေ့ကျင့်ခန်း 3.3: ဒေတာဘေ့စ်ပေါင်းစပ်ခြင်း**
+```text
+# Implement database deployment patterns:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -403,33 +409,33 @@ Analyze the following components:
 5. Implement data seeding for different environments
 ```
 
-#### Self-Assessment Questions
-1. Bicep ကို ARM templates ထက် အသုံးချရာတွင် အားသာချက်များ ဘာတွေလဲ?
-2. azd deployments တွင် database migrations များကို ဘယ်လို ကိုင်တွယ်သင့်သလဲ?
-3. zero-downtime deployments ရရှိစေရန် မည်သည့် strategy များ ရှိသနည်း?
-4. services များအကြား dependencies များကို ဘယ်လို စီမံရမည်နည်း?
-5. multi-region deployments အတွက် စဉ်းစားရမည့် အချက်များ ဘာတွေလဲ?
+#### ကိုယ်တိုင်အကဲဖြတ်မေးခွန်းများ
+1. ARM ပုံစံများအစား Bicep အသုံးပြုခြင်း၏အားသာချက်များက ဘာတွေလဲ?
+2. azd တပ်ဆင်မှုများတွင် ဒေတာဘေ့စ်ပြောင်းလဲမှုကို ပုံသေဘယ်လိုကျင်းပသလဲ?
+3. အချိန်မပ်ဘဲ တပ်ဆင်မှုများအတွက် မည်သည့် မဟာဗျူဟာများ ရှိပါသလဲ?
+4. ဝန်ဆောင်မှုများအကြား ကိုယ်စားလှယ်မှုများကို ဘယ်လိုစီမံခန့်ခွဲသလဲ?
+5. တိုင်းဒေသအများအပြားကို တပ်ဆင်တဲ့အခါတွင် ဂရုစိုက်ရမည့်အချက်များက ဘာတွေလဲ?
 
-### Module 4: Pre-Deployment Validation (Week 5)
+### မော်ဂျူး 4: တပ်ဆင်မှုမပြုမီ စစ်ဆေးခြင်း (အပတ် 5)
 
-#### Learning Objectives
-- ကြိုတင်ထုတ်လုပ်မှုအလိုရှိမှုများကို အကျယ်တဝင့် စစ်ဆေးရန် အကောင်အထည်ဖော်ပါ
-- စွမ်းဆောင်ရည် စီမံကိန်းများနှင့် အရင်းအမြစ် အတည်ပြုမှုကို ကျွမ်းကျင်ပါ
-- SKU ရွေးချယ်မှုနှင့် ကုန်ကျစရိတ် မျှတစွာ လျှော့ချမှုကို နားလည်ပါ
-- အလိုအလျောက် အတည်ပြုရေး pipeline များ တည်ဆောက်ပါ
+#### သင်ယူရမည့် ရည်ရွယ်ချက်များ
+- ပူးပေါင်းပြီး တပ်ဆင်မှုမပြုမီ စစ်ဆေးမှုများကို လုပ်ဆောင်ရန်
+- စွမ်းဆောင်ရည်အစီအစဉ်ရေးဆွဲခြင်းနှင့် အရင်းအမြစ်စစ်ဆေးခြင်း ကျွမ်းကျင်ရန်
+- SKU ရွေးချယ်ခြင်းနှင့် ကုန်ကျစရိတ်ချွတ်ခြင်းကို နားလည်ရန်
+- အလိုအလျောက် စစ်ဆေးမှု လမ်းစဉ်များ တည်ဆောက်ရန်
 
-#### Key Concepts to Master
-- Azure resource quotas and limits
-- SKU selection criteria and cost implications
-- Automated validation scripts and tools
-- Capacity planning methodologies
-- Performance testing and optimization
+#### ကျွမ်းကျင်ဖို့ အဓိက အကြောင်းအရာများ
+- Azure အရင်းအမြစ် ကွိုတာများနှင့် ကန့်သတ်ချက်များ
+- SKU ရွေးချယ်မှုအတွင်းခံစံနှုန်းများနှင့် ကုန်ကျစရိတ် သက်ရောက်မှုများ
+- အလိုအလျောက် စစ်ဆေးမှု စကရစ်များနှင့် ကိရိယာများ
+- စွမ်းဆောင်ရည်အစီအစဉ်ရေးဆွဲနည်းများ
+- စွမ်းဆောင်ရည် စမ်းသပ်ခြင်းနှင့် ပြုပြင်မွမ်းမံခြင်း
 
-#### Practice Exercises
+#### လေ့ကျင့်ခန်းများ
 
-**Exercise 4.1: Capacity Planning**
-```bash
-# စွမ်းရည်စစ်ဆေးမှုကို အကောင်အထည်ဖော်ပါ:
+**လေ့ကျင့်ခန်း 4.1: စွမ်းဆောင်ရည်အစီအစဉ်ရေးဆွဲခြင်း**
+```text
+# Implement capacity validation:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -437,9 +443,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Exercise 4.2: Pre-flight Validation**
-```powershell
-# ပြည့်စုံသော အတည်ပြုစစ်ဆေးရေး လုပ်ငန်းစဉ် တည်ဆောက်ပါ:
+**လေ့ကျင့်ခန်း 4.2: တပ်ဆင်မှုမပြုမီ စစ်ဆေးခြင်း**
+```text
+# Build comprehensive validation pipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -447,9 +453,9 @@ Analyze the following components:
 5. Cost estimation and budget verification
 ```
 
-**Exercise 4.3: SKU Optimization**
-```bash
-# ဝန်ဆောင်မှု ဖွဲ့စည်းချက်များကို အကောင်းဆုံးပြုလုပ်ပါ:
+**လေ့ကျင့်ခန်း 4.3: SKU ကုန်ကျစရိတ်ချွတ်ခြင်း**
+```text
+# Optimize service configurations:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -457,33 +463,33 @@ Analyze the following components:
 5. Set up auto-scaling policies
 ```
 
-#### Self-Assessment Questions
-1. SKU ရွေးချယ်မှု ဆုံးဖြတ်ရာတွင် ဘယ်ဖက်မှ အချက်များက သွက်လက်စေသင့်သနည်း?
-2. ဖြန့်ချိမှုပြုမတိုင်မီ Azure resource များ ရရှိနိုင်မှုကို မည်သို့ အတည်ပြုသနည်း?
-3. pre-flight စစ်ဆေးမှု စနစ် တစ်ခု၏ အဓိက တွဲဖက်ပစ္စည်းများက ဘာတွေပါသလဲ?
-4. ဖြန့်ချိမှုကုန်ကျစရိတ်များကို မည်သို့ ခန့်မှန်းပြီးထိန်းချုပ်သနည်း?
-5. စွမ်းဆောင်ရည် စီမံခန့်ခွဲမှုအတွက် မည်သည့် မီထရစ်များကို ကြီးကြပ်ရမည်နည်း?
+#### ကိုယ်တိုင်အကဲဖြတ်မေးခွန်းများ
+1. SKU ရွေးချယ်မှု ဆုံးဖြတ်ရာတွင် ဘယ်လိုအချက်များ ထိရောက်စွာ သက်ရောက်သင့်သလဲ?
+2. တပ်ဆင်မှုပြုမီ Azure အရင်းအမြစ်ရရှိနိုင်မှုကို ဘယ်လိုစစ်ဆေးသလဲ?
+3. တပ်ဆင်မှုမပြုမီ စစ်ဆေးမှုစနစ်၏ အဓိကအစိတ်အပိုင်းများက ဘာတွေလဲ?
+4. တပ်ဆင်မှုကုန်ကျစရိတ်ကို ဘယ်လိုခန့်မှန်းပြီး ထိန်းချုပ်သလဲ?
+5. စွမ်းဆောင်ရည်အစီအစဉ်ရေးဆွဲမှု အတွက် ဘယ် monitoring တွေ မရှိမဖြစ်လိုအပ်လဲ?
 
-### Module 5: Troubleshooting and Debugging (အပတ် 6)
+### မော်ဂျူး 5: ပြဿနာဖြေရှင်းခြင်းနှင့် အမှားရှာဖွေခြင်း (အပတ် 6)
 
-#### Learning Objectives
-- စနစ်တကျ ဖြစ်ပေါ်လာသော ပြဿနာများကို ရှာဖွေဖြေရှင်းနိုင်စေတဲ့ နည်းဗျူဟာများ ကျွမ်းကျင်ရန်
-- ဖြန့်ချိမှုများတွင် ဖြစ်ပေါ်လာသော ရှုပ်ထွေးသော အမှားများကို debugging တွင် ကျွမ်းကျင်ရန်
-- ကျယ်ပြန့်သော မော်နီတာနှင့် အချက်ပေးချက်များကို အကောင်အထည်ဖော်ရန်
-- ဖြစ်ရပ်ဆိုင်ရာ တုံ့ပြန်မှုနှင့် ပြန်လည်ရယူရေး လုပ်ထုံးလုပ်နည်းများ တည်ဆောက်ရန်
+#### သင်ယူရမည့် ရည်ရွယ်ချက်များ
+- ကြိမ်မြောက် ပြဿနာဖြေရှင်းမှုနည်းဗျူဟာများ ကျွမ်းကျင်ရန်
+- စိန်ခေါ်မှုများပြင်းထန်သော တပ်ဆင်မှုပြဿနာများ အမှားရှာဖွေမှု ကျွမ်းကျင်မှု ဖွံ့ဖြိုးရန်
+- ပူးပေါင်းပြီး ကြီးစိုးမှုနှင့် သတိပေးမှုကို လုပ်ဆောင်ရန်
+- ဖြစ်ရပ် မတော်တဆဖြစ်ရပ်များ တုံ့ပြန်မှုနှင့် ပြန်လည်ကောင်းမွန်မှု လုပ်ထုံးလုပ်နည်းများ တည်ဆောက်ရန်
 
-#### Key Concepts to Master
-- Common deployment failure patterns
-- Log analysis and correlation techniques
-- Performance monitoring and optimization
-- Security incident detection and response
-- Disaster recovery and business continuity
+#### ကျွမ်းကျင်ဖို့ အဓိက အကြောင်းအရာများ
+- ပုံမှန်ဖြစ်သော တပ်ဆင်မှုမအောင်မြင်မှု ပုံစံများ
+- မှတ်တမ်းများ ခွဲစိတ်ခြင်းနှင့် ဆက်စပ်ချက်နည်းများ
+- စွမ်းဆောင်ရည် ကြီးစိုးမှုနှင့် ပြုပြင်မွမ်းမံခြင်း
+- လုံခြုံရေး ဖြစ်ရပ် မတော်တဆများ ရှာဖွေမှု နှင့် တုံ့ပြန်မှု
+- မတော်တဆဖြစ်စဉ် ကာကွယ်ခြင်းနှင့် စီးပွားရေး ဆက်လက်တည်တံ့မှု
 
-#### Practice Exercises
+#### လေ့ကျင့်ခန်းများ
 
-**Exercise 5.1: Troubleshooting Scenarios**
-```bash
-# ပုံမှန်တွေ့ရသော ပြဿနာများကို ဖြေရှင်းရန် လေ့ကျင့်ပါ:
+**လေ့ကျင့်ခန်း 5.1: ပြဿနာဖြေရှင်းမှု မူကြမ်းများ**
+```text
+# Practice resolving common issues:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -491,9 +497,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Exercise 5.2: Monitoring Implementation**
-```bash
-# ပြည့်စုံသည့် စောင့်ကြည့်မှုစနစ်ကို တပ်ဆင်ပါ:
+**လေ့ကျင့်ခန်း 5.2: ကြီးစိုးမှု အကောင်အထည်ဖော်ခြင်း**
+```text
+# Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -501,9 +507,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Exercise 5.3: Incident Response**
-```bash
-# အဖြစ်အပျက် တုံ့ပြန်မှု လုပ်ထုံးလုပ်နည်းများ ဖန်တီးပါ:
+**လေ့ကျင့်ခန်း 5.3: ဖြစ်ရပ် မတော်တဆ တုံ့ပြန်မှု**
+```text
+# Build incident response procedures:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -511,32 +517,32 @@ Analyze the following components:
 5. Document lessons learned and improvements
 ```
 
-#### Self-Assessment Questions
-1. azd ဖြင့် ဖြန့်ချိမှုများကို ဖြေရှင်းရာတွင် စနစ်တကျ လုပ်ဆောင်ရမည့် နည်းလမ်းက ဘာလဲ?
-2. ဝန်ဆောင်မှုနှင့် အရင်းအမြစ်များစွာအတွင်းမှ журналများကို မည်သို့ ဆက်စပ်စဉ်ဆက်ဖော်ထုတ်သလဲ?
-3. ပြဿနာများကို အစောပိုင်း တွေ့ရှိနိုင်ရန် အရေးကြီးဆုံး မီထရစ်များက ဘာတွေလဲ?
-4. ထိရောက်သော disaster recovery လုပ်ထုံးလုပ်နည်းများကို မည်သို့ အကောင်အထည်ဖော်သနည်း?
-5. ဖြစ်ရပ်ဆိုင်ရာ တုံ့ပြန်မှု စီမံချက်တစ်ခု၏ အဓိက အစိတ်အပိုင်းများက ဘာတွေပါသလဲ?
+#### ကိုယ်တိုင်အကဲဖြတ်မေးခွန်းများ
+1. azd တပ်ဆင်မှုများတွင် ပြဿနာကို သက်ဆိုင်ရာနည်းလမ်းဖြင့် ဖြေရှင်းရာတွင် ဘယ်လိုနည်းလမ်း အသုံးပြုသလဲ?
+2. ဝန်ဆောင်မှုနှင့် အရင်းအမြစ်များအကြား မှတ်တမ်းများကို ဘယ်လိုဆက်စပ်ချက် ဖော်ထုတ်သလဲ?
+3. အစောဆုံး ပြဿနာ သတင်းပေးမှုအတွက် မည်သည့် ကြီးစိုးမှု အချက်အလက်များ လိုအပ်သလဲ?
+4. ပြေလည်ကောင်းမွန်သည့် မတော်တဆ ဖြစ်စဉ် ကာကွယ်မှု လုပ်ထုံးလုပ်နည်းများ ကို ဘယ်လိုအကောင်အထည် ဖော်သလဲ?
+5. ဖြစ်ရပ် မတော်တဆ တုံ့ပြန်ရေးအစီအစဉ်၏ အဓိကအစိတ်အပိုင်းများက ဘာတွေလဲ?
 
-### Module 6: Advanced Topics and Best Practices (အပတ် 7-8)
+### မော်ဂျူး 6: အဆင့်မြင့်အကြောင်းအရာများနှင့် အကောင်းဆုံး အလေ့အကျင့်များ (အပတ် 7-8)
 
-#### Learning Objectives
-- စက်မှုလုပ်ငန်းအဆင့် များအတွက် ဖြန့်ချိမှု ပုံစံများကို အကောင်အထည်ဖော်ရန်
-- CI/CD ပေါင်းစည်းမှုနှင့် အလိုအလျောက်သုံးစနစ်များကို ကျွမ်းကျင်ရန်
-- စိတ်တိုင်းမီ custom template များ ဖန်တီးပြီး community သို့ ဗဟုသုတ ပေးဆောင်ရန်
-- လုံခြုံရေးနှင့် အညီထမ်းဆောင်မှုဆိုင်ရာ အဆင့်မြင့် တရားကို နားလည်ရန်
+#### သင်ယူရမည့် ရည်ရွယ်ချက်များ
+- စီးပွားရေးအဆင့် တပ်ဆင်မှု ပုံစံများကို အကောင်အထည်ဖော်ရန်
+- CI/CD ထည့်သွင်းခြင်းနှင့် အလိုအလျောက်ဖြစ်စေမှု ကျွမ်းကျင်ရန်
+- စိတ်ကြိုက် ပုံစံများ ဖန်တီးခြင်းနှင့် အသိုင်းအဝိုင်းတွင် ပါဝင်ဆောင်ရွက်ရန်
+- အဆင့်မြင့် လုံခြုံရေး၊ ကိုက်ညီမှုလိုအပ်ချက်များကို နားလည်ရန်
 
-#### Key Concepts to Master
-- CI/CD pipeline integration patterns
-- Custom template development and distribution
-- Enterprise governance and compliance
-- Advanced networking and security configurations
-- Performance optimization and cost management
+#### ကျွမ်းကျင်ဖို့ အဓိက အကြောင်းအရာများ
+- CI/CD လမ်းကြောင်း ထည့်သွင်းခြင်း ပုံစံများ
+- စိတ်ကြိုက် ပုံစံ ဖန်တီးခြင်းနှင့် ဖြန့်ဝေခြင်း
+- စီးပွားရေးအုပ်ချုပ်မှုနှင့် ကိုက်ညီမှု
+- အဆင့်မြင့် ကွန်ရက်နှင့် လုံခြုံရေး ပြင်ဆင်မှုများ
+- စွမ်းဆောင်ရည် မြှင့်တင်ခြင်းနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု
 
-#### Practice Exercises
+#### လေ့ကျင့်ခန်းများ
 
-**Exercise 6.1: CI/CD Integration**
-```yaml
+**လေ့ကျင့်ခန်း 6.1: CI/CD ထည့်သွင်းခြင်း**
+```text
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
 2. Azure DevOps pipeline integration
@@ -545,9 +551,9 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Exercise 6.2: Custom Template Development**
-```bash
-# စိတ်ကြိုက် ပုံစံများကို ဖန်တီး၍ ထုတ်ဝေပါ:
+**လေ့ကျင့်ခန်း 6.2: စိတ်ကြိုက် ပုံစံ ဖန်တီးခြင်း**
+```text
+# Create and publish custom templates:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -555,9 +561,9 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
 
-**Exercise 6.3: Enterprise Implementation**
-```bash
-# လုပ်ငန်းအဆင့် အရည်အသွေးမြင့် အင်္ဂါရပ်များကို အကောင်အထည်ဖော်ပါ:
+**လေ့ကျင့်ခန်း 6.3: စီးပွားရေး အကောင်အထည်ဖော်ခြင်း**
+```text
+# Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -565,299 +571,299 @@ Analyze the following components:
 5. Disaster recovery and business continuity
 ```
 
-#### Self-Assessment Questions
-1. azd ကို ရှိပြီးသား CI/CD workflow များနှင့် မည်သို့ ပေါင်းစည်းသနည်း?
-2. custom template ဖန်တီးရာတွင် တွေးဆရမည့် အဓိက အချက်များက ဘာတွေလဲ?
-3. azd ဖြင့် ဖြန့်ချိခြင်းများတွင် အုပ်ချုပ်မှုနှင့် ကူးကျင့်မှုများကို မည်သို့ အကောင်အထည်ဖော်သနည်း?
-4. စက်မှုအဆင့် ဖြန့်ချိမှုများအတွက် အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများက ဘာတွေလဲ?
-5. azd community ထဲမှာ ထိရောက်စွာ ပါဝင်ရန် မည်သို့ ဝေမျှဆောင်ရွက်သနည်း?
+#### ကိုယ်တိုင်အကဲဖြတ်မေးခွန်းများ
+1. azd ကို ရှိပြီးသား CI/CD လုပ်ငန်းစဉ်များထဲ ဘယ်လိုပေါင်းစည်းသလဲ?
+2. စိတ်ကြိုက် ပုံစံ ဖန်တီးရာတွင် အဓိကဂရုစိုက်ရမည့်အချက်များက ဘာတွေလဲ?
+3. azd တပ်ဆင်မှုများတွင် အုပ်ချုပ်မှုနှင့် ကိုက်ညီမှု ကို ဘယ်လိုအကောင်အထည်ဖော်သလဲ?
+4. စီးပွားရေးအဆင့် တပ်ဆင်မှုများအတွက် အကောင်းဆုံး အလေ့အကျင့်များက ဘာတွေလဲ?
+5. azd အသိုင်းအဝိုင်းတွင် ထိရောက်စွာ ပါဝင်တာဝန်ယူဖို့ ဘယ်လိုလုပ်သင့်သလဲ?
 
-## Practical Projects
+## လက်တွေ့ စီမံကိန်းများ
 
-### Project 1: Personal Portfolio Website
-**Complexity**: Beginner  
-**Duration**: 1-2 weeks
+### စီမံကိန်း 1: ကိုယ်ပိုင် ပေါ်ဖိုးလီယို ဝက်ဘ်ဆိုက်
+**ရှုပ်ထွေးမှု**: စတင်သူ  
+**ကြာမြင့်ချိန်**: 1-2 ပတ်
 
-ကိုယ်ပိုင် portfolio ဝက်ဘ်ဆိုက် တစ်ခုကို တည်ဆောက်ပြီး ဖြန့်ချိပါ -
-- Static website hosting on Azure Storage
-- Custom domain configuration
-- CDN integration for global performance
-- Automated deployment pipeline
+ကိုယ်ပိုင် ပေါ်ဖိုးလီယို ဝက်ဘ်ဆိုက် တည်ဆောက်ပြီး တပ်ဆင်ပါ:
+- Azure Storage ဖြင့် Static ဝက်ဘ်ဆိုက် ဟိုစတင်ခြင်း
+- စိတ်ကြိုက်ဒိုမိန်း ဖွဲ့စည်းခြင်း
+- ကမ္ဘာအနှံ့ စွမ်းဆောင်ရည်မြှင့် အတွက် CDN ပေါင်းစပ်ခြင်း
+- အလိုအလျောက် တပ်ဆင်မှု လမ်းစဉ်
 
-**Deliverables**:
-- Azure ပေါ်တွင် လည်ပတ်နေသော ဝက်ဘ်ဆိုက်
-- Portfolio deployments အတွက် custom azd template
-- ဖြန့်ချိမှုလုပ်ငန်းစဉ်၏ အချက်အလက်များကို မှတ်တမ်းတင်ထားသော စာရွက်စာတမ်း
-- ကုန်ကျစရိတ် ခွဲခြမ်းစစ်ဆေးချက်များနှင့် အဆင်ပြေအောင် အကြံပြုချက်များ
+**ပေးအပ်ချက်များ**:
+- Azure တွင် လုပ်ဆောင်နေသော ဝက်ဘ်ဆိုက်
+- ပေါ်ဖိုးလီယို တပ်ဆင်မှုများအတွက် စိတ်ကြိုက် azd ပုံစံ
+- တပ်ဆင်မှု လုပ်ဆောင်ချက်များ စာတမ်း
+- ကုန်ကျစရိတ် ခွဲခြမ်းလေ့လာမှု နှင့် ထိရောက်မှု အကြံပြုချက်များ
 
-### Project 2: Task Management Application
-**Complexity**: Intermediate  
-**Duration**: 2-3 weeks
+### စီမံကိန်း 2: တာဝန်စီမံခန့်ခွဲမှု လျှောက်လွှာ
+**ရှုပ်ထွေးမှု**: အလယ်အလတ်  
+**ကြာမြင့်ချိန်**: 2-3 ပတ်
 
-အပြည့်အစုံ full-stack task management application တစ်ခုကို ဖန်တီးပါ -
-- React frontend deployed to App Service
-- Node.js API backend with authentication
-- PostgreSQL database with migrations
-- Application Insights monitoring
+အပြည့်အစုံ တာဝန်စီမံခန့်ခွဲမှု လျှောက်လွှာ တည်ဆောက်ပါ:
+- React frontend ကို App Service တွင် တပ်ဆင်ခြင်း
+- Node.js API backend နှင့် အတည်ပြုမှု
+- PostgreSQL ဒေတာဘေ့စ်နှင့် ပြောင်းလဲမှုများ
+- Application Insights ကြီးစိုးမှု
 
-**Deliverables**:
-- အသုံးပြုသူ အတည်ပြုချက်ပါ အပြည့်အစုံ application
-- Database schema နှင့် migration scripts
-- မော်နီတာချိန်ဇယားများနှင့် အချက်ပေးစည်းမျဉ်းများ
-- Multi-environment ဖြန့်ချိမှု စီမံချက်
+**ပေးအပ်ချက်များ**:
+- အသုံးပြုသူအတည်ပြုမှုပါရှိသော လျှောက်လွှာ ပြည့်စုံမှု
+- ဒေတာဘေ့စ် ပုံစံနှင့် ပြောင်းလဲမှု စကရစ်များ
+- ကြီးစိုးမှု ဒိုင်ယာဂရမ်များနှင့် သတိပေးချက် စည်းမျဉ်းများ
+- ပတ်ဝန်းကျင် အများအပြား တပ်ဆင်မှု ဖွဲ့စည်းမှု
 
-### Project 3: Microservices E-commerce Platform
-**Complexity**: Advanced  
-**Duration**: 4-6 weeks
+### စီမံကိန်း 3: မိုက်ခရိုဝန်ဆောင်မှု E-commerce ပလက်ဖောင်း
+**ရှုပ်ထွေးမှု**: အဆင့်မြင့်  
+**ကြာမြင့်ချိန်**: 4-6 ပတ်
 
-မိုက်ခရိုဆာဗစ် အခြေပြု e-commerce platform တစ်ခုကို ဒီဇိုင်းရေးဆွဲပြီး အကောင်အထည်ဖော်ပါ -
-- Multiple API services (catalog, orders, payments, users)
-- Message queue integration with Service Bus
-- Redis cache for performance optimization
-- Comprehensive logging and monitoring
+မိုက်ခရိုဝန်ဆောင်မှု အခြေခံ E-commerce ပလက်ဖောင်း ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်ပါ:
+- မျိုးစုံ API ဝန်ဆောင်မှုများ (catalog, orders, payments, users)
+- Service Bus သုံး၍ စာတိုက်တန်း သွင်းပေါင်းစပ်ခြင်း
+- စွမ်းဆောင်ရည်တိုးစေရန် Redis cache
+- စာရင်းဇယားကောက်ယူခြင်းနှင့် ကြီးစိုးမှု လုပ်ငန်းစဉ်များ
 
-**Reference Example**: See [Microservices Architecture](../../../examples/container-app/microservices) for a production-ready template and deployment guide
+**ရည်ညွှန်းနမူနာ**: [Microservices Architecture](../../../examples/container-app/microservices) တွင် ဝန်ဆောင်မှုနှစ်ခုပါသော သင်ယူပုံနှင့် တပ်ဆင်မှုလမ်းညွှန် စာမျက်နှာကို ကြည့်ရှုပါ။ ကြိုတင်စာရင်း၊ တည်ရှိမှု၊ အတည်ပြုမှု၊ ငွေပေးချေမှုလုပ်ငန်းစဉ်များနှင့် ထုတ်လုပ်မှု ပြင်ဆင်ရေးများသည် သီးခြားစီမံကိန်း ကိစ္စများဖြစ်သည်။
 
-**Deliverables**:
-- အပြီးအစီး မိုက်ခရိုဆာဗစ် ပံ့ပိုးဆိုင်ရာ ဆက်ဆံရေး
-- ဝန်ဆောင်မှုများအကြား ဆက်သွယ်ပုံများ
-- စွမ်းဆောင်ရည် စမ်းသပ်မှုများနှင့် တိုးတက်အောင်လုပ်ခြင်း
-- ထုတ်လုပ်မှုအဆင့် လုံခြုံရေး အကောင်အထည်ဖော်မှု
+**ပေးအပ်ချက်များ**:
+- အပြည့်အစုံ မိုက်ခရိုဝန်ဆောင်မှု အဆောက်အအုံ
+- ဝန်ဆောင်မှုများအကြား ဆက်သွယ်မှု ပုံစံများ
+- စွမ်းဆောင်ရည် စမ်းသပ်ခြင်းနှင့် ပြုပြင်မွမ်းမံခြင်း
+- ထုတ်လုပ်မှုအဆင်သင့် လုံခြုံရေး အကောင်အထည်ဖော်ခြင်း
 
-## Assessment and Certification
+## အကဲဖြတ်ခြင်းနှင့် အသိအမှတ်ပြုခြင်း
 
-### Knowledge Checks
+### သိရှိမှတ်ချက် စစ်ဆေးမှုများ
 
-Complete these assessments after each module:
+မော်ဂျူး တစ်ခုစီပြီးနောက် အောက်ပါ အကဲဖြတ်မှုများ ပြုလုပ်ပါ:
 
-**Module 1 Assessment**: Basic concepts and installation
-- Multiple choice questions on core concepts
-- Practical installation and configuration tasks
-- Simple deployment exercise
+**Module 1 အကဲဖြတ်မှု**: အခြေခံ သဘောတရားများနှင့် တပ်ဆင်ခြင်း
+- အဓိကသဘောတရား မေးခွန်းရွေးချယ်မှုများ
+- လက်တွေ့ တပ်ဆင်ခြင်းနှင့် ဖွဲ့စည်းမှု တာဝန်များ
+- လွယ်ကူသည့် တပ်ဆင်မှု လေ့ကျင့်ခန်း
 
-**Module 2 Assessment**: Configuration and environments
-- Environment management scenarios
-- Configuration troubleshooting exercises
-- Security configuration implementation
+**Module 2 အကဲဖြတ်မှု**: ဖွဲ့စည်းမှုနှင့် ပတ်ဝန်းကျင်များ
+- ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု မူကြမ်းများ
+- ဖွဲ့စည်းမှု ပြဿနာဖြေရှင်းမှု လေ့ကျင့်ခန်းများ
+- လုံခြုံရေး ဖွဲ့စည်းမှု အကောင်အထည်ဖော်ခြင်း
 
-**Module 3 Assessment**: Deployment and provisioning
-- Infrastructure design challenges
-- Multi-service deployment scenarios
-- Performance optimization exercises
+**Module 3 အကဲဖြတ်မှု**: တပ်ဆင်ခြင်းနှင့် စီမံခန့်ခွဲခြင်း
+- အုတ်မြစ်ဒီဇိုင်း စိန်ခေါ်မှုများ
+- အများစိတ်ဝန်ဆောင်မှု တပ်ဆင်မှု မူကြမ်းများ
+- စွမ်းဆောင်ရည် တိုးတက်မှု လေ့ကျင့်ခန်းများ
 
-**Module 4 Assessment**: Pre-deployment validation
-- Capacity planning case studies
-- Cost optimization scenarios
-- Validation pipeline implementation
+**Module 4 အကဲဖြတ်မှု**: တပ်ဆင်မှုမပြုမီ စစ်ဆေးခြင်း
+- စွမ်းဆောင်ရည်အစီအစဉ် ဥပမာများ
+- ကုန်ကျစရိတ် ကုသမှု စနစ်များ
+- စစ်ဆေးမှု လမ်းစဉ် တည်ဆောက်ခြင်း
 
-**Module 5 Assessment**: Troubleshooting and debugging
-- Problem diagnosis exercises
-- Monitoring implementation tasks
-- Incident response simulations
+**Module 5 အကဲဖြတ်မှု**: ပြဿနာဖြေရှင်းခြင်းနှင့် အမှားရှာဖွေခြင်း
+- ပြဿနာရှာဖွေရေး လေ့ကျင့်ခန်းများ
+- ကြီးစိုးမှု လုပ်ငန်းစဉ် အကောင်အထည်ဖော်ခြင်း
+- ဖြစ်ရပ် မတော်တဆ တုံ့ပြန်ရေး လေ့ကျင့်ခန်းများ
 
-**Module 6 Assessment**: Advanced topics
-- CI/CD pipeline design
-- Custom template development
-- Enterprise architecture scenarios
+**Module 6 အကဲဖြတ်မှု**: အဆင့်မြင့် အကြောင်းအရာများ
+- CI/CD လမ်းကြောင်း ဒီဇိုင်း
+- စိတ်ကြိုက် ပုံစံ ဖန်တီးခြင်း
+- စီးပွားရေး အဆောက်အအုံ မူကြမ်းများ
 
-### Final Capstone Project
+### နောက်ဆုံး Capstone စီမံကိန်း
 
-ဒီအရာအားလုံး၏ အကျွမ်းတဝင်ဖြစ်မှုကို ပြသနိုင်မည့် အပြည့်အစုံ ဖြေရှင်းချက်တစ်ခုကို ဒီဇိုင်းရေးဆွဲပြီး အကောင်အထည်ဖော်ပါ။
+အားလုံးသော သဘောတရားများတွင် ကျွမ်းကျင်မှု ပြသနိုင်သော အပြည့်အစုံဖြေရှင်းချက်ကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်ပါ:
 
-**Requirements**:
-- Multi-tier application architecture
-- Multiple deployment environments
-- Comprehensive monitoring and alerting
-- Security and compliance implementation
-- Cost optimization and performance tuning
-- Complete documentation and runbooks
+**လိုအပ်ချက်များ**:
+- အလွှာများစွာပါရှိသော လျှောက်လွှာ အဆောက်အအုံ
+- တပ်ဆင်မှု ပတ်ဝန်းကျင် အများအပြား
+- ကြီးစိုးမှုနှင့် သတိပေးမှု အပြည့်အစုံ
+- လုံခြုံရေးနှင့် ကိုက်ညီမှု အကောင်အထည်ဖော်ခြင်း
+- ကုန်ကျစရိတ် ချွတ်ခြင်းနှင့် စွမ်းဆောင်ရည် တိုးတက်ပြင်ဆင်မှု
+- အပြည့်အစုံ စာရွက်စာတမ်းနှင့် လုပ်ထုံးလုပ်နည်း စာတမ်းများ
 
-**Evaluation Criteria**:
-- နည်းပညာပိုင်း ဆောင်ရွက်မှု အရည်အသွေး
-- စာရွက်စာတမ်း ပြည့်စုံမှု
-- လုံခြုံရေးနှင့် အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများကို လိုက်နာမှု
-- စွမ်းဆောင်ရည်နှင့် ကုန်ကျစရိတ် တိုးတက်အောင်လုပ်မှု
-- ပြဿနာရှာဖွေရေးနှင့် မော်နီတာအကျိုးသက်ရောက်မှု
+**အကဲဖြတ်ခြင်းအတည်ပြုချက်များ**:
+- နည်းပညာပိုင်း အကောင်အထည်ဖော်မှု အရည်အသွေး
+- စာတမ်းများ ပြည့်စုံမှု
+- လုံခြုံရေးနှင့် အကောင်းဆုံး အလေ့အကျင့် ကူးခံမှု
+- စွမ်းဆောင်ရည်နှင့် ကုန်ကျစရိတ်ချွတ်ခြင်း
+- ပြဿနာဖြေရှင်းမှုနှင့် ကြီးစိုးမှု ထိရောက်မှု
 
-## Study Resources and References
+## သင်ယူရေး အရင်းအမြစ်များနှင့် ရည်ညွှန်းစာရင်းများ
 
-### Official Documentation
+### တရားဝင် စာတမ်းများ
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Community Resources
+### အသိုင်းအဝိုင်း ရင်းမြစ်များ
 - [AZD Template Gallery](https://azure.github.io/awesome-azd/)
 - [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
 - [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
-### Practice Environments
+### လေ့ကျင့်ပတ်ဝန်းကျင်များ
 - [Azure Free Account](https://azure.microsoft.com/free/)
 - [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
-### Additional Tools
+### ထပ်ဆောင်းကိရိယာများ
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Study Schedule Recommendations
+## သင်ယူရေး အချိန်ဇယား အကြံပြုချက်များ
 
-### Full-Time Study (8 weeks)
-- **Weeks 1-2**: Modules 1-2 (Getting Started, Configuration)
-- **Weeks 3-4**: Modules 3-4 (Deployment, Pre-deployment)
-- **Weeks 5-6**: Modules 5-6 (Troubleshooting, Advanced Topics)
-- **Weeks 7-8**: Practical Projects and Final Assessment
+### အချိန်ပြည့် သင်ယူမှု (8 ပတ်)
+- **အပတ် 1-2**: မော်ဂျူး 1-2 (စတင်ခြင်း၊ ဖွဲ့စည်းမှု)
+- **အပတ် 3-4**: မော်ဂျူး 3-4 (တပ်ဆင်ခြင်း၊ တပ်ဆင်မှုမပြုမီ)
+- **အပတ် 5-6**: မော်ဂျူး 5-6 (ပြဿနာဖြေရှင်းခြင်း၊ အဆင့်မြင့်အကြောင်းအရာများ)
+- **အပတ် 7-8**: လက်တွေ့ စီမံကိန်းများနှင့် နောက်ဆုံးအကဲဖြတ်မှု
 
-### Part-Time Study (16 weeks)
-- **Weeks 1-4**: Module 1 (Getting Started)
-- **Weeks 5-7**: Module 2 (Configuration and Environments)
-- **Weeks 8-10**: Module 3 (Deployment and Provisioning)
-- **Weeks 11-12**: Module 4 (Pre-deployment Validation)
-- **Weeks 13-14**: Module 5 (Troubleshooting and Debugging)
-- **Weeks 15-16**: Module 6 (Advanced Topics and Assessment)
-
----
-
-## Progress Tracking and Assessment Framework
-
-### Chapter Completion Checklist
-
-Track your progress through each chapter with these measurable outcomes:
-
-#### 📚 Chapter 1: Foundation & Quick Start
-- [ ] **Installation Complete**: AZD installed and verified on your platform
-- [ ] **First Deployment**: Successfully deployed todo-nodejs-mongo template
-- [ ] **Environment Setup**: Configured first environment variables
-- [ ] **Resource Navigation**: Explored deployed resources in Azure Portal
-- [ ] **Command Mastery**: Comfortable with basic AZD commands
-
-#### 🤖 Chapter 2: AI-First Development  
-- [ ] **AI Template Deployment**: Deployed azure-search-openai-demo successfully
-- [ ] **RAG Implementation**: Configured document indexing and retrieval
-- [ ] **Model Configuration**: Set up multiple AI models with different purposes
-- [ ] **AI Monitoring**: Implemented Application Insights for AI workloads
-- [ ] **Performance Optimization**: Tuned AI application performance
-
-#### ⚙️ Chapter 3: Configuration & Authentication
-- [ ] **Multi-Environment Setup**: Configured dev, staging, and prod environments
-- [ ] **Security Implementation**: Set up managed identity authentication
-- [ ] **Secrets Management**: Integrated Azure Key Vault for sensitive data
-- [ ] **Parameter Management**: Created environment-specific configurations
-- [ ] **Authentication Mastery**: Implemented secure access patterns
-
-#### 🏗️ Chapter 4: Infrastructure as Code & Deployment
-- [ ] **Custom Template Creation**: Built a multi-service application template
-- [ ] **Bicep Mastery**: Created modular, reusable infrastructure components
-- [ ] **Deployment Automation**: Implemented pre/post deployment hooks
-- [ ] **Architecture Design**: Deployed complex microservices architecture
-- [ ] **Template Optimization**: Optimized templates for performance and cost
-
-#### 🎯 Chapter 5: Multi-Agent AI Solutions
-- [ ] **Retail Solution Deployment**: Deployed complete multi-agent retail scenario
-- [ ] **Agent Customization**: Modified Customer and Inventory agent behaviors
-- [ ] **Architecture Scaling**: Implemented load balancing and auto-scaling
-- [ ] **Production Monitoring**: Set up comprehensive monitoring and alerting
-- [ ] **Performance Tuning**: Optimized multi-agent system performance
-
-#### 🔍 Chapter 6: Pre-Deployment Validation & Planning
-- [ ] **Capacity Analysis**: Analyzed resource requirements for applications
-- [ ] **SKU Optimization**: Selected cost-effective service tiers
-- [ ] **Validation Automation**: Implemented pre-deployment check scripts
-- [ ] **Cost Planning**: Created deployment cost estimates and budgets
-- [ ] **Risk Assessment**: Identified and mitigated deployment risks
-
-#### 🚨 Chapter 7: Troubleshooting & Debugging
-- [ ] **Diagnostic Skills**: Successfully debugged intentionally broken deployments
-- [ ] **Log Analysis**: Used Azure Monitor and Application Insights effectively
-- [ ] **Performance Tuning**: Optimized slow-performing applications
-- [ ] **Recovery Procedures**: Implemented backup and disaster recovery
-- [ ] **Monitoring Setup**: Created proactive monitoring and alerting
-
-#### 🏢 Chapter 8: Production & Enterprise Patterns
-- [ ] **Enterprise Security**: Implemented comprehensive security patterns
-- [ ] **Governance Framework**: Set up Azure Policy and resource management
-- [ ] **Advanced Monitoring**: Created dashboards and automated alerting
-- [ ] **CI/CD Integration**: Built automated deployment pipelines
-- [ ] **Compliance Implementation**: Met enterprise compliance requirements
-
-### Learning Timeline and Milestones
-
-#### Week 1-2: Foundation Building
-- **Milestone**: Deploy first AI application using AZD
-- **Validation**: Working application accessible via public URL
-- **Skills**: Basic AZD workflows and AI service integration
-
-#### Week 3-4: Configuration Mastery
-- **Milestone**: Multi-environment deployment with secure authentication
-- **Validation**: Same application deployed to dev/staging/prod
-- **Skills**: Environment management and security implementation
-
-#### Week 5-6: Infrastructure Expertise
-- **Milestone**: Custom template for complex multi-service application
-- **Validation**: Reusable template deployed by another team member
-- **Skills**: Bicep mastery and infrastructure automation
-
-#### Week 7-8: Advanced AI Implementation
-- **Milestone**: Production-ready multi-agent AI solution
-- **Validation**: System handling real-world load with monitoring
-- **Skills**: Multi-agent orchestration and performance optimization
-
-#### Week 9-10: Production Readiness
-- **Milestone**: Enterprise-grade deployment with full compliance
-- **Validation**: Passes security review and cost optimization audit
-- **Skills**: Governance, monitoring, and CI/CD integration
-
-### Assessment and Certification
-
-#### Knowledge Validation Methods
-1. **Practical Deployments**: Working applications for each chapter
-2. **Code Reviews**: Template and configuration quality assessment
-3. **Problem Solving**: Troubleshooting scenarios and solutions
-4. **Peer Teaching**: Explain concepts to other learners
-5. **Community Contribution**: Share templates or improvements
-
-#### Professional Development Outcomes
-- **ပို့ဖိုလ်ယို စီမံကိန်းများ**: ထုတ်လုပ်ရန် အသင့်ဖြစ်သော တပ်ဆင်မှု ၈ ခု
-- **နည်းပညာ ကျွမ်းကျင်မှုများ**: လုပ်ငန်းစံနှင့် ကိုက်ညီသော AZD နှင့် AI တပ်ဆင်မှု ကျွမ်းကျင်မှု
-- **ပြဿနာဖြေရှင်းနိုင်စွမ်း**: သီးသန့် ပြဿနာရှာဖွေဖြေရှင်းခြင်းနှင့် စနစ်တကျ တိုးတက်အောင်ပြင်ဆင်ခြင်း
-- **အဖွဲ့ဝင် အသိအမှတ်ပြုခြင်း**: Azure ဖွံ့ဖြိုးသူ အဖွဲ့တွင် တက်ကြွပါဝင်ခြင်းကြောင့် ရရှိသော အသိအမှတ်ပြုမှု
-- **အလုပ်အကိုင် တိုးတက်ရေး**: Cloud နှင့် AI တာဝန်များတွင် တိုက်ရိုက် အသုံးချနိုင်သော ကျွမ်းကျင်မှုများ
-
-#### အောင်မြင်မှုတိုင်းတာချက်များ
-- **တပ်ဆင်မှု အောင်မြင်မှုနှုန်း**: >95% အောင်မြင်သော တပ်ဆင်မှုများ
-- **ပြဿနာဖြေရှင်းချိန်**: ပုံမှန် ပြဿနာများအတွက် <30 မိနစ်
-- **စွမ်းဆောင်ရည် တိုးတက်မှု**: ကုန်ကျစရိတ်နှင့် စွမ်းဆောင်ရည်တွင် ထင်ရှားသော တိုးတက်မှုများကို ထည့်သွင်း ပြသနိုင်ခြင်း
-- **လုံခြုံရေး လိုက်နာမှု**: စီမံကိန်းများအားလုံးသည် လုပ်ငန်းအဆင့် လုံခြုံရေး စံသတ်မှတ်ချက်များကို လိုက်နာသည်
-- **အသိပညာ လွှဲပြောင်းနိုင်မှု**: အခြား ဖွံ့ဖြိုးရေးသူများကို လမ်းညွှန်ပေးနိုင်သော စွမ်းရည်
-
-### ဆက်လက်လေ့လာရေးနှင့် အဖွဲ့ဝင် ပါဝင်ဆောင်ရွက်မှု
-
-#### နောက်ဆုံးအချက်အလက်များကို ထိန်းသိမ်းပါ
-- **Azure Updates**: Azure Developer CLI ထုတ်ဝေမှတ်စုများကို လိုက်နာပါ
-- **Community Events**: Azure နှင့် AI ဖွံ့ဖြိုးသူ အစည်းအဝေးများတွင် ပါဝင်ဆောင်ရွက်ပါ
-- **Documentation**: ကွန်ယက် စာတမ်းများနှင့် ဥပမာများအား လက်ခံပံ့ပိုးပေးပါ
-- **Feedback Loop**: သင်တန်း အကြောင်းအရာများနှင့် Azure ဝန်ဆောင်မှုများအပေါ် တုံ့ပြန်ချက်ပေးပါ
-
-#### အလုပ်အကိုင် ဖွံ့ဖြိုးတိုးတက်ရေး
-- **Professional Network**: Azure နှင့် AI ကျွမ်းကျင်သူများနှင့် ဆက်သွယ်ပါ
-- **Speaking Opportunities**: ကွန်ဖရင့်များ သို့မဟုတ် မိတ်ဖက်အစည်းအဝေးများတွင် သင်လေ့လာသည့်အရာများကို တင်ပြပါ
-- **Open Source Contribution**: AZD အခ$template များနှင့် ကိရိယာများအား ပံ့ပိုးထောက်ပံ့ပါ
-- **Mentorship**: AZD သင်ယူရေး ခရီး၌ အခြား ဖွံ့ဖြိုးရေးသူများကို လမ်းညွှန်ပါ
+### အချိန်ပိုင်း သင်ယူမှု (16 ပတ်)
+- **အပတ် 1-4**: မော်ဂျူး 1 (စတင်ခြင်း)
+- **အပတ် 5-7**: မော်ဂျူး 2 (ဖွဲ့စည်းမှုနှင့် ပတ်ဝန်းကျင်များ)
+- **အပတ် 8-10**: မော်ဂျူး 3 (တပ်ဆင်ခြင်းနှင့် စီမံခန့်ခွဲခြင်း)
+- **အပတ် 11-12**: မော်ဂျူး 4 (တပ်ဆင်မှုမပြုမီ စစ်ဆေးခြင်း)
+- **အပတ် 13-14**: မော်ဂျူး 5 (ပြဿနာဖြေရှင်းခြင်းနှင့် အမှားရှာဖွေခြင်း)
+- **အပတ် 15-16**: မော်ဂျူး 6 (အဆင့်မြင့်အကြောင်းအရာများနှင့် အကဲဖြတ်မှု)
 
 ---
 
-**အခန်း လမ်းညွှန်:**
-- **📚 Course Home**: [AZD စတင်လေ့လာသူများအတွက်](../README.md)
-- **📖 Start Learning**: [အခန်း 1: အခြေခံ & အမြန်စတင်ခြင်း](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Progress Tracking**: သင်၏ တိုးတက်မှုကို အပြည့်အစုံ ၈ အခန်းပါ သင်ယူရေးစနစ်မှတဆင့် စောင့်ကြည့်ပါ
-- **🤝 Community**: [Azure Discord](https://discord.gg/microsoft-azure) အတွက် အထောက်အပံ့နှင့် ဆွေးနွေးမှုများ
+## ကြိုတင်ကြည့်ရှုခြင်းနှင့် အကဲဖြတ်မှု မြေပုံ
 
-**လေ့လာရေး တိုးတက်မှု စောင့်ကြည့်ခြင်း**: အတိုင်းအတာချထားနိုင်သည့် ရလဒ်များနှင့် ပရဖက်ရှင်နယ် ဖွံ့ဖြိုးတိုးတက်မှုအကျိုးများကို ရရှိစေသည့် တိုးတက်ဆက်လက် လက်တွေ့သင်ယူမှုဖြင့် Azure Developer CLI ကို ကျွမ်းကျင်စေရန် ဤ ဖွဲ့စည်းထားသော လမ်းညွှန်ကို အသုံးပြုပါ။
+### အခန်းပြီးမြောက်မှု စစ်ဆေးစာရင်း
+
+မင်းရဲ့ တိုက်ရိုက်အောင်မြင်မှုကို အခန်းတိုင်းအလိုက် အောက်ပါ အတိုင်းစာရင်းဖြင့် အကဲဖြတ်ပါ:
+
+#### 📚 အခန်း 1: အခြေခံနှင့် အစပြုခြင်း
+- [ ] **တပ်ဆင်ခြင်း ပြီးစီးမှု**: မင်းပလက်ဖောင်းပေါ်မှာ AZD ကို တပ်ဆင်ပြီး အတည်ပြုထားပါပြီ
+- [ ] **ပထမဆုံး တပ်ဆင်မှု**: todo-nodejs-mongo ပုံစံကို အောင်မြင်စွာ တပ်ဆင်ခဲ့သည်
+- [ ] **ပတ်ဝန်းကျင် ပြင်ဆင်မှု**: ပထမဆုံးပတ်ဝန်းကျင် အပြောင်းအလဲများ ပြုလုပ်ခဲ့သည်
+- [ ] **အရင်းအမြစ် ရှာဖွေရေး**: Azure ပေါ်ရှိ တပ်ဆင်ထားသော အရင်းအမြစ်များကို စူးစမ်းလိုက်သည်
+- [ ] **အမိန့်များ ကျွမ်းကျင်မှု**: AZD အခြေခံကောမန်းများအပေါ် သေချာနားလည်မှုရှိသည်
+
+#### 🤖 အခန်း 2: AI-ဦးစီး သယ်ဆောင်မှု  
+- [ ] **AI ပုံစံ တပ်ဆင်မှု**: azure-search-openai-demo ကို အောင်မြင်စွာ တပ်ဆင်ခဲ့သည်
+- [ ] **RAG လုပ်ဆောင်မှု**: စာရွက်စာတမ်း အညွှန်းပြုလုပ်ခြင်းနှင့် ဆွဲထုတ်ခြင်းကို ပြုလုပ်ခဲ့သည်
+- [ ] **ပုံစံ ပြင်ဆင်မှု**: ရည်ရွယ်ချက်ကွာခြားသော AI မော်ဒယ်များစွာကို စီစဉ်ထားသည်
+- [ ] **AI ကြီးစိုးမှု**: AI အလုပ်အပေါ် Application Insights ဖြင့် ကြီးစိုးမှု လုပ်ဆောင်ခဲ့သည်
+- [ ] **စွမ်းဆောင်ရည်ချိန်ညှိခြင်း**: AI လျှောက်လွှာ၏ စွမ်းဆောင်ရည်ကို တိုးတက်စေရန် အကောင်အထည်ဖော်ခဲ့သည်
+
+#### ⚙️ အခန်း 3: ဖွဲ့စည်းမှုနှင့် အတည်ပြုမှု
+- [ ] **ပတ်ဝန်းကျင် အများအပြား ပြင်ဆင်မှု**: dev, staging နှင့် prod ပတ်ဝန်းကျင်များ ပြင်ဆင်ခဲ့သည်
+- [ ] **လုံခြုံရေး တိုးတက်မှု**: managed identity အတည်ပြုမှု တပ်ဆင်ခဲ့သည်
+- [ ] **လျှို့ဝှက်ချက် စီမံခန့်ခွဲမှု**: Azure Key Vault ဖြင့် စိတ်လှုပ်ရှားစရာ ဒေတာများကို ထိန်းသိမ်းခဲ့သည်
+- [ ] **ပါတ်မီတာ စီမံခန့်ခွဲမှု**: ပတ်ဝန်းကျင်အလိုက် ကွဲပြားသော သတ်မှတ်ချက်များ ပြုလုပ်ခဲ့သည်
+- [ ] **အတည်ပြုမှု ကျွမ်းကျင်မှု**: လုံခြုံစိတ်ချရသော ဝင်ရောက်ခွင့် ပုံစံများ ထည့်သွင်းခဲ့သည်
+
+#### 🏗️ အခန်း 4: အုတ်မြစ်အဖြစ် အင်ဖရာစထရပ်ချာနှင့် တပ်ဆင်မှု
+- [ ] **စိတ်ကြိုက်ပုံစံ ဖန်တီးမှု**: အများစိတ်ဝန်ဆောင်မှုလျှောက်လွှာ ပုံစံ တည်ဆောက်ခဲ့သည်
+- [ ] **Bicep ကျွမ်းကျင်မှု**: ပြန်လည်အသုံးပြုနိုင်သော ပစ္စည်းအစိတ်အပိုင်းများ ဖန်တီးခဲ့သည်
+- [ ] **တပ်ဆင်မှု အလိုအလျောက်လုပ်ဆောင်မှု**: တပ်ဆင်မှုမပြုမီနှင့်ပြီးနောက် Hook များ ထည့်သွင်းခဲ့သည်
+- [ ] **ဒီဇိုင်း**: ခက်ခဲသော မိုက်ခရိုဝန်ဆောင်မှု အဆောက်အအုံ တပ်ဆင်ခဲ့သည်
+- [ ] **ပုံစံ ကုန်ကျစရိတ် နှင့် စွမ်းဆောင်ရည် မြှင့်တင်ရေး**: ပုံစံများကို ပြုပြင်မွမ်းမံခဲ့သည်
+
+#### 🎯 အခန်း 5: အများစိတ် AI ဖြေရှင်းချက်များ
+- [ ] **လက်လီ ကုန်ကျစရိတ်ဒီဇိုင်း ပြန်လည်သုံးသပ်ခြင်း**: လျှောက်လွှာအစိတ်အပိုင်းများ မရှိသေးသောအချက်များ ရှာဖွေပြီး တည်ဆောက်မှုနှင့် စစ်ဆေးမှု အစီအစဉ် ချခဲ့သည်
+- [ ] **Agent စိတ်ကြိုက်ပြင်ဆင်မှု**: Customer Agent နှင့် Inventory Agent ၏ အပြုအမူများ ပြင်ဆင်သည်
+- [ ] **ဒီဇိုင်း တိုးချဲ့မှု**: လုပ်ဆောင်မှုများ ကိုထိန်းချုပ်ရန် Load Balancing နှင့် Auto-scaling ပြုလုပ်သည်
+- [ ] **ထုတ်လုပ်မှု ကြီးစိုးမှု**: စိတ်ကြိုက် ကြီးစိုးမှုနှင့် သတိပေးမှု စနစ်များ တည်ဆောက်ခဲ့သည်
+- [ ] **စွမ်းဆောင်ရည်ချိန်ညှိခြင်း**: အများစိတ်စနစ် စွမ်းဆောင်ရည် မြှင့်တင်သွားခဲ့သည်
+
+#### 🔍 အခန်း 6: တပ်ဆင်မှုမပြုမီ စစ်ဆေးခြင်းနှင့်အစီအစဉ်ရေးဆွဲခြင်း
+- [ ] **စွမ်းဆောင်ရည် ခွဲခြမ်းစစ်ဆေးမှု**: လျှောက်လွှာအတွက် အရင်းအမြစ် လိုအပ်ချက်များ ခွဲခြမ်းစစ်တယ်
+- [ ] **SKU ကုန်ကျစရိတ်ချွတ်ခြင်း**: စျေးနှုန်းချိုသာသော ဝန်ဆောင်မှုပုံစံများ ရွေးချယ်သည်
+- [ ] **စစ်ဆေးမှု အလိုအလျောက်လုပ်ဆောင်မှု**: တပ်ဆင်မှုမပြုမီ စစ်ဆေးမှု စကရစ်များ ဖန်တီးခဲ့သည်
+- [ ] **ကုန်ကျစရိတ်အစီအစဉ်**: တပ်ဆင်မှုကုန်ကျစရိတ် ခန့်မှန်းချက်များနှင့် ဘဏ္ဍာရေးအစီအစဉ်များ ပြုလုပ်ခဲ့သည်
+- [ ] **စိုးရိမ်ချက် သုံးသပ်ချက်**: တပ်ဆင်မှု ဘေးကင်းလုံခြုံမှု စိုးရိမ်ချက်များ ဖော်ထုတ်နှင့် ဖြေရှင်းခဲ့သည်
+
+#### 🚨 အခန်း 7: ပြဿနာဖြေရှင်းခြင်းနှင့် အမှားရှာဖွေခြင်း
+- [ ] **ခွဲခြမ်းစိတ်ဖြာမှု ကျွမ်းကျင်မှု**: ရည်ရွယ်ပြီး ပျက်စီးထားသော တပ်ဆင်မှုများကို အောင်မြင်စွာ ပြင်ဆင်ခဲ့သည်
+- [ ] **မှတ်တမ်း ခွဲခြမ်းမှု**: Azure Monitor နှင့် Application Insights ကို ထိရောက်စွာ အသုံးပြုသည်
+- [ ] **စွမ်းဆောင်ရည်ချိန်ညှိခြင်း**: လျင်မြန်စွာ လုပ်ဆောင်နေသော လျှောက်လွှာများ ကို စှမ်းဆောင်ရည်မြှင့်တင်ခဲ့သည်
+- [ ] **ပြန်လည်ရယူမှု နည်းလမ်းများ**: ဘက်အပ်နှင့် မတော်တဆ ဖြစ်စဉ် ကာကွယ်ရေး အစီအစဉ်များ တည်ဆောက်ခဲ့သည်
+- [ ] **ကြီးစိုးမှု စနစ်**: ကြိုတင်ကြည့်ရှုမှုနှင့် သတိပေးမှု စနစ်များ ဖန်တီးခဲ့သည်
+
+#### 🏢 အခန်း 8: ထုတ်လုပ်မှုနှင့် စီးပွားရေး ပုံစံများ
+- [ ] **စီးပွားရေး လုံခြုံရေး**: ပူးပေါင်း ကြီးစိုးမှု လုံခြုံရေး ပုံစံများ တည်ဆောက်သည်
+- [ ] **အုပ်ချုပ်မှု ဖွဲ့စည်းမှု**: Azure Policy နှင့် အရင်းအမြစ် စီမံခန့်ခွဲမှု စနစ်များ ထည့်သွင်းထားသည်
+- [ ] **အဆင့်မြင့် ကြီးစိုးမှု**: ဒိုင်ယာဂရမ်များနှင့် အလိုအလျောက်သတိပေးမှုများ ဖန်တီးခဲ့သည်
+- [ ] **CI/CD ပေါင်းစည်းမှု**: အလိုအလျောက် တပ်ဆင်မှုပိုင်း လမ်းကြောင်းများ တည်ဆောက်ခဲ့သည်
+- [ ] **ကိုက်ညီမှု ဖြည့်ဆည်းမှု**: စီးပွားရေး ကိုက်ညီမှု လိုအပ်ချက်များ လိုက်နာခဲ့သည်
+
+### သင်ယူမှု အချိန်ဇယားနှင့် အမှတ်တံဆိပ်များ
+
+#### အပတ် 1-2: အခြေခံ တည်ဆောက်ခြင်း
+- **အမှတ်တံဆိပ်**: AZD ဖြင့် ပထမဆုံး AI လျှောက်လွှာ တပ်ဆင်ခြင်း
+- **အတည်ပြုချက်**: လူမှုအသုံးပြုနိုင်သော URL မှတဆင့် လုပ်ငန်း တည်ရှိနေရန်
+- **ကျွမ်းကျင်မှုများ**: AZD အခြေခံ လုပ်ငန်းစဉ်များနှင့် AI ဝန်ဆောင်မှု ပေါင်းစပ်မှု
+
+#### အပတ် 3-4: ဖွဲ့စည်းမှု ကျွမ်းကျင်မှု
+- **အမှတ်တံဆိပ်**: အများစိတ် ပတ်ဝန်းကျင်တပ်ဆင်ခြင်းနှင့် လုံခြုံမှု အတည်ပြုမှု
+- **အတည်ပြုချက်**: dev/staging/prod အားလုံးတွင် တူညီသော လျှောက်လွှာ တပ်ဆင်ခြင်း
+- **ကျွမ်းကျင်မှုများ**: ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှုနှင့် လုံခြုံရေး ပြုလုပ်ခြင်း
+
+#### အပတ် 5-6: အုတ်မြစ် ကျွမ်းကျင်မှု
+- **အမှတ်တံဆိပ်**: ခက်ခဲသော အများစိတ် ဝန်ဆောင်မှုလျှောက်လွှာ စိတ်ကြိုက် ပုံစံ တည်ဆောက်ခြင်း
+- **အတည်ပြုချက်**: အသစ်တစ်ဦး က အသုံးပြုလို့ရသော ပုံစံ ပြန်လည်အသုံးချခြင်း
+- **ကျွမ်းကျင်မှုများ**: Bicep ကျွမ်းကျင်မှုနှင့် အလိုအလျောက်လုပ်ငန်းစဉ်
+
+#### အပတ် 7-8: အဆင့်မြင့် AI တပ်ဆင်မှု
+- **အမှတ်တံဆိပ်**: ထုတ်လုပ်မှုအဆင်သင့် အများစိတ် AI ဖြေရှင်းချက်
+- **အတည်ပြုချက်**: စနစ်သည် စစ်မှန်သော ဖောက်သည်ပမာဏကို ထိန်းကျောင်းနိုင်မှုရှိသည်
+- **ကျွမ်းကျင်မှုများ**: အများစိတ် စနစ်စီမံခန့်ခွဲမှု နှင့် စွမ်းဆောင်ရည် မြှင့်တင်မှု
+
+#### အပတ် 9-10: ထုတ်လုပ်မှုအဆင်သင့်
+- **အမှတ်တံဆိပ်**: စီးပွားရေးအဆင့် တပ်ဆင်မှုလည်း အပြည့်အစုံ လိုက်နာမှု
+- **အတည်ပြုချက်**: လုံခြုံရေး ပြန်လည်သုံးသပ်မှုနှင့် ကုန်ကျစရိတ် ချွတ်ခြင်း စိစစ်ချက်ကြောင့် အောင်မြင်သည်
+- **ကျွမ်းကျင်မှုများ**: အုပ်ချုပ်မှု၊ ကြီးစိုးမှု နှင့် CI/CD ပေါင်းစည်းမှု
+
+### အကဲဖြတ်ခြင်း နှင့် အသိအမှတ်ပြုခြင်း
+
+#### သိရှိမှတ်ချက် အတည်ပြုပုံများ
+1. **လက်တွေ့အသုံးပြုမှုများ**: အခန်းတိုင်းအတွက် လုပ်ဆောင်နိုင်သော အပလီကေးရှင်းများ
+2. **ကုဒ်ပြန်လည်သုံးသပ်ခြင်း**: ဖိုင်ဇယားနှင့် တပ်ဆင်မှု အရည်အသွေး တိုင်းတာခြင်း
+3. **ပြဿနာဖြေရှင်းခြင်း**: ပြဿနာဖြေရှင်းမှု တွေ့ကြုံနင်းသော ပုံစံများနှင့် ဖြေရှင်းနည်းများ
+4. **ညီအစ်ကိုသင်ကြားခြင်း**: အခြားသင်ယူနေသူများအား အတွေးအခေါ်များ ရှင်းလင်းပြသခြင်း
+5. **အသိုင်းအဝိုင်း ပံ့ပိုးမှု**: ဖိုင်ဇယားများ သို့မဟုတ် တိုးတက်မှုများ မျှဝေခြင်း
+
+#### ပရော်ဖက်ရှင်နယ် တိုးတက်မှုရလဒ်များ
+- **ပို့ဖိုးလီယို ပရောဂျက်များ**: တိုက်ရိုက်တပ်ဆင်ခြင်းနှင့် အဆောက်အအုံ လေ့ကျင့်မှုများ; ထုတ်လုပ်မှု ပြင်ဆင်မှု များအတွက် သီးသန့် အကောင်အထည်ဖော်ခြင်းနှင့် ပြန်လည်သုံးသပ်မှု လိုအပ်သည်
+- **နည်းပညာကျွမ်းကျင်မှုများ**: စက်မှုဇုန်စံချိန် AZD နှင့် AI တပ်ဆင်မှုကျွမ်းကျင်မှုများ
+- **ပြဿနာဖြေရှင်းနိုင်စွမ်းများ**: တစ်ဦးတည်း ပြဿနာရှာဖွေတုံ့ပြန်ခြင်းနှင့် တိုးတက်မှု
+- **အသိုင်းအဝိုင်း အသိအမှတ်ပြုခြင်း**: Azure developer အသိုင်းအဝိုင်းတွင် တက်ကြွစွာ ပါဝင်ဆောင်ရွက်ခြင်း
+- **အလုပ်အကိုင် တိုးတက်မှု**: ကွန်ပျူတာကွန်ယက်နှင့် AI ရာထူးများတွင် တိုက်ရိုက် အသုံးချနိုင်သော ကျွမ်းကျင်မှုများ
+
+#### အောင်မြင်မှု ချိန်ရက်များ
+- **တပ်ဆင်မှု အောင်မြင်မှု အချိုးအစား**: >95% အောင်မြင်သော တပ်ဆင်မှုများ
+- **ပြဿနာဆိုင်ရာဖြေရှင်းချိန်**: ပုံမှန်ပြဿနာများအတွက် <30 မိနစ်
+- **လုပ်ဆောင်မှု တိုးတက်မှု**: ကုန်ကျစရိတ်နှင့် လုပ်ဆောင်မှု တိုးတက်မှုများ ထင်ဟပ်ပြသနိုင်မှု
+- **လုံခြုံရေး ပြန်လည်သုံးသပ်မှု**: သင့်အဖွဲ့အစည်း လိုအပ်ချက်များနှင့် ကိုက်ညီမှုရှိ/မရှိ ကို စာတမ်းများဖြင့် မှတ်တမ်းတင်ပါ; သင်တန်းပြီးစီးခြင်းသည် ကိုက်ညီမှုအား အတည်ပြုခြင်း မဟုတ်ပါ
+- **အသိပညာ ပြန်လည်ပေးအပ်မှု**: အခြား developer များကို လမ်းညွှန်နိုင်စွမ်းရှိမှု
+
+### ဆက်လက်သင်ယူမှုနှင့် အသိုင်းအဝိုင်း ပါဝင်ဆောင်ရွက်မှု
+
+#### နောက်ဆုံးရသတင်းများကို နေ့စဉ်ကြည့်ရှုရန်
+- **Azure အသစ်ထွက်များ**: Azure Developer CLI ဖြန့်ချိမှတ်စုများကို လိုက်နာကြည့်ရှုပါ
+- **အသိုင်းအဝိုင်း နေရာများ**: Azure နှင့် AI developer အစည်းအဝေးများတွင် ပါဝင်ဆောင်ရွက်ပါ
+- **စာရွက်စာတမ်းများ**: အဖွဲ့အစည်းသို့ စာရွက်စာတမ်းများနှင့် ဥပမာများ ပံ့ပိုးပေးပါ
+- **တုံ့ပြန်ချက် လုပ်ထုံးလုပ်နည်း**: သင်တန်းအကြောင်းနှင့် Azure ဝန်ဆောင်မှုများအပေါ် တုံ့ပြန်ချက်ပေးပါ
+
+#### အလုပ်အကိုင် တိုးတက်ရေး
+- **ပရော်ဖက်ရှင်နယ် ကွန်ရက်**: Azure နှင့် AI ကျွမ်းကျင်သူများနှင့် ဆက်သွယ်ပါ
+- **ပြောဆိုခွင့်များ**: ဂီတပြိုင်ပွဲများ သို့မဟုတ် အစည်းအဝေးများတွင် သင်တွေ့ထားသော သင်ခန်းစာများကို ဆွေးနွေးပြပါ
+- **ဖွင့်လင်းမူထုတ် ရှေ့ပြေး ပံ့ပိုးမှု**: AZD ဖိုင်ဇယားများနှင့် ကိရိယာများ ထောက်ပံ့ပါ
+- **လမ်းညွှန်မှု**: AZD သင်ယူမှု လမ်းကြောင်းတွင် အခြား developer များကို လမ်းညွှန်ပါ
+
+---
+
+**အခန်း လမ်းညွှန်မှု:**
+- **📚 သင်တန်းမူရင်း**: [AZD For Beginners](../README.md)
+- **📖 သင်ယူမှု စတင်ရန်**: [အခန်း ၁: အခြေခံနှင့် အကြမ်းဖျဉ်း စတင်ခြင်း](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 တိုးတက်မှု ခြေရာခံမှု**: ၈ အခန်း အပြည့်အစုံဖြင့် လေ့လာမှုစနစ်မှတဆင့် သင်တိုးတက်မှုကို ခြေရာခံပါ
+- **🤝 အသိုင်းအဝိုင်း**: [Azure Discord](https://discord.gg/microsoft-azure) မှ ပံ့ပိုးမှုနှင့် ဆွေးနွေးမှုများအတွက်
+
+**သင်ယူမှု တိုးတက်မှု ခြေရာခံခြင်း**: ဒီစနစ်တကျ လမ်းညွှန်ချက်နှင့် အတူ Azure Developer CLI ကို လက်တွေ့၊ တိုးတက် အပေါ်တွင် တတ်မြောက်စေပြီး၊ စစ်ဆေးနိုင်သော ရလဒ်များနှင့် ပရော်ဖက်ရှင်နယ် တိုးတက်မှု အကျိုးအမြတ်များ ပါဝင်သည့် နည်းလမ်းဖြင့် ကျွမ်းကျင်စေရန် အသုံးပြုပါ။
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ တိကျမှုအတွက် ကြိုးပမ်းပေမယ့် အော်တိုမက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူလဘာသာဖြင့် ရေးသားထားသော မူရင်းစာတမ်းကို အာဏာပိုင် အရင်းအမြစ်အဖြစ် သတ်မှတ်ရန် လိုအပ်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် သက်ဆိုင်ရာ ပရော်ဖက်ရှင်နယ် လူသား ဘာသာပြန်တစ်ဦး၏ ဘာသာပြန်ချက်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်နိုင်သော နားလည်မှုမှားယွင်းခြင်းများ သို့မဟုတ် အဓိပ္ပာယ် အလွဲအလျှာများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

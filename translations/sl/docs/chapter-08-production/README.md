@@ -1,4 +1,4 @@
-# Poglavje 8: Vzorce proizvodnje in podjetij
+# Poglavje 8: Produkcijski in podjetniški vzorci
 
 **📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 2-3 ure | **⭐ Kompleksnost**: Napredno
 
@@ -6,46 +6,46 @@
 
 ## Pregled
 
-To poglavje pokriva vzorce nameščanja, pripravljenih za podjetja, utrjevanje varnosti, spremljanje in optimizacijo stroškov za produkcijske AI delovne obremenitve.
+To poglavje zajema vzorce uvajanja, pripravljenih za podjetja, utrjevanje varnosti, nadzor in optimizacijo stroškov za produkcijske AI delovne obremenitve.
 
-To je arhitekturni referenčni zapis, ne popoln produkcijski predloga za namestitev. Primeri izpuščajo podrobnosti integracije, ki jih morate sami zagotoviti in preizkusiti v svoji aplikaciji; branje kontrolnega seznama ne zagotavlja pripravljenosti za produkcijo.
+To je arhitekturni referenčni material, ne popolna predloga za produkcijo, ki je pripravljena za uvajanje. Primeri izpuščajo podrobnosti integracije, ki jih morate zagotoviti in preizkusiti v svoji aplikaciji; branje kontrolnega seznama ne potrjuje pripravljenosti za produkcijo.
 
-> **Pregled izdaje (2026-11-04):** Navodila za AI CLI so bila preverjena glede na dokumentacijo/vir `azd 1.37.2`, agente `1.0.0-beta.23` in ocene `1.0.0-beta.2`. Za zahteve glede združljivosti in podrobnosti migracije si oglejte [spremembe in popravke izdaje](production-ai-practices.md#recent-release-changes-and-fixes); to ni preverjanje dejanske namestitve.
+> **Posodobitev Foundry GA (2026-11-09):** Uporabite `azd >= 1.37.0` in splošno dostopen paket `microsoft.foundry` 1.0 za Foundry potek dela; ocene se namestijo ločeno. Oglejte si [obseg izdaje in migracijo](production-ai-practices.md#recent-release-changes-and-fixes) in [primer overjenega poteka](production-ai-practices.md#cicd-pipeline-configuration). To je pregled dokumentacije, ne preverjanje uvajanja v živo ali splošni status GA za neobvezne predogledne funkcije.
 
 ## Cilji učenja
 
 Z dokončanjem tega poglavja boste:
-- Namestili večregijske odporne aplikacije
-- Implementirali varnostne vzorce za podjetja
-- Konfigurirali celovito spremljanje
+- Uvajali aplikacije z večregijskim odpornim delovanjem
+- Izvajali varnostne vzorce za podjetja
+- Konfigurirali celovit nadzor
 - Optimizirali stroške v obsegu
-- Nastavili CI/CD procese z AZD
+- Nastavili CI/CD cevovode z AZD
 
 ---
 
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Čas |
-|---|--------|--------------|------|
-| 1 | [Prakse produkcijskega AI](production-ai-practices.md) | Vzorce namestitve za podjetja | 90 min |
+|---|--------|-------------|------|
+| 1 | [Produkcijske AI prakse](production-ai-practices.md) | Podjetniški vzorci uvajanja | 90 min |
 
 ---
 
 ## 🚀 Kontrolni seznam za produkcijo
 
-- [ ] Večregijska namestitev za odpornost
-- [ ] Upravljana identiteta za preverjanje pristnosti (brez ključev)
-- [ ] Application Insights za spremljanje
-- [ ] Nastavljeni proračuni in opozorila za stroške
-- [ ] Omogočeno varnostno skeniranje
-- [ ] Integracija CI/CD procesa
-- [ ] Načrt za obnovitev po katastrofi
+- [ ] Večregijsko uvajanje za odpornost
+- [ ] Upravljana identiteta za avtentikacijo (brez ključev)
+- [ ] Application Insights za nadzor
+- [ ] Nastavljeni proračuni stroškov in opozorila
+- [ ] Omogočeno varnostno pregledovanje
+- [ ] Integracija CI/CD cevovoda
+- [ ] Načrt za obnovo po katastrofi
 
 ---
 
 ## 🏗️ Arhitekturni vzorci
 
-### Vzorec 1: Mikroservisi AI
+### Vzorec 1: AI mikro-storitve
 
 ```mermaid
 graph LR
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Vzorec 2: Dogodkovno usmerjeni AI
+### Vzorec 2: Dogodkovno vodena AI
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Strategija | Glavna omejitev |
 |----------|---------|
-| Skaliranje do ničle (Container Apps) | Zahteva ustrezen sprožilec; ostale storitve še vedno povzročajo stroške |
-| Uporaba plasti s porabo za razvoj | Primerjava cen izbrane storitve in delovne obremenitve |
+| Preklop na ničlo (Container Apps) | Zahteva primern sprožilec; druge storitve še vedno povzročajo stroške |
+| Uporaba nivojev porabe za razvoj | Primerjava cen izbrane storitve in delovne obremenitve |
 | Načrtovano skaliranje | Skaliranje preko podprte infrastrukture/avtomatizacije |
-| Rezervacije/rezervirana zmogljivost | Samo če je podprto; zaveze lahko povečajo stroške nedejavnosti |
+| Rezervacije/rezerve z zmogljivostjo | Samo če je podprto; obveznosti lahko povečajo stroške med mirovanjem |
 
-Uporabite [popolni vzorec proračuna](production-ai-practices.md#2-cost-monitoring-and-budgets) z veljavnim začetnim datumom, obsegom obračunavanja, prejemniki in dovoljenji. Proračun pošilja opozorila; ne omejuje porabe. Prihranki so odvisni od izmerjene porabe in niso zajamčeni odstotki.
+Uporabite [popolni vzorec proračuna virov](production-ai-practices.md#2-cost-monitoring-and-budgets) z veljavnim začetnim datumom, obsegom obračuna, prejemniki in dovoljenji. Proračun pošilja opozorila; ne omejuje porabe. Prihranki so odvisni od izmerjene uporabe in niso zagotovljeni deleži.
 
 ---
 
-## 📊 Nastavitev spremljanja
+## 📊 Nastavitev nadzora
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -125,7 +125,7 @@ az monitor metrics list --resource <resource-id>
 - [Vodnik za AI agente](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Rešitve z več agenti](../chapter-05-multi-agent/README.md)
-- [Primer mikroservisov](../../examples/microservices/README.md)
+- [Primer mikro-storitev](../../examples/microservices/README.md)
 
 ---
 

@@ -1,36 +1,36 @@
-# Commandolijst - Essentiële AZD-commando's
+# Command Cheat Sheet - Essentiële AZD Commando's
 
-**Snelle referentie voor alle hoofdstukken**
-- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
-- **📖 Snelle Start**: [Hoofdstuk 1: Fundament & Snelle Start](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-commando's**: [Hoofdstuk 2: AI-First Ontwikkeling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+**Snelle Referentie voor Alle Hoofdstukken**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../README.md)
+- **📖 Snel Starten**: [Hoofdstuk 1: Fundament & Snel Starten](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Commando's**: [Hoofdstuk 2: AI-First Ontwikkeling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Geavanceerd**: [Hoofdstuk 4: Infrastructuur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introductie
 
-Deze uitgebreide commandolijst biedt snelle referentie voor de meest gebruikte Azure Developer CLI-commando's, georganiseerd per categorie met praktische voorbeelden. Perfect voor snelle opzoekingen tijdens ontwikkeling, probleemoplossing en dagelijkse operaties met azd-projecten.
+Dit uitgebreide cheat sheet biedt een snelle referentie voor de meest gebruikte Azure Developer CLI-commando's, georganiseerd per categorie met praktische voorbeelden. Perfect voor snelle opzoekingen tijdens ontwikkeling, probleemoplossing en dagelijkse werkzaamheden met azd projecten.
 
 ## Leerdoelen
 
-Door deze commandolijst te gebruiken, zult u:
-- Direct toegang hebben tot essentiële Azure Developer CLI-commando's en syntaxis
-- Begrijpen hoe commando's georganiseerd zijn per functionele categorieën en gebruikssituaties
-- Praktische voorbeelden raadplegen voor veelvoorkomende ontwikkelings- en implementatiescenario's
-- Toegang hebben tot probleemoplossende commando's voor snelle foutoplossing
+Door dit cheat sheet te gebruiken, zult u:
+- Direct toegang hebben tot essentiële Azure Developer CLI-commando's en syntax
+- Begrijpen hoe commando's georganiseerd zijn per functionele categorieën en gebruiksscenario's
+- Praktische voorbeelden raadplegen voor veelvoorkomende ontwikkel- en implementatiescenario's
+- Toegang hebben tot probleemoplossingscommando's voor snelle oplossingsmethoden
 - Geavanceerde configuratie- en aanpassingsopties efficiënt vinden
-- Commando's voor omgevingsbeheer en multi-omgeving workflows lokaliseren
+- Commando's vinden voor omgevingsbeheer en multi-omgeving workflows
 
 ## Leerresultaten
 
-Door regelmatig deze commandolijst te raadplegen, zult u in staat zijn om:
-- azd-commando's zelfverzekerd uit te voeren zonder telkens de volledige documentatie te raadplegen
-- Veelvoorkomende problemen snel op te lossen met passende diagnostische commando's
+Bij regelmatige raadpleging van dit cheat sheet zult u in staat zijn om:
+- azd-commando's vol vertrouwen uit te voeren zonder steeds de volledige documentatie te raadplegen
+- Veelvoorkomende problemen snel op te lossen met geschikte diagnostische commando's
 - Meerdere omgevingen en implementatiescenario's efficiënt te beheren
-- Geavanceerde azd-functies en configuratieopties toe te passen wanneer nodig
-- Implementatieproblemen systematisch op te lossen met gerichte commandoreeksen
-- Werkstromen te optimaliseren door effectief gebruik van azd-snelkoppelingen en opties
+- Geavanceerde azd functies en configuratieopties toe te passen indien nodig
+- Implementatieproblemen systematisch op te lossen met een reeks commando's
+- Workflows te optimaliseren door effectief gebruik van azd snelkoppelingen en opties
 
-## Begincommando's
+## Commando's om te Beginnen
 
 ### Authenticatie
 ```bash
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Kern-implementatiecommando's
+## Kernimplementatiecommando's
 
-### Volledige implementatieworkflow
+### Complete Implementatieworkflow
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -89,7 +89,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-### Alleen infrastructuur
+### Alleen Infrastructuur
 ```bash
 # Provision Azure resources
 azd provision
@@ -100,7 +100,7 @@ azd provision --preview
 # It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Alleen applicatie
+### Alleen Applicatie
 ```bash
 # Deploy application code
 azd deploy
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Build en Package
+### Builden en Verpakken
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** downloadt de afhankelijkheden van uw app (npm, pip, NuGet, Maven, enz.). Het wordt automatisch uitgevoerd tijdens `azd package` en `azd deploy`, dus u hoeft het zelden handmatig aan te roepen—voer het handmatig uit om afhankelijkheden vooraf te laden (bijvoorbeeld om een CI-cache warm te maken of daarna offline te werken).
+> **`azd restore`** downloadt de afhankelijkheden van uw app (npm, pip, NuGet, Maven, enz.). Het wordt automatisch uitgevoerd tijdens `azd package` en `azd deploy`, dus u hoeft het zelden rechtstreeks aan te roepen—voer het handmatig uit om afhankelijkheden voor te laden (bijvoorbeeld om een CI-caching te verwarmen of later offline te werken).
 
-> **`azd package`** bereidt een deployable artefact voor zonder de applicatiedienst te implementeren. Het gedrag hangt af van de taal en host: container-packaging kan Azure remote builds gebruiken en beelden naar een registry publiceren, dus het is niet per se offline of vrij van Azure-schrijfacties. `azd deploy` kan automatisch pakken; gebruik een aparte package-stap wanneer u een artefact of buildcontrole nodig hebt.
+> **`azd package`** bereidt een implementeerbaar artefact voor zonder de applicatiedienst te implementeren. Het gedrag is afhankelijk van de taal en host: containerverpakking kan Azure remote builds gebruiken en afbeeldingen publiceren naar een register, dus het is niet per se offline of vrij van Azure-schrijfbewerkingen. `azd deploy` kan automatisch verpakken; gebruik een aparte package stap wanneer u een artefact of een buildcontrole nodig heeft.
 
 
 ## 🌍 Omgevingsbeheer
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Omgevingsbestanden zijn platte tekst. Behandel `azd env set` niet als geheime opslag; gebruik Key Vault-verwijzingen of beheerde identiteit waar passend.
+Omgevingsbestanden zijn platte tekst. Behandel `azd env set` niet als opslag voor geheimen; gebruik Key Vault-verwijzingen of beheerde identiteit waar passend.
 
 ## ⚙️ Configuratiecommando's
 
-### Globale configuratie
+### Globale Configuratie
 ```bash
 # List all configuration
 azd config show
@@ -204,7 +204,7 @@ azd show --output json
 
 ## 📊 Monitoring en Diagnostiek
 
-### Monitoringdashboard
+### Monitoring Dashboard
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights moet via de sjabloon geconfigureerd worden. AZD's Live Metrics-optie wordt momenteel niet ondersteund voor Python-applicaties; gebruik in plaats daarvan het overzicht, logs of de gedocumenteerde tracing-workflow van het voorbeeld.
+Application Insights moet geconfigureerd zijn door de template. De Live Metrics-optie van AZD wordt momenteel niet ondersteund voor Python-applicaties; gebruik in plaats daarvan het overzicht, logs, of de gedocumenteerde tracing workflow van het voorbeeld.
 
-### Containerlogboeken bekijken
+### Container Logs Bekijken
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Log Analytics-query's
+### Log Analytics Query's
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -246,7 +246,7 @@ az monitor log-analytics query \
 
 ## 🛠️ Onderhoudscommando's
 
-### Opruimen
+### Opschonen
 ```bash
 # Remove all Azure resources
 azd down
@@ -273,7 +273,7 @@ azd version
 azd config show
 ```
 
-## 🔧 Geavanceerde commando's
+## 🔧 Geavanceerde Commando's
 
 ### Pipeline en CI/CD
 ```bash
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI- en Extensiecommando's
+## 🤖 AI & Extensies Commando's
 
-### AZD-extensies
+### AZD Extensies
 
-AI CLI-referentie herzien 2026-11-04: `azd 1.37.2`, agents `1.0.0-beta.23`, evaluaties `1.0.0-beta.2`. Gebruik `azd >= 1.37.0` voor de gecombineerde workflow; upgrade de kern-CLI vóór incompatibele extensies.
+Foundry GA verwijzing bijgewerkt 2026-11-09: `microsoft.foundry` bundel 1.0, aangekondigd op [5 november 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Gebruik `azd >= 1.37.0`; componenten zijn onafhankelijk versiebeheer en optionele previewfuncties behouden hun eigen status.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI-agentcommando's
+De bundel bevat geen evaluaties, datasets, fine-tuning of aangepaste modellen. Het installeren van individuele kernextensies blijft ondersteund. Volg de [GA hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) voor een uitvoerbaar voorbeeld met Python 3.13+, huidige uv, permissies en modelquotum.
+
+### AI Agent Commando's
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` vervangt de verouderde `--manifest`/`-m` spelling; oude manifests moeten worden gemigreerd. Er is momenteel geen agent-init `--host containerapp` optie. Managed-harness, spraak- en langdurige previews vereisen onafhankelijke shell/CI-omgeving opt-ins; zie de [AI CLI referentie](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` vervangt de verouderde `--manifest`/`-m` spelling; legacy manifests moeten worden gemigreerd. Er is momenteel geen agent-init `--host containerapp` optie. Managed-harness, voice en langlopende previews hebben onafhankelijke shell/CI omgeving opt-ins nodig; zie de [AI CLI referentie](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### AI-evaluaties en optimalisatie
+Lokale testen gebruikt nog steeds Azure modelimplementaties en brengt kosten met zich mee. Voor opschoning verwijdert `azd down` de resourcegroep van een pas aangemaakt Foundry-project, maar laat hergebruikte projectbronnen intact; verwijder alleen ongewenste bronnen die u apart bezit.
+
+### AI Evaluaties en Optimalisatie
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agents beta.22 verving legacy evaluatiecommando's door `azd ai eval` van `azure.ai.evaluations`. Nieuwe evaluatieconfiguratie gebruikt camelCase-sleutels. Optimalisatie `--config` vereist een zelfstandige optimalisatie-API-aanroep, **niet** legacy `eval.yaml` of nieuwe `azure.eval.yaml`; gebruik `--eval`/`--eval-config` voor hergebruik van evaluatie. Zie [evaluatieopzet](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) en [optimalisatiemigratie](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agents beta.22 verving legacy evaluatiecommando's door `azd ai eval` van `azure.ai.evaluations`. Nieuwe evaluatieconfiguratie gebruikt camelCase keys. Optimalisatie `--config` neemt een zelfstandige optimalisatie API-aanroep, **niet** legacy `eval.yaml` of nieuwe `azure.eval.yaml`; gebruik `--eval`/`--eval-config` voor hergebruik van evaluaties. Zie [evaluatie-instelling](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) en [optimalisatie migratie](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+De runner-fragment is geen complete workflow. Commit geëvalueerde configuratie en niet-geheime assets, verleen dataset/evaluator/model toegang en gebruik een aparte omgeving per fase. Zie het [geauthenticeerde CI/CD voorbeeld](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### MCP Server (Alpha)
 ```bash
@@ -421,7 +456,7 @@ azd infra --help
 
 ## 🎯 Snelle Workflows
 
-### Ontwikkelingsworkflow
+### Ontwikkelworkflow
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Multi-omgevingworkflow
+### Multi-Omgevingsworkflow
 ```bash
 # Set up environments
 azd env new dev
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Template Debuggen
+### Template Debugging
 ```bash
 # List available templates with details
 azd template list --output json
@@ -502,7 +537,7 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 Bestands- en mapcommando's
+## 📁 Bestands- en Mapcommando's
 
 ### Projectstructuur
 ```bash
@@ -517,9 +552,9 @@ cd /path/to/your/project
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Uitvoervormgeving
+## 🎨 Output Formatting
 
-### JSON-uitvoer
+### JSON Output
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -531,7 +566,7 @@ azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabeluitvoer
+### Tabel Output
 ```bash
 # Human-readable environment table
 azd env list
@@ -540,9 +575,9 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Veelgebruikte commando-combinaties
+## 🔧 Veelvoorkomende Combinaties van Commando's
 
-### Gezondheidsscripts
+### Health Check Script
 ```bash
 #!/bin/bash
 # Quick health check
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Deploy-validatie
+### Implementatievalidatie
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### Script voor opruiming van bronnen
+### Resource Opschoningsscript
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -580,7 +615,7 @@ azd down --environment <environment-name>
 
 ## 📝 Omgevingsvariabelen
 
-### Algemene omgevingsvariabelen
+### Veelvoorkomende Omgevingsvariabelen
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -598,7 +633,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Noodcommando's
 
-### Snelle oplossingen
+### Snelle Oplossingen
 ```bash
 # Reauthenticate AZD without changing Azure CLI's account cache
 azd auth login
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 Pro Tips
 
-### Aliassen voor snellere workflows
+### Aliassen voor Snellere Workflows
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -658,9 +693,9 @@ azd-status() {
 }
 ```
 
-## 📖 Help en Documentatie
+## 📖 Hulp en Documentatie
 
-### Hulp krijgen
+### Hulp Krijgen
 ```bash
 # General help
 azd --help
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Voeg deze commandolijst toe aan uw bladwijzers en gebruik `Ctrl+F` om snel de commando's te vinden die u nodig hebt!
+**Tip**: Blader dit cheat sheet toe en gebruik `Ctrl+F` om snel de commando's te vinden die u nodig heeft!
 
 ---
 
 **Navigatie**
-- **Vorige les**: [Preflight Checks](../docs/chapter-06-pre-deployment/preflight-checks.md)
-- **Volgende les**: [Woordenlijst](glossary.md)
+- **Vorige Les**: [Preflight Checks](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Volgende Les**: [Glossarium](glossary.md)
 
 ---
 
-> **💡 Wilt u Azure-commandohulp in uw editor?** Installeer [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) met `npx skills add microsoft/github-copilot-for-azure` — 37 skills voor AI, Foundry, deployment, diagnostiek en meer.
+> **💡 Wilt u Azure-commando hulp in uw editor?** Installeer [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) met `npx skills add microsoft/github-copilot-for-azure` — 37 vaardigheden voor AI, Foundry, implementatie, diagnostiek en meer.
 
 ---
 

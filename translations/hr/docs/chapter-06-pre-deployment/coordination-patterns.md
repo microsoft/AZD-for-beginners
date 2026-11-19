@@ -1,10 +1,10 @@
-# Obrasci za koordinaciju više agenata
+# Obrasci koordinacije više agenata
 
-⏱️ **Procijenjeno vrijeme**: 60-75 minuta čitanja; nekoliko sati implementacije | 💰 **Procijenjeni trošak**: ovisi o opterećenju | ⭐ **Složenost**: Napredno
+⏱️ **Procijenjeno vrijeme**: 60-75 minuta čitanja; nekoliko sati za implementaciju | 💰 **Procijenjeni trošak**: ovisi o opterećenju | ⭐ **Složenost**: Napredno
 
 **📚 Put učenja:**
-- ← Prethodno: [Planiranje kapaciteta](capacity-planning.md) - Strategije dimenzioniranja i skaliranja resursa
-- 🎯 **Vi ste ovdje**: Obrasci koordinacije više agenata (orkestracija, komunikacija, upravljanje stanjem)
+- ← Prethodno: [Planiranje kapaciteta](capacity-planning.md) - Strategije određivanja veličine resursa i skaliranja
+- 🎯 **Trenutno ste ovdje**: Obrasci koordinacije više agenata (orkestracija, komunikacija, upravljanje stanjem)
 - → Sljedeće: [Odabir SKU](sku-selection.md) - Odabir pravih Azure usluga
 - 🏠 [Početna stranica tečaja](../../README.md)
 
@@ -12,28 +12,28 @@
 
 ## Što ćete naučiti
 
-Završetkom ovog poglavlja:
-- Razumjet ćete obrasce **arhitekture više agenata** i kada ih koristiti
-- Implementirati obrasce **orkestracije** (centralizirani, decentralizirani, hijerarhijski)
-- Dizajnirati strategije **komunikacije agenata** (sinkrono, asinkrono, pokretano događajima)
-- Upravljati **zajedničkim stanjem** između distribuiranih agenata
-- Implementirati **sustave više agenata** na Azure korištenjem AZD
-- Primijeniti obrasce **koordinacije** u stvarnim AI scenarijima
-- Nadzirati i otklanjati pogreške u distribuiranim sustavima agenata
+Završetkom ove lekcije, naučit ćete:
+- Razumjeti obrasce **višeagentske arhitekture** i kada ih koristiti
+- Implementirati **obrasce orkestracije** (centralizirano, decentralizirano, hijerarhijsko)
+- Dizajnirati strategije **komunikacije agenata** (sinkrono, asinkrono, događajno vođeno)
+- Upravljati **zajedničkim stanjem** među distribuiranim agentima
+- Postaviti **višeagentske sustave** na Azure pomoću AZD
+- Primijeniti **obrasce koordinacije** za stvarne AI scenarije
+- Nadzirati i ispravljati pogreške distribuiranih sustava agenata
 
 ## Zašto je koordinacija više agenata važna
 
-### Evolucija: od jednog agenta do više agenata
+### Evolucija: Od pojedinačnog agenta do više agenata
 
-**Jedan agent (jednostavan):**
+**Pojedinačni agent (jednostavan):**
 ```
 User → Agent → Response
 ```
-- ✅ Jednostavan za razumijevanje i implementaciju
+- ✅ Lako se razumije i implementira
 - ✅ Brz za jednostavne zadatke
 - ❌ Ograničen sposobnostima jednog modela
-- ❌ Ne može paralelizirati složene zadatke
-- ❌ Nema specijalizaciju
+- ❌ Ne može paralelno izvoditi složene zadatke
+- ❌ Nema specijalizacije
 
 **Sustav više agenata (napredno):**
 ```mermaid
@@ -43,12 +43,12 @@ graph TD
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
 - ✅ Specijalizirani agenti za određene zadatke
-- ✅ Paralelno izvođenje za brzinu
-- ✅ Modularan i lako održiv
-- ✅ Bolje za složene radne tokove
+- ✅ Paralelno izvođenje radi brzine
+- ✅ Modularan i održiv
+- ✅ Bolji za složene radne tokove
 - ⚠️ Zahtijeva logiku koordinacije
 
-**Analogia**: Jedan agent je kao jedna osoba koja radi sve zadatke. Više agenata je poput tima gdje svaki član ima specijalizirane vještine (istraživač, programer, recenzent, pisac) koji surađuju.
+**Analogija**: Pojedinačni agent je kao jedna osoba koja radi sve zadatke. Više agenata je kao tim gdje svaki član ima specijalizirane vještine (istraživač, programer, recenzent, pisac) koji rade zajedno.
 
 ---
 
@@ -56,7 +56,7 @@ graph TD
 
 ### Obrazac 1: Sekvencijalna koordinacija (lanac odgovornosti)
 
-**Kada koristiti**: Zadaci moraju biti izvršeni u specifičnom redoslijedu, svaki agent koristi izlaz prethodnog.
+**Kada koristiti**: Zadatci se moraju izvršavati u određenom redoslijedu, svaki agent nadograđuje na prethodni rezultat.
 
 ```mermaid
 sequenceDiagram
@@ -79,25 +79,25 @@ sequenceDiagram
 ```
 
 **Prednosti:**
-- ✅ Jasan tok podataka
-- ✅ Jednostavno za otkloniti pogreške
-- ✅ Predvidljiv redoslijed izvođenja
+- ✅ Jasno strujanje podataka
+- ✅ Lako za otklanjanje pogrešaka
+- ✅ Predvidljiv redoslijed izvršenja
 
 **Ograničenja:**
 - ❌ Sporije (nema paralelizma)
-- ❌ Jedna pogreška zaustavlja cijeli lanac
-- ❌ Ne može upravljati međuzavisnim zadacima
+- ❌ Jedan neuspjeh blokira cijeli lanac
+- ❌ Ne može se nositi s međuzavisnim zadacima
 
 **Primjeri upotrebe:**
-- Linija za kreiranje sadržaja (istraživanje → pisanje → uređivanje → objavljivanje)
+- Cjevovod izrade sadržaja (istraživanje → pisanje → uređivanje → objava)
 - Generiranje koda (planiranje → implementacija → testiranje → implementacija)
-- Izrada izvještaja (prikupljanje podataka → analiza → vizualizacija → sažetak)
+- Izvještavanje (prikupljanje podataka → analiza → vizualizacija → sažetak)
 
 ---
 
-### Obrazac 2: Paralelna koordinacija (raspodjela/sakupljanje)
+### Obrazac 2: Paralelna koordinacija (razdvajanje/spajanje)
 
-**Kada koristiti**: Neovisni zadaci mogu se izvoditi istovremeno, rezultati se kombiniraju na kraju.
+**Kada koristiti**: Neovisni zadatci mogu se izvoditi istovremeno, rezultati se kombiniraju na kraju.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Prednosti:**
-- ✅ Brzo (paralelno izvođenje)
-- ✅ Otporno na greške (djelomični rezultati prihvatljivi)
-- ✅ Horizontalno skalabilno
+- ✅ Brzo (paralelno izvršenje)
+- ✅ Otporno na pogreške (djelomični rezultati prihvatljivi)
+- ✅ Horizontalno skaliranje
 
 **Ograničenja:**
-- ⚠️ Rezultati mogu stići izvan redoslijeda
+- ⚠️ Rezultati mogu stizati izvan reda
 - ⚠️ Potrebna logika agregacije
 - ⚠️ Složenije upravljanje stanjem
 
 **Primjeri upotrebe:**
-- Prikupljanje podataka iz više izvora (API-ji + baze + web scraping)
-- Konkurentske analize (više modela proizvodi rješenja, odabire se najbolje)
+- Prikupljanje podataka iz više izvora (API-jevi + baze podataka + web scraping)
+- Konkurentska analiza (više modela generira rješenja, odabire se najbolje)
 - Usluge prevođenja (istovremeni prijevod na više jezika)
 
 ---
 
 ### Obrazac 3: Hijerarhijska koordinacija (menadžer-radnik)
 
-**Kada koristiti**: Složeni radni tokovi s podzadatcima, potrebna delegacija.
+**Kada koristiti**: Složeni radni tokovi sa podzadatcima, potrebna je delegacija.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Prednosti:**
-- ✅ Podržava složene radne tokove
-- ✅ Modularno i održivo
+- ✅ Rukuje složenim radnim tokovima
+- ✅ Modularan i održiv
 - ✅ Jasne granice odgovornosti
 
 **Ograničenja:**
 - ⚠️ Složenija arhitektura
 - ⚠️ Veća latencija (više slojeva koordinacije)
-- ⚠️ Potrebna složena orkestracija
+- ⚠️ Zahtijeva sofisticiranu orkestraciju
 
 **Primjeri upotrebe:**
-- Obrada dokumenata u poduzeću (klasificiraj → proslijedi → obradi → arhiviraj)
-- Višestupanjski podatkovni tokovi (unos → čišćenje → transformacija → analiza → izvještaj)
-- Složene automatizirane radne procedure (planiranje → raspodjela resursa → izvršenje → nadzor)
+- Obrada dokumenata u poduzeću (klasificirati → usmjeravati → obrađivati → arhivirati)
+- Višestupanjski cjevovodi podataka (unos → čišćenje → transformacija → analiza → izvještaj)
+- Složeni automatizirani radni tokovi (planiranje → dodjela resursa → izvršenje → nadzor)
 
 ---
 
-### Obrazac 4: Koordinacija temeljena na događajima (objava-pretplata)
+### Obrazac 4: Događajno vođena koordinacija (objavi-pretplati se)
 
-**Kada koristiti**: Agentima treba reagirati na događaje, poželjan labaviji spoj.
+**Kada koristiti**: Agentima treba reagirati na događaje, poželjna je labava povezanost.
 
 ```mermaid
 sequenceDiagram
@@ -207,25 +207,25 @@ sequenceDiagram
 
 **Prednosti:**
 - ✅ Labava povezanost između agenata
-- ✅ Jednostavno dodavanje novih agenata (pretplata)
+- ✅ Jednostavno dodavanje novih agenata (samo se pretplate)
 - ✅ Asinkrono procesiranje
-- ✅ Otpornost (zadržavanje poruka)
+- ✅ Otpornost (perzistencija poruka)
 
 **Ograničenja:**
-- ⚠️ Konačna konzistentnost
-- ⚠️ Složenije otklanjanje pogrešaka
+- ⚠️ Konačna dosljednost
+- ⚠️ Složenost u otklanjanju pogrešaka
 - ⚠️ Izazovi u redoslijedu poruka
 
 **Primjeri upotrebe:**
 - Sustavi za nadzor u stvarnom vremenu (upozorenja, nadzorne ploče, dnevnici)
-- Višekanalna obavještenja (e-pošta, SMS, push, Slack)
+- Višekanalne obavijesti (e-mail, SMS, push, Slack)
 - Cjevovodi za obradu podataka (više potrošača istih podataka)
 
 ---
 
-### Obrazac 5: Konsenzusna koordinacija (glasovanje/kvorum)
+### Obrazac 5: Koordinacija temeljena na konsenzusu (glasanje/kvorum)
 
-**Kada koristiti**: Potrebno je dogovoriti se među više agenata prije nastavka.
+**Kada koristiti**: Potrebno je postizanje dogovora više agenata prije nastavka.
 
 ```mermaid
 graph TB
@@ -249,24 +249,24 @@ graph TB
 
 **Prednosti:**
 - ✅ Veća točnost (više mišljenja)
-- ✅ Otpornost na greške (prihvatljive manjinske pogreške)
+- ✅ Otporno na pogreške (prihvatljivi neuspjesi manjine)
 - ✅ Ugrađena kontrola kvalitete
 
 **Ograničenja:**
-- ❌ Skupo (višestruki pozivi modelima)
-- ❌ Sporije (čekanje svih agenata)
+- ❌ Skupo (više poziva modelima)
+- ❌ Sporije (čekanje na sve agente)
 - ⚠️ Potrebno rješavanje sukoba
 
 **Primjeri upotrebe:**
-- Moderiranje sadržaja (višestruki modeli pregledavaju sadržaj)
-- Pregled koda (više lint alata/analizatora)
+- Moderacija sadržaja (više modela recenzira sadržaj)
+- Pregled koda (više linters/analizatora)
 - Medicinska dijagnoza (više AI modela, stručna validacija)
 
 ---
 
 ## Pregled arhitekture
 
-### Potpuni sustav više agenata na Azureu
+### Potpuni višeagentski sustav na Azureu
 
 ```mermaid
 graph TB
@@ -318,15 +318,15 @@ graph TB
 
 | Komponenta | Svrha | Azure usluga |
 |-----------|---------|---------------|
-| **API Gateway** | Ulazna točka, ograničenje brzine, autentikacija | API Management |
+| **API Gateway** | Ulazna točka, ograničenje brzine, autentifikacija | API Management |
 | **Orkestrator** | Koordinira radne tokove agenata | Container Apps |
-| **Red poruka** | Asinkrona komunikacija | Service Bus / Event Hubs |
+| **Message Queue** | Asinkrona komunikacija | Service Bus / Event Hubs |
 | **Agenti** | Specijalizirani AI radnici | Container Apps / Functions |
-| **Spremište stanja** | Zajedničko stanje, praćenje zadataka | Cosmos DB |
+| **Pohrana stanja** | Zajedničko stanje, praćenje zadataka | Cosmos DB |
 | **Pohrana artefakata** | Dokumenti, rezultati, dnevnici | Blob Storage |
-| **Nadzor** | Razdijeljeno praćenje, dnevnici | Application Insights |
+| **Nadzor** | Distribuirano praćenje, dnevnici | Application Insights |
 
-Service Bus redovi/teme i Event Hubs su različite usluge s različitim modelima isporuke/potrošnje; Event Hubs nije direktna zamjena za donji Service Bus radnički kod. Paralelizam, pohranjene poruke i glasovanje modela sami po sebi ne garantiraju otpornost na greške ili veću točnost.
+Service Bus queue/topic i Event Hubs su različite usluge s različitim modelima dostave i potrošnje; Event Hubs nije zamjena "plug-in" za Service Bus kod radnika prikazan dolje. Paralelizam, trajne poruke i glasanje modela sami po sebi ne jamče otpornost na pogreške niti veću točnost.
 
 ---
 
@@ -348,32 +348,32 @@ docker --version
 # ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Azure zahtjevi
+### Zahtjevi za Azure
 
 - Aktivna Azure pretplata
-- Ovlasti za kreiranje:
+- Dozvole za kreiranje:
   - Container Apps
-  - Service Bus namespaceova
-  - Cosmos DB računa
-  - Spremišnih računa
+  - Service Bus prostor imena
+  - Cosmos DB računi
+  - Računi za pohranu
   - Application Insights
 
 ### Preduvjeti znanja
 
 Trebali biste biti završili:
 - [Upravljanje konfiguracijom](../chapter-03-configuration/configuration.md)
-- [Autentikacija i sigurnost](../chapter-03-configuration/authsecurity.md)
+- [Autentifikaciju i sigurnost](../chapter-03-configuration/authsecurity.md)
 - [Primjer mikroservisa](../../../../examples/microservices)
 
 ---
 
 ## Vodič za implementaciju
 
-> **Dizajnerski fragmenti, ne primjenjivi laboratorij:** Struktura projekta i oznake `File:` ispod opisuju datoteke koje treba kreirati u vašem vlastitom projektu; ovaj repozitorij ne sadrži potpunu aplikaciju `multi-agent-system`. Nedostaju glavne/parametarske predloške, okruženje/registri Container Apps, Dockerfile-ovi i zaključavanje ovisnosti, postavljanje Cosmos baze/kontejnera, implementacije modela, konfiguracija identiteta/uloga, pravila skaliranja i paralelni radnici/redovi. Ne očekujte da `azd init` generira te datoteke niti da `azd up` implementira odlomke nepromijenjene. Za izvršni početak, završite [Osnove više agenata](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Dijelovi dizajna, a ne laboratorij za implementaciju:** Struktura projekta i oznake `File:` ispod opisuju datoteke koje treba napraviti u vlastitom projektu; ovaj spremnik ne sadrži cjelovitu aplikaciju `multi-agent-system`. Nedostaju glavne/predloške parametara, Container Apps okruženje/registracija, Dockerfiles i zaključavanje ovisnosti, postavljanje baze/područja Cosmos, implementacije modela, konfiguracija identiteta/uloga, pravila skaliranja i paralelni radnici/redovi. Ne očekujte da će `azd init` generirati te datoteke ili da će `azd up` rasporediti isječke nepromijenjene. Za izvršnu početnu točku, dovršite [Osnove više agenata](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Pretpostavke za izvršavanje:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask i (za nadzor) `azure-monitor-opentelemetry`; stavite `shared` na Python put uvoza u svakoj servisnoj slici. Cosmos `agent-state/tasks` kontejner mora već postojati s ključem particije `/id`. Povezivanja temeljena na ključevima pojednostavljuju ove fragmente, ne smjernice za produkciju: preferirajte upravljane identitete s opsegom uloga za Service Bus/Cosmos/OpenAI podatkovnu ravninu. Nemojte izlagati ključeve u ishodima ili dnevnicima.
+**Pretpostavke za vrijeme izvođenja:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask i (za nadzor) `azure-monitor-opentelemetry`; stavite `shared` na Python put uvoza u svakoj slici usluge. Cosmos `agent-state/tasks` spremnik već mora postojati s particijskim ključem `/id`. Povezivanje na temelju ključeva pojednostavljuje ove dijelove, nije uputa za produkciju: preferirajte upravljane identitete s opsegom uloga na razini podataka Service Bus/Cosmos/OpenAI. Ne izlažite ključeve u izlazima ili zapisima.
 
-Isporuka Service Busa je **najmanje jednom**. Sačuvajte idempotentnost po zadatku **i koraku**, koristite optimističku konkurenciju (ETags) za čitanje/izmjenu/pisanje stanja i obnavljajte zaključavanje poruka tijekom dugotrajne obrade. Jednostavan upravitelj stanja ispod je samo sekvencijalan i ne implementira ove produkcijske garancije.
+Dostava Service Bus-a je **najmanje jednom**. Očuvajte idempotenciju po zadatku **i koraku**, koristite optimističnu konkurenciju (ETags) za čitanje/izmjenu/upis stanja i obnavljajte zaključavanje poruke tijekom dugog procesiranja. Jednostavni upravitelj stanja prikazan dolje je samo sekvencijalan i ne provodi ove garancije za produkciju.
 
 ### Struktura projekta
 
@@ -409,11 +409,11 @@ multi-agent-system/
 
 ## Lekcija 1: Obrazac sekvencijalne koordinacije
 
-### Implementacija: Linija za izradu sadržaja
+### Implementacija: Cjevovod za izradu sadržaja
 
-Dizajnirajmo sekvencijalnu liniju: Istraži → Piši → Uredi. Objavljivanje je izvan ovog primjera.
+Dizajnirajmo sekvencijalan cjevovod: Istraživanje → Pisanje → Uređivanje. Objavljivanje nije obuhvaćeno ovim primjerom.
 
-### 1. Konfiguracija AZD-a
+### 1. Konfiguracija AZD
 
 **Datoteka: `azure.yaml`**
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orkestratorski servis
+### 4. Orkestratorska usluga
 
 **Datoteka: `src/orchestrator/app.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Istraživački agent
+### 5. Agent za istraživanje
 
 **Datoteka: `src/agents/research/app.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Pisani agent
+### 6. Agent pisac
 
 **Datoteka: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Uređivački agent
+### 7. Agent urednik
 
 **Datoteka: `src/agents/editor/app.py`**
 
@@ -893,16 +893,16 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Implementacija i testiranje
+### 8. Postavljanje i testiranje
 
-Ove naredbe vrijede **samo nakon što implementirate nedostajuće datoteke projekta**. Inicijalizacija Foundry agenta je zaseban radni tok; ne generira ovaj dizajn Service Busa.
+Ove naredbe vrijede **samo nakon što implementirate nedostajuće datoteke projekta**. Interaktivna inicijalizacija Foundry agenta je zaseban tijek rada; ne generira ovaj dizajn Service Bus-a.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
@@ -919,7 +919,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Očekivani ishod:**
+**✅ Očekivani izlaz:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Provjerite napredak zadatka:**
+**Provjera napretka zadatka:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Očekivani ishod (dovršeno):**
+**✅ Očekivani izlaz (završeno):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -968,7 +968,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Implementacija: Agregator istraživanja iz više izvora
 
-Izgradimo paralelni sustav koji istovremeno prikuplja informacije iz više izvora.
+Izgradimo paralelni sustav koji prikuplja informacije iz više izvora istovremeno.
 
 ### Paralelni orkestrator
 
@@ -1124,19 +1124,19 @@ if __name__ == '__main__':
 ```
 
 **Prednosti paralelnog obrasca:**
-- ⚡ **Potencijalno manja latencija** (ograničeno najsporijim radnikom i troškovima koordinacije)
-- 🔄 **Može podržati djelomične rezultate** s eksplicitnim rokovima i politikom u slučaju grešaka (nije implementirano u osnovnom agregatoru)
-- 📈 **Skalabilno** (jednostavno dodavanje više agenata)
+- ⚡ **Potencijalno niža latencija** (ograničena najsporijim radnikom plus dodatak koordinacije)
+- 🔄 **Može podržati djelomične rezultate** s eksplicitnim rokovima i politikom neuspjeha (nije implementirano u osnovnom agregatoru)
+- 📈 **Skalabilan** (lako dodavanje više agenata)
 
 ---
 
 ## Praktične vježbe
 
-### Vježba 1: Dodajte rukovanje vremenskim ograničenjem ⭐⭐ (srednje)
+### Vježba 1: Dodajte rukovanje vremenskim ograničenjem ⭐⭐ (Srednje)
 
 **Cilj**: Implementirati logiku vremenskog ograničenja da agregator ne čeka beskonačno na spore agente.
 
-**Početna točka:** Pokrenite ovu lokalnu simulaciju roka prije integracije u radnika reda. Vremensko ograničenje provjereno samo kad stigne nova poruka nikada se ne pokreće ako nedostajući radnik ne šalje ništa.
+**Početna točka:** Pokrenite lokalnu simulaciju roka prije integracije u queue radnika. Vremensko ograničenje koje se provjerava samo kad stigne nova poruka nikada ne ispaljuje ako spori radnik ništa ne šalje.
 
 **Koraci**:
 
@@ -1164,13 +1164,13 @@ async def main():
 asyncio.run(main())
 ```
 
-2. **Očekivani ishod:**
+2. **Očekivani izlaz:**
 
 ```text
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integracija u sustav reda (dizajnerski zadatak):** Sačuvajte krajnji rok slanja i očekivane agente prilikom kreiranja zadatka, pokrenite periodično provjeravanje roka neovisno o pristiglim rezultatima, atomički finalizirajte djelomične rezultate i ignorirajte kasne/duplikatne poruke za finalizirane zadatke. Lokalno vremensko ograničenje ne otkazuje udaljene radnike.
+3. **Integracija s queue sustavom (zadatak dizajna):** Očuvati rok za slanje i očekivane agente prilikom kreiranja zadatka, periodično čistiti rok neovisno o pristiglim rezultatima, atomski dovršiti djelomične rezultate i ignorirati kasne/duplikat poruke za dovršene zadatke. Lokalno vremensko ograničenje ne otkazuje udaljene radnike.
 
 Samo za vaš implementirani projekt:
 
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Kriteriji uspjeha:**
-- ✅ Lokalni test se vraća nakon jednosekundnog roka čak i ako agent nije dovršen
+- ✅ Lokalni test vraća rezultat nakon jednog sekundi roka čak i ako je agent nesavršen
 - ✅ Odgovor pokazuje djelomične rezultate (`"timed_out": true`)
-- ✅ Vraćaju se dostupni rezultati (3 od 4 agenta)
+- ✅ Dostupni rezultati su vraćeni (3 od 4 agenta)
 
 **Vrijeme**: 20-25 minuta
 
 ---
 
-### Vježba 2: Implementirajte logiku ponovnog pokušaja ⭐⭐⭐ (napredno)
+### Vježba 2: Implementirajte logiku ponovnog pokušaja ⭐⭐⭐ (Napredno)
 
-**Cilj**: Automatski ponoviti neuspjele zadatke agenata prije odustajanja.
+**Cilj**: Automatski ponavljati neuspjele zadatke agenata prije nego što odustanete.
 
 **Koraci**:
 
-1. **Koristite brojače isporuke Service Busa umjesto vlastitih brojača ponovnog pokušaja:**
+1. **Koristite brojače isporuke Service Bus umjesto ponovnog spremanja vlastitih brojača pokušaja:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Dodajte rukovatelja ponovnog pokušaja agentima:**
+2. **Dodajte rukovatelja ponovnim pokušajima agentima:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Nadzirite red za mrtve poruke:**
+3. **Nadzirite mrtvi red:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Kriteriji uspjeha:**
-- ✅ Neuspjeli zadaci se automatski ponavljaju (do 3 puta)
-- ✅ Eksponencijalno povećavanje vremena između pokušaja (5s, 10s, 20s), s obnovom zaključavanja poruka gdje je potrebno
-- ✅ Nakon maksimalnog broja pokušaja poruke se šalju u red za mrtve poruke
-- ✅ Poruke iz reda za mrtve poruke mogu se pregledavati; ponovni prijenos zahtijeva zaseban idempotentan radni tok oporavka
+- ✅ Neuspjeli zadaci automatski se ponavljaju (do 3 puta)
+- ✅ Eksponencijalni povratak između pokušaja (5s, 10s, 20s), s obnovom zaključavanja poruke gdje je potrebno
+- ✅ Nakon maksimalnih pokušaja, poruke idu u mrtvi red
+- ✅ Poruke u mrtvom redu mogu se pregledati; ponovno izvođenje zahtijeva zaseban idempotentni tijek oporavka
 
 **Vrijeme**: 30-40 minuta
 
 ---
 
-### Vježba 3: Implementirajte Circuit Breaker ⭐⭐⭐ (napredno)
+### Vježba 3: Implementirajte prekidač struje (Circuit Breaker) ⭐⭐⭐ (Napredno)
 
-**Cilj**: Spriječiti kaskadne pogreške zaustavljanjem zahtjeva prema neuspjelim agentima.
+**Cilj**: Spriječiti kaskadne neuspjehe zaustavljanjem zahtjeva prema neuspješnim agentima.
 
 **Koraci**:
 
-1. **Kreirajte klasu circuito-breakera:**
+1. **Napravi klasu prekidača struje:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Primijenite na pozive agentima:**
+2. **Primijeni na pozive agenta:**
 
 ```python
 # In orchestrator
@@ -1348,7 +1348,7 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Ovaj krug štiti **operaciju slanja**, a ne dovršenje na strani udaljenog radnika: uspješno stavljanje poruke u red ne govori ništa o tome je li agent živ. `send_message` je funkcija za slanje u vašoj aplikaciji. Za krugove izvršenja, unesite zabilježene neuspjehe/zakašnjele zadatke u trajni koordinator. Ova memorijska klasa je demonstracija jednonitnog rada, a ne distribuirani prekidač kruga.
+Ovaj krug štiti **operaciju slanja**, a ne dovršetak od strane udaljenog radnika: uspješno stavljanje poruke u red ne znači ništa o tome je li agent živ. `send_message` je funkcija za slanje vaše aplikacije. Za izvršne krugove, unesite zabilježene neuspjehe/zastoje zadataka u trajnog koordinatora. Ova memorijska klasa je demonstracija za jedan dretvu, nije distribuirani prekidač kruga.
 
 3. **Testirajte prekidač kruga lokalno:**
 
@@ -1369,18 +1369,18 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Kriteriji uspjeha:**
-- ✅ Nakon 5 neuspjeha, krug se otvara (odbija zahtjeve)
-- ✅ Nakon 60 sekundi, krug ide u polu-otvoreno stanje (testira oporavak)
-- ✅ Ostali agenti nastavljaju normalno raditi
+- ✅ Nakon 5 neuspjeha, krug se otvara (odbijaju se zahtjevi)
+- ✅ Nakon 60 sekundi, krug je poluotvoren (testira se oporavak)
+- ✅ Ostali agenti nastavljaju raditi normalno
 - ✅ Krug se automatski zatvara kada se agent oporavi
 
 **Vrijeme**: 40-50 minuta
 
 ---
 
-## Praćenje i otklanjanje pogrešaka
+## Praćenje i Rješavanje problema
 
-### Distribuirano praćenje s Application Insights
+### Distribuirano praćenje uz Application Insights
 
 **Datoteka: `src/shared/tracing.py`**
 
@@ -1425,9 +1425,9 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
             raise
 ```
 
-### Upiti u Application Insights
+### Upiti za Application Insights
 
-**Praćenje višeslojnih tokova rada:**
+**Praćenje višestrukih agenata u radnim tokovima:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1437,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Usporedba izvedbe agenata:**
+**Usporedba performansi agenata:**
 
 ```kusto
 // Compare agent execution times
@@ -1468,22 +1468,22 @@ exceptions
 
 ## Analiza troškova
 
-### Troškovi višeslojnog sustava (mjesečne procjene)
+### Troškovi višestrukih agenata (mjesečne procjene)
 
-Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je **$240-565/mjesečno**. Provjerite trenutačne regionalne cijene, sate aktivnih/nezaposlenih replika, omjer tokena ulaz/izlaz, pohranu i telemetriju. Serverless nema minimalni predviđeni protok, ali i dalje naplaćuje zahtjeve i pohranu.
+Samo ilustrativni planirani brojevi, ne ponude: zbroj ispod je **240-565 USD/mjesečno**. Provjerite aktualne regionalne cijene, sate aktivnih/neaktivnih replika, omjer ulaznih/izlaznih tokena, pohranu i telemetriju. Serverless nema minimalni unaprijed rezervirani kapacitet, ali i dalje naplaćuje zahtjeve i pohranu.
 
 | Komponenta | Konfiguracija | Trošak |
 |-----------|--------------|------|
-| **Orkestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agenta** | 4 Container App (0.5 vCPU, 1GB svaki) | $60-120 |
-| **Service Bus** | Standardni nivo, 10M poruka | $10-20 |
-| **Cosmos DB** | Serverless, 5GB pohrane, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB pohrane, 100K operacija | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokena | $100-300 |
-| **Ukupno** | | **$240-565/mjesečno** |
+| **Orkestrator** | 1 Container App (1 vCPU, 2GB) | 30-50 USD |
+| **4 Agenta** | 4 Container App (0.5 vCPU, 1GB svaki) | 60-120 USD |
+| **Service Bus** | Standardna razina, 10M poruka | 10-20 USD |
+| **Cosmos DB** | Serverless, 5GB pohrane, 1M RU | 25-50 USD |
+| **Blob Storage** | 10GB pohrane, 100K operacija | 5-10 USD |
+| **Application Insights** | 5GB unosa | 10-15 USD |
+| **Microsoft Foundry modeli** | gpt-4.1, 10M tokena | 100-300 USD |
+| **Ukupno** | | **240-565 USD/mjesečno** |
 
-### Strategije za optimizaciju troškova
+### Strategije optimizacije troškova
 
 1. **Koristite serverless gdje je moguće:**
    ```bicep
@@ -1494,7 +1494,7 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
    }
    ```
 
-2. **Skalirajte agente na nulu kad su neaktivni:**
+2. **Smanjite agente do nule kada su neaktivni:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1502,7 +1502,7 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
    }
    ```
 
-3. **Koristite grupiranje poruka za Service Bus:**
+3. **Koristite serijsko slanje za Service Bus:**
    ```python
    # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
@@ -1519,7 +1519,7 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
 
 ## Najbolje prakse
 
-### ✅ TREBATE:
+### ✅ RADITE:
 
 1. **Koristite idempotentne operacije**
    ```python
@@ -1528,12 +1528,12 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Implementirajte opsežno evidentiranje**
+2. **Implementirajte sveobuhvatno evidentiranje**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Koristite ID-ove korelacije**
+3. **Koristite korelacijske ID-eve**
    ```python
    # Pass task_id through entire workflow
    message_data = {
@@ -1542,20 +1542,20 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
    }
    ```
 
-4. **Postavite TTL (vrijeme života) za poruke**
+4. **Postavite TTL poruke (vrijeme trajanja)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Pratite redove mrtvih poruka**
+5. **Nadzor mrtvih redova poruka**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ NEMOJTE:
+### ❌ NE RADITE:
 
 1. **Ne stvarajte kružne ovisnosti**
    ```python
@@ -1563,7 +1563,7 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Ne blokirajte niti agenata**
+2. **Ne blokirajte dretve agenta**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1586,14 +1586,14 @@ Prikazni planirani iznosi samo za ilustraciju, ne ponude: ukupni zbroj ispod je 
 
 ---
 
-## Vodič za otklanjanje problema
+## Vodič za rješavanje problema
 
-### Problem: Poruke zapinju u redu
+### Problem: Poruke zapete u redu
 
 **Simptomi:**
 - Poruke se nakupljaju u redu
 - Agenti ne obrađuju
-- Status zadatka zapinje na "u čekanju"
+- Status zadatka ostaje "na čekanju"
 
 **Dijagnoza:**
 ```bash
@@ -1630,11 +1630,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Zadatak je u timeoutu/nikad se ne dovrši
+### Problem: Zadatak je istek vremena/ne završava se
 
 **Simptomi:**
 - Status zadatka ostaje "u tijeku"
-- Neki agenti dovršavaju, drugi ne
+- Neki agenti završavaju, neki ne
 - Nema poruka o pogrešci
 
 **Dijagnoza:**
@@ -1650,7 +1650,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 1. **Implementirajte timeout u agregatoru (Vježba 1)**
 
-2. **Provjerite neuspjehe agenata putem Azure Monitor:**
+2. **Provjerite za neuspjehe agenata koristeći Azure Monitor:**
    ```bash
    # View logs via azd monitor
    azd monitor --logs
@@ -1668,21 +1668,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Saznajte više
+## Saznajte Više
 
 ### Službena dokumentacija
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+- [Obrasci orkestracije AI agenta](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Sljedeći koraci u ovom tečaju
 - ← Prethodno: [Planiranje kapaciteta](capacity-planning.md)
-- → Sljedeće: [Odabir SKU-a](sku-selection.md)
+- → Sljedeće: [Izbor SKU-a](sku-selection.md)
 - 🏠 [Početna stranica tečaja](../../README.md)
 
 ### Povezani primjeri
-- [Primjer mikrousloga](../../../../examples/microservices) - Obrasci komunikacije usluga
+- [Primjer mikroservisa](../../../../examples/microservices) - Obrasci komunikacije usluga
 - [Primjer Microsoft Foundry modela](../../../../examples/azure-openai-chat) - AI integracija
 
 ---
@@ -1690,24 +1690,24 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ## Sažetak
 
 **Naučili ste:**
-- ✅ Pet obrazaca koordinacije (sekvencijalni, paralelni, hijerarhijski, vođeni događajima, konsenzus)
-- ✅ Arhitekturu više agenata na Azureu (Service Bus, Cosmos DB, Container Apps)
-- ✅ Upravljanje stanjem među distribuiranim agentima
-- ✅ Upravljanje timeoutima, ponovnim pokušajima i prekidačima kruga
+- ✅ Pet obrazaca koordinacije (sekvencijalni, paralelni, hijerarhijski, događajima vođeni, konsenzus)
+- ✅ Višestruku arhitekturu agenata na Azureu (Service Bus, Cosmos DB, Container Apps)
+- ✅ Upravljanje stanjem preko distribuiranih agenata
+- ✅ Rukovanje vremenom isteka, ponovnim pokušajima i prekidačima kruga
 - ✅ Praćenje i otklanjanje pogrešaka distribuiranih sustava
 - ✅ Strategije optimizacije troškova
 
-**Ključne pouke:**
-1. **Odaberite pravilan obrazac** - Sekvencijalni za naručene tokove rada, paralelni za brzinu, vođeni događajima za fleksibilnost
+**Glavni zaključci:**
+1. **Odaberite pravi obrazac** - Sekvencijalni za uređene radne tokove, paralelni za brzinu, događajima vođeni za fleksibilnost
 2. **Pažljivo upravljajte stanjem** - Koristite Cosmos DB ili slično za zajedničko stanje
-3. **Rukujte neuspjesima na lijep način** - Timeouti, ponovni pokušaji, prekidači krugova, redovi mrtvih poruka
-4. **Sve pratite** - Distribuirano praćenje je ključno za otklanjanje pogrešaka
-5. **Optimizirajte troškove** - Skalirajte na nulu, koristite serverless, implementirajte keširanje
+3. **Rukujte neuspjesima na elegantan način** - Vremena isteka, ponovni pokušaji, prekidači kruga, mrtvi redovi poruka
+4. **Sve nadgledajte** - Distribuirano praćenje je ključno za otklanjanje pogrešaka
+5. **Optimizirajte troškove** - Skalirajte do nule, koristite serverless, implementirajte keširanje
 
 **Sljedeći koraci:**
-1. Dovršite praktične vježbe
-2. Izgradite sustav s više agenata za svoj slučaj upotrebe
-3. Proučite [Odabir SKU-a](sku-selection.md) za optimizaciju performansi i troškova
+1. Završite praktične vježbe
+2. Izgradite sustav višestrukih agenata za svoj slučaj korištenja
+3. Proučite [Izbor SKU-a](sku-selection.md) za optimizaciju performansi i troškova
 
 ---
 

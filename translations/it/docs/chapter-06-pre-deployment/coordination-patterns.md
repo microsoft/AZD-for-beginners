@@ -1,10 +1,10 @@
-# Modelli di Coordinamento Multi-Agente
+# Schemi di Coordinamento Multi-Agente
 
-⏱️ **Tempo stimato**: 60-75 minuti di lettura; diverse ore per l'implementazione | 💰 **Costo stimato**: dipende dal carico di lavoro | ⭐ **Complessità**: Avanzato
+⏱️ **Tempo stimato**: 60-75 minuti di lettura; diverse ore per implementare | 💰 **Costo stimato**: dipende dal carico di lavoro | ⭐ **Complessità**: Avanzato
 
 **📚 Percorso di apprendimento:**
-- ← Precedente: [Capacity Planning](capacity-planning.md) - Strategie di dimensionamento e scalabilità delle risorse
-- 🎯 **Sei qui**: Modelli di Coordinamento Multi-Agente (Orchestrazione, comunicazione, gestione dello stato)
+- ← Precedente: [Capacity Planning](capacity-planning.md) - Strategie di dimensionamento e scaling delle risorse
+- 🎯 **Sei qui**: Schemi di Coordinamento Multi-Agente (Orchestrazione, comunicazione, gestione dello stato)
 - → Successivo: [SKU Selection](sku-selection.md) - Scelta dei servizi Azure appropriati
 - 🏠 [Home del corso](../../README.md)
 
@@ -12,27 +12,27 @@
 
 ## Cosa Imparerai
 
-Completando questa lezione, sarai in grado di:
-- Comprendere i **modelli di architettura multi-agente** e quando usarli
-- Implementare **modelli di orchestrazione** (centralizzato, decentralizzato, gerarchico)
-- Progettare strategie di **comunicazione tra agenti** (sincrona, asincrona, event-driven)
-- Gestire lo **stato condiviso** tra agenti distribuiti
-- Distribuire **sistemi multi-agente** su Azure con AZD
-- Applicare **modelli di coordinamento** in scenari reali di AI
-- Monitorare e fare debug di sistemi di agenti distribuiti
+Completando questa lezione, tu:
+- Comprenderai i modelli di **architettura multi-agente** e quando usarli
+- Implementerai **schemi di orchestrazione** (centralizzato, decentralizzato, gerarchico)
+- Progetterai strategie di **comunicazione tra agenti** (sincrona, asincrona, guidata da eventi)
+- Gestirai lo **stato condiviso** tra agenti distribuiti
+- Distribuirai **sistemi multi-agente** su Azure con AZD
+- Applicherai **schemi di coordinamento** per scenari AI reali
+- Monitora e debugga sistemi distribuiti di agenti
 
 ## Perché il Coordinamento Multi-Agente è Importante
 
-### L'evoluzione: da Agente Singolo a Multi-Agente
+### L’evoluzione: da Agente singolo a Multi-Agente
 
-**Agente Singolo (Semplice):**
+**Agente singolo (Semplice):**
 ```
 User → Agent → Response
 ```
-- ✅ Facile da comprendere e implementare
-- ✅ Veloce per compiti semplici
-- ❌ Limitato dalle capacità di un solo modello
-- ❌ Non può parallelizzare compiti complessi
+- ✅ Facile da capire e implementare
+- ✅ Veloce per attività semplici
+- ❌ Limitato dalle capacità di un singolo modello
+- ❌ Non può parallelizzare attività complesse
 - ❌ Nessuna specializzazione
 
 **Sistema Multi-Agente (Avanzato):**
@@ -44,19 +44,19 @@ graph TD
 ```
 - ✅ Agenti specializzati per compiti specifici
 - ✅ Esecuzione parallela per velocità
-- ✅ Modulabile e manutenibile
+- ✅ Modulare e manutenibile
 - ✅ Migliore per flussi di lavoro complessi
 - ⚠️ Richiede logica di coordinamento
 
-**Analogia**: Un agente singolo è come una persona che fa tutti i compiti. Il multi-agente è come un team dove ogni membro ha competenze specializzate (ricercatore, programmatore, revisore, scrittore) che lavorano insieme.
+**Analogia**: Un agente singolo è come una persona che svolge tutti i compiti. Un multi-agente è come un team in cui ogni membro ha competenze specializzate (ricercatore, programmatore, revisore, scrittore) che lavorano insieme.
 
 ---
 
-## Modelli Core di Coordinamento
+## Schemi Principali di Coordinamento
 
-### Modello 1: Coordinamento Sequenziale (Catena di Responsabilità)
+### Schema 1: Coordinamento Sequenziale (Catena di Responsabilità)
 
-**Quando usarlo**: I compiti devono essere completati in un ordine specifico, ogni agente costruisce sull'output precedente.
+**Quando usarlo**: Le attività devono completarsi in ordine specifico, ogni agente si basa sull’output precedente.
 
 ```mermaid
 sequenceDiagram
@@ -85,19 +85,19 @@ sequenceDiagram
 
 **Limitazioni:**
 - ❌ Più lento (nessun parallelismo)
-- ❌ Un errore blocca l’intera catena
-- ❌ Non gestisce compiti interdipendenti
+- ❌ Un fallimento blocca tutta la catena
+- ❌ Non gestisce attività interdipendenti
 
 **Esempi d’uso:**
 - Pipeline di creazione contenuti (ricerca → scrittura → modifica → pubblicazione)
-- Generazione di codice (pianificazione → implementazione → test → distribuzione)
-- Generazione di report (raccolta dati → analisi → visualizzazione → sintesi)
+- Generazione codice (pianificazione → implementazione → test → deploy)
+- Generazione report (raccolta dati → analisi → visualizzazione → sintesi)
 
 ---
 
-### Modello 2: Coordinamento Parallelo (Fan-Out/Fan-In)
+### Schema 2: Coordinamento Parallelo (Fan-Out/Fan-In)
 
-**Quando usarlo**: Compiti indipendenti possono essere eseguiti simultaneamente, i risultati vengono combinati alla fine.
+**Quando usarlo**: Attività indipendenti possono essere eseguite simultaneamente, risultati combinati alla fine.
 
 ```mermaid
 graph TB
@@ -124,24 +124,24 @@ graph TB
 
 **Vantaggi:**
 - ✅ Veloce (esecuzione parallela)
-- ✅ Tollera errori (risultati parziali accettabili)
+- ✅ Tollerante ai guasti (risultati parziali accettabili)
 - ✅ Scalabile orizzontalmente
 
 **Limitazioni:**
 - ⚠️ I risultati possono arrivare fuori ordine
-- ⚠️ Necessaria logica di aggregazione
+- ⚠️ Necessita logica di aggregazione
 - ⚠️ Gestione complessa dello stato
 
 **Esempi d’uso:**
-- Raccolta dati multicanale (API + database + scraping web)
-- Analisi competitiva (più modelli generano soluzioni, si seleziona la migliore)
+- Raccolta dati multi-sorgente (API + database + web scraping)
+- Analisi competitiva (molteplici modelli generano soluzioni, la migliore è selezionata)
 - Servizi di traduzione (traduzione simultanea in più lingue)
 
 ---
 
-### Modello 3: Coordinamento Gerarchico (Manager-Lavoratore)
+### Schema 3: Coordinamento Gerarchico (Manager-Lavoratore)
 
-**Quando usarlo**: Flussi di lavoro complessi con sotto-compiti, necessità di delega.
+**Quando usarlo**: Flussi di lavoro complessi con sotto-attività, necessaria delega.
 
 ```mermaid
 graph TB
@@ -167,24 +167,24 @@ graph TB
 
 **Vantaggi:**
 - ✅ Gestisce flussi di lavoro complessi
-- ✅ Modulabile e manutenibile
+- ✅ Modulare e manutenibile
 - ✅ Confini di responsabilità chiari
 
 **Limitazioni:**
 - ⚠️ Architettura più complessa
-- ⚠️ Maggiore latenza (più livelli di coordinamento)
+- ⚠️ Maggiore latenza (molti livelli di coordinamento)
 - ⚠️ Richiede orchestrazione sofisticata
 
 **Esempi d’uso:**
-- Elaborazione documenti aziendali (classificazione → instradamento → elaborazione → archiviazione)
-- Pipeline di dati multi-stadio (ingestione → pulizia → trasformazione → analisi → report)
+- Elaborazione documenti aziendali (classificare → indirizzare → processare → archiviare)
+- Pipeline dati multi-fase (ingestione → pulizia → trasformazione → analisi → report)
 - Flussi di lavoro di automazione complessi (pianificazione → allocazione risorse → esecuzione → monitoraggio)
 
 ---
 
-### Modello 4: Coordinamento Event-Driven (Publish-Subscribe)
+### Schema 4: Coordinamento Guidato da Eventi (Publish-Subscribe)
 
-**Quando usarlo**: Gli agenti devono reagire agli eventi, si desidera un accoppiamento debole.
+**Quando usarlo**: Gli agenti devono reagire a eventi, si desidera accoppiamento debole.
 
 ```mermaid
 sequenceDiagram
@@ -207,14 +207,14 @@ sequenceDiagram
 
 **Vantaggi:**
 - ✅ Accoppiamento debole tra agenti
-- ✅ Facile aggiungere nuovi agenti (basta iscriversi)
+- ✅ Facile aggiungere nuovi agenti (solo iscriversi)
 - ✅ Elaborazione asincrona
 - ✅ Resiliente (persistenza messaggi)
 
 **Limitazioni:**
 - ⚠️ Consistenza eventuale
 - ⚠️ Debug complesso
-- ⚠️ Sfide nell’ordinamento dei messaggi
+- ⚠️ Problemi con l’ordinamento dei messaggi
 
 **Esempi d’uso:**
 - Sistemi di monitoraggio in tempo reale (allarmi, dashboard, log)
@@ -223,9 +223,9 @@ sequenceDiagram
 
 ---
 
-### Modello 5: Coordinamento Basato su Consenso (Votazione/Quorum)
+### Schema 5: Coordinamento Basato su Consenso (Votazione/Quorum)
 
-**Quando usarlo**: Serve l'accordo di più agenti prima di procedere.
+**Quando usarlo**: Serve un accordo tra più agenti prima di procedere.
 
 ```mermaid
 graph TB
@@ -248,19 +248,19 @@ graph TB
 ```
 
 **Vantaggi:**
-- ✅ Maggiore accuratezza (più opinioni)
-- ✅ Tollerante ai guasti (fallimenti di minoranza accettabili)
-- ✅ Controllo qualità incorporato
+- ✅ Maggiore accuratezza (molteplici opinioni)
+- ✅ Tollerante ai guasti (fallimenti minoritari accettabili)
+- ✅ Garanzia di qualità incorporata
 
 **Limitazioni:**
-- ❌ Costoso (molte chiamate a modelli)
+- ❌ Costoso (molte chiamate ai modelli)
 - ❌ Più lento (attesa di tutti gli agenti)
-- ⚠️ Necessaria risoluzione dei conflitti
+- ⚠️ Necessaria risoluzione conflitti
 
 **Esempi d’uso:**
-- Moderazione dei contenuti (più modelli revisionano il contenuto)
-- Revisione codice (più linters/analizzatori)
-- Diagnosi medica (più modelli AI, validazione esperta)
+- Moderazione contenuti (molteplici modelli valutano i contenuti)
+- Revisione codice (molti linters/analizzatori)
+- Diagnosi medica (molteplici modelli AI, validazione esperta)
 
 ---
 
@@ -319,20 +319,20 @@ graph TB
 | Componente | Scopo | Servizio Azure |
 |-----------|---------|---------------|
 | **API Gateway** | Punto di ingresso, limitazione rate, autenticazione | API Management |
-| **Orchestratore** | Coordina i flussi di lavoro degli agenti | Container Apps |
+| **Orchestratore** | Coordina i workflow degli agenti | Container Apps |
 | **Message Queue** | Comunicazione asincrona | Service Bus / Event Hubs |
 | **Agenti** | Lavoratori AI specializzati | Container Apps / Functions |
-| **State Store** | Stato condiviso, tracciamento compiti | Cosmos DB |
-| **Storage degli Artifact** | Documenti, risultati, log | Blob Storage |
-| **Monitoraggio** | Tracciamento distribuito, log | Application Insights |
+| **Store di Stato** | Stato condiviso, tracciamento attività | Cosmos DB |
+| **Storage Artifact** | Documenti, risultati, log | Blob Storage |
+| **Monitoraggio** | Traccia distribuita, log | Application Insights |
 
-Le code/topic di Service Bus e gli Event Hubs sono servizi diversi con modelli di consegna/consumo differenti; Event Hubs non è un sostituto drop-in per il codice Service Bus worker qui sotto. Parallelismo, messaggi persistiti e votazione modelli non garantiscono da soli tolleranza ai guasti o maggiore accuratezza.
+Le code/topic di Service Bus e Event Hubs sono servizi diversi con modelli di consegna/consumo diversi; Event Hubs non è un sostituto diretto del codice worker di Service Bus qui sotto. Parallelismo, messaggi persistenti e votazione modello non garantiscono da soli tolleranza ai guasti o maggiore accuratezza.
 
 ---
 
 ## Prerequisiti
 
-### Strumenti Richiesti
+### Strumenti Necessari
 
 ```bash
 # Verify Azure Developer CLI
@@ -353,29 +353,29 @@ docker --version
 - Sottoscrizione Azure attiva
 - Permessi per creare:
   - Container Apps
-  - Namespace Service Bus
+  - Namespace di Service Bus
   - Account Cosmos DB
-  - Account di archiviazione
+  - Account di Storage
   - Application Insights
 
-### Prerequisiti di Conoscenza
+### Conoscenze Preliminari
 
 Dovresti aver completato:
-- [Gestione Configurazione](../chapter-03-configuration/configuration.md)
-- [Autenticazione e Sicurezza](../chapter-03-configuration/authsecurity.md)
-- [Esempio Microservizi](../../../../examples/microservices)
+- [Configuration Management](../chapter-03-configuration/configuration.md)
+- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
+- [Microservices Example](../../../../examples/microservices)
 
 ---
 
-## Guida all'Implementazione
+## Guida all’Implementazione
 
-> **Frammenti di design, non un laboratorio eseguibile:** L’albero del progetto e le etichette `File:` qui sotto descrivono i file da creare nel tuo progetto; questo repository non contiene un’applicazione `multi-agent-system` completa. Mancano pezzi come template main/parameter, ambiente/registro Container Apps, Dockerfile e lock dipendenze, setup database/container Cosmos, deployment modelli, configurazione identità/ruoli, regole di scaling, e lavoratori/code paralleli. Non aspettarti che `azd init` generi questi file né che `azd up` distribuisca gli snippet senza modifiche. Per un punto di partenza eseguibile, completa [Nozioni Base Multi-Agente](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Frammenti di design, non un laboratorio eseguibile:** L’albero del progetto e le etichette `File:` qui sotto descrivono file da creare nel tuo progetto; questo repository non contiene un’applicazione completa `multi-agent-system`. Mancano template main/parametri, ambiente/registry Container Apps, Dockerfile e lock dipendenze, setup database/container Cosmos, deployment modelli, configurazione identità/ruoli, regole di scaling, e worker/queue paralleli. Non aspettarti che `azd init` generi questi file o `azd up` distribuisca snippet invariati. Per un punto di partenza eseguibile, completa [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Assunzioni di runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, e (per il monitoraggio) `azure-monitor-opentelemetry`; metti `shared` nel percorso di import Python in ogni immagine di servizio. Il container Cosmos `agent-state/tasks` deve esistere già con chiave di partizione `/id`. Le connessioni basate su chiavi semplificano questi frammenti, non sono linee guida per la produzione: preferisci identità gestite con ruoli dati Service Bus/Cosmos/OpenAI scoped. Non esporre chiavi in output o log.
+**Assunzioni di runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, e (per monitoraggio) `azure-monitor-opentelemetry`; metti `shared` nel path di import Python in ogni immagine di servizio. Il container Cosmos `agent-state/tasks` deve già esistere con la chiave di partizione `/id`. Le connessioni basate su chiavi semplificano questi frammenti, non sono linee guida di produzione: preferisci identità gestite con ruoli a scopo limitato per Service Bus/Cosmos/OpenAI. Non esporre chiavi in output o log.
 
-La consegna Service Bus è **almeno una volta**. Conserva idempotenza per task **e passaggio**, usa concorrenza ottimistica (ETags) per leggere/modificare/scrivere stato, e rinnova i lock messaggi durante l’elaborazione lunga. Il semplice gestore di stato sotto è solo sequenziale e non implementa queste garanzie di produzione.
+La consegna di Service Bus è **almeno una volta**. Conserva idempotenza per task **e step**, usa concorrenza ottimistica (ETags) per leggere/modificare/scrivere stato, e rinnova i lock messaggi durante elaborazioni lunghe. Il semplice gestore di stato qui sotto è solo sequenziale e non implementa queste garanzie di produzione.
 
-### Struttura del Progetto
+### Struttura del progetto
 
 ```
 multi-agent-system/
@@ -407,9 +407,9 @@ multi-agent-system/
 
 ---
 
-## Lezione 1: Modello di Coordinamento Sequenziale
+## Lezione 1: Schema di Coordinamento Sequenziale
 
-### Implementazione: Pipeline di Creazione Contenuti
+### Implementazione: Pipeline di creazione contenuti
 
 Progettiamo una pipeline sequenziale: Ricerca → Scrittura → Modifica. La pubblicazione è fuori da questo esempio.
 
@@ -444,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastruttura: Service Bus per Coordinamento
+### 2. Infrastruttura: Service Bus per coordinamento
 
 **File: `infra/core/servicebus.bicep`**
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Gestore dello Stato Condiviso
+### 3. Gestore Stato Condiviso
 
 **File: `src/shared/state_manager.py`**
 
@@ -893,21 +893,21 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Distribuisci e Testa
+### 8. Deploy e Test
 
-Questi comandi si applicano **solo dopo aver implementato i file mancanti**. L’inizializzazione agente Foundry interattiva è un flusso separato; non genera questo design Service Bus.
+Questi comandi si applicano **solo dopo che hai implementato i file mancanti del progetto**. L’inizializzazione agente di Interactive Foundry è un workflow separato; non genera questo design Service Bus.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Consulta [Comandi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) per tutte le flag e opzioni `azd ai`.
+> Consulta [Comandi CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) per tutte le opzioni e flag `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -919,7 +919,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Output atteso:**
+**✅ Output previsto:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Controlla progresso task:**
+**Controlla il progresso del task:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Output atteso (completato):**
+**✅ Output previsto (completato):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -964,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lezione 2: Modello di Coordinamento Parallelo
+## Lezione 2: Schema di Coordinamento Parallelo
 
-### Implementazione: Aggregatore di Ricerca Multi- Fonte
+### Implementazione: Aggregatore di ricerche multi-sorgente
 
-Costruiamo un sistema parallelo che raccoglie informazioni da più fonti simultaneamente.
+Costruiamo un sistema parallelo che raccoglie informazioni da fonti multiple simultaneamente.
 
 ### Orchestratore Parallelo
 
@@ -1123,10 +1123,10 @@ if __name__ == '__main__':
     main()
 ```
 
-**Vantaggi del Modello Parallelo:**
-- ⚡ **Potenzialmente latenza più bassa** (limitatà dal lavoratore più lento più overhead di coordinamento)
-- 🔄 **Supporta risultati parziali** con scadenze esplicite e policy di fallimento (non implementato dal semplice aggregatore)
-- 📈 **Scalabile** (aggiungi facilmente altri agenti)
+**Vantaggi dello Schema Parallelo:**
+- ⚡ **Potenzialmente latenza inferiore** (limitata dal worker più lento più overhead coordinamento)
+- 🔄 **Può supportare risultati parziali** con scadenze esplicite e policy di fallimento (non implementata dal semplice aggregatore)
+- 📈 **Scalabile** (aggiungi agenti facilmente)
 
 ---
 
@@ -1134,13 +1134,13 @@ if __name__ == '__main__':
 
 ### Esercizio 1: Aggiungi Gestione Timeout ⭐⭐ (Medio)
 
-**Obiettivo**: Implementare la logica di timeout affinché l'aggregatore non attenda indefinitamente agenti lenti.
+**Obiettivo**: Implementare logica di timeout affinché l’aggregatore non aspetti all’infinito agenti lenti.
 
-**Punto di partenza:** Esegui questa simulazione locale di scadenza prima di integrarla in un worker di coda. Un timeout controllato solo all'arrivo di un altro messaggio non si attiva mai se il lavoratore mancante non invia nulla.
+**Punto di partenza:** Esegui questa simulazione di scadenza locale prima di integrarla in un worker di coda. Un timeout verificato solo all’arrivo di un altro messaggio non scatta se l’agente mancante non invia nulla.
 
 **Passi**:
 
-1. **Aggiungi monitoraggio timeout all'aggregatore:**
+1. **Aggiungi monitoraggio timeout all’aggregatore:**
 
 ```python
 import asyncio
@@ -1164,13 +1164,13 @@ async def main():
 asyncio.run(main())
 ```
 
-2. **Output atteso:**
+2. **Output previsto:**
 
 ```text
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integrazione sistema coda (compito di design):** Conserva la scadenza di dispatch e gli agenti attesi durante la creazione del task, esegui periodicamente la scansione delle scadenze indipendentemente dai risultati in arrivo, finalizza atomicamente i risultati parziali, e ignora messaggi tardivi/duplicati per task finalizzati. Un timeout locale non cancella lavoratori remoti.
+3. **Integrazione sistema coda (compito di design):** Conservare la scadenza di dispatch e gli agenti attesi alla creazione del task, eseguire una scansione periodica delle scadenze indipendentemente dai risultati in arrivo, finalizzare atomica i risultati parziali e ignorare messaggi in ritardo/duplicati per task finalizzati. Un timeout locale non annulla i worker remoti.
 
 Solo per il tuo progetto implementato:
 
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Criteri di successo:**
-- ✅ Il test locale restituisce dopo la sua scadenza di un secondo anche se un agente è incompleto
+- ✅ Il test locale termina dopo lo scadere del secondo previsto anche se un agente è incompleto
 - ✅ La risposta indica risultati parziali (`"timed_out": true`)
-- ✅ Vengono restituiti i risultati disponibili (3 su 4 agenti)
+- ✅ Sono restituiti risultati disponibili (3 su 4 agenti)
 
 **Tempo**: 20-25 minuti
 
 ---
 
-### Esercizio 2: Implementa la Logica di Ripetizione ⭐⭐⭐ (Avanzato)
+### Esercizio 2: Implementa Logica di Retry ⭐⭐⭐ (Avanzato)
 
-**Obiettivo**: Ritentare automaticamente i task agent falliti prima di rinunciare.
+**Obiettivo**: Ritentare automaticamente task agenti falliti prima di rinunciare.
 
 **Passi**:
 
-1. **Usa i conteggi di consegna Service Bus invece di reinserire contatori di retry personalizzati:**
+1. **Usa i conteggi di consegna Service Bus invece di reinserire contatori custom di retry:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Aggiungi gestore di retry agli agenti:**
+2. **Aggiungi gestore retry agli agenti:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1259,10 +1259,10 @@ def monitor_dead_letters():
 ```
 
 **✅ Criteri di successo:**
-- ✅ I task falliti vengono ritentati automaticamente (fino a 3 volte)
-- ✅ Backoff esponenziale tra i retry (5s, 10s, 20s), con rinnovo del lock messaggio dove necessario
-- ✅ Dopo il numero massimo di retry, i messaggi vanno nella dead letter queue
-- ✅ I messaggi nella dead letter possono essere ispezionati; il replay richiede un flusso di recupero idempotente separato
+- ✅ I task falliti ritentano automaticamente (fino a 3 volte)
+- ✅ Backoff esponenziale tra i retry (5s, 10s, 20s), con rinnovo lock messaggi dove necessario
+- ✅ Dopo il max retry, i messaggi vanno alla dead letter queue
+- ✅ I messaggi della dead letter possono essere ispezionati; replay richiede workflow di recovery idempotente separato
 
 **Tempo**: 30-40 minuti
 
@@ -1270,11 +1270,11 @@ def monitor_dead_letters():
 
 ### Esercizio 3: Implementa Circuit Breaker ⭐⭐⭐ (Avanzato)
 
-**Obiettivo**: Evitare fallimenti a cascata fermando le richieste verso agenti malfunzionanti.
+**Obiettivo**: Prevenire fallimenti a cascata fermando richieste ad agenti in errore.
 
 **Passi**:
 
-1. **Crea la classe circuit breaker:**
+1. **Crea classe circuit breaker:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Applica alle chiamate degli agenti:**
+2. **Applica alle chiamate agenti:**
 
 ```python
 # In orchestrator
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Questo circuito protegge l'**operazione di invio**, non il completamento da parte del lavoratore remoto: mettere con successo in coda un messaggio non dice nulla sul fatto che un agente sia attivo. `send_message` è la funzione mittente della tua applicazione. Per circuiti di esecuzione, alimenta i fallimenti/time-out dei task osservati in un coordinatore durevole. Questa classe in memoria è una dimostrazione a singolo thread, non un circuito breaker distribuito.
+Questo circuito protegge l'**operazione di invio**, non il completamento da parte del worker remoto: mettere con successo in coda un messaggio non significa nulla riguardo al fatto che un agente sia vivo. `send_message` è la funzione mittente della tua applicazione. Per circuiti di esecuzione, alimenta le failure/timeouts dei task osservati in un coordinatore durevole. Questa classe in memoria è una dimostrazione a singolo thread, non un circuit breaker distribuito.
 
-3. **Testare il circuito breaker localmente:**
+3. **Testa il circuit breaker localmente:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1369,10 +1369,10 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Criteri di successo:**
-- ✅ Dopo 5 fallimenti, il circuito si apre (rifiuta richieste)
-- ✅ Dopo 60 secondi, il circuito diventa semi-aperto (testa il recupero)
-- ✅ Gli altri agenti continuano a lavorare normalmente
-- ✅ Il circuito si chiude automaticamente quando l'agente si riprende
+- ✅ Dopo 5 fallimenti, il circuito si apre (rifiuta le richieste)
+- ✅ Dopo 60 secondi, il circuito passa a semi-aperto (testa il recupero)
+- ✅ Altri agenti continuano a lavorare normalmente
+- ✅ Il circuito si chiude automaticamente quando l'agente si recupera
 
 **Tempo**: 40-50 minuti
 
@@ -1437,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Confronto prestazioni agenti:**
+**Confronto delle prestazioni degli agenti:**
 
 ```kusto
 // Compare agent execution times
@@ -1466,26 +1466,26 @@ exceptions
 
 ---
 
-## Analisi dei costi
+## Analisi dei Costi
 
-### Costi del sistema multi-agente (stime mensili)
+### Costi del Sistema Multi-Agente (Stime Mensili)
 
-Dati illustrativi per pianificazione, non preventivi: la somma qui di seguito è **$240-565/mese**. Verifica le tariffe regionali attuali, le ore attive/inattive delle repliche, il mix di token in ingresso/uscita, lo storage e la telemetria. Serverless non prevede throughput minimo riservato ma fattura comunque per richieste e storage.
+Cifre illustrative di pianificazione, non preventivi: la somma seguente è **$240-565/mese**. Verifica le tariffe regionali attuali, le ore di replica attive/inattive, la miscela di token di input/output, lo storage e la telemetria. Serverless non ha un throughput minimo previsto ma fattura comunque richieste e storage.
 
 | Componente | Configurazione | Costo |
 |-----------|--------------|------|
-| **Orchestratore** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agenti** | 4 Container Apps (0.5 vCPU, 1GB ciascuno) | $60-120 |
-| **Service Bus** | Tier standard, 10M messaggi | $10-20 |
+| **Service Bus** | Livello Standard, 10M messaggi | $10-20 |
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operazioni | $5-10 |
-| **Application Insights** | 5GB ingestione | $10-15 |
+| **Application Insights** | 5GB di ingestione | $10-15 |
 | **Microsoft Foundry Models** | gpt-4.1, 10M token | $100-300 |
 | **Totale** | | **$240-565/mese** |
 
-### Strategie di ottimizzazione dei costi
+### Strategie di Ottimizzazione dei Costi
 
-1. **Usa serverless dove possibile:**
+1. **Usa il serverless dove possibile:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1502,13 +1502,13 @@ Dati illustrativi per pianificazione, non preventivi: la somma qui di seguito è
    }
    ```
 
-3. **Usa batch per Service Bus:**
+3. **Usa il batch per Service Bus:**
    ```python
    # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache dei risultati usati frequentemente:**
+4. **Metti in cache i risultati usati frequentemente:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1542,14 +1542,14 @@ Dati illustrativi per pianificazione, non preventivi: la somma qui di seguito è
    }
    ```
 
-4. **Imposta TTL (time-to-live) per i messaggi**
+4. **Imposta TTL (time-to-live) dei messaggi**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Monitora le code dead letter**
+5. **Monitora le dead letter queue**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1586,14 +1586,14 @@ Dati illustrativi per pianificazione, non preventivi: la somma qui di seguito è
 
 ---
 
-## Guida alla risoluzione dei problemi
+## Guida al Troubleshooting
 
-### Problema: messaggi bloccati in coda
+### Problema: Messaggi bloccati in coda
 
 **Sintomi:**
-- Messaggi si accumulano in coda
-- Agenti non processano
-- Stato task bloccato su "pending"
+- I messaggi si accumulano nella coda
+- Gli agenti non processano
+- Stato del task bloccato su "pending"
 
 **Diagnosi:**
 ```bash
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Controlla la coda dead letter:**
+2. **Controlla la dead letter queue:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,10 +1630,10 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problema: task in timeout/non completa mai
+### Problema: Timeout del task/non completa mai
 
 **Sintomi:**
-- Stato task resta "in_progress"
+- Stato del task rimane "in_progress"
 - Alcuni agenti completano, altri no
 - Nessun messaggio di errore
 
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Verifica che tutti gli agenti siano in esecuzione:**
+3. **Verifica che tutti gli agenti siano attivi:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1674,40 +1674,40 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+- [Pattern di Orchestrazione AI Agent](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Prossimi passi in questo corso
+### Passi successivi in questo corso
 - ← Precedente: [Capacity Planning](capacity-planning.md)
-- → Successivo: [SKU Selection](sku-selection.md)
-- 🏠 [Course Home](../../README.md)
+- → Successivo: [Selezione SKU](sku-selection.md)
+- 🏠 [Home del corso](../../README.md)
 
 ### Esempi correlati
-- [Microservices Example](../../../../examples/microservices) - Pattern di comunicazione tra servizi
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - Integrazione AI
+- [Esempio Microservizi](../../../../examples/microservices) - Pattern di comunicazione dei servizi
+- [Esempio Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Integrazione AI
 
 ---
 
-## Riassunto
+## Sommario
 
 **Hai imparato:**
 - ✅ Cinque pattern di coordinamento (sequenziale, parallelo, gerarchico, event-driven, consensus)
 - ✅ Architettura multi-agente su Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Gestione dello stato tra agenti distribuiti
-- ✅ Gestione timeout, retry e circuit breaker
-- ✅ Monitoraggio e debugging di sistemi distribuiti
+- ✅ Gestione dei timeout, retry, e circuit breaker
+- ✅ Monitoraggio e debug di sistemi distribuiti
 - ✅ Strategie di ottimizzazione dei costi
 
-**Punti chiave:**
+**Punti chiave da ricordare:**
 1. **Scegli il pattern giusto** - Sequenziale per workflow ordinati, parallelo per velocità, event-driven per flessibilità
 2. **Gestisci lo stato con cura** - Usa Cosmos DB o simili per stato condiviso
-3. **Gestisci i fallimenti in modo elegante** - Timeout, retry, circuit breaker, code dead letter
+3. **Gestisci i fallimenti con grazia** - Timeout, retry, circuit breaker, dead letter queues
 4. **Monitora tutto** - Il tracciamento distribuito è essenziale per il debugging
-5. **Ottimizza i costi** - Scala a zero, usa serverless, implementa cache
+5. **Ottimizza i costi** - Scala a zero, usa serverless, implementa caching
 
 **Prossimi passi:**
 1. Completa gli esercizi pratici
-2. Costruisci un sistema multi-agente per il tuo caso d’uso
-3. Studia [SKU Selection](sku-selection.md) per ottimizzare prestazioni e costi
+2. Crea un sistema multi-agente per il tuo caso d'uso
+3. Studia [Selezione SKU](sku-selection.md) per ottimizzare performance e costi
 
 ---
 

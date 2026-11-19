@@ -1,4 +1,4 @@
-# AZD សម្រាប់អ្នកចាប់ផ្តើម៖ ធ្វើដំណើររៀនដោយមានរចនាសម្ព័ន្ធ
+# AZD សម្រាប់អ្នកចាប់ផ្តើម៖ ការធ្វើដំណើររៀនដោយមានរចនាសម្ព័ន្ធ
 
 ![AZD-for-beginners](../../translated_images/km/azdbeginners.5527441dd9f74068.webp) 
 
@@ -11,14 +11,14 @@
 
 ---
 
-### ការបកប្រែដោយស្វ័យប្រវត្តិ (តែងតែទាន់សម័យ)
+### ការបកប្រែដោយស្វ័យប្រវត្តិ (រីងរាន់ជានិច្ច)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Khmer](./README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Manipuri (Meitei Mayek)](../mni/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Khmer](./README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-> **ចូលចិត្ត Clone នៅក្នុងម៉ាស៊ីនរបស់អ្នក?**
+> **ចូលចិត្តធ្វើការចម្លងនៅក្នុងតំបន់របស់អ្នក​?**
 >
-> មូលដ្ឋានទិន្នន័យនេះមានការបកប្រែជាភាសាជាង ៥០ ដែលធ្វើឱ្យទំហំទាញយកធំជាងមុន។ ដើម្បី clone ដោយគ្មានការបកប្រែ សូមប្រើ sparse checkout៖
+> សឹងតែមានការបកប្រែភាសាច្រើនជាង ៥០ ដែលបង្កើនទំហំទាញយកយ៉ាងខ្លាំង។ ដើម្បីចម្លងដោយគ្មានការបកប្រែ សូមប្រើការត្រួតពិនិត្យទាញយកតិចតួច ៖
 >
 > **Bash / macOS / Linux:**
 > ```bash
@@ -34,35 +34,35 @@
 > git sparse-checkout set --no-cone "/*" "!translations" "!translated_images"
 > ```
 >
-> វានាំឱ្យអ្នកទទួលបានគ្រប់យ៉ាងដែលត្រូវការសម្រាប់បញ្ចប់វគ្គបណ្ដុះបណ្ដាលនេះដោយមានការទាញយកឆាប់រហ័សជាងមុន។
+> នេះផ្ដល់វត្ថុបំណងទាំងអស់ដែលអ្នកត្រូវការ ដើម្បីបញ្ចប់វគ្គសិក្សាជាមួយនឹងការទាញយកលឿនជាងមុន។
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-## 🆕 តើមានអ្វីថ្មីនៅក្នុង azd ថ្ងៃនេះ
+## 🆕 មានអ្វីថ្មីនៅក្នុង azd ថ្ងៃនេះ
 
-> 📌 **ការពិនិត្យចេញផ្សាយ AI CLI (2026-11-04):** នេះជាការណែនាំបានត្រូវបានពិនិត្យទល់នឹងឯកសារ/ប្រភព ដែលបានបោះពុម្ពផ្សាយ **`azd 1.37.2`**, **agents `1.0.0-beta.23`**, និង **evaluations `1.0.0-beta.2`**។ ព្យាយាមប្រើ `azd >= 1.37.0` សម្រាប់ workflow រួម។ បើក `azd version` និង [ធ្វើបច្ចុប្បន្នភាព core CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) មុនការដំឡើង extension។ មើល [ការផ្លាស់ប្តូរនិងកែតម្រូវចេញផ្សាយ](docs/chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes)។ នេះមិនមែនជាការត្រួតពិនិត្យការចេញផ្សាយផ្ទាល់ក្នុងវគ្គទាំងមូលទេ។
+> 📌 **ព័ត៌មានបន្ទាប់ពីការចេញផ្សាយ Foundry GA (2026-11-09):** កញ្ចប់ **`microsoft.foundry` 1.0 គឺមានស្រាប់ សំរាប់ប្រើប្រាស់ទូទៅ**, ដែលបានផ្សព្វផ្សាយនៅថ្ងៃទី [5 ខែវិស្សាឆ្នាំ 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/)។ ប្រើ **`azd >= 1.37.0`** ហើយដំឡើងវាជាមួយ `azd ext install microsoft.foundry`។ អនុវត្តតាម [មគ្គុទេសក៍អ្នកជំនួយដំណើរការផ្សាយ](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) សម្រាប់ការតំឡើង ប្រើសាកល្បងក្នុងស្រុក និងការបង្ហោះ។ ការតំឡើងនេះដើមពីការណែនាំបានបោះពុម្ពផ្សាយ មិនមែនជាការបង្ហោះ Azure តាមសកម្មភាពផ្ទាល់ទេ; កញ្ចប់ GA មិនបានធ្វើអោយមុខងារជាជម្រើស ផ្នែកបន្ថែម ឬ SDK គ្រប់យ៉ាងមានស្រាប់ទេ។
 
-Azure Developer CLI គាំទ្រប្រភេទកម្មវិធីជាច្រើន រួមទាំង web apps, APIs និង AI agents តាមរយៈ host, template និង extension ដែលគាំទ្រ។
+Azure Developer CLI គាំទ្រប្រភេទកម្មវិធីជាច្រើន រួមមានកម្មវិធីបណ្តាញ API ហើយនិងភ្នាក់ងារបញ្ញាសិប្បនិម្មិត ដោយប្រើម៉ាស៊ីនបម្រើ តំបន់តំរូវ និងផ្នែកបន្ថែមដែលគាំទ្រ។
 
-នេះគឺជាអ្វីដែលមានន័យសម្រាប់អ្នក៖
+នេះគឺជាការបញ្ជាក់សម្រាប់អ្នក៖
 
-- **Agents AI ទទួលបានតួនាទីជារឿងសំខាន់ក្នុង azd។** អ្នកអាចចាប់ផ្តើម ធ្វើproduction និងគ្រប់គ្រងគម្រោង AI agent ដោយប្រើតែមុខងារ `azd init` → `azd up` ដែលអ្នកបានស្គាល់រួច។
-- **ជីវិត agents ត្រូវបានគ្រប់គ្រងតាមរយៈ extension ២។** ប្រើ `azure.ai.agents` ដើម្បីចាប់ផ្តើម ស្វែងរក បង្កើត និងផ្អាក agents។ ត្រូវដំឡើង **`azure.ai.evaluations`** ផ្ទែកាត់សម្រាប់ `azd ai eval init`, `generate` និង `run start`។ Agents beta.22 បានជំនួសការ workflow ពីកំឡុងៈមុន និងស្មើផ្សំការកំណត់ optimization ដែលបានផ្លាស់ប្តូរ; សូមអាន [មេរៀនផ្លាស់ប្តូរ](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks)។
-- **ប្លុកបន្ថែមសម្រាប់ AI ។** Extension ថ្មីបង្ហាញ-preview—`azure.ai.skills` និង `azure.ai.connections`—អនុញ្ញាតឱ្យអ្នកគ្រប់គ្រងជំនាញ agent ដែលអាចប្រើឡើងវិញ និងការតភ្ជាប់ Foundry តាមដានផ្ទាល់ដោយលំហ AZD។
-- **ការរួមបញ្ចូល Microsoft Foundry** នាំមកនូវការចេញផ្សាយម៉ូដែល ការតម្កល់ និងការតំឡើងសេវាដល់ AI ផ្ទាល់ទៅក្នុងប្រព័ន្ធស្នាដៃ AZD។
-- **បច្ចុប្បន្នភាពប្រចាំថ្ងៃល្អជាងមុន។** ការចេញផ្សាយថ្មីៗបានធ្វើឱ្យ `azd init` ធ្វើបានបន្ទាប់បន្សាយ (idempotent), បានធ្វើឱ្យ `azd auth login` លុបបំប្លែងស្លាកបញ្ជីស្វ័យប្រវត្តិ ហើយបន្ថែមការជូនដំណឹងកំណត់ការប្រើ `azd tool` ជាលើកដំបូងឲ្យកាន់តែរលូន។
-- **Workflow មូលដ្ឋានមិនបានផ្លាស់ប្តូរ។** មិនថាអ្នកកំពុងបញ្ចេញកម្មវិធី todo, microservice ឬយុទ្ធសាស្ត្រអនុវត្ត AI ពហុ agent ក៏ Commands នៅតែមួយ។
+- **កញ្ចប់ GA សម្រាប់ការអភិវឌ្ឍ Foundry។** `microsoft.foundry` ដំឡើងផ្នែកបន្ថែមស្នូលប្រាំពីរជាមួយ រួមមានភ្នាក់ងារ គម្រោង និង Agent Inspector។ កូដភ្នាក់ងារ និងកំណត់ចេញផ្សាយនៅជាមួយគ្នា​នៅ `azure.yaml`។
+- **សាកល្បងក្នុងស្រុក បន្ទាប់មកបង្ហោះកូដរបស់អ្នក។** ប្រើ `azd ai agent init --deploy-mode code`, `azd provision`, និង `azd ai agent run` សម្រាប់ពិនិត្យសំណើ និងការឆ្លើយតបក្នុងស្រុក។ បន្ទាប់មកប្រើ `azd deploy` សម្រាប់សំណង់ពីចម្ងាយក្នុង Foundry ដោយមិនចាំបាច់សង់ក្នុងកុងតែន័រក្នុងស្រុក។
+- **វាស់វែងគុណភាពដោយផ្ទាល់ខ្លួន។** ដំឡើង **`azure.ai.evaluations`** សម្រាប់ `azd ai eval generate`, `init`, និង `run start`; វាមិនបានបញ្ចូលក្នុងកញ្ចប់នោះទេ។ រក្សាទុកឯកសារត្រួតពិនិត្យ និងតារាងវាយតម្លៃជាមួយកូដរបស់អ្នក។ គម្រោងចាស់គួរតែអនុវត្តតាម [មគ្គុទេសក៍រៀបចំវាយតម្លៃ និងបង្រ្កាបការផ្លាស់ប្តូរ](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks)។
+- **បន្តប្រើការកំណត់រចនា​ក្នុង CI/CD។** បន្ទាប់ពីការបញ្ចប់ `azd up` ដោយជោគជ័យ សូមកំណត់រចនាច្រកការផ្លូវជាមួយ `azd pipeline config`។ ដំឡើងបន្ទុកនៅលើអ្នករត់ហើយរក្សាទុកការផ្ទៀងផ្ទាត់ និងការកំណត់បរិស្ថានដែលបានបង្កើត។
+- **មូលដ្ឋានប្រចាំថ្ងៃរលូន។** ការចេញផ្សាយថ្មីៗបានធ្វើឱ្យ `azd init` មានលក្ខណៈ idempotent (សុវត្ថិភាពក្នុងការរត់ម្ដងទៀត), បានធ្វើឱ្យ `azd auth login` សម្អាតស្លាកសញ្ញាចាស់ដោយស្វ័យប្រវត្តិ និងបានបន្ថែមការផ្តល់កំណត់ដំណើរការដំបូងជាមិត្តភាពដោយ `azd tool`។
+- **ដំណើរការស្នូលមិនបានផ្លាស់ប្តូរ។** មិនថាអ្នកកំពុងដាក់ឲ្យដំណើរការ Todo app, microservice, ឬដំណោះស្រាយ AI មានភ្នាក់ងារច្រើនដែរ ពាក្យបញ្ជា​គឺដូចគ្នាទាំងអស់។
 
-> **សំគាល់សម្រាប់អ្នកប្រើ Aspire៖** Microsoft ឥឡូវបានយល់ព្រមយ៉ាងសាមញ្ញថា ផលិតផលនេះគឺ **Aspire** (ពីមុន ".NET Aspire")។ ការគាំទ្រ AZD Aspire មិនប្រែប្រួលទេ—គ្រាន់តែប្តូរពាក្យប៉ុណ្ណោះ។
+> **កំណត់សម្គាល់សម្រាប់អ្នកប្រើ Aspire:** Microsoft ឥឡូវបានយោងផលិតផលនេះគ្រាប់មួយថា **Aspire** (មុននោះគឺ ".NET Aspire")។ ការគាំទ្រ azd Aspire មិនបានផ្លាស់ប្តូរ—គ្រាន់តែមានការកែលម្អឈ្មោះតែប៉ុណ្ណោះ។
 
-ប្រសិនបើអ្នកធ្លាប់ប្រើ azd មុននេះ ការគាំទ្រ AI គឺជាការពង្រីកធម្មតា មិនមែនឧបករណ៍ដាច់ពីគ្នាឬមុខវិជ្ជាជំនាញកម្រិតខ្ពស់ទេ។ ប្រសិនប្រសើរបើអ្នកចាប់ផ្តើមថ្មី នឹងរៀនworkflow មួយដែលដំណើរការសម្រាប់អ្វីគ្រប់យ៉ាង។
+ប្រសិនបើអ្នកបានប្រើ azd មកមុននេះ ការគាំទ្រ AI គឺជាការពន្យារពហុជាងមួយទូទៅ—មិនមែនជាឧបករណ៍ផ្សេងទេ ឬជាតំណផ្លូវខ្ពស់ទេ។ ប្រសិនបើអ្នកចាប់ផ្តើមថ្មី អ្នកនឹងរៀនមុខងារផ្ទាល់ខ្លួនមួយដែលដំណើរការសម្រាប់អ្វីៗគ្រប់យ៉ាង។
 
 ---
 
-## 🚀 តើ Azure Developer CLI (azd) គឺជាអ្វី?
+## 🚀 Azure Developer CLI (azd) ជាអ្វី?
 
-**Azure Developer CLI (azd)** គឺជាឧបករណ៍បន្ទាត់បញ្ជារាយភាពងាយស្រួលសម្រាប់អ្នកអភិវឌ្ឍ ដែលធ្វើឲ្យការចេញផ្សាយកម្មវិធីទៅ Azure ងាយស្រួល។ ជំនួសការបង្កើតនិងភ្ជាប់ធនធាន Azure ដោយដៃ អ្នកអាចចេញផ្សាយកម្មវិធីទាំងមូលជាមួយបញ្ជារមួយតែពីរដង។
+**Azure Developer CLI (azd)** គឺជាឧបករណ៍បញ្ជា​ចំណុចបញ្ចូលមិត្តភាព​សម្រាប់អ្នកអភិវឌ្ឍន៍ ដែលធ្វើឱ្យការដាក់ឲ្យដំណើរការកម្មវិធីទៅ Azure ងាយស្រួល។ ជំនួសការបង្កើត និងភ្ជាប់ធនធាន Azure ច្រើនដៃក្នុងដៃ អ្នកអាចដាក់ឲ្យដំណើរការកម្មវិធីទាំងមូលជាមួយពាក្យបញ្ជាមួយ។
 
-### មន្តស្នេររបស់ `azd up`
+### មនោសញ្ចេតនាក្នុង `azd up`
 
 ```bash
 # This single command does everything:
@@ -74,40 +74,40 @@ Azure Developer CLI គាំទ្រប្រភេទកម្មវិធី
 azd up
 ```
 
-ទម្រង់ស្មុំផ្តល់ការកំណត់កម្មវិធី និងសេវាកម្មសំណង់។ ការចេញផ្សាយជោគជ័យត្រូវការសេវាកម្ម/ម៉ូដែលគាំទ្រ, កំណត់កម្រិត និងសិទិ្ធគ្រប់គ្រាន់, ចូលបញ្ចូលត្រឹមត្រូវ និងការផ្ទៀងផ្ទាត់កម្មវិធីដែលបានចេញផ្សាយ។ `azd up` មិនបានធ្វើឲ្យទំរង់ស្មុំមានសុវត្ថិភាព, យល់ព្រម ឬមានភាពត្រៀមខ្លួនសម្រាប់ផលិតកម្មនៅស្វ័យប្រវត្តិទេ។
+កំណត់រចនាមូលដ្ឋានផ្តល់ជូនការកំណត់កម្មវិធី និងហេដ្ឋារចនាសម្ព័ន្ធ។ ការដាក់ឲ្យដំណើរការជោគជ័យត្រូវការសេវាកម្ម/ម៉ូដែលគាំទ្រ, គឺត្រូវមានសមត្ថភាពគ្រប់គ្រាន់ និងសិទ្ធិ, បញ្ចូលទិន្នន័យត្រឹមត្រូវ, និងការត្រួតពិនិត្យកម្មវិធីដែលបានដាក់ឲ្យដំណើរការ។ `azd up` មិនធ្វើឱ្យគំរូក្លាយជាសុវត្ថិភាព, មានការអនុលោម, ឬរួចរាល់សម្រាប់ផលិតកម្មដោយស្វ័យប្រវត្តិទេ។
 
 ---
 
-## ❓ Azure Developer CLI និង Azure CLI: តើខុសគ្នាយ៉ាងដូចម្ដេច?
+## ❓ Azure Developer CLI ប្រៀបធៀបទៅនឹង Azure CLI: តើខុសគ្នាតើអ្វី?
 
-នេះជាសំណួរធម្មតាសម្រាប់អ្នកចាប់ផ្តើម។ ចម្លើយងាយៗគឺ៖
+នេះជាសំណួរដែលអ្នកចាប់ផ្តើមសួរញឹកញាប់បំផុត។ នេះជាចម្លើយសាមញ្ញ៖
 
 | លក្ខណៈពិសេស | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
 |---------|---------------------|--------------------------------|
-| **គោលបំណង** | គ្រប់គ្រងធនធាន Azure បុគ្គលិក | ចេញផ្សាយកម្មវិធីពេញលេញ |
-| **គំនិត** | រចនាសម្ព័ន្ធផ្អែក | ការវាយតម្លៃកម្មវិធីផ្អែក |
+| **គោលបំណង** | គ្រប់គ្រងធនធាន Azure ឯកជន | គ្រប់គ្រងកម្មវិធីពេញលេញ |
+| **ចិត្ដវិស័យ** | ផ្អែកលើហេដ្ឋារចនាសម្ព័ន្ធ | ផ្អែកលើកម្មវិធី |
 | **ឧទាហរណ៍** | `az webapp create --name myapp...` | `azd up` |
-| **ការរៀន** | ត្រូវដឹងសេវាកម្ម Azure | តែស្គាល់កម្មវិធីរបស់អ្នក |
-| **សមស្របសម្រាប់** | DevOps, រចនាសម្ព័ន្ធ | អ្នកអភិវឌ្ឍ, បង្កើតគំរូ |
+| **កម្រិតរៀន** | ត្រូវដឹងសេវាកម្ម Azure | ត្រឹមតែដឹងកម្មវិធីរបស់អ្នក |
+| **សមស្របបំផុតសម្រាប់** | DevOps, ហេដ្ឋារចនាសម្ព័ន្ធ | អ្នកអភិវឌ្ឍ, ការសាកល្បង |
 
-### ប្រៀបធៀបសាមញ្ញ
+### ឧទាហរណ៍សាមញ្ញ
 
-- **Azure CLI** គឺដូចជាមានឧបករណ៍ទាំងអស់សម្រាប់សាងសង់ផ្ទះ - អង្ក្រង, គ្រាប់អំបោះ, និងព្រួញ។ អ្នកអាចសាងសង់អ្វីគ្រប់យ៉ាង ប៉ុន្តែត្រូវដឹងសំណង់។
-- **Azure Developer CLI** គឺដូចជាចំណាត់ថ្នាក់អ្នកសាងសង់ - អ្នកពិពណ៌នាអ្វីដែលចង់បាន ហើយពួកគេត្រូវដល់ការសាងសង់។
+- **Azure CLI** គឺដូចជាម៉ាស៊ីនរាល់ឧបករណ៍សម្រាប់សង់ផ្ទះ - អុំរក, ក្រចេះ, ទ្រនាប់។ អ្នកអាចសង់អ្វីយ៉ាងមួយបានទាំងអស់ ប៉ុន្តែត្រូវចេះសំណង់។
+- **Azure Developer CLI** គឺដូចជាចុះហត្ថ​កម្មករ​ម្នាក់ - អ្នក​ពណ៌នា​អ្វី​ដែល​ចង់បាន ហើយគាត់ដោះស្រាយការសង់។
 
-### ប្រើពេលណា
+### ពេលណាដើម្បីប្រើប្រាស់មួយណា
 
-| ស្ថានភាព | ប្រើនេះ |
+| ហេតុការណ៍ | ប្រើអ្វីនេះ |
 |----------|----------|
-| "ខ្ញុំចង់បញ្ចេញកម្មវិធីបណ្ដាញយ៉ាងរហ័ស" | `azd up` |
-| "ខ្ញុំត្រូវការបង្កើតគណនីស្ដុកមួយ" | `az storage account create` |
-| "ខ្ញុំកំពុងសាងសង់កម្មវិធី AI ពេញលេញ" | `azd init --template azure-search-openai-demo` |
-| "ខ្ញុំត្រូវការត្រួតពិនិត្យករណីកំហុសធនធាន Azure មួយ" | `az resource show` |
-| "ខ្ញុំចង់ចេញផ្សាយទៅបរិយាកាសផលិតកម្មដែលបានកំណត់រួច" | ពិនិត្យការកំណត់, សិទិ្ធចូល, គិតថ្លៃ, និងកំណត់ប្រតិបត្តិការមុនពេល `azd up --environment production` |
+| "ខ្ញុំចង់បញ្ចេញកម្មវិធីវេបរបស់ខ្ញុំយ៉ាងឆាប់រហ័ស" | `azd up` |
+| "ខ្ញុំត្រូវបង្កើតគណនីផ្ទុកមួយគត់" | `az storage account create` |
+| "ខ្ញុំកំពុងសង់កម្មវិធី AI ពេញលេញមួយ" | `azd init --template azure-search-openai-demo` |
+| "ខ្ញុំត្រូវតែឌីបភក់ធនធាន Azure មួយជាក់លាក់" | `az resource show` |
+| "ខ្ញុំចង់បញ្ចេញទៅបរិយាកាសផលិតកម្មដែលបានកំណត់របស់ខ្ញុំ" | ពិនិត្យមើលការកំណត់, ការចូលប្រើ, ថ្លៃដើម និងច្រកប្រតិបត្តិការមុនពេល `azd up --environment production` |
 
 ### ពួកគេធ្វើការជាមួយគ្នា!
 
-AZD និង Azure CLI មានការផ្ទៀងផ្ទាត់ និងការកំណត់ផ្សេងៗគ្នា។ ប្រើ `azd auth login` សម្រាប់ AZD និង `az login` នៅពេលមានកំណត់ហេតុ ឬបញ្ជាងវិភាគដែលចាំបាច់ត្រូវបានប្រើ Azure CLI។ អ្នកអាចប្រើទាំងពីរ ៖
+AZD និង Azure CLI មានប្រព័ន្ធផ្ទៀងផ្ទាត់ និងការកំណត់ខុសគ្នា។ ប្រើ `azd auth login` សម្រាប់ AZD ហើយ `az login` នៅពេលមានបន្ទាត់បញ្ជា ឬបញ្ជារវិភាគដែលត្រូវការអោយយល់ព្រម Azure CLI ។ អ្នកអាចប្រើទាំងពីរបាន៖
 ```bash
 # Deploy your app with AZD
 azd up
@@ -118,19 +118,19 @@ az webapp config set --name myapp --always-on true
 
 ---
 
-## 🌟 រករកមើល Template នៅក្នុង Awesome AZD
+## 🌟 រកមើលគំរូនៅក្នុង Awesome AZD
 
-កុំចាប់ផ្តើមពីសូន្យ! **Awesome AZD** ជាកំណត់បណ្ណាល័យសហគមន៍នៃ template ដែលអាចចេញផ្សាយបានភ្លាមៗ៖
+កុំចាប់ផ្តើមពីគ្មានអ្វី! **Awesome AZD** គឺជាការប្រមូលផ្តុំពីសហគមន៍នៃគំរូដែលអាចបញ្ចេញបានភ្លាមៗ៖
 
-| ធនធាន | ពណ៌នា |
+| ធនធាន | សេចក្ដីពិពណ៌នា |
 |----------|-------------|
-| 🔗 [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) | អាចរុករកបាន ២០០+ template និងចេញផ្សាយដោយចុចមួយដង |
-| 🔗 [**Submit a Template**](https://github.com/Azure/awesome-azd/issues) | បញ្ចូល template របស់អ្នកទៅសហគមន៍ |
-| 🔗 [**GitHub Repository**](https://github.com/Azure/awesome-azd) | ផ្ដល់ពន្លឺ និងស្វែងរកប្រភព |
+| 🔗 [**រូបភាព Awesome AZD**](https://azure.github.io/awesome-azd/) | រុករកគំរូ 200+ ជាមួយការបញ្ចេញក្នុងមួយចុច |
+| 🔗 [**ដាក់ស្នើគំរូមួយ**](https://github.com/Azure/awesome-azd/issues) | រួមចំណែកគំរូរបស់អ្នកទៅសហគមន៍ |
+| 🔗 [**ឃ្លាំង GitHub**](https://github.com/Azure/awesome-azd) | ផ្តាលតារា និងស្វែងយល់ប្រភព |
 
-### Template AI រំពឹកគេពី Awesome AZD
+### គំរូ AI និយមពី Awesome AZD
 
-ជ្រើសរើស template មួយនៅក្នុងថតទទេនោះ; បញ្ជាលើនេះជាផ្លូវជម្រើសផ្សេងៗ។ ការបន្សំ `.` កំណត់ថតនោះ។
+ជ្រើសរើសគំរូមួយនៅក្នុងថតទទេមួយ riêngគ្នា; បញ្ជារខាងក្រោមជាជម្រើសជាច្រើន។ ការបញ្ចប់ `.` នាំឱ្យបង្កើតថតនោះ។
 
 ```bash
 # RAG Chat with Microsoft Foundry Models + AI Search
@@ -145,9 +145,9 @@ azd init --template get-started-with-ai-agents .
 
 ---
 
-## 🎯 ចាប់ផ្តើមក្នុង ៣ ជំហាន
+## 🎯 ចាប់ផ្តើមក្នុង 3 ជំហាន
 
-មុនចាប់ផ្តើម សូមប្រាកដថា ម៉ាស៊ីនរបស់អ្នករួចរាល់សម្រាប់ template ដែលអ្នកចង់ចេញផ្សាយ៖
+មុននឹងចាប់ផ្តើម សូមប្រាកដថាម៉ាស៊ីនរបស់អ្នករួចរាល់សម្រាប់គំរូដែលអ្នកចង់បញ្ចេញ៖
 
 **Windows:**
 ```powershell
@@ -159,9 +159,9 @@ azd init --template get-started-with-ai-agents .
 bash ./validate-setup.sh
 ```
 
-ប្រសិនបើតម្លើងត្រូវបានបរាជ័យ សូមដោះស្រាយបញ្ហានោះជាមុនក្របខ័ណ្ឌលឿននេះ។
+ប្រសិនបើការត្រួតពិនិត្យដំណើរការណាមួយបរាជ័យ សូមជួសជុលវាមុន ហើយបន្តជាមួយការចាប់ផ្តើមរហ័ស។
 
-### ជំហាន 1៖ ដំឡើង AZD (២ នាទី)
+### ជំហាន 1៖ តំឡើង AZD (2 នាទី)
 
 **Windows:**
 ```powershell
@@ -178,7 +178,7 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### ជំហាន 2៖ ផ្ទៀងផ្ទាត់សុវត្ថិភាពសម្រាប់ AZD
+### ជំហាន 2៖ ផ្ទៀងផ្ទាត់សុពលភាពសម្រាប់ AZD
 
 ```bash
 # Optional if you plan to use Azure CLI commands directly in this course
@@ -188,9 +188,9 @@ az login
 azd auth login
 ```
 
-ប្រសិនបើអ្នកមិនបានប្រាកដថាតើត្រូវការអ្វី សូមអនុវត្តបន្តនូវដំណើរការតំឡើងពេញលេញក្នុង [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup)។
+ប្រសិនបើអ្នកមិនប្រាកដថាតើត្រូវការមួយណា សូមអនុវត្តចរន្តការតំឡើងពេញលេញនៅក្នុង [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup)។
 
-### ជំហាន 3៖ ចេញផ្សាយកម្មវិធីដំបូងរបស់អ្នក
+### ជំហានទី 3៖ បញ្ចេញកម្មវិធីដំបូងរបស់អ្នក
 
 ```bash
 # Initialize from a template
@@ -200,9 +200,9 @@ azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-**🎉 នេះហើយ!** កម្មវិធីរបស់អ្នកឥឡូវនេះដំណើរការលើ Azure។
+**🎉 គឺចប់ហើយ!** កម្មវិធីរបស់អ្នកឥឡូវនេះដំណើរការលើ Azure។
 
-### បំលែងស្អាត (កុំភ្លេច!)
+### សម្អាត (កុំភ្លេច!)
 
 ```bash
 # Remove all resources when done experimenting
@@ -211,116 +211,116 @@ azd down --force --purge
 
 ---
 
-## 📚 របៀបប្រើវគ្គសិក្សានេះ
+## 📚 របៀបប្រើប្រាស់វគ្គសិក្សានេះ
 
-វគ្គនេះបានរចនាសម្រាប់ **ការរៀនជាស៊ីចម្រាស់** - ចាប់ផ្តើមពីកន្លែងដែលអ្នកមានផាសុកភាព ហើយរៀបចំការរៀនជាបន្តបន្ទាប់៖
+វគ្គសិក្សានេះបានរចនាឡើងសម្រាប់ **ការសិក្សាជាបន្ត** - ចាប់ផ្តើមពីកន្លែងដែលអ្នកមានភាពងាយស្រួល ហើយបន្តរៀនឡើងទៅ៖
 
-| បទពិសោធន៍របស់អ្នក | ចាប់ផ្តើមនៅទីនេះ |
+| ប្រវត្តិរបស់អ្នក | ចាប់ផ្តើមទីនេះ |
 |-----------------|------------|
-| **ថ្មីទើបចូលបច្ចុប្បន្នភាពទៅ Azure** | [ជំពូកទី 1៖ មូលដ្ឋាន](#-chapter-1-foundation--quick-start) |
-| **ស្គាល់ Azure មិនទាន់ស្គាល់ AZD** | [ជំពូកទី 1៖ មូលដ្ឋាន](#-chapter-1-foundation--quick-start) |
-| **ចង់ចេញផ្សាយកម្មវិធី AI** | [ជំពូកទី 2៖ ការអភិវឌ្ឍជាចម្បង AI](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
-| **ចង់ហាត់ក្រាស់ដៃ** | [🎓 សិក្ខាសាលាផ្ទាល់](workshop/README.md) - បុព្វហេតុដឹកនាំ ៣-៤ ម៉ោង |
-| **ត្រូវការឧទាហរណ៍ផលិតកម្ម** | [ជំពូកទី 8៖ ផលិតកម្ម និងសហគ្រាស](#-chapter-8-production--enterprise-patterns) |
+| **ថ្មីទេ ទៅ Azure** | [ជំពូក 1៖ មូលដ្ឋាន](#-chapter-1-foundation--quick-start) |
+| **ស្គាល់ Azure មុន ប៉ុន្តានៅថ្មី AZD** | [ជំពូក 1៖ មូលដ្ឋាន](#-chapter-1-foundation--quick-start) |
+| **ចង់បញ្ចេញកម្មវិធី AI** | [ជំពូក 2៖ ការអភិវឌ្ឍ AI ជាមុន](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
+| **ចង់មានហ្វូងហាត់ដៃ** | [🎓 ឧទ្យានហ្វូងអន្តរកម្ម](workshop/README.md) - ពេលវេលាដឹកនាំ 3-4 ម៉ោង |
+| **ត្រូវការគំរូផលិតកម្ម** | [ជំពូក 8៖ ផលិតកម្ម និងសហគ្រាស](#-chapter-8-production--enterprise-patterns) |
 
-### ការដំឡើងរហ័ស
+### ការតំឡើងរហ័ស
 
-1. **ផ្ដល់ Fork មូលដ្ឋាននេះ**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Clone វា**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
-3. **ទទួលជំនួយ**: [សហគមន៍ Azure Discord](https://discord.com/invite/ByRwuEEgH4)
+1. **ចម្លងផ្នែកនេះ**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **ចម្លងវា**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
+3. **សុំជំនួយ**: [សហគមន៍ Discord របស់ Azure](https://discord.com/invite/ByRwuEEgH4)
 
-> **ចូលចិត្ត Clone នៅក្នុងម៉ាស៊ីនរបស់អ្នក?**
+> **ចូលចិត្តចម្លងក្នុងស្រុកឬ?**
 
-> មូលដ្ឋានទិន្នន័យនេះមានការបកប្រែជាភាសាជាង ៥០ ដែលធ្វើឱ្យទំហំទាញយកធំជាងមុន។ ដើម្បី clone ដោយគ្មានការបកប្រែ សូមប្រើ sparse checkout៖
+> ពហុការបញ្ចូលភាសាចំនួន 50+ ត្រូវបានរួមបញ្ចូលក្នុងឃ្លាំងនេះ ដែលបង្កើនទំហំទាញយកយ៉ាងខ្លាំង។ ដើម្បីចម្លងដោយគ្មានការបកប្រែ សូមប្រើ sparse checkout៖
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
 > git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
 > ```
-> នេះផ្តល់ឱ្យអ្នកនូវអ្វីដែលអ្នកត្រូវការទាំងអស់ដើម្បីបញ្ចប់វគ្គនេះជាមួយនឹងការទាញយកបានលឿនជាងមុន។
+> នេះផ្តល់ឱ្យអ្នកនូវអ្វីដែលអ្នកត្រូវការទាំងអស់ដើម្បីបញ្ចប់វគ្គសិក្សាដោយមានការទាញយកលឿនជាងមុន។
 
 
-## ទិដ្ឋភាពទូទៅនៃវគ្គរៀន
+## ទិដ្ឋភាពទូទៅនៃវគ្គសិក្សា
 
-ជំនាញ Azure Developer CLI (azd) តាមរយៈជំពូកដែលបានបង្កើតឡើងយ៉ាងមានរចនាសម្ព័នសម្រាប់ការរៀនដំណើរការជាបន្តបន្ទាប់។ **ផ្តោតសំខាន់ពិសេសលើការដំឡើងកម្មវិធី AI ជាមួយការរួមបញ្ចូល Microsoft Foundry។**
+ចេះ Azure Developer CLI (azd) តាមរយៈជំពូកដែលមានរចនាសម្ព័ន្ធសម្រាប់ការសិក្សាផ្ដល់ជំហានៗ។ **ផ្តោតជាពិសេសលើការដាក់ពាក្យកម្មវិធី AI ជាមួយបញ្ចូលពិភព Microsoft Foundry ។**
 
-### ហេតុអ្វីបានជាវគ្គនេះមានសារៈសំខាន់សម្រាប់អ្នកអភិវឌ្ឍន៍ទំនើប
+### ហេតុផលដែលវគ្គសិក្សានេះមានសារៈសំខាន់សម្រាប់អ្នកអភិវឌ្ឍបច្ចុប្បន្ន
 
-អ្នកអភិវឌ្ឍន៍ដែលដំឡើងបំណែក AI ស្ទើរត្រូវការជំនួយលើ៖
-- រចនាសម្ព័ន្ធ AI ដែលស្មុគស្មាញមានសេវាច្រើន
-- អនុវត្តន៍ការដំឡើង AI ល្អបំផុតសម្រាប់ផលិតកម្ម
-- បញ្ចូលនិងកំណត់សេវា Azure AI
-- បរិច្ឆេទថ្លៃដើមសំរាប់បំណែក AI
-- ដោះស្រាយបញ្ហាការដំឡើងដែលពាក់ព័ន្ធ AI
+អ្នកអភិវឌ្ឍដែលដាក់ពាក្យកម្មវិធី AI ធម្មតាចង់បានការណែនាំពី៖
+- វេជ្ជបណ្ឌិត AI ពហុសេវាកម្មដែលស្មុគស្មាញ
+- ជំនាញល្អបំផុតសម្រាប់ការដាក់ពាក្យកម្មវិធី AI ផលិតកម្ម  
+- ការបញ្ចូលសេវាកម្ម AI Azure និងការកំណត់រចនាសម្ព័ន្ធ
+- ការប្រើប្រាស់ថ្លៃដើមសម្រាប់មុខងារ AI
+- ដោះស្រាយបញ្ហាក្នុងការដាក់ពាក្យកម្មវិធី AI ជាក់លាក់
 
-### គោលដៅការរៀន
+### គោលដៅការសិក្សា
 
-ដោយបញ្ចប់វគ្គសម្រួលនេះ អ្នកនឹងអាច៖
-- **ជំនាញមូលដ្ឋាន AZD**៖ គំនិតមូលដ្ឋាន ការដំឡើង និងកំណត់តាម
-- **ដំឡើងកម្មវិធី AI**៖ ប្រើ AZD ជាមួយសេវា Microsoft Foundry
-- **អនុវត្តប្រាក់ចំណូលជាអាគារជាកូដ**៖ សម្របសម្រួលធនធាន Azure ជាមួយទំរង់ Bicep
-- **ដោះស្រាយបញ្ហាការដំឡើង**៖ ជួយដោះស្រាយបញ្ហាទូទៅ និងស្វែងរកកំហុស
-- **បង្កើនប្រសិទ្ធភាពសម្រាប់ផលិតកម្ម**៖ សន្តិសុខ ការលំនឹង ការត្រួតពិនិត្យ និងការគ្រប់គ្រងថ្លៃដើម
-- **បង្កើតដំណោះស្រាយជាមនុស្សប្រតិបត្តិជាច្រើន**៖ ដំឡើងរចនាសម្ព័ន្ធ AI ស្មុគស្មាញ
+ក្រោយពេលបញ្ចប់វគ្គសិក្សារចនាសម្ព័ន្ធនេះ អ្នកនឹង:
+- **ចេះ AZD មូលដ្ឋាន**៖ គំនិតមូលដ្ឋាន ការតម្លើង និងការកំណត់រចនាសម្ព័ន្ធ
+- **ដាក់ពាក្យកម្មវិធី AI**៖ ប្រើ AZD ជាមួយសេវាកម្ម Microsoft Foundry
+- **អនុវត្តបុគ្គលិកមូលដ្ឋានជា Code**៖ គ្រប់គ្រងធនធាន Azure ដោយប្រើប្លង់ Bicep
+- **ដោះស្រាយបញ្ហាការដាក់ពាក្យកម្មវិធី**៖ ដោះស្រាយបញ្ហាទូទៅ និងបញ្ហាដាក់ពាក្យកម្មវិធី
+- **បង្កើនប្រសិទ្ធភាពសម្រាប់ផលិតកម្ម**៖ សុវត្ថិភាព ការពង្រីក ការត្រួតពិនិត្យ និងការគ្រប់គ្រងថ្លៃដើម
+- **សាងសង់ដំណោះស្រាយភ្នាក់ងារច្រើន**៖ ដាក់ពាក្យកម្មវិធី AI ពហុសេវាកម្ម
 
-## មុនចាប់ផ្ដើម៖ គណនី ការចូលដំណើរការ និងការសន្មត់
+## មុនចាប់ផ្តើម៖ គណនី, ការចូលដំណើរការ និងការអនុញ្ញាត
 
-មុនចាប់ផ្ដើមជំពូក ១ សូមប្រាកដថាអ្នកមានអ្វីខ្លះខាងក្រោម។ ជំហានដំឡើងក្នុងមគ្គុទេសក៍នេះចាត់ទុកថារឿងទាំងឡាយទាំងនេះបានរៀបចំរួចហើយ។
+មុនចាប់ផ្តើមជំពូកទី 1 សូមប្រាកដថាអ្នកមានអ្វីទាំងនេះ។ ជំហានតម្លើងនៅក្រោមណែនាំទាំងនេះសន្មតថានេះគឺបានរៀបចំរួចហើយ។
 
-- **ការជាវ Azure**៖ អ្នកអាចប្រើការជាវដែលមានពីការងារឬគណនីផ្ទាល់ខ្លួនរបស់អ្នក ឬបង្កើត [សាកល្បងដោយឥតគិតថ្លៃ](https://aka.ms/azurefreetrial) ដើម្បីចាប់ផ្ដើម។
-- **ការអនុញ្ញាតបង្កើតធនធាន Azure**៖ សម្រាប់ការប្រលងភាគច្រើន អ្នកគួរតែមានសិទ្ធិ **Contributor** នៅលើការជាវឬក្រុមធនធានគោលដៅ។ ខ្លះជំពូកប្រហែលជាក៏សន្មតថាអ្នកអាចបង្កើតក្រុមធនធាន សម្គាល់គ្រប់គ្រង និងការបែងចែក RBAC។
-- [**គណនី GitHub**](https://github.com)៖ នេះមានប្រយោជន៍សម្រាប់ធ្វើ Fork ទុកឃ្លាំងប្រភព តាមដានការផ្លាស់ប្តូររបស់អ្នក និងប្រើ GitHub Codespaces សម្រាប់សិក្ខាសាលា។
-- **គ្រោងតម្រូវក្នុងការរត់តាមម៉ាស៊ីន**៖ គំរូខ្លះត្រូវការឧបករណ៍ក្នុងដំណើរការពីម៉ាស៊ីនដូចជា Node.js, Python, Java, ឬ Docker។ បើកដោយកម្មវិធីចំណេញត្រួតពិនិត្យមុនចាប់ផ្ដើមដើម្បីរកឧបករណ៍ខ្វះលឿន។
-- **ការស្គាល់មូលដ្ឋាននៃបន្ទាត់បញ្ជា**៖ អ្នកមិនចាំបាច់ជាអ្នកឯកទេស ប៉ុន្តែអ្នកគួរតែចេះដំណើរការបញ្ជាទាំងនេះដូចជា `git clone`, `azd auth login`, និង `azd up`។
+- **ការជាវ Azure**៖ អ្នកអាចប្រើការជាវដែលមានរួចរបស់ក្រុមហ៊ុនឬគណនីផ្ទាល់ខ្លួនរបស់អ្នក ឬបង្កើត [សាកល្បងមិនគិតថ្លៃ](https://aka.ms/azurefreetrial) ដើម្បីចាប់ផ្តើម។
+- **សិទ្ធិបង្កើតធនធាន Azure**៖ សំរាប់លំហាត់ភាគច្រើន អ្នកគួរតែមានសិទ្ធិ **អ្នករួមចំណែក** នៅលើការជាវឬក្រុមធនធានគោលដៅ។ ជំពូកខ្លះត្រូវការឲ្យអ្នកអាចបង្កើតក្រុមធនធាន គណនីគ្រប់គ្រង និងការចាត់តាំង RBAC។
+- [**គណនី GitHub**](https://github.com)៖ វាដំណើរការសម្រាប់បង្កើត fork ទៅឃ្លាំង កត់ត្រាបម្លែងរបស់ខ្លួន និងប្រើ GitHub Codespaces សម្រាប់សិក្ខាសាលា។
+- **តម្រូវការឧបករណ៍រត់ពេលនៃប្លង់**៖ ប្លង់ខ្លះត្រូវការឧបករណ៍ក្នុងលោកដូចជា Node.js, Python, Java ឬ Docker។ ប្រតិបត្តិការត្រួតពិនិត្យការតំឡើងមុនចាប់ផ្តើមដើម្បីរកឧបករណ៍ខ្វះ។ 
+- **ការស្គាល់បញ្ជាលេខមូលដ្ឋាន**៖ អ្នកមិនចាំបាច់ជាអ្នកជំនាញទេ ប៉ុន្តែគួរតែសូវស្រួលចាប់ផ្តើមបញ្ជា Command ដូចជា `git clone`, `azd auth login` និង `azd up`។
 
-> **ធ្វើការជាកម្មវិធីក្នុងការជាវអាជីវកម្ម?**
-> ប្រសិនបើបរិយាកាស Azure របស់អ្នក មានអ្នកគ្រប់គ្រង អ្នកគួរតែបញ្ជាក់មុនថាអ្នកអាចដំឡើងធនធានក្នុងការជាវ ឬក្រុមធនធានដែលអ្នកមានគម្រោងប្រើ។ ប្រសិនបើមិនអាចធ្វើបាន សូមស្នើរសុំការជាវ sandbox ឬសិទ្ធិផ្ទាល់ក្រុម Contributor មុនចាប់ផ្ដើម។
+> **ធ្វើបច្ចុប្បន្នភាពក្នុងការជាវសហគ្រាស?**
+> បើបរិបទ Azure របស់អ្នកត្រូវបានគ្រប់គ្រងដោយអ្នកគ្រប់គ្រង សូមបញ្ជាក់ជាមុនថាអ្នកអាចដាក់ធនធានក្នុងការជាវឬក្រុមធនធានដែលអ្នកគ្រោងប្រើ។ បើមិនដូច្នោះ សូមស្នើរសុំការជាវ sandbox ឬសិទ្ធិ Contributor មុនចាប់ផ្តើម។
 
 > **ថ្មីចំពោះ Azure?**
-> ចាប់ផ្ដើមជាមួយសាកល្បង Azure ផ្ទាល់ខ្លួន ឬការជាវបង់ប្រាក់តាមការប្រើប្រាស់នៅ https://aka.ms/azurefreetrial ដើម្បីបញ្ចប់ការប្រលងដោយពុំចាំបាច់រង់ចាំការអនុម័តកម្រិត tenant។
+> ចាប់ផ្តើមជាមួយការជាវសាកល្បងនៃ Azure របស់អ្នកឬការជាវបង់ប្រាក់ឥឡូវនេះដែលមាននៅ https://aka.ms/azurefreetrial ដូច្នេះអ្នកអាចធ្វើលំហាត់ទាំងអស់បានជាលំដាប់ដោយមិនចាំបាច់រង់ចាំការអនុម័តកម្រិត tenant។
 
-## 🗺️ ផែនទីវគ្គศึกษา៖ ការរុករកយ៉ាងលឿនតាមជំពូក
+## 🗺️ ផែនទីវគ្គសិក្សា៖ ផ្លូវបឋមបន្ទាន់តាមជំពូក
 
-ជំពូកទាំងអស់មាន README ផ្ទាល់ខ្លួនជាមួយគោលដៅការរៀន ការចាប់ផ្ដើមយ៉ាងលឿន និងការប្រលង៖
+ជំពូកនីមួយៗមាន README ផ្តាច់មុខ នឹងបច្ចេកទេសសិក្សា ការចាប់ផ្តើមយ៉ាងរហ័ស និងលំហាត់៖
 
-| ជំពូក | ប្រធានបទ | មេរៀន | រយៈពេល | ភាពស្មុគស្មាញ |
+| ជំពូក | សារធាតុ | មេរៀន | រយៈពេល | កម្រិតស្មុគស្មាញ |
 |---------|-------|---------|----------|------------|
-| **[ជំពូក 1: មូលដ្ឋាន](docs/chapter-01-foundation/README.md)** | ការចាប់ផ្ដើម | [មូលដ្ឋាន AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [ការដំឡើង](docs/chapter-01-foundation/installation.md) &#124; [គម្រោងដំបូង](docs/chapter-01-foundation/first-project.md) | 30-45 នាទី | ⭐ |
-| **[ជំពូក 2: អភិវឌ្ឍ AI](docs/chapter-02-ai-development/README.md)** | កម្មវិធី AI ជាចម្បង | [ការរួមបញ្ចូល Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [ភ្នាក់ងារបច្ចេកវិទ្យា AI](docs/chapter-02-ai-development/agents.md) &#124; [ដំឡើងម៉ូដែល](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [សិក្ខាសាលា](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 ម៉ោង | ⭐⭐ |
-| **[ជំពូក 3: ការកំណត់តំរូវការ](docs/chapter-03-configuration/README.md)** | អត្តសញ្ញាណ និងសន្តិសុខ | [កំណត់តំរូវការ](docs/chapter-03-configuration/configuration.md) &#124; [អត្តសញ្ញាណ និងសន្តិសុខ](docs/chapter-03-configuration/authsecurity.md) | 45-60 នាទី | ⭐⭐ |
-| **[ជំពូក 4: ហេដ្ឋារចនាសម្ព័ន្ធ](docs/chapter-04-infrastructure/README.md)** | IaC និងការដំឡើង | [មគ្គុទេសក៍ដំឡើង](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [ការបម្រុងទុក](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 ម៉ោង | ⭐⭐⭐ |
-| **[ជំពូក 5: មនុស្សប្រតិបត្តិជាច្រើន](docs/chapter-05-multi-agent/README.md)** | ដំណោះស្រាយភ្នាក់ងារបច្ចេកវិទ្យា AI | [សេណារីយ៉ោលក់តាមសៀវភៅ](examples/retail-scenario.md) &#124; [លំនាំសម្របសម្រួល](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 ម៉ោង | ⭐⭐⭐⭐ |
-| **[ជំពូក 6: មុនការដំឡើង](docs/chapter-06-pre-deployment/README.md)** | ការងារធ្វើផែនការ និងការត្រួតពិនិត្យ | [ការត្រួតពិនិត្យមុនបើកដំណើរការ](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [ការគ្រោងទុកសមត្ថភាព](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [ជម្រើស SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 ម៉ោង | ⭐⭐ |
-| **[ជំពូក 7: ដោះស្រាយបញ្ហា](docs/chapter-07-troubleshooting/README.md)** | ដំណោះស្រាយ និងជួសជុល | [បញ្ហាទូទៅ](docs/chapter-07-troubleshooting/common-issues.md) &#124; [ការស្វែងរកកំហុស](docs/chapter-07-troubleshooting/debugging.md) &#124; [បញ្ហា AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 ម៉ោង | ⭐⭐ |
-| **[ជំពូក 8: ផលិតកម្ម](docs/chapter-08-production/README.md)** | លំនាំសេដ្ឋកិច្ច | [ការអនុវត្តក្នុងផលិតកម្ម](docs/chapter-08-production/production-ai-practices.md) | 2-3 ម៉ោង | ⭐⭐⭐⭐ |
-| **[🎓 សិក្ខាសាលា](workshop/README.md)** | មន្ទីរបណ្តុះបណ្តាលជាក់ស្តែង | [ការណែនាំ](workshop/docs/instructions/0-Introduction.md) &#124; [ជម្រើស](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [ការត្រួតពិនិត្យ](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [ការបំបែក](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [កំណត់](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [កែទម្រង់](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [ការបញ្ចប់](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [សង្ខេប](workshop/docs/instructions/7-Wrap-up.md) | 3-4 ម៉ោង | ⭐⭐ |
+| **[ជំពូក 1៖ មូលដ្ឋាន](docs/chapter-01-foundation/README.md)** | ចាប់ផ្តើម | [AZD មូលដ្ឋាន](docs/chapter-01-foundation/azd-basics.md) &#124; [តម្លើង](docs/chapter-01-foundation/installation.md) &#124; [គម្រោងដំបូង](docs/chapter-01-foundation/first-project.md) | 30-45 នាទី | ⭐ |
+| **[ជំពូក 2៖ អភិវឌ្ឍ AI](docs/chapter-02-ai-development/README.md)** | កម្មវិធី AI ជាចម្បង | [បញ្ចូល Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [ភ្នាក់ងារ AI](docs/chapter-02-ai-development/agents.md) &#124; [ការដាក់ពាក្យម៉ូដែល](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [សិក្ខាសាលា](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 ម៉ោង | ⭐⭐ |
+| **[ជំពូក 3៖ ការកំណត់រចនាសម្ព័ន្ធ](docs/chapter-03-configuration/README.md)** | អនុញ្ញាត និង សុវត្ថិភាព | [ការកំណត់រចនាសម្ព័ន្ធ](docs/chapter-03-configuration/configuration.md) &#124; [អនុញ្ញាត & សុវត្ថិភាព](docs/chapter-03-configuration/authsecurity.md) | 45-60 នាទី | ⭐⭐ |
+| **[ជំពូក 4៖ ពហុគ្រឹះសម្បទា](docs/chapter-04-infrastructure/README.md)** | IaC និង ការដាក់ពាក្យ | [មគ្គុទេសក៍ការដាក់ពាក្យ](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [ការផ្ដល់ប្រាក់](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 ម៉ោង | ⭐⭐⭐ |
+| **[ជំពូក 5៖ ភ្នាក់ងារច្រើន](docs/chapter-05-multi-agent/README.md)** | ដំណោះស្រាយភ្នាក់ងារពហុ | [សេណារីយោលខ្លះ](examples/retail-scenario.md) &#124; [លំនាំកូអឌីណាដ់](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 ម៉ោង | ⭐⭐⭐⭐ |
+| **[ជំពូក 6៖ មុនការដាក់ពាក្យ](docs/chapter-06-pre-deployment/README.md)** | ការផែនការ និង ការត្រួតពិនិត្យ | [ការត្រួតពិនិត្យមុន](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [ផែនការថាមពល](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [ការជ្រើសរើស SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 ម៉ោង | ⭐⭐ |
+| **[ជំពូក 7៖ ដោះស្រាយបញ្ហា](docs/chapter-07-troubleshooting/README.md)** | ការវិភាគ និង ជួសជុល | [បញ្ហាទូទៅ](docs/chapter-07-troubleshooting/common-issues.md) &#124; [ការវិភាគ](docs/chapter-07-troubleshooting/debugging.md) &#124; [បញ្ហា AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 ម៉ោង | ⭐⭐ |
+| **[ជំពូក 8៖ ផលិតកម្ម](docs/chapter-08-production/README.md)** | លំនាំសហគ្រាស | [ជំនាញផលិតកម្ម](docs/chapter-08-production/production-ai-practices.md) | 2-3 ម៉ោង | ⭐⭐⭐⭐ |
+| **[🎓 សិក្ខាសាលា](workshop/README.md)** | មន្ទីរពិសោធន៍ | [មើលទៅទូទៅ](workshop/docs/instructions/0-Introduction.md) &#124; [ជ្រើសរើស](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [ត្រួតពិនិត្យ](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [បំបែក](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [កំណត់រចនាសម្ព័ន្ធ](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [ប្តូរតាមចំណូលចិត្ត](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [បញ្ចប់](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [សង្ខេប](workshop/docs/instructions/7-Wrap-up.md) | 3-4 ម៉ោង | ⭐⭐ |
 
-**រយៈពេលសរុបវគ្គ:** ~10-14 ម៉ោង | **ការកើនឡើងជំនាញ:** អ្នកចាប់ផ្ដើម → ប្រកបដោយភាពរួចរាល់សម្រាប់ផលិតកម្ម
+**រយៈពេលសរុបវគ្គសិក្សា:** ~10-14 ម៉ោង | **បន្តការជំនាញ:** អ្នកចាប់ផ្តើម → រួចរាល់សម្រាប់ផលិតកម្ម
 
 ---
 
-## 📚 ជំពូកសម្រាប់រៀន
+## 📚 ជំពូកសិក្សា
 
-*ជ្រើសរើសផ្លូវរៀនរបស់អ្នក យោងតាមកម្រិតបទពិសោធន៍ និងគោលបំណង*
+*ជ្រើសរើសផ្លូវសិក្សារបស់អ្នកដោយផ្អែកលើកម្រិតបទពិសោធន៍ និងគោលបំណង*
 
-### 🚀 ជំពូក 1: មូលដ្ឋាន & ចាប់ផ្ដើមយ៉ាងលឿន
-**លក្ខខណ្ឌជាមុន**: ជាវ Azure, ស្គាល់បន្ទាត់បញ្ជាមូលដ្ឋាន  
-**រយៈពេល**: 30-45 នាទី  
-**ភាពស្មុគស្មាញ**: ⭐
+### 🚀 ជំពូក 1៖ មូលដ្ឋាន និង ចាប់ផ្តើមយ៉ាងរហ័ស
+**តម្រូវការជាមុន**៖ ការជាវ Azure, ចំណេះដឹងបញ្ជាលេខមូលដ្ឋាន  
+**រយៈពេល**៖ 30-45 នាទី  
+**កម្រិតស្មុគស្មាញ**៖ ⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- ការយល់ដឹងពីមូលដ្ឋាន Azure Developer CLI
-- ការដំឡើង AZD លើវេទិការបស់អ្នក
-- ការដំឡើងជោគជ័យដំបូងរបស់អ្នក
+- យល់ដឹងពីមូលដ្ឋាន Azure Developer CLI
+- តម្លើង AZD នៅលើវេទិការបស់អ្នក
+- ដាក់ពាក្យកម្មវិធីដំបូងបានជោគជ័យ
 
-#### ឯកសារសម្រាប់រៀន
-- **🎯 ចាប់ផ្ដើមទីនេះ**: [Azure Developer CLI ជាអ្វី?](#-what-is-azure-developer-cli-azd)
-- **📖 ទ្រឹស្តី**: [មូលដ្ឋាន AZD](docs/chapter-01-foundation/azd-basics.md) - គំនិតគោល និងពាក្យទាក់ទង
-- **⚙️ ការដំឡើង**: [ការដំឡើង & ការតំឡើង](docs/chapter-01-foundation/installation.md) - មគ្គុទេសក៍សម្រាប់វេទិកា
-- **🛠️ បណ្តុះបណ្តាលជាក់ស្តែង**: [គម្រោងដំបូងរបស់អ្នក](docs/chapter-01-foundation/first-project.md) - មេរៀនជំហាន-ដោយជំហាន
-- **📋 សៀវភៅយោងរហ័ស**: [សៀវភៅបញ្ជា](resources/cheat-sheet.md)
+#### ប្រភពសិក្សា
+- **🎯 ចាប់ផ្តើមទីនេះ**៖ [Azure Developer CLI គឺអ្វី?](#-what-is-azure-developer-cli-azd)
+- **📖 ទ្រឹស្តី**៖ [AZD មូលដ្ឋាន](docs/chapter-01-foundation/azd-basics.md) - គំនិតមូលដ្ឋាន និងពាក្យ
+- **⚙️ តំឡើង**៖ [តម្លើង & ការតំឡើង](docs/chapter-01-foundation/installation.md) - លទ្ធផលគ្រប់វេទិកា
+- **🛠️ ដោយដៃ**៖ [គម្រោងដំបូងរបស់អ្នក](docs/chapter-01-foundation/first-project.md) - មេរៀនជំហាន​ដំណាក់កាល
+- **📋 ឯកសារយោងរហ័ស**៖ [តារាងបញ្ជាការណ៍](resources/cheat-sheet.md)
 
-#### លំហាត់អនុវត្តន៍
+#### លំហាត់អនុវត្ត
 ```bash
 # Quick installation check
 azd version
@@ -330,9 +330,9 @@ azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-**💡 លទ្ធផលជំពូក**: ដំឡើងកម្មវិធីបណ្ដាញសាមញ្ញទៅលើ Azure ដោយប្រើ AZD ជោគជ័យ
+**💡 លទ្ធផលជំពូក**៖ ដាក់ពាក្យកម្មវិធីគេហទំព័រងាយស្រួលទៅ Azure ដោយប្រើ AZD បានជោគជ័យ
 
-**✅ ការត្រួតពិនិត្យជោគជ័យ:**
+**✅ ការផ្ទៀងផ្ទាត់ជោគជ័យ:**
 ```bash
 # After completing Chapter 1, you should be able to:
 azd version              # Shows installed version
@@ -344,30 +344,30 @@ azd down --force --purge  # Cleans up resources
 ```
 
 **📊 រយៈពេលវិនិយោគ:** 30-45 នាទី  
-**📈 កម្រិតជំនាញបន្ទាប់ពីរៀន:** អាចដំឡើងកម្មវិធីមូលដ្ឋានដោយឯកជន
+**📈 កម្រិតជំនាញបន្ទាប់ពីនេះ:** អាចដាក់ពាក្យកម្មវិធីមូលដ្ឋានដោយឯករាជ្យ
 
 ---
 
-### 🤖 ជំពូក 2: អភិវឌ្ឍ AI ជាចម្បង (ណែនាំសម្រាប់អ្នកអភិវឌ្ឍ AI)
-**លក្ខខណ្ឌជាមុន**: បញ្ចប់ជំពូក 1  
-**រយៈពេល**: 1-2 ម៉ោង  
-**ភាពស្មុគស្មាញ**: ⭐⭐
+### 🤖 ជំពូក 2៖ ការអភិវឌ្ឍជាមុន AI (ណែនាំសម្រាប់អ្នកអភិវឌ្ឍ AI)
+**តម្រូវការជាមុន**៖ ជំពូក 1 បានបញ្ចប់  
+**រយៈពេល**៖ 1-2 ម៉ោង  
+**កម្រិតស្មុគស្មាញ**៖ ⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- ការរួមបញ្ចូល Microsoft Foundry ជាមួយ AZD
-- ដំឡើងកម្មវិធីដែលបំភ្លឺដោយ AI
-- ការយល់ដឹងអំពីកំណត់រចនាសម្ព័ន្ធសេវា AI
+- បញ្ចូល Microsoft Foundry ជាមួយ AZD
+- ដាក់កម្មវិធីដែលបង្កើតដោយ AI
+- យល់ដឹងពីការកំណត់រចនាសម្ព័ន្ធសេវាកម្ម AI
 
-#### ឯកសារសម្រាប់រៀន
-- **🎯 ចាប់ផ្ដើមទីនេះ**: [ការរួមបញ្ចូល Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🤖 ភ្នាក់ងារបច្ចេកវិទ្យា AI**: [មគ្គុទេសក៍ភ្នាក់ងារ AI](docs/chapter-02-ai-development/agents.md) - ដំឡើងភ្នាក់ងារឆ្លាតវៃជាមួយ AZD
-- **📖 លំនាំ**: [ដំឡើងម៉ូដែល AI](docs/chapter-02-ai-development/ai-model-deployment.md) - ដំឡើងនិងគ្រប់គ្រងម៉ូដែល AI
-- **🛠️ សិក្ខាសាលា**: [មន្ទីរសិក្សា AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - ធ្វើឱ្យដំណោះស្រាយ AI របស់អ្នកសម្រួលជាមួយ AZD
-- **🎥 មគ្គុទេសក៍អន្តរកម្ម**: [សម្ភារៈសិក្សាសិក្ខាសាលា](workshop/README.md) - រៀនតាមកម្មវិធី MkDocs * បរិយាកាស DevContainer
-- **📋 គំរូ**: [គំរូ Microsoft Foundry](#featured-microsoft-foundry-templates)
-- **📝 ឧទាហរណ៌**: [ឧទាហរណ៍ដំឡើង AZD](examples/README.md)
+#### ប្រភពសិក្សា
+- **🎯 ចាប់ផ្តើមទីនេះ**៖ [បញ្ចូល Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 ភ្នាក់ងារ AI**៖ [មគ្គុទេសក៍ភ្នាក់ងារ AI](docs/chapter-02-ai-development/agents.md) - ដាក់ភ្នាក់ងារចំណេះដឹងជាមួយ AZD
+- **📖 លំនាំ**៖ [ការដាក់កម្មវិធីម៉ូដែល AI](docs/chapter-02-ai-development/ai-model-deployment.md) - ដាក់ និងគ្រប់គ្រងម៉ូដែល AI
+- **🛠️ សិក្ខាសាលា**៖ [មន្ទីរពិសោធន៍ AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - បង្កើតដំណោះស្រាយ AI ដែលរួមបញ្ចូល AZD
+- **🎥 មគ្គុទេសក៍អន្តរកម្ម**៖ [សម្ភារសិក្សា](workshop/README.md) - រៀនតាមកម្មវិធីរោទ៍ MkDocs * បរិស្ថាន DevContainer
+- **📋 ប្លង់**៖ [ប្លង់ Microsoft Foundry](#featured-microsoft-foundry-templates)
+- **📝 ឧទាហរណ៍**៖ [ឧទាហរណ៍ AZD Deployment](examples/README.md)
 
-#### លំហាត់អនុវត្តន៍
+#### លំហាត់អនុវត្ត
 ```bash
 # Deploy your first AI application
 azd init --template azure-search-openai-demo .
@@ -378,9 +378,9 @@ azd init --template openai-chat-app-quickstart .
 azd init --template agent-openai-python-prompty .
 ```
 
-**💡 លទ្ធផលជំពូក**: ដំឡើងនិងកំណត់បន្ថែមកម្មវិធីជជែក AI ដែលមានមុខងារស្វែងរកបញ្ច្រាស RAG
+**💡 លទ្ធផលជំពូក**៖ ដាក់ និងកំណត់រចនាសម្ព័ន្ធកម្មវិធីឆាតដែលគាំទ្រ AI មានសមត្ថភាព RAG
 
-**✅ ការត្រួតពិនិត្យជោគជ័យ:**
+**✅ ការផ្ទៀងផ្ទាត់ជោគជ័យ:**
 ```bash
 # After Chapter 2, you should be able to:
 azd init --template azure-search-openai-demo .
@@ -393,32 +393,32 @@ azd down --force --purge
 ```
 
 **📊 រយៈពេលវិនិយោគ:** 1-2 ម៉ោង  
-**📈 កម្រិតជំនាញបន្ទាប់ពីរៀន:** អាចដំឡើងកម្មវិធី​រៀន AI និងកំណត់តម្រូវការបន្ថែមសម្រាប់ភាពរួចរាល់ផលិតកម្ម
-**💰 ចំណាយថ្លៃ:** យល់ព្រមថ្លៃអភិវឌ្ឍ $80-150/ខែ ថ្លៃផលិតកម្ម $300-3500/ខែ
+**📈 កម្រិតជំនាញបន្ទាប់ពីនេះ:** អាចដាក់កម្មវិធីសិក្សា AI និងស្គាល់តម្រូវការច្រើនជាងនេះសម្រាប់ផលិតកម្ម
+**💰 ការយល់ដឹងអំពីថ្លៃដើម:** យល់ពីថ្លៃអភិវឌ្ឍ $80-150/ខែ និងថ្លៃផលិតកម្ម $300-3500/ខែ
 
-#### 💰 ការពិចារណារបស់ថ្លៃសម្រាប់ការដំឡើង AI
+#### 💰 ការពិចារណារួមទាំងថ្លៃដើមសម្រាប់ការដាក់ AI
 
 **បរិយាកាសអភិវឌ្ឍ (ប្រមាណ $80-150/ខែ):**
-- ម៉ូដែល Microsoft Foundry (បង់តាមការប្រើប្រាស់): $0-50/ខែ (ផ្អែកលើការប្រើស្លាបព្រិល)
-- ការស្វែងរក AI (កម្រិតមូលដ្ឋាន): $75/ខែ
-- កម្មវិធីកុងតឺន័រ (ប្រើប្រាស់): $0-20/ខែ
-- ការផ្ទុក (ស្តង់ដារ): $1-5/ខែ
+- ម៉ូដែល Microsoft Foundry (បង់តាមប្រើប្រាស់): $0-50/ខែ (អាស្រ័យលើការប្រើប្រាស់ token)
+- ស្វែងរក AI (ជាន់មូលដ្ឋាន): $75/ខែ
+- កម្មវិធី Container (ប្រើប្រាស់): $0-20/ខែ
+- ស្តុក (ស្តង់ដា): $1-5/ខែ
 
 **បរិយាកាសផលិតកម្ម (ប្រមាណ $300-3,500+/ខែ):**
-- ម៉ូដែល Microsoft Foundry (PTU សម្រាប់ការសម្របសម្រួលមួយ): $3,000+/ខែ ឬ បង់តាមការប្រើប្រាស់ជាមួយបរិមាណខ្ពស់
-- ការស្វែងរក AI (កម្រិតស្ដង់ដារ): $250/ខែ
-- កម្មវិធីកុងតឺន័រ (ឧទាហរណ៍): $50-100/ខែ
+- ម៉ូដែល Microsoft Foundry (PTU សម្រាប់មុខងារជាប់លាប់): $3,000+/ខែ ឬបង់តាមប្រើប្រាស់ជាមួយបរិមាណច្រើន
+- ស្វែងរក AI (ជាន់ស្តង់ដា): $250/ខែ
+- កម្មវិធី Container (ឧបករណ៍ផ្ដល់ជូន): $50-100/ខែ
 - Application Insights: $5-50/ខែ
-- ការផ្ទុក (ព្រីមៀម): $10-50/ខែ
+- ស្តុក (ជាន់ព្រីមៀម): $10-50/ខែ
 
-**💡 ការណែនាំបន្ថែមសម្រាប់ការបង្កើនប្រសិទ្ធភាពថ្លៃ:**
-- ពិនិត្យតម្លៃសមាហរណដ៏ម៉ូដែលនិងឥណទានសម្រាប់គណនីជាក់លាក់; Azure OpenAI មិនឲ្យមានការអនុញ្ញាតឥតគិតថ្លៃ 50,000 ស្លាបព្រិលក្នុងមួយខែទេ
-- ប្រតិបត្តិ `azd down` ដើម្បីលុបធនធានពេលមិនចាំបាច់បន្ថែម មុនពិនិត្យបរិយាកាសដែលបានជ្រើស
-- ចាប់ផ្ដើមជាមួយវិធីបង់ប្រាក់តាមការប្រើប្រាស់ ពេលក្រោយបង្កើនទៅ PTU សម្រាប់ផលិតកម្មតែប៉ុណ្ណោះ
-- ប្រើ `azd provision --preview` ដើម្បីពិចារណាហេដ្ឋារចនាសម្ព័ន្ធដែលបានគ្រោង រួចពិនិត្យតម្លៃធនធានដែលបានគិតជាមួយគណនីតម្លៃ Azure
-- បើកអូតូលំនឹង៖ បង់តែចំនួនដែលបានប្រើប្រាស់ពិតប្រាកដ
+**💡 ម איםជួយបន្ថយថ្លៃដើម៖**
+- ពិនិត្យតម្លៃស្មើម៉ូដែល និងឥណទានក្នុងគណនី; Azure OpenAI មិនរាប់បញ្ចូលការផ្តល់ជូនសេវាមួយ 50,000 token ទទួលខុសត្រូវរៀងរាល់ខែ
+- ប្រតិបត្តិ `azd down` ដើម្បីលុបធនធានបន្ទាប់ពីមិនចាំបាច់ ប្រសិនបើបានពិនិត្យបរិយាកាសដែលបានជ្រើសរើសរួច
+- ចាប់ផ្តើមជាមួយវិធីបង់ប្រាក់តាមការប្រើប្រាស់ បន្ទាប់ពីនោះផ្លាស់ទៅ PTU សម្រាប់ផលិតកម្មតែប៉ុណ្ណោះ
+- ប្រើ `azd provision --preview` ដើម្បីពិនិត្យផែនការគ្រឹះសម្បទា បន្ទាប់មកគណនាតម្លៃធនធាននោះជាមួយកំណត់តម្លៃ Azure Pricing Calculator
+- បើកអូតូស្កាលៈ បង់ត្រឹមតែការប្រើប្រាស់ពិតប្រាកដ
 
-**ការតាមដានថ្លៃ:**
+**ការត្រួតពិនិត្យថ្លៃដើម៖**
 ```bash
 # Inspect planned resources (this does not calculate prices)
 azd provision --preview
@@ -429,70 +429,70 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### ⚙️ ជំពូក 3: ការកំណត់តំរូវការ និងអត្តសញ្ញាណ
-**លក្ខខណ្ឌជាមុន**: បញ្ចប់ជំពូក 1  
-**រយៈពេល**: 45-60 នាទី  
-**ភាពស្មុគស្មាញ**: ⭐⭐
+### ⚙️ ជំពូក 3៖ កំណត់រចនាសម្ព័ន្ធ និង អនុញ្ញាត
+**តម្រូវការជាមុន**៖ ជំពូក 1 បានបញ្ចប់  
+**រយៈពេល**៖ 45-60 នាទី  
+**កម្រិតស្មុគស្មាញ**៖ ⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- ការកំណត់ និងគ្រប់គ្រងបរិយាកាស
-- អត្តសញ្ញាណ និងបទប្បញ្ញត្តិសន្តិសុខល្អបំផុត
-- ការកំណត់ឈ្មោះធនធាន និងការរៀបចំ
+- ការកំណត់បរិយាកាស និង ការគ្រប់គ្រងវា
+- អន្តរកម្ម និង ល្អបំផុតសុវត្ថិភាព
+- ការប្រើឈ្មោះធនធាន និង សមាសទ្រង់ទ្រាយ
 
-#### ឯកសារសម្រាប់រៀន
-- **📖 កំណត់តំរូវការ**: [មគ្គុទេសក៍កំណត់តំរូវការ](docs/chapter-03-configuration/configuration.md) - ការកំណត់បរិយាកាស
-- **🔐 សន្តិសុខ**: [លំនាំអត្តសញ្ញាណនិងសម្គាល់គ្រប់គ្រង](docs/chapter-03-configuration/authsecurity.md) - លំនាំអត្តសញ្ញាណ
-- **📝 ឧទាហរណ៍**: [ឧទាហរណ៍កម្មវិធីមូលដ្ឋានទិន្នន័យ](examples/database-app/README.md) - ឧទាហរណ៍ AZD សម្រាប់មូលដ្ឋានទិន្នន័យ
+#### ប្រភពសិក្សា
+- **📖 ការកំណត់**៖ [មគ្គុទេសក៍ការកំណត់រចនាសម្ព័ន្ធ](docs/chapter-03-configuration/configuration.md) - ការតំឡើងបរិយាកាស
+- **🔐 សុវត្ថិភាព**៖ [លំនាំអន្តរកម្ម និង គណនីគ្រប់គ្រង](docs/chapter-03-configuration/authsecurity.md) - លំនាំអន្តរកម្ម
+- **📝 ឧទាហរណ៍**៖ [ឧទាហរណ៍កម្មវិធីទិន្នន័យ](examples/database-app/README.md) - ឧទាហរណ៍ AZD Database
 
-#### លំហាត់អនុវត្តន៍
-- កំណត់បរិយាកាសជាច្រើន (ការអភិវឌ្ឍ, staging, ផលិតកម្ម)
-- កំណត់អត្តសញ្ញាណគ្រប់គ្រង
-- អនុវត្តកំណត់បរិយាកាសឯកជន
+#### លំហាត់អនុវត្ត
+- កំណត់បរិយាកាសជាច្រើន (dev, staging, prod)
+- កំណត់អន្តរកម្មគ្រប់គ្រង
+- អនុវត្តការកំណត់បរិយាកាសជាក់លាក់
 
-**💡 លទ្ធផលជំពូក**: គ្រប់គ្រងបរិយាកាសជាច្រើនជាមួយអត្តសញ្ញាណនិងសន្តិសុខត្រឹមត្រូវ
+**💡 លទ្ធផលជំពូក**៖ គ្រប់គ្រងបរិយាកាសជាច្រើនជាមួយការអន្តរកម្ម និងសុវត្ថិភាពត្រឹមត្រូវ
 
 ---
 
-### 🏗️ ជំពូក 4: ហេដ្ឋារចនាសម្ព័ន្ធជាកូដ & ការដំឡើង
-**លក្ខខណ្ឌជាមុន**: បញ្ចប់ជំពូក 1-3  
-**រយៈពេល**: 1-1.5 ម៉ោង  
-**ភាពស្មុគស្មាញ**: ⭐⭐⭐
+### 🏗️ ជំពូក 4៖ វិស្វកម្មជា Code និង ការដាក់ពាក្យ
+**តម្រូវការជាមុន**៖ ជំពូក 1-3 បានបញ្ចប់  
+**រយៈពេល**៖ 1-1.5 ម៉ោង  
+**កម្រិតស្មុគស្មាញ**៖ ⭐⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- លំនាំដំឡើងកម្រិតខ្ពស់
-- ហេដ្ឋារចនាសម្ព័ន្ធជាកូដជាមួយ Bicep
-- ย្បត្ដិការផ្លាស់ប្តូរធនធាន
+- លំនាំការដាក់ពាក្យកម្រិតកំពូល
+- វិស្វកម្មជា Code ជាមួយ Bicep
+- ផែនការផ្ដល់ប្រាក់ធនធាន
 
-#### ឯកសារសម្រាប់រៀន
-- **📖 ដំឡើង**: [មគ្គុទេសក៍ដំឡើង](docs/chapter-04-infrastructure/deployment-guide.md) - សៀវភៅចុះកម្មវិធីទាំងមូល
-- **🏗️ បម្រុងទុកធនធាន**: [ការគ្រប់គ្រងធនធាន Azure](docs/chapter-04-infrastructure/provisioning.md) - ការគ្រប់គ្រងធនធាន Azure
-- **📝 ឧទាហរណ៍**: [ឧទាហរណ៍កម្មវិធីកុងតឺន័រ](../../examples/container-app) - ដំឡើងកម្មវិធីកុងតឺន័រ
+#### ប្រភពសិក្សា
+- **📖 ការដាក់ពាក្យ**៖ [មគ្គុទេសក៍ការដាក់ពាក្យ](docs/chapter-04-infrastructure/deployment-guide.md) - ការងារពេញលេញ
+- **🏗️ ផ្ដល់ប្រាក់**៖ [ការគ្រប់គ្រងធនធាន](docs/chapter-04-infrastructure/provisioning.md) - ការគ្រប់គ្រងធនធាន Azure
+- **📝 ឧទាហរណ៍**៖ [ករណីកម្មវិធី Container](../../examples/container-app) - ការដាក់កម្មវិធីជា container
 
-#### លំហាត់អនុវត្តន៍
-- បង្កើតគំរូ Bicep ផ្ទាល់ខ្លួន
-- ដំឡើងកម្មវិធីដែលមានសេវាជាច្រើន
-- អនុវត្តយុទ្ធសាស្ត្រដំឡើងប្លូ-ហ្គ្រីន
+#### លំហាត់អនុវត្ត
+- បង្កើតប្លង់ Bicep ផ្ទាល់ខ្លួន
+- ដាក់កម្មវិធីពហុសេវាកម្ម
+- អនុវត្តលំនាំការដាក់ប្លង់ blue-green
 
-**💡 លទ្ធផលជំពូក**: ដំឡើងកម្មវិធីដែលមានសេវាច្រើនស្មុគស្មាញដោយប្រើគំរូហេដ្ឋារចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
+**💡 លទ្ធផលជំពូក**៖ ដាក់កម្មវិធីពហុសេវាកម្មស្មុគស្មាញដោយប្រើប្លង់អនាគតទ្រង់ទ្រាយផ្ទាល់ខ្លួន
 
 ---
 
-### 🎯 ជំពូក 5: ដំណោះស្រាយភ្នាក់ងារពហុ (កម្រិតខ្ពស់)
-**លក្ខខណ្ឌជាមុន**: បញ្ចប់ជំពូក 1-2  
-**រយៈពេល**: 2-3 ម៉ោង  
-**ភាពស្មុគស្មាញ**: ⭐⭐⭐⭐
+### 🎯 ជំពូក 5៖ ដំណោះស្រាយ AI ដែលមានអ្នកបំរើជាច្រើន (កម្រិតខ្ពស់)
+**តម្រូវការជាមុន**៖ ជំពូក 1-2 បានបញ្ចប់  
+**រយៈពេល**៖ 2-3 ម៉ោង  
+**កម្រិតស្មុគស្មាញ**៖ ⭐⭐⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- លំនាំរចនាសម្ព័ន្ធភ្នាក់ងារពហុ
-- ការសម្រួលនិងសម្របសម្រួលភ្នាក់ងារ
-- ការដំឡើង AI ដែលរួចរាល់សម្រាប់ផលិតកម្ម
+- លំនាំស្ថាបត្យកម្មអ្នកបំរើជាច្រើន
+- ការសម្របសម្រួល និងការសហការភ្នាក់ងារជាច្រើន
+- ការដាក់ពាក្យ AI សម្រាប់ផលិតកម្ម
 
-#### ឯកសារសម្រាប់រៀន
-- **🤖 រចនាប័ទ្មដែលបានជ្រើសរើស**: [ដំណោះស្រាយភ្នាក់ងារលក់តាមសៀវភៅ](examples/retail-scenario.md) - គំរូរចនាសម្ព័ន្ធ មិនមែនកម្មវិធីពេញលេញ
-- **🛠️ រចនាARM Templates**: [ប៉េគេ ARM Template](../../examples/retail-multiagent-arm-template) - ការបង្កើតខ្នាតមូលដ្ឋានផ្ទុក; គូសត្រួតពិនិត្យការប្រមូលផ្តុំបានមុន និងធាតុដែលអនុវត្តកម្មវិធីបាត់បង់
-- **📖 វិចារ​ស្ថាបត្យកម្ម**: [លំនាំការសម្របសម្រួលភ្នាក់ងារច្រើន](docs/chapter-06-pre-deployment/coordination-patterns.md) - លំនាំ
+#### ប្រភពសិក្សា
+- **🤖 រចនាប័ទ្មពិសេស**: [ដំណោះស្រាយភ្នាក់ងារច្រើនលក់រាយ](examples/retail-scenario.md) - គំនូសស្ថាបត្យកម្ម មិនមែនកម្មវិធីពេញលេញ
+- **🛠️ ស្លាកសញ្ញា ARM**: [កញ្ចប់ស្លាកសញ្ញា ARM](../../examples/retail-multiagent-arm-template) - ស៊្វេតហ្វូលផ្នែកហេដ្ឋារចនាសម្ព័ន្ធ; ពិនិត្យមើលការតម្រូវនិងធាតុអនុវត្តកម្មវិធីដែលខ្វះ
+- **📖 ស្ថាបត្យកម្ម**: [គំរូសម្របសម្រួលភ្នាក់ងារច្រើន](docs/chapter-06-pre-deployment/coordination-patterns.md) - គំរូ
 
-#### ហាត់ប្រាណជាក់ស្តែង
+#### ការអនុវត្តជាក់ស្តែង
 ```bash
 # Inspect the retail infrastructure scaffold before choosing to deploy it
 cd examples/retail-multiagent-arm-template
@@ -502,114 +502,114 @@ cat README.md
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 លទ្ធផលមុខវិជ្ជា**: យល់ដឹងអំពីរចនាភ្នាក់ងារច្រើន និងកំណត់អត្តសញ្ញាណនូវការអនុវត្តការ ធ្វើតេស្ត និងការងារជាក់លាក់ដែលចាំបាច់ក្រៅពីការបង្កើតខ្នាតមូលដ្ឋាន
+**💡 លទ្ធផលមេរៀន**: យល់ដឹងពីរចនាប័ទ្មភ្នាក់ងារច្រើន និងកំណត់សម្គាល់ការអនុវត្ត ការផ្ទៀងផ្ទាត់ និងការងារប្រតិបត្តិការដែលចាំបាច់នៅលើសពីស៊្វេតហ្វូលហេដ្ឋារចនាសម្ព័ន្ធ
 
 ---
 
-### 🔍 មុខវិជ្ជាទី 6: ការត្រួតពិនិត្យមុនដាក់បញ្ចូល និងការធ្វើការរៀបចំផែនការ
-**Prerequisites**: បញ្ចប់មុខវិជ្ជាទី 4  
+### 🔍 មេរៀនទី 6: ការផ្ទៀងផ្ទាត់ និងការធ្វើផែនការ មុនការតំឡើង
+**ការតម្រូវជាមុន**: បានបញ្ចប់មេរៀនទី 4  
 **រយៈពេល**: 1 ម៉ោង  
-**ភាពស្មុគ​ស្មាញ**: ⭐⭐
+**កម្រិតស្មុគស្មាញ**: ⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- ការធ្វើផែនការសមត្ថភាព និងការត្រួតពិនិត្យធនធាន
-- ប្រព័ន្ធជម្រើស SKU
-- ការត្រួតពិនិត្យមុនបញ្ជូន និងស្វ័យប្រវត្តិការ
+- គ្រោងសមត្ថភាព និងការផ្ទៀងផ្ទាត់ធនធាន
+- ន គន្លឹះជ្រើសរើស SKU
+- ការពិនិត្យមុនការហោះ និងស្វ័យប្រវត្តិ
 
-#### ប្រភពរៀន
-- **📊 ផែនការ**: [ផែនការសមត្ថភាព](docs/chapter-06-pre-deployment/capacity-planning.md) - ត្រួតពិនិត្យធនធាន
-- **💰 ជម្រើស**: [ជម្រើស SKU](docs/chapter-06-pre-deployment/sku-selection.md) - ជម្រើសថ្លៃសមរម្យ
-- **✅ ត្រួតពិនិត្យ**: [ការត្រួតពិនិត្យមុនបញ្ជូន](docs/chapter-06-pre-deployment/preflight-checks.md) - ស្គ្រីបស្វ័យប្រវត្តិ
+#### ឯកសារស្ទូឌីង
+- **📊 ការធ្វើផែនការ**: [ការគ្រោងសមត្ថភាព](docs/chapter-06-pre-deployment/capacity-planning.md) - ការផ្ទៀងផ្ទាត់ធនធាន
+- **💰 ជ្រើសរើស**: [ជ្រើសរើស SKU](docs/chapter-06-pre-deployment/sku-selection.md) - ជម្រើសដែលសន្សំឈ្នួលបាន
+- **✅ ផ្ទៀងផ្ទាត់**: [ការពិនិត្យមុនការហោះ](docs/chapter-06-pre-deployment/preflight-checks.md) - ស្គ្រីបស្វ័យប្រវត្តិ
 
-#### ហាត់ប្រាណជាក់ស្តែង
-- ប្រតិបត្តិការត្រួតពិនិត្យសមត្ថភាព
-- បង្កើនប្រសិទ្ធភាពជម្រើស SKU ដើម្បីសន្សំថ្លៃ
-- អនុវត្តការត្រួតពិនិត្យមុនដាក់បញ្ចូលដោយស្វ័យប្រវត្តិ
+#### ការអនុវត្តជាក់ស្តែង
+- រត់ស្គ្រីបផ្ទៀងផ្ទាត់សមត្ថភាព
+- បង្កើនប្រសិទ្ធភាពការជ្រើសរើស SKU សម្រាប់ការចំណាយ
+- អនុវត្តការត្រួតពិនិត្យស្វ័យប្រវត្តិមុនការតំឡើង
 
-**💡 លទ្ធផលមុខវិជ្ជា**: ត្រួតពិនិត្យ និងបង្កើនសមត្ថភាពការដាក់បញ្ចូលមុនការអនុវត្ត
+**💡 លទ្ធផលមេរៀន**: ផ្ទៀងផ្ទាត់ និងបង្កើនប្រសិទ្ធភាពការតំឡើង មុនការអនុវត្ត
 
 ---
 
-### 🚨 មុខវិជ្ជាទី 7: ការបញ្ហា និងការសំអាតកំហុស
-**Prerequisites**: បញ្ចប់មុខវិជ្ជាដាក់បញ្ចូលណាមួយ  
+### 🚨 មេរៀនទី 7: ការដោះស្រាយបញ្ហា និងការបំបែកកំហុស
+**ការតម្រូវជាមុន**: បានបញ្ចប់មេរៀនណាមួយក្នុងការតំឡើង  
 **រយៈពេល**: 1-1.5 ម៉ោង  
-**ភាពស្មុគ​ស្មាញ**: ⭐⭐
+**កម្រិតស្មុគស្មាញ**: ⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- វិធីសាស្រ្តសំអាតកំហុសប្រព័ន្ធយ៉ាងមានរបៀប
+- វិធីសាស្រ្តដោះស្រាយកំហុសជារបៀបប្រព័ន្ធ
 - បញ្ហាទូទៅ និងដំណោះស្រាយ
-- ការជួយដោះស្រាយបញ្ហាទាក់ទងនឹង AI
+- ការដោះស្រាយបញ្ហាគ្រប់គ្រងដោយ AI
 
-#### ប្រភពរៀន
+#### ឯកសារស្ទូឌីង
 - **🔧 បញ្ហាទូទៅ**: [បញ្ហាទូទៅ](docs/chapter-07-troubleshooting/common-issues.md) - សំណួរញឹកញាប់ និងដំណោះស្រាយ
-- **🕵️ ការសំអាតកំហុស**: [មេរៀនសំអាតកំហុស](docs/chapter-07-troubleshooting/debugging.md) - វិធីសាស្រ្តជំហានៗ
-- **🤖 បញ្ហា AI**: [ការជួយដោះស្រាយបញ្ហា AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - បញ្ហាសេវា AI
+- **🕵️ ការដោះស្រាយកំហុស**: [មគ្គុទេសក៍ដោះស្រាយកំហុស](docs/chapter-07-troubleshooting/debugging.md) - យុទ្ធសាស្រ្តជំហានក្នុងជំហាន
+- **🤖 បញ្ហា AI**: [ការដោះស្រាយបញ្ហាគ្រប់គ្រងដោយ AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - បញ្ហាសេវាកម្ម AI
 
-#### ហាត់ប្រាណជាក់ស្តែង
-- កំណត់បញ្ហាផ្នែកដាក់បញ្ចូល
-- ដោះស្រាយបញ្ហាសង្វាក់សម្ងាត់
-- សំអាតការតភ្ជាប់សេវា AI
+#### ការអនុវត្តជាក់ស្តែង
+- វិភាគបរាជ័យការតំឡើង
+- ដោះស្រាយបញ្ហាស្គាល់ភាព
+- ដោះស្រាយបញ្ហាការតភ្ជាប់សេវាកម្ម AI
 
-**💡 លទ្ធផលមុខវិជ្ជា**: កំណត់ និងដោះស្រាយបញ្ហាដាក់បញ្ចូលដោយឯករាជ្យ
+**💡 លទ្ធផលមេរៀន**: វិភាគ និងដោះស្រាយបញ្ហាដែលកើតឡើងក្នុងការតំឡើងដោយឯករាជ្យ
 
 ---
 
-### 🏢 មុខវិជ្ជាទី 8: លំនាំផលិតកម្ម និងសហគ្រាស
-**Prerequisites**: បញ្ចប់មុខវិជ្ជាទី 1-4  
+### 🏢 មេរៀនទី 8: លំនាំផលិតកម្ម និងបុគ្គលិកសហគ្រាស
+**ការតម្រូវជាមុន**: បានបញ្ចប់មេរៀនទី 1-4  
 **រយៈពេល**: 2-3 ម៉ោង  
-**ភាពស្មុគ​ស្មាញ**: ⭐⭐⭐⭐
+**កម្រិតស្មុាគស្មាញ**: ⭐⭐⭐⭐
 
 #### អ្វីដែលអ្នកនឹងរៀន
-- យុទ្ធសាស្រ្តដាក់បញ្ចូលផលិតកម្ម
-- លំនាំសន្តិសុខសហគ្រាស
-- ការត្រួតពិនិត្យ និងបង្កើនប្រសិទ្ធិភាពថ្លៃដើម
+- យុទ្ធសាស្រ្តការតំឡើងផលិតកម្ម
+- លំនាំសន្តិសុខបុគ្គលិកសហគ្រាស
+- ការត្រួតពិនិត្យ និងបង្កើនប្រសិទ្ធភាពចំណាយ
 
-#### ប្រភពរៀន
-- **🏭 ផលិតកម្ម**: [អនុវត្តការ AI ផលិតកម្មល្អបំផុត](docs/chapter-08-production/production-ai-practices.md) - លំនាំសហគ្រាស
-- **📝 ឧទាហរណ៍**: [ឧទាហរណ៍ Microservices](../../examples/microservices) - វិចារណដ្ឋានស្មុគស្មាញ
-- **📊 ការត្រួតពិនិត្យ**: [ការតភ្ជាប់ Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - ការត្រួតពិនិត្យ
+#### ឯកសារស្ទូឌីង
+- **🏭 ផលិតកម្ម**: [អនុសាសន៍ល្អ AI ផលិតកម្ម](docs/chapter-08-production/production-ai-practices.md) - លំនាំសហគ្រាស
+- **📝 ឧទាហរណ៍**: [ឧទាហរណ៍សេវាមីក្រូ](../../examples/microservices) - ស្ថាបត្យកម្មស្មុគស្មាញ
+- **📊 ការត្រួតពិនិត្យ**: [ការរួមបញ្ចូលពិនិត្យពាក្យប្រតិបត្តិការ](docs/chapter-06-pre-deployment/application-insights.md) - ការត្រួតពិនិត្យ
 
-#### ហាត់ប្រាណជាក់ស្តែង
+#### ការអនុវត្តជាក់ស្តែង
 - អនុវត្តលំនាំសន្តិសុខសហគ្រាស
-- បង្កើតការត្រួតពិនិត្យយ៉ាងទូលំទូលាយ
-- ដាក់បញ្ចូលទៅផលិតកម្មជាមួយការគ្រប់គ្រងត្រឹមត្រូវ
+- រៀបចំការត្រួតពិនិត្យដ៏ទូលំទូលាយ
+- តំឡើងទៅផលិតកម្មជាមួយការគ្រប់គ្រងដែលសមរម្យ
 
-**💡 លទ្ធផលមុខវិជ្ជា**: ដាក់បញ្ចូលកម្មវិធីរួចមានស្រាប់សម្រាប់សហគ្រាសជាមួយសក្តានុពលផលិតកម្មពេញលេញ
+**💡 លទ្ធផលមេរៀន**: តំឡើងកម្មវិធីរួចរាល់សម្រាប់សហគ្រាសជាមួយសមត្ថភាពផលិតកម្មពេញលេញ
 
 ---
 
-## 🎓 សេចក្ដីសង្ខេបសិក្សា៖បទពិសោធន៍រៀនធ្វើដោយដៃ
+## 🎓 ស្វែងរកសិក្ខាសាលា: បទពិសោធន៍រៀនដោយដៃ
 
-> **⚠️ ស្ថានភាពសិក្សា: កំពុងអភិវឌ្ឍ**  
-> សម្ភារៈសិក្សាបច្ចុប្បន្នកំពុងត្រូវបានអភិវឌ្ឍ និងកែប្រែក្នុងទម្រង់ល្អ។ ម៉ូឌុលមូលដ្ឋានមានមុខងារ ជាមួយផ្នែកខ្លះមិនទាន់ពេញលេញ។ យើងកំពុងសកម្មក្នុងការបញ្ចប់មាតិកាទាំងអស់។ [តាមដានការវិវត្តន៍ →](workshop/README.md)
+> **⚠️ ស្ថានភាពសិក្ខាសាលា: ការអភិវឌ្ឍសកម្ម**  
+> សម្ភារៈសិក្ខាសាលាកំពុងត្រូវបានអភិវឌ្ឍន៍និងកែប្រែ។ ម៉ូឌុលស្នូលអាចប្រតិបត្តិបាន តែមួយចំនួននៃផ្នែកកម្រិតខ្ពស់នៅឯក។ យើងកំពុងបន្តអភិវឌ្ឍផលបញ្ចប់។ [តាមដានវឌ្ឍនភាព →](workshop/README.md)
 
-### សម្ភារៈសិក្សាបណ្តាញអន្តរកម្ម
-**បទពិសោធន៍រៀនធ្វើដោយដៃពេញលេញជាមួយឧបករណ៍ផ្អែកលើកម្មវិធីរុករក និងហាត់ដោយណែនាំ**
+### សម្ភារៈសិក្ខាសាលាផ្ទាល់ខ្លួន
+**បទពិសោធន៍រៀនដៃជាមួយឧបករណ៍អ៊ិនធឺណិត និងការអនុវត្តមានមគ្គុទេសក៍**
 
-សម្ភារៈសិក្សារបស់យើងផ្តល់បទពិសោធន៍រៀនអន្តរកម្មដែលមានរចនាសម្ព័ន្ធ ហើយបំពេញប្រធានបទមុខវិជ្ជាច្រើនខាងលើ។ វាត្រូវបានរចនាឡើងសម្រាប់ការរៀនដោយខ្លួនឯង និងវគ្គបង្រៀនដោយគ្រូបង្រៀន។
+សម្ភារៈសិក្ខាសាលានេះផ្តល់បទពិសោធន៍រៀនអន្ដរកម្មដែលមានរៀបចំទ្រឹស្តីសម្រាប់មេរៀនជាដើមខាងលើ។ សិក្ខាសាលាត្រូវបានរចនាឡើងសម្រាប់ការរៀនដោយខ្លួនឯង និងការបង្រៀនដោយគ្រូបង្រៀន។
 
-#### 🛠️ លក្ខណៈពិសេសនៃសិក្ខាសាលា
-- **មុខងារមូលដ្ឋានក្នុងកម្មវិធីរុករក**: សិក្ខាសាលាគ្រប់គ្រងដោយ MkDocs មានសមត្ថភាពស្វែងរក, ចម្លងនិងផ្នែកបន្ថែម
-- **ការបញ្ចូល GitHub Codespaces**: ការតំឡើងបរិយាកាសអភិវឌ្ឍន៍មួយចុច
-- **ផែនទីការរៀនដែលមានរចនា**: 8 ម៉ូឌុលហាត់ប្រាណ (រយៈពេល 3-4 ម៉ោងសរុប)
-- **វិធីសាស្រ្តដែលជាដំណាក់កាល**: គំនូសនា → ជម្រើស → ត្រួតពិនិត្យ → ការបំបែក → ការកំណត់រចនា → ការផ្លាស់ប្ដូរ → ការរុះរក → សង្ខេប
-- **បរិយាកាសឧបករណ៍ DevContainer អន្តរកម្ម**: ឧបករណ៍ និងការពឹងផ្អែកកំណត់រចនាស្រាច់
+#### 🛠️ លក្ខណៈពិសេសសិក្ខាសាលា
+- **ផ្ទាំងប្រើប្រាស់អ៊ិនធឺណិត**: សិក្ខាសាលាពេញលេញដែលគាំទ្រ MkDocs មានសមត្ថភាពស្វែងរក កាត់ត និងផែនខ្នាត់
+- **ការរួមបញ្ចូល GitHub Codespaces**: ការតំឡើងបរិយាកាសអភិវឌ្ឍជាមួយចុចមួយដង
+- **ផ្លូវរៀនមានរចនាសម្ព័ន្ធ**: 8 ម៉ូឌុល អនុវត្តមានមគ្គុទេសក៍ (3-4 ម៉ោងសរុប)
+- **វិធីសាស្ត្រដើមទល់បញ្ចប់ឯកសារ**: ការណែនាំ → ជ្រើសរើស → ផ្ទៀងផ្ទាត់ → បំបែក → ការកំណត់តំរូវការ → ការប្ដូរតាមតម្រូវការ → បញ្ចប់ → សរុប
+- **បរិយាកាសអភិវឌ្ឍបែប DevContainer អន្ដរកម្ម**: ឧបករណ៍ និងជំនួយត្រូវបានរៀបចំជាមុន
 
 #### 📚 រចនាសម្ព័ន្ធម៉ូឌុលសិក្ខាសាលា
-សិក្ខាសាលាពេញលេញអនុវត្តវិធីសាស្រ្តជាដំណាក់កាល 8 ម៉ូឌុលដែលនាំអ្នកពីការស្វែងរកទៅកាន់ជំនាញដាក់បញ្ចូល៖
+សិក្ខាសាលាប្រើវិធីសាស្រ្ត **8 ម៉ូឌុលដែលមានជំរើសជាគម្រោង** ដែលនាំអ្នកពីការរកឃើញទៅកាន់ជំនាញការតំឡើង:
 
 | ម៉ូឌុល | ប្រធានបទ | អ្វីដែលអ្នកនឹងធ្វើ | រយៈពេល |
 |--------|-------|----------------|----------|
-| **0. ការណែនាំ** | សង្ខេបសិក្ខាសាលា | យល់ដឹងអំពីគោលបំណងសិក្សា, តម្រូវការមុន និងរចនាសម្ព័ន្ធសិក្ខាសាលា | 15 នាទី |
-| **1. ជម្រើស** | ស្វែងរកទម្រង់ | ស្វែងរកទម្រង់ AZD និងជ្រើសរើសទម្រង់ AI ដែលត្រឹមត្រូវសម្រាប់ឧបសគ្គរបស់អ្នក | 20 នាទី |
-| **2. ត្រួតពិនិត្យ** | ដាក់បញ្ចូល និងផ្ទៀងផ្ទាត់ | ដាក់បញ្ចូលទម្រង់ជាមួយ `azd up` និងផ្ទៀងផ្ទាត់ការវិបត្តិកម្មវិធី | 30 នាទី |
-| **3. ការបំបែក** | យល់ពីរចនាសម្ព័ន្ធ | ប្រើ GitHub Copilot ដើម្បីស្វែងយល់អំពីរចនាសម្ព័ន្ធទម្រង់, ឯកសារ Bicep, និងការរៀបចំកូដ | 30 នាទី |
-| **4. កំណត់រចនា** | ពង្រីក azure.yaml | បង្រៀនការកំណត់រចនា `azure.yaml`, រយៈពេលចងក្រង និងអថេរបរិយាកាស | 30 នាទី |
-| **5. ផ្លាស់ប្ដូរ** | បង្កើតតាមរយៈជំនាញផ្ទាល់ខ្លួន | សម្រួល AI Search, ការតាមដាន, ការវាយតម្លៃ និងប្តូរតាមលក្ខណៈរបស់អ្នក | 45 នាទី |
-| **6. ការរុះរក** | សម្អាត | សម្រួលធនធានដោយសុវត្ថិភាពជាមួយ `azd down --purge` | 15 នាទី |
-| **7. សង្ខេប** | ជំហានបន្ទាប់ | ពិនិត្យការសម្រេច និងមេរៀនសំខាន់ៗ រួចបន្តការរៀនរបស់អ្នក | 15 នាទី |
+| **0. ការណែនាំ** | សង្ខេបទស្សនៈសិក្ខាសាលា | យល់អំពីគោលបំណង ការតម្រូវ និងរចនាសម្ព័ន្ធសិក្ខាសាលា | 15 នាទី |
+| **1. ជ្រើសរើស** | ស្វែងរកស្លាកសញ្ញា | ស្វែងរកស្លាកសញ្ញា AZD និងជ្រើសរើសស្លាកសញ្ញា AI ដែលសមស្របនឹងស្ថានភាពរបស់អ្នក | 20 នាទី |
+| **2. ផ្ទៀងផ្ទាត់** | តំឡើង និងផ្ទៀងផ្ទាត់ | តំឡើងស្លាកសញ្ញាជាមួយ `azd up` និងផ្ទៀងផ្ទាត់ការងារហេដ្ឋារចនាសម្ព័ន្ធ | 30 នាទី |
+| **3. បំបែក** | យល់ពីរចនាសម្ព័ន្ធ | ប្រើ GitHub Copilot ដើម្បីស្វែងរកស្ថាបត្យកម្មស្លាកសញ្ញា, ឯកសារ Bicep និងការរៀបចំកូដ | 30 នាទី |
+| **4. ការកំណត់** | ជ្រាបជ្រៅazure.yaml | ជំនាញខ្ពស់ក្នុងការកំណត់ `azure.yaml`, ខួបជីវិត និងអថេរបរិស្ថាន | 30 នាទី |
+| **5. ការប្ដូរតាមតម្រូវការ** | ធ្វើវាជាមួយរបស់អ្នក | បើកអោយស្វ័យប្រវត្តិស្វែងរក AI, ការតាមដាន, ការវាយតម្លៃ និងប្ដូរតាមតម្រូវការរបស់អ្នក | 45 នាទី |
+| **6. បញ្ចប់** | សម្អាត | ដំណើរការលុបធនធានយ៉ាងសុវត្ថិភាពជាមួយ `azd down --purge` | 15 នាទី |
+| **7. សរុប** | ជំហានបន្ទាប់ | ពិនិត្យឡើងវិញការសម្រេចបាន គំនិតសំខាន់ និងបន្តផ្លូវរៀនរបស់អ្នក | 15 នាទី |
 
-**ដំណើរការសិក្ខាសាលា:**
+**លំដាប់សិក្ខាសាលា:**
 ```
 Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
      ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
@@ -629,158 +629,158 @@ cd azd-for-beginners/workshop
 # Follow the setup instructions in workshop/README.md
 ```
 
-#### 🎯 លទ្ធផលរៀនពីសិក្ខាសាលា
-ដោយបញ្ចប់សិក្ខាសាលា អ្នកចូលរួមនឹង៖
-- **ដាក់បញ្ចូលកម្មវិធី AI ផលិតកម្ម**: ប្រើ AZD ជាមួយសេវាកម្ម Microsoft Foundry
-- **ចេះរចនាសម្ព័ន្ធភ្នាក់ងារច្រើន**: អនុវត្តការ AI agent តាមការសម្របសម្រួល
-- **អនុវត្តបច្ចេកទេសសន្តិសុខល្អបំផុត**: កំណត់សុវត្ថិភាពសម្ងាត់និងការគ្រប់គ្រងការចូលប្រើ
-- **បង្កើនប្រសិទ្ធិភាពបុគ្គលិកភាព**: ផែនការការដាក់បញ្ចូលថ្លៃប្រសើរនិងមានប្រសិទ្ធភាព
-- **ដោះស្រាយបញ្ហាការដាក់បញ្ចូល**: ដោះស្រាយបញ្ហាទូទៅដោយឯករាជ្យ
+#### 🎯 លទ្ធផលរៀនរបស់សិក្ខាសាលា
+ដោយបញ្ចប់សិក្ខាសាលា អ្នកចូលរួមនឹង:
+- **តំឡើងកម្មវិធី AI ផលិតកម្ម**: ប្រើ AZD ជាមួយសេវាកម្ម Microsoft Foundry
+- **ជំនាញរចនាសម្ព័ន្ធភ្នាក់ងារច្រើន**: អនុវត្តដំណោះស្រាយភ្នាក់ងារ AI ដែលបានសម្របសម្រួល
+- **អនុវត្តបច្ចេកវិទ្យាសន្តិសុខល្អ**: កំណត់ការផ្ទៀងផ្ទាត់ និងការគ្រប់គ្រងការចូលប្រើ
+- **បង្កើនប្រសិទ្ធភាពសម្រាប់ការពង្រីក**: រចនាការតំឡើងដែលសន្សំថវិកា និងមានប្រសិទ្ធភាព
+- **ដោះស្រាយបញ្ហាការតំឡើង**: ដោះស្រាយបញ្ហាទូទៅដោយឯករាជ្យ
 
-#### 📖 ប្រភពរៀនសិក្ខាសាលា
-- **🎥 មេរៀនអន្តរកម្ម**: [សម្ភារៈសិក្ខាសាលា](workshop/README.md) - បរិយាកាសរៀនតាមកម្មវិធីរុករក
-- **📋 សេចក្ដីណែនាំលំដាប់ម៉ូឌុល**:
-  - [0. ការណែនាំ](workshop/docs/instructions/0-Introduction.md) - សង្ខេប និងគោលបំណងសិក្ខាសាលា
-  - [1. ជម្រើស](workshop/docs/instructions/1-Select-AI-Template.md) - ស្វែងរក និងជម្រើសទម្រង់ AI
-  - [2. ត្រួតពិនិត្យ](workshop/docs/instructions/2-Validate-AI-Template.md) - ដាក់បញ្ចូល និងផ្ទៀងផ្ទាត់ទម្រង់
-  - [3. ការបំបែក](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - ស្វែងយល់រចនាសម្ព័ន្ធទម្រង់
-  - [4. កំណត់រចនា](workshop/docs/instructions/4-Configure-AI-Template.md) - បង្រៀន azure.yaml
-  - [5. ផ្លាស់ប្ដូរ](workshop/docs/instructions/5-Customize-AI-Template.md) - ផ្លាស់ប្ដូរតាមលក្ខណៈរបស់អ្នក
-  - [6. ការរុះរក](workshop/docs/instructions/6-Teardown-Infrastructure.md) - សម្អាតធនធាន
-  - [7. សង្ខេប](workshop/docs/instructions/7-Wrap-up.md) - ពិនិត្យ និងជំហានបន្ទាប់
-- **🛠️ ពហុមណ្ឌលហាត់ប្រាណ AI**: [ពហុមណ្ឌលហាត់ប្រាណ AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - ហាត់ប្រាណផ្តោតលើ AI
-- **💡 ការចាប់ផ្តើមរហ័ស**: [មគ្គុទេសក៍តំឡើងសិក្ខាសាលា](workshop/README.md#browser-based-guide) - ការកំណត់បរិយាកាស
+#### 📖 ឯកសារសិក្ខាសាលា
+- **🎥 មគ្គុទេសក៍អន្ដរកម្ម**: [សម្ភារៈសិក្ខាសាលា](workshop/README.md) - បរិយាកាសរៀនប្រើប្រាស់ក្នុងកម្មវិធីប្រាវហ្ស័រ
+- **📋 សេចក្តីណែនាំម៉ូឌុល-ទៅ-ម៉ូឌុល**:
+  - [0. ការណែនាំ](workshop/docs/instructions/0-Introduction.md) - សង្ខេបសិក្ខាសាលា និងគោលបំណង
+  - [1. ជ្រើសរើស](workshop/docs/instructions/1-Select-AI-Template.md) - រក និងជ្រើសរើសស្លាកសញ្ញា AI
+  - [2. ផ្ទៀងផ្ទាត់](workshop/docs/instructions/2-Validate-AI-Template.md) - តំឡើង និងផ្ទៀងផ្ទាត់ស្លាកសញ្ញា
+  - [3. បំបែក](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - ស្វែងរកស្ថាបត្យកម្មស្លាកសញ្ញា
+  - [4. ការកំណត់](workshop/docs/instructions/4-Configure-AI-Template.md) - ជ្រាបជ្រៅ azure.yaml
+  - [5. ការប្ដូរតាមតម្រូវការ](workshop/docs/instructions/5-Customize-AI-Template.md) - ប្ដូរតាមតម្រូវការ
+  - [6. បញ្ចប់](workshop/docs/instructions/6-Teardown-Infrastructure.md) - សម្អាតធនធាន
+  - [7. សរុប](workshop/docs/instructions/7-Wrap-up.md) - ពិនិត្យឡើងវិញ និងជំហានបន្ទាប់
+- **🛠️ បន្ទប់​បណ្តុះបណ្តាល AI**: [បន្ទប់​បណ្តុះបណ្តាល AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - ការបណ្តុះបណ្តាលផ្តោតទៅលើ AI
+- **💡 ចាប់ផ្តើមរហ័ស**: [មគ្គុទេសក៍ការដំឡើងសិក្ខាសាលា](workshop/README.md#browser-based-guide) - ការកំណត់បរិយាកាស
 
-**ល្អសម្រាប់**: បណ្តុះបណ្តាលក្រុមហ៊ុន, មហាវិទ្យាល័យ, រៀនដោយខ្លួនឯង និងវគ្គកុំព្យូទ័ររបស់អ្នកអភិវឌ្ឍ
-
----
-
-## 📖 ការសម្រួលយកចូលលំអិត៖ សមត្ថភាព AZD
-
-ក្រៅពីមូលដ្ឋាន AZD ផ្តល់នូវលក្ខណៈពិសេសដ៏មានអំណាចសម្រាប់ការដាក់បញ្ចូលផលិតកម្ម។
-
-- **ការដាក់បញ្ចូលផ្អែកលើទម្រង់** - ប្រើទម្រង់បានរៀបចំរួចសម្រាប់លំនាំកម្មវិធីទូទៅ
-- **ស្ថាបត្យកម្មជា Code** - គ្រប់គ្រងធនធាន Azure ជាមួយ Bicep ឬ Terraform  
-- **ប្រព័ន្ធបន្តវេទិកាដែលរួមបញ្ចូលគ្នា** - បង្កើត, ដាក់បញ្ចូល និងត្រួតពិនិត្យកម្មវិធីដោយស្វ័យប្រវត្តិ
-- **ល្អសម្រាប់អ្នកអភិវឌ្ឍ** - បង្កើតសក្តានុពលកំរិតខ្ពស់សម្រាប់ការអភិវឌ្ឍ និងបទពិសោធន៍អ្នកអភិវឌ្ឍ
-
-### **AZD + Microsoft Foundry: ល្អសម្រាប់ការដាក់បញ្ចូល AI**
-
-**ហេតុអ្វី AZD សម្រាប់ដំណោះស្រាយ AI?** AZD ដោះស្រាយបញ្ហាសំខាន់ៗដែលអ្នកអភិវឌ្ឍ AI ប៉ះពាល់៖
-
-- **ទម្រង់ AI រួចរាល់** - ទម្រង់ត្រៀមរួចសម្រាប់ម៉ូដែល Microsoft Foundry, សេវា Azure AI និងការងារ ML
-- **ការដាក់បញ្ចូល AI មានសុវត្ថិភាព** - លំនាំសន្តិសុខស្តង់ដារសម្រាប់សេវា AI, គន្លឹះ API និងម៉ូដែល endpoint  
-- **លំនាំ AI ផលិតកម្ម** - អនុវត្តការអនុវត្តល្អបំផុតសម្រាប់ការដាក់បញ្ចូលកម្មវិធី AI ដែលអាចពឹងផ្អែកលើការកំណត់ថ្លៃប្រកបដោយប្រសិទ្ធិភាព
-- **ដំណើរការការងារសម្រាប់ AI ពីដើមដល់ចុង** - ពីការអភិវឌ្ឍម៉ូដែលទៅដាក់បញ្ចូលផលិតកម្មជាមួយការត្រួតពិនិត្យត្រឹមត្រូវ
-- **ការបង្រ្កាបថ្លៃដើម** - ផែនការដាក់ធនធាននិងវិធីសាស្រ្តកំណត់ទំហំសម្រាប់ការងារ AI
-- **ការតភ្ជាប់ Microsoft Foundry** - តភ្ជាប់ជាស្រួលទៅកាន់កាតាឡុកម៉ូដែល និង endpoints Microsoft Foundry
+**សមរម្យសម្រាប់**: ការបណ្តុះបណ្តាលក្រុមហ៊ុន, វគ្គសិក្សាវិទ្យាស្ថាន, ការរៀនដោយខ្លួនឯង និងបណ្តុះបណ្តាលអ្នកអភិវឌ្ឍន៍។
 
 ---
 
-## 🎯 បណ្ណាល័យទម្រង់ និងឧទាហរណ៍
+## 📖 ការលេចចេញលម្អិត: សមត្ថភាព AZD
 
-### លំនាំពិសេស: ទម្រង់ Microsoft Foundry
-**ចាប់ផ្តើមនៅទីនេះ ប្រសិនបើអ្នកកំពុងដាក់បញ្ចូលកម្មវិធី AI!**
+លើសពីមូលដ្ឋាន AZD ផ្តល់លក្ខណៈពិសេសដ៏ខ្លាំងសម្រាប់ការតំឡើងផលិតកម្ម:
 
-> **កំណត់ចំណាំ:** ទម្រង់ទាំងនេះបង្ហាញលំនាំផ្សេងៗនៃ AI។ មួយចំនួនគឺ Azure Samples ផ្ទាល់ក្រៅ, ខ្លះទៀតជាការអនុវត្តក្នុងតំបន់។
+- **ការតំឡើងដោយស្លាកសញ្ញា** - ប្រើស្លាកសញ្ញាបានរៀបចំរួចសម្រាប់លំនាំកម្មវិធីទូទៅ
+- **ហេដ្ឋារចនាសម្ព័ន្ធជាកូដ** - គ្រប់គ្រងធនធាន Azure តាម Bicep ឬ Terraform  
+- **ដំណើរការរួមបញ្ចូល** - ផ្ដល់ការបង្កើត តំឡើង និងត្រួតពិនិត្យកម្មវិធីដូចម្តេចដោយឆាប់រហ័ស
+- **មានភាពងាយស្រួលសម្រាប់អ្នកអភិវឌ្ឍ** - អុបទីម៉ាល់សម្រាប់ផលិតភាពនិងបទពិសោធន៍អ្នកអភិវឌ្ឍ
 
-| ទម្រង់ | មុខវិជ្ជា | ភាពស្មុគ​ស្មាញ | សេវា | ប្រភេទ |
+### **AZD + Microsoft Foundry: ល្អឥតខ្ចោះសម្រាប់ការតំឡើង AI**
+
+**ហេតុអ្វី AZD សម្រាប់ដំណោះស្រាយ AI?** AZD ឆ្លើយតបទៅនឹងបញ្ហាចម្បងដែលអ្នកអភិវឌ្ឍ AI ប្រឈមមុខ៖
+
+- **ស្លាកសញ្ញាសម្រាប់ AI** - ស្លាកសញ្ញាបានរៀបចំរួចសម្រាប់ម៉ូដែល Microsoft Foundry, សេវាកម្ម AI Azure និងកាលបរិច្ឆេទ ML
+- **ការតំឡើង AI មានសន្តិសុខ** - លំនាំសន្តិសុខក្នុងសេវាកម្ម AI, កូនសោ API និងចំណុចចាក់ម៉ូដែល  
+- **លំនាំ AI សម្រាប់ផលិតកម្ម** - អនុវត្តល្អសម្រាប់ការតំឡើងកម្មវិធី AI ដែលអាចពង្រីកបាន និងសន្សំថវិកា
+- **ដំណើរការរបស់ AI ពេញលេញ** - ពីការអភិវឌ្ឍម៉ូដែលរហូតដល់ការតំឡើងផលិតកម្មជាមួយការត្រួតពិនិត្យត្រឹមត្រូវ
+- **បង្កើនប្រសិទ្ធភាពចំណាយ** - ការបែងចែកធនធានឆ្លាតវៃ និងយុទ្ធសាស្រ្តបង្កើនសមត្ថភាពសម្រាប់កាលបរិច្ឆេទ AI
+- **ការរួមបញ្ចូល Microsoft Foundry** - ការតភ្ជាប់រលូនទៅកាតាឡុកម៉ូដែល Microsoft Foundry និងចំណុចចាក់ម៉ូដែល
+
+---
+
+## 🎯 បណ្ណាល័យស្លាកសញ្ញា និងឧទាហរណ៍
+
+### ពិសេស: ស្លាកសញ្ញា Microsoft Foundry
+**ចាប់ផ្តើមនៅទីនេះ ប្រសិនបើអ្នកកំពុងតំឡើងកម្មវិធី AI!**
+
+> **ចំណាំ:** ស្លាកសញ្ញាទាំងនេះបង្ហាញលំនាំ AI ផ្សេងៗ។ មានខ្លះជាតំរងប្រើវគ្គសិក្សា Azure ទីផ្សារ ខណៈដែលមានខ្លះជាអនុវត្តក្នុងតំបន់នៅទីនេះ។
+
+| ស្លាកសញ្ញា | មេរៀន | កម្រិតស្មុគស្មាញ | សេវាកម្ម | ប្រភេទ |
 |----------|---------|------------|----------|------|
-| [**ចាប់ផ្តើមជាមួយ AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | មុខវិជ្ជាទី 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | ប្រែប្រួលខាងក្រៅ |
-| [**ចាប់ផ្តើមជាមួយភ្នាក់ងារ AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | មុខវិជ្ជាទី 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| ប្រែប្រួលខាងក្រៅ |
-| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | មុខវិជ្ជាទី 2 | ⭐⭐ | Azure OpenAI + Azure AI Search + Container Apps (default) + Storage | ប្រែប្រួលខាងក្រៅ |
-| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | មុខវិជ្ជាទី 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | ប្រែប្រួលខាងក្រៅ |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | មុខវិជ្ជាទី 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | ប្រែប្រួលខាងក្រៅ |
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | មុខវិជ្ជាទី 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | ប្រែប្រួលខាងក្រៅ |
-| [**ដំណោះស្រាយភ្នាក់ងារច្រើនលក់លក់រាយ**](examples/retail-scenario.md) | មុខវិជ្ជាទី 5 | ⭐⭐⭐⭐ | រចនាសម្ព័ន្ធនិងបង្កើតខ្នាតមូលដ្ឋាន; តម្រូវការអនុវត្តកម្មវិធី | **គំរូ​មូលដ្ឋាននៅក្នុងតំបន់** |
+| [**ចាប់ផ្តើមជាមួយ AI សន្ទនា**](https://github.com/Azure-Samples/get-started-with-ai-chat) | មេរៀនទី 2 | ⭐⭐ | AzureOpenAI + API អនុស្សាវរីយ៍ម៉ូដែល Azure AI + Azure AI ស្វែងរក + Azure Container Apps + Application Insights | ភាពផ្ទាល់ខ្លួន |
+| [**ចាប់ផ្តើមជាមួយភ្នាក់ងារ AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | មេរៀនទី 2 | ⭐⭐ | ភ្នាក់ងាររបស់ Foundry + AzureOpenAI + Azure AI ស្វែងរក + Azure Container Apps + Application Insights| ភាពផ្ទាល់ខ្លួន |
+| [**ការតែមើល Azure ស្វែងរក + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | មេរៀនទី 2 | ⭐⭐ | Azure OpenAI + Azure AI ស្វែងរក + Container Apps (លំនាំដើម) + គ្រប់គ្រងទិន្នន័យ | ភាពផ្ទាល់ខ្លួន |
+| [**កម្មវិធីសន្ទនា OpenAI អនុវត្តរហ័ស**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | មេរៀនទី 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | ភាពផ្ទាល់ខ្លួន |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | មេរៀនទី 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | ភាពផ្ទាល់ខ្លួន |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | មេរៀនទី 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI ស្វែងរក + Cosmos DB + Container Apps | ភាពផ្ទាល់ខ្លួន |
+| [**ដំណោះស្រាយភ្នាក់ងារច្រើនលក់រាយ**](examples/retail-scenario.md) | មេរៀនទី 5 | ⭐⭐⭐⭐ | គំនូសស្ថាបត្យកម្ម និងស៊្វេតហ្វូលហេដ្ឋារចនាសម្ព័ន្ធ; តម្រូវការអនុវត្តកម្មវិធី | **គំនូសក្នុងតំបន់** |
 
-### លំនាំពិសេស: សេណារីយោរៀនសូត្រពេញ
-**ទម្រង់កម្មវិធីរួចរាល់សម្រាប់ការសិក្សាមុខវិជ្ជា**
+### ពិសេស: សកម្មភាពរៀនពេញលេញ
+**ស្លាកសញ្ញាកម្មវិធីផលិតកម្មត្រូវបានផ្គូផ្គងជាមួយមេរៀនសិក្សា**
 
-| ទម្រង់ | មុខវិជ្ជារៀន | ភាពស្មុគ​ស្មាញ | ការសិក្សាសំខាន់ៗ |
+| ស្លាកសញ្ញា | មេរៀនរៀន | កម្រិតស្មុគស្មាញ | មេរៀនសំខាន់ |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | មុខវិជ្ជាទី 2 | ⭐ | លំនាំដាក់បញ្ចូល AI បឋម |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | មុខវិជ្ជាទី 2 | ⭐⭐ | អនុវត្ត RAG ជាមួយ Azure AI Search |
-| [**get-started-with-ai-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | មុខវិជ្ជាទី 2 | ⭐⭐ | ការវាយតម្លៃ និងបទពិសោធន៍តេស្តដោយភ្នាក់ងារជំនួយ |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | មុខវិជ្ជាទី 5 | ⭐⭐⭐ | សំណុំបែបបទភ្នាក់ងារ និងការហៅមុខងារ |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | មុខវិជ្ជាទី 8 | ⭐⭐⭐ | ការរៀបចំពាណិជ្ជកម្ម AI សហគ្រាស |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | មុខវិជ្ជាទី 5 | ⭐⭐⭐⭐ | រចនាសម្ព័ន្ធភ្នាក់ងារច្រើនជាមួយភ្នាក់ងារ Customer និង Inventory |
+| [**កម្មវិធីសន្ទនា openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | មេរៀនទី 2 | ⭐ | លំនាំការតំឡើង AI មូលដ្ឋាន |
+| [**ថ្ងៃទីនិងចាស់ azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | មេរៀនទី 2 | ⭐⭐ | ការអនុវត្ត RAG ជាមួយ Azure AI ស្វែងរក |
+| [**get-started-with-ai-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | មេរៀនទី 2 | ⭐⭐ | សន្ទនាភ្នាក់ងារជាមួយAgent និងការវាយតម្លៃតេស្តជាក់លាក់ |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | មេរៀនទី 5 | ⭐⭐⭐ | ស៊ុមភ្នាក់ងារ និងការហៅមុខងារ |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | មេរៀនទី 8 | ⭐⭐⭐ | ការគ្រប់គ្រង AI សហគ្រាស |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | មេរៀនទី 5 | ⭐⭐⭐⭐ | រចនាសម្ព័ន្ធភ្នាក់ងារច្រើន ជាមួយភ្នាក់ងារអតិថិជន និងស្តុកទំនិញ |
 
 ### រៀនតាមប្រភេទឧទាហរណ៍
 
-> **📌 ឧទាហរណ៍ក្នុងតំបន់ទល់នឹងក្រៅតំបន់:**  
-> **ឧទាហរណ៍ក្នុងតំបន់** (ក្នុង repo នេះ) = ពិនិត្យមើល README របស់ឧទាហរណ៍សម្រាប់ស្ថានភាពអនុវត្ត និងតម្រូវការវិញ
-> **ឧទាហរណ៍ក្រៅតំបន់** (Azure Samples) = ចម្លងពីភាគហ៊ុនដែលបានភ្ជាប់
+> **📌 ឧទាហរណ៍ក្នុងតំបន់ និងខាងក្រៅ:**  
+> **ឧទាហរណ៍ក្នុងតំបន់** (នៅក្នុង repo នេះ) = ពិនិត្យREADME របស់ឧទាហរណ៍សម្រាប់ស្ថានភាពអនុវត្តន៍ និងការតម្រូវជាមុន
+> **ឧទាហរណ៍ខាងក្រៅ** (វគ្គសិក្សា Azure) = ត្រឡប់ពី repository តំណភ្ជាប់
 
-#### ឧទាហរណ៍ក្នុងតំបន់ (រួចរាល់ប្រើប្រាស់បាន)
-- [**ដំណោះស្រាយភ្នាក់ងារច្រើនលក់លក់រាយ**](examples/retail-scenario.md) - គំរូរចនាសម្ព័ន្ធជាមួយខ្នាតមូលដ្ឋាន ARM 
-  - តួនាទីភ្នាក់ងារ Customer និង Inventory ដែលបានផ្តល់អនុសាសន៍
-  - ត្រូវអនុវត្តការត្រួតពិនិត្យ និងកូដកម្មវិធី 
-  - ការបញ្ជូនធនធានតែមួយមិនគ្រប់គ្រាន់សម្រាប់កម្មវិធីលក់លក់រាយបើក​ដំណើរ​ឡើង​បាន
+#### ឧទាហរណ៍ក្នុងតំបន់ (រួចរាល់ប្រើប្រាស់)
+- [**ដំណោះស្រាយភ្នាក់ងារច្រើនលក់រាយ**](examples/retail-scenario.md) - គំនូសស្ថាបត្យកម្មជាមួយស៊្វេតហ្វូលហេដ្ឋារចនាសម្ព័ន្ធ ARM
+  - តួនាទីភ្នាក់ងារ អតិថិជន និងស្តុកទំនិញបានស្នើ
+  - ត្រូវអនុវត្ត និងផ្ទៀងផ្ទាត់ការត្រួតពិនិត្យ ការវាយតម្លៃ និងកូដកម្មវិធី
+  - ការផ្ដល់ធនធានតែប៉ុណ្ណោះមិនបង្កើតកម្មវិធីលក់រាយដំណើរការបាន
 
-#### ឧទាហរណ៍ក្នុងតំបន់ - កម្មវិធី Container (មុខវិជ្ជាទី 2-5)
-**ឧទាហរណ៍ការដាក់បញ្ចូលកម្មវិធី container ពេញលេញនៅក្នុង repoនេះ:**
-- [**ឧទាហរណ៍កម្មវិធី Container**](examples/container-app/README.md) - មគ្គុទេសក៍ពេញលេញនៃការដាក់បញ្ចូល container
-  - [API Flask ងាយស្រួល](../../examples/container-app/simple-flask-api) - REST API មូលដ្ឋានជាមួយការកំណត់រំកិលទៅសូន្យ
-  - [វិចារណដ្ឋាន Microservices](../../examples/container-app/microservices) - ឧទាហរណ៍រៀនពីសេវារយៈ២; ការកែលម្អផលិតកម្មជាការងារបន្ថែម
-  - រៀនចាប់ផ្តើមរហ័ស, ផលិតកម្ម និងលំនាំដាក់បញ្ចូលខ្ពស់
-  - គន្លឹះត្រួតពិនិត្យ, សន្តិសុខ និងការបង្កើនប្រសិទ្ធភាពថ្លៃដើម
+#### ឧទាហរណ៍ក្នុងតំបន់ - កម្មវិធីកុងតឺន័រ (មេរៀនទី 2-5)
+**ឧទាហរណ៍ការតំឡើងកុងតឺន័រ ពេញលេញនៅក្នុង repository នេះ:**
+- [**ឧទាហរណ៍កម្មវិធីកុងតឺន័រ**](examples/container-app/README.md) - មគ្គុទេសក៍ពេញលេញសម្រាប់ការតំឡើងកុងតឺន័រ
+  - [API Flask ដ៏សាមញ្ញ](../../examples/container-app/simple-flask-api) - REST API មូលដ្ឋាន ជាមួយការស្រួចទៅសូន្យ
+  - [ស្ថាបត្យកម្មសេវាមីក្រូ](../../examples/container-app/microservices) - ឧទាហរណ៍រៀនពីសេវាកម្មពីរមុខ; ការពង្រឹងផលិតកម្មគឺជាការងារបន្ថែម
+  - ចាប់ផ្តើមរហ័ស លំនាំផលិតកម្ម និងការតំឡើងកម្រិតខ្ពស់
+  - មគ្គុទេសក៍ត្រួតពិនិត្យ សន្តិសុខ និងបង្កើនប្រសិទ្ធភាពចំណាយ
 
-#### ឧទាហរណ៍ក្រៅតំបន់ - កម្មវិធីសាមញ្ញ (មុខវិជ្ជាទី 1-2)
-**ចម្លង repo Azure Samples ទាំងនេះដើម្បីចាប់ផ្តើម:**
-- [កម្មវិធីវេបសាយសាមញ្ញ - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - លំនាំដាក់បញ្ចូលមូលដ្ឋាន
-- [វេបសាយស្ថិតស្ថេរ - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - ការដាក់បញ្ចូលមាតិកាស្ថិតស្ថេរ
-- [កម្មវិធី Container - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - ការដាក់បញ្ចូល REST API
+#### ឧទាហរណ៍ខាងក្រៅ - កម្មវិធីសាមញ្ញ (មេរៀនទី 1-2)
+**ចម្លង repository វគ្គសិក្សា Azure ទាំងនេះ ដើម្បីចាប់ផ្តើម:**
+- [កម្មវិធីឡើបវិបសាយសាមញ្ញ - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - លំនាំការតំឡើងមូលដ្ឋាន
+- [គេហទំព័រត្រឹមត្រូវ - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - ការតំឡើងមាតិកាត្រឹមត្រូវ
+- [កម្មវិធីកុងតឺន័រ - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - ការដាក់បanyar API REST
 
-#### ឧទាហរណ៍ក្រៅតំបន់ - ការចូលបញ្ចូលមូលដ្ឋានទិន្នន័យ (មុខវិជ្ជាទី 3-4)  
-- [កម្មវិធីទិន្នន័យ - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - គំរូការតភ្ជាប់ទិន្នន័យ
-- [មុខងារ + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - ហត្ថកម្មទិន្នន័យមិនមានម៉ាស៊ីនមេ
+#### ឧទាហរណ៍ខាងក្រៅ - ការរួមបញ្ចូលមូលដ្ឋានទិន្នន័យ (ជំពូក 3-4)  
+- [កម្មវិធីមូលដ្ឋានទិន្នន័យ - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - លំនាំការតភ្ជាប់មូលដ្ឋានទិន្នន័យ
+- [មុខងារ + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - ប្រតិបត្តិករការទិន្នន័យមិនមានម៉ាស៊ីនម៉ាស៊ីន
 
-#### ឧទាហរណ៍ខាងក្រៅ - គំរូកម្រិតខ្ពស់ (ជំពូក 4-8)
-- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - ស្ថាបត្យកម្មមុខងារច្រើន
-- [កម្មវិធី Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - ការប្រមូលផ្ទុកផ្ទៃខាងក្រោយ  
-- [Enterprise ML Pipeline](https://github.com/Azure/mlops-v2) - គំរូយោង MLOps; មិនមែនជាគំរូ AZD ដាក់បញ្ចូលផ្ទាល់
+#### ឧទាហរណ៍ខាងក្រៅ - លំនាំកម្រិតខ្ពស់ (ជំពូក 4-8)
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - វិខានសេវាកម្មច្រើន
+- [កម្មវិធីកុងតឺន័រ ងារ](https://github.com/Azure-Samples/container-apps-jobs) - ការប្រតិបត្តិការផ្ទៃក្រោយ  
+- [បណ្តាញ MLOps សហគ្រាស](https://github.com/Azure/mlops-v2) - លំនាំយោង MLOps; មិនមែនជាគំរូ AZD ដាក់ជាប្រភេទ
 
-### ប្រមូលផ្តុំគំរូខាងក្រៅ
-- [**វិចិត្រសាលគំរូ AZD ផ្លូវការជាផ្លូវការ**](https://azure.github.io/awesome-azd/) - ប្រមូលផ្តុំគំរូផ្លូវការនិងសហគមន៍ដែលបានជ្រើសរើស
+### ប្រមូណ្ឋគំរូខាងក្រៅ
+- [**ហ្គាឡេរីគំរូ AZD ផ្លូវការ**](https://azure.github.io/awesome-azd/) - ប្រមូលផ្តុំគំរូផ្លូវការ និងសហគមន៍ដែលបានជ្រើសរើស
 - [**គំរូ Azure Developer CLI**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - ឯកសារគំរូ Microsoft Learn
-- [**ថតឧទាហរណ៍**](examples/README.md) - ឧទាហរណ៍រៀនក្នុងតំបន់ជាមួយការពន្យល់លម្អិត
+- [**ថតឧទាហរណ៍**](examples/README.md) - ឧទាហរណ៍រៀនក្នុងមូលដ្ឋានជាមួយការពណ៌នាយ៉ាងលម្អិត
 
 ---
 
-## 📚 ធនធាន និងយោងសម្រាប់រៀន
+## 📚 ធនធានការរៀន និងយោង
 
-### យោងរហ័ស
-- [**តារាងពាក្យបញ្ជា**](resources/cheat-sheet.md) - ពាក្យបញ្ជា azd សំខាន់ៗត្រូវបានរៀបចាក្រមដោយជំពូក
-- [**ពាក្យពេញលេញ**](resources/glossary.md) - ពាក្យសម្រួល Azure និង azd  
-- [**សំណួរញឹកញាប់**](resources/faq.md) - សំណួរពេញនិយមត្រូវបានរៀបចារតាមជំពូករៀន
-- [**មគ្គុទេសក៍សិក្សា**](resources/study-guide.md) - លំហាត់អនុវត្តទូលំទូលាយ
+### យោងឆាប់រហ័ស
+- [**សៀវភៅបញ្ជា commandes**](resources/cheat-sheet.md) - ពាក្យបញ្ជា azd សំខាន់ៗតម្រៀបតាមជំពូក
+- [**វចនានុក្រម**](resources/glossary.md) - ពាក្យស្លោក Azure និង azd  
+- [**សំណួរញឹកញាប់**](resources/faq.md) - សំនួរពេញនិយមតម្រៀបតាមជំពូករៀន
+- [**មាគ៌ាសិក្សា**](resources/study-guide.md) - ខៀវវាយនភណ្ឌអនុវត្តលម្អិត
 
-### ធ្វើហាតដ៍អនឡាញ
-- [**ព្រឹត្តិបត្រការផលិត AI**](docs/chapter-02-ai-development/ai-workshop-lab.md) - បង្កើតដំណោះស្រាយ AI របស់អ្នកឱ្យអាចដាក់ជាមួយ AZD (2-3 ម៉ោង)
-- [**សិក្ខាសាលាផ្សេងៗ**](workshop/README.md) - ការអនុវត្តពង្រីកជាផ្នែក 8 ជាមួយ MkDocs និង GitHub Codespaces
-  - តាមលំដាប់: ការណែនាំ → ការជ្រើសរើស → ការត្រួតពិនិត្យ → ការបំបែក → ការកំណត់រចនា → ការប្តូរផ្ទាល់ខ្លួន → ការបាញ់កបាន → ការសង្ខេប
+### សិក្ខាសាលាដៃក្នុង
+- [**មើលសិក្ខាសាលា AI**](docs/chapter-02-ai-development/ai-workshop-lab.md) - ធ្វើឱ្យដំណោះស្រាយ AI របស់អ្នកអាចដាក់បានដោយ AZD (2-3 ម៉ោង)
+- [**សិក្ខាសាលាផ្ទាល់**](workshop/README.md) - 8 ម៉ូឌុលហាត់ដោយ MkDocs និង GitHub Codespaces
+  - អនុវត្តត្រូវតាម: ការណែនាំ → ជ្រើសរើស → សុពលភាព → ការបំបែក → ការរៀបចំ → ការផ្ទុះមុខងារ → ការលុប → បិទ
 
-### ធនធានរៀនខាងក្រៅ
+### ធនធានសិក្សាខាងក្រៅ
 - [ឯកសារ Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [មជ្ឈមណ្ឌលស្ថាបត្យកម្ម Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [គណនាប្រាក់ Azure](https://azure.microsoft.com/pricing/calculator/)
+- [មជ្ឈមណ្ឌលរចនាសម្ព័ន្ធ Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [គណនាថ្លៃ Azure](https://azure.microsoft.com/pricing/calculator/)
 - [ស្ថានភាព Azure](https://status.azure.com/)
 
-### ជំនាញភ្នាក់ងារយល់ឃើញ AI សម្រាប់កម្មវិធីកែសម្រួលរបស់អ្នក
-- [**ជំនាញ Microsoft Azure នៅ skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - ជំនាញភ្នាក់ងារបើកចំហ 37 ក្នុង Azure AI, Foundry, ការដាក់បញ្ចូល, ការធ្វើវាយតម្លៃ, ការអភិវឌ្ឍថ្លៃនិងជាច្រើនទៀត។ ដំឡើងវា ក្នុង GitHub Copilot, Cursor, Claude Code ឬភ្នាក់ងារដែលគាំទ្រ៖
+### ជំនាញភ្នាក់ងារពី AI សម្រាប់កម្មវិធីសម្រួលរបស់អ្នក
+- [**ជំនាញ Microsoft Azure លើ skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 ជំនាញភ្នាក់ងារបើកសម្រាប់ Azure AI, Foundry, ការដាក់, វិភាគ, ការបង្កើនប្រសិទ្ធិភាពថ្លៃ និងផ្សេងទៀត។ ដំឡើងពួកវានៅ GitHub Copilot, Cursor, Claude Code, ឬភ្នាក់ងារគាំទ្រណាមួយ៖
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-## 🔧 មគ្គុទេសក៍ដោះស្រាយបញ្ហារហ័ស
+## 🔧 មគ្គុទេសក៍ដោះស្រាយបញ្ហាឆាប់រហ័ស
 
-**បញ្ហាទូទៅដែលអ្នកចាប់ផ្តើមប្រឈមមុខ និងដំណោះស្រាយភ្លាមៗ:**
+**បញ្ហាគ្រប់រូបដែលអ្នកចាប់ផ្តើមប្រឈម និងដំណោះស្រាយភ្លាមៗ:**
 
 <details>
-<summary><strong>❌ "azd: មិនមានពាក្យបញ្ជា"</strong></summary>
+<summary><strong>❌ "azd: មិនបានរកឃើញពាក្យបញ្ជា"</strong></summary>
 
 ```bash
 # Install AZD first
@@ -852,7 +852,7 @@ azd monitor --logs
 </details>
 
 <details>
-<summary><strong>❌ "ការផ្ទៀងផ្ទាត់បរាជ័យ" ឬ "សំបុត្របញ្ចប់"</strong></summary>
+<summary><strong>❌ "ការផ្ទៀងផ្ទាត់មិនជោគជ័យ" ឬ "ស្លាកសញ្ញាផុតកំណត់"</strong></summary>
 
 ```bash
 # Re-authenticate for AZD
@@ -869,7 +869,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "ធនធាននេះមានហើយ" ឬ ដោយសារការប្រកួតឈ្នះឈ'iz</strong></summary>
+<summary><strong>❌ "ធនធានមានរួចហើយ" ឬប្រឈមមុខការប្រកួតឈ្មោះ</strong></summary>
 
 ```bash
 # Inspect the conflicting resource before changing or deleting anything.
@@ -880,12 +880,12 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ ការដាក់កំណត់គំរូយឺតเกิน</strong></summary>
+<summary><strong>❌ ការដាក់គំរូយឺតពេក</strong></summary>
 
-**ពេលរង់ចាំធម្មតា:**
-- កម្មវិធីវេបសាមញ្ញ: 5-10 នាទី
-- កម្មវិធីជាមួយមូលដ្ឋានទិន្នន័យ: 10-15 នាទី
-- កម្មវិធី AI: 15-25 នាទី (ការផ្ដល់ជូន OpenAI យឺត)
+**ពេលរង់ចាំធម្មតា៖**
+- កម្មវិធីគេហទំព័រងាយៗ៖ 5-10 នាទី
+- កម្មវិធីជាមួយមូលដ្ឋានទិន្នន័យ៖ 10-15 នាទី
+- កម្មវិធី AI៖ 15-25 នាទី (ការផ្តល់ OpenAI យឺត)
 
 ```bash
 # Check progress
@@ -898,7 +898,7 @@ azd monitor --overview
 </details>
 
 <details>
-<summary><strong>❌ "បានដាក់បញ្ឈប់ការអនុញ្ញាត" ឬ "ហាមឃាត់"</strong></summary>
+<summary><strong>❌ "ការអនុញ្ញាតបដិសេធ" ឬ "ហាមឃាត់"</strong></summary>
 
 ```bash
 # Check your Azure role
@@ -912,7 +912,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 </details>
 
 <details>
-<summary><strong>❌ រកមិនឃើញ URL កម្មវិធីដែលបានដាក់ជូន</strong></summary>
+<summary><strong>❌ មិនអាចរក URL កម្មវិធីដែលបានដាក់បាន</strong></summary>
 
 ```bash
 # Show all service endpoints
@@ -927,83 +927,83 @@ azd env get-values
 ```
 </details>
 
-### 📚 ធនធានដោះស្រាយបញ្ហាដេញម្លាំង
+### 📚 ធនធានដោះស្រាយបញ្ហាផ្ទាល់ខ្លួន
 
-- **មគ្គុទេសក៍បញ្ហាធម្មតា:** [ដំណោះស្រាយលម្អិត](docs/chapter-07-troubleshooting/common-issues.md)
-- **បញ្ហាជាក់លាក់ AI:** [ដោះស្រាយបញ្ហា AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
-- **មគ្គុទេសក៍វាយតម្លៃកូដ:** [ការវាយតម្លៃជាដំណាក់កាល](docs/chapter-07-troubleshooting/debugging.md)
-- **សុំជំនួយ:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **មគ្គុទេសក៍បញ្ហាប្រកបដោយភាពទូទៅ:** [ដំណោះស្រាយលម្អិត](docs/chapter-07-troubleshooting/common-issues.md)
+- **បញ្ហាពិសេស AI:** [បញ្ហាដោះស្រាយ AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
+- **មគ្គុទេសក៍កែលម្អកូដ:** [ដំណើរការកែលម្អកូដ](docs/chapter-07-troubleshooting/debugging.md)
+- **ទទួលជំនួយ:** [Discord Azure](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 ការបញ្ចប់វគ្គសិក្សា និងវិញ្ញាបនប័ត្រ
+## 🎓 ការបញ្ចប់វគ្គសិក្សា និងការផ្តល់វិញ្ញាបនបត្រ
 
-### ការតាមដានការរីកចម្រើន
-តាមដានការរៀនរបស់អ្នកនៅតាមរយៈជំពូកនីមួយៗ៖
+### តាមដានការរីកចម្រើន
+តាមដានការរៀនរបស់អ្នកតាមជំពូកនីមួយៗ៖
 
-- [ ] **ជំពូក ១**: មូលដ្ឋាន & ចាប់ផ្តើមយ៉ាងរហ័ស ✅
-- [ ] **ជំពូក ២**: ការអភិវឌ្ឍផ្តើមពី AI ✅  
-- [ ] **ជំពូក ៣**: ការកំណត់រចនា & ការផ្ទៀងផ្ទាត់ ✅
-- [ ] **ជំពូក ៤**: ហេដ្ឋារចនាសម្ព័ន្ធជាជាកូដ & ការដាក់បញ្ចូល ✅
-- [ ] **ជំពូក ៥**: ដំណោះស្រាយ AI ជាម៉ាស៊ីនភ្នាក់ងារ​ច្រើន ✅
-- [ ] **ជំពូក ៦**: ការត្រួតពិនិត្យ និងគម្រោងមុនដាក់បញ្ចូល ✅
-- [ ] **ជំពូក ៧**: ការដោះស្រាយបញ្ហា & វាយតម្លៃកូដ ✅
-- [ ] **ជំពូក ៨**: ផលិតកម្ម & គំរូសហគ្រាស ✅
+- [ ] **ជំពូក 1**: មូលដ្ឋាន & ចាប់ផ្ដើមលឿន ✅
+- [ ] **ជំពូក 2**: ការអភិវឌ្ឍ AI ជាលើកដំបូង ✅  
+- [ ] **ជំពូក 3**: ការកំណត់រចនាសម្ព័ន្ធ & ការផ្ទៀងផ្ទាត់ ✅
+- [ ] **ជំពូក 4**: ស្ថាបត្យកម្មជាកូដ & ការដាក់បញ្ចូល ✅
+- [ ] **ជំពូក 5**: ដំណោះស្រាយ AI ជាភ្នាក់ងារច្រើន ✅
+- [ ] **ជំពូក 6**: ការផ្ទៀងផ្ទាត់មុនដាក់បញ្ចូល & រៀបចំ ✅
+- [ ] **ជំពូក 7**: ការដោះស្រាយបញ្ហា & ការស្ទង់កូដ ✅
+- [ ] **ជំពូក 8**: លំនាំផលិតកម្ម & សហគ្រាស ✅
 
 ### ការត្រួតពិនិត្យការរៀន
-បន្ទាប់ពីបញ្ចប់ជំពូកនីមួយៗ ពិនិត្យជំនាញរបស់អ្នកដោយ៖
-1. **លំហាត់អនុវត្ត**៖ បញ្ចប់ការដាក់បញ្ចូលប្រតិបត្តិការ​ជំពូក
-2. **ពិនិត្យចំណេះដឹង**៖ ស្វែងរកផ្នែក FAQ សម្រាប់ជំពូករបស់អ្នក
-3. **ការពិភាក្សាសហគមន៍**៖ ចែករំលែកបទពិសោធន៍របស់អ្នកនៅក្នុង Azure Discord
-4. **ជំពូកបន្ទាប់**៖ ទៅកាន់កម្រិតស្មុគស្មាញបន្ទាប់
+បន្ទាប់ពីបញ្ចប់ជំពូកមួយៗ អ្នកត្រូវត្រួតពិនិត្យចំណេះដឹងរបស់អ្នក៖
+1. **ហាត់កម្មវិធី**: បញ្ចប់ការដាក់បញ្ចូលដៃក្នុងជំពូក
+2. **ត្រួតពិនិត្យចំណេះដឹង**: ពិនិត្យផ្នែក FAQ សម្រាប់ជំពូករបស់អ្នក
+3. **ពិភាក្សាសហគមន៍**: ចែករំលែកបទពិសោធន៍របស់អ្នកក្នុង Azure Discord
+4. **ជំពូកបន្ទាប់**: ទៅកាន់កម្រិតស្មុគស្មាញបន្ទាប់
 
 ### អត្ថប្រយោជន៍ពីការបញ្ចប់វគ្គសិក្សា
 បន្ទាប់ពីបញ្ចប់ជំពូកទាំងអស់ អ្នកនឹងមាន៖
-- **បទពិសោធន៍ផលិតកម្ម**: ដាក់បញ្ចូលកម្មវិធី AI ជាក់ស្តែងទៅ Azure
-- **ជំនាញវិជ្ជាជីវៈ**: សមត្ថភាពដាក់បញ្ចូលសម្រាប់សហគ្រាស  
-- **ការទទួលស្គាល់ពីសហគមន៍**: ជាសមាជិកសកម្មនៃសហគមន៍អ្នកអភិវឌ្ឍ Azure
-- **ការរីកចម្រើនអាជីព**: ជំនាញ AZD និងការដាក់បញ្ចូល AI ដែលត្រូវការខ្ពស់
+- **បទពិសោធផលិតកម្ម**: កម្មវិធី AI ពិតប្រាកដដែលបានដាក់បញ្ចូលទៅ Azure
+- **ជំនាញវិជ្ជាជីវៈ**: សមត្ថភាពដាក់បញ្ចូលសហគ្រាស
+- **ការទទួលស្គាល់ពីសហគមន៍**: សមាជិកសកម្មនៃសហគមន៍អ្នកអភិវឌ្ឍ Azure
+- **ការកែលម្អអាជីព**: ជំនាញ AZD និងការដាក់ AI ដែលត្រូវការល្បី
 
 ---
 
 ## 🤝 សហគមន៍ និងការគាំទ្រ
 
-### សុំជំនួយ និងគាំទ្រ
-- **បញ្ហាបច្ចេកទេស**: [រាយការណ៍បញ្ហា និងស្នើរសុំមុខងារ](https://github.com/microsoft/azd-for-beginners/issues)
-- **សំណួររៀន**: [សហគមន៍ Microsoft Azure Discord](https://discord.gg/microsoft-azure) និង [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **ជំនួយជាក់លាក់ AI**: ចូលរួមក្នុង [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **ឯកសារ**: [ឯកសារផ្លូវការរបស់ Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### ទទួលជំនួយ និងគាំទ្រ
+- **បញ្ហាបច្ចេកទេស**: [រាយការណ៍កំហុស និងសំណើរសុំមុខងារ](https://github.com/microsoft/azd-for-beginners/issues)
+- **សំនួររៀនសូត្រ**: [សហគមន៍ Microsoft Azure Discord](https://discord.gg/microsoft-azure) និង [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **ជំនួយប្រព័ន្ធ AI**: ចូលរួម [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **ឯកសារ**: [ឯកសារ Azure Developer CLI ផ្លូវការ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### មតិយោបល់សហគមន៍ពី Microsoft Foundry Discord
+### ទស្សនៈសហគមន៍ពី Microsoft Foundry Discord
 
-**ប្រធានបទដែលសហគមន៍ពិភាក្សាៈ**
-- ការដាក់បញ្ចូលមុខងារច្រើន, ការគ្រប់គ្រងគណនី និងភាពត្រៀមរួចសម្រាប់ផលិតកម្ម
-- គំរូ AI ជាក់លាក់, មគ្គុទេសក៍ដោះស្រាយបញ្ហា និងការអនុវត្តល្អបំផុត
+**ប្រធានបទដែលសហគមន៍ពិភាក្សា:**
+- ការដាក់ចេញសេវាកម្មច្រើន, ការគ្រប់គ្រងសញ្ញាបត្រ, និងការប្រៀបប្រដៅ
+- គំរូ AI ពិសេស, មគ្គុទេសក៍ដោះស្រាយបញ្ហា, និងគោលការណ៍ល្អបំផុត
 
 **ចូលរួមសហគមន៍របស់យើងដើម្បី:**
-- ចែករំលែកបទពិសោធន៍ AZD + AI និងទទួលបានជំនួយ
+- ចែករំលែកបទពិសោធន៍ AZD + AI របស់អ្នក និងទទួលជំនួយ
 - ចូលប្រើការមើលជាមុននៃគំរូ AI ថ្មីៗ
-- ធ្វើអ៊ីចង់លើការអនុវត្តល្អបំផុតនៃការដាក់បញ្ចូល AI
-- មានឥទ្ធិពលលើការអភិវឌ្ឍមុខងារ AI + AZD នៅអនាគត
+- មានភាគរយទៅក្នុងគោលការណ៍ការដាក់ AI ល្អបំផុត
+- ធ្វើឱ្យមានឥទ្ធិពលលើការអភិវឌ្ឍន៍មុខងារ AI + AZD ផ្សេងទៀត
 
-### ធ្វើរួមចំណែកក្នុងវគ្គសិក្សា
-យើងស្វាគមន៍ការរួមចំណែក! សូមអាន [មគ្គុទេសក៍ការរួមចំណែក](CONTRIBUTING.md) សម្រាប់ព័ត៌មានលម្អិតអំពី:
-- **ការកែលម្អខ្លឹមសារ**: កែលម្អជំពូក និងឧទាហរណ៍ដែលមានស្រាប់
-- **ឧទាហរណ៍ថ្មីៗ**: បន្ថែមឧទាហរណ៍ និងគំរូពិតប្រាកដ  
-- **ការបកប្រែ**: ជួយថែរក្សាគាំទ្រជាភាសាច្រើន
-- **រាយការណ៍កំហុស**: ធ្វើឱ្យមានភាពត្រឹមត្រូវ និងច្បាស់លាស់
-- **ស្តង់ដារសហគមន៍**: អនុរក្សវិធានការសំខាន់នៃសហគមន៍រួម
+### អនុរុទ្ធទៅវគ្គសិក្សា
+យើងស្វាគមន៍ការរួមចំណែក! សូមអាន [មគ្គុទេសក៍ការរួមចំណែក](CONTRIBUTING.md) សម្រាប់ព័ត៌មានលម្អិតអំពី៖
+- **ការកែលម្អមាតិកា**: បង្រួមជំពូកស្រាប់ និងឧទាហរណ៍
+- **ឧទាហរណ៍ថ្មី**: បន្ថែមទេពកោសល្យជាក់ស្តែង និងគំរូ  
+- **ការបកប្រែ**: ជួយថែទាំការគាំទ្រជាភាសាច្រើន
+- **រាយការណ៍កំហុស**: បង្កើនភាពត្រឹមត្រូវ និងច្បាស់លាស់
+- **ស្តង់ដារសហគមន៍**: តាមដានមធ្យោបាយសហគមន៍របស់យើង
 
 ---
 
-## 📄 ព័តកិច្ចវគ្គសិក្សា
+## 📄 ព័ត៌មានវគ្គសិក្សា
 
-### រក្សាសិទ្ធិ
-គម្រោងនេះមានអាជ្ញាប័ណ្ណក្រោមអាជ្ញាប័ណ្ណ MIT - សូមមើលឯកសារ [LICENSE](../../LICENSE) សម្រាប់ព័ត៌មានលម្អិត។
+### អាជ្ញាប័ណ្ណ
+គម្រោងនេះមានអាជ្ញាប័ណ្ណក្រោមអាជ្ញាប័ណ្ណ MIT - មើលឯកសារ [LICENSE](../../LICENSE) សម្រាប់ព័ត៌មានលម្អិត។
 
-### ធនធាន Microsoft សម្រាប់រៀនជាប់សាច់
+### ធនធានសិក្សាសាកល្បង Microsoft ដដែល
 
-ក្រុមការងារយើងផលិតវគ្គសិក្សាផ្សេងទៀតដែលទូលំទូលាយ៖
+ក្រុមការងារយើងផលិតវគ្គសិក្សាដទៃទៀតទូលំទូលាយ៖
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
@@ -1012,7 +1012,7 @@ azd env get-values
 [![LangChain សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
-### Azure / Edge / MCP / Agents
+### Azure / Edge / MCP / ភ្នាក់ងារ
 [![AZD សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -1020,42 +1020,42 @@ azd env get-values
 
 ---
  
-### ស៊េរី Generative AI
-[![Generative AI សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### ស៊េរី AI បង្កើត
+[![AI បង្កើតសម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI បង្កើត (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![AI បង្កើត (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![AI បង្កើត (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### ការរៀនមូលដ្ឋាន
+### ការរៀនគោល
 [![ML សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![វិទ្យាសាស្ត្រទិន្នន័យសម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![សន្តិសុខវេបសាយសម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![អភិវឌ្ឍន៍វេបសម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![សន្តិសុខCyberសម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![អភិវឌ្ឍវែបសម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 [![អភិវឌ្ឍ XR សម្រាប់អ្នកចាប់ផ្តើម](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### ស៊េរី Copilot
-[![Copilot សម្រាប់ការផ្គុំកម្មវិធី AI រួម](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot សម្រាប់កម្មវិធី AI ជាគូ](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot សម្រាប់ C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot រឿងកម្សាន្ត](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot ពីរឿងផ្ទាល់ខ្លួន](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
-## 🗺️ ទិសដៅវគ្គសិក្សា
+## 🗺️ ទីតាំងវគ្គសិក្សា
 
-**🚀 ត្រៀមខ្លួនសម្រាប់ចាប់ផ្តើមរៀន?**
+**🚀 ត្រៀមខ្លួនចាប់ផ្តើមរៀន?**
 
-**អ្នកចាប់ផ្តើម**: ចាប់ផ្តើមជាមួយ [ជំពូក ១: មូលដ្ឋាន & ចាប់ផ្តើមយ៉ាងរហ័ស](#-chapter-1-foundation--quick-start)  
-**អ្នកអភិវឌ្ឍ AI**: លោតទៅ [ជំពូក ២: ការអភិវឌ្ឍផ្តើមពី AI](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
-**អ្នកអភិវឌ្ឍមានបទពិសោធន៍**: ចាប់ផ្តើមជាមួយ [ជំពូក ៣: ការកំណត់រចនា & ការផ្ទៀងផ្ទាត់](#️-chapter-3-configuration--authentication)
+**អ្នកចាប់ផ្តើម**: ចាប់ផ្តើមជាមួយ [ជំពូក 1: មូលដ្ឋាន និងចាប់ផ្តើមលឿន](#-chapter-1-foundation--quick-start)  
+**អ្នកអភិវឌ្ឍ AI**: ហោះទៅ [ជំពូក 2: ការអភិវឌ្ឍ AI ជាលើកដំបូង](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
+**អ្នកអភិវឌ្ឍឆ្នើម**: ចាប់ផ្តើមជាមួយ [ជំពូក 3: ការកំណត់រចនាសម្ព័ន្ធ និងការផ្ទៀងផ្ទាត់](#️-chapter-3-configuration--authentication)
 
-**ជំហានបន្ទាប់**: [ចាប់ផ្តើមជំពូក ១ - មូលដ្ឋាន AZD](docs/chapter-01-foundation/azd-basics.md) →
+**ជំហ៊ានបន្ទាប់**: [ចាប់ផ្តើមជំពូក 1 - មូលដ្ឋាន AZD](docs/chapter-01-foundation/azd-basics.md) →
 
 ---
 

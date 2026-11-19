@@ -1,87 +1,93 @@
-# Study Guide - Complete Learning Objectives Dem
+# Study Guide - Comprehensive Learning Objectives
 
-**How To Find Your Way Inside Learning Path**
+**Learning Path Navigation**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Start Learning**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 Progress Tracking**: [Course Completion](../README.md#-course-completion--certification)
 
 ## Introduction
 
-Dis complete study guide dey give you structure learning goals, main key concepts, practice exercises, and test materials to make you sabi Azure Developer CLI (azd) well well. Use dis guide to check your progress and make sure say you cover all the koko dem.
+Dis kain study guide get all di important learning goals, key ideas dem, practice exercises, and assessment materials wey go help you sabi Azure Developer CLI (azd) well well. Use dis guide to dey track how far you don go and make sure say you don cover all di important tori dem.
 
-## Wetin You Go Learn
+## Learning Goals
 
-As you complete dis study guide, na wetin you go fit do be:
-- Sabi every basic and advanced concepts of Azure Developer CLI
-- Build correct skills for how to deploy and run Azure applications
-- Build better confidence for how to fix wahala and make deployment better
-- Understand how to deploy for production and how to take care of security matters
+If you finish dis study guide, you go:
+- Sabi all di basic and advanced tori dem of Azure Developer CLI
+- Develop practical skills for deploying and managing Azure apps
+- Build confidence to troubleshoot and make deployments beta
+- Understand how to deploy production-ready apps and security matter them
 
-## Things You Go Fit Do After Learning
+## Learning Outcomes
 
-After you don finish all di parts for dis study guide, you go fit:
-- Design, deploy, and manage full application setup using azd
-- Take care of full monitoring, security, and cost-saving plans
-- Fix sabi wahala wey tough for deployment all by yourself
-- Create your own templates and join the azd community
+After you complete all di sections inside dis guide, you go fit:
+- Design, deploy, and manage full app architectures using azd
+- Implement complete monitoring, security, and ways to reduce cost
+- Troubleshoot difficult deployment wahala by yourself
+- Create custom templates and join azd community work
 
-## 8 Chapters Learning Setup
+## 8-Chapter Learning Structure
 
 ### Chapter 1: Foundation & Quick Start (Week 1)
 **Duration**: 30-45 minutes | **Complexity**: ⭐
 
 #### Learning Objectives
-- Understand Azure Developer CLI main concepts and how dem take sound
-- Correctly install and arrange AZD for your development system
-- Deploy your first app using template wey dey ready
-- Use the AZD command-line properly without wahala
+- Understand Azure Developer CLI main concepts and word dem
+- Successfully install and set up AZD for your development machine
+- Deploy your first app using template wey dey
+- Use the AZD CLI command line interface well well
 
-#### Key Concepts to Sabi Well
-- AZD project structure and parts (azure.yaml, infra/, src/)
-- How to deploy using templates
-- Basic setup of environment
-- How to manage resource groups and subscriptions
+#### Key Concepts to Master
+- AZD project structure and components (azure.yaml, infra/, src/)
+- Template-based deployment workflows
+- Basic environment settings
+- Managing resource group and subscription
 
 #### Practical Exercises
-1. **Check Installation**: Install AZD and check am with `azd version`
-2. **First Deployment**: Successfully deploy todo-nodejs-mongo template
-3. **Setup Environment**: Arrange your first environment variables
-4. **Explore Resources**: Check deployed resources for Azure Portal
+1. **Installation Verification**: Install AZD and check am with `azd version`
+2. **First Deployment**: Deploy todo-nodejs-mongo template well
+3. **Environment Setup**: Set your first environment variables
+4. **Resource Exploration**: Use Azure Portal to navigate deployed resources
 
 #### Assessment Questions
-- Wetin be the main parts of AZD project?
+- Wetin be di main parts of AZD project?
 - How you go start new project from template?
-- Wetin be the difference between `azd up` and `azd deploy`?
-- How you take handle many environments with AZD?
+- Wetin make `azd up` and `azd deploy` different?
+- How you fit manage many environments inside AZD?
 
 ---
 
 ### Chapter 2: AI-First Development (Week 2)
-**Duration**: 1-2 hours | **Complexity**: ⭐⭐
+**Duration**: 4-5 hours including workshop | **Complexity**: ⭐⭐
 
 #### Learning Objectives
-- Join Microsoft Foundry services with AZD workflows
-- Deploy and setup AI-powered apps
-- Understand RAG (Retrieval-Augmented Generation) pattern wey dem dey use
+- Join Microsoft Foundry services with AZD workflow dem
+- Use the GA `microsoft.foundry` bundle with AZD 1.37.0+ for hosted-agent development
+- Deploy and set AI-powered applications
+- Sabi how RAG (Retrieval-Augmented Generation) dey work
 - Manage AI model deployment and scaling
 
-#### Key Concepts to Sabi Well
-- Microsoft Foundry Models service joining and API management
+#### Key Concepts to Master
+- Microsoft Foundry Models service join and API management
 - AI Search setup and vector indexing
-- Model deployment style and planning capacity
-- Monitoring AI apps and making dem sharp
+- Model deployment plans and capacity planning
+- AI app monitoring and make performance beta
+- Local Agent Inspector vs cloud traces, source-code deployment, and evaluation assets inside version control
 
 #### Practical Exercises
 1. **AI Chat Deployment**: Deploy azure-search-openai-demo template
-2. **RAG Implementation**: Setup document indexing and retrieval
-3. **Model Setup**: Arrange many AI models wey get different purposes
-4. **AI Monitoring**: Put Application Insights for AI workloads
+2. **RAG Implementation**: Configure document indexing and retrieval
+3. **Model Configuration**: Set up different AI models wey get different purposes
+4. **AI Monitoring**: Use Application Insights for AI workloads
+5. **GA Hosted Agent**: Follow the [hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga); compare local and cloud responses, review evaluation result, and confirm who clean am up
 
 #### Assessment Questions
-- How you go configure Microsoft Foundry Models services for AZD template?
-- Wetin be the main parts of RAG architecture?
-- How you manage AI model capacity and scaling?
-- Which monitoring metrics important for AI apps?
+- How you fit configure Microsoft Foundry Models service inside AZD template?
+- Wetin be di important parts for RAG architecture?
+- How you dey manage AI model capacity and scaling?
+- Wetin monitoring metrics dey important for AI app dem?
+- Which extensions dey inside `microsoft.foundry`, and why dem dey install evaluation apart?
+- Why local agent tests still dey cause Azure model charges?
+- Wetin `azd down` dey leave behind when you reuse existing Foundry project?
 
 ---
 
@@ -89,28 +95,28 @@ After you don finish all di parts for dis study guide, you go fit:
 **Duration**: 45-60 minutes | **Complexity**: ⭐⭐
 
 #### Learning Objectives
-- Master how to configure environment and manage am well
-- Use secure authentication styles and managed identity
-- Arrange resources with correct naming gaya
-- Setup multi-environment deployment (dev, staging, prod)
+- Master environment configuration and how to manage am well
+- Use secure authentication ways and managed identity
+- Arrange resources with correct naming system
+- Set multi-environment deployments (dev, staging, prod)
 
-#### Key Concepts to Sabi Well
-- Environment order and configuration that matter pass
-- Managed identity and service principal authentication
-- Using Key Vault for managing secrets
-- Managing parameters wey dey specific to environment
+#### Key Concepts to Master
+- Environment hierarchy and configuration order
+- Managed identity and service principal for authentication
+- Use Key Vault for secrets management
+- Parameter management for each environment
 
 #### Practical Exercises
-1. **Setup for Many Environment**: Configure dev, staging, and prod environments
-2. **Security Setup**: Use managed identity for authentication
-3. **Secrets Management**: Use Azure Key Vault for sensitive data
-4. **Parameters Management**: Make special config for environment
+1. **Multi-Environment Setup**: Set up dev, staging, and prod environments
+2. **Security Configuration**: Use managed identity authentication
+3. **Secrets Management**: Connect Azure Key Vault for sensitive info
+4. **Parameter Management**: Create environment-specific configs
 
 #### Assessment Questions
-- How you go configure different environments with AZD?
-- Wetin be the advantage of using managed identity pass service principals?
-- How you take safely manage app secrets?
-- Wetin be the configuration hierarchy for AZD?
+- How you fit configure different environments for AZD?
+- Wetin be benefit of managed identity over service principals?
+- How you dey keep app secrets safely?
+- How configuration hierarchy dey inside AZD?
 
 ---
 
@@ -118,33 +124,33 @@ After you don finish all di parts for dis study guide, you go fit:
 **Duration**: 1-1.5 hours | **Complexity**: ⭐⭐⭐
 
 #### Learning Objectives
-- Make and customize Bicep infrastructure templates
+- Create and customize Bicep templates for infrastructure
 - Use advanced deployment patterns and workflows
-- Understand how to provide resources
-- Design scalable architecture wey get many services
+- Understand how to provision resources well well
+- Design scalable architectures with many services
 
-- Deploy container apps using Azure Container Apps and AZD
+- Deploy containerized apps wit Azure Container Apps and AZD
 
 
-#### Key Concepts to Sabi Well
-- Bicep template structure and correct way to use am
-- Resource dependencies and deployment order
-- Parameter files and making template modular
-- Custom hooks and automation for deployment
-- Container app deployment pattern (quick start, production, microservices)
+#### Key Concepts to Master
+- Bicep template structure and beta practice dem
+- Resource dependencies and order for deployment
+- Parameter files and template modularity
+- Custom hooks and deployment automation
+- Container app deployment styles (quick start, production, microservices)
 
 #### Practical Exercises
 1. **Custom Template Creation**: Build multi-service app template
-2. **Bicep Mastery**: Make modular and reusable infrastructure pieces
+2. **Bicep Mastery**: Create modular, reusable infrastructure parts
 3. **Deployment Automation**: Use pre/post deployment hooks
 4. **Architecture Design**: Deploy complex microservices architecture
-5. **Container App Deployment**: Deploy the [Simple Flask API](../../../examples/container-app/simple-flask-api) and [Microservices Architecture](../../../examples/container-app/microservices) examples using AZD
+5. **Container App Deployment**: Deploy [Simple Flask API](../../../examples/container-app/simple-flask-api) and [Microservices Architecture](../../../examples/container-app/microservices) using AZD
 
 #### Assessment Questions
-- How you go create custom Bicep templates for AZD?
-- Wetin be the best way to organize infrastructure code?
-- How you go handle resource dependencies in templates?
-- Which deployment pattern fit support zero downtime updates?
+- How you create custom Bicep templates for AZD?
+- Wetin be best practice for organizing infrastructure code?
+- How you fit manage resource dependencies for templates?
+- Wetin kind deployment patterns dey support zero-downtime updates?
 
 ---
 
@@ -152,31 +158,31 @@ After you don finish all di parts for dis study guide, you go fit:
 **Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
 
 #### Learning Objectives
-- Design and put multi-agent AI architectures for ground
-- Organize how agents go coordinate and talk
-- Deploy production-level AI solutions wit monitoring
-- Understand agent specialization and workflow styles
-- Join containerized microservices as part of multi-agent solutions
+- Design and build multi-agent AI architectures
+- Orchestrate agent coordination and their communication
+- Deploy production-ready AI solutions with monitoring
+- Understand agent specialization and workflow patterns
+- Combine containerized microservices as part of multi-agent solutions
 
-#### Key Concepts to Sabi Well
-- Multi-agent architecture style and design principles
-- Agent communication ways and data waka
-- Load balancing and scaling styles for AI agent
+#### Key Concepts to Master
+- Multi-agent architecture patterns and design principles
+- Agent communication protocols and data flow
+- Load balancing and scaling strategies for AI agents
 - Production monitoring for multi-agent systems
-- Service-to-service communication for containerized environment
+- Service-to-service communication in container environments
 
 #### Practical Exercises
-1. **Retail Architecture Review**: Look through retail blueprint to know which app parts must finish before deployment
+1. **Retail Architecture Review**: Check retail blueprint and find which app parts must dey work before deployment
 2. **Agent Customization**: Change how Customer and Inventory agents dey behave
-3. **Architecture Scaling**: Setup load balancing and auto-scaling
-4. **Production Monitoring**: Arrange full monitoring and alerting system
-5. **Microservices Integration**: Add [Microservices Architecture](../../../examples/container-app/microservices) example to support agent workflow
+3. **Architecture Scaling**: Implement load balancing and auto-scaling
+4. **Production Monitoring**: Set up full monitoring and alerting system
+5. **Microservices Integration**: Add [Microservices Architecture](../../../examples/container-app/microservices) example to support agent-based workflows
 
 #### Assessment Questions
-- How you go design correct multi-agent communication ways?
-- Wetin be the main things for scaling AI agent workloads?
-- How you go take monitor and debug multi-agent AI systems?
-- Which production styles dey make AI agents reliable?
+- How you go design better multi-agent communication ways?
+- Wetin be key points to think about when scaling AI agent workload?
+- How you go monitor and debug multi-agent AI systems?
+- Which production patterns fit to make AI agents reliable?
 
 ---
 
@@ -184,28 +190,28 @@ After you don finish all di parts for dis study guide, you go fit:
 **Duration**: 1 hour | **Complexity**: ⭐⭐
 
 #### Learning Objectives
-- Do full capacity planning and resource check
-- Choose best Azure SKUs to save cost
-- Use auto pre-flight check and validation
-- Plan deployment with cost saving ideas
+- Do thorough capacity planning and resource checks
+- Pick correct Azure SKUs to reduce cost
+- Use automated pre-deployment checks and validation
+- Plan deployment with cost-saving steps
 
-#### Key Concepts to Sabi Well
-- Azure resource limits and capacity wahala
-- How to choose SKU and save cost
-- Auto check scripts and testing
-- Plan deployment and risk check
+#### Key Concepts to Master
+- Azure resource quotas and capacity limits
+- How to pick SKU and optimize cost
+- Automated validation scripts and testing
+- Deployment plan and risk check
 
 #### Practical Exercises
-1. **Capacity Analysis**: Analyze resource needs for your apps
-2. **SKU Optimization**: Compare and choose cost-saving service tiers
-3. **Validation Automation**: Put pre-deployment check scripts
-4. **Cost Planning**: Create cost planning and budgets for deployment
+1. **Capacity Analysis**: Check resource needs for your apps
+2. **SKU Optimization**: Compare and select cost-saving service tiers
+3. **Validation Automation**: Use pre-deployment check scripts
+4. **Cost Planning**: Make deployment cost estimate and budget
 
 #### Assessment Questions
-- How you go validate Azure capacity before deployment?
+- How you fit check Azure capacity before deployment?
 - Wetin dey affect SKU choice decisions?
-- How you take automate pre-deployment validation?
-- Which strategies fit help save deployment cost?
+- How you fit automate pre-deployment validation?
+- Which kind strategies fit help save deployment cost?
 
 ---
 
@@ -213,28 +219,28 @@ After you don finish all di parts for dis study guide, you go fit:
 **Duration**: 1-1.5 hours | **Complexity**: ⭐⭐
 
 #### Learning Objectives
-- Build systematic debugging methods for AZD deployment wahala
-- Fix common deployment and config issues
-- Debug AI specific wahala and performance issues
-- Use monitoring and alert system to find problems early
+- Develop step-by-step debugging methods for AZD deployments
+- Solve common deployment and configuration problems
+- Debug AI-specific wahala and performance issues
+- Use monitoring and alerting to catch problems early
 
-#### Key Concepts to Sabi Well
-- Diagnostic and logging ways
-- Common failure patterns and how to fix dem
-- Performance checking and improvements
-- How to take do incident response and recovery
+#### Key Concepts to Master
+- Diagnostic ways and logging methods
+- Common failures and how to solve dem
+- Performance monitoring and ways to improve
+- Incident response and recovery steps
 
 #### Practical Exercises
 1. **Diagnostic Skills**: Practice with purposely broken deployments
-2. **Log Analysis**: Use Azure Monitor and Application Insights well well
-3. **Performance Tuning**: Make slow apps fast
-4. **Recovery Steps**: Use backup and disaster recovery plans
+2. **Log Analysis**: Use Azure Monitor and Application Insights well
+3. **Performance Tuning**: Make slow apps faster
+4. **Recovery Procedures**: Do backup and disaster recovery plan
 
 #### Assessment Questions
-- Wetin be the most common AZD deployment failures?
-- How you go debug authentication and permission wahala?
-- Which monitoring ways fit stop production wahala?
-- How you go make app performance better for Azure?
+- Wetin be di commonest AZD deployment failure?
+- How you fit debug authentication and permission wahala?
+- Which monitoring plans fit stop production problems?
+- How you fit make app performance beta for Azure?
 
 ---
 
@@ -242,43 +248,43 @@ After you don finish all di parts for dis study guide, you go fit:
 **Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
 
 #### Learning Objectives
-- Use enterprise-level deployment styles
-- Design security patterns and compliance frameworks
-- Setup monitoring, governance and cost control
-- Make scalable CI/CD pipelines with AZD connection
-- Use best ways for production container app deployment (security, monitoring, cost, CI/CD)
+- Use top enterprise-grade deployment ways
+- Design security patterns and compliance structure dem
+- Set monitoring, governance, and cost management
+- Build scalable CI/CD pipelines wey fit connect AZD
+- Use best practice for production container app deployments (security, monitoring, cost, CI/CD)
 
-#### Key Concepts to Sabi Well
-- Enterprise security and compliance needs
-- Governance and policy setup
+#### Key Concepts to Master
+- Enterprise security and compliance rules
+- Governance framework and policy setup
 - Advanced monitoring and cost control
-- CI/CD integration and automatic deployment pipelines
-- Blue-green and canary deployment ways for container workloads
+- CI/CD connection and automated deployment pipelines
+- Blue-green and canary deployment styles for container workloads
 
 #### Practical Exercises
-1. **Enterprise Security**: Setup solid security patterns
-2. **Governance Framework**: Setup Azure Policy and resource control
-3. **Advanced Monitoring**: Make dashboards and automatic alerts
-4. **CI/CD Integration**: Build automatic deployment pipelines
-5. **Production Container Apps**: Use security, monitoring, and cost saving for [Microservices Architecture](../../../examples/container-app/microservices) example
+1. **Enterprise Security**: Use full security patterns
+2. **Governance Framework**: Set Azure Policy and resource management
+3. **Advanced Monitoring**: Make dashboards and automatic alerting
+4. **CI/CD Integration**: Build automated deployment pipeline
+5. **Production Container Apps**: Use security, monitoring, and cost savings for [Microservices Architecture](../../../examples/container-app/microservices) example
 
 #### Assessment Questions
-- How you put enterprise security for AZD deployments?
-- Wetin be governance patterns wey fit make sure compliance and cost control?
-- How you design scalable monitoring for production system dem?
-- Wetin CI/CD patterns make sense well with AZD workflows?
+- How you go implement enterprise security for AZD deployments?
+- Which governance patterns fit to ensure compliance and cost control?
+- How you go design scalable monitoring for production?
+- Wetin CI/CD patterns dey work best for AZD workflows?
 
 #### Learning Objectives
 - Understand Azure Developer CLI basics and main concepts
-- Correctly install and arrange azd for your development environment
-- Finish your first deployment using ready template
-- Find your way inside azd project structure and sabi main parts
+- Successfully install and configure azd for your development setup
+- Do your first deployment using template wey dey
+- Know azd project structure and main parts
 
-#### Key Concepts to Sabi Well
+#### Key Concepts to Master
 - Templates, environments, and services
-- azure.yaml configuration setup
+- azure.yaml config structure
 - Basic azd commands (init, up, down, deploy)
-- Infrastructure as Code principles
+- Infrastructure as Code rule dem
 - Azure authentication and permission
 
 #### Practice Exercises
@@ -313,15 +319,15 @@ Analyze the following components:
 ```
 
 #### Self-Assessment Questions
-1. Wetin be the three main ideas of azd architecture?
-2. Wetin be the work wey azure.yaml file dey do?
-3. How different environments dey help manage different deployment places?
-4. Which authentication ways you fit use with azd?
-5. Wetin happen when you run `azd up` first time?
+1. Wetin be di three main concepts of azd architecture?
+2. Wetin be purpose of azure.yaml file?
+3. How environments dey help manage different deployment target dem?
+4. Which authentication methods you fit use with azd?
+5. Wetin happen if you run `azd up` first time?
 
 ---
 
-## Progress Tracking and Assessment Setup
+## Progress Tracking and Assessment Framework
 ```text
 # Create and configure multiple environments:
 1. Create development environment: azd env new development
@@ -350,26 +356,26 @@ Analyze the following components:
 ```
 
 #### Self-Assessment Questions
-1. How azd dey handle environment variable importance order?
+1. How azd dey take handle environment variable priority?
 2. Wetin be deployment hooks and when you suppose use dem?
-3. How you go configure different SKUs for different environments?
-4. Wetin be the security matters about different authentication ways?
-5. How you go manage secrets and sensitive configuration data?
+3. How you go configure different SKUs for different environment dem?
+4. Wetin be security issues for different authentication ways?
+5. How you go manage secrets and sensitive config data?
 
 ### Module 3: Deployment and Provisioning (Week 4)
 
 #### Learning Objectives
-- Master deployment workflows and correct ways wey best
+- Master deployment workflows and beta practices
 - Understand Infrastructure as Code with Bicep templates
-- Use complex architecture wey get many services
-- Make deployment fast and dependable
+- Build complex multi-service architectures
+- Make deployment fast and reliable
 
-#### Key Concepts to Sabi Well
+#### Key Concepts to Master
 - Bicep template structure and modules
-- Resource dependencies and how dem follow one another
-- Deployment ways (blue-green, rolling updates)
-- Deployment for many regions
-- Database migration and data handling
+- Resource dependencies and ordering
+- Deployment strategies (blue-green, rolling updates)
+- Deploy to many regions
+- Database migrations and data management
 
 #### Practice Exercises
 
@@ -404,26 +410,26 @@ Analyze the following components:
 ```
 
 #### Self-Assessment Questions
-1. Wetin be di better side of Bicep compared to ARM templates?
-2. How you handle database migration inside azd deployment?
-3. Which strategies dey for zero downtime deployment?
-4. How you take manage dependencies between services?
-5. Wetin you suppose consider for multi-region deployment?
+1. Wetin be di advantages of using Bicep pass ARM templates?
+2. How you dey handle database migrations for azd deployments?
+3. Wetin be di strategies wey dey for zero-downtime deployments?
+4. How you dey manage dependencies between services?
+5. Wetin be di considerations for multi-region deployments?
 
 ### Module 4: Pre-Deployment Validation (Week 5)
 
 #### Learning Objectives
-- Make sure say you do full checks before deployment
-- Become master for capacity planning and resource validation
-- Understand how to select SKU and how to reduce cost
-- Build automatic validation pipelines
+- Implement comprehensive pre-deployment checks
+- Master capacity planning and resource validation
+- Understand SKU selection and cost optimization
+- Build automated validation pipelines
 
-#### Main Things You Suppose Know
+#### Key Concepts to Master
 - Azure resource quotas and limits
-- How to choose SKU and the cost wahala wey dey
-- Automatic validation scripts and tools
-- Capacity planning methods
-- Performance testing and how to optimize am
+- SKU selection criteria and cost implications
+- Automated validation scripts and tools
+- Capacity planning methodologies
+- Performance testing and optimization
 
 #### Practice Exercises
 
@@ -458,26 +464,26 @@ Analyze the following components:
 ```
 
 #### Self-Assessment Questions
-1. Wetin be the factors wey suppose affect SKU selection?
-2. How you go take check say Azure resource dey available before deployment?
-3. Wetin be the main parts for pre-flight check system?
-4. How you go take guess and control deployment cost?
-5. Which monitoring important for capacity planning?
+1. Wetin be di factors wey suppose influence SKU selection decisions?
+2. How you dey validate Azure resource availability before deployment?
+3. Wetin be di key components of pre-flight check system?
+4. How you dey estimate and control deployment costs?
+5. Wetin monitoring dey essential for capacity planning?
 
 ### Module 5: Troubleshooting and Debugging (Week 6)
 
 #### Learning Objectives
-- Master how to troubleshoot systematically
-- Develop skills for debugging complex deployment problems
-- Do full monitoring and alerting
-- Build incident response and recovery plan
+- Master systematic troubleshooting methodologies
+- Develop expertise for debugging complex deployment issues
+- Implement comprehensive monitoring and alerting
+- Build incident response and recovery procedures
 
-#### Main Things You Suppose Know
+#### Key Concepts to Master
 - Common deployment failure patterns
-- Log analysis and how to join dem together
-- Performance monitoring and how to optimize
-- Security incident detection and how to respond
-- Disaster recovery and how to keep business dey continue
+- Log analysis and correlation techniques
+- Performance monitoring and optimization
+- Security incident detection and response
+- Disaster recovery and business continuity
 
 #### Practice Exercises
 
@@ -512,26 +518,26 @@ Analyze the following components:
 ```
 
 #### Self-Assessment Questions
-1. How be the correct way to troubleshoot azd deployments?
-2. How you fit join logs from plenti services and resources?
-3. Which monitoring metrics be the most important for early problem detection?
-4. How you take implement good disaster recovery procedures?
-5. Wetin be the key parts of incident response plan?
+1. Wetin be di systematic approach to troubleshooting azd deployments?
+2. How you dey correlate logs across multiple services and resources?
+3. Wetin monitoring metrics be di most critical for early problem detection?
+4. How you dey implement effective disaster recovery procedures?
+5. Wetin be di key components of incident response plan?
 
 ### Module 6: Advanced Topics and Best Practices (Week 7-8)
 
 #### Learning Objectives
-- Do enterprise-level deployment patterns
+- Implement enterprise-grade deployment patterns
 - Master CI/CD integration and automation
-- Build custom templates and help di community
-- Understand advanced security and compliance wahala
+- Develop custom templates and contribute to di community
+- Understand advanced security and compliance requirements
 
-#### Main Things You Suppose Know
+#### Key Concepts to Master
 - CI/CD pipeline integration patterns
-- How to build and share custom templates
+- Custom template development and distribution
 - Enterprise governance and compliance
-- Advanced networking and security settings
-- Performance optimization and how to manage cost
+- Advanced networking and security configurations
+- Performance optimization and cost management
 
 #### Practice Exercises
 
@@ -566,69 +572,69 @@ Analyze the following components:
 ```
 
 #### Self-Assessment Questions
-1. How you go take join azd into existing CI/CD workflows?
-2. Wetin be the main things to consider for custom template development?
-3. How you go take do governance and compliance for azd deployments?
-4. Wetin be the best ways for enterprise-scale deployments?
-5. How you fit contribute well to the azd community?
+1. How you dey integrate azd into existing CI/CD workflows?
+2. Wetin be di key considerations for custom template development?
+3. How you dey implement governance and compliance for azd deployments?
+4. Wetin be di best practices for enterprise-scale deployments?
+5. How you fit contribute effectively to di azd community?
 
 ## Practical Projects
 
 ### Project 1: Personal Portfolio Website
-**Difficulty**: Beginner  
+**Complexity**: Beginner  
 **Duration**: 1-2 weeks
 
 Build and deploy personal portfolio website using:
 - Static website hosting for Azure Storage
-- Custom domain settings
-- CDN integration for better global performance
+- Custom domain configuration
+- CDN integration for global performance
 - Automated deployment pipeline
 
 **Deliverables**:
-- Working website wey dey deployed on Azure
-- Custom azd template for portfolio deployment
-- Documentation of how you deploy am
-- Cost analysis and better ways to reduce am
+- Working website wey dey deployed for Azure
+- Custom azd template for portfolio deployments
+- Documentation of deployment process
+- Cost analysis and optimization recommendations
 
 ### Project 2: Task Management Application
-**Difficulty**: Intermediate  
+**Complexity**: Intermediate  
 **Duration**: 2-3 weeks
 
-Build full-stack task management app with:
-- React frontend wey deployed to App Service
-- Node.js API backend plus authentication
-- PostgreSQL database plus migrations
+Create full-stack task management application with:
+- React frontend wey dey deployed to App Service
+- Node.js API backend with authentication
+- PostgreSQL database with migrations
 - Application Insights monitoring
 
 **Deliverables**:
-- Complete app with user authentication
+- Complete application with user authentication
 - Database schema and migration scripts
-- Monitoring dashboards and alert rules
-- Multi-environment deployment settings
+- Monitoring dashboards and alerting rules
+- Multi-environment deployment configuration
 
 ### Project 3: Microservices E-commerce Platform
-**Difficulty**: Advanced  
+**Complexity**: Advanced  
 **Duration**: 4-6 weeks
 
-Design and build microservices e-commerce platform:
-- Many API services (catalog, orders, payments, users)
-- Message queue wey join Service Bus
-- Redis cache for better performance
-- Full logging and monitoring
+Design and implement microservices-based e-commerce platform:
+- Multiple API services (catalog, orders, payments, users)
+- Message queue integration with Service Bus
+- Redis cache for performance optimization
+- Comprehensive logging and monitoring
 
-**Example for Reference**: See [Microservices Architecture](../../../examples/container-app/microservices) for two-service learning and deployment guide. Queues, persistence, authentication, payment processing, plus production hardening na separate project work.
+**Reference Example**: See [Microservices Architecture](../../../examples/container-app/microservices) for two-service learning sample and deployment guide. Queues, persistence, authentication, payment processing, and production hardening na separate project work.
 
 **Deliverables**:
 - Complete microservices architecture
-- How the services dey talk to one another
+- Inter-service communication patterns
 - Performance testing and optimization
-- Security implementation wey ready for production
+- Production-ready security implementation
 
 ## Assessment and Certification
 
 ### Knowledge Checks
 
-Complete these checks after each module:
+Complete these assessments after each module:
 
 **Module 1 Assessment**: Basic concepts and installation
 - Multiple choice questions on core concepts
@@ -662,22 +668,22 @@ Complete these checks after each module:
 
 ### Final Capstone Project
 
-Design and build full solution wey show sey you sabi all di concepts:
+Design and implement complete solution wey show mastery of all concepts:
 
 **Requirements**:
 - Multi-tier application architecture
-- Plenty deployment environments
-- Full monitoring and alerting
+- Multiple deployment environments
+- Comprehensive monitoring and alerting
 - Security and compliance implementation
 - Cost optimization and performance tuning
 - Complete documentation and runbooks
 
 **Evaluation Criteria**:
-- Quality of technical implementation
-- How complete documentation be
-- Following security plus best practices
+- Technical implementation quality
+- Documentation completeness
+- Security and best practices adherence
 - Performance and cost optimization
-- Effectiveness of troubleshooting and monitoring
+- Troubleshooting and monitoring effectiveness
 
 ## Study Resources and References
 
@@ -719,141 +725,141 @@ Design and build full solution wey show sey you sabi all di concepts:
 
 ---
 
-## How To Track Progress and Assessment Framework
+## Progress Tracking and Assessment Framework
 
 ### Chapter Completion Checklist
 
-Track your progress for every chapter with these checkpoints:
+Track your progress through each chapter wit these measurable outcomes:
 
 #### 📚 Chapter 1: Foundation & Quick Start
-- [ ] **Installation Complete**: AZD install finish and e don check for your platform
-- [ ] **First Deployment**: You don deploy todo-nodejs-mongo template well
-- [ ] **Environment Setup**: You don set your first environment variables
+- [ ] **Installation Complete**: AZD don install and you don verify for your platform
+- [ ] **First Deployment**: You don successfully deploy todo-nodejs-mongo template
+- [ ] **Environment Setup**: Configured first environment variables
 - [ ] **Resource Navigation**: You don explore deployed resources for Azure Portal
-- [ ] **Command Mastery**: You sabi basic AZD commands well
+- [ ] **Command Mastery**: You dey comfortable wit basic AZD commands
 
 #### 🤖 Chapter 2: AI-First Development  
-- [ ] **AI Template Deployment**: You don deploy azure-search-openai-demo correct
-- [ ] **RAG Implementation**: You don configure document indexing and retrieval
-- [ ] **Model Configuration**: You setup plenty AI models for different work
+- [ ] **AI Template Deployment**: You don deploy azure-search-openai-demo successfully
+- [ ] **RAG Implementation**: Configured document indexing and retrieval
+- [ ] **Model Configuration**: You don set up multiple AI models wit different purposes
 - [ ] **AI Monitoring**: You don implement Application Insights for AI workloads
 - [ ] **Performance Optimization**: You don tune AI application performance
 
 #### ⚙️ Chapter 3: Configuration & Authentication
-- [ ] **Multi-Environment Setup**: You configure dev, staging, and prod environments
-- [ ] **Security Implementation**: You setup managed identity authentication
-- [ ] **Secrets Management**: You join Azure Key Vault for sensitive data
-- [ ] **Parameter Management**: You create environment-specific configurations
-- [ ] **Authentication Mastery**: You implement secure access patterns
+- [ ] **Multi-Environment Setup**: You don configure dev, staging, and prod environments
+- [ ] **Security Implementation**: You don set up managed identity authentication
+- [ ] **Secrets Management**: You integrate Azure Key Vault for sensitive data
+- [ ] **Parameter Management**: You don create environment-specific configurations
+- [ ] **Authentication Mastery**: You don implement secure access patterns
 
 #### 🏗️ Chapter 4: Infrastructure as Code & Deployment
 - [ ] **Custom Template Creation**: You build multi-service application template
-- [ ] **Bicep Mastery**: You create modular, reusable infrastructure parts
+- [ ] **Bicep Mastery**: You create modular, reusable infrastructure components
 - [ ] **Deployment Automation**: You implement pre/post deployment hooks
 - [ ] **Architecture Design**: You deploy complex microservices architecture
 - [ ] **Template Optimization**: You optimize templates for performance and cost
 
 #### 🎯 Chapter 5: Multi-Agent AI Solutions
-- [ ] **Retail Architecture Review**: You locate missing app components and plan how to implement and validate them
-- [ ] **Agent Customization**: You change Customer and Inventory agent behaviors
+- [ ] **Retail Architecture Review**: You identify missing application components and plan di implementation and validation
+- [ ] **Agent Customization**: You modify Customer and Inventory agent behaviors
 - [ ] **Architecture Scaling**: You implement load balancing and auto-scaling
-- [ ] **Production Monitoring**: You setup full monitoring and alerting
+- [ ] **Production Monitoring**: You set up comprehensive monitoring and alerting
 - [ ] **Performance Tuning**: You optimize multi-agent system performance
 
 #### 🔍 Chapter 6: Pre-Deployment Validation & Planning
-- [ ] **Capacity Analysis**: You analyze resource needs for apps
-- [ ] **SKU Optimization**: You choose cost-effective service tiers
+- [ ] **Capacity Analysis**: You analyze resource requirements for applications
+- [ ] **SKU Optimization**: You select cost-effective service tiers
 - [ ] **Validation Automation**: You implement pre-deployment check scripts
 - [ ] **Cost Planning**: You create deployment cost estimates and budgets
-- [ ] **Risk Assessment**: You identify and reduce deployment risks
+- [ ] **Risk Assessment**: You identify and mitigate deployment risks
 
 #### 🚨 Chapter 7: Troubleshooting & Debugging
-- [ ] **Diagnostic Skills**: You don debug broken deployments successfully
-- [ ] **Log Analysis**: You use Azure Monitor and Application Insights well
-- [ ] **Performance Tuning**: You optimize slow apps
+- [ ] **Diagnostic Skills**: You don successfully debug intentionally broken deployments
+- [ ] **Log Analysis**: You use Azure Monitor and Application Insights effectively
+- [ ] **Performance Tuning**: You optimize slow-performing applications
 - [ ] **Recovery Procedures**: You implement backup and disaster recovery
 - [ ] **Monitoring Setup**: You create proactive monitoring and alerting
 
 #### 🏢 Chapter 8: Production & Enterprise Patterns
-- [ ] **Enterprise Security**: You implement full security patterns
-- [ ] **Governance Framework**: You set Azure Policy and manage resources
-- [ ] **Advanced Monitoring**: You create dashboards and automatic alerting
+- [ ] **Enterprise Security**: You implement comprehensive security patterns
+- [ ] **Governance Framework**: You set up Azure Policy and resource management
+- [ ] **Advanced Monitoring**: You create dashboards and automated alerting
 - [ ] **CI/CD Integration**: You build automated deployment pipelines
 - [ ] **Compliance Implementation**: You meet enterprise compliance requirements
 
 ### Learning Timeline and Milestones
 
 #### Week 1-2: Foundation Building
-- **Milestone**: Deploy first AI app with AZD
-- **Validation**: Working app wey people fit access via public URL
-- **Skills**: Basic AZD workflow and AI service join up
+- **Milestone**: Deploy first AI application using AZD
+- **Validation**: Working application wey people fit access via public URL
+- **Skills**: Basic AZD workflows and AI service integration
 
 #### Week 3-4: Configuration Mastery
-- **Milestone**: Multi-environment deployment with secure authentication
-- **Validation**: Same app dey for dev/staging/prod
+- **Milestone**: Multi-environment deployment wit secure authentication
+- **Validation**: Same application deployed to dev/staging/prod
 - **Skills**: Environment management and security implementation
 
 #### Week 5-6: Infrastructure Expertise
-- **Milestone**: Custom template for complex multi-service app
-- **Validation**: Template wey reusable deploy by another team member
+- **Milestone**: Custom template for complex multi-service application
+- **Validation**: Reusable template wey another team member deploy
 - **Skills**: Bicep mastery and infrastructure automation
 
 #### Week 7-8: Advanced AI Implementation
 - **Milestone**: Production-ready multi-agent AI solution
-- **Validation**: System fit handle real-world load with monitoring
+- **Validation**: System wey fit handle real-world load wit monitoring
 - **Skills**: Multi-agent orchestration and performance optimization
 
 #### Week 9-10: Production Readiness
-- **Milestone**: Enterprise-grade deployment with full compliance
-- **Validation**: Pass security review and cost optimization audit
+- **Milestone**: Enterprise-grade deployment wit full compliance
+- **Validation**: Passes security review and cost optimization audit
 - **Skills**: Governance, monitoring, and CI/CD integration
 
 ### Assessment and Certification
 
 #### Knowledge Validation Methods
-1. **Practical Deployments**: Working apps for each chapter
-2. **Code Reviews**: Check template and config quality
-3. **Problem Solving**: Troubleshooting scenarios and solutions
-4. **Peer Teaching**: Explain concepts to other students
-5. **Community Contribution**: Share templates or improvements
+1. **Practical Deployments**: Wok pan dem applications for each chapter
+2. **Code Reviews**: Template an configuration quality check
+3. **Problem Solving**: Troubleshooting tins and solution dem
+4. **Peer Teaching**: Explain tins to oda learners
+5. **Community Contribution**: Share templates or better tins
 
 #### Professional Development Outcomes
-- **Portfolio Projects**: Learning deployments and architecture exercises; production readiness need separate implementation and review
-- **Technical Skills**: Industry-standard AZD and AI deployment expertise
-- **Problem-Solving Abilities**: Independent troubleshooting and optimization
+- **Portfolio Projects**: Learning deployments an architecture exercises; production readiness need separate implementation and review
+- **Technical Skills**: Industry-standard AZD an AI deployment skills
+- **Problem-Solving Abilities**: Independent troubleshooting an optimization
 - **Community Recognition**: Active participation for Azure developer community
-- **Career Advancement**: Skills wey fit directly work for cloud and AI roles
+- **Career Advancement**: Skills wey fit cloud an AI work direct
 
 #### Success Metrics
-- **Deployment Success Rate**: >95% beta deployments wey succeed
-- **Troubleshooting Time**: <30 minutes for common wahala dem
-- **Performance Optimization**: Clear improvements for cost and performance
-- **Security Review**: Write down controls and any gaps wey remain against your organization requirements; finish the course no mean say compliance dey guaranteed
-- **Knowledge Transfer**: Fit to mentor other developers
+- **Deployment Success Rate**: >95% successful deployments
+- **Troubleshooting Time**: <30 minutes for normal issues
+- **Performance Optimization**: Show clear improvements for cost an performance
+- **Security Review**: Document controls an remaining gaps against your organization's requirements; course completion no mean say compliance don finish
+- **Knowledge Transfer**: Fit teach oda developers
 
 ### Continuous Learning and Community Engagement
 
 #### Stay Current
 - **Azure Updates**: Follow Azure Developer CLI release notes
-- **Community Events**: Join Azure and AI developer events
-- **Documentation**: Help contribute to community documentation and examples
-- **Feedback Loop**: Give feedback for course content and Azure services
+- **Community Events**: Join Azure an AI developer events
+- **Documentation**: Contribute to community documentation an examples
+- **Feedback Loop**: Give feedback on course content an Azure services
 
 #### Career Development
-- **Professional Network**: Connect with Azure and AI experts dem
-- **Speaking Opportunities**: Present wetin you learn for conferences or meetups
-- **Open Source Contribution**: Help contribute to AZD templates and tools
-- **Mentorship**: Guide other developers for their AZD learning journey
+- **Professional Network**: Connect with Azure an AI experts dem
+- **Speaking Opportunities**: Talk about wetin you learn for conferences or meetups
+- **Open Source Contribution**: Help work on AZD templates an tools
+- **Mentorship**: Guide oda developers for their AZD learning waka
 
 ---
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Start Learning**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Progress Tracking**: Track your advancement through the comprehensive 8-chapter learning system
-- **🤝 Community**: [Azure Discord](https://discord.gg/microsoft-azure) for support and discussion
+- **🎯 Progress Tracking**: Track your progress through the full 8-chapter learning system
+- **🤝 Community**: [Azure Discord](https://discord.gg/microsoft-azure) for support and talk
 
-**Study Progress Tracking**: Use dis structured guide to sabi Azure Developer CLI well well through step-by-step, practical learning wey get measurable results and professional development benefits.
+**Study Progress Tracking**: Use dis structured guide to sabi Azure Developer CLI through steady, practical learning wey get measurable results an professional development benefits.
 
 ---
 

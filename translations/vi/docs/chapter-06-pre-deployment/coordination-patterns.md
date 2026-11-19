@@ -1,38 +1,38 @@
 # Mẫu Điều phối Đa Tác nhân
 
-⏱️ **Thời gian ước tính**: 60-75 phút đọc; vài giờ để triển khai | 💰 **Chi phí ước tính**: phụ thuộc khối lượng công việc | ⭐ **Độ phức tạp**: Nâng cao
+⏱️ **Thời gian ước tính**: 60-75 phút đọc; vài giờ để triển khai | 💰 **Chi phí ước tính**: phụ thuộc vào khối lượng công việc | ⭐ **Độ phức tạp**: Nâng cao
 
 **📚 Lộ trình học:**
-- ← Trước: [Capacity Planning](capacity-planning.md) - Chiến lược định cỡ và mở rộng tài nguyên
+- ← Trước: [Lập kế hoạch năng lực](capacity-planning.md) - Chiến lược định kích thước tài nguyên và mở rộng
 - 🎯 **Bạn đang ở đây**: Mẫu Điều phối Đa Tác nhân (Điều phối, giao tiếp, quản lý trạng thái)
-- → Tiếp theo: [SKU Selection](sku-selection.md) - Lựa chọn dịch vụ Azure phù hợp
-- 🏠 [Trang chủ Khóa học](../../README.md)
+- → Tiếp theo: [Chọn SKU](sku-selection.md) - Lựa chọn dịch vụ Azure phù hợp
+- 🏠 [Trang chính Khóa học](../../README.md)
 
 ---
 
-## Bạn sẽ học gì
+## Bạn sẽ học được gì
 
-Sau khi hoàn thành bài học này, bạn sẽ:
-- Hiểu các mẫu **kiến trúc đa tác nhân** và khi nào sử dụng chúng
-- Triển khai các **mẫu điều phối** (tập trung, phân tán, phân cấp)
-- Thiết kế các chiến lược **giao tiếp tác nhân** (đồng bộ, bất đồng bộ, theo sự kiện)
+Khi hoàn thành bài học này, bạn sẽ:
+- Hiểu các mẫu **kiến trúc đa tác nhân** và khi nào nên sử dụng chúng
+- Triển khai các **mẫu điều phối** (tập trung, phân quyền, phân cấp)
+- Thiết kế các chiến lược **giao tiếp tác nhân** (đồng bộ, không đồng bộ, điều khiển sự kiện)
 - Quản lý **trạng thái chia sẻ** giữa các tác nhân phân tán
 - Triển khai **hệ thống đa tác nhân** trên Azure với AZD
-- Áp dụng các **mẫu điều phối** cho các kịch bản AI thực tế
+- Áp dụng các **mẫu phối hợp** cho các tình huống AI thực tế
 - Giám sát và gỡ lỗi hệ thống tác nhân phân tán
 
-## Tại sao Điều phối Đa Tác nhân quan trọng
+## Tại sao Điều phối Đa Tác nhân Quan trọng
 
-### Sự tiến hóa: Từ Tác nhân đơn đến Đa Tác nhân
+### Quá trình tiến hóa: Từ Tác nhân Đơn sang Đa Tác nhân
 
-**Tác nhân đơn (Đơn giản):**
+**Tác nhân Đơn (Đơn giản):**
 ```
 User → Agent → Response
 ```
 - ✅ Dễ hiểu và triển khai
-- ✅ Nhanh với các tác vụ đơn giản
-- ❌ Bị giới hạn bởi khả năng mô hình đơn
-- ❌ Không thể song song hóa các tác vụ phức tạp
+- ✅ Nhanh cho các tác vụ đơn giản
+- ❌ Bị giới hạn bởi khả năng của mô hình đơn lẻ
+- ❌ Không thể thực thi song song các tác vụ phức tạp
 - ❌ Không có sự chuyên môn hóa
 
 **Hệ thống Đa Tác nhân (Nâng cao):**
@@ -42,21 +42,21 @@ graph TD
     Orchestrator --> Agent2[Agent2<br/>Code]
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
-- ✅ Tác nhân chuyên môn hóa cho các nhiệm vụ cụ thể
+- ✅ Tác nhân chuyên môn cho các nhiệm vụ cụ thể
 - ✅ Thực thi song song để tăng tốc
-- ✅ Modular và dễ bảo trì
-- ✅ Tốt hơn với các luồng công việc phức tạp
-- ⚠️ Cần logic điều phối
+- ✅ Mô-đun và dễ bảo trì
+- ✅ Tốt hơn cho các quy trình làm việc phức tạp
+- ⚠️ Yêu cầu logic điều phối
 
-**Tương tự**: Tác nhân đơn giống như một người thực hiện tất cả các công việc. Đa tác nhân giống như một đội nhóm, mỗi thành viên có kỹ năng chuyên môn riêng (nhà nghiên cứu, lập trình viên, người duyệt, người viết) làm việc cùng nhau.
+**Tương tự**: Tác nhân đơn giống như một người làm tất cả các công việc. Đa tác nhân giống như một đội, mỗi thành viên có kỹ năng chuyên biệt (nghiên cứu, lập trình, đánh giá, viết) làm việc cùng nhau.
 
 ---
 
-## Các mẫu điều phối cốt lõi
+## Các Mẫu Điều phối Cốt lõi
 
-### Mẫu 1: Điều phối tuần tự (Chuỗi trách nhiệm)
+### Mẫu 1: Điều phối Tuần tự (Chuỗi Trách nhiệm)
 
-**Khi nào sử dụng**: Các tác vụ phải hoàn thành theo thứ tự cụ thể, mỗi tác nhân xây dựng dựa trên đầu ra trước đó.
+**Khi nào dùng**: Các tác vụ phải hoàn thành theo thứ tự cụ thể, mỗi tác nhân dựa trên kết quả trước đó.
 
 ```mermaid
 sequenceDiagram
@@ -84,20 +84,20 @@ sequenceDiagram
 - ✅ Thứ tự thực thi dự đoán được
 
 **Hạn chế:**
-- ❌ Chậm hơn (không có song song)
-- ❌ Một lỗi làm tắc toàn bộ chuỗi
-- ❌ Không thể xử lý tác vụ phụ thuộc lẫn nhau
+- ❌ Chậm hơn (không song song)
+- ❌ Một lỗi làm tắc cả chuỗi
+- ❌ Không xử lý được các tác vụ phụ thuộc lẫn nhau
 
 **Ví dụ sử dụng:**
-- Quy trình tạo nội dung (nghiên cứu → viết → chỉnh sửa → xuất bản)
+- Chuỗi tạo nội dung (nghiên cứu → viết → chỉnh sửa → xuất bản)
 - Tạo mã (lập kế hoạch → triển khai → kiểm thử → triển khai)
 - Tạo báo cáo (thu thập dữ liệu → phân tích → trực quan hóa → tóm tắt)
 
 ---
 
-### Mẫu 2: Điều phối song song (Fan-Out/Fan-In)
+### Mẫu 2: Điều phối Song song (Phân tán/Thu thập)
 
-**Khi nào sử dụng**: Các tác vụ độc lập có thể chạy đồng thời, kết quả được kết hợp ở cuối.
+**Khi nào dùng**: Các tác vụ độc lập chạy đồng thời, kết quả được tổng hợp ở cuối.
 
 ```mermaid
 graph TB
@@ -124,24 +124,24 @@ graph TB
 
 **Lợi ích:**
 - ✅ Nhanh (thực thi song song)
-- ✅ Chịu lỗi tốt (chấp nhận kết quả một phần)
-- ✅ Mở rộng theo chiều ngang
+- ✅ Chịu lỗi tốt (kết quả một phần chấp nhận được)
+- ✅ Mở rộng ngang
 
 **Hạn chế:**
-- ⚠️ Kết quả có thể đến không theo thứ tự
+- ⚠️ Kết quả có thể đến không đúng thứ tự
 - ⚠️ Cần logic tổng hợp
 - ⚠️ Quản lý trạng thái phức tạp
 
 **Ví dụ sử dụng:**
 - Thu thập dữ liệu đa nguồn (API + cơ sở dữ liệu + thu thập web)
-- Phân tích cạnh tranh (nhiều mô hình tạo giải pháp, chọn giải pháp tốt nhất)
-- Dịch vụ dịch thuật (dịch sang nhiều ngôn ngữ cùng lúc)
+- Phân tích cạnh tranh (nhiều mô hình tạo giải pháp, chọn tốt nhất)
+- Dịch vụ dịch thuật (dịch ra nhiều ngôn ngữ cùng lúc)
 
 ---
 
-### Mẫu 3: Điều phối phân cấp (Quản lý - Người làm)
+### Mẫu 3: Điều phối Phân cấp (Quản lý–Nhân viên)
 
-**Khi nào sử dụng**: Luồng công việc phức tạp với các tác vụ con, cần ủy quyền.
+**Khi nào dùng**: Các quy trình làm việc phức tạp với các tác vụ con, cần phân công.
 
 ```mermaid
 graph TB
@@ -166,25 +166,25 @@ graph TB
 ```
 
 **Lợi ích:**
-- ✅ Xử lý luồng công việc phức tạp
-- ✅ Modular và dễ bảo trì
+- ✅ Xử lý quy trình làm việc phức tạp
+- ✅ Mô-đun và dễ bảo trì
 - ✅ Ranh giới trách nhiệm rõ ràng
 
 **Hạn chế:**
 - ⚠️ Kiến trúc phức tạp hơn
 - ⚠️ Độ trễ cao hơn (nhiều lớp điều phối)
-- ⚠️ Cần điều phối tinh vi
+- ⚠️ Yêu cầu điều phối tinh vi
 
 **Ví dụ sử dụng:**
 - Xử lý tài liệu doanh nghiệp (phân loại → chuyển tiếp → xử lý → lưu trữ)
-- Pipeline dữ liệu đa giai đoạn (nhập → làm sạch → biến đổi → phân tích → báo cáo)
-- Các luồng tự động hóa phức tạp (lập kế hoạch → phân bổ tài nguyên → thực thi → giám sát)
+- Chuỗi dữ liệu đa giai đoạn (nhập → làm sạch → biến đổi → phân tích → báo cáo)
+- Quy trình tự động hóa phức tạp (lập kế hoạch → phân bổ nguồn lực → thực thi → giám sát)
 
 ---
 
-### Mẫu 4: Điều phối dựa trên sự kiện (Publish-Subscribe)
+### Mẫu 4: Điều phối Dựa trên Sự kiện (Xuất bản-Đăng ký)
 
-**Khi nào sử dụng**: Các tác nhân cần phản ứng theo sự kiện, mong muốn kết nối lỏng lẻo.
+**Khi nào dùng**: Tác nhân cần phản ứng với sự kiện, mong muốn kết nối lỏng.
 
 ```mermaid
 sequenceDiagram
@@ -207,25 +207,25 @@ sequenceDiagram
 
 **Lợi ích:**
 - ✅ Kết nối lỏng lẻo giữa các tác nhân
-- ✅ Dễ dàng thêm tác nhân mới (chỉ cần đăng ký)
-- ✅ Xử lý bất đồng bộ
-- ✅ Đáng tin cậy (lưu trữ tin nhắn)
+- ✅ Dễ thêm tác nhân mới (chỉ cần đăng ký)
+- ✅ Xử lý không đồng bộ
+- ✅ Chịu lỗi tốt (tin nhắn được lưu trữ)
 
 **Hạn chế:**
-- ⚠️ Tính nhất quán có thể bị trì hoãn
-- ⚠️ Khó khăn khi gỡ lỗi
-- ⚠️ Thách thức về thứ tự tin nhắn
+- ⚠️ Tính nhất quán cuối cùng
+- ⚠️ Khó gỡ lỗi
+- ⚠️ Thách thức trong sắp xếp thứ tự tin nhắn
 
 **Ví dụ sử dụng:**
 - Hệ thống giám sát thời gian thực (cảnh báo, bảng điều khiển, nhật ký)
 - Thông báo đa kênh (email, SMS, thông báo đẩy, Slack)
-- Pipeline xử lý dữ liệu (nhiều người tiêu thụ cùng dữ liệu)
+- Chuỗi xử lý dữ liệu (nhiều người tiêu thụ cùng dữ liệu)
 
 ---
 
-### Mẫu 5: Điều phối dựa trên đồng thuận (Bỏ phiếu/Quorum)
+### Mẫu 5: Điều phối Dựa trên Đồng thuận (Bỏ phiếu/Đoàn thể)
 
-**Khi nào sử dụng**: Cần sự đồng thuận của nhiều tác nhân trước khi tiến hành.
+**Khi nào dùng**: Cần sự đồng ý từ nhiều tác nhân trước khi tiến hành.
 
 ```mermaid
 graph TB
@@ -253,20 +253,20 @@ graph TB
 - ✅ Đảm bảo chất lượng tích hợp
 
 **Hạn chế:**
-- ❌ Tốn kém (gọi nhiều mô hình)
+- ❌ Tốn kém (nhiều lần gọi mô hình)
 - ❌ Chậm hơn (phải đợi tất cả tác nhân)
 - ⚠️ Cần giải quyết xung đột
 
 **Ví dụ sử dụng:**
-- Kiểm duyệt nội dung (nhiều mô hình xét duyệt nội dung)
-- Đánh giá mã nguồn (nhiều công cụ phân tích)
-- Chuẩn đoán y khoa (nhiều mô hình AI, xác nhận chuyên gia)
+- Kiểm duyệt nội dung (nhiều mô hình đánh giá nội dung)
+- Đánh giá mã (nhiều trình phân tích/kiểm tra)
+- Chẩn đoán y khoa (nhiều mô hình AI, xác nhận chuyên gia)
 
 ---
 
-## Tổng quan Kiến trúc
+## Tổng Quan Kiến Trúc
 
-### Hệ thống Đa Tác nhân hoàn chỉnh trên Azure
+### Hệ Thống Đa Tác nhân Toàn Diện trên Azure
 
 ```mermaid
 graph TB
@@ -314,25 +314,25 @@ graph TB
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 
-**Các thành phần chính:**
+**Các Thành Phần Chính:**
 
 | Thành phần | Mục đích | Dịch vụ Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Điểm vào, giới hạn tần suất, xác thực | API Management |
-| **Orchestrator** | Điều phối luồng tác nhân | Container Apps |
-| **Message Queue** | Giao tiếp bất đồng bộ | Service Bus / Event Hubs |
-| **Agents** | Tác nhân AI chuyên biệt | Container Apps / Functions |
-| **State Store** | Trạng thái chia sẻ, theo dõi tác vụ | Cosmos DB |
-| **Artifact Storage** | Tài liệu, kết quả, nhật ký | Blob Storage |
-| **Monitoring** | Theo dõi phân tán, nhật ký | Application Insights |
+| **Cổng API** | Điểm vào, giới hạn tốc độ, xác thực | Quản lý API |
+| **Bộ Điều phối** | Điều phối quy trình làm việc của tác nhân | Container Apps |
+| **Hàng Đợi Tin Nhắn** | Giao tiếp không đồng bộ | Service Bus / Event Hubs |
+| **Tác nhân** | Công nhân AI chuyên biệt | Container Apps / Functions |
+| **Kho Trữ Trạng thái** | Trạng thái chia sẻ, theo dõi nhiệm vụ | Cosmos DB |
+| **Lưu trữ Tài liệu** | Tài liệu, kết quả, nhật ký | Blob Storage |
+| **Giám sát** | Theo dõi phân tán, nhật ký | Application Insights |
 
-Hàng đợi/bảng chủ đề Service Bus và Event Hubs là các dịch vụ khác nhau với mô hình phân phối/tiêu thụ khác nhau; Event Hubs không phải là thay thế trực tiếp cho mã worker Service Bus dưới đây. Song song hóa, tin nhắn được lưu trữ và bỏ phiếu mô hình không tự đảm bảo chịu lỗi hoặc độ chính xác cao hơn.
+Hàng đợi/chủ đề Service Bus và Event Hubs là hai dịch vụ khác nhau với mô hình giao nhận/tiêu thụ khác nhau; Event Hubs không thể thay thế trực tiếp cho mã công nhân Service Bus phía dưới. Song song, tin nhắn lưu trữ và bỏ phiếu mô hình tự nó không đảm bảo chịu lỗi hoặc độ chính xác cao hơn.
 
 ---
 
-## Yêu cầu trước
+## Yêu Cầu Tiên Quyết
 
-### Công cụ cần thiết
+### Công Cụ Cần Thiết
 
 ```bash
 # Verify Azure Developer CLI
@@ -348,34 +348,34 @@ docker --version
 # ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Yêu cầu Azure
+### Yêu Cầu Azure
 
-- Có thuê bao Azure hoạt động
+- Có đăng ký Azure đang hoạt động
 - Quyền tạo:
   - Container Apps
-  - Không gian tên Service Bus
+  - Namespace Service Bus
   - Tài khoản Cosmos DB
   - Tài khoản lưu trữ
   - Application Insights
 
-### Kiến thức nền tảng
+### Kiến Thức Yêu Cầu
 
-Bạn nên hoàn thành:
+Bạn nên đã hoàn thành:
 - [Quản lý Cấu hình](../chapter-03-configuration/configuration.md)
 - [Xác thực & Bảo mật](../chapter-03-configuration/authsecurity.md)
 - [Ví dụ Microservices](../../../../examples/microservices)
 
 ---
 
-## Hướng dẫn triển khai
+## Hướng Dẫn Triển Khai
 
-> **Mảnh ghép thiết kế, không phải đoạn mã triển khai:** Cây dự án và các nhãn `File:` bên dưới mô tả các tệp cần tạo trong dự án của bạn; kho này không chứa ứng dụng `multi-agent-system` hoàn chỉnh. Các phần thiếu bao gồm mẫu chính/tham số, môi trường/đăng ký Container Apps, Dockerfile và khóa phụ thuộc, thiết lập database/container Cosmos, triển khai mô hình, cấu hình nhận dạng/role, quy tắc mở rộng, và worker/hàng đợi song song. Đừng mong `azd init` tạo các tệp này hay `azd up` triển khai đoạn mã nguyên bản. Để có điểm bắt đầu thực thi, hoàn thành [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Phân mảnh thiết kế, không phải phòng thí nghiệm có thể triển khai:** Cây dự án và nhãn `File:` bên dưới mô tả các tệp để tạo trong dự án của bạn; kho lưu trữ này không chứa ứng dụng `multi-agent-system` hoàn chỉnh. Các phần thiếu bao gồm mẫu chính/tham số, môi trường/registry Container Apps, Dockerfile và khóa phụ thuộc, thiết lập cơ sở dữ liệu/container Cosmos, triển khai mô hình, cấu hình định danh/ vai trò, quy tắc mở rộng và công nhân/hàng đợi song song. Đừng mong `azd init` tự tạo các tệp này hoặc `azd up` triển khai các đoạn mã không thay đổi. Để có điểm bắt đầu có thể thực thi, hoàn thành [Kiến thức cơ bản về Đa Tác nhân](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Giả định thời gian chạy:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask và (cho giám sát) `azure-monitor-opentelemetry`; đặt `shared` trên đường dẫn import Python trong mỗi ảnh dịch vụ. Container `agent-state/tasks` của Cosmos phải tồn tại với khóa phân vùng `/id`. Kết nối dựa trên khóa đơn giản hóa các mảnh ghép này, không phải hướng dẫn sản xuất: ưu tiên dùng managed identities với role dịch vụ có phạm vi Service Bus/Cosmos/OpenAI. Không tiết lộ khóa trong output hoặc nhật ký.
+**Giả định thời gian chạy:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask và (cho giám sát) `azure-monitor-opentelemetry`; đặt `shared` vào đường dẫn nhập Python trong từng ảnh dịch vụ. Container Cosmos `agent-state/tasks` phải đã tồn tại với khóa phân vùng `/id`. Kết nối dựa trên khóa đơn giản các phân mảnh này, không phải hướng dẫn sản xuất: ưu tiên danh tính được quản lý với vai trò Service Bus/Cosmos/OpenAI ở mức dữ liệu được ủy quyền. Không tiết lộ khóa trong đầu ra hoặc nhật ký.
 
-Giao hàng Service Bus là **ít nhất một lần**. Ghi nhận idempotency theo từng tác vụ **và bước**, dùng đồng bộ lạc quan (ETags) cho đọc/sửa/ghi trạng thái, và gia hạn khóa tin nhắn khi xử lý lâu. Bộ quản lý trạng thái đơn giản dưới đây chỉ tuần tự và không đảm bảo các tính năng sản xuất này.
+Giao nhận Service Bus là **ít nhất một lần**. Duy trì tính idempotent cho từng nhiệm vụ **và bước**, sử dụng đồng bộ tối ưu (ETags) cho trạng thái đọc/sửa/ghi, và gia hạn khóa tin nhắn trong quá trình xử lý lâu. Bộ quản lý trạng thái đơn giản dưới đây chỉ tuần tự và không thực thi các đảm bảo sản xuất này.
 
-### Cấu trúc dự án
+### Cấu Trúc Dự Án
 
 ```
 multi-agent-system/
@@ -409,9 +409,9 @@ multi-agent-system/
 
 ## Bài học 1: Mẫu Điều phối Tuần tự
 
-### Triển khai: Quy trình tạo nội dung
+### Triển khai: Chuỗi Tạo Nội dung
 
-Hãy thiết kế quy trình tuần tự: Nghiên cứu → Viết → Chỉnh sửa. Xuất bản nằm ngoài ví dụ này.
+Hãy thiết kế một chuỗi tuần tự: Nghiên cứu → Viết → Chỉnh sửa. Xuất bản nằm ngoài ví dụ này.
 
 ### 1. Cấu hình AZD
 
@@ -444,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Cơ sở hạ tầng: Service Bus cho Điều phối
+### 2. Hạ tầng: Service Bus cho Điều phối
 
 **Tệp: `infra/core/servicebus.bicep`**
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Bộ quản lý trạng thái chia sẻ
+### 3. Bộ Quản lý Trạng thái Chia sẻ
 
 **Tệp: `src/shared/state_manager.py`**
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Dịch vụ Orchestrator
+### 4. Dịch vụ Điều phối
 
 **Tệp: `src/orchestrator/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Tác nhân Biên tập
+### 7. Tác nhân Chỉnh sửa
 
 **Tệp: `src/agents/editor/app.py`**
 
@@ -893,21 +893,21 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Triển khai và Kiểm thử
+### 8. Triển khai và Kiểm tra
 
-Các lệnh này áp dụng **chỉ sau khi bạn đã triển khai các tệp dự án còn thiếu**. Khởi tạo tác nhân Foundry tương tác là quy trình riêng; nó không tạo mẫu thiết kế Service Bus này.
+Các lệnh này áp dụng **chỉ sau khi bạn đã thực hiện các tệp dự án còn thiếu**. Khởi tạo tác nhân Foundry tương tác là quy trình riêng; nó không tạo ra thiết kế Service Bus này.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Xem [Lệnh AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) cho tất cả cờ và tùy chọn `azd ai`.
+> Xem [Lệnh AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) cho tất cả các cờ và tùy chọn `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Kiểm tra tiến trình tác vụ:**
+**Kiểm tra tiến trình nhiệm vụ:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Kết quả mong đợi (đã hoàn thành):**
+**✅ Kết quả mong đợi (hoàn thành):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -966,11 +966,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Bài học 2: Mẫu Điều phối Song song
 
-### Triển khai: Bộ tổng hợp Nghiên cứu đa nguồn
+### Triển khai: Bộ Tổng hợp Nghiên cứu Đa Nguồn
 
-Hãy xây dựng hệ thống song song thu thập thông tin từ nhiều nguồn cùng lúc.
+Hãy xây dựng một hệ thống song song thu thập thông tin từ nhiều nguồn đồng thời.
 
-### Orchestrator Song song
+### Bộ Điều phối Song song
 
 **Tệp: `src/orchestrator/parallel_workflow.py`**
 
@@ -1124,23 +1124,23 @@ if __name__ == '__main__':
 ```
 
 **Lợi ích của Mẫu Song song:**
-- ⚡ **Có thể giảm độ trễ** (bị giới hạn bởi tác nhân chậm nhất cộng chi phí điều phối)
-- 🔄 **Hỗ trợ kết quả một phần** với deadline rõ ràng và chính sách lỗi (chưa hiện thực ở bộ tổng hợp cơ bản)
-- 📈 **Dễ mở rộng** (dễ dàng thêm tác nhân)
+- ⚡ **Tiềm năng giảm độ trễ** (giới hạn bởi tác nhân chậm nhất cộng thời gian điều phối)
+- 🔄 **Hỗ trợ kết quả một phần** với thời hạn rõ và chính sách thất bại (chưa thực hiện trong bộ tổng hợp cơ bản)
+- 📈 **Có thể mở rộng** (dễ dàng thêm tác nhân)
 
 ---
 
 ## Bài tập Thực hành
 
-### Bài tập 1: Thêm Xử lý Hết thời gian ⭐⭐ (Trung bình)
+### Bài tập 1: Thêm Xử lý Timeout ⭐⭐ (Trung bình)
 
-**Mục tiêu**: Triển khai logic hết thời gian để bộ tổng hợp không chờ mãi các tác nhân chậm.
+**Mục tiêu**: Triển khai logic timeout để bộ tổng hợp không chờ mãi các tác nhân chậm.
 
-**Điểm bắt đầu:** Chạy mô phỏng deadline địa phương này trước khi tích hợp vào worker hàng đợi. Kiểm tra hết thời gian chỉ khi có tin nhắn mới không bao giờ khởi tạo nếu tác nhân thiếu không gửi gì.
+**Điểm bắt đầu:** Chạy mô phỏng hạn chót cục bộ này trước khi tích hợp vào công nhân hàng đợi. Một timeout chỉ kiểm tra khi có tin nhắn khác đến sẽ không kích hoạt nếu tác nhân mất tích không gửi gì.
 
 **Các bước**:
 
-1. **Thêm theo dõi hết thời gian vào bộ tổng hợp:**
+1. **Thêm theo dõi timeout vào bộ tổng hợp:**
 
 ```python
 import asyncio
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Tích hợp hệ thống hàng đợi (tác vụ thiết kế):** Lưu deadline dispatch và danh sách tác nhân kỳ vọng khi tạo tác vụ, chạy quét deadline định kỳ độc lập với kết quả đến, hoàn tất kết quả một cách nguyên tử, và bỏ qua tin nhắn đến muộn/trùng cho tác vụ đã hoàn tất. Timeout địa phương không huỷ worker từ xa.
+3. **Tích hợp hệ thống hàng đợi (nhiệm vụ thiết kế):** Lưu hạn chót phân phối và tác nhân dự kiến khi tạo nhiệm vụ, chạy quét định kỳ hạn chót độc lập với kết quả đến, hoàn tất kết quả một phần nguyên tử, và bỏ qua tin nhắn muộn/trùng lặp cho nhiệm vụ đã hoàn tất. Timeout cục bộ không hủy công nhân từ xa.
 
-Chỉ cho dự án bạn đã triển khai:
+Chỉ áp dụng cho dự án bạn đã triển khai:
 
 ```bash
 azd deploy aggregator
@@ -1187,9 +1187,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Kiểm tra địa phương trả về sau deadline một giây ngay cả khi tác nhân chưa hoàn thành
-- ✅ Phản hồi cho biết kết quả một phần (`"timed_out": true`)
-- ✅ Kết quả sẵn có được trả về (3 trong 4 tác nhân)
+- ✅ Kiểm tra cục bộ trả về sau hạn chót một giây ngay cả khi có tác nhân chưa hoàn thành
+- ✅ Phản hồi chỉ ra kết quả một phần (`"timed_out": true`)
+- ✅ Kết quả có sẵn được trả về (3 trên 4 tác nhân)
 
 **Thời gian**: 20-25 phút
 
@@ -1197,11 +1197,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Bài tập 2: Triển khai Logic Thử lại ⭐⭐⭐ (Nâng cao)
 
-**Mục tiêu**: Tự động thử lại các tác vụ tác nhân thất bại trước khi từ bỏ.
+**Mục tiêu**: Tự động thử lại nhiệm vụ tác nhân thất bại trước khi bỏ cuộc.
 
 **Các bước**:
 
-1. **Dùng số lần giao hàng Service Bus thay vì bộ đếm thử lại tùy chỉnh:**
+1. **Dùng số lần giao nhận của Service Bus thay vì đếm thử lại tùy chỉnh:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Thêm bộ xử lý thử lại vào các tác nhân:**
+2. **Thêm bộ xử lý thử lại cho các tác nhân:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Tác vụ thất bại tự động thử lại (tối đa 3 lần)
-- ✅ Nghỉ giữa các lần thử lại theo hàm mũ (5s, 10s, 20s), gia hạn khóa tin nhắn khi cần
-- ✅ Sau tối đa thử lại, tin nhắn chuyển vào hàng đợi thư chết
-- ✅ Tin nhắn thư chết có thể được kiểm tra; phát lại cần quy trình phục hồi idempotent riêng biệt
+- ✅ Các nhiệm vụ thất bại được thử lại tự động (tối đa 3 lần)
+- ✅ Backoff theo cấp số nhân giữa các lần thử (5s, 10s, 20s), cùng gia hạn khóa tin nhắn khi cần
+- ✅ Sau tối đa thử, tin nhắn được chuyển đến hàng đợi thư chết
+- ✅ Tin nhắn thư chết có thể kiểm tra; phát lại cần quy trình phục hồi idempotent riêng
 
 **Thời gian**: 30-40 phút
 
 ---
 
-### Bài tập 3: Triển khai Bộ ngắt mạch (Circuit Breaker) ⭐⭐⭐ (Nâng cao)
+### Bài tập 3: Triển khai Bộ ngắt Mạch ⭐⭐⭐ (Nâng cao)
 
-**Mục tiêu**: Ngăn chặn lỗi lan truyền bằng cách dừng yêu cầu đến các tác nhân đang lỗi.
+**Mục tiêu**: Ngăn chặn lỗi lan truyền bằng cách ngừng yêu cầu tới tác nhân đang lỗi.
 
 **Các bước**:
 
-1. **Tạo lớp circuit breaker:**
+1. **Tạo lớp bộ ngắt mạch:**
 
 ```python
 from enum import Enum
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Mạch này bảo vệ **hoạt động gửi**, không phải hoàn thành bởi công nhân từ xa: việc đưa một tin nhắn thành công vào hàng đợi không nói lên điều gì về việc liệu một tác nhân có còn hoạt động hay không. `send_message` là hàm gửi của ứng dụng bạn. Đối với các mạch thực thi, cung cấp các lỗi/timeout tác vụ quan sát được vào một điều phối viên bền vững. Lớp trong bộ nhớ này là một minh hoạ đơn luồng, không phải là một mạch phá vỡ phân tán.
+Mạch này bảo vệ **hoạt động gửi**, không bảo vệ việc hoàn thành bởi công nhân từ xa: việc đưa một tin nhắn vào hàng đợi thành công không nói lên liệu một tác nhân có còn hoạt động hay không. `send_message` là hàm gửi của ứng dụng bạn. Đối với các mạch thực thi, hãy cung cấp các lỗi/timeout nhiệm vụ quan sát được vào một bộ điều phối bền vững. Lớp trong bộ nhớ này là một minh họa đơn luồng, không phải là một bộ ngắt mạch phân tán.
 
-3. **Kiểm tra mạch ngắt cục bộ:**
+3. **Kiểm tra bộ ngắt mạch tại chỗ:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1369,10 +1369,10 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Sau 5 lần thất bại, mạch mở (từ chối yêu cầu)
-- ✅ Sau 60 giây, mạch chuyển sang trạng thái bán mở (kiểm tra phục hồi)
+- ✅ Sau 5 lỗi, mạch mở (từ chối yêu cầu)
+- ✅ Sau 60 giây, mạch chuyển sang bán mở (kiểm tra phục hồi)
 - ✅ Các tác nhân khác tiếp tục làm việc bình thường
-- ✅ Mạch tự đóng khi tác nhân phục hồi
+- ✅ Mạch tự động đóng khi tác nhân phục hồi
 
 **Thời gian**: 40-50 phút
 
@@ -1380,7 +1380,7 @@ print("Circuit breaker recovery verified")
 
 ## Giám sát và Gỡ lỗi
 
-### Phân tích phân tán với Application Insights
+### Theo dõi phân tán với Application Insights
 
 **Tệp: `src/shared/tracing.py`**
 
@@ -1468,22 +1468,22 @@ exceptions
 
 ## Phân tích Chi phí
 
-### Chi phí Hệ thống đa tác nhân (Ước tính hàng tháng)
+### Chi phí Hệ thống Đa tác nhân (Ước tính hàng tháng)
 
-Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng dưới đây là **$240-565/tháng**. Xác minh các mức giá vùng hiện tại, giờ hoạt động/nhàn rỗi của bản sao, tỷ lệ token nhập/xuất, lưu trữ và dữ liệu giám sát. Serverless không có mức tối thiểu băng thông được cấp nhưng vẫn tính phí cho yêu cầu và lưu trữ.
+Các con số minh họa chỉ dùng để lập kế hoạch, không phải báo giá: tổng dưới đây là **từ $240 đến $565/tháng**. Xác minh các tỷ lệ khu vực hiện tại, giờ hoạt động/thời gian nhàn rỗi của bản sao, hỗn hợp token đầu vào/đầu ra, lưu trữ và theo dõi. Serverless không có mức tối thiểu băng thông được cấp nhưng vẫn tính phí cho yêu cầu và lưu trữ.
 
 | Thành phần | Cấu hình | Chi phí |
 |-----------|--------------|------|
-| **Điều phối viên** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Tác nhân** | 4 Container Apps (0.5 vCPU, 1GB mỗi cái) | $60-120 |
-| **Service Bus** | Mức tiêu chuẩn, 10M tin nhắn | $10-20 |
-| **Cosmos DB** | Serverless, 5GB lưu trữ, 1M RUs | $25-50 |
+| **Service Bus** | Mức tiêu chuẩn, 10 triệu tin nhắn | $10-20 |
+| **Cosmos DB** | Serverless, 5GB lưu trữ, 1 triệu RUs | $25-50 |
 | **Blob Storage** | 10GB lưu trữ, 100K thao tác | $5-10 |
-| **Application Insights** | 5GB nhập liệu | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M token | $100-300 |
+| **Application Insights** | 5GB dữ liệu thu thập | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, 10 triệu token | $100-300 |
 | **Tổng cộng** | | **$240-565/tháng** |
 
-### Chiến lược Tối ưu chi phí
+### Chiến lược Tối ưu Chi phí
 
 1. **Sử dụng serverless khi có thể:**
    ```bicep
@@ -1494,7 +1494,7 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
    }
    ```
 
-2. **Thu nhỏ tác nhân về zero khi nhàn rỗi:**
+2. **Phóng to các tác nhân xuống zero khi nhàn rỗi:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1502,13 +1502,13 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
    }
    ```
 
-3. **Sử dụng gom lô cho Service Bus:**
+3. **Sử dụng ghép nhóm cho Service Bus:**
    ```python
    # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Bộ nhớ đệm kết quả sử dụng thường xuyên:**
+4. **Lưu kết quả sử dụng thường xuyên vào bộ nhớ đệm:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1517,18 +1517,18 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
 
 ---
 
-## Thực hành Tốt nhất
+## Thực tiễn Tốt nhất
 
-### ✅ NÊN làm:
+### ✅ NÊN LÀM:
 
-1. **Sử dụng các hoạt động lặp lại được (idempotent)**
+1. **Sử dụng các thao tác không gây tác động lặp lại (idempotent)**
    ```python
    # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Thực hiện ghi log toàn diện**
+2. **Triển khai ghi log toàn diện**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1542,14 +1542,14 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
    }
    ```
 
-4. **Đặt thời gian tồn tại tin nhắn (TTL)**
+4. **Đặt thời gian sống cho tin nhắn (TTL)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Giám sát hàng đợi thư chết**
+5. **Theo dõi hàng đợi thư chết**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1557,13 +1557,13 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
 
 ### ❌ KHÔNG NÊN:
 
-1. **Không tạo phụ thuộc vòng**
+1. **Không tạo các phụ thuộc vòng tròn**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Không khóa luồng tác nhân**
+2. **Không chặn các luồng của tác nhân**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1572,13 +1572,13 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
    # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Không bỏ qua lỗi một phần**
+3. **Không bỏ qua các lỗi một phần**
    ```python
    # ❌ BAD: Fail entire workflow if one agent fails
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Không dùng số lần thử vô hạn**
+4. **Không sử dụng thử lại vô hạn**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1588,12 +1588,12 @@ Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng d�
 
 ## Hướng dẫn Khắc phục sự cố
 
-### Vấn đề: Tin nhắn kẹt trong hàng đợi
+### Vấn đề: Tin nhắn bị kẹt trong hàng đợi
 
 **Triệu chứng:**
 - Tin nhắn tích tụ trong hàng đợi
-- Tác nhân không xử lý
-- Trạng thái tác vụ bị kẹt ở "đang chờ"
+- Các tác nhân không xử lý
+- Trạng thái nhiệm vụ kẹt ở "đang chờ"
 
 **Chẩn đoán:**
 ```bash
@@ -1630,10 +1630,10 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Vấn đề: Tác vụ timeout/không hoàn thành
+### Vấn đề: Nhiệm vụ timeout/không bao giờ hoàn thành
 
 **Triệu chứng:**
-- Trạng thái tác vụ giữ "đang tiến hành"
+- Trạng thái nhiệm vụ giữ nguyên "đang xử lý"
 - Một số tác nhân hoàn thành, số khác không
 - Không có thông báo lỗi
 
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Giải pháp:**
 
-1. **Áp dụng timeout trong bộ tổng hợp (Bài tập 1)**
+1. **Triển khai timeout trong bộ tổng hợp (Bài tập 1)**
 
 2. **Kiểm tra lỗi tác nhân bằng Azure Monitor:**
    ```bash
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Xác minh tất cả tác nhân đang chạy:**
+3. **Xác nhận tất cả các tác nhân đang chạy:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1674,40 +1674,40 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Mẫu Điều phối AI](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+- [Mẫu Điều phối Tác nhân AI](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Bước tiếp theo trong khoá học này
+### Các bước tiếp theo trong Khóa học này
 - ← Trước: [Lập kế hoạch Công suất](capacity-planning.md)
 - → Tiếp: [Chọn SKU](sku-selection.md)
-- 🏠 [Trang chủ khoá học](../../README.md)
+- 🏠 [Trang Chủ Khóa học](../../README.md)
 
-### Ví dụ Liên quan
-- [Ví dụ Microservices](../../../../examples/microservices) - Mô hình giao tiếp dịch vụ
+### Ví dụ liên quan
+- [Ví dụ Microservices](../../../../examples/microservices) - Mẫu giao tiếp dịch vụ
 - [Ví dụ Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Tích hợp AI
 
 ---
 
 ## Tóm tắt
 
-**Bạn đã học:**
+**Bạn đã học được:**
 - ✅ Năm mẫu điều phối (tuần tự, song song, phân cấp, sự kiện, đồng thuận)
 - ✅ Kiến trúc đa tác nhân trên Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Quản lý trạng thái trên các tác nhân phân tán
-- ✅ Xử lý timeout, thử lại và mạch ngắt
+- ✅ Xử lý timeout, thử lại, và bộ ngắt mạch
 - ✅ Giám sát và gỡ lỗi hệ thống phân tán
 - ✅ Chiến lược tối ưu chi phí
 
-**Những điểm chính:**
-1. **Chọn mẫu phù hợp** - Tuần tự cho luồng công việc có thứ tự, song song để nhanh, sự kiện để linh hoạt
-2. **Quản lý trạng thái cẩn thận** - Dùng Cosmos DB hoặc tương tự cho trạng thái chung
-3. **Xử lý lỗi khéo léo** - Timeout, retry, mạch ngắt, hàng đợi thư chết
-4. **Giám sát mọi thứ** - Phân tích phân tán thiết yếu cho gỡ lỗi
-5. **Tối ưu chi phí** - Thu nhỏ về zero, dùng serverless, thực hiện bộ nhớ đệm
+**Điểm chính cần ghi nhớ:**
+1. **Chọn mẫu phù hợp** - Tuần tự cho luồng công việc có trật tự, song song cho tốc độ, sự kiện cho tính linh hoạt
+2. **Quản lý trạng thái cẩn thận** - Dùng Cosmos DB hoặc tương tự cho trạng thái dùng chung
+3. **Xử lý lỗi một cách nhẹ nhàng** - Timeout, thử lại, bộ ngắt mạch, hàng đợi thư chết
+4. **Giám sát mọi thứ** - Theo dõi phân tán rất cần thiết cho gỡ lỗi
+5. **Tối ưu hóa chi phí** - Phóng to xuống zero, dùng serverless, triển khai bộ nhớ đệm
 
 **Bước tiếp theo:**
 1. Hoàn thành các bài tập thực hành
-2. Xây dựng hệ thống đa tác nhân cho trường hợp của bạn
-3. Nghiên cứu [Chọn SKU](sku-selection.md) để tối ưu hiệu suất và chi phí
+2. Xây dựng hệ thống đa tác nhân cho trường hợp sử dụng của bạn
+3. Nghiên cứu [Chọn SKU](sku-selection.md) để tối ưu hiệu năng và chi phí
 
 ---
 

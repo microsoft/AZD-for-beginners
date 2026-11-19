@@ -1,4 +1,4 @@
-# Capitolo 8: Pattern per Produzione e Enterprise
+# Capitolo 8: Pattern di Produzione e Aziendali
 
 **📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
 
@@ -6,17 +6,17 @@
 
 ## Panoramica
 
-Questo capitolo tratta i pattern di deployment pronti per l'impresa, il rafforzamento della sicurezza, il monitoraggio e l'ottimizzazione dei costi per carichi di lavoro AI in produzione.
+Questo capitolo tratta modelli di distribuzione pronti per l'impresa, rafforzamento della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
 
-Si tratta di un riferimento architetturale, non di un template completo e distribuibile in produzione. Gli esempi omettono dettagli di integrazione che devono essere forniti e testati nella vostra applicazione; leggere la checklist non certifica la prontezza per la produzione.
+Questo è un riferimento architetturale, non un template completo distribuibile in produzione. Gli esempi omettono dettagli di integrazione che devono essere forniti e testati nella vostra applicazione; la lettura della checklist non certifica la prontezza per la produzione.
 
-> **Revisione della release (2026-11-04):** Le linee guida AI CLI sono state verificate contro la documentazione/sorgente di `azd 1.37.2`, agenti `1.0.0-beta.23`, e valutazioni `1.0.0-beta.2`. Vedi [modifiche e correzioni della release](production-ai-practices.md#recent-release-changes-and-fixes) per i requisiti di compatibilità e i dettagli di migrazione; questa non è una convalida di deployment live.
+> **Aggiornamento Foundry GA (2026-11-09):** Usare `azd >= 1.37.0` e il bundle `microsoft.foundry` 1.0 generalmente disponibile per il workflow Foundry; le valutazioni si installano separatamente. Vedere [ambito del rilascio e migrazione](production-ai-practices.md#recent-release-changes-and-fixes) e l'[esempio di pipeline autenticata](production-ai-practices.md#cicd-pipeline-configuration). Questa è una revisione della documentazione, non una convalida di distribuzione live o uno status GA generale per funzionalità di anteprima opzionali.
 
 ## Obiettivi di Apprendimento
 
-Completando questo capitolo, sarai in grado di:
+Completando questo capitolo, sarete in grado di:
 - Distribuire applicazioni resilienti multi-regione
-- Implementare pattern di sicurezza enterprise
+- Implementare pattern di sicurezza aziendale
 - Configurare un monitoraggio completo
 - Ottimizzare i costi su larga scala
 - Impostare pipeline CI/CD con AZD
@@ -27,17 +27,17 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Pratiche AI per la Produzione](production-ai-practices.md) | Pattern di deployment enterprise | 90 min |
+| 1 | [Pratiche AI in Produzione](production-ai-practices.md) | Pattern di distribuzione aziendale | 90 min |
 
 ---
 
-## 🚀 Checklist per la Produzione
+## 🚀 Checklist di Produzione
 
-- [ ] Deployment multi-regione per la resilienza
-- [ ] Identità gestita per l'autenticazione (senza chiavi)
-- [ ] Application Insights per il monitoraggio
-- [ ] Budget e avvisi sui costi configurati
-- [ ] Scansione della sicurezza abilitata
+- [ ] Distribuzione multi-regione per resilienza
+- [ ] Identità gestita per autenticazione (senza chiavi)
+- [ ] Application Insights per monitoraggio
+- [ ] Budget e avvisi di costo configurati
+- [ ] Scansione di sicurezza abilitata
 - [ ] Integrazione pipeline CI/CD
 - [ ] Piano di disaster recovery
 
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Pattern 2: AI guidata da eventi
+### Pattern 2: AI basata su Eventi
 
 ```mermaid
 graph LR
@@ -85,14 +85,14 @@ properties: {
 
 ## 💰 Ottimizzazione dei Costi
 
-| Strategia | Vincolo principale |
+| Strategia | Vincolo Principale |
 |----------|---------|
 | Scala a zero (Container Apps) | Richiede un trigger adatto; altri servizi continuano a generare costi |
-| Utilizzo di livelli di consumo per dev | Confronta il prezzo del servizio selezionato e il carico di lavoro |
-| Scaling programmato | Scala tramite infrastruttura/automazione supportata |
-| Prenotazioni/capacità riservata | Solo quando supportato; gli impegni possono aumentare i costi inattivi |
+| Usare livelli a consumo per dev | Confronta i prezzi del servizio selezionato e il carico di lavoro |
+| Scalatura programmata | Scala tramite infrastruttura/automazione supportata |
+| Prenotazioni/capacità provvista | Solo se supportato; impegni possono aumentare i costi inattivi |
 
-Usa il [pattern completo della risorsa budget](production-ai-practices.md#2-cost-monitoring-and-budgets) con una data di inizio valida, ambito di fatturazione, destinatari e autorizzazioni. Un budget invia allarmi; non limita la spesa. Il risparmio dipende dall’utilizzo misurato e non è garantito in percentuale.
+Usate il [pattern completo di risorsa budget](production-ai-practices.md#2-cost-monitoring-and-budgets) con una data di inizio valida, ambito di fatturazione, destinatari e permessi. Un budget invia avvisi; non limita la spesa. Il risparmio dipende dall'utilizzo misurato e non è garantito in percentuali.
 
 ---
 
@@ -115,17 +115,17 @@ az monitor metrics list --resource <resource-id>
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
-| **Corso completato** | [Home del corso](../../README.md) |
+| **Precedente** | [Capitolo 7: Risoluzione dei Problemi](../chapter-07-troubleshooting/README.md) |
+| **Corso Completo** | [Home del Corso](../../README.md) |
 
 ---
 
 ## 📖 Risorse Correlate
 
-- [Guida AI Agents](../chapter-02-ai-development/agents.md)
+- [Guida Agenti AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluzioni Multi-Agente](../chapter-05-multi-agent/README.md)
-- [Esempio di Microservizi](../../examples/microservices/README.md)
+- [Esempio Microservizi](../../examples/microservices/README.md)
 
 ---
 

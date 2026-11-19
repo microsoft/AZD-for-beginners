@@ -4,19 +4,21 @@
 
 ---
 
-## Vue d’ensemble
+## Vue d'ensemble
 
-Ce chapitre se concentre sur le déploiement d'applications alimentées par l'IA en utilisant Azure Developer CLI et les services Microsoft Foundry. Des applications simples de chat IA aux agents intelligents avec outils.
+Ce chapitre se concentre sur le déploiement d’applications alimentées par l’IA utilisant Azure Developer CLI et les services Microsoft Foundry. Des simples applications de chat IA aux agents intelligents avec des outils.
 
-> **Revue de la version (2026-11-04) :** Les directives AI CLI ont été vérifiées par rapport à la documentation/source publiée `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, et `azure.ai.evaluations` `1.0.0-beta.2`. Utilisez `azd >= 1.37.0` pour le flux de travail combiné. Les évaluations utilisent désormais l’espace de noms distinct `azd ai eval` ; voir [changements de version et guide de migration](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ceci n’est pas une validation de déploiement en direct.
+> **Mise à jour GA Foundry (2026-11-09) :** Le bundle `microsoft.foundry` 1.0 est [disponible en général](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Utilisez `azd >= 1.37.0` ; les évaluations restent une installation séparée. Le [guide de l'agent hébergé](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) couvre les tests locaux dans Agent Inspector et le déploiement de code à distance. Ceci est une revue documentaire, pas une validation de déploiement en direct ; les fonctionnalités en aperçu restent dans leur propre statut.
 
-## Objectifs d’apprentissage
+## Objectifs d'apprentissage
 
-En complétant ce chapitre, vous serez capable de :
-- Déployer des applications IA en utilisant des modèles AZD préconstruits
+En complétant ce chapitre, vous allez :
+- Déployer des applications IA à l’aide de templates AZD préconçus
 - Comprendre l’intégration Microsoft Foundry avec AZD
+- Installer le bundle GA et tester un agent hébergé localement avant de déployer son code source sur Foundry
+- Revoir `azure.yaml`, les ressources d’évaluation, et la gestion des projets nouveaux contre réutilisés
 - Configurer et personnaliser des agents IA avec des outils
-- Déployer des applications RAG (Génération augmentée par récupération)
+- Déployer des applications RAG (Retrieval-Augmented Generation)
 
 ---
 
@@ -24,16 +26,18 @@ En complétant ce chapitre, vous serez capable de :
 
 | # | Leçon | Description | Durée |
 |---|--------|-------------|------|
-| 1 | [Intégration Microsoft Foundry](microsoft-foundry-integration.md) | Connecter AZD aux services Foundry | 30 min |
+| 1 | [Intégration Microsoft Foundry](microsoft-foundry-integration.md) | Bundle GA, workflow local-à-cloud de l’agent hébergé, et évaluations | 60 min |
 | 2 | [Guide des Agents IA](agents.md) | Déployer des agents intelligents avec outils | 45 min |
-| 3 | [Déploiement de Modèle IA](ai-model-deployment.md) | Déployer et configurer des modèles IA | 30 min |
-| 4 | [Atelier Laboratoire IA](ai-workshop-lab.md) | Pratique : Explorer un modèle et planifier votre conversion | 2-3 heures |
+| 3 | [Déploiement de modèle IA](ai-model-deployment.md) | Déployer et configurer des modèles IA | 30 min |
+| 4 | [Atelier Laboratoire IA](ai-workshop-lab.md) | Pratique : Explorer un template et planifier votre conversion | 2-3 heures |
 
 ---
 
 ## 🚀 Démarrage rapide
 
-Choisissez une option dans un nouveau répertoire vide. Le `.` final initialise le répertoire actuel ; sinon AZD peut créer un sous-répertoire sans changer le répertoire de travail du shell.
+Choisissez une option dans un nouveau répertoire vide. Le suffixe `.` initialise le répertoire courant ; sinon AZD peut créer un sous-répertoire sans changer le répertoire de travail de votre shell.
+
+Pour le **chemin de déploiement de code agent hébergé GA**, commencez avec le [guide pas-à-pas](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Il nécessite AZD 1.37.0+, uv actuel, Python 3.13+, permissions Foundry, et quota de modèle. Les templates complets d’application ci-dessous sont des alternatives, non des prérequis pour ce guide.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,9 +55,9 @@ azd up
 
 ---
 
-## 🤖 Modèles IA en vedette
+## 🤖 Templates IA phares
 
-| Modèle | Description | Services |
+| Template | Description | Services |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG avec citations | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent IA avec outils | AI Agent Service |
@@ -63,15 +67,15 @@ azd up
 
 ## 💰 Sensibilisation aux coûts
 
-Ce sont des fourchettes indicatives, pas des devis ou plafonds ; le trafic du modèle, les SKU Search/Compute, la région et les fonctionnalités optionnelles peuvent les dépasser. Consultez la tarification actuelle de l’exemple choisi avant le provisionnement.
+Ce sont des plages illustratives, pas des devis ni des plafonds ; le trafic modèle, les SKU Search/compute, la région, et les fonctionnalités optionnelles peuvent les dépasser. Consultez la tarification actuelle de votre échantillon choisi avant de provisionner.
 
-| Environnement | Coût mensuel estimé |
+| Environnement | Coût Mensuel Estimé |
 |-------------|----------------------|
 | Développement | 80-150 $ |
-| Mise en scène | 150-300 $ |
+| Préproduction | 150-300 $ |
 | Production | 300-3 500+ $ |
 
-**Astuce :** Lancez `azd down` après les tests pour éviter des frais.
+**Nettoyage :** Consultez `azd down` avant de confirmer : pour un projet Foundry nouvellement créé, il supprime le groupe de ressources et tout ce qu’il contient. Pour un projet Foundry réutilisé, il laisse en place les ressources du projet et de l’agent ; suivez les [instructions de nettoyage du guide](microsoft-foundry-integration.md#7-clean-up-deliberately) pour supprimer séparément les ressources indésirables.
 
 ---
 
@@ -79,13 +83,13 @@ Ce sont des fourchettes indicatives, pas des devis ou plafonds ; le trafic du mo
 
 | Direction | Chapitre |
 |-----------|---------|
-| **Précédent** | [Chapitre 1 : Fondations](../chapter-01-foundation/README.md) |
+| **Précédent** | [Chapitre 1 : Fondation](../chapter-01-foundation/README.md) |
 | **Suivant** | [Chapitre 3 : Configuration](../chapter-03-configuration/README.md) |
 | **Aller à** | [Chapitre 8 : Modèles de Production](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Ressources Associées
+## 📖 Ressources associées
 
 - [Dépannage IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Pratiques IA en Production](../chapter-08-production/production-ai-practices.md)

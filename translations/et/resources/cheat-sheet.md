@@ -1,34 +1,34 @@
-# Käskude abivihik - Olulised AZD käsud
+# Käsurea Pääsukomplekt - Olulised AZD Käsud
 
-**Kiire viide kõigile peatükkidele**
-- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **📖 Kiire algus**: [1. peatükk: Alus ja kiire algus](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI käsud**: [2. peatükk: AI-esmane arendus](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Täiustatud**: [4. peatükk: Infrastruktuur koodina](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Kiirviide Kõikide Peatükkide Jaoks**
+- **📚 Kursuse Avaleht**: [AZD Algajatele](../README.md)
+- **📖 Kiire Algus**: [1. Peatükk: Alused & Kiire Algus](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Tehisintellekti Käsud**: [2. Peatükk: AI-Esmane Arendus](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Täiustatud**: [4. Peatükk: Infrastruktuur Koodi Kujul](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Sissejuhatus
 
-See põhjalik abivihik pakub kiiret viidet kõige sagedamini kasutatavatele Azure Developer CLI käskudele, korraldatud kategooriate kaupa praktiliste näidetega. Täiuslik kiireks otsimiseks arenduse, tõrkeotsingu ja igapäevaste azd projektide toimingute ajal.
+See põhjalik käsurea pääsukomplekt pakub kiiret viidet kõige sagedamini kasutatavatele Azure Developer CLI käskudele, kategooriatesse organiseerituna praktiliste näidetega. Ideaalne kiireks viitamiseks arendamise, tõrkeotsingu ja igapäevaste tööde jooksul azd projektidega.
 
 ## Õpieesmärgid
 
-Selle abivihiku kasutamisel:
-- Saad kohe ligipääsu olulistele Azure Developer CLI käskudele ja süntaksile
-- Saad aru käskude korraldusest funktsionaalsete kategooriate ja kasutusjuhtumite järgi
-- Viitad praktilistele näidetele tavapäraste arendus- ja juurutusstsenaariumite jaoks
-- Kasutad tõrkeotsingu käske kiireks probleemide lahendamiseks
-- Leiab tõhusalt täiustatud seadistuse ja kohandamise valikud
-- Leiab keskkonna haldamise ja mitmekeskkondliku töövoo käsud
+Selle käsurea pääsukomplekti kasutades saad:
+- Kohese juurdepääsu olulistele Azure Developer CLI käskudele ja süntaksile
+- Mõista käskude organiseerimist funktsionaalsete kategooriate ja kasutusjuhtude järgi
+- Viidata praktilistele näidetele tavaliste arendus- ja kasutuselevõtustsenaariumite jaoks
+- Juurdepääsu tõrkeotsingu käskudele kiireks probleemide lahendamiseks
+- Leidma tõhusalt täiustatud seadistus- ja kohandamisvalikuid
+- Asukohad keskkonna haldamise ja mitmekeskkonnatöövoo käskude jaoks
 
 ## Õpitulemused
 
-Selle abivihiku regulaarsel kasutamisel oskad:
-- Käitada azd käske kindlalt, ilma kogu dokumentatsiooni vaatamata
-- Lahendada kiiresti tavalisi probleeme õige diagnostika käsu abil
-- Hallata tõhusalt mitut keskkonda ja juurutusstsenaariume
-- Rakendada vajaduse korral täiustatud azd funktsioone ja seadistusvalikuid
-- Tõrkeotsingu juurutusprobleeme süstemaatiliste käskude järjestustega
-- Optimeerida töövooge azd efektiivsete otseteede ja valikute kasutamisega
+Selle pääsukomplekti regulaarsel kasutamisel suudad:
+- Täita azd käske enesekindlalt ilma täielikku dokumentatsiooni viitamata
+- Kiiresti lahendada tavalisi probleeme sobivate diagnostikakäskude abil
+- Tõhusalt hallata mitut keskkonda ja kasutuselevõtustsenaariume
+- Vajadusel rakendada täiustatud azd funktsioone ja seadistusvalikuid
+- Tõrkeotsida kasutuselevõtuprobleeme süsteemsete käsujadade abil
+- Optimeerida töövooge azd otseteede ja valikute tõhusa kasutamisega
 
 ## Alustavad käsud
 
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Projekti initsialiseerimine
+### Projekti algatamine
 ```bash
 # Browse available templates
 azd template list
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Tuumjuurutuse käsud
+## Põhilised kasutuselevõtu käsud
 
-### Täielik juurutustöövoog
+### Täielik kasutuselevõtu töövoog
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Koostamine ja pakkimine
+### Koostamine ja paketistamine
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** laadib alla sinu rakenduse sõltuvused (npm, pip, NuGet, Maven jne). See käib automaatselt uuendamise ajal `azd package` ja `azd deploy`, seega harva kutsud seda otse — käivita käsitsi sõltuvuste eelallalaadimiseks (näiteks CI vahemälu soojendamiseks või hilisemaks võrguvabaks tööks).
+> **`azd restore`** laadib alla sinu rakenduse sõltuvused (npm, pip, NuGet, Maven jne). See käivitub automaatselt `azd package` ja `azd deploy` ajal, seega kutsutakse seda harva otseselt – käivita see käsitsi, et eelnevalt sõltuvused üles laadida (näiteks CI vahemälu soojendamiseks või hiljem võrguühenduseta tööks).
 
-> **`azd package`** valmistab ette juurutatava artefakti ilma rakendusteenust juurutamata. Käitumine sõltub keelest ja hostist: konteineri pakkimine võib kasutada Azure kaugkoostamist ning avaldada pildid registrisse, seega see ei pruugi olla võrguvaba ega kirjutustest vaba. `azd deploy` saab automaatselt pakkida; eraldi paketietapp on vajalik artefakti või koostamise kontrolli jaoks.
+> **`azd package`** valmistab ette kasutuselevõtmiseks sobiva artefakti ilma rakenduseteenust käivitamata. Käitumine sõltub keelest ja hostist: konteineri pakkimine võib kasutada Azure'i kaugkoostamist ja avaldada pilte registrisse, seega ei ole see tingimata võrguühenduseta ega Azure'i kirjutusvaba. `azd deploy` saab pakkida automaatselt; kasuta eraldi paketistamise sammu, kui vajad artefakti või koostamise kontrolli.
 
 
 ## 🌍 Keskkonna haldamine
@@ -170,9 +170,9 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Keskkonna failid on lihttekstis. Ärge käsitlege `azd env set` saladuste hoidla; kasutage vajadusel Key Vault viiteid või hallatud identiteeti.
+Keskkonna failid on tavatekstina. Ära käsitle `azd env set` salajase hoiuna; kasuta vastavalt Key Vault viiteid või hallatud identiteeti.
 
-## ⚙️ Seadistuse käsud
+## ⚙️ Seadistuskäsud
 
 ### Globaalne seadistus
 ```bash
@@ -204,7 +204,7 @@ azd show --output json
 
 ## 📊 Jälgimine ja diagnostika
 
-### Jälgimisdashboard
+### Jälgimise armatuurlaud
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,7 +219,7 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights peab olema malli poolt seadistatud. AZD Live Metrics valikut ei toetata hetkel Python rakenduste jaoks; küsi ülevaadet, logisid või proovimärgendatud jälgimistöövoogu.
+Application Insights peab olema malliga seadistatud. AZD Live Metrics valikut ei toetata hetkel Python rakenduste puhul; kasuta selle asemel üldvaadet, logisid või näite dokumenteeritud jälgimistöövoogu.
 
 ### Konteineri logide vaatamine
 ```bash
@@ -244,7 +244,7 @@ az monitor log-analytics query \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Hooldus käsud
+## 🛠️ Hoolduskäsud
 
 ### Puhastamine
 ```bash
@@ -287,7 +287,7 @@ azd pipeline config --provider azdo
 azd pipeline config --help
 ```
 
-### Infrastruktuuri haldus
+### Infrastruktuuri haldamine
 ```bash
 # Generate infrastructure templates
 azd infra generate
@@ -321,23 +321,22 @@ azd show --output json | jq '.services'
 
 ### AZD laiendused
 
-AI CLI viide ülevaatatud 2026-11-04: `azd 1.37.2`, agendid `1.0.0-beta.23`, hindamised `1.0.0-beta.2`. Kasuta `azd >= 1.37.0` kombineeritud töövoolu jaoks; täienda esmalt põhilist CLI-d enne ühilduvuse puudumisega laiendusi.
+Foundry GA viite uuendus 2026-11-09: `microsoft.foundry` pakk 1.0, kuulutati välja [5. november 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Kasuta `azd >= 1.37.0`; komponendid on iseseisvalt versioonitud ja valikulised eelvaate funktsioonid säilitavad oma staatuse.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI agendi käsud
+Komplekt ei sisalda hindamisi, andmesettekandeid, peenhäälestust ega kohandatud mudeleid. Üksikute põhilaienete installimine on jätkuvalt toetatud. Jälgi [GA hostitud agentide samm-sammult juhendit](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) töötava näite jaoks Python 3.13+, praeguse uv, õigustega ja mudelilimiidiga.
+
+### AI Agendi käsud
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` asendab vananenud `--manifest`/`-m` õigekirja; vanad manifestid vajavad migratsiooni. Praegu puudub agent-init `--host containerapp` võimalus. Hallatud-harzi, hääl- ja pikaajalise eelvaate jaoks vajalikud sõltumatud kest-/CI keskkonna opt-inid; vaata [AI CLI viidet](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` asendab aegunud `--manifest`/`-m` kirjaviisi; vanemaid manuseid tuleb migreerida. Praegu puudub agent-init `--host containerapp` valik. Hallatud sisu, hääl ja pikaajaliste eelvaadete jaoks on vajalikud iseseisvad shell/CI keskkonna nõusolekud; vaata [AI CLI viidet](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### AI hindamised ja optimeerimine
+Kohalik testimine kasutab endiselt Azure mudeli kasutuselevõtteid ja tekitab kulusid. Puhastamiseks kustutab `azd down` värskelt loodud Foundry projekti ressursigrupi, kuid jätab alles taaskasutatud projekti ressursid; eemalda eraldi ainult soovimatud ressursid, mis sulle kuuluvad.
+
+### AI Hindamised ja optimeerimine
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,9 +417,24 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agendid beta.22 asendasid vanad hindamiskäsud `azd ai eval`-ga `azure.ai.evaluations`-st. Uus hindamiskonfiguratsioon kasutab camelCase võtmeid. Optimeerimine `--config` võtab eraldi optimeerimise API päringu, **mitte** vana `eval.yaml` ega uut `azure.eval.yaml`; kasutage `--eval`/`--eval-config` hindamise korduskasutuseks. Vaata [hindamiskonfiguratsiooni](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ja [optimeerimise migratsiooni](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agendid beta.22 asendasid vanemad hindamiskäsud `azd ai eval` abil `azure.ai.evaluations`. Uus hindamiskonfiguratsioon kasutab camelCase võtmeid. Optimeerimine `--config` võtab vastu iseseisva optimeerimis-API päringu, **mitte** vanemat `eval.yaml` ega uut `azure.eval.yaml`; kasuta `--eval`/`--eval-config` hindamise taaskasutamiseks. Vaata [hindamise seadistust](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ja [optimeerimise migratsiooni](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-### MCP server (Alpha)
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Käivitaja fragment ei ole täielik töövoog. Kinnita üle vaadatud hindamiskonfiguratsioon ja mitte-saladusneed varad, anna andmestiku/hindaja/mudeli ligipääs ja kasuta iga etapi jaoks keskkonda. Vaata [autentitud CI/CD näidet](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
+### MCP Server (Alfa)
 ```bash
 # Start the MCP server for your project
 azd mcp start
@@ -421,7 +456,7 @@ azd infra --help
 
 ## 🎯 Kiired töövood
 
-### Arenduse töövoog
+### Arendustöövoog
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Mitmekeskkondlik töövoog
+### Mitmekeskkonnatöövoog
 ```bash
 # Set up environments
 azd env new dev
@@ -473,9 +508,9 @@ azd monitor --logs
 azd show --output json
 ```
 
-## 🔍 Silumine käsud
+## 🔍 Silumis- ehk debug käsud
 
-### Silumisinfo
+### Silumise info
 ```bash
 # Enable debug output for a command
 azd <command> --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Mallide silumine
+### Malli silumine
 ```bash
 # List available templates with details
 azd template list --output json
@@ -502,7 +537,7 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 Faili- ja kataloogikäsklused
+## 📁 Faili ja kataloogi käsud
 
 ### Projekti struktuur
 ```bash
@@ -540,7 +575,7 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Tavalised käskude kombinatsioonid
+## 🔧 Levinud käsukombinatsioonid
 
 ### Tervisekontrolli skript
 ```bash
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Juurutuse valideerimine
+### Kasutuselevõtu valideerimine
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### Ressursside puhastamise skript
+### Ressursside puhastus-skript
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -580,7 +615,7 @@ azd down --environment <environment-name>
 
 ## 📝 Keskkonnamuutujad
 
-### Tavapärased keskkonnamuutujad
+### Levinud keskkonnamuutujad
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -598,7 +633,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Hädaolukorra käsud
 
-### Kiireparandused
+### Kiired parandused
 ```bash
 # Reauthenticate AZD without changing Azure CLI's account cache
 azd auth login
@@ -613,7 +648,7 @@ azd deploy
 azd show --output json
 ```
 
-### Taastamiskäsud
+### Taastamise käsud
 ```bash
 # Inspect before retrying; deletion/purge is not a routine recovery step
 azd show
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 Pro näpunäited
 
-### Kiiremaks töövooguks aliased
+### Aliased kiiremaks töövooguks
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Nipp**: Seo see abivihik järjehoidjaks ja kasuta `Ctrl+F`, et kiiresti leida vajalikke käske!
+**Nõuanne**: Lisa see käsurea pääsukomplekt järjehoidjasse ja kasuta `Ctrl+F`, et kiiresti leida vajalikud käsud!
 
 ---
 
-**Navigatsioon**
-- **Eelmine tund**: [Ettevalmistuskontrollid](../docs/chapter-06-pre-deployment/preflight-checks.md)
-- **Järgmine tund**: [Terminid](glossary.md)
+**Navigeerimine**
+- **Eelmine Õppetund**: [Preflight Kontrollid](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Järgmine Õppetund**: [Sõnastik](glossary.md)
 
 ---
 
-> **💡 Tahad Azure käsuabi oma tekstiredaktoris?** Paigalda [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) koos `npx skills add microsoft/github-copilot-for-azure` — 37 oskust AI, Foundry, juurutuse, diagnostika ja muu jaoks.
+> **💡 Tahad Azure käsuabi oma redaktoris?** Paigalda [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) koos `npx skills add microsoft/github-copilot-for-azure` — 37 oskust AI, Foundry, kasutuselevõtu, diagnostika ja muu jaoks.
 
 ---
 

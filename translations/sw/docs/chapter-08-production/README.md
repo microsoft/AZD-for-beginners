@@ -1,25 +1,25 @@
 # Sura ya 8: Mifumo ya Uzalishaji & Biashara
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Saa 2-3 | **⭐ Ugumu**: Juu
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: masaa 2-3 | **⭐ Ugumu**: Kiwango cha Juu
 
 ---
 
 ## Muhtasari
 
-Sura hii inashughulikia mifumo ya utoaji tayari kwa biashara, kuimarisha usalama, ufuatiliaji, na uboreshaji wa gharama kwa mizigo ya AI ya uzalishaji.
+Sura hii inashughulikia mifumo ya ueneaji inayokubalika kwa biashara, kuimarisha usalama, ufuatiliaji, na uboreshaji wa gharama kwa mzigo kazi wa AI wenye uzalishaji.
 
-Hii ni kumbukumbu ya usanifu, si kiolezo kamili cha uzalishaji kinachoweza kutumika moja kwa moja. Mifano hugawanya maelezo ya muunganiko ambayo yanapaswa kutolewa na kujaribiwa katika programu yako mwenyewe; kusoma orodha ya ukaguzi haimaanishi uko tayari kwa uzalishaji.
+Hii ni rejeleo la usanifu, si kiolezo kamili cha kuweza kutumika uzalishaji. Mifano huacha maelezo ya ujumuishaji ambayo lazima yatolewa na kujaribiwa katika programu yako mwenyewe; kusoma orodha ya ukaguzi hakuhakiki utayari wa uzalishaji.
 
-> **Mapitio ya toleo (2026-11-04):** Mwongozo wa AI CLI ulifikirishwa dhidi ya hati/chanzo cha `azd 1.37.2`, maajenti `1.0.0-beta.23`, na tathmini `1.0.0-beta.2`. Tazama [mabadiliko na marekebisho ya toleo](production-ai-practices.md#recent-release-changes-and-fixes) kwa mahitaji ya muunganisho na maelezo ya uhamisho; hii si uthibitisho wa utoaji wa moja kwa moja.
+> **Sasisho la Foundry GA (2026-11-09):** Tumia `azd >= 1.37.0` na kundi la 1.0 la `microsoft.foundry` lililopatikana kwa ujumla kwa mchakato wa Foundry; tathmini zinawekwa kwa tofauti. Angalia [wigo wa toleo na uhamishaji](production-ai-practices.md#recent-release-changes-and-fixes) na [mfano wa mteremko uliothibitishwa](production-ai-practices.md#cicd-pipeline-configuration). Hii ni mapitio ya nyaraka, si uthibitisho wa uwekaji moja kwa moja au hali ya GA kwa vipengele vya onyesho la hiari.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza sura hii, utaweza:
-- Kutoa programu zenye ustahimilivu katika maeneo mengi
-- Kutekeleza mifumo ya usalama wa biashara
-- Kupanga ufuatiliaji wa kina
-- Kuboresha gharama kwa wingi
-- Kuanzisha njia za CI/CD kwa kutumia AZD
+- Kueneza programu zinazoimirika katika mikoa mingi
+- Kutekeleza mifumo ya usalama ya biashara
+- Kusanidi ufuatiliaji kamili
+- Kuboresha gharama kwa kiwango kikubwa
+- Kuanzisha mistari ya CI/CD kwa kutumia AZD
 
 ---
 
@@ -27,25 +27,25 @@ Kwa kumaliza sura hii, utaweza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Mazingira ya Uzalishaji ya AI](production-ai-practices.md) | Mifumo ya utoaji biashara | Dakika 90 |
+| 1 | [Mazingira ya AI ya Uzalishaji](production-ai-practices.md) | Mifumo ya ueneaji wa biashara | Dakika 90 |
 
 ---
 
 ## 🚀 Orodha ya Ukaguzi wa Uzalishaji
 
-- [ ] Utoaji wa maeneo mengi kwa ustahimilivu
-- [ ] Utambuzi uliodhibitiwa kwa uthibitishaji (bila funguo)
-- [ ] Application Insights kwa ajili ya ufuatiliaji
-- [ ] Bajeti za gharama na arifa zimepangwa
-- [ ] Upimaji wa usalama umewezeshwa
-- [ ] Muunganisho wa njia za CI/CD
-- [ ] Mpango wa kurejesha baada ya maafa
+- [ ] Ueneaji wa mikoa mingi kwa uhimili
+- [ ] Utambulisho ulioendeshwa kwa usimamizi kwa uthibitishaji (bila funguo)
+- [ ] Application Insights kwa ufuatiliaji
+- [ ] Bajeti za gharama na arifa zimewekwa
+- [ ] Usahihishaji wa usalama umewezeshwa
+- [ ] Ujumuishaji wa mteremko wa CI/CD
+- [ ] Mpango wa urejeshaji wa maafa
 
 ---
 
 ## 🏗️ Mifumo ya Usanifu
 
-### Mfano 1: AI ya Microservices
+### Mfano 1: Microservices AI
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Mbinu Bora za Usalama
+## 🔐 Mazoezi Bora ya Usalama
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -85,18 +85,18 @@ properties: {
 
 ## 💰 Uboreshaji wa Gharama
 
-| Mkakati | Vizingiti Vikuu |
+| Mikakati | Kizuizi Kikuu |
 |----------|---------|
-| Kudhibiti kwa kiwango cha sifuri (Container Apps) | Inahitaji kichocheo kinachofaa; huduma nyingine bado husababisha gharama |
+| Kupunguza hadi sifuri (Programu za Kontena) | Inahitaji kichocheo kinachofaa; huduma zingine bado zinatoa gharama |
 | Tumia ngazi za matumizi kwa maendeleo | Linganisha bei ya huduma iliyochaguliwa na mzigo wa kazi |
-| Mipangilio ya upanuzi kwa ratiba | Panua kupitia miundombinu/otomatiki inayounga mkono |
-| Hifadhi/uwezo uliowekwa | Ni pale panapoungwa mkono; ahadi zinaweza kuongeza gharama zisizotumika |
+| Kupanga vifaa kwa ratiba | Punguza kupitia miundombinu/matikio yaliyotumika |
+| Hifadhi / uwezo uliopangwa | Ni pale inapopatikana tu; ahadi zinaweza kuongeza gharama za kusimama pasipo shughuli |
 
-Tumia [mfano kamili wa rasilimali ya bajeti](production-ai-practices.md#2-cost-monitoring-and-budgets) na tarehe halali ya kuanza, upeo wa bili, wapokeaji, na ruhusa. Bajeti hutuma arifa; haisimamishi matumizi. Akiba hutegemea matumizi yaliyopimwa na si asilimia iliyohakikishwa.
+Tumia [mfano kamili wa rasilimali ya bajeti](production-ai-practices.md#2-cost-monitoring-and-budgets) ikiwa na tarehe halali ya kuanzia, wigo wa bili, wapokeaji, na ruhusa. Bajeti hutuma arifa; haizuizi matumizi. Akiba hutegemea matumizi yaliyopimwa na haina asilimia inayohakikisha.
 
 ---
 
-## 📊 Mipangilio ya Ufuatiliaji
+## 📊 Usanidi wa Ufuatiliaji
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -115,16 +115,16 @@ az monitor metrics list --resource <resource-id>
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyopita** | [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/README.md) |
-| **Kozi Imekamilika** | [Nyumbani kwa Kozi](../../README.md) |
+| **Iliyotangulia** | [Sura ya 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/README.md) |
+| **Kozi Imekamilika** | [Mwanzo wa Kozi](../../README.md) |
 
 ---
 
-## 📖 Vyanzo Vinavyohusiana
+## 📖 Rasilimali Zinazohusiana
 
-- [Mwongozo wa Maajenti wa AI](../chapter-02-ai-development/agents.md)
+- [Mwongozo wa Wakala wa AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Suluhisho za Maajenti Wengi](../chapter-05-multi-agent/README.md)
+- [Suluhisho za Wakala Wengi](../chapter-05-multi-agent/README.md)
 - [Mfano wa Microservices](../../examples/microservices/README.md)
 
 ---

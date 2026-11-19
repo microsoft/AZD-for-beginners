@@ -6,11 +6,11 @@
 
 ## Aperçu
 
-Ce chapitre aborde les modèles de déploiement prêts pour l’entreprise, le renforcement de la sécurité, la surveillance et l’optimisation des coûts pour les charges de travail AI en production.
+Ce chapitre couvre les modèles de déploiement prêts pour l’entreprise, le renforcement de la sécurité, la surveillance et l’optimisation des coûts pour les charges de travail IA en production.
 
-Il s’agit d’une référence architecturale, non d’un modèle de production complet déployable. Les exemples omettent des détails d’intégration qui doivent être fournis et testés dans votre propre application ; la lecture de la checklist ne certifie pas la préparation à la production.
+Il s’agit d’une référence architecturale, pas d’un modèle complet déployable en production. Les exemples omettent les détails d’intégration qui doivent être fournis et testés dans votre propre application ; lire la liste de contrôle ne certifie pas la préparation à la production.
 
-> **Revue de version (2026-11-04) :** Les directives AI CLI ont été vérifiées par rapport à la documentation/source `azd 1.37.2`, agents `1.0.0-beta.23`, et évaluations `1.0.0-beta.2`. Voir [modifications et corrections de la version](production-ai-practices.md#recent-release-changes-and-fixes) pour les exigences de compatibilité et les détails de migration ; il ne s’agit pas d’une validation de déploiement en direct.
+> **Mise à jour Foundry GA (2026-11-09) :** Utilisez `azd >= 1.37.0` et le paquet `microsoft.foundry` 1.0 généralement disponible pour le workflow Foundry ; les évaluations sont installées séparément. Voir [portée de la release et migration](production-ai-practices.md#recent-release-changes-and-fixes) et l’[exemple de pipeline authentifié](production-ai-practices.md#cicd-pipeline-configuration). Il s’agit d’une revue documentaire, pas d’une validation de déploiement en direct ou d’un statut GA global pour les fonctionnalités en aperçu optionnel.
 
 ## Objectifs d’apprentissage
 
@@ -26,15 +26,15 @@ En complétant ce chapitre, vous serez capable de :
 ## 📚 Leçons
 
 | # | Leçon | Description | Durée |
-|---|--------|-------------|-------|
-| 1 | [Pratiques AI en Production](production-ai-practices.md) | Modèles de déploiement entreprise | 90 min |
+|---|--------|-------------|------|
+| 1 | [Pratiques IA en Production](production-ai-practices.md) | Modèles de déploiement d’entreprise | 90 min |
 
 ---
 
-## 🚀 Checklist de Production
+## 🚀 Liste de Contrôle Production
 
-- [ ] Déploiement multi-régions pour la résilience
-- [ ] Identité managée pour l’authentification (sans clés)
+- [ ] Déploiement multi-région pour la résilience
+- [ ] Identité gérée pour l’authentification (sans clés)
 - [ ] Application Insights pour la surveillance
 - [ ] Budgets et alertes de coûts configurés
 - [ ] Analyse de sécurité activée
@@ -45,7 +45,7 @@ En complétant ce chapitre, vous serez capable de :
 
 ## 🏗️ Modèles Architecturaux
 
-### Modèle 1 : Microservices AI
+### Modèle 1 : Microservices IA
 
 ```mermaid
 graph LR
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Modèle 2 : AI Orienté Événements
+### Modèle 2 : IA Événementielle
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Bonnes Pratiques de Sécurité
+## 🔐 Bonnes pratiques de sécurité
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -83,20 +83,20 @@ properties: {
 
 ---
 
-## 💰 Optimisation des Coûts
+## 💰 Optimisation des coûts
 
-| Stratégie | Contrainte Principale |
-|----------|--------------------|
-| Mise à l’échelle à zéro (Container Apps) | Nécessite un déclencheur adapté ; d’autres services engendrent toujours des coûts |
-| Utiliser les paliers à la consommation pour dev | Comparer le tarif du service sélectionné et la charge de travail |
-| Mise à l’échelle programmée | Mise à l’échelle via infrastructure/automatisation supportée |
-| Réservations/capacité provisionnée | Seulement quand supporté ; les engagements peuvent augmenter les coûts au repos |
+| Stratégie | Contraintes principales |
+|----------|---------|
+| Mise à l’échelle à zéro (Container Apps) | Nécessite un déclencheur adapté ; d’autres services génèrent toujours des coûts |
+| Utiliser les niveaux de consommation pour dev | Comparer le prix du service sélectionné et la charge de travail |
+| Mise à l’échelle programmée | Échelle via infrastructure/automatisation supportée |
+| Réservations/capacité provisionnée | Seulement si pris en charge ; engagements peuvent augmenter les coûts à l’inactivité |
 
-Utilisez le [modèle complet de ressource budget](production-ai-practices.md#2-cost-monitoring-and-budgets) avec une date de début valide, un périmètre de facturation, des destinataires et des permissions. Un budget envoie des alertes ; il ne limite pas les dépenses. Les économies dépendent de l’utilisation mesurée et ne sont pas des pourcentages garantis.
+Utilisez le [modèle complet de ressource budget](production-ai-practices.md#2-cost-monitoring-and-budgets) avec une date de début valide, un périmètre de facturation, des destinataires et des permissions. Un budget envoie des alertes ; il ne limite pas les dépenses. Les économies dépendant de l’utilisation mesurée ne sont pas garanties en pourcentage.
 
 ---
 
-## 📊 Configuration de la Surveillance
+## 📊 Configuration de la surveillance
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -116,15 +116,15 @@ az monitor metrics list --resource <resource-id>
 | Direction | Chapitre |
 |-----------|---------|
 | **Précédent** | [Chapitre 7 : Dépannage](../chapter-07-troubleshooting/README.md) |
-| **Cours terminé** | [Accueil du cours](../../README.md) |
+| **Cours terminé** | [Page d’accueil du cours](../../README.md) |
 
 ---
 
-## 📖 Ressources Associées
+## 📖 Ressources associées
 
-- [Guide des Agents AI](../chapter-02-ai-development/agents.md)
+- [Guide des agents IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Solutions Multi-Agents](../chapter-05-multi-agent/README.md)
+- [Solutions Multi-Agent](../chapter-05-multi-agent/README.md)
 - [Exemple Microservices](../../examples/microservices/README.md)
 
 ---

@@ -1,784 +1,239 @@
-# الگوی زیرساختی راه‌حل چندعاملی خرده‌فروشی
+# چارچوب زیرساخت عامل‌های چندگانه خرده‌فروشی
 
-**فصل ۵: بسته استقرار تولید**
-- **📚 صفحه دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل مرتبط**: [فصل ۵: راه‌حل‌های هوش مصنوعی چندعاملی](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 راهنمای سناریو**: [معماری کامل](../retail-scenario.md)
-- **🎯 استقرار سریع**: [استقرار با یک کلیک](#-quick-deployment)
+**مثال معماری پیشرفته — نه یک برنامه عامل چندگانه قابل اجرا.**
 
-> **⚠️ فقط الگوی زیرساخت**  
-> این قالب ARM منابع Azure را برای یک سیستم چندعاملی مستقر می‌کند.  
->  
-> **چه چیزهایی مستقر می‌شوند (۱۵–۲۵ دقیقه):**
-> - ✅ سرویس‌های Microsoft Foundry Models (gpt-4.1، gpt-4.1-mini، مدل‌های embeddings در ۳ منطقه)
-> - ✅ سرویس Azure AI Search (خالی، آماده برای ایجاد ایندکس)
-> - ✅ Container Apps (تصاویر نگهدارنده، آماده برای کد شما)
-> - ✅ Storage، Cosmos DB، Key Vault، Application Insights
->  
-> **چه چیزهایی شامل نمی‌شود (نیاز به توسعه دارد):**
-> - ❌ کد پیاده‌سازی عامل‌ها (Customer Agent، Inventory Agent)
-> - ❌ منطق مسیریابی و نقاط پایانی API
-> - ❌ رابط کاربری چت فرانت‌اند
-> - ❌ اسکیمای ایندکس جستجو و خطوط لوله داده
-> - ❌ **برآورد تلاش توسعه: ۸۰–۱۲۰ ساعت**
->  
-> **از این قالب استفاده کنید اگر:**
-> - ✅ می‌خواهید زیرساخت Azure را برای یک پروژه چندعاملی فراهم کنید
-> - ✅ قصد دارید پیاده‌سازی عامل‌ها را جداگانه توسعه دهید
-> - ✅ به یک پایه زیرساخت مناسب تولید نیاز دارید
->  
-> **استفاده نکنید اگر:**
-> - ❌ انتظار یک دموی چندعاملی آماده و کارآمد فوراً دارید
-> - ❌ به دنبال نمونه‌های کامل کد برنامه هستید
+[صفحه دوره](../../README.md) ·
+[فصل ۵](../../docs/chapter-05-multi-agent/README.md) ·
+[نقشه معماری](../retail-scenario.md)
 
-## مرور کلی
+## آنچه این مستقر می‌کند
 
-این پوشه شامل یک قالب جامع Azure Resource Manager (ARM) برای استقرار پایه زیرساختی یک سیستم پشتیبانی مشتری چندعاملی است. قالب تمام سرویس‌های لازم Azure را تامین می‌کند، به‌درستی پیکربندی و متصل شده‌اند و برای توسعه برنامه شما آماده‌اند.
+این پوشه شامل قالب ARM، پارامترها، و اسکریپت استقرار Bash است.
+هیچ **برنامه منبع `azure.yaml` یا برنامه خرده‌فروشی وجود ندارد**.
 
-**پس از استقرار، خواهید داشت:** زیرساخت Azure آماده تولید  
-**برای تکمیل سیستم نیاز دارید:** کد عامل‌ها، رابط کاربری فرانت‌اند، و پیکربندی داده (رجوع کنید به [راهنمای معماری](../retail-scenario.md))
+| منبع | وضعیت واقعی پس از تأمین منابع |
+|---|---|
+| حساب اصلی Azure OpenAI | استقرار `gpt-4.1-chat` با استفاده از نسخه `gpt-4.1`، `2025-04-14`، `GlobalStandard` |
+| حساب ثانویه OpenAI (اختیاری) | `gpt-4.1-mini-inventory`، مدل `gpt-4.1-mini` نسخه `2025-04-14`، `GlobalStandard` |
+| حساب ایمبیدینگ (اختیاری) | نسخه `text-embedding-ada-002`، `2`، `Standard`؛ بدون خط لوله نمایه‌سازی |
+| حساب Grader OpenAI | `gpt-4.1-grader`، مدل `gpt-4.1` نسخه `2025-04-14`، `GlobalStandard`؛ بدون ارزیاب |
+| جستجوی AI | سرویس خالی؛ بدون ایندکس یا اسناد |
+| ذخیره‌سازی | مخازن بلاک خالی `documents` و `uploads` |
+| Cosmos DB | حساب بدون سرور، پایگاه داده `chathistory`، ظرف `conversations` تقسیم شده بر `/userId`، زمان زنده‌ ماندن آیتم 30 روز |
+| برنامه‌های Container | همراوتر و هم فرانت‌اند هر دو `mcr.microsoft.com/azuredocs/containerapps-helloworld:latest` را روی پورت ۸۰ اجرا می‌کنند |
+| Key Vault (اختیاری) | خزانه فعال‌شده با RBAC خالی؛ **بدون اسرار یا تخصیص نقش** |
+| Application Insights / Log Analytics (اختیاری) | منابع و جمع‌آوری لاگ محیط؛ بدون ابزار اندازه‌گیری سفارشی برنامه، هشدارها یا داشبوردها |
+| هوش مستندات | حساب S0؛ بدون روند پردازش مستندات |
 
-## 🎯 آنچه مستقر می‌شود
+جستجوی قدیمی بینگ نسخه ۷ در ۱۱ اوت ۲۰۲۵ بازنشسته شد و **مجهز نشده است**.
+هیچ جایگزین یکپارچگی مبتنی بر وب پیاده‌سازی نشده است.
 
-### زیرساخت اصلی (وضعیت پس از استقرار)
+**شامل نمی‌شود:** عوامل مشتری/مخزن، API روتر `/chat`، رابط کاربری چت فرانت‌اند،
+جستجوی طرح یا اسکریپت‌های استنساخ، Azure Container Registry، نقاط پایانی خصوصی،
+شناسه‌های مدیریت شده، انتساب‌های RBAC، سوئیچ خودکار خطا، Front Door، اسکنر تیم قرمز،
+رابط خط فرمان ارزیابی، احراز هویت، یا CI/CD.
 
-✅ **سرویس‌های Microsoft Foundry Models** (آماده برای فراخوانی API)
-  - منطقه اصلی: استقرار gpt-4.1 (ظرفیت 20K TPM)
-  - منطقه ثانویه: استقرار gpt-4.1-mini (ظرفیت 10K TPM)
-  - منطقه سوم: مدل متن embeddings (ظرفیت 30K TPM)
-  - منطقه ارزیابی: مدل grader gpt-4.1 (ظرفیت 15K TPM)
-  - **وضعیت:** کاملاً عملیاتی - می‌توان فوراً فراخوانی API انجام داد
+پیام موفقیت ARM فقط تأیید تأمین منابع است. این پیام کارکرد برنامه، امنیت،
+در دسترس بودن، یا آمادگی تولید را تضمین نمی‌کند.
 
-✅ **Azure AI Search** (خالی - آماده برای پیکربندی)
-  - قابلیت‌های جستجوی برداری فعال شده
-  - سطح Standard با ۱ پارتیشن، ۱ نسخه کپی
-  - **وضعیت:** سرویس در حال اجرا، اما نیاز به ایجاد ایندکس دارد
-  - **اقدام مورد نیاز:** ایجاد ایندکس جستجو با اسکیمای شما
+## پیش‌نیازها و هزینه‌ها
 
-✅ **حساب ذخیره‌سازی Azure** (خالی - آماده برای بارگذاری‌ها)
-  - کانتینرهای Blob: `documents`, `uploads`
-  - پیکربندی امن (فقط HTTPS، بدون دسترسی عمومی)
-  - **وضعیت:** آماده دریافت فایل‌ها
-  - **اقدام مورد نیاز:** بارگذاری داده‌های محصول و اسناد شما
+- Bash (Git Bash/WSL روی ویندوز) و
+  [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- یک اشتراک با مجوزهای ایجاد همه منابع لیست شده.
+- بررسی در دسترس بودن **هر مدل/نسخه/SKU در هر منطقه انتخاب شده** و
+  سهمیه برای اشتراک شما. مقادیر پیش‌فرض نمونه هستند، نه تضمین.
+  به [دسترسی مدل](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) مراجعه کنید.
+- انتخاب یک گروه منابع اختصاصی که پس از تست می‌توانید حذف کنید.
 
-⚠️ **محیط Container Apps** (تصاویر نگهدارنده مستقر شده‌اند)
-  - برنامه مسیریاب عامل (تصویر پیش‌فرض nginx)
-  - برنامه فرانت‌اند (تصویر پیش‌فرض nginx)
-  - مقیاس خودکار پیکربندی شده (۰–۱۰ نمونه)
-  - **وضعیت:** کانتینرهای نگهدارنده در حال اجرا
-  - **اقدام مورد نیاز:** ساخت و استقرار برنامه‌های عامل شما
+```bash
+az version
+az login
+az account show --query "{subscription:id,name:name}" -o table
+az cognitiveservices usage list --location eastus2 -o table
+```
 
-✅ **Azure Cosmos DB** (خالی - آماده برای داده)
-  - پایگاه‌داده و کانتینر از پیش پیکربندی شده‌اند
-  - بهینه‌شده برای عملیات تأخیر پایین
-  - TTL فعال برای پاک‌سازی خودکار
-  - **وضعیت:** آماده ذخیره تاریخچه چت
+مکان‌های پیش‌فرض: اصلی `eastus2`، ثانویه `westus2`، تعبیه‌ها `francecentral`؛
+درجه‌بند به طور پیش‌فرض منطقه اصلی را انتخاب می‌کند مگر اینکه `graderLocation` ارائه شود.
+`--no-multi-region` حساب‌های ثانویه و تعبیه‌ها را رد می‌کند؛ اما حساب درجه‌بند را رد نمی‌کند.
 
-✅ **Azure Key Vault** (اختیاری - آماده برای اسرار)
-  - حذف نرم (soft delete) فعال شده
-  - RBAC برای managed identities پیکربندی شده
-  - **وضعیت:** آماده نگهداری کلیدها و رشته‌های اتصال
 
-✅ **Application Insights** (اختیاری - مانیتورینگ فعال)
-  - متصل به Log Analytics workspace
-  - معیارها و هشدارهای سفارشی پیکربندی شده
-  - **وضعیت:** آماده دریافت تله‌متری از برنامه‌های شما
-
-✅ **Document Intelligence** (آماده برای فراخوانی API)
-  - tier S0 برای بارهای کاری تولید
-  - **وضعیت:** آماده پردازش اسناد بارگذاری‌شده
-
-✅ **Bing Search API** (آماده برای فراخوانی API)
-  - tier S1 برای جستجوهای بلادرنگ
-  - **وضعیت:** آماده پرس‌وجوهای وب
+جستجو شبیه‌سازی شده در حین تأمین منابع هزینه‌بر است حتی اگر خالی باشد. حداقل نسخه‌های کانتینر،
+افزونگی ذخیره‌سازی، درخواست‌ها/ذخیره‌سازی Cosmos DB، توکن‌های مدل، تماس‌های Document Intelligence،
+و ورود/ذخیره‌سازی لاگ می‌توانند هزینه بر باشند. هیچ **مجموع ماهانه ثابت یا تأیید شده‌ای** وجود ندارد.
+هزینه‌های دقیق SKUs را در
+[ماشین حساب قیمت‌گذاری Azure](https://azure.microsoft.com/pricing/calculator/) تخمین بزنید و
+قبل از استقرار بودجه تنظیم کنید.
 
 ### حالت‌های استقرار
 
-| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
-|------|-----------------|---------------------|-------------|-------------------|----------|
-| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
-| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
-| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
+این تنظیمات اندازه منابع هستند، **نه گواهی‌های تولید یا SLA**:
 
-**تأثیر هزینه:**
-- **Minimal → Standard:** افزایش هزینه حدود ۴ برابر ($100-370/mo → $420-1,450/mo)
-- **Standard → Premium:** افزایش هزینه حدود ۳ برابر ($420-1,450/mo → $1,150-3,500/mo)
-- **انتخاب براساس:** بار مورد انتظار، الزامات SLA، محدودیت بودجه
+| حالت | چت / مینی / تعبیه / واحدهای ظرفیت گرِیدر | نسخه‌های روتر | نسخه‌های فرانت‌اند | لایه جستجو | ذخیره‌سازی |
+|---|---|---|---|---|---|
+| حداقل | ۱۰ / ۱۰ / ۲۰ / ۵ | ۰–۳ | ۱–۲ | پایه، ۱ نسخه | Standard_LRS |
+| استاندارد | ۲۰ / ۱۵ / ۳۰ / ۱۵ | ۱–۳ | ۱–۲ | استاندارد، ۱ نسخه | Standard_ZRS |
+| پریمیوم | ۴۰ / ۳۰ / ۶۰ / ۳۰ | ۱–۱۰ | ۱–۵ | standard2، ۲ نسخه | Standard_GRS |
 
-**برنامه‌ریزی ظرفیت:**
-- **TPM (Tokens Per Minute):** مجموع در تمام استقرارهای مدل
-- **Container Instances:** بازه مقیاس خودکار (حداقل-حداکثر نمونه‌ها)
-- **Search Tier:** بر عملکرد پرس‌وجو و محدودیت اندازه ایندکس تأثیر می‌گذارد
-
-## 📋 پیش‌نیازها
-
-### ابزارهای مورد نیاز
-1. **Azure CLI** (نسخه 2.50.0 یا بالاتر)
-   ```bash
-   az --version  # نسخه را بررسی کنید
-   az login      # احراز هویت کنید
-   ```
-
-2. **اشتراک فعال Azure** با دسترسی Owner یا Contributor
-   ```bash
-   az account show  # تأیید اشتراک
-   ```
-
-### سهمیه‌های مورد نیاز Azure
-
-قبل از استقرار، از کافی بودن سهمیه‌ها در مناطق هدف خود اطمینان حاصل کنید:
-
-```bash
-# در دسترس بودن مدل‌های Microsoft Foundry در منطقه خود را بررسی کنید
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus2
-
-# سهمیه OpenAI را بررسی کنید (مثال برای gpt-4.1)
-az cognitiveservices usage list \
-  --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
-
-# سهمیه Container Apps را بررسی کنید
-az provider show \
-  --namespace Microsoft.App \
-  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
-```
-
-**حداقل سهمیه‌های مورد نیاز:**
-- **Microsoft Foundry Models:** ۳–۴ استقرار مدل در مناطق مختلف
-  - gpt-4.1: 20K TPM (Tokens Per Minute)
-  - gpt-4.1-mini: 10K TPM
-  - text-embedding-ada-002: 30K TPM
-  - **توجه:** gpt-4.1 ممکن است در برخی مناطق لیست انتظار داشته باشد - بررسی کنید [دسترس‌پذیری مدل](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** محیط مدیریت‌شده + ۲–۱۰ نمونه کانتینر
-- **AI Search:** سطح Standard (Basic برای جستجوی برداری کافی نیست)
-- **Cosmos DB:** توان عملیاتی استاندارد تامین‌شده
-
-**اگر سهمیه کافی نیست:**
-1. به پرتال Azure → Quotas → درخواست افزایش بروید
-2. یا از Azure CLI استفاده کنید:
-   ```bash
-   az support tickets create \
-     --ticket-name "OpenAI-Quota-Increase" \
-     --severity "minimal" \
-     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
-   ```
-3. در نظر بگیرید از مناطق جایگزین با دسترس‌پذیری استفاده کنید
+واحدهای ظرفیت مدل خاص مدل / SKU هستند؛ آنها را به عنوان تضمین TPM جهانی جمع نزنید.
+پریمیوم قابلیت برنامه‌های کانتینری دارای افزونگی منطقه‌ای را فعال نمی‌کند: این نیازمند
+طراحی شبکه اضافی است. جستجوی پایه از جستجوی برداری پشتیبانی می‌کند، مشروط بر
+محدودیت‌های خدمات؛ اساساً با بردارها ناسازگار نیست.
 
 ## 🚀 استقرار سریع
 
-### گزینه ۱: استفاده از Azure CLI
+ابتدا `azuredeploy.json` و `azuredeploy.parameters.json` را مرور کنید. دستورات
+زیر **منابع قابل صورتحساب Azure را ایجاد می‌کنند**؛ اینها بررسی‌های آفلاین نیستند.
+
+از ریشه مخزن:
 
 ```bash
-# فایل‌های قالب را کلون یا دانلود کنید
-git clone <repository-url>
 cd examples/retail-multiagent-arm-template
-
-# اسکریپت استقرار را قابل اجرا کنید
-chmod +x deploy.sh
-
-# با تنظیمات پیش‌فرض استقرار دهید
-./deploy.sh -g myResourceGroup
-
-# برای محیط تولید با قابلیت‌های پریمیوم استقرار دهید
-./deploy.sh -g myProdRG -e prod -m premium -l eastus2
+bash deploy.sh --help
+bash deploy.sh -g retail-learning-rg -m minimal --no-multi-region
 ```
 
-### گزینه ۲: استفاده از Azure Portal
+اسکریپت از مسیرهای نسبی به دایرکتوری خودش استفاده می‌کند، ورود / ابزارها / پارامترها را بررسی می‌کند،
+گروه منابع را در صورت عدم وجود ایجاد می‌کند، استقرار را اعتبارسنجی می‌کند، فراهم می‌آورد، و
+خروجی‌های غیر محرمانه را نمایش می‌دهد. هیچ `jq`، پرکردن داده، بازیابی محرمانه، یا
+تنظیم برنامه پس از استقرار لازم یا انجام نمی‌شود.
 
-[![استقرار در Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
-
-### گزینه ۳: استفاده مستقیم از Azure CLI
+مقادیر پیش‌فرض خط فرمان اسکریپت مقادیر متناظر در فایل پارامترها را بازنویسی می‌کنند.
+برای تنظیماتی مانند ثانویه / ثالثیه فایل پارامترها را ویرایش کنید.
+مناطق؛ در صورت نیاز به بازنویسی دلخواه پارامترها، از استقرار مستقیم CLI استفاده کنید:
 
 ```bash
-# ایجاد گروه منابع
-az group create --name myResourceGroup --location eastus2
-
-# استقرار قالب
+az group create --name retail-learning-rg --location eastus2
 az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json
-```
-
-## ⏱️ جدول زمانی استقرار
-
-### آنچه انتظار می‌رود
-
-| فاز | مدت زمان | چه اتفاقی می‌افتد |
-|-------|----------|--------------||
-| **Template Validation** | 30-60 seconds | Azure validates ARM template syntax and parameters |
-| **Resource Group Setup** | 10-20 seconds | Creates resource group (if needed) |
-| **OpenAI Provisioning** | 5-8 minutes | Creates 3-4 OpenAI accounts and deploys models |
-| **Container Apps** | 3-5 minutes | Creates environment and deploys placeholder containers |
-| **Search & Storage** | 2-4 minutes | Provisions AI Search service and storage accounts |
-| **Cosmos DB** | 2-3 minutes | Creates database and configures containers |
-| **Monitoring Setup** | 2-3 minutes | Sets up Application Insights and Log Analytics |
-| **RBAC Configuration** | 1-2 minutes | Configures managed identities and permissions |
-| **Total Deployment** | **15-25 minutes** | Complete infrastructure ready |
-
-**پس از استقرار:**
-- ✅ **زیرساخت آماده:** تمام سرویس‌های Azure تامین و در حال اجرا هستند
-- ⏱️ **توسعه برنامه:** ۸۰–۱۲۰ ساعت (مسئولیت شما)
-- ⏱️ **پیکربندی ایندکس:** ۱۵–۳۰ دقیقه (نیاز به اسکیمای شما دارد)
-- ⏱️ **بارگذاری داده:** بسته به حجم مجموعه داده متغیر است
-- ⏱️ **آزمون و اعتبارسنجی:** ۲–۴ ساعت
-
----
-
-## ✅ بررسی موفقیت استقرار
-
-### گام ۱: بررسی تامین منابع (۲ دقیقه)
-
-```bash
-# تأیید کنید که همهٔ منابع با موفقیت مستقر شده‌اند
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-**انتظار می‌رود:** جدول خالی (تمام منابع وضعیت "Succeeded" را نشان می‌دهند)
-
-### گام ۲: تأیید استقرارهای Microsoft Foundry Models (۳ دقیقه)
-
-```bash
-# تمام حساب‌های OpenAI را فهرست کنید
-az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
-  --output table
-
-# استقرارهای مدل در منطقهٔ اصلی را بررسی کنید
-OPENAI_NAME=$(az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
-
-az cognitiveservices account deployment list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --output table
-```
-
-**انتظار می‌رود:** 
-- ۳–۴ حساب OpenAI (مناطق اولیه، ثانویه، ثالثیه، ارزیابی)
-- ۱–۲ استقرار مدل برای هر حساب (gpt-4.1، gpt-4.1-mini، text-embedding-ada-002)
-
-### گام ۳: آزمون نقاط انتهایی زیرساخت (۵ دقیقه)
-
-```bash
-# دریافت آدرس‌های URL برنامه کانتینری
-az containerapp list \
-  --resource-group myResourceGroup \
-  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
-  --output table
-
-# تست نقطه پایانی روتر (یک تصویر جایگزین پاسخ می‌دهد)
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-echo "Testing: https://$ROUTER_URL"
-curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
-```
-
-**انتظار می‌رود:** 
-- Container Apps وضعیت "Running" را نشان دهند
-- nginx نگهدارنده با HTTP 200 یا 404 پاسخ دهد (هنوز کد برنامه وجود ندارد)
-
-### گام ۴: تأیید دسترسی API به Microsoft Foundry Models (۳ دقیقه)
-
-```bash
-# دریافت endpoint و کلید OpenAI
-OPENAI_ENDPOINT=$(az cognitiveservices account show \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "properties.endpoint" -o tsv)
-
-OPENAI_KEY=$(az cognitiveservices account keys list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "key1" -o tsv)
-
-# آزمایش استقرار gpt-4.1
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello"}],
-    "max_tokens": 10
-  }'
-```
-
-**انتظار می‌رود:** پاسخ JSON با تکمیل چت (تأیید می‌کند OpenAI عملیاتی است)
-
-### چه چیزهایی کار می‌کنند در برابر چه چیزهایی کار نمی‌کنند
-
-**✅ موارد کارآمد پس از استقرار:**
-- مدل‌های Microsoft Foundry Models مستقر شده و پذیرای فراخوانی API هستند
-- سرویس AI Search در حال اجرا (خالی، هنوز ایندکس ندارد)
-- Container Apps در حال اجرا هستند (تصاویر nginx نگهدارنده)
-- حساب‌های ذخیره‌سازی قابل دسترسی و آماده بارگذاری
-- Cosmos DB آماده عملیات داده‌ای
-- Application Insights تله‌متری زیرساخت را جمع‌آوری می‌کند
-- Key Vault آماده ذخیره اسرار است
-
-**❌ مواردی که هنوز کار نمی‌کنند (نیاز به توسعه دارند):**
-- نقاط انتهایی عامل‌ها (کدی برای برنامه‌ریزی نشده)
-- عملکرد چت (نیاز به پیاده‌سازی فرانت‌اند و بک‌اند دارد)
-- پرس‌وجوهای جستجو (هنوز ایندکس جستجو ایجاد نشده)
-- خط لوله پردازش اسناد (داده‌ای بارگذاری نشده)
-- تله‌متری سفارشی (نیاز به ابزاردهی برنامه دارد)
-
-**گام‌های بعدی:** به [پیکربندی پس از استقرار](#-post-deployment-next-steps) مراجعه کنید تا برنامه خود را توسعه و مستقر نمایید
-
----
-
-## ⚙️ گزینه‌های پیکربندی
-
-### پارامترهای قالب
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `projectName` | string | "retail" | پیشوند برای همه نام‌های منابع |
-| `location` | string | Resource group location | منطقه استقرار اولیه |
-| `secondaryLocation` | string | "westus2" | منطقه ثانویه برای استقرار چندمنطقه‌ای |
-| `tertiaryLocation` | string | "francecentral" | منطقه برای مدل embeddings |
-| `environmentName` | string | "dev" | نام محیط (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | پیکربندی استقرار (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | فعال‌سازی استقرار چندمنطقه‌ای |
-| `enableMonitoring` | bool | true | فعال‌سازی Application Insights و لاگ‌ها |
-| `enableSecurity` | bool | true | فعال‌سازی Key Vault و امنیت افزوده |
-
-### سفارشی‌سازی پارامترها
-
-فایل `azuredeploy.parameters.json` را ویرایش کنید:
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "projectName": {
-      "value": "mycompany"
-    },
-    "environmentName": {
-      "value": "prod"
-    },
-    "deploymentMode": {
-      "value": "premium"
-    },
-    "location": {
-      "value": "eastus2"
-    }
-  }
-}
-```
-
-## 🏗️ نمای کلی معماری
-
-```mermaid
-graph TD
-    Frontend[فرانت‌اند<br/>برنامهٔ کانتینری] --> Router[روتر عامل<br/>برنامهٔ کانتینری] --> Agents[عامل‌ها<br/>مشتری + موجودی]
-    Router --> Search[جستجوی هوش مصنوعی<br/>پایگاه‌دادهٔ برداری]
-    Router --> Models[مدل‌های Microsoft Foundry<br/>چندمنطقه‌ای]
-    Agents --> Storage[ذخیره‌سازی<br/>اسناد]
-    Search --> CosmosDB[Cosmos DB<br/>تاریخچهٔ چت]
-    Models --> AppInsights[App Insights<br/>نظارت]
-    Storage --> KeyVault[Key Vault<br/>رمزها]
-```
-## 📖 نحوه استفاده از اسکریپت استقرار
-
-اسکریپت `deploy.sh` تجربه استقرار تعاملی فراهم می‌کند:
-
-```bash
-# نمایش راهنما
-./deploy.sh --help
-
-# استقرار پایه
-./deploy.sh -g myResourceGroup
-
-# استقرار پیشرفته با تنظیمات سفارشی
-./deploy.sh \
-  -g myProductionRG \
-  -p companyname \
-  -e prod \
-  -m premium \
-  -l eastus2
-
-# استقرار توسعه‌ای بدون حالت چندمنطقه‌ای
-./deploy.sh \
-  -g myDevRG \
-  -e dev \
-  -m minimal \
-  --no-multi-region \
-  --no-security
-```
-
-### ویژگی‌های اسکریپت
-
-- ✅ **اعتبارسنجی پیش‌نیازها** (Azure CLI، وضعیت ورود، فایل‌های قالب)
-- ✅ **مدیریت گروه منابع** (در صورت عدم وجود ایجاد می‌کند)
-- ✅ **اعتبارسنجی قالب** قبل از استقرار
-- ✅ **نظارت بر پیشرفت** با خروجی رنگی
-- ✅ **نمایش خروجی‌های استقرار**
-- ✅ **راهنمایی پس از استقرار**
-
-## 📊 مانیتورینگ استقرار
-
-### بررسی وضعیت استقرار
-
-```bash
-# فهرست استقرارها
-az deployment group list --resource-group myResourceGroup --output table
-
-# دریافت جزئیات استقرار
-az deployment group show \
-  --resource-group myResourceGroup \
-  --name retail-deployment-YYYYMMDD-HHMMSS
-
-# مشاهده پیشرفت استقرار
-az deployment group create \
-  --resource-group myResourceGroup \
+  --resource-group retail-learning-rg \
+  --name retail-learning \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
-  --verbose
+  --parameters projectName=retail environmentName=dev \
+    deploymentMode=minimal enableMultiRegion=false
 ```
 
-### خروجی‌های استقرار
+تهیه منابع می‌تواند ۱۵ تا ۴۵ دقیقه یا بیشتر طول بکشد و ممکن است به دلیل سهمیه‌های منطقه‌ای یا محدودیت‌های چرخه عمر مدل ناموفق باشد.
+بدون دقت مجدداً تلاش نکنید: ابتدا عملیات ناموفق را بخوانید.
 
-پس از استقرار موفق، خروجی‌های زیر در دسترس‌اند:
+## گزینه‌های پیکربندی
 
-- **Frontend URL**: نقطه انتهایی عمومی برای رابط وب
-- **Router URL**: نقطه انتهایی API برای مسیریاب عامل
-- **OpenAI Endpoints**: نقاط انتهایی سرویس OpenAI اولیه و ثانویه
-- **Search Service**: نقطه انتهایی سرویس Azure AI Search
-- **Storage Account**: نام حساب ذخیره‌سازی برای اسناد
-- **Key Vault**: نام Key Vault (در صورت فعال بودن)
-- **Application Insights**: نام سرویس مانیتورینگ (در صورت فعال بودن)
+| پارامتر | مقدار پیش‌فرض در قالب | معنی |
+|---|---|---|
+| `projectName` | الزامی (`retail` در فایل پارامترها) | ۳ تا ۱۰ حرف کوچک/عدد |
+| `location` | محل گروه منابع | منطقه اصلی (`eastus2` در فایل پارامترها) |
+| `secondaryLocation` | `westus2` | منطقه حساب مدل کوچک |
+| `tertiaryLocation` | `francecentral` | منطقه حساب تعبیه‌ها |
+| `graderLocation` | منطقه اصلی | منطقه حساب درجه‌بند مستقل |
+| `environmentName` | `dev` | `dev`، `staging`، یا `prod`؛ فقط نام، نه سوئیچ سخت‌سازی |
+| `deploymentMode` | `standard` | انتخاب SKU/ظرفیت |
+| `enableMultiRegion` | `true` | افزودن حساب‌های ثانویه و تعبیه‌ها |
+| `enableMonitoring` | `true` | افزودن Insights/محیط کار و جمع‌آوری لاگ محیطی |
+| `enableSecurity` | `true` | ایجاد فقط یک صندوق امن خالی با پشتیبانی RBAC |
 
-## 🔧 پس از استقرار: گام‌های بعدی
-> **📝 مهم:** زیرساخت مستقر شده است، اما شما باید کد برنامه را توسعه دهید و مستقر کنید.
+پارامتر گمراه‌کننده `openAiApiVersion` حذف شد: یک نسخه API صف داده‌ها
+نسخه‌های منبع ARM یا نسخه‌های مدل را کنترل نمی‌کند. جفت‌های نام/نسخه مدل
+در `variables.modelDeployments` هستند؛ آن‌ها را همراه با SKU استقرار بررسی کنید.
 
-### فاز 1: توسعه برنامه‌های عامل (مسئولیت شما)
+## تأیید تأمین منابع
 
-الگوی ARM برنامه‌های خالی Container Apps را با تصاویر nginx نگهدارنده ایجاد می‌کند. شما باید:
-
-**توسعه مورد نیاز:**
-1. **پیاده‌سازی عامل** (30-40 ساعت)
-   - عامل خدمات مشتری با ادغام gpt-4.1
-   - عامل موجودی با ادغام gpt-4.1-mini
-   - منطق مسیریابی عامل
-
-2. **توسعه فرانت‌اند** (20-30 ساعت)
-   - رابط کاربری چت (React/Vue/Angular)
-   - قابلیت آپلود فایل
-   - رندر و قالب‌بندی پاسخ‌ها
-
-3. **سرویس‌های بک‌اند** (12-16 ساعت)
-   - مسیر‌دهنده FastAPI یا Express
-   - میان‌افزار احراز هویت
-   - ادغام تله‌متری
-
-**مشاهده:** [Architecture Guide](../retail-scenario.md) برای الگوهای پیاده‌سازی و نمونه‌های کد دقیق
-
-### فاز 2: پیکربندی ایندکس جستجوی هوش مصنوعی (15-30 دقیقه)
-
-یک ایندکس جستجو مطابق با مدل داده‌ای خود ایجاد کنید:
+از نام استقرار خروجی اسکریپت یا `az deployment group list` استفاده کنید.
+برای استقرار مستقیم بالا:
 
 ```bash
-# جزئیات سرویس جستجو را دریافت کنید
-SEARCH_NAME=$(az search service list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-SEARCH_KEY=$(az search admin-key show \
-  --service-name $SEARCH_NAME \
-  --resource-group myResourceGroup \
-  --query "primaryKey" -o tsv)
-
-# یک شاخص با طرح‌وارهٔ خود ایجاد کنید (نمونه)
-curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_KEY}" \
-  -d '{
-    "name": "products",
-    "fields": [
-      {"name": "id", "type": "Edm.String", "key": true},
-      {"name": "title", "type": "Edm.String", "searchable": true},
-      {"name": "content", "type": "Edm.String", "searchable": true},
-      {"name": "category", "type": "Edm.String", "filterable": true},
-      {"name": "content_vector", "type": "Collection(Edm.Single)", 
-       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
-    ],
-    "vectorSearch": {
-      "algorithms": [{"name": "default", "kind": "hnsw"}],
-      "profiles": [{"name": "default", "algorithm": "default"}]
-    }
-  }'
+RG=retail-learning-rg
+DEPLOYMENT=retail-learning
+az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.provisioningState -o tsv
+az deployment operation group list -g "$RG" -n "$DEPLOYMENT" -o table
+az resource list -g "$RG" -o table
 ```
 
-**منابع:**
-- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+انتظار می‌رود: وضعیت استقرار `Succeeded` باشد. در صورت بروز خطا، جزئیات خطای عملیات را بررسی کنید.
+خروجی فهرست منابع به تنهایی برای بررسی وضعیت تأمین منابع قابل اطمینان نیست.
 
-### فاز 3: بارگذاری داده‌های شما (زمان متغیر)
-
-پس از در اختیار داشتن داده‌های محصول و اسناد:
+مکان‌نگهدار **root** را آزمایش کنید، نه نقاط انتهایی غیر موجود عامل:
 
 ```bash
-# دریافت جزئیات حساب ذخیره‌سازی
-STORAGE_NAME=$(az storage account list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-STORAGE_KEY=$(az storage account keys list \
-  --account-name $STORAGE_NAME \
-  --resource-group myResourceGroup \
-  --query "[0].value" -o tsv)
-
-# اسناد خود را بارگذاری کنید
-az storage blob upload-batch \
-  --destination documents \
-  --source /path/to/your/product/docs \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
-
-# مثال: بارگذاری یک فایل
-az storage blob upload \
-  --container-name documents \
-  --name "product-manual.pdf" \
-  --file /path/to/product-manual.pdf \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
+ROUTER_URL=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.routerUrl.value -o tsv)
+curl --fail-with-body "$ROUTER_URL"
 ```
 
-### فاز 4: ساخت و استقرار برنامه‌های شما (8-12 ساعت)
+انتظار می‌رود: صفحه hello-world با HTTP 200، **نه پاسخ چت**. خطای HTTP به ‌عنوان تأیید موفقیت‌آمیز محسوب نمی‌شود.
 
-پس از توسعه کد عامل‌های خود:
+
+برای آزمایش استنتاج مدل اصلی واقعی (قابل صورتحساب):
 
 ```bash
-# 1. ایجاد Azure Container Registry (در صورت نیاز)
-az acr create \
-  --name myregistry \
-  --resource-group myResourceGroup \
-  --sku Basic
-
-# 2. ساخت و ارسال تصویر agent router
-docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
-az acr login --name myregistry
-docker push myregistry.azurecr.io/agent-router:v1
-
-# 3. ساخت و ارسال تصویر فرانت‌اند
-docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
-docker push myregistry.azurecr.io/frontend:v1
-
-# 4. به‌روزرسانی Container Apps با تصاویر شما
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:v1
-
-az containerapp update \
-  --name retail-frontend \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/frontend:v1
-
-# 5. پیکربندی متغیرهای محیطی
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --set-env-vars \
-    OPENAI_ENDPOINT=secretref:openai-endpoint \
-    OPENAI_KEY=secretref:openai-key \
-    SEARCH_ENDPOINT=secretref:search-endpoint \
-    SEARCH_KEY=secretref:search-key
+OPENAI_ENDPOINT=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.openAiEndpointPrimary.value -o tsv)
+OPENAI_NAME=$(az cognitiveservices account list -g "$RG" \
+  --query "[?kind=='OpenAI' && contains(name, '-openai-primary-')].name | [0]" -o tsv)
+OPENAI_KEY=$(az cognitiveservices account keys list -g "$RG" -n "$OPENAI_NAME" \
+  --query key1 -o tsv)
+curl --fail-with-body \
+  "${OPENAI_ENDPOINT%/}/openai/deployments/gpt-4.1-chat/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" -H "api-key: $OPENAI_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello"}],"max_tokens":20}'
+unset OPENAI_KEY
 ```
 
-### فاز 5: آزمایش برنامه شما (2-4 ساعت)
+انتظار می‌رود: جیسون شامل `choices` و `usage`. نام استقرار
+`gpt-4.1-chat` است، نه نام مدل زیرین `gpt-4.1`.
+
+## 🔧 پس از استقرار: مراحل بعدی
+
+این یک **لیست کارهای توسعه** است، نه یک تمرین کامل‌شده:
+
+1. پیاده‌سازی عامل‌های مشتری/موجودی احراز هویت‌شده و قرارداد روتر.
+2. پیاده‌سازی بخش جلویی و اعتبارسنجی پیکربندی آن.
+3. ایجاد و پر کردن یک شاخص جستجو با ابعاد/پروفایلی که مدل تعبیه شما را مطابقت می‌دهد و مدیریت شکست‌ها و به‌روزرسانی اسناد.
+4. ایجاد یک رجیستری و پیکربندی هویت/مجوزهای کشیدن تصویر.
+5. ساخت و ارسال تصاویر واقعی. پورت‌ها و پروب‌های ورودی برنامه کانتینری را تغییر دهید تا
+   با آن تصاویر مطابقت داشته باشند قبل از آزمایش؛ پورت 80 در اینجا متعلق به مکان‌نگهدارها است.
+   قبل از تست، آن تصاویر را مطابقت دهید؛ پورت ۸۰ اینجا متعلق به جایگزین‌ها است.
+۶. پیکربندی رازها یا شناسه‌های مدیریت‌شده و نقش‌های محدوده داده‌های صفحهٔ داده.  
+   به نام‌های راز خیالی اشاره نکنید: این قالب هیچ راز برنامه‌ای ایجاد نمی‌کند.  
+۷. برنامه‌ها را ابزارسنجی کنید، هشدارها را پیکربندی کنید، شکست/بازیابی را آزمایش کنید و ارزیابی کنید  
+   نتایج با حقیقت میدانی نماینده و بازبینی انسانی.
+
+طراحی مرزها را در [نقشه معماری](../retail-scenario.md) ببینید.
+
+## عیب‌یابی و مرزهای امنیتی
+
+- **مدل در دسترس نیست:** مدل/نسخه/SKU، منطقه و سهمیه اشتراک را بررسی کنید؛
+  اسکریپت پیش‌نمایش کاتالوگ‌های مدل را انجام نمی‌دهد.
+- **نظارت غیرفعال است:** مقصد لاگ محیط `none` است، نه یک
+  پیکربندی نامعتبر و خالی Log Analytics.
+- **فقط جایگزین‌ها:** `/chat`، ارزیابی عامل، و دریافت فایل وجود ندارند.
+- **شبکه/هویت:** نقاط انتهایی عمومی و احراز هویت محلی فعال هستند.
+  فقط فعال‌کردن RBAC مخزن کلید باعث ایجاد انتصابات نقش یا هویت‌ها نمی‌شود.
+- **تولید:** افزودن احراز هویت، هویت‌های محدودشده، مدیریت اسرار،
+  شبکه خصوصی در صورت مناسب، طراحی در دسترس بودن و تست‌های عملیاتی.
+  حساب‌های مدل چندمنطقه‌ای به‌تنهایی قابلیت بازیابی ندارند.
+
+## پاک‌سازی
+
+اینجا پروژه AZD وجود ندارد؛ `azd down` دستور پاک‌سازی نیست.
+پس از اطمینان از اینکه گروه فقط منابع یادگیری شما را دارد:
 
 ```bash
-# نشانی اینترنتی برنامهٔ خود را دریافت کنید
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-# نقطهٔ پایانی عامل را آزمایش کنید (پس از استقرار کد شما)
-curl -X POST "https://${ROUTER_URL}/chat" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "message": "Hello, I need help with my order",
-    "agent": "customer"
-  }'
-
-# لاگ‌های برنامه را بررسی کنید
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
+az group delete --name retail-learning-rg --yes
+az group exists --name retail-learning-rg
 ```
 
-### منابع پیاده‌سازی
+انتظار می‌رود پس از پایان حذف: `false`. منابع حذف‌شده نرم‌افزاری مخزن کلید و سرویس‌های شناختی
+ممکن است نام‌ها را حفظ کنند؛ پاکسازی دائمی نیاز به دسترسی‌های مناسب دارد.
+هزینه‌های استفاده با تأخیر را در مدیریت هزینه بررسی کنید.
 
-**معماری و طراحی:**
-- 📖 [Complete Architecture Guide](../retail-scenario.md) - الگوهای پیاده‌سازی دقیق
-- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
-
-**نمونه‌های کد:**
-- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - الگوی RAG
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - فریم‌ورک عامل (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - هماهنگی عامل‌ها (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - گفتگوهای چندعاملی
-
-**کل تلاش تخمینی:**
-- استقرار زیرساخت: 15-25 دقیقه (✅ Complete)
-- توسعه برنامه: 80-120 ساعت (🔨 کار شما)
-- آزمایش و بهینه‌سازی: 15-25 ساعت (🔨 کار شما)
-
-## 🛠️ عیب‌یابی
-
-### مسائل رایج
-
-#### 1. سهمیه مدل‌های Microsoft Foundry تمام شده است
-
-```bash
-# استفاده فعلی از سهمیه را بررسی کنید
-az cognitiveservices usage list --location eastus2
-
-# درخواست افزایش سهمیه
-az support tickets create \
-  --ticket-name "OpenAI-Quota-Increase" \
-  --severity "minimal" \
-  --description "Request quota increase for Microsoft Foundry Models in region X"
-```
-
-#### 2. استقرار Container Apps ناموفق بود
-
-```bash
-# لاگ‌های برنامهٔ کانتینر را بررسی کنید
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
-
-# برنامهٔ کانتینر را مجدداً راه‌اندازی کنید
-az containerapp revision restart \
-  --name retail-router \
-  --resource-group myResourceGroup
-```
-
-#### 3. راه‌اندازی سرویس جستجو
-
-```bash
-# وضعیت سرویس جستجو را بررسی کنید
-az search service show \
-  --name <search-service-name> \
-  --resource-group myResourceGroup
-
-# اتصال سرویس جستجو را آزمایش کنید
-curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "api-key: <search-admin-key>"
-```
-
-### اعتبارسنجی استقرار
-
-```bash
-# بررسی کنید که همهٔ منابع ایجاد شده‌اند
-az resource list \
-  --resource-group myResourceGroup \
-  --output table
-
-# سلامت منابع را بررسی کنید
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-## 🔐 ملاحظات امنیتی
-
-### مدیریت کلیدها
-- تمام اسرار در Azure Key Vault ذخیره می‌شوند (در صورت فعال بودن)
-- اپلیکیشن‌های کانتینری از Managed Identity برای احراز هویت استفاده می‌کنند
-- اکانت‌های ذخیره‌سازی تنظیمات پیش‌فرض امن دارند (فقط HTTPS، بدون دسترسی عمومی به blob)
-
-### امنیت شبکه
-- اپلیکیشن‌های کانتینری در صورت امکان از شبکه داخلی استفاده می‌کنند
-- سرویس جستجو با گزینه private endpoints پیکربندی شده است
-- Cosmos DB با حداقل مجوزهای لازم پیکربندی شده است
-
-### پیکربندی RBAC
-```bash
-# تخصیص نقش‌های لازم برای هویت مدیریت‌شده
-az role assignment create \
-  --assignee <container-app-managed-identity> \
-  --role "Cognitive Services OpenAI User" \
-  --scope <openai-resource-id>
-```
-
-## 💰 بهینه‌سازی هزینه
-
-### برآورد هزینه (ماهانه، USD)
-
-| حالت | OpenAI | Container Apps | Search | Storage | جمع تخمینی |
-|------|--------|----------------|--------|---------|------------|
-| حداقلی | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| استاندارد | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| پریمیوم | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
-
-### نظارت بر هزینه
-
-```bash
-# تنظیم هشدارهای بودجه
-az consumption budget create \
-  --account-name <subscription-id> \
-  --budget-name "retail-budget" \
-  --amount 500 \
-  --time-grain Monthly \
-  --start-date 2024-01-01 \
-  --end-date 2024-12-31
-```
-
-## 🔄 به‌روزرسانی‌ها و نگهداری
-
-### به‌روزرسانی قالب
-- فایل‌های قالب ARM را تحت کنترل نسخه قرار دهید
-- ابتدا تغییرات را در محیط توسعه تست کنید
-- برای به‌روزرسانی‌ها از حالت استقرار افزایشی استفاده کنید
-
-### به‌روزرسانی منابع
-```bash
-# به‌روزرسانی با پارامترهای جدید
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json \
-  --mode Incremental
-```
-
-### پشتیبان‌گیری و بازیابی
-- پشتیبان‌گیری خودکار Cosmos DB فعال است
-- قابلیت soft delete در Key Vault فعال است
-- نسخه‌های اپلیکیشن کانتینری برای بازگشت نگهداری می‌شوند
-
-## 📞 پشتیبانی
-
-- **مشکلات قالب**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **پشتیبانی Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **جامعه**: [Azure AI Discord](https://discord.gg/microsoft-azure)
-
----
-
-**⚡ آماده‌اید راه‌حل چندعاملی خود را مستقر کنید؟**
-
-شروع با: `./deploy.sh -g myResourceGroup`
+[گزارش مشکل](https://github.com/microsoft/AZD-for-beginners/issues) ·
+[جستجوی Azure AI](https://learn.microsoft.com/azure/search/) ·
+[برنامه‌های کانتینر](https://learn.microsoft.com/azure/container-apps/)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مبدأ باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای توسط انسان توصیه می‌شود. ما در قبال هر گونه سوتفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری خود باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء تفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

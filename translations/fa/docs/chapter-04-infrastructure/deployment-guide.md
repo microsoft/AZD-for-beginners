@@ -1,135 +1,140 @@
 # راهنمای استقرار - تسلط بر استقرارهای AZD
 
-**ناوبری فصل:**
-- **📚 صفحه دوره**: [AZD For Beginners](../../README.md)
-- **📖 فصل فعلی**: فصل 4 - زیرساخت به‌عنوان کد و استقرار
-- **⬅️ فصل قبلی**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
-- **➡️ بعدی**: [Provisioning Resources](provisioning.md)
-- **🧩 همچنین در این فصل**: [Authoring Your Own Template](custom-templates.md)
-- **🚀 فصل بعدی**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+**هدایت فصل:**
+- **📚 خانه دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل ۴ - زیرساخت به‌عنوان کد و استقرار
+- **⬅️ فصل قبلی**: [فصل ۳: پیکربندی](../chapter-03-configuration/configuration.md)
+- **➡️ بعدی**: [تأمین منابع](provisioning.md)
+- **🧩 همچنین در این فصل**: [نوشتن قالب خودتان](custom-templates.md)
+- **🚀 فصل بعدی**: [فصل ۵: راه‌حل‌های هوش مصنوعی چندعاملی](../../examples/retail-scenario.md)
 
 ## مقدمه
 
-این راهنمای جامع همه چیزهایی را که باید درباره استقرار برنامه‌ها با استفاده از Azure Developer CLI بدانید پوشش می‌دهد، از استقرارهای ساده با یک فرمان تا سناریوهای پیشرفته تولید با هوک‌های سفارشی، چندین محیط، و یکپارچه‌سازی CI/CD. چرخه کامل عمر استقرار را با مثال‌های عملی و بهترین شیوه‌ها یاد بگیرید.
+> بررسی شده در برابر `azd 1.37.2` (نوامبر ۲۰۲۶). دستورات از Bash استفاده می‌کنند؛ مثال‌های JSON نیاز به `jq` دارند. به جز تمرین todo که صراحتاً مقداردهی اولیه شده است، مثال‌های پیشرفته **قطعات یکپارچه‌سازی** هستند: منبع، زیرساخت، آزمایش‌ها و اسکریپت‌های خود را تأمین کنید. در این بررسی هیچ استقرار Azure اجرا نشده است.
+
+این راهنمای جامع همه چیزهایی را که باید درباره استقرار برنامه‌ها با استفاده از Azure Developer CLI بدانید پوشش می‌دهد، از استقرارهای ساده با یک دستور تا سناریوهای پیشرفته تولید با قلاب‌های سفارشی، محیط‌های متعدد و ادغام CI/CD. چرخه کامل استقرار را با مثال‌های عملی و بهترین روش‌ها به‌خوبی بیاموزید.
 
 ## اهداف یادگیری
 
-با تکمیل این راهنما، شما:
-- همه دستورات و جریان‌های کاری استقرار Azure Developer CLI را به‌خوبی فراخواهید گرفت
-- چرخه کامل عمر استقرار را از تأمین منابع تا مانیتورینگ درک خواهید کرد
-- هوک‌های استقرار سفارشی برای اتوماسیون پیش و پس از استقرار پیاده‌سازی خواهید کرد
-- چندین محیط را با پارامترهای مخصوص هر محیط پیکربندی خواهید کرد
-- استراتژی‌های پیشرفته استقرار مانند blue-green و canary را راه‌اندازی خواهید کرد
-- استقرارهای azd را با خطوط لوله CI/CD و گردش‌کارهای DevOps یکپارچه خواهید کرد
+با تکمیل این راهنما، شما خواهید توانست:
+- تسلط بر همه دستورات و روندهای استقرار Azure Developer CLI
+- درک کامل چرخه عمر استقرار از تأمین تا نظارت
+- پیاده‌سازی قلاب‌های سفارشی استقرار برای اتوماسیون پیش و پس از استقرار
+- پیکربندی چندین محیط با پارامترهای مخصوص هر محیط
+- راه‌اندازی استراتژی‌های پیشرفته استقرار از جمله استقرارهای آبی-سبز و کناری
+- ادغام استقرارهای azd با خطوط CI/CD و روندهای DevOps
 
 ## نتایج یادگیری
 
 پس از اتمام، شما قادر خواهید بود:
-- تمام جریان‌های کاری استقرار `azd` را به‌طور مستقل اجرا و عیب‌یابی کنید
-- اتوماسیون استقرار سفارشی را با استفاده از هوک‌ها طراحی و پیاده‌سازی کنید
-- استقرارهای آماده تولید را با امنیت و مانیتورینگ مناسب پیکربندی کنید
-- سناریوهای پیچیده چندمحیطی را مدیریت کنید
-- عملکرد استقرار را بهینه کرده و استراتژی‌های بازگشت را پیاده‌سازی کنید
-- استقرارهای `azd` را در رویه‌های DevOps سازمانی یکپارچه کنید
+- به‌صورت مستقل همه روندهای استقرار azd را اجرا و عیب‌یابی کنید
+- اتوماسیون استقرار سفارشی با استفاده از قلاب‌ها طراحی و پیاده‌سازی کنید
+- استقرارهای آماده تولید با امنیت و نظارت مناسب پیکربندی کنید
+- مدیریت سناریوهای پیچیده استقرار چندمحیطی را انجام دهید
+- عملکرد استقرار را بهینه کنید و استراتژی‌های بازگشت به عقب را پیاده‌سازی کنید
+- استقرارهای azd را در رویه‌های سازمانی DevOps ادغام کنید
 
 ## نمای کلی استقرار
 
-Azure Developer CLI چندین فرمان استقرار ارائه می‌دهد:
-- `azd up` - جریان کاری کامل (provision + deploy)
+Azure Developer CLI چندین دستور استقرار دارد:
+- `azd up` - روند کامل (تأمین + استقرار)
 - `azd provision` - فقط ایجاد/به‌روزرسانی منابع Azure
 - `azd deploy` - فقط استقرار کد برنامه
 - `azd package` - ساخت و بسته‌بندی برنامه‌ها
 
-## جریان‌های کاری پایه استقرار
+## روندهای پایه استقرار
 
 ### استقرار کامل (azd up)
-رایج‌ترین جریان کاری برای پروژه‌های جدید:
+رایج‌ترین روند برای پروژه‌های جدید:
 ```bash
-# همه چیز را از ابتدا مستقر کنید
+# Deploy everything from scratch
 azd up
 
-# با محیط مشخص مستقر کنید
+# Deploy with specific environment
 azd up --environment production
 
-# با پارامترهای سفارشی مستقر کنید
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
-### فقط زیرساخت
-وقتی فقط نیاز به به‌روزرسانی منابع Azure دارید:
+### استقرار فقط زیرساخت
+زمانی که فقط نیاز به به‌روزرسانی منابع Azure دارید:
 ```bash
-# تأمین/به‌روزرسانی زیرساخت
+# Provision/update infrastructure
 azd provision
 
-# تأمین با اجرای آزمایشی (dry-run) برای پیش‌نمایش تغییرات
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# تأمین سرویس‌های مشخص
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
-### فقط کد
+### استقرار فقط کد
 برای به‌روزرسانی سریع برنامه:
 ```bash
-# همه سرویس‌ها را مستقر کنید
+# Deploy all services
 azd deploy
 
-# خروجی مورد انتظار:
-# در حال استقرار سرویس‌ها (azd deploy)
-# - web: در حال استقرار... انجام شد
-# - api: در حال استقرار... انجام شد
-# موفقیت: استقرار شما در 2 دقیقه و 15 ثانیه تکمیل شد
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# یک سرویس مشخص را مستقر کنید
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# استقرار با آرگومان‌های ساخت سفارشی
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# استقرار را تأیید کنید
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
-### ✅ تایید استقرار
+### ✅ تأیید استقرار
 
 پس از هر استقرار، موفقیت را بررسی کنید:
 
 ```bash
-# اطمینان حاصل کنید که همه سرویس‌ها در حال اجرا هستند
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# نقاط پایانی سلامت را آزمایش کنید
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# برای خطاها نظارت کنید (به‌طور پیش‌فرض در مرورگر باز می‌شود)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
 **معیارهای موفقیت:**
-- ✅ همه سرویس‌ها وضعیت "Running" را نشان می‌دهند
-- ✅ نقاط بررسی سلامت پاسخ HTTP 200 بازمی‌گردانند
-- ✅ در 5 دقیقه گذشته خطای لاگ وجود ندارد
-- ✅ برنامه به درخواست‌های تست پاسخ می‌دهد
+- ✅ `azd show` به اهداف سرویس/آدرس‌های URL مورد انتظار پاسخ می‌دهد
+- ✅ درخواست‌ها به مسیرهای واقعی برنامه وضعیت و بدنه مورد انتظار را برمی‌گردانند
+- ✅ هیچ خطای لاگ در ۵ دقیقه اخیر ثبت نشده است
+- ✅ برنامه به درخواست‌های آزمایشی پاسخ می‌دهد
 
-## 🏗️ درک فرایند استقرار
+## 🏗️ درک فرآیند استقرار
 
-### با هوک‌ها تازه‌کار هستید؟ از اینجا شروع کنید
+### تازه با قلاب‌ها آشنا شده‌اید؟ اینجا شروع کنید
 
-یک **هوک** فرمانی است که `azd` به‌صورت خودکار در لحظه‌ای مشخص از روند استقرار اجرا می‌کند — قبل یا بعد از تأمین منابع، و قبل یا بعد از استقرار کد شما. آن‌ها به شما اجازه می‌دهند کارهای کوچکی را که همیشه اطراف یک استقرار وجود دارد خودکار کنید: پر کردن دیتابیس، اجرای مهاجرت‌ها، ساخت دارایی‌ها، یا انجام تست‌های دود (smoke-testing) روی برنامه زنده.
+**قلاب** دستوری است که azd به طور خودکار در لحظه مشخصی از فرایند استقرار اجرا می‌کند - پیش یا پس از تأمین و قبل یا پس از استقرار کد شما. این‌ها به شما اجازه می‌دهند کارهای کوچک اطراف استقرار را اتوماتیک کنید: بذر زدن پایگاه داده، اجرای مهاجرت‌ها، ساخت دارایی‌ها یا تست دود اپ زنده.
 
-| Hook | اجرا می‌شود… | کاربرد معمول |
-|------|---------------|---------------|
-| `preprovision` | قبل از ایجاد منابع | اعتبارسنجی پیش‌نیازها، ورود به یک رجیستری |
-| `postprovision` | بعد از اینکه منابع ایجاد شدند | پیکربندی منابع، راه‌اندازی دیتابیس |
+| قلاب | اجرا می‌شود… | کاربرد رایج |
+|------|-------|------------|
+| `preprovision` | قبل از ایجاد منابع | اعتبارسنجی پیش‌نیازها، وارد شدن به رجیستری |
+| `postprovision` | پس از وجود منابع | پیکربندی منابع، راه‌اندازی پایگاه داده |
 | `predeploy` | قبل از استقرار کد | ساخت دارایی‌های فرانت‌اند، اجرای تست‌های واحد |
-| `postdeploy` | بعد از زنده شدن کد | اجرای مهاجرت‌های دیتابیس، تست دود از نقطه پایان |
+| `postdeploy` | پس از زنده شدن کد | اجرای مهاجرت‌های پایگاه داده، تست دود نقطه پایانی |
 
-هوک‌ها در فایل `azure.yaml` شما زندگی می‌کنند. در اینجا کوچک‌ترین مثال ممکن را می‌بینید — فقط پس از استقرار یک پیام چاپ می‌کند:
+قلاب‌ها در `azure.yaml` شما قرار دارند. در اینجا کوچک‌ترین مثال ممکن است — فقط پس از استقرار پیغامی را چاپ می‌کند:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-همین است — دفعه بعد که `azd up` را اجرا کنید، پیام به‌صورت خودکار چاپ می‌شود. همچنین می‌توانید یک هوک را به‌تنهایی اجرا کنید، بدون یک استقرار کامل، که برای تست عالی است:
+همین است — دفعه بعد که `azd up` را اجرا کنید، پیغام به‌صورت خودکار چاپ می‌شود. همچنین می‌توانید یک قلاب را به‌تنهایی اجرا کنید، بدون استقرار کامل، که برای آزمایش عالی است:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-فازهای زیر هوک‌های دنیای واقعی (مهاجرت‌ها، تست‌ها، اعتبارسنجی) را برای هر مرحله نشان می‌دهند.
+مراحل زیر قلاب‌های دنیای واقعی (مهاجرت‌ها، تست‌ها، اعتبارسنجی) را برای هر مرحله نشان می‌دهند.
 
-### فاز 1: هوک‌های پیش از تأمین
+### مرحله ۱: قلاب‌های پیش از تأمین منابع
 ```yaml
 # azure.yaml
 hooks:
@@ -161,13 +166,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### فاز 2: تأمین زیرساخت
+### مرحله ۲: تأمین زیرساخت
 - خواندن قالب‌های زیرساخت (Bicep/Terraform)
 - ایجاد یا به‌روزرسانی منابع Azure
 - پیکربندی شبکه و امنیت
-- راه‌اندازی مانیتورینگ و لاگ‌گیری
+- راه‌اندازی نظارت و ثبت لاگ
 
-### فاز 3: هوک‌های پس از تأمین
+### مرحله ۳: قلاب‌های پس از تأمین منابع
 ```yaml
 hooks:
   postprovision:
@@ -180,12 +185,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### فاز 4: بسته‌بندی برنامه
+### مرحله ۴: بسته‌بندی برنامه
 - ساخت کد برنامه
-- ایجاد آثار استقراری
+- ایجاد مواد استقرار
 - بسته‌بندی برای پلتفرم هدف (کانتینرها، فایل‌های ZIP و غیره)
 
-### فاز 5: هوک‌های پیش از استقرار
+### مرحله ۵: قلاب‌های پیش از استقرار
 ```yaml
 hooks:
   predeploy:
@@ -198,12 +203,12 @@ hooks:
       npm run db:migrate
 ```
 
-### فاز 6: استقرار برنامه
-- استقرار برنامه‌های بسته‌بندی شده به سرویس‌های Azure
+### مرحله ۶: استقرار برنامه
+- استقرار برنامه‌های بسته‌بندی‌شده به سرویس‌های Azure
 - به‌روزرسانی تنظیمات پیکربندی
 - راه‌اندازی/راه‌اندازی مجدد سرویس‌ها
 
-### فاز 7: هوک‌های پس از استقرار
+### مرحله ۷: قلاب‌های پس از استقرار
 ```yaml
 hooks:
   postdeploy:
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### مدیریت خطاهای هوک
+### مدیریت خطاهای قلاب
 
-به‌طور پیش‌فرض، **اگر یک فرمان هوک با کد خروجی غیرصفر خاتمه یابد، azd کل عملیات را متوقف می‌کند.** این معمولاً همان چیزی است که می‌خواهید — یک مهاجرت ناموفق باید استقرار را متوقف کند، نه اینکه یک برنامه خراب را منتشر کند. اما این یعنی هوک‌ها باید با دقت نوشته شوند.
+به طور پیش‌فرض، **اگر دستور قلاب با کد غیر صفر خارج شود، azd کل عملیات را متوقف می‌کند.** این معمولاً همان چیزی است که می‌خواهید — یک مهاجرت شکست‌خورده باید استقرار را متوقف کند نه اینکه یک برنامه خراب را منتشر کند. اما یعنی قلاب‌ها باید با دقت نوشته شوند.
 
-**1. شکست‌ها را بلند و عمدی کنید.** یک هوک زمانی شکست می‌خورد که آخرین فرمان آن کد خروجی غیرصفر برگرداند. در اسکریپت‌های شل، `set -e` اضافه کنید تا هوک در اولین فرمان شکست‌خورده متوقف شود به‌جای اینکه به‌طور مخفیانه ادامه دهد:
+**۱. خطاها باید بلند و عمدی باشند.** یک قلاب زمانی شکست می‌خورد که آخرین دستور آن کد خروجی غیر صفر برگرداند. در اسکریپت‌های شل، `set -e` را اضافه کنید تا قلاب در اولین دستور شکست‌خورده متوقف شود و ادامه خاموش نداشته باشد:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. اجازه دهید یک هوک بدون متوقف کردن `azd` شکست بخورد.** برای مراحل غیرضروری (گرم‌کردن کش اختیاری، اطلاع‌رسانی بهترین تلاش)، `continueOnError: true` را تنظیم کنید. azd شکست را لاگ می‌کند اما ادامه می‌دهد:
+**۲. اجازه دهید یک قلاب بدون توقف azd شکست بخورد.** برای مراحل غیر بحرانی (گرم کردن اختیاری کش، اعلان بهترین تلاش)، `continueOnError: true` را تنظیم کنید. azd خطا را لاگ می‌کند اما ادامه می‌دهد:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. هوک‌ها را جداگانه قبل از اجرای کامل تست کنید.** لازم نیست برای اشکال‌زدایی یک هوک `azd up` را اجرا کنید — آن را به‌تنهایی اجرا کنید و سریع تکرار کنید:
+**۳. قلاب‌ها را به‌صورت جداگانه قبل از اجرای کامل تست کنید.** نیازی نیست برای اشکال‌زدایی قلاب `azd up` را اجرا کنید — آن را به‌تنهایی اجرا کنید و سریع تکرار کنید:
 
 ```bash
-azd hooks run predeploy          # فقط هوک predeploy را اجرا می‌کند
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. مراقب شل‌های مخصوص سیستم‌عامل باشید.** یک هوک که از `shell: pwsh` استفاده می‌کند نیاز به نصب PowerShell روی ماشینی دارد که آن را اجرا می‌کند (از جمله عامل‌های CI). برای گسترده‌ترین قابلیت حمل از `shell: sh` استفاده کنید، یا هر دو نسخه `windows` و `posix` را فراهم کنید:
+**۴. حواس‌تان به شل‌های مخصوص سیستم‌عامل باشد.** یک قلاب که از `shell: pwsh` استفاده می‌کند به PowerShell نصب‌شده روی ماشینی که آن را اجرا می‌کند نیاز دارد (از جمله عوامل CI). برای بیشترین حمل‌پذیری از `shell: sh` استفاده کنید، یا هر دو نسخه `windows` و `posix` را ارائه دهید:
 
 ```yaml
 hooks:
@@ -262,54 +267,54 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **نکته اشکال‌زدایی:** هر فرمان `azd` را با `--debug` اجرا کنید تا خط فرمان دقیق هوک و خروجی کامل آن را ببینید — بسیار ارزشمند وقتی که یک هوک به‌صورت محلی کار می‌کند اما در CI شکست می‌خورد.
+> **نکته اشکال‌زدایی:** هر دستور azd را با `--debug` اجرا کنید تا دستور قلاب دقیق و خروجی کامل آن را ببینید — این در مواقعی که قلاب به‌صورت محلی کار می‌کند اما در CI شکست می‌خورد بسیار ارزشمند است.
 
 ## 🎛️ پیکربندی استقرار
 
-### تنظیمات استقرار اختصاصی سرویس
+### تنظیمات استقرار مخصوص سرویس
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
 ### پیکربندی‌های مخصوص محیط
+
+این‌ها فقط مقادیر محلی azd هستند. آن‌ها را صریحاً به پیکربندی زیرساخت/رانتایم نگاشت دهید. `NODE_ENV` معمولاً `production` برای یک برنامه Node مستقر است، از جمله استقرار مرحله استیجینگ؛ از یک متغیر جداگانه مخصوص برنامه برای تمایز مراحل استقرار استفاده کنید.
+
 ```bash
-# محیط توسعه
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# محیط پیش‌تولید
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# محیط تولید
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -354,52 +359,53 @@ services:
     host: function
 ```
 
-### استقرارهای Blue-Green
+### استقرار آبی-سبز
+
+**طرح عملیاتی نمونه:** شما باید هر دو محیط، لایه مشترک مسیریابی ترافیک و دو اسکریپت زیر را تأمین کنید. azd به‌صورت خودکار ترافیک را تغییر نمی‌دهد یا آمادگی بازگشت به عقب را اعتبارسنجی نمی‌کند. تا زمانی که آبی تست‌ها را بگذراند و بازگشت به عقب لازم نباشد، سبز را نگه دارید.
+
 ```bash
-# ایجاد محیط آبی
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# آزمایش محیط آبی
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# هدایت ترافیک به محیط آبی (به‌روزرسانی دستی DNS/توازن بار)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# پاک‌سازی محیط سبز
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
-### استقرارهای Canary
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+### استقرار کناری
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### استقرارهای مرحله‌ای
+تقسیم ترافیک به پیکربندی برنامه‌های کانتینری (Bicep یا Azure CLI) مربوط می‌شود، نه خاصیت `azure.yaml` `trafficSplit`. پیش‌نمایش/تأمین و استقرارهای بعدی باید حالت نسخه و قوانین مسیریابی انتخاب‌شده شما را حفظ کنند.
+
+### استقرار مرحله‌ای
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,43 +415,38 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
 fi
 ```
 
-## 🐳 استقرار کانتینر
+## 🐳 استقرار کانتینرها
 
-### استقرارهای Container App
+### استقرار برنامه کانتینر
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
+
+اسرار زمان اجرا را با `configuration.secrets`/`secretRef` (یا ارجاع به Key Vault) و مقیاس‌دهی با `template.scale` در زیرساخت برنامه کانتینر پیکربندی کنید. ویژگی‌های سطح سرویس `secrets` یا `scale` را در `azure.yaml` اختراع نکنید.
 
 ### بهینه‌سازی Dockerfile چندمرحله‌ای
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -472,75 +474,87 @@ CMD ["npm", "start"]
 
 ### استقرارهای مخصوص سرویس
 ```bash
-# یک سرویس مشخص را برای تکرار سریع‌تر مستقر کنید
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# تمام سرویس‌ها را مستقر کنید
+# Deploy all services
 azd deploy
 ```
 
-### کش‌سازی ساخت
+### کش ساخت
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
+
+روند معمول Node از اسکریپت‌های بسته استفاده می‌کند؛ قلاب‌های سرویس `prepackage` می‌توانند مراحل مورد نیاز را اضافه کنند. کش لایه داکر جدا از تعریف دستور ساخت سرویس است.
 
 ### استقرارهای کد کارآمد
 ```bash
-# برای تغییراتی که فقط به کد مربوط‌اند، از azd deploy (نه azd up) استفاده کنید
-# این مرحلهٔ تأمین زیرساخت را رد می‌کند و بسیار سریع‌تر است
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# برای سریع‌ترین تکرار، سرویس مشخص را مستقر کنید
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
-## 🔍 مانیتورینگ استقرار
+## 🔍 نظارت بر استقرار
 
-### مانیتورینگ استقرار در زمان واقعی
+### نظارت بر استقرار در زمان واقعی
 ```bash
-# نظارت بر برنامه در زمان واقعی
+# Monitor application in real-time
 azd monitor --live
 
-# مشاهده گزارش‌های برنامه
+# View application logs
 azd monitor --logs
 
-# بررسی وضعیت استقرار
+# Check deployment status
 azd show
 ```
 
-### بررسی‌های سلامت
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+### بررسی سلامت
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
+
+برنامه شما باید `/health` را پیاده‌سازی کند؛ این به‌صورت خودکار توسط azd تأمین نمی‌شود. خصوصیت عمومی `azure.yaml` `healthCheck` وجود ندارد.
 
 ### اعتبارسنجی پس از استقرار
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# بررسی سلامت برنامه
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -565,78 +579,48 @@ echo "✅ Deployment validation completed successfully"
 
 ### مدیریت اسرار
 ```bash
-# اسرار را به‌صورت ایمن ذخیره کنید
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# در azure.yaml به اسرار ارجاع دهید
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` نامعتبر است. مقادیر محیطی معمولی متن ساده محلی هستند؛ فرض نکنید دستورات خواندن آن‌ها را مخفی کنند. دستورات بالا ارجاع به Key Vault را ذخیره می‌کنند، اما زیرساخت/برنامه شما هنوز باید اسرار را مصرف و دسترسی هویت زمان اجرا را بدهد.
 
 ### امنیت شبکه
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+پارامترهای شبکه را در Bicep اعلام و مصرف کنید و آن‌ها را در `infra/main.parameters.json` نگاشت دهید. پوشش عمومی `infra.parameters` در `azure.yaml` وجود ندارد. دامنه‌های مستندات نمونه `203.0.113.0/24` و `198.51.100.0/24` شبکه‌های واقعی دفتر/VPN نیستند؛ آن‌ها را با دامنه‌های شبکه مجاز جایگزین کنید.
 
 ### مدیریت هویت و دسترسی
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+توان‌سازی `identity` برنامه کانتینر در Bicep و اختصاص نقش داده‌پلان لازم Key Vault در محدوده قلعه. اسرار نامگذاری شده پشتیبانی شده توسط Key Vault و ارجاعات زمان اجرا را در آن منبع پیکربندی کنید؛ `identity` و `keyVault` ویژگی‌های عمومی سرویس azd نیستند. به [احراز هویت و هویت مدیریت‌شده](../chapter-03-configuration/authsecurity.md) مراجعه کنید.
 
-## 🚨 استراتژی‌های بازگشت (Rollback)
+## 🚨 استراتژی‌های بازگشت به عقب
 
 ### بازگشت سریع
 ```bash
-# AZD بازگردانی داخلی (rollback) ندارد. رویکردهای پیشنهادی:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# گزینهٔ ۱: استقرار مجدد از Git (توصیه‌شده)
-git revert HEAD  # کامیت مشکل‌دار را برگردانید
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# گزینهٔ ۲: استقرار مجدد یک کامیت مشخص
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
 ### بازگشت زیرساخت
 ```bash
-# قبل از اعمال، تغییرات زیرساخت را پیش‌نمایش کنید
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# برای بازگردانی زیرساخت، از کنترل نسخه استفاده کنید:
-git revert HEAD  # تغییرات زیرساخت را برگردانید
-azd provision    # وضعیت قبلی زیرساخت را اعمال کنید
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
-### بازگشت مهاجرت دیتابیس
+### بازگشت مهاجرت پایگاه داده
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -652,15 +636,15 @@ echo "Database rollback completed"
 
 ## 📊 معیارهای استقرار
 
-### ردیابی عملکرد استقرار
+### پیگیری عملکرد استقرار
 ```bash
-# مشاهده وضعیت فعلی استقرار
+# View current deployment status
 azd show
 
-# نظارت بر برنامه با Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# مشاهده معیارهای بلادرنگ
+# View live metrics
 azd monitor --live
 ```
 
@@ -681,32 +665,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 بهترین شیوه‌ها
+## 🎯 بهترین روش‌ها
 
-### 1. تناسب محیط‌ها
+### ۱. ثبات محیط
 ```bash
-# از نام‌گذاری یکسان استفاده کنید
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# شباهت محیط‌ها را حفظ کنید
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
-### 2. اعتبارسنجی زیرساخت
+### ۲. اعتبارسنجی زیرساخت
 ```bash
-# پیش‌نمایش تغییرات زیرساخت قبل از استقرار
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# استفاده از linting برای ARM و Bicep
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# اعتبارسنجی سینتکس Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
-### 3. یکپارچه‌سازی تست
+### ۳. ادغام تست
 ```yaml
 hooks:
   predeploy:
@@ -735,74 +719,80 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. مستندسازی و لاگ‌گیری
+### ۴. مستندسازی و ثبت لاگ
 ```bash
-# فرآیندهای استقرار را مستندسازی کنید
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## گام‌های بعدی
+## مراحل بعدی
 
-- [Provisioning Resources](provisioning.md) - بررسی عمیق مدیریت زیرساخت
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - برنامه‌ریزی استراتژی استقرار
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - حل مشکلات استقرار
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - استراتژی‌های استقرار آماده تولید
+- [تأمین منابع](provisioning.md) - بررسی عمیق مدیریت زیرساخت
+- [برنامه‌ریزی پیش از استقرار](../chapter-06-pre-deployment/capacity-planning.md) - برنامه‌ریزی استراتژی استقرار شما
+- [مسائل رایج](../chapter-07-troubleshooting/common-issues.md) - حل مشکلات استقرار
+- [بهترین روش‌ها](../chapter-07-troubleshooting/debugging.md) - استراتژی‌های استقرار آماده تولید
 
 ## 🎯 تمرین‌های عملی استقرار
 
-### تمرین 1: جریان کاری استقرار افزایشی (20 دقیقه)
-**هدف**: تفاوت بین استقرار کامل و افزایشی را تسلط یابید
+### تمرین ۱: روند استقرار تدریجی (۲۰ دقیقه)
+**هدف**: تسلط بر تفاوت بین استقرار کامل و تدریجی
+
+**نقطه شروع:** Bash، Node.js نسخه ۲۲، Git، ورود به azd و اشتراک Azure با مجوز استقرار. در یک پوشه جدید اجرا کنید؛ انتظار داشته باشید منابع App Service/Cosmos DB قابل صورتحساب باشند. زمان‌بندی بستگی به منطقه و قالب دارد.
 
 ```bash
-# استقرار اولیه
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# ثبت زمان استقرار اولیه
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# اعمال تغییر در کد
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# فقط کد را مستقر کنید (سریع)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# مقایسه زمان‌ها
+# Compare times
 cat deployment-log.txt
 
-# پاک‌سازی
+# Clean up
 azd down --force --purge
 ```
 
 **معیارهای موفقیت:**
-- [ ] استقرار کامل 5-15 دقیقه طول بکشد
-- [ ] استقرار فقط-کد 2-5 دقیقه طول بکشد
-- [ ] تغییرات کد در برنامه مستقر منعکس شوند
-- [ ] زیرساخت پس از `azd deploy` تغییر نکند
+- [ ] زمان سپری‌شده برای هر دو دستور ثبت شود (مدت زمان تضمین‌شده‌ای نیست)
+- [ ] هر دو دستور با موفقیت کامل اجرا شوند
+- [ ] API عملکردی باقی بماند؛ ویرایش فقط نظر تغییر قابل مشاهده در UI نیست
+- [ ] هیچ تغییری در زیرساخت بعد از `azd deploy` وجود نداشته باشد
 
-**نتیجه یادگیری**: `azd deploy` برای تغییرات کد 50-70% سریع‌تر از `azd up` است
+**نتیجه یادگیری**: `azd deploy` از تأمین زیرساخت صرف‌نظر می‌کند. زمان‌های اندازه‌گیری‌شده را مقایسه کنید به جای اینکه فرض کنید سرعت ثابتی وجود دارد.
 
-### تمرین 2: هوک‌های استقرار سفارشی (30 دقیقه)
-**هدف**: اتوماسیون پیش و پس از استقرار را پیاده‌سازی کنید
+### تمرین ۲: قلاب‌های استقرار سفارشی (۳۰ دقیقه)
+**هدف**: پیاده‌سازی اتوماسیون پیش و پس از استقرار
+
+**نقطه شروع:** پروژه مقداردهی اولیه‌شده `deployment-practice` بالا. اگر آن را پاک کرده‌اید، قبل از آزمایش استقرار فقط کد، دوباره `azd up` را اجرا کنید. اعتبارسنجی زیر از اسکریپت ساخت واقعی API استفاده می‌کند، نه اسکریپت ریشه `test:unit` غیرممکن. تست‌های API قالب نیاز به دسترسی پیکربندی‌شده پایگاه داده دارند؛ آن‌ها تست‌های واحد مجزایی نیستند.
 
 ```bash
-# ایجاد اسکریپت اعتبارسنجی قبل از استقرار
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# بررسی موفقیت‌آمیز بودن تست‌ها
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# بررسی وجود تغییرات ثبت‌نشده
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# ایجاد تست سریع (smoke) پس از استقرار
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# افزودن هوک‌ها به azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# تست استقرار با هوک‌ها
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
 **معیارهای موفقیت:**
-- [ ] اسکریپت پیش-استقرار قبل از استقرار اجرا شود
-- [ ] در صورت شکست تست‌ها، استقرار متوقف شود
+- [ ] اسکریپت پیش از استقرار قبل از استقرار اجرا شود
+- [ ] اگر اعتبارسنجی ساخت شکست خورد، استقرار متوقف شود
 - [ ] تست دود پس از استقرار سلامت را تایید کند
-- [ ] هوک‌ها به ترتیب صحیح اجرا شوند
+- [ ] قلاب‌ها به ترتیب درست اجرا شوند
 
-### تمرین 3: استراتژی استقرار چندمحیطی (45 دقیقه)
-**هدف**: جریان کاری استقرار مرحله‌ای را پیاده‌سازی کنید (dev → staging → production)
+### تمرین ۳: استراتژی استقرار چندمحیطی (۴۵ دقیقه)
+**هدف**: پیاده‌سازی روند استقرار مرحله‌ای (توسعه → مرحله → تولید)
+
+**نقطه شروع:** همان پروژه todo مقداردهی اولیه شده با `jq`. محیط‌های زیر را با مقادیر واقعی اشتراک/مکان ایجاد کنید (یا در هر کدام `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` را تنظیم کنید) **قبل از** اجرای روند کاری بدون درخواست ورودی. این کار عمداً در صورت نبود مقادیر آنها را اختراع نمی‌کند و عملیات را شکست می‌دهد. تنها از محیط‌های آموزشی یک‌بار مصرف استفاده کنید، نه اشتراک تولید واقعی.
 
 ```bash
-# ایجاد اسکریپت استقرار
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# مرحله ۱: استقرار در محیط توسعه
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# مرحله ۲: استقرار در محیط آماده‌سازی
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# مرحله ۳: تأیید دستی برای محیط تولید
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# ایجاد محیط‌ها
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# اجرای استقرار مرحله‌ای
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
 **معیارهای موفقیت:**
-- [ ] محیط Dev با موفقیت مستقر شود
-- [ ] محیط Staging با موفقیت مستقر شود
-- [ ] برای تولید تأیید دستی لازم باشد
-- [ ] همه محیط‌ها چک‌های سلامت کارآمد داشته باشند
-- [ ] امکان بازگشت در صورت نیاز وجود داشته باشد
+- [ ] محیط توسعه با موفقیت مستقر شود
+- [ ] محیط استیجینگ با موفقیت مستقر شود
+- [ ] برای تولید نیاز به تایید دستی باشد
+- [ ] همه محیط‌ها چک‌های سلامتی فعال داشته باشند
+- [ ] در صورت نیاز بتوان بازگشت انجام داد
 
-### تمرین 4: استراتژی بازگشت (25 دقیقه)
-**هدف**: بازگشت استقرار با استفاده از Git را پیاده‌سازی و تست کنید
+### تمرین ۴: استراتژی بازگشت (۲۵ دقیقه)
+**هدف**: پیاده‌سازی و آزمایش بازگشت استقرار با استفاده از Git
+
+**نقطه شروع:** بررسی ایزوله شده تمرینی از قالب todo با کل کد پایه ثبت شده، درخت کاری تمیز Git و محیط پیکربندی شده یک‌بار مصرف. هرگز در پروژه تولید واقعی شکست عمدی وارد نکنید. `APP_VERSION` زیر فقط برای حسابداری است مگر اینکه خودتان صراحتاً آن را به برنامه وصل کنید.
 
 ```bash
-# استقرار v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# ذخیرهٔ هش کامیت v1
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# استقرار v2 با تغییر ناسازگار
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# شناسایی خرابی و بازگردانی
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # بازگردانی با استفاده از git
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # بازگردانی محیط
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # استقرار مجدد v1
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
 **معیارهای موفقیت:**
-- [ ] قادر به شناسایی خطاهای استقرار باشید
-- [ ] اسکریپت بازگشت به‌صورت خودکار اجرا شود
-- [ ] برنامه به حالت کار بازگردد
-- [ ] پس از بازگشت، چک‌های سلامت برقرار باشند
+- [ ] قادر به تشخیص شکست‌های استقرار باشد
+- [ ] اسکریپت بازگشت به طور خودکار اجرا شود
+- [ ] برنامه به حالت کاری بازگردد
+- [ ] پس از بازگشت، چک‌های سلامتی موفق باشند
 
-## 📊 ردیابی معیارهای استقرار
+## 📊 پیگیری معیارهای استقرار
 
-### عملکرد استقرار خود را ردیابی کنید
+### عملکرد استقرار خود را پیگیری کنید
 
 ```bash
-# ایجاد اسکریپت معیارهای استقرار
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,37 +999,38 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# نوشتن لاگ در فایل
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# از آن استفاده کنید
+# Use it
 ./track-deployment.sh
 ```
 
-**متریک‌های خود را تحلیل کنید:**
+**معیارهای خود را تحلیل کنید:**
 ```bash
-# مشاهده تاریخچه استقرار
+# View deployment history
 cat deployment-metrics.csv
 
-# محاسبه میانگین زمان استقرار
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## منابع بیشتر
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [مراجعه به استقرار Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [استقرار Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [استقرار Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [استقرار Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **ناوبری**
-- **درس قبلی**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **درس بعدی**: [Provisioning Resources](provisioning.md)
+- **درس قبلی**: [اولین پروژه شما](../chapter-01-foundation/first-project.md)
+- **درس بعدی**: [تهیه منابع](provisioning.md)
 
 ---
 
