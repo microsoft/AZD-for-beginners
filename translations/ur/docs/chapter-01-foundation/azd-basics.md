@@ -1,120 +1,122 @@
-# AZD بنیادیات - Azure Developer CLI کو سمجھنا
-
 # AZD بنیادیات - بنیادی تصورات اور اصول
 
 **باب کی نیویگیشن:**
-- **📚 کورس ہوم**: [نئے شروع کرنے والوں کے لئے AZD](../../README.md)
+- **📚 کورس ہوم**: [ابتدائیوں کے لئے AZD](../../README.md)
 - **📖 موجودہ باب**: باب 1 - بنیاد اور فوری آغاز
 - **⬅️ پچھلا**: [کورس کا جائزہ](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ اگلا**: [انسٹالیشن اور سیٹ اپ](installation.md)
-- **🚀 اگلا باب**: [باب 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 اگلا باب**: [باب 2: AI-فرسٹ ڈویلپمنٹ](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## تعارف
 
-اس سبق میں آپ کو Azure Developer CLI (azd) سے تعارف کروایا جائے گا، جو ایک طاقتور کمانڈ لائن ٹول ہے جو آپ کی مقامی ترقی سے Azure پر تعیناتی کے سفر کو تیز کرتا ہے۔ آپ بنیادی تصورات، مرکزی خصوصیات سیکھیں گے اور سمجھیں گے کہ azd کس طرح کلاؤڈ نیٹو ایپلیکیشن کی تعیناتی کو آسان بناتا ہے۔
+> جائزہ لیا گیا ہے `azd 1.37.2` (نومبر 2026) کے مطابق۔ باش کمانڈز میں اقتباس شدہ پلیس ہولڈرز استعمال ہوتے ہیں جنہیں آپ کو تبدیل کرنا ہوگا۔ ٹیمپلیٹ ورک فلو میں موجود `.` موجودہ ڈائریکٹری کو ابتدائیہ کرنے کے لیے استعمال ہوتا ہے؛ بغیر ڈائریکٹری آرگیومنٹ کے، ٹیمپلیٹ کی ابتدائیہ سب ڈائریکٹری بناتی ہے اور آپ کے شیل کی ورکنگ ڈائریکٹری کو تبدیل نہیں کرتی۔ ترقی یافتہ کوڈ کے ٹکڑے صرف وضاحتی ہیں، مکمل پروجیکٹس نہیں۔
 
-## سیکھنے کے مقاصد
+اس سبق میں آپ کو ایزور ڈویلپر CLI (azd) سے متعارف کروایا جائے گا، جو ایک طاقتور کمانڈ لائن ٹول ہے جو آپ کی مقامی ترقی سے ایزور پر تعیناتی کے عمل کو تیز کرتا ہے۔ آپ بنیادی تصورات، مرکزی خصوصیات سیکھیں گے اور سمجھیں گے کہ azd کلاؤڈ-نیٹو ایپلیکیشن کی تعیناتی کو کس طرح آسان بناتا ہے۔
 
-اس سبق کے اختتام پر، آپ:
-- جان سکیں گے کہ Azure Developer CLI کیا ہے اور اس کا بنیادی مقصد کیا ہے
+## تعلیمی مقاصد
+
+اس سبق کے اختتام تک، آپ:
+- یہ سمجھ سکیں گے کہ Azure Developer CLI کیا ہے اور اس کا بنیادی مقصد کیا ہے
 - ٹیمپلیٹس، ماحول، اور خدمات کے بنیادی تصورات سیکھیں گے
-- اہم خصوصیات جیسے ٹیمپلیٹ پر مبنی ترقی اور Infrastruktur بطور کوڈ دریافت کریں گے
+- ٹیمپلیٹ پر مبنی ترقی اور Infrastructure as Code جیسے کلیدی فوائد دریافت کریں گے
 - azd پروجیکٹ کی ساخت اور ورک فلو کو سمجھیں گے
 - اپنے ترقیاتی ماحول کے لیے azd انسٹال اور ترتیب دینے کے لیے تیار ہوں گے
 
-## سیکھنے کے نتائج
+## تعلیمی نتائج
 
-سبق مکمل کرنے کے بعد، آپ قابل ہوں گے کہ:
-- جدید کلاؤڈ ڈیویلپمنٹ ورک فلو میں azd کے کردار کی وضاحت کریں
-- azd پروجیکٹ ساخت کے اجزاء کی شناخت کریں
-- سمجھائیں کہ ٹیمپلیٹس، ماحول، اور خدمات کس طرح مل کر کام کرتی ہیں
-- azd کے ساتھ Infrastruktur بطور کوڈ کے فوائد جانیں
-- مختلف azd کمانڈز اور ان کے مقاصد کو پہچانیں
+اس سبق کے مکمل ہونے کے بعد، آپ قابل ہوں گے:
+- azd کے جدید کلاؤڈ ترقیاتی ورک فلوز میں کردار کی وضاحت کریں
+- azd پروجیکٹ کی ساخت کے اجزاء کی شناخت کریں
+- وضاحت کریں کہ ٹیمپلیٹس، ماحول، اور خدمات کس طرح مل کر کام کرتے ہیں
+- azd کے ذریعے Infrastructure as Code کے فوائد کو سمجھیں
+- مختلف azd کمانڈز اور ان کے مقاصد کی شناخت کریں
 
 ## Azure Developer CLI (azd) کیا ہے؟
 
-Azure Developer CLI (azd) ایک کمانڈ لائن ٹول ہے جو آپ کے مقامی ترقی سے Azure پر تعیناتی کے سفر کو تیز کرنے کے لیے ڈیزائن کیا گیا ہے۔ یہ Azure پر کلاؤڈ نیٹو ایپلیکیشن بنانے، تعینات کرنے، اور مینج کرنے کے عمل کو آسان بناتا ہے۔
+Azure Developer CLI (azd) ایک کمانڈ لائن ٹول ہے جو آپ کی مقامی ترقی سے Azure پر تعیناتی کے سفر کو تیز کرنے کے لیے ڈیزائن کیا گیا ہے۔ یہ Azure پر کلاؤڈ-نیٹو ایپلیکیشنز کی تعمیر، تعیناتی، اور انتظام کے عمل کو آسان بناتا ہے۔
 
 ### آپ azd کے ساتھ کیا تعینات کر سکتے ہیں؟
 
-azd مختلف قسم کے ورک لوڈز کی حمایت کرتا ہے—اور یہ فہرست بڑھتی جا رہی ہے۔ آج آپ azd کو استعمال کرکے تعینات کر سکتے ہیں:
+azd متعدد کاموں کی حمایت کرتا ہے—اور فہرست مسلسل بڑھ رہی ہے۔ آج آپ azd کو تعینات کرنے کے لیے استعمال کر سکتے ہیں:
 
-| ورک لوڈ کی قسم | مثالیں | کیا ایک جیسا ورک فلو ہے؟ |
+| کام کی قسم | مثالیں | کیا ورک فلو ایک جیسا ہے؟ |
 |---------------|----------|----------------|
 | **روایتی ایپلیکیشنز** | ویب ایپس، REST APIs، جامد سائٹس | ✅ `azd up` |
-| **خدمات اور مائیکروسروسز** | کنٹینر ایپس، فنکشن ایپس، ملٹی سروس بیک اینڈ | ✅ `azd up` |
-| **AI سے چلنے والی ایپلیکیشنز** | Microsoft Foundry ماڈلز کے ساتھ چیٹ ایپس، AI سرچ کے ساتھ RAG حل | ✅ `azd up` |
-| **ذہین ایجنٹس** | Foundry-میزبان ایجنٹس، ملٹی ایجنٹ آرکیسٹریشنز | ✅ `azd up` |
+| **خدمات اور مائیکرو سروسز** | کنٹینر ایپس، فنکشن ایپس، ملٹی سروس بیک اینڈز | ✅ `azd up` |
+| **AI سے لیس ایپلیکیشنز** | Microsoft Foundry Models کے ساتھ چیٹ ایپس، AI سرچ کے ساتھ RAG حل | ✅ `azd up` |
+| **ذہین ایجنٹس** | Foundry ہوسٹڈ ایجنٹس، ملٹی ایجنٹ آرکیسٹریشنز | ✅ `azd up` |
 
-اہم نکتہ یہ ہے کہ **azd کا لائف سائیکل آپ جو بھی تعینات کر رہے ہوں، یکساں رہتا ہے**۔ آپ ایک پروجیکٹ شروع کرتے ہیں، انفراسٹرکچر فراہم کرتے ہیں، اپنا کوڈ تعینات کرتے ہیں، ایپ کی نگرانی کرتے ہیں، اور صفائی کرتے ہیں—چاہے وہ سادہ ویب سائٹ ہو یا پیچیدہ AI ایجنٹ۔
+کلیدی بات یہ ہے کہ **azd کی لائف سائیکل آپ جو کچھ بھی تعینات کر رہے ہیں، یکساں رہتی ہے**۔ آپ پروجیکٹ کو ابتدائیہ کرتے ہیں، انفراسٹرکچر فراہم کرتے ہیں، کوڈ تعینات کرتے ہیں، اپنی ایپ کی نگرانی کرتے ہیں، اور صفائی کرتے ہیں—چاہے یہ ایک سادہ ویب سائٹ ہو یا ایک پیچیدہ AI ایجنٹ۔
 
-یہ تسلسل ڈیزائن کے تحت ہے۔ azd AI صلاحیتوں کو آپ کے ایپلیکیشن کی ایک اور قسم کی سروس کے طور پر سمجھتا ہے، نہ کہ کچھ بنیادی طور پر مختلف کے طور پر۔ Microsoft Foundry ماڈلز سے چلنے والا چیٹ اینڈپوائنٹ، azd کی نظر میں، بس جو ایک اور سروس ہے جس کی ترتیب اور تعیناتی کی جاتی ہے۔
+یہ تسلسل جان بوجھ کر ڈیزائن کیا گیا ہے۔ azd AI صلاحیتوں کو آپ کی ایپلیکیشن کی ایک اور قسم کی خدمت کے طور پر لیتا ہے، نہ کہ کچھ بنیادی طور پر مختلف۔ Microsoft Foundry Models سے معاونت یافتہ چیٹ اینڈ پوائنٹ، azd کی نظر سے، محض ایک اور خدمت ہے جسے ترتیب دینا اور تعینات کرنا ہے۔
 
 ### 🎯 AZD کیوں استعمال کریں؟ ایک حقیقی دنیا کا موازنہ
 
-آئیے ایک سادہ ویب ایپ جس میں ڈیٹا بیس ہے، کی تعیناتی کا موازنہ کرتے ہیں:
+آئیے ایک سادہ ویب ایپ کو ڈیٹا بیس کے ساتھ تعینات کرنے کا موازنہ کرتے ہیں:
 
 #### ❌ بغیر AZD کے: دستی Azure تعیناتی (30+ منٹ)
 
+**وضاحتی باش موازنہ، چلائے جانے والا ایپلی کیشن اسٹارٹر نہیں۔** یہ موجودہ ایپلیکیشن کوڈ، منفرد وسائل کے نام، Azure CLI کی توثیق، اور کسی بھی ضروری CLI توسیعات کو فرض کرتا ہے۔ نیچے کے ٹیمپلیٹ مشق میں مکمل معاونت یافتہ راہ استعمال کریں۔
+
 ```bash
-# مرحلہ 1: ریسورس گروپ بنائیں
+# Step 1: Create resource group
 az group create --name myapp-rg --location eastus
 
-# مرحلہ 2: ایپ سروس پلان بنائیں
+# Step 2: Create App Service Plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# مرحلہ 3: ویب ایپ بنائیں
+# Step 3: Create Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
-  --runtime "NODE:18-lts"
+  --runtime "NODE:22-lts"
 
-# مرحلہ 4: کازموس ڈی بی اکاؤنٹ بنائیں (10-15 منٹ)
+# Step 4: Create Cosmos DB account (10-15 minutes)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# مرحلہ 5: ڈیٹا بیس بنائیں
+# Step 5: Create database
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# مرحلہ 6: کلیکشن بنائیں
+# Step 6: Create collection
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --database-name tododb \
   --name todos
 
-# مرحلہ 7: کنکشن سٹرنگ حاصل کریں
+# Step 7: Get connection string
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# مرحلہ 8: ایپ سیٹنگز مرتب کریں
+# Step 8: Configure app settings
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# مرحلہ 9: لاگنگ کو فعال کریں
+# Step 9: Enable logging
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# مرحلہ 10: اپلیکیشن انسائٹس سیٹ اپ کریں
+# Step 10: Set up Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# مرحلہ 11: ایپ انسائٹس کو ویب ایپ سے لنک کریں
+# Step 11: Link App Insights to Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -125,230 +127,240 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# مرحلہ 12: مقامی طور پر ایپلیکیشن بنائیں
+# Step 12: Build application locally
 npm install
 npm run build
 
-# مرحلہ 13: ڈپلائمنٹ پیکیج بنائیں
+# Step 13: Create deployment package
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# مرحلہ 14: ایپلیکیشن کو ڈپلائے کریں
+# Step 14: Deploy application
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# مرحلہ 15: انتظار کریں اور دعا کریں کہ یہ کام کرے 🙏
-# (کوئی خودکار تصدیق نہیں، دستی جانچ ضروری ہے)
+# Step 15: Wait and pray it works 🙏
+# (No automated validation, manual testing required)
 ```
 
 **مسائل:**
-- ❌ یاد رکھنے اور ترتیب میں چلانے کے لیے 15+ کمانڈز
-- ❌ 30-45 منٹ کا دستی کام
-- ❌ غلطیاں آسان ہیں (ٹائپنگ کی غلطیاں، غلط پیرامیٹرز)
-- ❌ کنکشن اسٹرنگز ٹرمینل کی ہسٹری میں ظاہر ہو جاتی ہیں
-- ❌ اگر کچھ غلط ہو تو خودکار رول بیک نہیں ہوتا
-- ❌ ٹیم ممبرز کے لیے نقالی مشکل
-- ❌ ہر بار مختلف (دوبارہ قابل تکرار نہیں)
+- ❌ یاد رکھنے اور ترتیب سے چلانے کے لیے 15+ کمانڈز
+- ❌ 30-45 منٹ کے دستی کام
+- ❌ غلطیاں کرنا آسان (ٹائپوس، غلط پیرامیٹرز)
+- ❌ سہولیات کو واضح ہینڈلنگ کی ضرورت ہے؛ ڈیبگ لاگز اور شیل ٹریسنگ ان کا انکشاف کر سکتی ہے
+- ❌ اگر کچھ ناکام ہو جائے تو خودکار رول بیک نہیں ہوتا
+- ❌ ٹیم کے اراکین کے لیے نقل کرنا مشکل ہے
+- ❌ ہر بار مختلف (دہرائے نہ جانے والے)
 
 #### ✅ AZD کے ساتھ: خودکار تعیناتی (5 کمانڈز، 10-15 منٹ)
 
 ```bash
-# مرحلہ 1: ٹیمپلیٹ سے شروعات کریں
-azd init --template todo-nodejs-mongo
+# Step 1: Initialize from template
+azd init --template todo-nodejs-mongo .
 
-# مرحلہ 2: تصدیق کریں
+# Step 2: Authenticate
 azd auth login
 
-# مرحلہ 3: ماحول بنائیں
-azd env new dev
+# Step 3: Select the environment created during init
+azd env select dev
 
-# مرحلہ 4: تبدیلیوں کا پیش نظارہ کریں (اختیاری لیکن تجویز کردہ)
+# Step 4: Preview changes (optional but recommended)
 azd provision --preview
 
-# مرحلہ 5: سب کچھ تعینات کریں
+# Step 5: Deploy everything
 azd up
 
-# ✨ مکمل! سب کچھ تعینات، تشکیل شدہ، اور نگرانی شدہ ہے
+# ✨ Done! Everything is deployed, configured, and monitored
 ```
 
-**فوائد:**
+**فائدے:**
 - ✅ **5 کمانڈز** بمقابلہ 15+ دستی مراحل
-- ✅ **10-15 منٹ** کل وقت (زیادہ تر Azure کے انتظار کا)
+- ✅ **کل وقت 10-15 منٹ** (زیادہ تر Azure کا انتظار)
 - ✅ **کم دستی غلطیاں** - مستقل، ٹیمپلیٹ پر مبنی ورک فلو
-- ✅ **محفوظ خفیہ کاری** - بہت سے ٹیمپلیٹس Azure-مدیریت شدہ راز ذخیرہ استعمال کرتے ہیں
-- ✅ **دہرائے جانے والی تعیناتیاں** - ہر بار ایک جیسا ورک فلو
-- ✅ **مکمل طور پر دوبارہ قابل تکرار** - ہر بار ایک جیسا نتیجہ
-- ✅ **ٹیم کے لیے تیار** - کوئی بھی ایک جیسے کمانڈز کے ساتھ تعینات کر سکتا ہے
-- ✅ **انفراسٹرکچر بطور کوڈ** - ورژن کنٹرول کیے گئے بائسِپ ٹیمپلیٹس
-- ✅ **اندرونی مانیٹرنگ** - ایپلیکیشن انسائٹس خود بخود ترتیب دی جاتی ہے
+- ✅ **محفوظ خفیہ ہینڈلنگ** - بہت سے ٹیمپلیٹس Azure کے زیر انتظام خفیہ اسٹوریج استعمال کرتے ہیں
+- ✅ **دہرائی جانے والی تعیناتیاں** - ہر بار ایک جیسا ورک فلو
+- ✅ **دہرائی جانے والی انفراسٹرکچر کی تعریفیں** - کوٹہ، علاقائی دستیابی، اور ٹیمپلیٹ کے ورژنز کے تابع
+- ✅ **ٹیم کے لیے تیار** - کوئی بھی ایک ہی کمانڈز سے تعینات کر سکتا ہے
+- ✅ **انفراسٹرکچر ایز کوڈ** - ورژن کنٹرول شدہ بائسک ٹیمپلیٹس
+- ✅ **ٹیمپلیٹ سے متعین مانیٹرنگ** - جب ٹیمپلیٹ میں شامل ہو تو Application Insights
 
-### 📊 وقت اور غلطی میں کمی
+### وقت اور قابل اعتمادیت
 
-| میٹرک | دستی تعیناتی | AZD تعیناتی | بہتری |
-|:-------|:------------------|:---------------|:------------|
-| **کمانڈز** | 15+ | 5 | 67% کم |
-| **وقت** | 30-45 منٹ | 10-15 منٹ | 60% تیز |
-| **غلطی کی شرح** | ~40% | <5% | 88% کمی |
-| **تسلسل** | کم (دستی) | 100% (خودکار) | بہترین |
-| **ٹیم آن بورڈنگ** | 2-4 گھنٹے | 30 منٹ | 75% تیز |
-| **رول بیک کا وقت** | 30+ منٹ (دستی) | 2 منٹ (خودکار) | 93% تیز |
+اوپر دیے گئے اوقات اندازے ہیں، معیار نہیں۔ azd وہ کمانڈز کم کرتا ہے جنہیں آپ کو مربوط کرنا ہوتا ہے، لیکن تعیناتی کا دورانیہ، غلطیوں کا خاتمہ، یا خودکار ایپلیکیشن/ڈیٹا بیس رول بیک کی ضمانت نہیں دیتا۔ فعال ورژنز کو سورس کنٹرول میں رکھیں اور بحالی کے طریقہ کار کا ٹیسٹ کریں۔
 
 ## بنیادی تصورات
 
 ### ٹیمپلیٹس
-ٹیمپلیٹس azd کی بنیاد ہیں۔ ان میں شامل ہوتے ہیں:
-- **ایپلیکیشن کوڈ** - آپ کا سورس کوڈ اور انحصار
-- **انفراسٹرکچر کی تعریفیں** - Azure وسائل جو بائسِپ یا ٹیررا فارم میں متعین ہیں
-- **کنفیگریشن فائلز** - سیٹنگز اور ماحول کے متغیرات
-- **تعیناتی اسکرپٹس** - خودکار تعیناتی کے ورک فلو
+ٹیمپلیٹس azd کی بنیاد ہیں۔ وہ شامل ہیں:
+- **ایپلیکیشن کوڈ** - آپ کا سورس کوڈ اور انحصارات
+- **انفراسٹرکچر کی تعریفیں** - بائسک یا ٹیرافارم میں Azure وسائل کی تعریف
+- **کنفیگریشن فائلز** - ترتیبات اور ماحولیاتی متغیرات
+- **تعیناتی اسکرپٹ** - خودکار تعیناتی کے ورک فلو
 
-### ماحول
-ماحول مختلف تعیناتی اہداف کی نمائندگی کرتے ہیں:
-- **ڈیولپمنٹ** - جانچ اور ترقی کے لیے
-- **اسٹیجنگ** - قبل از پیداواری ماحول
-- **پیداواری** - لائیو پیداوار ماحول
+### ماحولیات
+ماحولیات مختلف تعیناتی کے مقامات کی نمائندگی کرتے ہیں:
+- **ترقی** - ٹیسٹنگ اور ڈیولپمنٹ کے لیے
+- **اسٹیجنگ** - پری پروڈکشن ماحول
+- **پروڈکشن** - لائیو پروڈکشن ماحول
 
-ہر ماحول اپنی خاص:
-- Azure ریسورس گروپ
+ہر ماحول اپنا رکھتا ہے:
+- ماحول کا نام اور اقدار؛ وسائل کی علیحدگی انفراسٹرکچر ٹیمپلیٹ پر منحصر ہوتی ہے
 - کنفیگریشن سیٹنگز
 - تعیناتی کی حالت
 
 ### خدمات
-خدمات آپ کی ایپلیکیشن کی بلڈنگ بلاکس ہیں:
+خدمات `azure.yaml` میں تعیناتی کے قابل ایپلیکیشن اجزاء کو بیان کرتی ہیں:
 - **فرنٹ اینڈ** - ویب ایپلیکیشنز، SPAs
-- **بیک اینڈ** - APIs، مائیکروسروسز
-- **ڈیٹا بیس** - ڈیٹا اسٹوریج حل
-- **اسٹوریج** - فائل اور بلاپ اسٹوریج
+- **بیک اینڈ** - APIs، مائیکرو سروسز
 
-## اہم خصوصیات
+ڈیٹابیسز اور اسٹوریج عام طور پر انفراسٹرکچر وسائل کے طور پر مہیا کیے جاتے ہیں، نہ کہ تخلیق شدہ سروس ہوسٹس جیسے کہ `host: postgres`۔
+
+## کلیدی خصوصیات
 
 ### 1. ٹیمپلیٹ پر مبنی ترقی
 ```bash
-# دستیاب ٹیمپلیٹس کو براؤز کریں
+# Browse available templates
 azd template list
 
-# ٹیمپلیٹ سے شروعات کریں
-azd init --template <template-name>
+# Initialize from a template
+azd init --template "<template-name>" .
 ```
 
-### 2. Infrastructure بطور کوڈ
-- **بائسِپ** - Azure کی ڈومین مخصوص زبان
-- **ٹیررا فارم** - کثیر کلاؤڈ انفراسٹرکچر ٹول
-- **ARM ٹیمپلیٹس** - Azure ریسورس مینیجر ٹیمپلیٹس
+### 2. انفراسٹرکچر ایز کوڈ
+- **بائسک** - Azure کا ڈومین-اسپیسفک زبان
+- **ٹیرافارم** - ملٹی کلاؤڈ انفراسٹرکچر ٹول
+- بائسک ARM ٹیمپلیٹس میں کمپائل ہوتا ہے؛ خام ARM JSON کوئی الگ بلٹ ان `infra.provider` نہیں ہے۔
 
 ### 3. مربوط ورک فلو
 ```bash
-# مکمل تعیناتی ورک فلو
-azd up            # دستیاب + تعینات یہ پہلی بار کی ترتیب کے لیے بغیر ہاتھ کے ہے
+# Complete deployment workflow
+azd up            # Provision + Deploy this is hands off for first time setup
 
-# 🧪 نیا: تعیناتی سے پہلے انفراسٹرکچر کی تبدیلیوں کا پیش منظر (محفوظ)
-azd provision --preview    # تبدیلی کیے بغیر انفراسٹرکچر تعیناتی کا مشابہہ
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
 
-azd provision     # اگر آپ انفراسٹرکچر کو اپ ڈیٹ کریں تو Azure وسائل بنائیں
-azd deploy        # ایپلیکیشن کوڈ تعینات کریں یا اپ ڈیٹ کے بعد دوبارہ تعینات کریں
-azd down          # وسائل کی صفائی کریں
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
+azd down          # Clean up resources
 ```
 
-#### 🛡️ پیش نظارہ کے ساتھ محفوظ Infrastructure کی منصوبہ بندی
-`azd provision --preview` کمانڈ محفوظ تعیناتیوں کے لیے ایک گیم چینجر ہے:
-- **ڈرائی رن تجزیہ** - دکھاتا ہے کہ کیا بنایا، تبدیل، یا حذف کیا جائے گا
-- **صفر خطرہ** - آپ کے Azure ماحول میں کوئی حقیقی تبدیلی نہیں کی جاتی
-- **ٹیم تعاون** - تعیناتی سے پہلے پیش نظارہ کے نتائج شیئر کریں
-- **لاگت کا تخمینہ** - وعدہ کرنے سے پہلے وسائل کی قیمت سمجھیں
+#### 🛡️ معائنہ کے ساتھ محفوظ انفراسٹرکچر منصوبہ بندی
+`azd provision --preview` کمانڈ محفوظ تعیناتیوں کے لیے ایک اہم تبدیلی ہے:
+- **خشک دوڑ تجزیہ** - دکھاتا ہے کیا بنایا، تبدیل یا حذف کیا جائے گا
+- **کوئی انفراسٹرکچر اطلاق نہیں** - فراہم کنندہ کی تبدیلیوں کا جائزہ لیتا ہے؛ سب سے پہلے پروجیکٹ ہکس کا معائنہ کریں، کیونکہ ہکس سائیڈ ایفیکٹس والی کمانڈز چلا سکتے ہیں
+- **ٹیم تعاون** - تعیناتی سے پہلے پیش نظارہ نتائج شیئر کریں
+- **لاگت کی منصوبہ بندی کا ان پٹ** - تجویز کردہ SKUs کا معائنہ کریں، پھر Azure پرائسنگ کیلکولیٹر سے قیمت لگائیں؛ پیش نظارہ قیمت نہیں نکالتا
 
 ```bash
-# مثال کا جائزہ ورک فلو
-azd provision --preview           # دیکھیں کیا بدل جائے گا
-# نتیجہ کا جائزہ لیں، ٹیم کے ساتھ بات کریں
-azd provision                     # اعتماد کے ساتھ تبدیلیاں نافذ کریں
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
-### 📊 بصری: AZD ترقیاتی ورک فلو
+### 📊 بصری: AZD ڈیولپمنٹ ورک فلو
 
 ```mermaid
 graph LR
-    A[azd init] -->|پروجیکٹ کا آغاز کریں| B[azd auth login]
-    B -->|تصدیق کریں| C[azd env new]
-    C -->|ماحول بنائیں| D{پہلا تعیناتی؟}
-    D -->|ہاں| E[azd up]
-    D -->|نہیں| F[azd provision --preview]
-    F -->|تبدیلیوں کا جائزہ لیں| G[azd provision]
-    E -->|وسائل کی فراہمی اور تعیناتی| H[وسائل چل رہے ہیں]
-    G -->|انفراسٹرکچر کو اپ ڈیٹ کریں| H
-    H -->|نگرانی کریں| I[azd monitor]
-    I -->|کوڈ میں تبدیلی کریں| J[azd deploy]
-    J -->|صرف کوڈ کو دوبارہ تعینات کریں| H
-    H -->|صفائی کریں| K[azd down]
+    %% Initialization Phase
+    subgraph Setup & Init
+        A[azd init] -->|Initialize project| B[azd auth login]
+        B -->|Authenticate| C[azd env new]
+        C -->|Create environment| D{First deployment?}
+    end
+
+    %% Deployment Phase
+    D -->|Yes| E[azd up]
+    D -->|No| F[azd provision --preview]
     
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
-    style F fill:#fff9c4
-    style H fill:#c5e1a5
-    style K fill:#ffcdd2
+    F -->|Review changes| G[azd provision]
+    
+    %% Operational Phase
+    E -->|Provisions & deploys| H((Resources running))
+    G -->|Updates infrastructure| H
+    
+    H -->|Monitor logs/metrics| I[azd monitor]
+    
+    %% Daily Dev Loop
+    J[azd deploy] -->|Redeploy code only| H
+    H -->|Make code changes| J
+    
+    %% Cleanup
+    H -->|Teardown resources| K[azd down]
+
+    %% Styling
+    style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style E fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style H fill:#d1c4e9,stroke:#512da8,stroke-width:2px
+    style J fill:#e1f5fe,stroke:#01579b,stroke-width:1px
+    style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
 **ورک فلو کی وضاحت:**
-1. **Init** - ٹیمپلیٹ یا نیا پروجیکٹ شروع کریں
-2. **Auth** - Azure کے ساتھ تصدیق کریں
-3. **Environment** - ایک علیحدہ تعیناتی ماحول بنائیں
-4. **Preview** - 🆕 ہمیشہ پہلے infrastructure تبدیلیوں کا پیش نظارہ کریں (محفوظ عمل)
-5. **Provision** - Azure وسائل بنائیں/اپ ڈیٹ کریں
-6. **Deploy** - اپنا ایپلیکیشن کوڈ بھیجیں
-7. **Monitor** - ایپلیکیشن کی کارکردگی ملاحظہ کریں
-8. **Iterate** - تبدیلیاں کریں اور کوڈ دوبارہ تعینات کریں
-9. **Cleanup** - ختم ہونے پر وسائل کو ہٹائیں
+1. **ابتدائیہ** - ٹیمپلیٹ یا نیا پروجیکٹ شروع کریں
+2. **تصدیق** - Azure کے ساتھ تصدیق کریں
+3. **ماحول** - علیحدہ تعیناتی ماحول تخلیق کریں
+4. **پیش نظارہ** - 🆕 ہمیشہ پہلے انفراسٹرکچر کی تبدیلیوں کا پیش نظارہ کریں (محفوظ عمل)
+5. **پروویژن** - Azure وسائل بنائیں/اپ ڈیٹ کریں
+6. **تعیناتی** - اپنا ایپلیکیشن کوڈ اپ لوڈ کریں
+7. **نگرانی** - ایپلیکیشن کی کارکردگی کو ملاحظہ کریں
+8. **دہرانا** - تبدیلیاں کریں اور کوڈ دوبارہ تعین کریں
+9. **صفائی** - کام ختم ہونے پر وسائل ہٹائیں
 
 ### 4. ماحول کا انتظام
 ```bash
-# ماحول بنائیں اور ان کا انتظام کریں
-azd env new <environment-name>
-azd env select <environment-name>
+# Create and manage environments
+azd env new "<environment-name>"
+azd env select "<environment-name>"
 azd env list
 ```
 
 ### 5. ایکسٹینشنز اور AI کمانڈز
 
-azd ایکسٹینشن سسٹم استعمال کرتا ہے تاکہ بنیادی CLI سے مزید صلاحیتیں شامل کی جا سکیں۔ یہ خاص طور پر AI ورک لوڈز کے لیے مفید ہے:
+azd ایکسٹینشن سسٹم استعمال کرتا ہے تاکہ بنیادی CLI سے آگے صلاحیتیں شامل کی جا سکیں۔ یہ خاص طور پر AI کام کے بوجھ کے لیے مفید ہے:
 
 ```bash
-# دستیاب توسیعات کی فہرست بنائیں
+# List available extensions
 azd extension list
 
-# فاؤنڈری ایجنٹ توسیع انسٹال کریں
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
-# مینفیسٹ سے ایک AI ایجنٹ منصوبہ initialize کریں
-azd ai agent init -m agent-manifest.yaml
+# Initialize an AI agent project interactively
+azd ai agent init
 
-# ایک تعینات ایجنٹ کا معائنہ کریں (تاخیر اور وقت-برائے-پہلا-بائٹ دکھائیں)
+# Test a deployed agent (shows latency and time-to-first-byte)
 azd ai agent invoke
 
-# AI معاونت یافتہ ترقی کے لیے MCP سرور شروع کریں (الفا)
+# Start the MCP server for AI-assisted development (Alpha)
 azd mcp start
 ```
 
-**ایجنٹ لائف سائیکل، ابتدا سے انتہا تک۔** جب آپ نے `azure.ai.agents` انسٹال کر لیا، تو ایک واحد ورک فلو آپ کو خیال سے چلنے والے، نگرانی شدہ ایجنٹ تک لے جاتا ہے۔ آپ کو دن ایک پر یہ سب کچھ نہیں چاہیئے—بس جان لیں کہ یہ موجود ہیں:
+**ایجنٹ لائف سائیکل، ابتدا سے آخر تک۔** GA `microsoft.foundry` بنڈل میں `azure.ai.agents` اور چھ دیگر بنیادی ایکسٹینشنز شامل ہیں۔ الگ الگ جانچ کے لیے `azure.ai.evaluations` انسٹال کریں۔ اس ورک فلو کے لیے `azd >= 1.37.0` استعمال کریں۔ آپ کو پہلے دن ان سب کی ضرورت نہیں ہے:
 
-| مرحلہ | کمانڈ | یہ کیا کرتی ہے |
+| مرحلہ | کمانڈ | یہ کیا کرتا ہے |
 |-------|---------|--------------|
-| **اسکیفولڈ** | `azd ai agent init -m <manifest>` | مینی فیسٹ سے ایجنٹ پروجیکٹ جنریٹ کریں |
-| **ٹیسٹ** | `azd ai agent invoke` | ایجنٹ کو کال کریں اور جواب کی مدت دیکھیں |
-| **ناپ تول** | `azd ai agent eval generate` | ایجنٹ کے لیے تشخیصی ڈیٹاسیٹ بنائیں |
-| **بہتری** | `azd ai agent optimize` | اپنے ڈیٹا کے خلاف ایجنٹ کے ہدایات بہتر بنائیں |
-| **معائنہ** | `azd ai agent endpoint show` | لائیو اینڈپوائنٹ کی ترتیب دیکھیں |
-| **صفائی** | `azd ai agent delete` | میزبان ایجنٹ اور اس کے تمام ورژنز کو حذف کریں |
+| **سکافولڈ** | `azd ai agent init --template <path-to-azure.yaml>` | موجودہ ایجنٹ پروجیکٹ ٹیمپلیٹ اپنائیں |
+| **مقامی طور پر چلائیں** | `azd ai agent run`، پھر دوسرے ٹرمینل میں `azd ai agent invoke --local "Test prompt"` | ایجنٹ انسپیکٹر میں مقامی سرگرمی کا معائنہ کریں؛ ماڈل کالز اب بھی Azure استعمال کرتی ہیں |
+| **تعیناتی** | `azd deploy` | کوڈ موڈ ہوںڈ ایجنٹس کے لیے، ریموٹ Foundry بلڈ کے لیے ذرائع اپ لوڈ کریں |
+| **جانچ** | `azd ai agent invoke` | ایجنٹ کو کال کریں اور جواب کی ٹائمنگ دیکھیں |
+| **نابندی** | `azd ai eval init`, `generate`, `run start` | الگ ایکسٹینشن استعمال کرتے ہوئے جانچیں ترتیب دیں، تعینات کریں، اور چلائیں |
+| **بہتری** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | ایجنٹ کو بہتر بنانے کے لیے ایک مطابقت پذیر جانچ دوبارہ استعمال کریں |
+| **معائنہ** | `azd ai agent endpoint show` | لائیو اینڈپوائنٹ کنفیگریشن دیکھیں |
+| **صفائی کریں** | `azd ai agent delete` | کسی ہوسٹ کیے گئے ایجنٹ اور اس کی تمام ورژنز کو حذف کریں |
 
-> ایکسٹینشنز کی تفصیل [باب 2: AI-First Development](../chapter-02-ai-development/agents.md) اور [AZD AI CLI کمانڈز](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) حوالہ میں دی گئی ہے۔
+> شروع کریں [GA ہوسٹڈ ایجنٹ واک تھرو](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) سے، جو پری ریکوزیٹس، پروویژننگ، اور محفوظ صفائی کو کور کرتا ہے۔ ایکسٹینشنز مزید تفصیل میں [AZD AI CLI کمانڈز](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) حوالہ میں شامل ہیں۔
 
-## 📁 پروجیکٹ کی ساخت
+## 📁 پروجیکٹ کا ڈھانچہ
 
-ایک عمومی azd پروجیکٹ کی ساخت:
+ایک عام azd پروجیکٹ کا ڈھانچہ:
 ```
 my-app/
-├── .azd/                    # azd configuration
-│   └── config.json
-├── .azure/                  # Azure deployment artifacts
+├── .azure/                  # Local environments and selected-environment config
+│   ├── config.json
+│   └── dev/.env
 ├── .devcontainer/          # Development container config
 ├── .github/workflows/      # GitHub Actions
 ├── .vscode/               # VS Code settings
@@ -363,10 +375,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 کنفیگریشن فائلز
+## 🔧 کنفیگریشن فائلیں
 
 ### azure.yaml
-مرکزی پروجیکٹ کنفیگریشن فائل:
+مرکزی پروجیکٹ کی کنفیگریشن فائل:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -389,97 +401,100 @@ hooks:
 ```
 
 ### .azure/config.json
-ماحول مخصوص کنفیگریشن:
+پروجیکٹ-مقامی ڈیفالٹ ماحول کا انتخاب (مثالی؛ azd کے ذریعے منظم):
 ```json
 {
-  "version": 1,
-  "defaultEnvironment": "dev",
-  "environments": {
-    "dev": {
-      "subscriptionId": "your-subscription-id",
-      "location": "eastus"
-    }
-  }
+  "defaultEnvironment": "dev"
 }
 ```
 
 ## 🎪 عام ورک فلو اور عملی مشقیں
 
-> **💡 سیکھنے کی ٹپ:** اپنی AZD مہارتوں کو بتدریج بنانے کے لیے ان مشقوں کو ترتیب سے کریں۔
+> **💡 سیکھنے کا اشارہ:** AZD مہارتیں بتدریج بنانے کے لیے یہ مشقیں ترتیب سے کریں۔
 
-### 🎯 مشق 1: اپنے پہلے پروجیکٹ کی شروعات کریں
+### 🎯 مشق 1: اپنا پہلا پروجیکٹ شروع کریں
 
-**مقصد:** ایک AZD پروجیکٹ بنائیں اور اس کی ساخت دریافت کریں
+**مقصد:** AZD پروجیکٹ بنائیں اور اس کا ڈھانچہ دریافت کریں
 
-**اقدامات:**
+**قدامات:**
 ```bash
-# ایک ثابت شدہ ٹیمپلیٹ استعمال کریں
-azd init --template todo-nodejs-mongo
+# Use a proven template
+mkdir azd-basics-practice
+cd azd-basics-practice
+# Choose "dev" for the environment name when prompted
+azd init --template todo-nodejs-mongo .
 
-# بنائے گئے فائلز کو دریافت کریں
-ls -la  # تمام فائلز دیکھیں بشمول پوشیدہ فائلز
+# Explore the generated files
+ls -la  # View all files including hidden ones
 
-# بنائی گئی اہم فائلز:
-# - azure.yaml (مین کنفیگریشن)
-# - infra/ (انفراسٹرکچر کوڈ)
-# - src/ (ایپلیکیشن کوڈ)
+# Key files created:
+# - azure.yaml (main config)
+# - infra/ (infrastructure code)
+# - src/ (application code)
 ```
 
-**✅ کامیابی:** آپ کے پاس azure.yaml، infra/، اور src/ ڈائریکٹریز ہیں
+**✅ کامیابی:** آپ کے پاس azure.yaml، infra/، اور src/ ڈائریکٹریز موجود ہیں
 
 ---
 
-### 🎯 مشق 2: Azure پر تعینات کریں
+### 🎯 مشق 2: Azure پر تعیناتی کریں
 
-**مقصد:** ابتدا سے آخر تک تعیناتی مکمل کریں
+**مقصد:** مکمل اختتامی تعیناتی
 
 **اقدامات:**
 ```bash
-# 1. توثیق کریں
-az login && azd auth login
+# 1. Authenticate
+azd auth login
 
-# 2. ماحول بنائیں
-azd env new dev
+# 2. Select the dev environment created in Exercise 1
+azd env select dev
 azd env set AZURE_LOCATION eastus
 
-# 3. تبدیلیوں کا پیش نظارہ کریں (تجویز کردہ)
+# 3. Preview changes (RECOMMENDED)
 azd provision --preview
 
-# 4. سب کچھ تعینات کریں
+# 4. Deploy everything
 azd up
 
-# 5. تعیناتی کی تصدیق کریں
-azd show    # اپنے ایپ کا URL دیکھیں
+# 5. Verify deployment
+azd show    # View your app URL
 ```
 
 **متوقع وقت:** 10-15 منٹ  
-**✅ کامیابی:** ایپلیکیشن کا URL براؤزر میں کھلتا ہے
+**✅ کامیابی:** براؤزر میں درخواست کا URL کھل جائے
 
 ---
 
-### 🎯 مشق 3: متعدد ماحول
+### 🎯 مشق 3: متعدد ماحولیات
 
-**مقصد:** dev اور staging پر تعینات کریں
+**مقصد:** dev اور staging پر تعینات کرنا
 
 **اقدامات:**
 ```bash
-# پہلے سے ڈیو ہے، اسٹیجنگ بنائیں
+# Already have dev, create staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# ان کے درمیان سوئچ کریں
+# Switch between them
 azd env list
 azd env select dev
 ```
 
-**✅ کامیابی:** Azure پورٹل میں دو الگ ریسورس گروپس
+**✅ کامیابی:** Azure پورٹل میں دو الگ الگ ریسورس گروپس
+
+**صفائی:** مشق 3 ایک دوسرا بل ایبل تعیناتی بناتی ہے۔ ختم کرنے پر دونوں کو حذف کریں:
+
+```bash
+azd down --environment dev
+azd down --environment staging
+```
 
 ---
 
-### 🛡️ صفائی: `azd down --force --purge`
+### 🛡️ تباہ کن صفائی: `azd down --force --purge`
 
-جب آپ کو مکمل طور پر شروع سے شروع کرنا ہو:
+جب آپ خاص طور پر منتخب شدہ ماحول کے Azure ریسورسز کو حذف کرنا چاہتے ہیں:
 
 ```bash
 azd down --force --purge
@@ -487,207 +502,197 @@ azd down --force --purge
 
 **یہ کیا کرتا ہے:**
 - `--force`: کوئی تصدیقی پرامپٹس نہیں
-- `--purge`: تمام مقامی حالت اور Azure وسائل حذف کر دیتا ہے
+- `--purge`: نیز درمیانی طور پر حذف شدہ معاون وسائل کو مستقل طور پر حذف کرتا ہے (مثلاً کی والٹس)، جہاں پرج پروٹیکشن اجازت دیتا ہے۔ یہ مقامی `.azure/` ڈائریکٹری کو حذف نہیں کرتا۔
 
-**استعمال کریں جب:**
-- تعیناتی درمیان میں ناکام ہو جائے
-- پروجیکٹس تبدیل کرنا ہو
-- تازہ آغاز کی ضرورت ہو
+**استعمال کریں جب:** ایک قابل ضیاع ماحول کے ساتھ کام ختم ہو چکا ہو۔ تباہ کن صفائی کو توثیق، کوٹا، یا کنفیگریشن غلطی کے لئے پہلا ردعمل نہ سمجھیں۔
 
 ---
 
-## 🎪 اصل ورک فلو حوالہ
+## 🎪 اصل ورک فلو کا حوالہ
 
 ### نیا پروجیکٹ شروع کرنا
 ```bash
-# طریقہ 1: موجودہ ٹیمپلیٹ استعمال کریں
-azd init --template todo-nodejs-mongo
+# Method 1: Use existing template
+azd init --template todo-nodejs-mongo .
 
-# طریقہ 2: صفر سے شروع کریں
+# Method 2: Start from scratch
 azd init
 
-# طریقہ 3: موجودہ ڈائریکٹری استعمال کریں
+# Method 3: Use current directory
 azd init .
 ```
 
 ### ترقیاتی سائیکل
 ```bash
-# ترقیاتی ماحول قائم کریں
+# Set up development environment
 azd auth login
 azd env new dev
 azd env select dev
 
-# سب کچھ تعینات کریں
+# Deploy everything
 azd up
 
-# تبدیلیاں کریں اور دوبارہ تعینات کریں
+# Make changes and redeploy
 azd deploy
 
-# کام مکمل ہونے پر صفائی کریں
-azd down --force --purge # Azure Developer CLI میں کمانڈ آپ کے ماحول کے لیے **سخت ری سیٹ** ہے — خاص طور پر اس وقت مفید جب آپ ناکام تعیناتیوں کو حل کر رہے ہوں، بے کار وسائل کی صفائی کر رہے ہوں، یا تازہ تعیناتی کے لیے تیاری کر رہے ہوں۔
+# Clean up when done
+azd down --force --purge # Deletes this environment's discovered Azure resources; review before forcing deletion.
 ```
 
 ## `azd down --force --purge` کو سمجھنا
-`azd down --force --purge` کمانڈ آپ کے azd ماحول اور تمام منسلک وسائل کو مکمل طور پر ختم کرنے کا طاقتور طریقہ ہے۔ یہاں ہر فلیگ کا خلاصہ ہے:
+`azd down --force --purge` کمانڈ azd ماحول اور تمام منسلک وسائل کو مکمل طور پر ختم کرنے کا ایک طاقتور طریقہ ہے۔ یہاں ہر فلیگ کا خلاصہ ہے:
 ```
 --force
 ```
 - تصدیقی پرامپٹس کو چھوڑ دیتا ہے۔
-- خود کاری یا اسکرپٹنگ کے لیے مفید جہاں دستی ان پٹ ممکن نہیں۔
-- یقینی بناتا ہے کہ بغیر کسی رکاوٹ کے ماحول ختم کیا جائے، چاہے CLI تضادات کا پتہ لگائے۔
+- آٹومیشن یا اسکرپٹنگ کے لئے مفید جہاں دستی انپٹ ممکن نہ ہو۔
+- اجازت نامے، پرج پروٹیکشن، یا حذف کرنے کی ناکامیوں کو نظرانداز نہیں کرتا۔
 
 ```
 --purge
 ```
-تمام متعلقہ میٹا ڈیٹا کو حذف کر دیتا ہے، بشمول:
-ماحول کی حالت
-مقامی `.azure` فولڈر
-کیچ شدہ تعیناتی کی معلومات
-azd کو پچھلی تعیناتیوں کو "یاد" کرنے سے روکتا ہے، جو وسائل کے گروپس میں عدم تطابق یا پرانے رجسٹری حوالوں جیسے مسائل کا باعث بن سکتا ہے۔
+مستقل طور پر معاون سافٹ-ڈیلیٹ کی گئی Azure وسائل کو بغیر اضافی تصدیق کے حذف کر دیتا ہے۔ پرج تحفظ اور اجازتیں اب بھی لاگو ہوتی ہیں۔ یہ **مقامی ماحولیات** یا `.azure/` فولڈر کو حذف نہیں کرتا۔
+
 
 ### دونوں کا استعمال کیوں کریں؟
-جب آپ `azd up` میں موجودہ حالت یا جزوی تعیناتیوں کی وجہ سے مشکلات کا سامنا کرتے ہیں، تو یہ امتزاج ایک **صاف صفحہ** یقینی بناتا ہے۔
+دونوں کا استعمال صرف اس وقت کریں جب آپ منتخب ماحول کے Azure وسائل کو حذف کرنے اور قابل بازیافت وسائل کو حذف کرنے کا ارادہ رکھتے ہوں۔ یہ تباہ کن صفائی ہے، عمومی مرمت یا مقامی-حالت ری سیٹ نہیں۔
 
-یہ خاص طور پر Azure پورٹل میں دستی وسائل کے حذف کرنے کے بعد یا ٹیمپلیٹس، ماحول، یا ریسورس گروپ کے نام رکھنے کی روایات تبدیل کرتے وقت مددگار ہے۔
+یہ خاص طور پر Azure پورٹل میں دستی وسائل کی حذف کاری کے بعد یا ٹیمپلیٹس، ماحول، یا وسائلی گروپ کے نام دینے کے معیار کو تبدیل کرتے وقت مددگار ہوتا ہے۔
 
-### متعدد ماحول کا انتظام
+
+### متعدد ماحولیات کا انتظام
 ```bash
-# اسٹیجنگ ماحول بنائیں
+# Create staging environment
 azd env new staging
 azd env select staging
 azd up
 
-# واپس ڈیولپمنٹ پر جائیں
+# Switch back to dev
 azd env select dev
 
-# ماحول کا موازنہ کریں
+# Compare environments
 azd env list
 ```
 
 ## 🔐 توثیق اور اسناد
 
-توثیق کو سمجھنا کامیاب azd تعیناتیوں کے لیے ضروری ہے۔ Azure کئی توثیقی طریقے استعمال کرتا ہے، اور azd وہی اسناد چین استعمال کرتا ہے جو دوسرے Azure ٹولز استعمال کرتے ہیں۔
+تعیناتی کی توثیق (`azd auth login`) کو ایپلیکیشن SDK کی توثیق (`DefaultAzureCredential`) سے الگ کریں۔ یہ دونوں مختلف ہیں۔ azd ڈیفالٹ کے طور پر Azure CLI کی اسناد استعمال نہیں کرتا۔
 
 ### Azure CLI کی توثیق (`az login`)
 
-azd استعمال کرنے سے پہلے، آپ کو Azure کے ساتھ توثیق کرنی ہوتی ہے۔ سب سے عام طریقہ Azure CLI استعمال کرنا ہے:
+azd کے لیے `azd auth login` چلائیں۔ مندرجہ ذیل Azure CLI کمانڈز اختیاری ہیں اور `az` کمانڈز کی علیحدہ توثیق کرتی ہیں:
 
 ```bash
-# متعامل لاگ ان (براؤزر کھولتا ہے)
+# Interactive login (opens browser)
 az login
 
-# مخصوص کرایہ دار کے ساتھ لاگ ان کریں
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# سروس پرنسپل کے ساتھ لاگ ان کریں
-az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+# Login with service principal
+az login --service-principal -u "<app-id>" -p "<password>" --tenant "<tenant-id>"
 
-# موجودہ لاگ ان کی حالت چیک کریں
+# Check current login status
 az account show
 
-# دستیاب سبسکرپشنز کی فہرست
+# List available subscriptions
 az account list --output table
 
-# ڈیفالٹ سبسکرپشن سیٹ کریں
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### توثیقی فلو
-1. **انٹرایکٹو لاگ ان**: آپ کا ڈیفالٹ براؤزر کھولتا ہے توثیق کے لیے
-2. **ڈوائس کوڈ فلو**: ایسے ماحول کے لیے جہاں براؤزر کی رسائی نہیں
+### توثیقی عمل
+1. **انٹرایکٹو لاگ ان**: توثیق کے لیے آپ کا ڈیفالٹ براؤزر کھولتا ہے
+2. **ڈیوائس کوڈ فلو**: غیر براؤزر ماحول کے لیے
 3. **سروس پرنسپل**: خودکاری اور CI/CD منظرناموں کے لیے
-4. **مینجڈ شناخت**: Azure میزبان ایپلیکیشنز کے لیے
+4. **مینجڈ آئیڈینٹیٹی**: Azure پر میزبانی شدہ ایپلیکیشنز کے لیے
 
 ### DefaultAzureCredential چین
 
-`DefaultAzureCredential` ایک اسناد کی قسم ہے جو خود بخود متعدد اسناد ذرائع کو ایک مخصوص ترتیب میں آزما کر آسان توثیق کا تجربہ فراہم کرتی ہے:
+`DefaultAzureCredential` ایک اسناد کی قسم ہے جو مخصوص ترتیب میں خودکار طور پر متعدد اسناد ذرائع آزما کر سادہ تصدیقی تجربہ فراہم کرتی ہے:
 
-#### اسناد چین کی ترتیب
+#### ایپلیکیشن SDK اسناد کی چین
+
+درست چین Azure Identity SDK زبان، ورژن، نصب کردہ پلگ انز، اور اختیارات پر منحصر ہے۔ یہ خاکہ تصوری ہے، کوئی مقررہ azd تصدیقی تسلسل نہیں؛ حالیہ SDKs میں Azure Developer CLI اسناد بھی شامل ہو سکتی ہیں۔
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[محرکاتی ماحولیاتی متغیر]
-    B --> C[کام کے بوجھ کی شناخت]
-    C --> D[منتظم شناخت]
-    D --> E[ویژول اسٹوڈیو]
-    E --> F[ویژول اسٹوڈیو کوڈ]
-    F --> G[ایزور CLI]
-    G --> H[ایزور پاور شیل]
-    H --> I[تفاعلی براؤزر]
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
 ```
 
 #### 1. ماحولیاتی متغیرات
 ```bash
-# سروس پرنسپل کے لئے ماحول کے متغیرات مقرر کریں
+# Set environment variables for service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. ورک لوڈ شناخت (Kubernetes/GitHub Actions)
-خود بخود استعمال ہوتی ہے:
-- Azure Kubernetes Service (AKS) کے ساتھ ورک لوڈ شناخت
-- GitHub Actions میں OIDC فیڈریشن کے ساتھ
-- دیگر فیڈریٹیڈ شناخت کے منظرنامے
+#### 2. ورک لوڈ آئیڈینٹیٹی (Kubernetes/GitHub Actions)
+خودکار طور پر استعمال کی جاتی ہے:
+- Azure Kubernetes سروس (AKS) کے ساتھ ورک لوڈ آئیڈینٹیٹی
+- GitHub Actions کے ساتھ OIDC فیڈریشن
+- دیگر وفاقی شناخت منظرنامے
 
-#### 3. مینجد شناخت
-Azure وسائل کے لیے جیسے:
+#### 3. مینجد آئیڈینٹیٹی
+Azure وسائل جیسے:
 - ورچوئل مشینیں
 - ایپ سروس
 - Azure فنکشنز
 - کنٹینر انسٹینسز
 
 ```bash
-# چیک کریں کہ آیا Azure کے وسائل پر مینجڈ آئیڈینٹیٹی کے ساتھ چل رہا ہے
-az account show --query "user.type" --output tsv
-# واپس کرتا ہے: "servicePrincipal" اگر مینجڈ آئیڈینٹی استعمال ہو رہی ہو
+# Inspect a deployed Container App's configured identity (requires az login)
+az containerapp show --name "<app-name>" --resource-group "<rg-name>" --query identity
 ```
 
 #### 4. ڈویلپر ٹولز انٹیگریشن
-- **Visual Studio**: خود بخود سائن ان کھاتے کا استعمال کرتا ہے
-- **VS Code**: Azure اکاؤنٹ ایکسٹینشن کی اسناد استعمال کرتا ہے
+- **ویژول اسٹوڈیو**: خود بخود سائن ان اکاؤنٹ استعمال کرتا ہے
+- **VS کوڈ**: سپورٹ SDK اور اس کے معاون بروکر/پلگ ان سیٹ اپ پر منحصر ہے
 - **Azure CLI**: `az login` اسناد استعمال کرتا ہے (مقامی ترقی کے لیے سب سے عام)
 
-### AZD توثیق کی ترتیب
+### AZD تصدیقی سیٹ اپ
 
 ```bash
-# طریقہ 1: Azure CLI استعمال کریں (ترقی کے لیے تجویز کردہ)
-az login
-azd auth login  # موجودہ Azure CLI اسناد استعمال کرتا ہے
+# Method 1: Direct azd authentication (recommended)
+azd auth login
 
-# طریقہ 2: براہ راست azd تصدیق
-azd auth login --use-device-code  # ہیڈ لیس ماحول کے لیے
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
 
-# طریقہ 3: تصدیق کی حیثیت چیک کریں
+# Method 3: Check authentication status
 azd auth login --check-status
 
-# طریقہ 4: لاگ آؤٹ کریں اور دوبارہ تصدیق کریں
+# Method 4: Logout and re-authenticate
 azd auth logout
 azd auth login
 ```
 
-### توثیق کی بہترین عادات
+### تصدیق کے بہترین طریقے
 
 #### مقامی ترقی کے لیے
 ```bash
-# 1. Azure CLI کے ساتھ لاگ ان کریں
-az login
-
-# 2. درست سبسکریپشن کی تصدیق کریں
-az account show
-az account set --subscription "Your Subscription Name"
-
-# 3. موجودہ اسناد کے ساتھ azd استعمال کریں
+# 1. Log in to azd
 azd auth login
+
+# 2. Select the subscription for this initialized environment
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+
+# 3. Check azd sign-in details (read the status message)
+azd auth login --check-status
 ```
 
 #### CI/CD پائپ لائنز کے لیے
 ```yaml
-# GitHub Actions example
-- name: Azure Login
-  uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+# Partial GitHub Actions steps: assumes checkout, azd installation,
+# required AZURE_* environment values, and pipeline secret configuration.
 - name: Deploy with azd
   run: |
     azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
@@ -696,17 +701,17 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### پروڈکشن ماحول کے لیے
-- Azure وسائل پر چلانے کے لیے **Managed Identity** استعمال کریں
-- خودکار کاری کے منظرناموں کے لیے **Service Principal** استعمال کریں
-- کوڈ یا کنفیگریشن فائلوں میں اسناد محفوظ کرنے سے گریز کریں
+#### پیداوار کے ماحول کے لیے
+- Azure وسائل پر چلتے ہوئے **مینجد آئیڈینٹیٹی** استعمال کریں
+- خودکاری منظرناموں کے لیے **سروس پرنسپل** استعمال کریں
+- کوڈ یا کنفیگریشن فائلوں میں اسناد ذخیرہ کرنے سے گریز کریں
 - حساس کنفیگریشن کے لیے **Azure Key Vault** استعمال کریں
 
-### عام توثیق کے مسائل اور حل
+### عام تصدیقی مسائل اور حل
 
-#### مسئلہ: "کوئی سبسکرپشن نہیں ملی"
+#### مسئلہ: "کوئی سبسکرپشن نہیں ملا"
 ```bash
-# حل: ڈیفالٹ سبسکرپشن سیٹ کریں
+# Solution: Set default subscription
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
@@ -714,323 +719,330 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 #### مسئلہ: "ناکافی اجازتیں"
 ```bash
-# حل: مطلوبہ کردار چیک کریں اور تفویض کریں
+# Solution: Check and assign required roles
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# عام مطلوبہ کردار:
-# - تعاون کنندہ (وسائل کے انتظام کے لیے)
-# - صارف رسائی ایڈمنسٹریٹر (کردار تفویض کے لیے)
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
 ```
 
-#### مسئلہ: "ٹوکن ختم ہو گیا"
+#### مسئلہ: "ٹوکن کی میعاد ختم ہوگئی"
 ```bash
-# حل: دوبارہ تصدیق کریں
+# Solution: Re-authenticate
 az logout
 az login
 azd auth logout
 azd auth login
 ```
 
-### مختلف منظرناموں میں توثیق
+### مختلف منظرناموں میں تصدیق
 
 #### مقامی ترقی
 ```bash
-# ذاتی ترقی کا کھاتہ
+# Personal development account
 az login
 azd auth login
 ```
 
-#### ٹیم کی ترقی
+#### ٹیم ترقی
 ```bash
-# تنظیم کے لیے مخصوص کرایہ دار استعمال کریں
+# Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
-azd auth login
+azd auth login --tenant-id "<tenant-id>"
 ```
 
-#### متعدد کرایہ دار منظرنامے
+#### ملٹی ٹیننٹ منظرنامے
 ```bash
-# کرایہ داروں کے درمیان سوئچ کریں
+# Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
-# کرایہ دار 1 پر تعینات کریں
+azd auth login --tenant-id "<tenant-1-id>"
+# Select an environment configured with tenant 1's subscription
+azd env select tenant1-dev
+# Deploy to tenant 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# کرایہ دار 2 پر تعینات کریں
+azd auth login --tenant-id "<tenant-2-id>"
+azd env select tenant2-dev
+# Deploy to tenant 2
 azd up
 ```
 
-### سیکیورٹی کے تحفظات
+### سیکیورٹی کے خیالات
 
-1. **اسناد ذخیرہ کرنا**: اسناد کو سورس کوڈ میں کبھی نہ رکھیں
-2. **حد بندی**: سروس پرنسپل کے لیے کم از کم اجازتوں کا اصول استعمال کریں
-3. **ٹوکن کی تبدیلی**: سروس پرنسپل کے سیکرٹس کو باقاعدگی سے تبدیل کریں
-4. **آڈٹ ٹریل**: توثیق اور تعیناتی کی سرگرمیوں کی نگرانی کریں
-5. **نیٹ ورک سیکیورٹی**: ممکن ہو تو پرائیویٹ اینڈ پوائنٹس استعمال کریں
+1. **اسناد کا ذخیرہ**: اسناد کو کبھی ماخذ کوڈ میں نہ رکھیں
+2. **حد بندی دائرہ کار**: سروس پرنسپلز کے لیے کم سے کم مراعات کا اصول استعمال کریں
+3. **ٹوکن کی تبدیلی**: سروس پرنسپل کے رازوں کو باقاعدگی سے تبدیل کریں
+4. **آڈٹ ٹریل**: تصدیق اور تعیناتی سرگرمیوں کی نگرانی کریں
+5. **نیٹ ورک سیکیورٹی**: جہاں ممکن ہو نجی اینڈ پوائنٹس استعمال کریں
 
-### توثیق کے مسائل کا حل
+### تصدیق کی خرابیوں کا ازالہ
 
 ```bash
-# توثیق کے مسائل کو ڈیبگ کریں
+# Debug authentication issues
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# عام تشخیصی کمانڈز
-whoami                          # موجودہ صارف کا سیاق و سباق
-az ad signed-in-user show      # مائیکروسافٹ اینٹرا آئی ڈی صارف کی تفصیلات
-az group list                  # وسائل کی رسائی کا امتحان کریں
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Microsoft Entra ID user details
+az group list                  # Test resource access
 ```
 
-## `azd down --force --purge` کو سمجھنا
+## کمانڈ دریافت
 
 ### دریافت
 ```bash
-azd template list              # ٹیمپلیٹس براؤز کریں
-azd template show <template>   # ٹیمپلیٹ کی تفصیلات
-azd init --help               # ابتدائی اختیارات
+azd template list              # Browse templates
+azd template list --help       # Template discovery options
+azd init --help               # Initialization options
 ```
 
-### پروجیکٹ مینجمنٹ
+### پراجیکٹ مینجمنٹ
 ```bash
-azd show                     # پروجیکٹ کا جائزہ
-azd env list                # دستیاب ماحولیات اور منتخب شدہ ڈیفالٹ
-azd config show            # ترتیب کی ترتیبات
+azd show                     # Project overview
+azd env list                # Available environments and selected default
+azd config show            # Configuration settings
 ```
 
-### نگرانی
+### مانیٹرنگ
 ```bash
-azd monitor                  # آزور پورٹل کی نگرانی کھولیں
-azd monitor --logs           # درخواست کے لاگز دیکھیں
-azd monitor --live           # لائیو میٹرکس دیکھیں
-azd pipeline config          # سی آئی/سی ڈی سیٹ اپ کریں
+azd monitor                  # Open Azure portal monitoring
+azd monitor --logs           # View application logs
+azd monitor --live           # View live metrics
+azd pipeline config          # Set up CI/CD
 ```
 
 ## بہترین طریقے
 
 ### 1. معنی خیز نام استعمال کریں
 ```bash
-# اچھا
+# Good
 azd env new production-east
-azd init --template web-app-secure
+azd init --template todo-nodejs-mongo .
 
-# اجتناب کریں
+# Avoid
 azd env new env1
-azd init --template template1
+azd init --template template1 .
 ```
 
 ### 2. ٹیمپلیٹس سے فائدہ اٹھائیں
 - موجودہ ٹیمپلیٹس سے شروع کریں
-- اپنی ضروریات کے مطابق حسبِ ضرورت بنائیں
-- اپنی تنظیم کے لیے دوبارہ استعمال ہونے والے ٹیمپلیٹس بنائیں
+- اپنی ضروریات کے مطابق تخصیص کریں
+- اپنی تنظیم کے لیے قابلِ استعمال ٹیمپلیٹس بنائیں
 
 ### 3. ماحول کی علیحدگی
-- dev/staging/prod کے لیے الگ ماحول استعمال کریں
-- مقامی مشین سے براہ راست پروڈکشن میں تعیناتی نہ کریں
-- پروڈکشن کی تعیناتی کے لیے CI/CD پائپ لائنز استعمال کریں
+- ڈیولپمنٹ/اسٹیجنگ/پروڈ کے لیے الگ الگ ماحول استعمال کریں
+- مقامی مشین سے براہ راست پیداوار پر تعیناتی کبھی نہ کریں
+- پیداوار کی تعیناتی کے لیے CI/CD پائپ لائن استعمال کریں
 
-### 4. کنفیگریشن کا انتظام
-- حساس ڈیٹا کے لیے ماحولیاتی متغیرات استعمال کریں
+### 4. کنفیگریشن مینجمنٹ
+- رازوں کے لیے مینجد آئیڈینٹیٹی اور Key Vault استعمال کریں؛ عام `azd env set` اقدار مقامی سادہ متن ہیں
 - کنفیگریشن کو ورژن کنٹرول میں رکھیں
-- ماحول specific سیٹنگز کی دستاویزات بنائیں
+- ماحول پر مخصوص ترتیبات کی دستاویز بنائیں
 
-## سیکھنے کی پیش رفت
+## سیکھنے کی ترقی
 
-### آغاز کنندہ (ہفتہ 1-2)
-1. azd انسٹال کریں اور توثیق کریں
+### ابتدائی (ہفتہ 1-2)
+1. azd انسٹال کریں اور تصدیق کریں
 2. ایک سادہ ٹیمپلیٹ تعینات کریں
-3. پروجیکٹ کی ساخت کو سمجھیں
+3. پراجیکٹ کا ڈھانچہ سمجھیں
 4. بنیادی کمانڈز سیکھیں (up, down, deploy)
 
-### درمیانی (ہفتہ 3-4)
-1. ٹیمپلیٹس کو حسب ضرورت بنائیں
+### درمیانہ (ہفتہ 3-4)
+1. ٹیمپلیٹس تخصیص کریں
 2. متعدد ماحول کا انتظام کریں
-3. انفراسٹرکچر کوڈ کو سمجھیں
+3. بنیادی ڈھانچے کا کوڈ سمجھیں
 4. CI/CD پائپ لائنز سیٹ اپ کریں
 
-### اعلی (ہفتہ 5 سے آگے)
+### اعلیٰ (ہفتہ 5+)
 1. حسب ضرورت ٹیمپلیٹس بنائیں
-2. ہوشیار انفراسٹرکچر پیٹرنز
+2. جدید بنیادی ڈھانچے کے نمونے
 3. ملٹی ریجن تعیناتیاں
 4. انٹرپرائز گریڈ کنفیگریشنز
 
 ## اگلے اقدامات
 
 **📖 باب 1 کی تعلیم جاری رکھیں:**
-- [تنصیب اور سیٹ اپ](installation.md) - azd انسٹال اور کنفیگر کریں
-- [آپ کا پہلا پروجیکٹ](first-project.md) - ہینڈز آن ٹیوٹوریل مکمل کریں
-- [کنفیگریشن گائیڈ](configuration.md) - ایڈوانس کنفیگریشن کے اختیارات
+- [انسٹالیشن اور سیٹ اپ](installation.md) - azd انسٹال کریں اور ترتیب دیں
+- [آپ کا پہلا پروجیکٹ](first-project.md) - مکمل ہینڈز آن سبق
+- [کنفیگریشن گائیڈ](../chapter-03-configuration/configuration.md) - جدید کنفیگریشن اختیارات
 
 **🎯 اگلے باب کے لیے تیار؟**
-- [باب 2: AI-فرسٹ ڈیولپمنٹ](../chapter-02-ai-development/microsoft-foundry-integration.md) - AI اپلیکیشنز بنانا شروع کریں
+- [باب 2: AI-فرسٹ ڈیولپمنٹ](../chapter-02-ai-development/microsoft-foundry-integration.md) - AI ایپلیکیشنز بنانا شروع کریں
 
 ## اضافی وسائل
 
 - [Azure Developer CLI کا جائزہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [ٹیمپلیٹ گیلری](https://azure.github.io/awesome-azd/)
-- [کمیونٹی سیمپلز](https://github.com/Azure-Samples)
+- [کمیونٹی نمونے](https://github.com/Azure-Samples)
 
 ---
 
-## 🙋 اکثر پوچھے جانے والے سوالات
+## 🙋 بار بار پوچھے گئے سوالات
 
 ### عمومی سوالات
 
 **س: AZD اور Azure CLI میں کیا فرق ہے؟**
 
-ج: Azure CLI (`az`) فرد Azure وسائل کے انتظام کے لیے ہے۔ AZD (`azd`) پورے ایپلی کیشنز کے انتظام کے لیے ہے:
+ج: Azure CLI (`az`) انفرادی Azure وسائل کا انتظام کرنے کے لیے ہے۔ AZD (`azd`) مکمل ایپلیکیشنز کا انتظام کرنے کے لیے ہے:
 
 ```bash
-# ایزور سی ایل آئی - کم سطح کا وسائل کا انتظام
+# Azure CLI - Low-level resource management
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...مزید کئی کمانڈز کی ضرورت ہے
+# ...many more commands needed
 
-# اے زی ڈی - درخواست کی سطح کا انتظام
-azd up  # تمام وسائل کے ساتھ مکمل ایپ کو تعینات کرتا ہے
+# AZD - Application-level management
+azd up  # Deploys entire app with all resources
 ```
 
-**اس طرح سوچیں:**
-- `az` = الگ الگ Lego اینٹوں پر کام کرنا
-- `azd` = مکمل Lego سیٹ کے ساتھ کام کرنا
+**اسے اس طرح سمجھیں:**
+- `az` = انفرادی LEGO بلاکس پر عمل کرنا
+- `azd` = مکمل LEGO سیٹ کے ساتھ کام کرنا
 
 ---
 
-**س: کیا AZD استعمال کرنے کے لیے مجھے Bicep یا Terraform جاننا ضروری ہے؟**
+**س: کیا مجھے AZD استعمال کرنے کے لیے Bicep یا Terraform جاننا ضروری ہے؟**
 
-ج: نہیں! ٹیمپلیٹس کے ساتھ شروع کریں:
+ج: نہیں! ٹیمپلیٹس سے شروع کریں:
 ```bash
-# موجودہ سانچہ استعمال کریں - کسی IaC علم کی ضرورت نہیں
-azd init --template todo-nodejs-mongo
+# Use existing template - no IaC knowledge needed
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-آپ Bicep بعد میں سیکھ سکتے ہیں تاکہ انفراسٹرکچر کو حسب ضرورت بنائیں۔ ٹیمپلیٹس کام کرنے والے نمونے فراہم کرتے ہیں جن سے سیکھا جا سکتا ہے۔
+آپ بعد میں Bicep سیکھ کر بنیادی ڈھانچے کو تخصیص کر سکتے ہیں۔ ٹیمپلیٹس عملی مثالیں فراہم کرتے ہیں جن سے سیکھا جا سکتا ہے۔
 
 ---
 
-**س: AZD ٹیمپلیٹس چلانے کی کیا لاگت ہے؟**
+**س: AZD ٹیمپلیٹس چلانے کی لاگت کتنی ہے؟**
 
-ج: لاگت ٹیمپلیٹ کے حساب سے مختلف ہوتی ہے۔ زیادہ تر ترقیاتی ٹیمپلیٹس کی قیمت $50-150/ماہ ہے:
+ج: لاگتیں ریجن، SKU، اپ ٹائم، ڈیٹا بیس موڈ، اور ماڈل کے استعمال کے مطابق مختلف ہوتی ہیں۔ ایک ترقیاتی ماحول اِن وقتی حالت میں بھی کافی ماہانہ چارجز لا سکتا ہے؛ عمومی $50-150 کی حد فرض نہ کریں:
 
 ```bash
-# تعیناتی سے پہلے اخراجات کا پیش نظارہ کریں
+# Preview resource changes (not prices)
 azd provision --preview
 
-# استعمال نہ کرنے پر ہمیشہ صفائی کریں
-azd down --force --purge  # تمام وسائل کو ختم کرتا ہے
+# Always cleanup when not using
+azd down --force --purge  # Removes all resources
 ```
 
-**پروف تکنیک:** جہاں دستیاب ہو مفت طبقات استعمال کریں:
-- ایپ سروس: F1 (مفت) طبقه
-- Microsoft Foundry ماڈلز: Azure OpenAI 50,000 ٹوکنز/ماہ مفت
-- Cosmos DB: 1000 RU/s مفت طبقه
+**پیشہ ورانہ مشورہ:** جہاں ممکن ہو مفت سطحیں استعمال کریں:
+- ایپ سروس: F1 (مفت) سطح
+- Azure OpenAI: عام ماہانہ مفت ٹوکن الاوونس کی ضمانت نہیں؛ موجودہ ماڈل اور پیشکش کی قیمت چیک کریں
+- Cosmos DB: اہل پروویژنڈ تھرو پٹ اکاؤنٹس مفت سطح میں حصہ لے سکتے ہیں؛ سرورلیس ٹیمپلیٹس خود بخود اہل نہیں ہوتے
 
 ---
 
 **س: کیا میں موجودہ Azure وسائل کے ساتھ AZD استعمال کر سکتا ہوں؟**
 
-ج: ہاں، لیکن تازہ آغاز کرنا آسان ہے۔ AZD اس وقت بہترین کام کرتا ہے جب وہ پورے لائف سائیکل کا انتظام کرتا ہے۔ موجودہ وسائل کے لیے:
+ج: ہاں، لیکن تازہ آغاز کرنا آسان ہے۔ AZD تب بہترین کام کرتا ہے جب یہ مکمل زندگی سائیکل کا انتظام کرے۔ موجودہ وسائل کے لیے:
 
 ```bash
-# اختیار 1: موجودہ وسائل درآمد کریں (ایڈوانسڈ)
+# Option 1: Import existing resources (advanced)
 azd init
-# اس کے بعد infra/ میں ترمیم کریں تاکہ موجودہ وسائل کی طرف اشارہ ہو
+# Then modify infra/ to reference existing resources
 
-# اختیار 2: نیا آغاز کریں (تجویز کردہ)
-azd init --template matching-your-stack
-azd up  # نیا ماحول بناتا ہے
+# Option 2: Start fresh (recommended)
+azd init --template "<verified-template-name>" .
+azd up  # Creates new environment
 ```
 
 ---
 
-**س: میں اپنے پروجیکٹ کو ٹیم ممبران کے ساتھ کیسے شیئر کر سکتا ہوں؟**
+**س: میں اپنے پروجیکٹ کو ٹیم کے اراکین کے ساتھ کیسے شیئر کروں؟**
 
-ج: AZD پروجیکٹ کو Git میں کمٹ کریں (لیکن .azure فولڈر کو نہیں):
+ج: AZD پروجیکٹ کو Git میں کمیٹ کریں (لیکن .azure فولڈر نہیں):
 
 ```bash
-# پہلے سے ہی .gitignore میں ڈیفالٹ کے طور پر
-.azure/        # راز اور ماحولیاتی ڈیٹا پر مشتمل ہے
-*.env          # ماحولیاتی متغیرات
+# Already in .gitignore by default
+.azure/        # Contains secrets and environment data
+*.env          # Environment variables
 
-# ٹیم کے اراکین پھر:
-git clone <your-repo>
+# Team members then:
+git clone "<your-repo>"
+# Change into the cloned repository before running the remaining commands.
 azd auth login
-azd env new <their-name>-dev
+azd env new "<their-name>-dev"
 azd up
 ```
 
-ہر کوئی ایک جیسے انفراسٹرکچر کو ایک ہی ٹیمپلیٹس سے حاصل کرتا ہے۔
+سب کو ایک جیسے بنیادی ڈھانچے کی ٹیمپلیٹس ملتے ہیں۔
 
 ---
 
-### مسئلہ حل کرنے والے سوالات
+### مسئلے حل کرنے کے سوالات
 
 **س: "azd up" آدھے راستے میں ناکام ہو گیا۔ میں کیا کروں؟**
 
-ج: غلطی چیک کریں، اسے درست کریں، پھر دوبارہ کوشش کریں:
+ج: ایرر چیک کریں، اسے ٹھیک کریں، پھر دوبارہ کوشش کریں:
 
 ```bash
-# تفصیلی لاگز دیکھیں
-azd show
+# Capture detailed diagnostics (redact sensitive values before sharing)
+azd up --debug
 
-# عام حل:
+# Common fixes:
 
-# 1۔ اگر کوٹہ تجاوز ہو گیا:
-azd env set AZURE_LOCATION "westus2"  # مختلف علاقے کی کوشش کریں
+# 1. If quota exceeded:
+azd env set AZURE_LOCATION "westus2"  # Try different region
 
-# 2۔ اگر وسائل کے نام میں تصادم ہو:
-azd down --force --purge  # صاف ستھرا آغاز کریں
-azd up  # دوبارہ کوشش کریں
+# 2. If resource name conflict:
+azd down --force --purge  # Clean slate
+azd up  # Retry
 
-# 3۔ اگر تصدیق کی مدت ختم ہو گئی:
+# 3. If auth expired:
 az login
 azd auth login
 azd up
 ```
 
-**سب سے عام مسئلہ:** غلط Azure سبسکرپشن منتخب ہونا
+**سب سے عام مسئلہ:** غلط Azure سبسکرپشن منتخب کرنا
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
+azd env set AZURE_SUBSCRIPTION_ID "<correct-subscription-id>"
 ```
 
 ---
 
-**س: کیا میں بغیر دوبارہ تعیناتی کے صرف کوڈ کی تبدیلیاں تعینات کر سکتا ہوں؟**
+**س: میں بس کوڈ میں تبدیلیاں تعینات کیسے کروں بغیر دوبارہ پروویژن کیے؟**
 
-ج: `azd up` کے بجائے `azd deploy` استعمال کریں:
+ج: `azd deploy` استعمال کریں بجائے `azd up` کے:
 
 ```bash
-azd up          # پہلی بار: تیاری + تعیناتی (دیر سے)
+azd up          # First time: provision + deploy (slow)
 
-# کوڈ میں تبدیلیاں کریں...
+# Make code changes...
 
-azd deploy      # بعد کے اوقات: صرف تعیناتی (تیز)
+azd deploy      # Subsequent times: deploy only (fast)
 ```
 
 رفتار کا موازنہ:
-- `azd up`: 10-15 منٹ (انفراسٹرکچر مہیا کرتا ہے)
+- `azd up`: 10-15 منٹ (بنیادی ڈھانچہ تیار کرتا ہے)
 - `azd deploy`: 2-5 منٹ (صرف کوڈ)
 
 ---
 
-**س: کیا میں انفراسٹرکچر ٹیمپلیٹس کو حسب ضرورت بنا سکتا ہوں؟**
+**س: کیا میں بنیادی ڈھانچے کے ٹیمپلیٹس تخصیص کر سکتا ہوں؟**
 
-ج: جی ہاں! `infra/` میں Bicep فائلوں کو ایڈٹ کریں:
+ج: ہاں! `infra/` میں Bicep فائلوں میں ترمیم کریں:
 
 ```bash
-# آزڈ انِٹ کے بعد
+# After azd init
 cd infra/
-code main.bicep  # وی ایس کوڈ میں ترمیم کریں
+code main.bicep  # Edit in VS Code
 
-# تبدیلیوں کا پیش نظارہ کریں
+# Preview changes
 azd provision --preview
 
-# تبدیلیاں لاگو کریں
+# Apply changes
 azd provision
 ```
 
-**مشورہ:** چھوٹے سے شروع کریں — پہلے SKUs تبدیل کریں:
+**مشورہ:** چھوٹے سے شروع کریں - پہلے SKU تبدیل کریں:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1040,47 +1052,46 @@ sku: {
 
 ---
 
-**س: میں AZD کی بنائی ہوئی تمام چیزیں کیسے حذف کروں؟**
+**س: میں AZD کے بنائے گئے تمام کچھ کیسے ڈیلیٹ کروں؟**
 
-ج: ایک کمانڈ سے تمام وسائل ہٹا دیں:
+ج: ایک کمانڈ تمام وسائل ہٹا دیتی ہے:
 
 ```bash
 azd down --force --purge
 
-# یہ حذف کرتا ہے:
-# - تمام Azure وسائل
-# - وسیلہ گروپ
-# - مقامی ماحول کی حالت
-# - کیش شدہ تعیناتی کا ڈیٹا
+# This deletes:
+# - Azure resources/resource groups discovered for the selected environment
+# - Supported soft-deleted resources, if purge protection allows
+# Local .azure files remain; shared/external resources may remain too.
 ```
 
-**ہمیشہ یہ کربھی جب:**
-- ٹیمپلیٹ کا ٹیسٹ ختم ہو گیا ہو
-- مختلف پروجیکٹ پر سوئچ کر رہے ہوں
-- نیا آغاز کرنا چاہتے ہوں
+**ہمیشہ اس وقت چلائیں جب:**
+- ٹیمپلیٹ کا ٹیسٹ مکمل ہو جائے
+- مختلف پروجیکٹ پر سوئچ کریں
+- تازہ آغاز کرنا ہو
 
-**لاگت کی بچت:** غیر استعمال شدہ وسائل کو حذف کرنا = $0 چارجز
+**لاگت کی جانچ:** Azure میں حذف ہونے کی تصدیق کریں اور بقایا/مشترکہ وسائل چیک کریں۔ پہلے سے لگائی گئی لاگتیں اب بھی لاگو ہوتی ہیں۔
 
 ---
 
-**س: اگر میں غلطی سے Azure Portal میں وسائل حذف کر دوں تو کیا ہوتا ہے؟**
+**س: اگر میں نے غلطی سے Azure پورٹل میں وسائل حذف کر دیے تو؟**
 
-ج: AZD کی حالت ہم آہنگی سے باہر ہو سکتی ہے۔ کلین سلیٹ اپروچ:
+ج: AZD کی حالت ہم آہنگی سے باہر ہو سکتی ہے۔ صاف آغاز کا طریقہ:
 
 ```bash
-# 1۔ مقامی حالت کو ہٹائیں
+# 1. Delete remaining resources only if that is your intent
 azd down --force --purge
 
-# 2۔ نیا آغاز کریں
+# 2. Start fresh
 azd up
 
-# متبادل: AZD کو پتہ لگانے اور صحیح کرنے دیں
-azd provision  # غائب وسائل بنائیں گے
+# Alternative: Let AZD detect and fix
+azd provision  # Will create missing resources
 ```
 
 ---
 
-### اعلی سوالات
+### اعلیٰ سوالات
 
 **س: کیا میں CI/CD پائپ لائنز میں AZD استعمال کر سکتا ہوں؟**
 
@@ -1098,7 +1109,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Install azd
         run: curl -fsSL https://aka.ms/install-azd.sh | bash
@@ -1111,99 +1122,99 @@ jobs:
             --tenant-id ${{ secrets.AZURE_TENANT_ID }}
       
       - name: Deploy
+        env:
+          AZURE_ENV_NAME: dev
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
         run: azd up --no-prompt
 ```
 
 ---
 
-**س: میں راز اور حساس ڈیٹا کو کیسے سنبھالوں؟**
+**س: میں راز اور حساس ڈیٹا کیسے سنبھالوں؟**
 
-ج: AZD خود بخود Azure Key Vault سے مربوط ہوتا ہے:
+ج: Key Vault واضح طور پر استعمال کریں۔ `azd env set` عام اقدار مقامی ماحول کی فائل میں لکھتا ہے؛ یہ خود بخود والٹ نہیں بناتا، رولز تفویض نہیں کرتا، یا آپ کی ایپلیکیشن میں راز داخل نہیں کرتا۔
 
 ```bash
-# راز کوڈ میں نہیں بلکہ کی والٹ میں محفوظ کیے جاتے ہیں
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
-
-# AZD خود بخود:
-# 1. کی والٹ بناتا ہے
-# 2. راز محفوظ کرتا ہے
-# 3. منیجڈ شناخت کے ذریعے ایپ تک رسائی دیتا ہے
-# 4. رن ٹائم پر شامل کرتا ہے
+# Interactive: create/select a Key Vault secret and save its reference
+azd env set-secret DATABASE_PASSWORD
 ```
 
-**کبھی کمٹ نہ کریں:**
-- `.azure/` فولڈر (ماحول کا ڈیٹا ہوتا ہے)
+آپ کو مناسب والٹ اجازتیں درکار ہیں۔ آپ کا بنیادی ڈھانچہ/ایپلیکیشن اب بھی راز کو صارف تک پہنچانے اور رن ٹائم شناخت کو رسائی دینے کا بندوبست کرے گا۔ حل شدہ راز کو لاگز میں کبھی نہ پرنٹ کریں۔
+
+**کبھی کمیٹ نہ کریں:**
+- `.azure/` فولڈر (ماحولیاتی ڈیٹا شامل ہے)
 - `.env` فائلیں (مقامی راز)
-- کنکشن اسٹرنگز
+- کنکشن سٹرنگز
 
 ---
 
-**س: کیا میں متعدد خطوں میں تعینات کر سکتا ہوں؟**
+**س: کیا میں متعدد علاقوں میں تعینات کر سکتا ہوں؟**
 
-ج: ہاں، ہر خطے کے لیے ایک ماحول بنائیں:
+ج: ہاں، ہر خطے کے لیے ماحول بنائیں:
 
 ```bash
-# مشرقی امریکہ کا ماحول
+# East US environment
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# مغربی یورپ کا ماحول
+# West Europe environment
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# ہر ماحول آزاد ہے
+# Each environment is independent
 azd env list
 ```
 
-سچائی میں ملٹی-ریجن ایپس کے لیے، Bicep ٹیمپلیٹس کو حسب ضرورت بنائیں تاکہ بیک وقت متعدد خطوں میں تعیناتی ہو سکے۔
+حقیقی ملٹی ریجن ایپس کے لیے، بائسپ ٹیمپلیٹس کو تخصیص کریں تاکہ بیک وقت متعدد علاقوں میں تعینات کی جا سکے۔
 
 ---
 
-**س: اگر میں پھنس جاؤں تو مدد کہاں حاصل کروں؟**
+**س: اگر میں پھنس جاؤں تو مدد کہاں سے حاصل کروں؟**
 
-1. **AZD ڈاکیومنٹیشن:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli چینل
-4. **Stack Overflow:** ٹیگ `azure-developer-cli`
-5. **یہ کورس:** [Troubleshooting Guide](../chapter-07-troubleshooting/common-issues.md)
+1. **AZD دستاویزات:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **GitHub مسائل:** https://github.com/Azure/azure-dev/issues
+3. **ڈسکارڈ:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli چینل
+4. **اسٹیک اوور فلو:** ٹیگ `azure-developer-cli`
+5. **یہ کورس:** [مسائل حل کرنے کی گائیڈ](../chapter-07-troubleshooting/common-issues.md)
 
-**پروف ٹپ:** سوال پوچھنے سے پہلے یہ چلائیں:
+**پیشہ ورانہ مشورہ:** پوچھنے سے پہلے، چلائیں:
 ```bash
-azd show       # موجودہ حالت دکھاتا ہے
-azd version    # آپ کا ورژن دکھاتا ہے
+azd show       # Shows current state
+azd version    # Shows your version
 ```
-فوراً مدد کے لیے اس معلومات کو اپنے سوال میں شامل کریں۔
+ تیز مدد کے لیے اپنے سوال میں یہ معلومات شامل کریں۔
 
 ---
 
-## 🎓 اگلا کیا؟
+## 🎓 آگے کیا ہے؟
 
-اب آپ AZD کے بنیادی اصول سمجھ گئے ہیں۔ اپنا راستہ منتخب کریں:
+آپ اب AZD کے بنیادی اصول سمجھتے ہیں۔ اپنی راہ منتخب کریں:
 
 ### 🎯 ابتدائیوں کے لیے:
-1. **اگلا:** [تنصیب اور سیٹ اپ](installation.md) - اپنی مشین پر AZD انسٹال کریں
-2. **اس کے بعد:** [آپ کا پہلا پروجیکٹ](first-project.md) - اپنی پہلی ایپ تعینات کریں
-3. **مشکل:** اس سبق میں تمام 3 مشقیں مکمل کریں
+1. **اگلا:** [انسٹالیشن اور سیٹ اپ](installation.md) - اپنی مشین پر AZD انسٹال کریں
+2. **پھر:** [آپ کا پہلا پروجیکٹ](first-project.md) - اپنی پہلی ایپ تعینات کریں
+3. **مشقی کریں:** اس سبق کے تمام 3 مشقیں مکمل کریں
 
-### 🚀 AI ڈیولپرز کے لیے:
-1. **چھلانگ لگائیں:** [باب 2: AI-فرسٹ ڈیولپمنٹ](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **تعینات کریں:** `azd init --template get-started-with-ai-chat` سے شروع کریں
-3. **سیکھیں:** تعیناتی کے دوران بنائیں
+### 🚀 AI ڈویلپرز کے لیے:
+1. **اسکپ کریں:** [باب 2: AI-فرسٹ ڈیولپمنٹ](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **تعینات کریں:** ایک خالی پروجیکٹ ڈائریکٹری میں، `azd init --template get-started-with-ai-chat .` سے شروع کریں
+3. **سیکھیں:** تعینات کرتے وقت تعمیر کریں
 
-### 🏗️ تجربہ کار ڈیولپرز کے لیے:
-1. **دیکھیں:** [کنفیگریشن گائیڈ](configuration.md) - ایڈوانس سیٹنگز
-2. **دریافت کریں:** [انفراسٹرکچر ایز کوڈ](../chapter-04-infrastructure/provisioning.md) - Bicep کی گہری تفصیل
-3. **بنائیں:** اپنی اسٹیک کے لیے حسب ضرورت ٹیمپلیٹس
+### 🏗️ تجربہ کار ڈویلپرز کے لیے:
+1. **جائزہ لیں:** [کنفیگریشن گائیڈ](../chapter-03-configuration/configuration.md) - جدید ترتیبات
+2. **دریافت کریں:** [انفراسٹرکچر ایز کوڈ](../chapter-04-infrastructure/provisioning.md) - Bicep کی تفصیلی جانچ
+3. **تعمیر کریں:** اپنی اسٹیک کے لیے حسب ضرورت ٹیمپلیٹس بنائیں
 
 ---
 
 **باب کی نیویگیشن:**
 - **📚 کورس ہوم**: [AZD برائے ابتدائی](../../README.md)
-- **📖 موجودہ باب**: باب 1 - بنیاد اور فوری آغاز  
+- **📖 موجودہ باب**: باب 1 - بنیاد اور جلد آغاز  
 - **⬅️ پچھلا**: [کورس کا جائزہ](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ اگلا**: [تنصیب اور سیٹ اپ](installation.md)
+- **➡️ اگلا**: [انسٹالیشن اور سیٹ اپ](installation.md)
 - **🚀 اگلا باب**: [باب 2: AI-فرسٹ ڈیولپمنٹ](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
