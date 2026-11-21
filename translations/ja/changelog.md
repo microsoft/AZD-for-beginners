@@ -65,7 +65,7 @@
 #### 初心者向けギャップフィル #2：テンプレート作成、Dev Containers、Pulumi、Azure DevOps、サービスプリンシパルなど
 **このバージョンでは、azdカバレッジ分析で明らかになった残りの中級者向けギャップを埋めています：自分のテンプレートの作成と公開、再現可能なDev Containers/Codespaces環境、Pulumiインフラプロバイダー、Azure DevOps CI/CDのウォークスルー、サービスプリンシパル認証、ホスト選択のガイダンス（AKS/Spring Apps）、`azd restore`/`azd package`の説明、フックエラー処理、チーム/共有環境のプラクティス。**
 
-#### 追加
+#### 追加点
 - **🧱 新しいChapter 4レッスン** `docs/chapter-04-infrastructure/custom-templates.md` — 独自のazdテンプレートの作成方法：必須構造（`azure.yaml`、`infra/`、`src/`）、`metadata.template`フィールド、インフラのパラメータ化（`uniqueString()`リソーストークンと`azd-env-name`タグ）、ローカルで`azd init --template <local-path>`を使ったテスト、GitHubでの公開、Awesome AZDギャラリーへの提出
 - **📦 新しいChapter 1レッスン** `docs/chapter-01-foundation/dev-containers.md` — Dev ContainersとGitHub Codespacesを使った再現可能なazd環境：公式`ghcr.io/azure/azure-dev/azd`機能を使った最小限の`.devcontainer/devcontainer.json`、言語固有機能、コンテナホスト用の`docker-in-docker`、リモート署名のための`azd auth login --use-device-code`
 - <strong>🧩 azdでのPulumi</strong>セクションを`docs/chapter-04-infrastructure/provisioning.md`に追加 — `infra.provider: pulumi`、Pulumiのフォルダ構成、azd環境にマッピングされたスタック、必要なアウトプット/タグ付け、同一の`azd up` / `azd down`フロー
@@ -76,7 +76,7 @@
 - <strong>👥 チーム／共有環境</strong>セクションを`docs/chapter-03-configuration/configuration.md`に追加 — `.azure/`に含まれるもの、gitignore設定、開発者ごとの環境、`azd env list`/`select`、CI/CDでの環境値提供
 - **🧰 `azd restore` と拡張された `azd package`**の説明を`resources/cheat-sheet.md`に追加 — 依存関係の復元とデプロイせずにアーティファクトをビルドする方法
 
-#### 変更
+#### 変更点
 - <strong>🧭 Chapter 4のレッスンテーブル</strong>を更新し、新しい「独自テンプレート作成」レッスン（レッスン3）を追加
 - <strong>🧭 Chapter 1のレッスンテーブル</strong>を更新し、新しい「Dev Containers & Codespaces」レッスン（レッスン5）を追加；`bring-your-own-app.md`と`dev-containers.md`の間にナビゲーションフッターを接続
 
@@ -85,7 +85,7 @@
 #### 初心者向けギャップフィル：ハンズオンのマルチエージェントレッスン、「Bring Your Own App」、Terraform、CI/CDウォークスルー
 **このバージョンは、完全初心者ガイドの最大のギャップを埋めるため、2つの新しいハンズオンレッスン（デプロイ可能なマルチエージェントウォークスルーと既存アプリへのazd追加）、初心者向けフック入門、azdでのTerraformセクション、GitHub Actionsパイプラインのステップバイステップウォークスルー、新しいプレビュー拡張機能の解説、明示的なデプロイ検証チェックリストを追加しました。**
 
-#### 追加
+#### 追加点
 - **🤝 新しいChapter 5レッスン** `docs/chapter-05-multi-agent/multi-agent-basics.md` — フルハンズオンでデプロイ可能な2エージェントウォークスルー（オーケストレーター + スペシャリスト）を実際のテンプレート（`contoso-creative-writer`）で解説。マルチエージェントを使うタイミング、`azd up`のワークフロー、デプロイされたリソースの理解、クロスエージェントのトレーシング、カスタマイズ、クリーンアップをカバー
 - **📦 新しいChapter 1レッスン** `docs/chapter-01-foundation/bring-your-own-app.md` — 既存プロジェクトに`azd init`でazdを追加する方法（「現在のディレクトリのコードを使用」）、`azure.yaml`と`infra/`の理解、`azd infra generate`、ホスト検出、`azd up`によるデプロイ
 - <strong>🌐 azdでのTerraform</strong>セクションを`docs/chapter-04-infrastructure/provisioning.md`に追加 — `infra.provider: terraform`設定、`.tf`フォルダ構成、必要な `AZURE_*`アウトプットと`azd-env-name`タグ付け、同一の`azd up` / `azd down`ワークフロー（Terraformサポートの主張はあったがBicepしか示していなかったギャップを埋める）
@@ -94,12 +94,12 @@
 - <strong>✅ 「デプロイ検証」チェックリスト</strong>を`docs/chapter-01-foundation/first-project.md`のステップ5に追加 — スモークテスト、ヘルスエンドポイントチェック、明示的な成功基準
 - **🧩 新しいプレビュー拡張機能**`azure.ai.skills` と `azure.ai.connections` の解説（それらが何か、いつ利用すべきか）を`docs/chapter-08-production/production-ai-practices.md`に追加
 
-#### 変更
+#### 変更点
 - <strong>🧭 Chapter 5のレッスンテーブル</strong>を修正：`multi-agent-basics.md`は現在レッスン1（唯一の完全なハンズオンレッスン）となり、レッスン2はChapter 6に移動、Retailシナリオはアーキテクチャの設計図でありワンコマンドテンプレートではない旨を明示
 - <strong>🧭 Chapter 1のレッスンテーブル</strong>に新しい「Bring Your Own App」レッスン（レッスン4）を追加
 - <strong>🔗 ナビゲーションフッター</strong>を更新：`first-project.md`から`bring-your-own-app.md`へのリンクを追加
 
-#### 修正
+#### 修正点
 - <strong>🧱 「主張はあるが欠落していた」Terraformギャップ</strong>を閉じる — 以前はTerraformサポートが言及されていたが実例は示されていなかった
 - <strong>🔀 誤解を招くChapter 5のクロスリンク</strong>を修正 — 完全なマルチエージェント実装があるかのように誤解させていたが実際は設計図のみだった
 
@@ -122,7 +122,7 @@
 
 **このバージョンでは、`azd` `1.25.6`（2026年6月）および `azure.ai.agents` `0.1.40-preview` 拡張機能に対するコースの再検証を行い、AIガイダンスを「エージェントのスキャフォールド作成」から完全なエージェントライフサイクル（テスト → 評価 → 最適化 → 検査 → 削除）に拡張し、新しい `azure.ai.skills` と `azure.ai.connections` プレビュー拡張機能を紹介し、また「.NET Aspire」→「Aspire」製品のリブランドについて記載しています。**
 
-#### 追加
+#### 追加点
 - **🔁 ドキュメント全体で初心者とAIエンジニア向けに完全なエージェントライフサイクルのカバレッジを提供：**
   - `docs/chapter-01-foundation/azd-basics.md` — 拡張機能とAIコマンドセクションにライフサイクル表（スキャフォールド → テスト → 測定 → 改善 → 検査 → クリーンアップ）を追加
   - `docs/chapter-08-production/production-ai-practices.md` — `azd ai agent invoke`、`endpoint show`、`eval generate`、`optimize`、`code download`、`delete --force` をカバーした新しい「エージェントライフサイクル管理」セクション
@@ -131,14 +131,14 @@
 - **⏱️ 応答時間のガイダンス** — `azd ai agent invoke` の例にトータル待ち時間と最初のバイト到着時間を表示する旨を注記
 - **📌 ルートREADMEにバージョンバナー** を追加し、学習者に `azd version` と `azd upgrade` を案内
 
-#### 変更
+#### 変更点
 - **✅ バリデーションベースラインの更新** — 全章のREADMEおよびワークショップドキュメントで `azd 1.23.12`（2026年3月）から `azd 1.25.6`（2026年6月）に更新
 - **🤖 第2章の拡張機能注記** — `azure.ai.agents` `0.1.18-preview` から `0.1.40-preview` に更新
 - **🧪 ワークショップの検証例** (`azd version` の出力) を `1.25.6` に更新
 - **🧭 README 「本日のazdの新機能」** を刷新し、エンドツーエンドのエージェントライフサイクル、新しいAI拡張機能、最近の使い勝手の改善（`azd init` の冪等性、`azd auth login` における期限切れトークンのクリア、`azd tool` の初回実行プロンプト）を強調
 - **📖 第2章 agents.md（オプション4）** — `azd up` で止まらず、デプロイ後のライフサイクルコマンドへ学習者を案内
 
-#### 修正
+#### 修正点
 - **🏷️ 製品名の表記** — Aspireのリブランド注記を追加（「.NET Aspire」は「Aspire」に変更されました）；azdのAspire対応は変更なし
 - **🔎 ライブリリース検証** — Azure Developer CLIのリリースフィードに基づく検証：安定版CLI `1.25.6`（2026-06-12）および `azure.ai.agents` `0.1.40-preview`（2026-06-15）
 
@@ -167,17 +167,17 @@
 #### 初心者オンボーディングの明確化、セットアップ検証と最終AZDコマンド整理
 **このバージョンはAZD 1.23検証の続きとして初心者向けにドキュメントの見直しを実施。AZD優先の認証ガイダンスを明確化し、ローカルセットアップ検証スクリプトを追加、主要コマンドをライブAZD CLIで検証、変更履歴外の古い英語版コマンド記述を除去しています。**
 
-#### 追加
+#### 追加点
 - **🧪 初心者向けセットアップ検証スクリプト** `validate-setup.ps1` と `validate-setup.sh` を追加し、チャプター1開始前に必須ツールの確認が可能に
 - **✅ 事前セットアップ検証手順** をルートREADMEおよびチャプター1READMEに追加し、`azd up` 前に不足条件を検出可能に
 
-#### 変更
+#### 変更点
 - **🔐 初心者認証ガイダンス** — `azd auth login` をAZDワークフローの主流ルートとして一貫して扱い、`az login` はAzure CLIコマンドを直接使用する場合のみ任意として案内
 - **📚 第1章オンボーディングの流れ** — インストール、認証、最初のデプロイ手順の前にローカルセットアップ検証を行うよう案内
 - **🛠️ バリデーターメッセージ** — ブロック要件とオプションのAzure CLI警告を明確に区別し、AZD専用初心者パス用に改善
 - **📖 設定、トラブルシューティング、例示ドキュメント** — 必須のAZD認証と任意のAzure CLIサインインを区別して提示
 
-#### 修正
+#### 修正点
 - <strong>📋 残存していた英語版コマンド参照</strong>を現在のAZDフォームに更新、チートシートの `azd config show` やAzureポータル概要案内が意図された `azd monitor --overview` など
 - **🧭 第1章の初学者向け表現** — すべてのテンプレートとAzureリソースに対してエラーゼロやロールバック保証など過剰な約束を避けるためにソフト化
 - **🔎 ライブCLI検証** — `azd env get-values`、`azd template list`、`azd extension list --installed`、`azd copilot consent list`、`azd mcp start`、`azd provision --preview`、`azd monitor --logs`、`azd down --force --purge` の現在のサポートを確認
@@ -204,13 +204,13 @@
 #### AZD 1.23.12検証、ワークショップ環境拡張、AIモデルの刷新
 **このバージョンでは、`azd` `1.23.12` に対するドキュメント検証を行い、古くなったAZDコマンド例を更新し、AIモデルガイダンスを最新のデフォルトに刷新、さらにワークショップの指示をGitHub Codespacesから開発用コンテナやローカルクローンにも拡張しています。**
 
-#### 追加
+#### 追加点
 - **✅ コア章とワークショップドキュメントでのバリデーション注記** — 新旧CLIビルド利用者に対してテスト済みのAZDベースラインを明示
 - **⏱️ 長時間展開のタイムアウトガイダンス** — `azd deploy --timeout 1800` 使用例
 - **🔎 拡張機能検査手順** — AIワークフロードキュメントでの `azd extension show azure.ai.agents` 実行方法
 - **🌐 ワークショップ環境のガイダンス拡大** — GitHub Codespaces、開発コンテナ、ローカルクローンでのMkDocs利用についての説明追加
 
-#### 変更
+#### 変更点
 - **📚 各章のイントロREADME** — ファンデーション、構成、インフラ、マルチエージェント、プリデプロイ、トラブルシューティング、生産環境の各セクションで `azd 1.23.12` での検証を一貫して明示
 - **🛠️ ドキュメント内のAZDコマンド参照更新**：
   - `azd config list` → `azd config show`
@@ -221,7 +221,7 @@
 - **🧭 ワークショップのフロー変更** — Codespaces限定実行を前提とせず、Codespaces、開発コンテナ、ローカルクローンでラボを完了可能に改訂
 - **🔐 認証ガイダンス更新** — AZDワークフローには `azd auth login` を推奨、Azure CLIコマンド直接使用時のみ `az login` をオプションとして案内
 
-#### 修正
+#### 修正点
 - **🪟 Windowsインストールコマンド** — インストールガイド内で現在の `winget` パッケージ表記に統一
 - **🐧 Linuxインストールガイダンス** — サポート外のディストリビューション別 `azd` パッケージマネージャー指示を削除、代わりにリリース資産を参照
 - **📦 AIモデル例を刷新** — 古いデフォルト `gpt-35-turbo` と `text-embedding-ada-002` から現在例の `gpt-4.1-mini`、`gpt-4.1`、`text-embedding-3-large` へ更新
@@ -229,7 +229,7 @@
 - **⚙️ GitHub Actionsガイダンス更新** — `Azure/setup-azd@v1.0.0` から `Azure/setup-azd@v2` へ
 - **🤖 MCP/Copilot同意ガイダンス変更** — `azd mcp consent` から `azd copilot consent list` へ更新
 
-#### 改善
+#### 改善点
 - **🧠 AI章のガイダンス** — プレビュー対応の `azd ai` 動作、テナント固有のログイン、最新の拡張機能使用法、モデル展開推奨をより良く説明
 - **🧪 ワークショップ指示** — より現実的なバージョン例とわかりやすい環境セットアップ表現を使用して実践的ラボに改良
 - **📈 本番環境およびトラブルシューティングドキュメント** — 最新の監視、フォールバックモデル、コスト層例により整合性を向上
@@ -270,7 +270,7 @@
 #### AZD AI CLIコマンド、コンテンツ検証およびテンプレート拡充
 **このバージョンは、すべてのAI関連チャプターにわたって `azd ai`、`azd extension`、および `azd mcp` コマンドのカバレッジを追加し、agents.mdの壊れたリンクや非推奨コードを修正し、チートシートを更新し、検証済みの説明および新しいAzure AI AZDテンプレートを用いてサンプルテンプレートセクションを刷新しています。**
 
-#### 追加
+#### 追加点
 - **🤖 AZD AI CLIカバレッジ** — 7ファイルで展開（以前は第8章のみ）：
   - `docs/chapter-01-foundation/azd-basics.md` — 新規「拡張機能とAIコマンド」セクションで `azd extension`、`azd ai agent init`、`azd mcp` を紹介
   - `docs/chapter-02-ai-development/agents.md` — オプション4：`azd ai agent init` とテンプレート対マニフェストアプローチの比較表
@@ -290,7 +290,7 @@
   - **azd-ai-starter** — 最小限のAzure AIインフラBicepスターターテンプレート
   - **🔗 Awesome AZD AIギャラリーリンク** — [awesome-azd AIギャラリー](https://azure.github.io/awesome-azd/?tags=ai)（80以上のテンプレート）への参照
 
-#### 修正
+#### 修正点
 - **🔗 agents.mdナビゲーション**: 前/次リンクが第2章READMEのレッスン順と一致（Microsoft Foundry Integration → Agents → AI Model Deployment）
 - **🔗 agents.mdのリンク切れ**: `production-ai-practices.md`を`../chapter-08-production/production-ai-practices.md`に修正（3箇所）
 - **📦 agents.md廃止コード**: `opencensus`を`azure-monitor-opentelemetry`＋OpenTelemetry SDKに置き換え
@@ -299,10 +299,10 @@
 - **azure-search-openai-demo**: サービスを「Cognitive Search + App Service」から「Azure AI Search + Azure Container Apps」に修正（2024年10月にデフォルトホスト変更）
 - **contoso-chat**: 説明をAzure AI Foundry + Promptyに更新し、リポジトリの実際のタイトルと技術スタックに一致させた
 
-#### 削除
+#### 削除点
 - **ai-document-processing**: 機能しないテンプレート参照を削除（リポジトリがAZDテンプレートとして公開されていないため）
 
-#### 改善
+#### 改善点
 - **📝 agents.md演習**: 演習1に期待される出力と`azd monitor`手順を追加；演習2に完全な`FunctionTool`登録コードを追加；演習3の曖昧な指示を具体的な`prepdocs.py`コマンドに変更
 - **📚 agents.mdリソース**: ドキュメントリンクを最新のAzure AI Agent Serviceドキュメントとクイックスタートに更新
 - **📋 agents.md次のステップ表**: AIワークショップラボリンクを追加し章全体をカバー
@@ -323,7 +323,7 @@
 #### コースナビゲーションの改善
 **このバージョンではREADME.mdの章ナビゲーションを改善された表形式で強化しています。**
 
-#### 変更
+#### 変更点
 - <strong>コースマップの表</strong>: 直接レッスンリンク、所要時間の見積もり、複雑さ評価を追加
 - <strong>フォルダーのクリーンアップ</strong>: 冗長な古いフォルダー（deployment/, getting-started/, pre-deployment/, troubleshooting/）を削除
 - <strong>リンク検証</strong>: コースマップ表内の21以上の内部リンクすべてを検証済み
@@ -333,7 +333,7 @@
 #### 製品名の更新
 **このバージョンでは製品の言及を最新のMicrosoftブランドに更新しました。**
 
-#### 変更
+#### 変更点
 - **Microsoft Foundry → Microsoft Foundry**: 非翻訳ファイル内のすべての参照を更新
 - **Azure AI Agent Service → Foundry Agents**: サービス名を最新ブランドに更新
 
@@ -381,19 +381,19 @@
 | pre-deployment内の全ファイル | pre-deployment/ | chapter-06-pre-deployment/ |
 | troubleshooting内の全ファイル | troubleshooting/ | chapter-07-troubleshooting/ |
 
-#### 追加
+#### 追加点
 - **📚 章ごとのREADMEファイル**: 各章フォルダーにREADME.mdを作成し以下を含む:
   - 学習目標と所要時間
   - レッスン表と説明
   - クイックスタートコマンド
   - 他の章へのナビゲーション
 
-#### 変更
+#### 変更点
 - **🔗 すべての内部リンクを更新**: 78以上のパスをドキュメント内で更新
 - **🗺️ メインREADME.md**: コースマップを新しい章構造に更新
 - **📝 examples/README.md**: 章フォルダへのクロスリファレンスを更新
 
-#### 削除
+#### 削除点
 - 古いフォルダー構造（getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/）
 
 ---
@@ -410,7 +410,7 @@
 #### 新しいAIエージェントガイド
 **このバージョンではAzure Developer CLIを使ったAIエージェントの展開に関する包括的ガイドを追加しました。**
 
-#### 追加
+#### 追加点
 - **🤖 docs/microsoft-foundry/agents.md**: 完全ガイド、以下をカバー:
   - AIエージェントの定義とチャットボットとの違い
   - 3つのクイックスタートエージェントテンプレート（Foundry Agents、Prompty、RAG）
@@ -436,11 +436,11 @@
 #### DevContainer環境の更新
 **このバージョンでは、現代的なツールとより良いデフォルト設定で開発コンテナ構成を更新し、AZD学習体験を向上させました。**
 
-#### 変更
+#### 変更点
 - **🐳 ベースイメージ**: `python:3.12-bullseye`から`python:3.12-bookworm`（最新のDebian安定版）に更新
 - **📛 コンテナ名**: 「Python 3」から「AZD for Beginners」に変更し分かりやすく
 
-#### 追加
+#### 追加点
 - **🔧 新しいDev Container機能**:
   - Bicepサポートが有効な`azure-cli`
   - AZDテンプレート用のLTS版`node:20`
@@ -473,7 +473,7 @@
   - コード品質のためのpre-commitを追加
   - Azure SDKパッケージ（azure-identity、azure-mgmt-resource）を追加
 
-#### 修正
+#### 修正点
 - **Post-Createコマンド**: コンテナ起動時にAZDとAzure CLIのインストールを確認するように
 
 ---
@@ -483,7 +483,7 @@
 #### 初心者向けREADMEの大改訂
 **このバージョンではREADME.mdを大幅に改善し、初心者にも分かりやすくAI開発者向けの重要なリソースを追加しました。**
 
-#### 追加
+#### 追加点
 - **🆚 Azure CLIとAZDの比較**: どのツールをいつ使うべきか、実例付きで明確に解説
 - **🌟 Awesome AZDリンク集**: コミュニティテンプレートギャラリーおよび貢献リソースへの直接リンク:
   - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200以上のデプロイ済テンプレート
@@ -491,13 +491,13 @@
 - **🎯 クイックスタートガイド**: 簡単な3ステップ（インストール → ログイン → デプロイ）
 - **📊 経験ベースのナビゲーション表**: 開発者経験に基づく開始ポイントの明確な案内
 
-#### 変更
+#### 変更点
 - **README構成**: 重要情報を先にそろえた段階的開示形式に再編成
 - <strong>導入セクション</strong>: 完全初心者向けに「`azd up`の魔法」を説明するよう書き換え
 - <strong>重複コンテンツ削除</strong>: 重複したトラブルシューティングセクションを削除
 - <strong>トラブルシューティングコマンド</strong>: `azd logs`参照を正しい`azd monitor --logs`に修正
 
-#### 修正
+#### 修正点
 
 - **🔐 認証コマンド**: `azd auth login` と `azd auth logout` を cheat-sheet.md に追加
 - <strong>無効なコマンド参照</strong>: README のトラブルシューティングセクションから残っていた `azd logs` を削除
@@ -513,7 +513,7 @@
 #### Azure Developer CLI コマンドの正確性更新
 **このバージョンではドキュメント全体の存在しない AZD コマンドを修正し、すべてのコード例が有効な Azure Developer CLI 構文を使用するようにしました。**
 
-#### 修正内容
+#### 修正点
 - **🔧 存在しない AZD コマンドの削除**: 無効なコマンドの包括的な監査と修正:
   - `azd logs` (存在しない) → `azd monitor --logs` または Azure CLI の代替に置換
   - `azd service` のサブコマンド (存在しない) → `azd show` と Azure CLI に置換
@@ -538,7 +538,7 @@
 - **📝 バージョン参照の更新**: 
   - `docs/getting-started/installation.md`: 固定値 `1.5.0` のバージョンを汎用の `1.x.x` に変更し、リリースへのリンクを追加
 
-#### 変更内容
+#### 変更点
 - <strong>ロールバック戦略</strong>: ドキュメントを Git ベースのロールバックに更新 (AZD ネイティブ機能はなし)
 - <strong>ログ表示</strong>: `azd logs` 参照を `azd monitor --logs`、`azd monitor --live`、および Azure CLI コマンドに置換
 - <strong>パフォーマンスセクション</strong>: 存在しない並列/インクリメンタルデプロイフラグを削除し、有効な代替を提示
@@ -558,14 +558,14 @@
 #### ワークショップ完了およびドキュメント品質の更新
 **このバージョンでは、インタラクティブなワークショップモジュールを完了し、壊れたドキュメントリンクを修正し、Microsoft AZD を使用する AI 開発者向けのコンテンツ品質を向上させました。**
 
-#### 追加
+#### 追加点
 - **📝 CONTRIBUTING.md**: 新しいコントリビューションガイド文書を追加、内容として:
   - 問題報告と変更提案の明確な手順
   - 新規コンテンツのドキュメント基準
   - コード例ガイドラインとコミットメッセージ規約
   - コミュニティ参加情報
 
-#### 完了
+#### 完了点
 - **🎯 ワークショップモジュール7 (まとめ)**: 完全なまとめモジュールを完了し、内容は:
   - ワークショップでの成果の包括的な要約
   - AZD、テンプレート、Microsoft Foundry に関する重要な概念の習得セクション
@@ -585,7 +585,7 @@
   - ソフト削除された認知サービスの回復ガイダンス
   - GitHub Copilot と Azure ポータルの探索用ボーナスプロンプト
 
-#### 修正
+#### 修正点
 - **🔗 壊れたリンクの修正**: 15 以上の内部ドキュメントリンクを修正:
   - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md へのパスを修正
   - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md と production-ai-practices.md へのパスを修正
@@ -599,7 +599,7 @@
 
 - **🔗 ワークショップナビゲーション**: 非存在の lab-1-azd-basics フォルダーを指す壊れたワークショップ README.md のナビゲーションリンクを修正
 
-#### 変更
+#### 変更点
 - <strong>ワークショッププレゼンテーション</strong>: 「作成中」警告を削除し、ワークショップは完成して使用準備完了
 - <strong>ナビゲーションの一貫性</strong>: すべてのワークショップモジュールに適切なモジュール間ナビゲーションを確保
 - <strong>学習パス参照</strong>: 正しい microsoft-foundry パスを使うよう変更
@@ -629,7 +629,7 @@
 #### 高度なドキュメント: モニタリング、セキュリティ、およびマルチエージェントパターン
 **このバージョンでは、Application Insights 統合、認証パターン、および本番デプロイ向けのマルチエージェント調整に関する包括的な A グレードのレッスンを追加しました。**
 
-#### 追加
+#### 追加点
 - **📊 Application Insights 統合レッスン**: `docs/pre-deployment/application-insights.md` にて:
   - AZD に焦点を当てた自動プロビジョニング付きデプロイ
   - Application Insights + Log Analytics の完全な Bicep テンプレート
@@ -661,18 +661,18 @@
   - コスト詳細 ($240-565/月) と最適化戦略
   - モニタリングのための Application Insights 統合
 
-#### 強化
+#### 強化点
 - <strong>プレデプロイメント章</strong>: 包括的なモニタリングおよび調整パターンを追加
 - <strong>入門章</strong>: プロフェッショナルな認証パターンで強化
 - <strong>本番準備</strong>: セキュリティから可観測性までの完全なカバレッジ
 - <strong>コース概要</strong>: 第3章と第6章の新レッスンへの参照を更新
 
-#### 変更
+#### 変更点
 - <strong>学習の進行</strong>: セキュリティおよびモニタリングの統合を改善
 - <strong>ドキュメント品質</strong>: 新レッスンで一貫した A グレード基準 (95-97%)
 - <strong>本番パターン</strong>: エンタープライズデプロイ向けの完全なエンドツーエンドカバレッジ
 
-#### 改善
+#### 改善点
 - <strong>デベロッパーエクスペリエンス</strong>: 開発から本番モニタリングへの明確なパス
 - <strong>セキュリティ基準</strong>: 認証およびシークレット管理のプロフェッショナルパターン
 - <strong>可観測性</strong>: AZD と統合された完全な Application Insights
@@ -705,7 +705,7 @@
 #### ドキュメント品質の向上と新 Microsoft Foundry Models 例の追加
 **このバージョンではリポジトリ全体のドキュメント品質を向上させ、gpt-4.1 チャットインターフェースを備えた Microsoft Foundry Models の完全な展開例を追加しました。**
 
-#### 追加
+#### 追加点
 - **🤖 Microsoft Foundry Models チャット例**: `examples/azure-openai-chat/` における gpt-4.1 の完全展開と動作実装:
   - Microsoft Foundry Models の完全なインフラストラクチャー (gpt-4.1 モデル展開)
   - 会話履歴付きの Python コマンドラインチャットインターフェース
@@ -724,7 +724,7 @@
   - すべてのデプロイコマンドの期待される出力
   - トラブルシューティングクイックリファレンス
 
-#### 強化
+#### 強化点
 - **examples/README.md**: A グレード品質に更新 (93%):
   - azure-openai-chat をすべての関連セクションに追加
   - ローカルの例の数を3から4に更新
@@ -770,7 +770,7 @@
 #### メジャーアップデート: コンテナアプリ展開例
 **このバージョンでは、Azure Developer CLI（AZD）を使用した本格派のコンテナアプリケーション展開例を包括的に導入し、学習パスに完全に統合したドキュメントを提供します。**
 
-#### 追加
+#### 追加点
 - **🚀 コンテナアプリの例**: `examples/container-app/` に新たにローカル例を追加：
   - [マスターガイド](examples/container-app/README.md): コンテナ化展開の完全概要、クイックスタート、本番環境、応用パターン
   - [シンプルFlask API](../../examples/container-app/simple-flask-api): 初心者向けREST APIでスケールゼロ、ヘルスプローブ、モニタリング、トラブルシューティングを備える
@@ -779,7 +779,7 @@
 - <strong>コードサンプル</strong>: 完全な`azure.yaml`、Bicepテンプレート、多言語サービス実装（Python、Node.js、C#、Go）
 - **テスト＆トラブルシューティング**: エンドツーエンドのテストシナリオ、モニタリングコマンド、トラブルシューティングガイド
 
-#### 変更
+#### 変更点
 - **README.md**: 新たなコンテナアプリ例を「ローカル例 - コンテナアプリケーション」セクションに追加しリンクを更新
 - **examples/README.md**: コンテナアプリ例の強調表示、比較マトリクスの追加、技術・構成情報の更新
 - **コース概要＆学習ガイド**: 関連章に新たなコンテナアプリ例と展開パターンを参照として追加
@@ -859,7 +859,7 @@
 #### インフラプレビューと検証の強化
 **このバージョンでは、新しいAzure Developer CLIのプレビューフィーチャーを包括的にサポートし、ワークショップのユーザー体験を強化します。**
 
-#### 追加
+#### 追加点
 - **🧪 azd provision --preview 機能ドキュメント**: 新機能であるインフラプレビュー機能の詳細説明
   - チートシート内のコマンドリファレンスと使用例
   - プロビジョニングガイドへの詳細統合、ユースケースと利点を含む
@@ -870,18 +870,18 @@
   - 透明性を高める最終更新タイムスタンプ表示
   - すべてのデバイス対応のレスポンシブデザイン
 
-#### 強化
+#### 強化点
 - <strong>インフラの安全性</strong>: 展開ドキュメント全体にプレビュー機能を組み込み
 - <strong>展開前検証</strong>: 自動化スクリプトにインフラプレビューテストを追加
 - <strong>開発者ワークフロー</strong>: プレビューをベストプラクティスとしてコマンドシーケンスを更新
 - <strong>ワークショップ体験</strong>: コンテンツ開発状況について明確に期待値を設定
 
-#### 変更
+#### 変更点
 - <strong>展開ベストプラクティス</strong>: プレビュー優先ワークフローを推奨手法に変更
 - <strong>ドキュメントフロー</strong>: 学習プロセスの早い段階にインフラ検証を移動
 - <strong>ワークショップ表示</strong>: プロ仕様のステータス表示と明確な開発スケジュール添付
 
-#### 改善
+#### 改善点
 - <strong>安全第一のアプローチ</strong>: 展開前にインフラ変更の検証が可能に
 - <strong>チームコラボレーション</strong>: プレビュー結果の共有とレビュー・承認が可能に
 - <strong>コスト認識</strong>: プロビジョニング前にリソースコストがより透明化
@@ -904,7 +904,7 @@
 #### ワークショップ資料とインタラクティブラーニング体験の強化
 **このバージョンでは、ブラウザベースのインタラクティブガイドと構造化学習パスを備えた包括的なワークショップ資料を導入します。**
 
-#### 追加
+#### 追加点
 - **🎥 インタラクティブワークショップガイド**: MkDocsプレビュー機能を利用したブラウザベースのワークショップ体験
 - **📝 構造化されたワークショップ指示**: 発見からカスタマイズまでの7ステップガイド学習パス
   - 0-導入: ワークショップ概要と設定
@@ -919,13 +919,13 @@
 - **🎯 ハンズオン学習パス**: 3段階メソッド（発見 → 展開 → カスタマイズ）
 - **📱 GitHub Codespaces統合**: シームレスな開発環境セットアップ
 
-#### 強化
+#### 強化点
 - **AIワークショップラボ**: 2〜3時間の構造化学習体験を拡充
 - <strong>ワークショップドキュメント</strong>: ナビゲーションと視覚補助を備えたプロ仕様の提示
 - <strong>学習進行</strong>: テンプレート選択から本番展開までの明確な段階的指導
 - <strong>開発者体験</strong>: 開発ワークフローを効率化する統合ツール
 
-#### 改善
+#### 改善点
 - <strong>アクセシビリティ</strong>: 検索、コピー機能、テーマ切替を備えたブラウザベースのインターフェイス
 - <strong>セルフペース学習</strong>: 各自のスピードに合わせた柔軟なワークショップ構成
 - <strong>実用的応用</strong>: 実際のAIテンプレート展開シナリオを提供
@@ -943,7 +943,7 @@
 #### ナビゲーションの大幅再構成と章別学習システム
 **このバージョンでは、リポジトリ全体のナビゲーションを強化し、包括的な章別学習構造を導入します。**
 
-#### 追加
+#### 追加点
 - **📚 章別学習システム**: コース全体を8つの進行的な学習章に再構成
   - 第1章: 基礎とクイックスタート（⭐ - 30〜45分）
   - 第2章: AIファースト開発（⭐⭐ - 1〜2時間）
@@ -958,7 +958,7 @@
 - **🗺️ 学習パス案内**: 異なる経験レベルと目標に合わせた明確なエントリーポイント
 - **🔗 クロスリファレンスナビゲーション**: 関連章と前提条件を明確にリンク
 
-#### 強化
+#### 強化点
 - **README構造**: 章別構成の学習プラットフォームとして再構成
 - <strong>ドキュメントナビゲーション</strong>: すべてのページに章のコンテキストと進行案内を追加
 - <strong>テンプレート組織</strong>: 例とテンプレートを対応する学習章にマッピング
@@ -996,7 +996,7 @@
 
 ### [v3.1.0] - 2025-09-17
 
-#### 強化されたマルチエージェントAIソリューション
+#### 強化点されたマルチエージェントAIソリューション
 **このバージョンでは、エージェント名の改善とドキュメントの強化によってマルチエージェント小売ソリューションを改善しました。**
 
 #### 変更点
@@ -1200,33 +1200,33 @@
 
 1. <strong>バージョン番号</strong>: セマンティックバージョニング（major.minor.patch）に従うこと
 2. <strong>日付</strong>: リリースまたは更新日をYYYY-MM-DD形式で記載
-3. <strong>カテゴリー</strong>: Added、Changed、Deprecated、Removed、Fixed、Security
+3. <strong>カテゴリー</strong>: 追加点、変更点、非推奨、削除点、修正点、セキュリティ
 4. <strong>明確な説明</strong>: 何が変更されたかの簡潔な説明
 5. <strong>影響評価</strong>: 既存ユーザーに対する影響の評価
 
 ### 変更カテゴリー
 
-#### Added
+#### 追加点
 - 新機能、ドキュメントセクション、または機能拡張
 - 新しい例、テンプレート、または学習資源
 - 追加のツール、スクリプト、またはユーティリティ
 
-#### Changed
+#### 変更点
 - 既存機能やドキュメントへの変更
 - 明確さや正確さを高めるための更新
 - コンテンツや構造の再編成
 
-#### Deprecated
+#### 非推奨
 - 段階的に廃止される機能や手法
 - 削除予定のドキュメントセクション
 - より良い代替手段がある方法
 
-#### Removed
+#### 削除点
 - もはや関連性のない機能、ドキュメント、または例
 - 廃止された情報や手法
 - 重複または統合されたコンテンツ
 
-#### Fixed
+#### 修正点
 - ドキュメントやコードの誤りの修正
 - 報告された問題や不具合の解決
 - 正確さや機能性の改善
@@ -1310,8 +1310,8 @@
 ---
 
 <strong>ナビゲーション</strong>
-- <strong>前のレッスン</strong>: [Study Guide](resources/study-guide.md)
-- <strong>次のレッスン</strong>: [Main README](README.md) に戻る
+- <strong>前のレッスン</strong>: [学習ガイド](resources/study-guide.md)
+- <strong>次のレッスン</strong>: [メインのREADME](README.md) に戻る
 
 <strong>最新情報を入手</strong>: このリポジトリをウォッチして、新リリースや学習資料の重要な更新の通知を受け取ってください。
 
