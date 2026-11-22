@@ -1,11 +1,11 @@
 # 1. Select a Template
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
-
-    - [ ] Describe what AZD templates are
-    - [ ] Discover and use AZD templates for AI
-    - [ ] Get started with the AI Agents template
-    - [ ] **Lab 1:** AZD Quickstart in Codespaces or a dev container
+> [!TIP]
+> **By the end of this module, you will be able to:**
+> - Describe what AZD templates are
+> - Discover and use AZD templates for AI
+> - Get started with the AI Agents template
+> - **Lab 1:** AZD Quickstart in Codespaces or a dev container
 
 ---
 
@@ -104,5 +104,6 @@ azd auth login
 azd up
 ```
 
-!!! info "Explore More Templates"
-    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
+> [!NOTE]
+> **Explore More Templates**
+> The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
