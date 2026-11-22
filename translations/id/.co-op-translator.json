@@ -34,66 +34,55 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "id",
-      "failure_date": "2026-11-16T21:11:26+00:00",
+      "failure_date": "2026-11-22T16:06:42+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "examples/README.md": {
       "original_hash": "55ebabb511ae0cd2fb23c899b4dc8839",
       "source_file": "examples/README.md",
       "language_code": "id",
-      "failure_date": "2026-11-16T21:15:27+00:00",
+      "failure_date": "2026-11-22T16:09:22+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "docs/chapter-03-configuration/configuration.md": {
       "original_hash": "0f149d295e8d48938b1b8ff712ea0bf9",
       "source_file": "docs/chapter-03-configuration/configuration.md",
       "language_code": "id",
-      "failure_date": "2026-11-16T21:22:44+00:00",
+      "failure_date": "2026-11-22T16:15:51+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.2.1.1.1.1 of 'configuration.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.2.1.1.1.1.1 of 'configuration.md', and the chunk could not be split further.",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/instructions/2-Validate-AI-Template.md": {
       "original_hash": "08d94072fd61ef49bd86481689cb0484",
       "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
       "language_code": "id",
-      "failure_date": "2026-11-16T21:35:13+00:00",
+      "failure_date": "2026-11-22T16:18:08+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "workshop/docs/instructions/1-Select-AI-Template.md": {
-      "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
-      "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-      "language_code": "id",
-      "failure_date": "2026-11-16T21:37:40+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '1-Select-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "docs/chapter-08-production/production-ai-practices.md": {
       "original_hash": "9fbedacd6668e71b42c90685832ae72c",
       "source_file": "docs/chapter-08-production/production-ai-practices.md",
       "language_code": "id",
-      "failure_date": "2026-11-16T21:19:10+00:00",
+      "failure_date": "2026-11-22T16:12:32+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 2.2.1.1.1.1.1 of 'production-ai-practices.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -398,8 +387,8 @@
     "language_code": "id"
   },
   "workshop/docs/instructions/1-Select-AI-Template.md": {
-    "original_hash": "aae1218e5db7f2e2325b0e7cbbd6528f",
-    "translation_date": "2026-03-31T13:25:04+00:00",
+    "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
+    "translation_date": "2026-11-22T16:19:06+00:00",
     "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
     "language_code": "id"
   },
