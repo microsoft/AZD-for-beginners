@@ -1,15 +1,15 @@
 # 1. テンプレートを選択
 
-!!! tip "このモジュールの終了時には次のことができるようになります"
-
-    - [ ] AZD テンプレートとは何かを説明する
-    - [ ] AI 向けの AZD テンプレートを発見して使用する
-    - [ ] AI Agents テンプレートの使い方を習得する
-    - [ ] **Lab 1:** Codespaces または開発コンテナでの AZD クイックスタート
+> [!TIP] 
+> "このモジュールの終了時には次のことができるようになります"
+> - AZDテンプレートとは何かを説明する
+> - AI向けAZDテンプレートを見つけて利用する
+> - 「AIエージェント」テンプレートを使い始める
+> - **ラボ 1:** Codespacesまたは開発コンテナ（dev container）環境でのAZDクイックスタート
 
 ---
 
-## 1. A Builder Analogy
+## 1. 建築業者に例えるなら
 
 ゼロから最新のエンタープライズ対応の AI アプリケーションを構築するのは困難です。これは、新しい家を自分で一つ一つレンガを積んで建てるようなものです。確かに可能ですが、望む成果を得る最も効率的な方法ではありません！
 
@@ -28,7 +28,7 @@
 
 ## 2. Azure Developer CLI
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) は、IDE（開発）と CI/CD（DevOps）環境全体で一貫して動作する、開発者に優しいコマンド群によりコードからクラウドへの道のりを加速するオープンソースのコマンドラインツールです。
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)（別名 `azd`）は、オープンソースのコマンドラインツールです。開発者に優しい一連のコマンドを備えており、IDE（開発環境）から CI/CD（DevOps 環境）まで一貫して利用できるため、コードをクラウドへデプロイするまでのプロセスを迅速化できます。
 
 `azd` を使うと、デプロイの流れは次のようにシンプルになります:
 
@@ -47,7 +47,7 @@ azd help
 
 ---
 
-## 3. The AZD Template
+## 3. AZDテンプレート
 
 `azd` がこれを実現するためには、プロビジョニングするインフラ、適用すべき構成設定、そしてデプロイするアプリケーションを知る必要があります。ここで [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) の出番です。 
 
@@ -68,15 +68,15 @@ AZD テンプレートは、サンプルコードとソリューションアー�
 
 ---
 
-## 4. AI App Templates
+## 4. AIアプリテンプレート
 
 AI 搭載アプリケーション向けに、Microsoft は **Microsoft Foundry** と **Foundry Agents** を特徴とする専門のテンプレートを提供しています。これらのテンプレートは、インテリジェントで本番対応のアプリケーションを構築するまでの道のりを加速します。
 
-### Microsoft Foundry & Foundry Agents Templates
+### Microsoft Foundry および Foundry Agents テンプレート
 
 以下からテンプレートを選んでデプロイしてください。各テンプレートは [Awesome AZD](https://azure.github.io/awesome-azd/) に掲載されており、単一のコマンドで初期化できます。
 
-| Template | Description | Deploy Command |
+| テンプレート | 説明 | デプロイコマンド |
 |----------|-------------|----------------|
 | **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Microsoft Foundry を使用した Retrieval Augmented Generation によるチャットアプリケーション | `azd init -t azure-samples/azure-search-openai-demo` |
 | **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | 自律的なタスク実行のための Foundry Agents を使用して AI エージェントを構築する | `azd init -t azure-samples/foundry-agent-service-starter` |
@@ -87,7 +87,7 @@ AI 搭載アプリケーション向けに、Microsoft は **Microsoft Foundry**
 | **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Foundry Agents と組み合わせた Semantic Kernel を使用する AI エージェント | `azd init -t azure-samples/semantic-kernel-agent` |
 | **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | AutoGen フレームワークを使用したマルチエージェントシステム | `azd init -t azure-samples/autogen-multi-agent` |
 
-### Quick Start
+### クイックスタート
 
 1. <strong>テンプレートを閲覧</strong>: [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) を訪れ、`AI`、`Agents`、または `Microsoft Foundry` でフィルターします
 2. <strong>テンプレートを選択</strong>: ユースケースに合ったものを選びます
@@ -107,12 +107,14 @@ azd init -t azure-samples/azure-search-openai-demo
 azd up
 ```
 
-!!! info "さらにテンプレートを探索する"
-    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
+> [!NOTE]
+> **他のテンプレートを探す**
+> 
+> [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) には、250 以上のテンプレートが用意されています。フィルター機能を利用して、言語、フレームワーク、Azure サービスといった特定の要件に合致するテンプレートを探すことができます。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-本ドキュメントはAI翻訳サービス[Co-op トランスレーター](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性の確保に努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご留意ください。原文（原言語での文書）を権威ある出典として扱ってください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因する誤解や誤訳について、当社は一切の責任を負いません。
+本ドキュメントはAI翻訳サービス[Co‑op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性の確保に努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご留意ください。原文（原言語での文書）を権威ある出典として扱ってください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因する誤解や誤訳について、当社は一切の責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
