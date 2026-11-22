@@ -1,27 +1,27 @@
-# Cele mai bune practici pentru sarcini AI în producție cu AZD
+# Cele mai bune practici pentru sarcini de lucru AI în producție cu AZD
 
-**Navigarea capitolului:**
-- **📚 Acasă la curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 8 - Modele pentru Producție și Enterprise
-- **⬅️ Capitolul precedent**: [Capitolul 7: Depanare](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ De asemenea legat**: [Laborator AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
+**Navigarea capitolelor:**
+- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 8 - Modele pentru Producție & Întreprinderi
+- **⬅️ Capitol anterior**: [Capitolul 7: Depanare](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ De asemenea relevant**: [Laborator Workshop AI](../chapter-02-ai-development/ai-workshop-lab.md)
 - **🎯 Curs complet**: [AZD Pentru Începători](../../README.md)
 
 ## Prezentare generală
 
-Acest ghid explică modele de design AI pentru producție folosind Azure Developer CLI (AZD). Este o referință de design, nu o aplicație de implementat sau o certificare de producție.
+Acest ghid explică modele de proiectare AI pentru producție folosind Azure Developer CLI (AZD). Este o referință de proiectare, nu o aplicație implementabilă sau o certificare de producție.
 
-**Limitele exemplului:** Cu excepția cazului în care este descris explicit ca fiind complet, fragmentele Bicep presupun parametri și resurse referite dintr-un șablon conținător. Ele omit imagini/gazde de host, identități, atribuiri de rol, DNS, rezultate și alte elemente necesare integrării. Căile serviciilor YAML și scripturile de hook/test sunt fișiere illustrative de creat în **propria dvs. aplicație**; nu sunt furnizate de acest curs. Utilizați un exemplu funcțional AZD ca bază, compilați infrastructura completă și testați-o într-un mediu izolat înainte de producție.
+**Limitele exemplului:** Cu excepția cazului în care este descris explicit ca fiind complet, fragmentele Bicep presupun parametrii și resursele referențiate dintr-un șablon conținut. Ele omit imagini/gazde, identități, alocări de roluri, DNS, ieșiri și alte integrări necesare. Căile serviciilor YAML și scripturile hook/test sunt fișiere ilustrative de creat în **propria ta aplicație**; nu sunt furnizate de acest curs. Folosește un exemplu funcțional AZD ca bază, compilează infrastructura completă și testeaz-o într-un mediu izolat înainte de producție.
 
 ## Provocări cheie abordate
 
-Îngrijorările obișnuite pentru producție includ implementări multi-serviciu, managementul identităților și secretelor, scalare, controlul costurilor și monitorizare. Nu se revendică prevalență măsurată aici.
+Probleme comune în producție includ implementări multi-serviciu, gestionarea identităților și secretelor, scalare, controlul costurilor și monitorizare. Nu se afirmă o prevalență măsurată aici.
 
-## Modele arhitecturale pentru AI în producție
+## Modele de arhitectură pentru AI în producție
 
-### Model 1: Arhitectura AI Microservicii
+### Model 1: Arhitectura AI pe microservicii
 
-**Când să folosiți**: Aplicații AI complexe cu multiple capabilități
+**Când se folosește**: Aplicații AI complexe cu multiple capabilități
 
 ```mermaid
 graph TD
@@ -34,7 +34,7 @@ graph TD
     Text --> DocIntel[Document Intelligence]
 ```
 
-**Implementare cu AZD**:
+**Implementare AZD**:
 
 ```yaml
 # azure.yaml
@@ -59,7 +59,7 @@ services:
 
 ### Model 2: Procesare AI bazată pe evenimente
 
-**Când să folosiți**: Procesare în loturi, analiză documente, fluxuri asincrone
+**Când se folosește**: Procesare batch, analiză de documente, fluxuri de lucru asincrone
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -106,48 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-Aceasta creează fragmente de namespace, nu hub-uri, cozi, abonamente sau declanșatoare Function. O Function executabilă necesită și un plan de host, configurarea runtime/stocare, o identitate atașată, RBAC și acces la rețea. Referința Key Vault necesită permisiune pentru citirea secretului; un URL de endpoint nu este o acreditare.
+Aceasta creează fragmente de namespace, nu hub-uri, cozi, abonamente sau triggeri de Funcție. O Funcție rulabilă are nevoie și de un plan de găzduire, configurare runtime/stocare, o identitate atașată, RBAC și acces la rețea. Referința Key Vault are nevoie de permisiunea de a citi secretul; un URL endpoint nu este o acreditare.
 
-## Gândirea despre sănătatea agenților AI
+## Gânduri despre sănătatea agentului AI
 
-Când o aplicație web tradițională se strică, simptomele sunt familiare: o pagină nu se încarcă, un API returnează o eroare sau o implementare eșuează. Aplicațiile alimentate de AI se pot strica în aceleași moduri — dar se pot comporta și în moduri mai subtile care nu produc mesaje de eroare evidente.
+Când o aplicație web tradițională se strică, simptomele sunt familiare: o pagină nu se încarcă, un API returnează o eroare sau o implementare eșuează. Aplicațiile AI pot să se defecteze în toate aceste moduri — dar pot să se comporte și subtil, fără mesaje evidente de eroare.
 
-Această secțiune vă ajută să construiți un model mental pentru monitorizarea sarcinilor AI astfel încât să știți unde să căutați când ceva nu pare în regulă.
+Această secțiune te ajută să construiești un model mental pentru monitorizarea sarcinilor AI astfel încât să știi unde să cauți când ceva nu pare în regulă.
 
-### Cum diferă sănătatea agenților de sănătatea aplicațiilor tradiționale
+### Cum diferă sănătatea agentului de cea a aplicației tradiționale
 
-Aplicațiile tradiționale pot avea și ele eșecuri subtile de corectitudine. Un agent AI adaugă calitate nedețerministă a răspunsului la preocupările obișnuite de disponibilitate și corectitudine. Gândiți-vă la sănătatea agentului în două straturi:
+Aplicațiile tradiționale pot avea și ele erori subtile de corectitudine. Un agent AI adaugă calitate nondeterministă a răspunsului la preocupările obișnuite privind disponibilitatea și corectitudinea. Gândește sănătatea agentului în două straturi:
 
-| Strat | Ce să urmăriți | Unde să căutați |
+| Stratul | Ce să urmărești | Unde să cauți |
 |-------|--------------|---------------|
-| **Sănătatea infrastructurii** | Rulează serviciul? Sunt resursele alocate? Sunt endpointurile accesibile? | `azd monitor`, sănătatea resurselor în Azure Portal, jurnalele containerului/aplicației |
-| **Sănătatea comportamentului** | Răspunde agentul corect? Răspunsurile sunt la timp? Modelul este apelat corect? | Urmăriri Application Insights, metriți privind latența apelurilor modelului, jurnalele calității răspunsului |
+| **Sănătatea infrastructurii** | Serviciul rulează? Resursele sunt provisionate? Endpointurile sunt accesibile? | `azd monitor`, sănătatea resurselor în Azure Portal, jurnalele containerului/aplicației |
+| **Sănătatea comportamentului** | Agentul răspunde corect? Răspunsurile sunt la timp? Modelul este apelat corect? | Urmăririle din Application Insights, metrici de latență apel model, jurnale de calitate a răspunsului |
 
-Sănătatea infrastructurii este familiară — este aceeași pentru orice aplicație azd. Sănătatea comportamentului este stratul nou introdus de sarcinile AI.
+Sănătatea infrastructurii este cunoscută — e aceeași pentru orice aplicație azd. Sănătatea comportamentului este stratul nou introdus de sarcinile AI.
 
-### Unde să căutați când aplicațiile AI nu se comportă așa cum vă așteptați
+### Unde să cauți când aplicațiile AI nu se comportă cum te aștepți
 
-Dacă aplicația dvs. AI nu produce rezultatele așteptate, iată o listă conceptuală de verificare:
+Dacă aplicația ta AI nu produce rezultatele așteptate, iată o listă conceptuală:
 
-1. **Începeți cu elementele de bază.** Aplicația rulează? Poate accesa dependențele? Verificați `azd monitor` și sănătatea resurselor așa cum ați face pentru orice aplicație.
-2. **Verificați conexiunea la model.** Aplicația dvs. apelează cu succes modelul AI? Apelurile modelului eșuate sau cu timeout sunt cea mai comună cauză a problemelor aplicațiilor AI și vor apărea în jurnalele aplicației.
-3. **Inspectați inputul și fundamentarea în siguranță.** Răspunsurile greșite pot rezulta din căutare, instrucțiuni, limitări ale modelului sau execuția uneltelor. Folosiți date de diagnostic controlate și redactate; nu activați logarea necontrolată a prompturilor/răspunsurilor în producție.
-4. **Revizuiți latența răspunsului.** Apelurile modelului AI sunt mai lente decât apelurile API obișnuite. Dacă aplicația pare lentă, verificați dacă timpii de răspuns ai modelului au crescut — acest lucru poate indica limitarea traficului, limite de capacitate sau congestie regională.
-5. **Fiți atenți la semnale de cost.** Creșteri neașteptate în utilizarea tokenilor sau a apelurilor API pot indica un ciclu, un prompt configurat greșit sau încercări excesive.
+1. **Începe cu elementele de bază.** Aplicația rulează? Poate accesa dependențele? Verifică `azd monitor` și sănătatea resurselor la fel ca pentru orice aplicație.
+2. **Verifică conexiunea cu modelul.** Aplicația ta apelează cu succes modelul AI? Apelurile eșuate sau care au expirat sunt cea mai comună cauză a problemelor aplicațiilor AI și vor apărea în jurnalele aplicației.
+3. **Inspectează intrarea și bazarea în mod sigur.** Răspunsurile greșite pot rezulta din recuperare, instrucțiuni, limitări ale modelului sau execuția uneltelor. Folosește date de diagnostic controlate prin acces, redactate; nu activa jurnalizarea prompturilor/răspunsurilor în mod nediscriminatoriu în producție.
+4. **Revizuiește latența răspunsului.** Apelurile modelului AI sunt mai lente decât apelurile tipice API. Dacă aplicația se simte lentă, verifică dacă timpul de răspuns al modelului a crescut — asta poate indica throttling, limite de capacitate sau congestie la nivel de regiune.
+5. **Urmărește semnalele de cost.** Creșteri neașteptate în utilizarea tokenilor sau apelurile API pot indica o buclă, un prompt configurat greșit sau încercări excesive.
 
-Nu trebuie să stăpâniți imediat instrumentele de observabilitate. Principalul de reținut este că aplicațiile AI au un strat suplimentar de comportament de monitorizat, iar monitorizarea încorporată a azd (`azd monitor`) oferă un punct de plecare pentru investigarea ambelor straturi.
+Nu trebuie să stăpânești imediat uneltele de observabilitate. Principalul este că aplicațiile AI au un strat suplimentar de comportament de monitorizat, iar monitorizarea integrată azd (`azd monitor`) îți oferă un punct de plecare pentru investigarea ambelor straturi.
 
 ---
 
 ## Cele mai bune practici de securitate
 
-### 1. Modelul de securitate Zero-Trust
+### 1. Model de securitate Zero-Trust
 
-**Strategia de implementare**:
+**Strategie de implementare**:
 - Nicio comunicare serviciu-la-serviciu fără autentificare
 - Toate apelurile API folosesc identități gestionate
 - Izolare de rețea cu endpoint-uri private
-- Controale de acces cu drepturi minime
+- Controale de acces cu privilegii minime
 
 ```bicep
 // Managed Identity for each service
@@ -168,7 +168,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Management securizat al secretelor
+### 2. Gestionare securizată a secretelor
 
 **Model de integrare cu Key Vault**:
 
@@ -203,11 +203,11 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-Atribuiți identitatea runtime `Key Vault Secrets User` la scopul corespunzător și atașați-o hostului; `enableRbacAuthorization` singur nu acordă acces. Preferabil autentificarea identității gestionate OpenAI cu `disableLocalAuth: true`. Secretul opțional de cheie are sens doar pentru un cont deliberat activat cu cheie, iar principalul de aprovizionare are nevoie și de permisiune de a scrie secrete.
+Atribuie identitatea runtime `Key Vault Secrets User` la nivelul corespunzător și atașeaz-o gazdei; `enableRbacAuthorization` singur nu acordă acces. Preferă autentificarea cu identitate gestionată OpenAI cu `disableLocalAuth: true`. Secretul cheie opțional are sens doar pentru un cont intenționat activat cu cheie, iar principalul de aprovizionare are nevoie și de permisiunea de a scrie secrete.
 
 ### 3. Securitatea rețelei
 
-**Configurarea endpoint-ului privat**:
+**Configurarea endpoint-urilor private**:
 
 ```bicep
 // Virtual Network for AI services
@@ -265,13 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-Endpointurile private necesită și grupuri zonă DNS private/legături VNet și integrarea în VNet a aplicației. Ele nu blochează automat accesul public: dezactivați explicit accesul la rețeaua publică a contului AI după verificarea conectivității private și accesului la implementare.
+Endpoint-urile private necesită, de asemenea, grupuri de zone DNS private/legături VNet și integrarea VNet a aplicației. Nu blochează automat accesul public: dezactivează explicit accesul public al contului AI după validarea conectivității private și a accesului la implementare.
 
 ## Performanță și scalare
 
 ### 1. Strategii de auto-scalare
 
-**Auto-scalarea Container Apps**:
+**Auto-scalare pentru Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -344,9 +344,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-Azure Cache for Redis Basic/Standard/Premium este pe un [drum de retragere](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Folosiți Azure Managed Redis pentru noi proiecte și configurația sa documentată SKU, identitate și TLS, în loc să copiați această resursă moștenită într-un nou sistem de producție. Linia cu șirul de conectare este un substituent nefuncțional, nu o acreditare. Partitionați cheile cache după autorizare, model/instrucțiuni și versiunea de recuperare, cu expirare; o cache partajată doar pentru interogări poate expune datele altui utilizator.
+Azure Cache pentru Redis Basic/Standard/Premium este pe o [cale de retragere](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Folosește Azure Managed Redis pentru proiecte noi și configurarea documentată a SKU, identității și TLS, în loc să copiezi această resursă moștenită într-un sistem nou de producție. Linia connection-string este un substituent nefuncțional, nu o acreditare. Partitionează cheile cache după autorizare, model/instrucțiuni și versiunea de recuperare, cu expirare; o cache partajată doar pentru interogări poate expune datele altui utilizator.
 
-### 3. Echilibrare de sarcină și managementul traficului
+### 3. Echilibrare de încărcare și gestionarea traficului
 
 **Application Gateway cu WAF**:
 
@@ -384,7 +384,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-Aceasta este o resursă parțială de gateway: o implementare reală necesită subrețea/configurare IP gateway, IP-uri și porturi frontend, ascultători/certificate TLS, setări HTTP backend/probe, reguli și priorități de rutare și o politică WAF revizuită. Numele gazdei TLS/SNI și autentificarea trebuie să se potrivească cu backend-ul Container App.
+Aceasta este o resursă parțială de gateway: o implementare reală necesită și subnet/IP gateway, IP-uri și porturi front-end, ascultători/certificate TLS, setări HTTP/backend, sonde, reguli de rutare și priorități, și o politică WAF revizuită. Numele de gazdă/SNI TLS și autentificarea trebuie să corespundă backend-ului Container App.
 
 ## 💰 Optimizarea costurilor
 
@@ -392,7 +392,7 @@ Aceasta este o resursă parțială de gateway: o implementare reală necesită s
 
 **Configurații specifice mediului**:
 
-Aceste nume sunt **inputuri ilustrative pentru șabloane personalizate**, nu setări automate AZD. Maparea fiecăruia în `infra/main.parameters.json`/Bicep și configurarea hostului înainte. De exemplu, exemplul RAG folosește `AZURE_SEARCH_SERVICE_SKU` și `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, nu denumirile generice de mai jos. Dați memoriei Container Apps o unitate suportată precum `1Gi` în resursa efectivă. Aplicați modificările infrastructurii cu `azd up` sau `azd provision`; `azd deploy` singur nu aplică schimbările Bicep.
+Aceste nume sunt **inputuri ilustrative pentru șabloane personalizate**, nu setări automate AZD. Mapă fiecare în `infra/main.parameters.json`/Bicep și configurația gazdei mai întâi. De exemplu, exemplul RAG folosește `AZURE_SEARCH_SERVICE_SKU` și `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, nu numele generice de mai jos. Oferă memorie Container Apps o unitate suportată precum `1Gi` în resursa efectivă. Aplică schimbările de infrastructură cu `azd up` sau `azd provision`; `azd deploy` singur nu aplică modificările Bicep.
 
 ```bash
 # Development environment
@@ -412,7 +412,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Monitorizarea costurilor și bugete
+### 2. Monitorizarea costurilor și bugetelor
 
 ```bicep
 // Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
@@ -455,13 +455,13 @@ resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
 }
 ```
 
-Înlocuiți destinatarii exemplului și verificați scopul/permisiunile. Alertarea de buget folosește date întârziate de facturare și nu impune o limită de cheltuieli.
+Înlocuiește destinatarii exemplu și verifică domeniul/permisii. Alerta bugetelor folosește date de facturare întârziate și nu impune o limită de cheltuieli.
 
 ### 3. Optimizarea utilizării tokenilor
 
-**Managementul costurilor OpenAI**:
+**Gestionarea costurilor OpenAI**:
 
-Aceasta este doar o euristică bazată pe caractere pentru o previzualizare UI, **nu** un validator al limitelor tokenilor modelului. Codul de producție trebuie să utilizeze un tokenizer potrivit pentru modelul implementat și să țină cont de instrucțiunile sistemului, schemele uneltelor, istoricul și bugetul de output. Respingeți un mesaj utilizator supradimensionat în loc să-l tăiați silențios.
+Aceasta este doar o euristică bazată pe caractere pentru o previzualizare UI, **nu** un validator de limită de tokeni model. Codul de producție trebuie să folosească un tokenizer potrivit modelului implementat și să țină cont de instrucțiunile sistemului, schemele uneltelor, istoricul și bugetul de output. Respinge un mesaj utilizator oversized în loc să îl trunchiezi silențios.
 
 ```typescript
 // Application-level token optimization
@@ -495,7 +495,7 @@ class TokenOptimizer {
 }
 ```
 
-## Monitorizare și Observabilitate
+## Monitorizare și observabilitate
 
 ### 1. Application Insights cuprinzător
 
@@ -542,9 +542,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitorizare specifică AI
+### 2. Monitorizare specific AI
 
-**Dashboard-uri personalizate pentru metrici AI**:
+**Dashboards personalizate pentru metrici AI**:
 
 ```json
 {
@@ -572,7 +572,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-Acest JSON este o schiță definită de aplicație, nu un șablon de dashboard importabil în portalul Azure. Interogările de token/cost necesită ca aplicația dvs. să emită exact acești metrici personalizați; nu sunt creați de AZD. Adaptați filtrele de dependență pentru numele reale ale endpointului/modelului.
+Acest JSON este o schiță definită de aplicație, nu un schema de dashboard importabil în portalul Azure. Interogările pentru token/cost necesită ca aplicația ta să emită acei metrici personalizați exacți; nu sunt creați de AZD. Adaptează filtrele de dependență pentru endpoint/span-urile modelului tău real.
 
 ### 3. Verificări de sănătate și monitorizare uptime
 
@@ -615,11 +615,11 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Recuperare după dezastre și Disponibilitate ridicată
+## Recuperarea după dezastru și disponibilitatea ridicată
 
-Testul precedent presupune un App Service existent `webApp` și o resursă Application Insights. Testele standard de disponibilitate sunt taxabile și necesită un endpoint accesibil; aplicațiile doar private au nevoie de un design corespunzător de monitorizare privată. Testele ping URL sunt învechite; folosiți [teste standard de disponibilitate](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+Testul precedent presupune un App Service existent `webApp` și o resursă Application Insights. Testele standard de disponibilitate sunt facturabile și necesită un endpoint accesibil; aplicațiile private-only necesită un design adecvat de monitorizare privată. Testele ping URL sunt depreciate; folosește [teste standard de disponibilitate](https://learn.microsoft.com/azure/azure-monitor/app/availability).
 
-### 1. Implementare multi-regiune
+### 1. Implementarea multi-regională
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -681,9 +681,9 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-Variabilele de mediu nu aleg locațiile resurselor. IaC trebuie să aprovizioneze hosturi regionale distincte și să lege fiecare serviciu cu etichete `resourceName` sau `azd-service-name`. Exemplul Traffic Manager este o **topologie separată App Service** (`primaryAppService`/`secondaryAppService`), nu rutare pentru declarațiile Container Apps. Container Apps necesită un endpoint extern/front door configurat corespunzător, rutare TLS/domeniu personalizat și probe de sănătate.
+Variabilele de mediu nu aleg locațiile resurselor. IaC trebuie să provisioneze gazde regionale distincte și să lege fiecare serviciu cu tagurile `resourceName` sau `azd-service-name`. Exemplul Traffic Manager este o **topologie separată App Service** (`primaryAppService`/`secondaryAppService`), nu rutare pentru declarațiile Container Apps. Container Apps necesită un endpoint extern/corect configurat, rutare TLS/domeniu personalizat și sonde de sănătate.
 
-### 2. Backup și recuperare de date
+### 2. Backup și recuperare date
 
 ```bicep
 // Backup configuration for critical data
@@ -705,11 +705,11 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
 
 ```
 
-Vault-ul singur nu face backup nimic. Configurați o **politică specifică sarcinii acceptată și o instanță de backup**, permisiunile sursei, reținerea și testele de restaurare folosind [matricele de suport Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Nu există o politică generică Azure Backup pentru implementările găzduite Azure OpenAI model. Păstrați definițiile infrastructurii/modelului în controlul sursei; protejați documentele încărcate, datele aplicației și artefactele de fine-tuning folosind caracteristicile suportate de backup/export ale fiecărui serviciu de bază. Definiți și testați explicit RPO/RTO.
+Doar vault-ul nu face backup. Configurează o **politică și instanță de backup suportate specifice sarcinii**, permisiuni sursă, retenție și teste de restaurare folosind [matricele de suport Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Nu există o politică generică Azure Backup pentru implementările model OpenAI găzduit. Păstrează definițiile infrastructură/model în controlul sursei; protejează documentele încărcate, datele aplicației și artefactele de fine-tuning folosind facilitățile suportate de backup/export ale fiecărui serviciu de backing. Definește și testează explicit RPO/RTO.
 
 ## Integrare DevOps și CI/CD
 
-### 1. Flux de lucru GitHub Actions
+### 1. Workflow GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -747,7 +747,7 @@ jobs:
 
 ```
 
-Aceasta este **porțiunea doar pentru test** a unui flux de lucru și presupune că ați creat `requirements.txt`, `tests/` și cele două scripturi de siguranță. Adăugați joburile de aprovizionare/implementare autentificate OIDC din [Configurare Pipeline CI/CD](#cicd-pipeline-configuration), cu `needs: test`, un push/triggere manual de încredere și medii GitHub protejate. Nu implementați cod din pull-request neîncrezător cu credențiale cloud. Un runner proaspăt nu are un mediu local AZD selectat; furnizați intrările environment/subscription/location și folosiți `azd auth login`, nu doar `azure/login`.
+Aceasta este **partea doar de testare** a unui workflow și presupune că ai creat `requirements.txt`, `tests/` și cele două scripturi de siguranță. Adaugă joburile de aprovizionare/implementare autentificate OIDC din [Configurarea Pipeline-ului CI/CD](#cicd-pipeline-configuration), cu `needs: test`, un trigger de push/manual de încredere și medii GitHub protejate. Nu implementa cod neîncrezut din pull-request cu acreditări cloud. Un runner nou nu are selectat mediu AZD local; furnizează inputurile de mediu/abonament/locație și folosește `azd auth login`, nu doar `azure/login`.
 
 ### 2. Validarea infrastructurii
 
@@ -789,76 +789,76 @@ fi
 echo "Infrastructure validation completed successfully!"
 ```
 
-Expectativă: un exit zero și mesajul de finalizare doar atunci când toate tipurile așteptate există și implementarea modelului numit este aprovizionată. Aceasta verifică inventarul/starea de aprovizionare, **nu** sănătatea resurselor, topologia exactă, RBAC, accesibilitatea rețelei sau comportamentul modelului. Adaptați tipurile așteptate la arhitectura dvs., apoi efectuați un test separat de pregătire a aplicației autentificat.
+Așteptat: ieșire zero și mesaj de finalizare doar când toate tipurile așteptate există și implementarea modelului numit este provisionată. Acesta verifică starea inventar/provisionare, **nu** sănătatea resurselor, topologia exactă, RBAC, accesibilitatea rețelei sau comportamentul modelului. Adaptează tipurile așteptate pentru arhitectura ta, apoi fă un test separat autenticat de pregătire a aplicației.
 
-## Lista de verificare pentru pregătirea producției
+## Checklist pentru pregătirea producției
 
 ### Securitate ✅
-- [ ] Toate serviciile folosesc identități gestionate
+- [ ] Toate serviciile utilizează identități gestionate
 - [ ] Secrete stocate în Key Vault
 - [ ] Endpoint-uri private configurate
-- [ ] Grupuri de securitate de rețea implementate
+- [ ] Grupuri de securitate rețea implementate
 - [ ] RBAC cu privilegii minime
-- [ ] WAF activat pe endpointuri publice
+- [ ] WAF activat pe endpoint-urile publice
 
 ### Performanță ✅
 - [ ] Auto-scalare configurată
 - [ ] Caching implementat
-- [ ] Echilibrare de sarcină configurată
+- [ ] Echilibrare de încărcare configurată
 - [ ] CDN pentru conținut static
-- [ ] Pooling conexiuni bază de date
+- [ ] Pooling al conexiunilor bazei de date
 - [ ] Optimizarea utilizării tokenilor
 
 ### Monitorizare ✅
 - [ ] Application Insights configurat
 - [ ] Metrici personalizate definite
-- [ ] Reguli de alertă configurate
+- [ ] Reguli de alertare configurate
 - [ ] Dashboard creat
 - [ ] Verificări de sănătate implementate
-- [ ] Politici de retenție pentru jurnale
+- [ ] Politici de retenție a jurnalelor
 
 ### Fiabilitate ✅
-- [ ] Implementare multi-regiune
+- [ ] Implementare multi-regională
 - [ ] Plan de backup și recuperare
-- [ ] Circuit breakers implementați
+- [ ] Circuite de siguranță implementate
 - [ ] Politici de retry configurate
 - [ ] Degradare grațioasă
-- [ ] Endpoint-uri de verificare a sănătății
+- [ ] Endpoint-uri pentru verificarea sănătății
 
-### Managementul costurilor ✅
-- [ ] Alarme de buget configurate
+### Gestionarea costurilor ✅
+- [ ] Alerta bugetelor configurate
 - [ ] Dimensionarea corectă a resurselor
-- [ ] Discounturi dev/test aplicate
+- [ ] Discounturi dezvoltare/test aplicate
 - [ ] Instanțe rezervate achiziționate
 - [ ] Dashboard de monitorizare a costurilor
-- [ ] Revizuiri regulate ale costurilor
+- [ ] Recenzii regulate ale costurilor
 
 ### Conformitate ✅
 - [ ] Cerințele de rezidență a datelor îndeplinite
-- [ ] Logare de audit activată
+- [ ] Jurnalizare de audit activată
 - [ ] Politici de conformitate aplicate
-- [ ] Baze de securitate implementate
+- [ ] Baseline-uri de securitate implementate
 - [ ] Evaluări regulate de securitate
 - [ ] Plan de răspuns la incidente
 
 ## Repere de performanță
 
-### Ținte ilustrative de producție
+### Ținte ilustrative pentru producție
 
-Acestea sunt exemple de SLO-uri pentru negociere și testare la încărcare, nu repere măsurate sau garanții. Latența răspunsului depinde de model/lungimea outputului; cheltuielile lunare de tokeni depind de trafic și prețuri, nu doar de numărul tokenilor.
+Acestea sunt exemple de SLO-uri pentru negociere și testare la încărcare, nu repere măsurate sau garanții. Latența răspunsului depinde de model/lungimea outputului; cheltuiala lunară cu tokeni depinde de trafic și prețuri, nu doar de numărul de tokeni.
 
 | Metrică | Țintă | Monitorizare |
 |--------|--------|------------|
 | **Timp de răspuns** | < 2 secunde | Application Insights |
-| **Disponibilitate** | 99,9% | Monitorizare uptime |
-| **Rată de erori** | < 0,1% | Jurnalele aplicației |
-| **Cheltuieli model** | < 500$ / lună (buget exemplu) | Managementul costurilor |
-| **Utilizatori concurenți** | 1000+ | Testare de încărcare |
-| **Timp de recuperare** | < 1 oră | Teste de recuperare după dezastru |
+| **Disponibilitate** | 99.9% | Monitorizare uptime |
+| **Rata erorilor** | < 0.1% | Jurnale aplicație |
+| **Cheltuieli model** | < 500$/lună (buget exemplu) | Gestionarea costurilor |
+| **Utilizatori concurenți** | 1000+ | Testare la încărcare |
+| **Timp de recuperare** | < 1 oră | Teste de recuperare în caz de dezastru |
 
 ### Testare de încărcare
 
-Următorul este un schiț al interfeței pentru un script de testare a încărcării **pe care trebuie să-l implementați**; acest depozit nu oferă `scripts/load_test.py`. Definiți conținutul cererilor, autentificarea, sarcinile reprezentative, aserțiunile privind latența/eroarea percentilă și o limită de cheltuieli în instrumentul dvs. ales pentru testarea încărcării înainte de rulare:
+Următorul este un schiț al interfeței pentru un script de testare a încărcării **pe care trebuie să îl implementați**; acest depozit nu furnizează `scripts/load_test.py`. Definiți conținutul cererii, autentificarea, sarcinile de lucru reprezentative, aserțiunile privind latența/erorile percentilice și o limită de cheltuieli în instrumentul ales de testare a încărcării înainte de a rula:
 
 ```bash
 # Load testing script for AI applications
@@ -869,31 +869,31 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Cele mai bune practici din comunitate
+## 🤝 Cele mai bune practici ale comunității
 
 Pe baza feedback-ului comunității Microsoft Foundry Discord:
 
-### Recomandările principale ale comunității:
+### Recomandările principale din partea comunității:
 
-1. **Începeți mic, scalați treptat**: Începeți cu SKU-uri de bază și scalați în funcție de utilizarea reală
-2. **Monitorizați totul**: Configurați o monitorizare cuprinzătoare din prima zi
-3. **Automatizați securitatea**: Folosiți infrastructura ca cod pentru securitate constantă
-4. **Testați temeinic**: Includeți testarea specifică AI în pipeline-ul dvs.
-5. **Planificați costurile**: Monitorizați utilizarea token-urilor și setați alerte de buget devreme
+1. **Porniți în mic, scalați treptat**: Începeți cu SKU-uri de bază și scalați în funcție de utilizarea efectivă
+2. **Monitorizați tot**: Configurați monitorizare cuprinzătoare de la prima zi
+3. **Automatizați securitatea**: Folosiți infrastructura ca cod pentru securitate consistentă
+4. **Testați temeinic**: Includeți testare specifică AI în pipeline-ul vostru
+5. **Planificați costurile**: Monitorizați utilizarea tokenurilor și setați alerte de buget de timpuriu
 
-### Capcane frecvente de evitat:
+### Capcane comune de evitat:
 
 - ❌ Hardcodarea cheilor API în cod
-- ❌ Lipsa configurării unei monitorizări corespunzătoare
+- ❌ Nepregătirea monitorizării corespunzătoare
 - ❌ Ignorarea optimizării costurilor
-- ❌ Lipsa testării scenariilor de eroare
+- ❌ Nepregătirea scenariilor de eșec
 - ❌ Implementarea fără verificări de sănătate
 
 ## Comenzi și extensii AZD AI CLI
 
-AZD include un set în creștere de comenzi și extensii specifice AI care simplifică fluxurile de lucru AI în producție. Aceste instrumente acoperă diferența dintre dezvoltarea locală și implementarea în producție pentru sarcini AI.
+AZD include un set în creștere de comenzi și extensii specifice AI care simplifică fluxurile de lucru AI în producție. Aceste unelte fac legătura între dezvoltarea locală și implementarea în producție pentru sarcini AI.
 
-> **Revizuire lansare (2026-11-04):** Ghidul CLI de mai jos a fost verificat cu versiunile publicate ale `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, și `azure.ai.evaluations` **1.0.0-beta.2**. Agenții beta.23 necesită `azd >= 1.37.0`; evaluările beta.2 necesită `azd >= 1.33.0`. Folosiți cel puțin 1.37.0 pentru fluxul de lucru combinat. Aceasta este o revizuire a documentației/surselor, nu o validare live a implementării Azure.
+> **Actualizare Foundry GA (2026-11-09):** Pachetul `microsoft.foundry` a atins **1.0 / disponibilitate generală** pe [5 noiembrie 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Folosiți **`azd >= 1.37.0`** pentru acest flux de lucru. Revizuirea anterioară `azd 1.37.2`, agenți beta.23 și evaluări beta.2 este păstrată mai jos ca istoric al migrării, nu ca versiune curentă a pachetului. Aceasta este o revizuire de documentație/sursă, nu o validare a implementării live sau o afirmație că toate extensiile opționale, API-urile sau funcțiile preview sunt GA.
 
 ### Extensii AZD pentru AI
 
@@ -903,12 +903,12 @@ AZD folosește un sistem de extensii pentru a adăuga capabilități specifice A
 # List all available extensions (including AI)
 azd extension list
 
-# Inspect installed extension details
+# Inspect installed versions
 azd version
-azd extension show azure.ai.agents
+azd ext list --installed
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle
+azd ext install microsoft.foundry
 
 # Install the separate Foundry evaluations extension
 azd extension install azure.ai.evaluations
@@ -919,51 +919,61 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Upgrade the Foundry bundle
+azd ext upgrade microsoft.foundry
 ```
 
 **Extensii AI disponibile:**
 
 | Extensie | Scop | Stare |
 |-----------|---------|--------|
-| `azure.ai.agents` | Gestionarea serviciului Foundry Agent | Previzualizare |
-| `azure.ai.evaluations` | Seturi de date de evaluare, evaluatori, grupuri de evaluare și rulări | Previzualizare |
-| `azure.ai.skills` | Abilități reutilizabile ale agenților | Previzualizare |
-| `azure.ai.connections` | Conexiuni Foundry (surse de date, unelte) | Previzualizare |
-| `azure.ai.finetune` | Fine-tuning modele Foundry | Previzualizare |
-| `azure.ai.models` | Modele personalizate Foundry | Previzualizare |
-| `azure.coding-agent` | Configurare agent de codare | Disponibilă |
+| `microsoft.foundry` | Metapachet care instalează cele șapte extensii principale de mai jos; nu are grup de comenzi propriu | Pachet GA 1.0 |
+| `azure.ai.agents` | `azd ai agent`: configurare agenți, execuție locală și operațiuni | Inclus; versiuni independente |
+| `azure.ai.connections` | `azd ai connection`: conexiuni de proiect | Inclus; versiuni independente |
+| `azure.ai.inspector` | `azd ai inspector`: interfață Agent Inspector locală | Inclus; versiuni independente |
+| `azure.ai.projects` | `azd ai project`: resurse de proiect și implementări de modele | Inclus; versiuni independente |
+| `azure.ai.routines` | `azd ai routine`: programe și declanșatoare | Inclus; versiuni independente |
+| `azure.ai.skills` | `azd ai skill`: linii directoare comportamentale reutilizabile | Inclus; versiuni independente |
+| `azure.ai.toolboxes` | `azd ai toolbox`: colecții de unelte versionate | Inclus; versiuni independente |
+| `azure.ai.evaluations` | Seturi de date pentru evaluare, evaluatori, grupuri evaluare și rulări | Instalare/release separată |
+| `azure.ai.dataset` | Înregistrarea și versiunea seturilor de date | Instalare/release separată |
+| `azure.ai.finetune` | Fine-tuning modelele Foundry | Instalare/release separată |
+| `azure.ai.models` | Modele personalizate Foundry | Instalare/release separată |
 
-> Rulați `azd extension list --installed` și `azd extension show azure.ai.evaluations` pentru a inspecta versiunile instalate. Actualizați mai întâi CLI-ul core folosind [instrucțiunile de instalare/actualizare](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (pentru o instalare Windows winget: `winget upgrade Microsoft.Azd`), apoi rulați `azd extension upgrade --all`. Nu există o comandă core `azd upgrade`. Revizuiți modificările breaking înainte de a actualiza automatizarea din producție; nu presupuneți că o actualizare de extensie păstrează vechile formate de comandă sau configurație.
+Instalarea individuală a `azure.ai.agents` rămâne suportată și instalează dependențele; pachetul este presetarea cursului pentru fluxul GA. GA pachet nu garantează statutul de lansare pentru toate funcțiile opționale ale componentelor sale. Consultați [împachetarea și verificarea extensiilor](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions) și verificați ajutorul comenzilor instalate înainte de utilizare.
 
-### Schimbări și corecții în lansările recente
+> Actualizați mai întâi CLI-ul principal cu `azd update` sau metoda corespunzătoare de [instalare/actualizare](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd), apoi rulați `azd ext upgrade microsoft.foundry`. Actualizați manual evaluările instalate separat după cum este nevoie cu `azd ext upgrade azure.ai.evaluations`. Nu există o comandă principală `azd upgrade`. Înregistrați și revizuiți extensiile cu versiuni independente în automatizarea producției; o actualizare nu migrează automat configurația veche.
 
-| Lansare | Ce se schimbă pentru acest curs |
+### Schimbări și corecții recente ale versiunii
+
+| Versiune | Ce se schimbă pentru acest curs |
 |---------|------------------------------|
-| `azd 1.37.0` | Adaugă API-uri stabile de previzualizare a implementării și corectează editările de extensii care rescriau setări `azure.yaml` nelegate. |
-| `azd 1.37.1` | Corectează propagarea Ctrl+C prin extensii și distinge anulările/timeouts de eșecurile generice. |
-| `azd 1.37.2` | Îmbunătățește validarea provisioning: avertismente critice implicite la **Nu**, eșuează fără confirmare în rulări neasistate, iar anularea sare hook-urile post-provision. Corectează de asemenea valorile nerezolvate de mediu în listele de interdicție Deployment Stacks când funcția alpha este activată. |
-| Agenți `beta.22` | Migrează evaluarea la `azd ai eval`, schimbă optimizarea la API GA v1, necesită forme de plural `toolboxes`, și separă acceptarea pentru managed-harness, voce și previzualizări cu rulare lungă. Corectează selecția modelului specific mediului și autentificarea toolbox-ului. |
-| Agenți `beta.23` | Expune `init --harness`; corectează ieșirea răspunsului A2A 0.3, căi/module prompt-agent invalide peste straturi de infrastructură, diagnosticări activation-timeout și avertismente RBAC pentru dezvoltatori reținute. |
-| Evaluări `beta.2` | Necesită configurație camelCase pentru evaluare, adaugă autorii de conversații statice/simulate și surse locale de fișiere explicite, și corectează gestionarea identității/versionii setului de date, numărătoarea calității, și diagnostice pentru rulări eșuate. |
+| `microsoft.foundry` 1.0 GA (2026-11-05) | Implicit setează pachetul cu cele șapte extensii, păstrează setările agent/deployment în `azure.yaml`, testează local cu Agent Inspector și încarcă cod pentru build-ul Foundry la distanță. Instalează separat evaluările și reinstalează extensiile necesare pe runner-ele CI. |
+| `azd 1.37.0` | Adaugă API-uri stabile pentru previzualizarea implementării și repară editările extensiilor care suprascriau setările `azure.yaml` nelegate. |
+| `azd 1.37.1` | Remediază propagarea Ctrl+C prin extensii și diferențiază anulările/timeout-urile de erorile generice. |
+| `azd 1.37.2` | Îmbunătățește validarea provisioning-ului: avertismente critice implicite la **Nu**, eșuează fără confirmare în rulări fără operator, iar anularea saltă hook-urile post-provisioning. De asemenea, remediază valori de mediu nerezolvate în listele de excludere Deployment Stack când acea funcție alfa este activată. |
+| Agenți `beta.22` | Migrează evaluarea către `azd ai eval`, schimbă optimizarea la API-ul GA v1, cere formele de plural `toolboxes` și separă gestionarea harness, voce și opt-in-urile de previzualizare pe termen lung. Corectează selecția modelului specific mediului și autentificarea toolbox-ului. |
+| Agenți `beta.23` | Expune `init --harness`; repară afișarea răspunsurilor A2A 0.3, căile/modulul prompt-agent invalide între straturile de infrastructură, diagnosticările timeout-ului de activare și avertismentele RBAC persistente ale dezvoltatorului. |
+| Evaluări `beta.2` | Solicită configurare evaluări camelCase, adaugă autorat static/simulat al conversațiilor și surse explicite de fișiere locale, și remediază gestionarea identității/versiunii seturilor de date, numărarea porților de calitate și diagnosticările rulărilor eșuate. |
 
-Un timeout de activare agent NU dovedește un eșec de implementare: inspectați versiunea încercată și starea sa înainte de a reîncerca. Avertismentele RBAC dezvoltator pot persista chiar dacă provisioning-ul reușește; rezolvați accesul lipsă înainte de a invoca ca acel dezvoltator.
+Un timeout de activare agent **nu** demonstrează un eșec al implementării: inspectați versiunea încercată și starea acesteia înainte de a reîncerca. Avertismentele RBAC pentru dezvoltatori pot rămâne chiar dacă provisioning-ul a fost un succes; rezolvați lipsa accesului înainte de a invoca ca acel dezvoltator.
 
-Surse: [Lansări AZD](https://github.com/Azure/azure-dev/releases), [lansarea agenților beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [migrarea agenților beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), și [lansarea evaluărilor beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
+Rândurile beta de mai sus descriu corecții anterioare și limitele de migrare, nu o cerință de a fixa proiecte noi la acele versiuni.
 
-**Ce sunt extensiile mai noi `skills` și `connections`?**
+Surse: [anunț Foundry GA](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/), [lansări AZD](https://github.com/Azure/azure-dev/releases), [lansare agenți beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [migrare agenți beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), și [lansare evaluări beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-Două extensii în previzualizare au apărut alături de uneltele agenților și merită înțelese chiar dacă sunteți începător:
+**Ce sunt extensiile `skills` și `connections` incluse?**
 
-- **`azure.ai.skills`** — O **abilitate** este o capacitate reutilizabilă (un instrument sau comportament pachetat) pe care o puteți atașa unuia sau mai multor agenți în loc să o reimplementați de fiecare dată. Gândiți-o ca pe o piesă comună de construcție: definiți o abilitate "caută în documentație" sau "verifică o comandă" o dată, apoi reutilizați-o printre agenți. Aceasta menține sistemele multi-agent (Capitolul 5) consistente și evită copierea/lipirea.
-- **`azure.ai.connections`** — O **conexiune** este o legătură gestionată de la proiectul Foundry la o resursă externă de care agenții dvs. au nevoie—o sursă de date (precum Azure AI Search), un endpoint de unealtă sau un alt serviciu. Conexiunile centralizează *unde* și *cum* agenții accesează datele, astfel încât acreditările și endpoint-urile trăiesc într-un loc guvernat în loc să fie împrăștiate în cod.
+Acestea sunt instalate cu pachetul de bază, dar au scopuri diferite:
 
-Nu aveți nevoie de acestea pentru a implementa primul agent—folosiți `azure.ai.agents` în timpul învățării. Apelați la `skills` când vă regăsiți duplicând aceeași unealtă în agenți diferiți și `connections` când mai mulți agenți partajează aceeași sursă de date.
+- **`azure.ai.skills`** — Un **skill** reprezintă un pachet de ghiduri comportamentale reutilizabile pentru agenți. Partajați instrucțiuni revizuite între agenți în loc să le copiați. Un skill nu implementează un instrument sau nu oferă acces la date; folosiți cutiile de instrumente și codul aplicației pentru execuția instrumentelor.
+- **`azure.ai.connections`** — O **conexiune** este un link gestionat de la proiectul Foundry către o resursă externă de care au nevoie agenții dvs.—o sursă de date (precum Azure AI Search), un punct final al unui instrument sau un alt serviciu. Conexiunile centralizează *unde* și *cum* agenții accesează datele, astfel încât acreditările și punctele finale sunt păstrate într-un singur loc guvernat, nu împrăștiate prin cod.
+
+Nu trebuie să configurați fiecare capabilitate din pachet pentru a lansa primul agent. Apelați la skills când agenții partajează ghiduri comportamentale și la conexiuni când partajează resurse externe.
 
 ### Inițializarea proiectelor de agenți cu `azd ai agent init`
 
-Comanda `azd ai agent init` construiește scheletul unui proiect de agent Microsoft Foundry. Folosiți un șablon de proiect `azure.yaml` curent, nu un manifest implicit al agentului moștenit:
+Comanda `azd ai agent init` creează scheletul unui proiect de agent Microsoft Foundry. Pentru un exemplu funcțional de implementare cod cu Python 3.13+ și uv curent, urmați [tutorialul GA pentru agent găzduit](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Comenzile de mai jos ilustrează adoptarea **propriului** șablon curent `azure.yaml`; șablonul local menționat nu este furnizat de acest curs:
 
 ```bash
 # Initialize a new agent project from a local project template
@@ -976,40 +986,48 @@ azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <
 azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**Flag-uri cheie:**
+**Flaguri cheie:**
 
 | Flag | Descriere |
 |------|-------------|
 | `-t, --template` | Cale sau URI GitHub suportat către un document de proiect `azure.yaml` |
-| `-p, --project-id` | ID-ul proiectului Microsoft Foundry existent pentru mediul azd |
-| `-s, --src` | Directorul sursa pentru agenții generați sau directorul țintă când adoptați un proiect |
-| `--kind` | Inițializează un agent `hosted`, `prompt` sau în previzualizarea `prompt-voice` |
-| `--harness` | Executare opțională pentru `--kind prompt`; necesită opt-in în previzualizare |
-| `-e, --environment` | Mediul azd de folosit |
+| `-p, --project-id` | ID existent de Proiect Microsoft Foundry pentru mediul dvs. azd |
+| `-s, --src` | Director sursă pentru agenții generați sau director țintă când adoptați un proiect |
+| `--deploy-mode code` | Sursă de upload pentru o construire Foundry la distanță în loc de construire locală |
+| `--model-deployment` | Reutilizează o implementare de model existentă numită în timpul inițierii |
+| `--kind` | Inițializează un agent `hosted`, `prompt` sau în previzualizare `prompt-voice` |
+| `--harness` | Mediu de execuție opțional pentru `--kind prompt`; necesită participare opțională la previzualizare |
+| `-e, --environment` | Mediul azd care va fi folosit |
 
-`--manifest`/`-m` este un alias depreciat pentru `--template`/`-t`; redenumirea flag-ului nu convertește un manifest vechi într-un document de proiect curent. `--host containerapp` nu este un flag agent-init curent. Pentru o aplicație obișnuită Container Apps, folosiți `azd init --template` cu un șablon care declară `host: containerapp`.
+`--manifest`/`-m` este un alias depreciat pentru `--template`/`-t`; redenumirea flagului nu convertește un manifest vechi într-un document de proiect curent. `--host containerapp` nu este un flag curent pentru agent-init. Pentru o aplicație obișnuită Container Apps, folosiți `azd init --template` cu un șablon care declară `host: containerapp`.
 
-Pentru un proiect existent cu exact un serviciu `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` adaugă sau actualizează o definiție directă de agent fără provisioning sau implementare. Comenzile runtime resping definițiile vechi implicite `agent.yaml`/AgentManifest și subordonate `config:`; migrați-le către un serviciu `azure.ai.agent` curent. Când init printă o următoare etapă `cd`, rulați-o înainte de `azd up`: init nu schimbă directorul shell-ului dvs.
+Pentru un proiect existent cu exact un serviciu `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` adaugă sau actualizează o definiție directă a agentului fără a face provisonare sau implementare. Comenzile runtime resping definiții `agent.yaml`/AgentManifest implicite și serviciile `config:` imbricate de tip legacy; migrați-le către un serviciu `azure.ai.agent` curent. Când init afișează un pas următor `cd`, executați-l înainte de `azd up`: init nu schimbă directorul shell-ului dvs.
 
 **Sfat pentru producție**: Folosiți `--project-id` pentru a vă conecta direct la un proiect Foundry existent, păstrând codul agentului și resursele cloud legate de la început.
 
-#### Funcții opționale în previzualizare
+#### Funcționalități opționale în previzualizare
 
-Managed harness, voice și invocare pe durată lungă sunt dezactivate implicit. Puneți doar comutatorul pentru funcția de care aveți nevoie în **mediu proces shell/CI**, nu cu `azd env set`:
+Mediu gestionat, voce și invocare de durată lungă sunt dezactivate implicit independent. Setează doar comutatorul pentru caracteristica necesară în **mediul procesului shell/CI**, nu cu `azd env set`:
 
-| Funcție | Variabilă de mediu proces |
+| Caracteristică | Variabilă de mediu proces |
 |---------|------------------------------|
-| Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
-| Voice (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
-| Invocare pe durată lungă | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+| Mediu gestionat (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Voce (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Invocare de durată lungă | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
 
-De exemplu, folosiți `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` în Bash sau `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` în PowerShell înainte de a rula comanda relevantă. Un singur comutator nu activează celelalte. Consultați [README-ul agenților lansați](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) pentru toate comutatoarele și limitările în previzualizare.
+De exemplu, folosiți `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` în Bash sau `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` în PowerShell înainte de a rula comanda relevantă. Un comutator nu activează pe celelalte. Consultați [README-ul agenților lansați](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) pentru toate comutatoarele de previzualizare și limitări.
 
 ### Gestionarea ciclului de viață al agentului
 
-Folosiți `azure.ai.agents` pentru testare, inspectare, optimizare și retragere a agenților, și extensia separată `azure.ai.evaluations` pentru măsurarea calității:
+Extensia `azure.ai.agents` din pachet suportă testarea locală și operațiunile agentului implementat. Instalați `azure.ai.evaluations` separat pentru a măsura calitatea:
 
 ```bash
+# Start the local agent and Agent Inspector (leave running)
+azd ai agent run
+
+# From a second terminal in the project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
 # Invoke a deployed agent and view server response timing
 # (total latency and time to first byte)
 azd ai agent invoke
@@ -1026,39 +1044,42 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-**Ciclul de viață pe scurt:**
+**Ciclul de viață în rezumat:**
 
 | Etapă | Comandă | Utilizare în producție |
 |-------|---------|----------------|
-| Testare | `azd ai agent invoke` | Validați răspunsurile și măsurați latența înainte de lansare |
-| Inspectare | `azd ai agent endpoint show` | Revizuiți autentificarea/configurarea endpoint-urilor; detectați devreme schimbările breaking |
+| Test local | `azd ai agent run`, apoi `azd ai agent invoke --local "Test prompt"` | Inspectați cererile și răspunsurile înainte de implementare; apelurile către modele Azure tot generează costuri |
+| Implementare | `azd deploy` | În modul cod, construiți sursa uploadată la distanță în Foundry |
+| Testare | `azd ai agent invoke` | Validarea răspunsurilor și măsurarea latenței înainte de lansare |
+| Diagnosticare | `azd ai agent doctor`, `azd ai agent monitor --follow` | Verificați configurarea/permisii și urmăriți jurnalele agentului |
+| Inspectare | `azd ai agent endpoint show` | Revizuiți autentificarea/configurația punctului final; detectați devreme schimbări care pot cauza erori |
 | Măsurare | `azd ai eval init`, `generate`, `run start` | Definiți, implementați și executați evaluări repetabile |
-| Îmbunătățire | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reutilizați o evaluare compatibilă pentru optimizarea agentului |
-| Recuperare | `azd ai agent code download` | Recuperează codul sursă exact implementat pentru audit/rollback |
-| Retragere | `azd ai agent delete --force` | Demolați curat un agent și versiunile acestuia |
+| Îmbunătățire | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reutilizați o evaluare compatibilă pentru a optimiza agentul |
+| Recuperare | `azd ai agent code download` | Recuperează sursa exactă implementată pentru audit/rollback |
+| Retragere | `azd ai agent delete --force` | Dezafectarea curată a unui agent și versiunilor acestuia |
 
-> Acestea sunt comenzi în previzualizare și pot suferi modificări între lansările extensiilor. Rulați `azd ai agent --help` pentru a vedea subcomenzile exacte disponibile în versiunea dvs. instalată.
+> Rulați `azd ai agent --help` pentru a inspecta comenzile din versiunea instalată. Pachetul este GA; funcționalitățile opt-in pentru previzualizare sunt încă independente. Înainte de curățare, distingeți ștergerea agentului de ștergerea proiectului: `azd down` șterge grupul de resurse al unui proiect nou creat, dar păstrează resursele proiectului reutilizat. Urmați [instrucțiunile de curățare](../chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately).
 
-`endpoint show` suportă agenți găzduiți, prompt și de voce, dar actualizările endpoint-ului sunt doar găzduite; agenții workflow nu sunt susținuți. Descărcarea codului și exemplul de retragere a agentului găzduit de mai sus nu sunt operațiuni generice pentru fiecare tip de agent.
+`endpoint show` suportă agenți găzduiți, prompt și vocal, dar actualizările punctelor finale sunt doar pentru găzduiți; agenții de tip workflow nu sunt susținuți. Descărcarea codului și exemplul de retragere agent găzduit de mai sus nu sunt operațiuni generice pentru orice tip de agent.
 
-#### Migrarea evaluărilor și verificările calității
+#### Migrarea evaluărilor și verificările de calitate
 
-Începând cu agenții **1.0.0-beta.22 (2026-10-23)**, comenzile moștenite `azd ai agent eval` oferă ghid de migrare în locul vechiului flux de evaluare. Nu copiați exemple vechi `eval generate --dataset ...`: evaluarea trăiește acum sub **`azd ai eval`**.
+Începând cu agenții **1.0.0-beta.22 (2026-10-23)**, comenzile `azd ai agent eval` vechi oferă îndrumări pentru migrare în loc de vechiul flux de lucru de evaluare. Nu copiați exemplele vechi `eval generate --dataset ...`: evaluarea se află acum sub **`azd ai eval`**.
 
-Într-un proiect de agent inițializat, autentificați-vă cu `azd auth login`, confirmați mediul/proiectul Foundry selectat și instalați `azure.ai.evaluations`. O implementare model judge este necesară pentru scorarea bazată pe model; generarea și simularea conversației pot necesita selecții proprii de modele și pot genera costuri suplimentare.
+Într-un proiect agent inițializat, autentifică-te cu `azd auth login`, confirmă mediul/proiectul Foundry selectat și instalează `azure.ai.evaluations`. Este necesară o implementare a unui model judecător pentru evaluarea bazată pe model; generarea și simularea conversațiilor pot necesita selecții proprii de modele și pot implica costuri suplimentare.
 
 ```bash
-# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
-azd ai eval init
-
-# Optionally synthesize a rubric and dataset from the agent
+# Generate a draft rubric and dataset from the deployed agent
 azd ai eval generate
+
+# After reviewing the assets, configure a named evaluation
+azd ai eval init --name quality
 
 # Review generated files, then register datasets, evaluators, and eval groups
 azd up
 
 # Start an evaluation and wait for its results
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 
 # Inspect runs and available test-case output
 azd ai eval run list
@@ -1066,45 +1087,45 @@ azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
 ```
 
-Urmați selecțiile interactive și următorii pași tipăriți în loc să presupuneți că datele generate sunt deja înregistrate. Configurația evaluării stă de obicei în `evals/azure.eval.yaml`, referințiată de serviciul `azure.ai.eval` în `azure.yaml`. Cheile sunt în **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); vechile chei în snake_case sunt respinse. Căile dintr-o configurație referențiată se rezolvă relativ la acel fișier, nu la rădăcina depozitului.
+Pentru exemplul anunțului GA, selectează **Dataset and evaluator** și **Turn** în timpul generării, apoi selectează activele revizuite și un model judecător în timpul inițializării. Urmează pașii imprimați în loc să presupui că activele generate sunt deja înregistrate. Poți de asemenea să inițializezi folosind un set de date/rubrică revizuită existentă, fără a genera date noi. Configurația evaluării se află de obicei în `evals/azure.eval.yaml`, referențiată de serviciul `azure.ai.eval` în `azure.yaml`. Cheile sunt în **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); cheile vechi în snake_case sunt respinse. Căile din cadrul unei configurații referențiate se rezolvă relativ la acel fișier, nu la rădăcina depozitului.
 
-Pentru evaluările conversațiilor, alegeți **static** pentru a evalua transcrieri finalizate fără a invoca agentul, sau **simulare** pentru a genera conversații din semințe de scenariu. Simularea necesită un agent țintă, un model simulator și o selecție separată model judge. Pentru comenzile neasistate, furnizați intrările listate de `azd ai eval init --help` și `azd ai eval generate --help`; nu presupuneți că modelul de generare este și judge sau simulator.
+Pentru evaluările conversațiilor, alege **static** pentru a evalua transcripturi completate fără a apela un agent, sau **simulation** pentru a genera conversații din semințe de scenarii. Simularea necesită o țintă agent, un model simulator și o selecție separată de model judecător. Pentru comenzi automate, furnizează intrările listate de `azd ai eval init --help` și `azd ai eval generate --help`; nu presupune că modelul de generare este și judecătorul sau simulatorul.
 
-Pentru CI, configurați o politică explicită de calitate folosind `azd ai eval run start --help` (`--fail-on`) și tratați o ieșire nonzero a hostului ca eșec. O rulare finalizată nu este automat un pas calitativ. Revizuiți rândurile eșuate/eroate și diagnosticele; lipsa sau inconsistența numărului de rezultate nu este o dovadă a succesului. Seturile de date înregistrate păstrează identitatea/versionarea serviciului; `--max-samples` nu poate face subset de seturi de date înregistrate. Publicați un set de date mai mic deliberat sau folosiți o sursă locală de fișiere susținută.
+Pentru CI, configurează o politică de calitate explicită folosind `azd ai eval run start --help` (`--fail-on`) și consideră o ieșire a gazdei nenulă ca eșec. O execuție completă nu echivalează automat cu trecerea calității. Revizuiește rândurile eșuate/eroate și diagnosticele; lipsa sau inconsistența numerelor de rezultate nu constituie dovezi de succes. Seturile de date înregistrate își păstrează identitatea/versiunea serviciului; `--max-samples` nu poate face subset dintr-un set de date înregistrat. Publică deliberat un set de date mai mic sau folosește o sursă locală de fișiere suportată.
 
 ```bash
 # Example CI policy: at least 90% of all test cases must pass
-azd ai eval run start --wait --fail-on "pass-rate=0.9"
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
-Poarta ratei de trecere folosește testele trecute împărțite la totalul testelor; testele eșuate, eroate, sărite sau netrecute contează împotriva acesteia. Nu combinați poarta cu `--no-wait`, care returnează înainte ca un verdict să fie disponibil.
+Poarta ratei de trecere folosește cazurile de test trecute împărțite la totalul cazurilor de test; rândurile eșuate, eroate, sărite și cele fără trecere sunt calculate împotriva acesteia. Nu combina o poartă cu `--no-wait`, care returnează înainte ca un verdict să fie disponibil.
 
-#### Migrarea configurației de optimizare
+#### Migrarea Configurației de Optimizare
 
-Optimizarea folosește acum API-ul GA v1. Pentru a reutiliza o evaluare compatibilă **la nivel de tură, susținută de set de date** din noul flux de lucru:
+Optimizarea folosește acum API-ul GA v1. Pentru a reutiliza o evaluare compatibilă **la nivel de tura, susținută de set de date** din fluxul de lucru nou:
 
 ```bash
 # Replace placeholders with the evaluation name and optimizer model deployment
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-`--eval` selectează o evaluare; `--eval-config` selectează fișierul său de configurare (inclusiv definiții susținute de fișiere). `--config` ia în schimb o **cerere API de optimizare independentă** în YAML sau JSON. Nu transmite un vechi agent `eval.yaml` sau noul `azure.eval.yaml` către `--config` și nu combina `--config` cu `--eval`/`--eval-config`. Evaluările de conversație, susținute de trasări sau simulări nu sunt interschimbabile cu comanda rapidă de optimizare susținută de setul de date; folosește formatul cererii de optimizare suportat pentru acele scenarii. Revizuiește candidații înainte de a-i aplica sau implementa.
+`--eval` selectează o evaluare; `--eval-config` selectează fișierul său de configurare (inclusiv definițiile susținute de fișier). `--config` ia în schimb o **cerere API de optimizare independentă** în YAML sau JSON. Nu transmite un vechi `eval.yaml` al agentului sau noul `azure.eval.yaml` la `--config`, și nu combina `--config` cu `--eval`/`--eval-config`. Evaluările conversaționale, susținute de trasări, sau de simulare nu sunt interschimbabile cu scurtătura de optimizare susținută de setul de date; folosește formatul cererii de optimizare suportat pentru aceste scenarii. Revizuiește candidații înainte de a-i aplica sau implementa.
 
-Consultă [referința evaluărilor pentru versiunea revizuită](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) și [sursa comenzii de optimizare pentru versiunea revizuită](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) pentru opțiuni exacte.
+Vezi [referința evaluărilor pentru versiunea revizuită](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) și [sursa comenzii de optimizare pentru versiunea revizuită](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) pentru opțiuni exacte.
 
-#### Previzualizare Implementare Agent găzduit doar pentru citire
+#### Previziune Implementare Agent Găzduit cu Acces Doar în Citire
 
-Pentru un mediu existent legat de Foundry cu un serviciu unificat `azure.ai.agent` de `kind: hosted`, compară configurația suportată înainte de implementare:
+Pentru un mediu legat de Foundry existent cu un serviciu unificat `azure.ai.agent` de `kind: hosted`, compară configurarea suportată înainte de implementare:
 
 ```bash
 azd deploy <service-name> --preview --no-prompt
 ```
 
-Această previzualizare nu implementează agentul. Nu este o diferență completă de infrastructură/securitate: agenții pentru prompturi/voci/workflow, configurații moștenite și unele setări găzduite sunt în afara ariei sale. Un rezultat `unknown` nu este aprobarea pentru implementare. Nu există o comandă independentă `azd ai agent deploy` sau agent `--dry-run`; folosește fluxul de lucru de implementare principal.
+Această previziune nu implementează agentul. Nu este o diferență completă de infrastructură/securitate: agenții de prompt/voce/workflow, layout-urile de configurație vechi și unele setări găzduite sunt în afara domeniului său. Un rezultat `unknown` nu este o aprobare pentru implementare. Nu există o comandă `azd ai agent deploy` independentă sau agent `--dry-run`; folosește fluxul principal de implementare.
 
 ### Protocolul Contextului Modelului (MCP) cu `azd mcp`
 
-AZD include suport integrat pentru server MCP (Alpha), permițând agenților AI și uneltelor să interacționeze cu resursele tale Azure printr-un protocol standardizat:
+AZD include suport integrat pentru serverul MCP (Alpha), permițând agenților AI și uneltelor să interacționeze cu resursele tale Azure printr-un protocol standardizat:
 
 ```bash
 # Start the MCP server for your project
@@ -1114,30 +1135,30 @@ azd mcp start
 azd copilot consent list
 ```
 
-Serverul MCP expune contextul proiectului tău azd — medii, servicii și resurse Azure — către unelte de dezvoltare alimentate de AI. Acest lucru permite:
+Serverul MCP expune contextul proiectului tău azd — medii, servicii și resurse Azure — către unelte de dezvoltare asistate de AI. Aceasta permite:
 
-- **Implementare asistată de AI**: Permite agenților de codare să interogheze starea proiectului tău și să declanșeze implementări
-- **Descoperirea resurselor**: uneltele AI pot descoperi ce resurse Azure folosește proiectul tău
-- **Gestionarea mediului**: agenții pot comuta între mediile de dezvoltare/testare/producție
+- **Implementare asistată de AI**: Agenții de codare pot interoga starea proiectului tău și pot declanșa implementări
+- **Descoperirea resurselor**: Uneltele AI pot descoperi ce resurse Azure folosește proiectul tău
+- **Gestionarea mediului**: Agenții pot comuta între mediile dev/staging/production
 
 ### Generarea Infrastructurii cu `azd infra generate`
 
-Pentru sarcini AI de producție, poți genera și personaliza infrastructura ca și cod în loc să te bazezi pe aprovizionare automată:
+Pentru sarcini AI de producție, poți genera și personaliza Infrastructura ca și Cod în loc să te bazezi pe aprovizionarea automată:
 
 ```bash
 # Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Suportul depinde de proiect/gazdă și de furnizorii instalați; aceasta nu este o comandă generală de inginerie inversă pentru resurse Azure arbitrare sau o promisiune de a genera atât Bicep cât și Terraform. Rulează `azd infra generate --help` și inspectează formatul generat. Unde este suportat, scrierea IaC pe disc îți permite să:
-- Revizuiești și verifici infrastructura înainte de implementare
-- Adaugi politici de securitate personalizate (reguli de rețea, puncte finale private)
-- Integrezi cu procesele de revizuire IaC existente
-- Controlezi versiunile modificărilor infrastructurii separat de codul aplicației
+Suportul depinde de proiect/host și furnizorii instalați; aceasta nu este o comandă generală de inginerie inversă pentru resurse arbitrari Azure sau o promisiune de a genera atât Bicep cât și Terraform. Rulează `azd infra generate --help` și inspectează formatul generat. Acolo unde este suportat, scrierea IaC pe disc îți permite:
+- Revizuiești și auditezi infrastructura înainte de implementare
+- Adaugi politici personalizate de securitate (reguli de rețea, puncte finale private)
+- Integrezi cu procesele existente de revizuire IaC
+- Controlezi versiuni pentru schimbările infrastructurii separat de codul aplicației
 
-### Cârlige pentru ciclul de viață al producției
+### Cârlige pentru Ciclu de Viață în Producție
 
-Cârligele AZD îți permit să injectezi logică personalizată în fiecare etapă a ciclului de viață al implementării — critic pentru fluxuri de lucru AI de producție:
+Cârligele AZD îți permit să injectezi logică personalizată în fiecare etapă a ciclului de viață al implementării — critic pentru fluxuri AI în producție:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1170,18 +1191,18 @@ services:
 azd hooks run predeploy
 ```
 
-**Cârlige recomandate pentru producție la sarcini AI:**
+**Cârlige recomandate pentru producție în sarcinile AI:**
 
 | Cârlig | Caz de utilizare |
 |------|----------|
-| `preprovision` | Validarea cotelor de abonament pentru capacitatea modelului AI |
-| `postprovision` | Verificarea conectivității private și ieșirilor necesare ale resurselor |
-| `predeploy` | Rularea testelor de siguranță AI, validarea șabloanelor de prompturi |
-| `postdeploy` | Testare rapidă a răspunsurilor agentului, verificarea conectivității modelului |
+| `preprovision` | Validează cotele abonamentului pentru capacitatea modelului AI |
+| `postprovision` | Verifică conectivitatea privată și ieșirile resurselor necesare |
+| `predeploy` | Rulează teste de siguranță AI, validează șabloanele de prompt |
+| `postdeploy` | Test de fum pentru răspunsurile agentului, verifică conectivitatea modelului |
 
-### Configurarea pipeline-ului CI/CD
+### Configurarea Pipeline-ului CI/CD
 
-Folosește `azd pipeline config` pentru a conecta proiectul tău la GitHub Actions sau Azure Pipelines cu autentificare Azure securizată:
+Mai întâi validează proiectul local și finalizează cu succes un `azd up`. Apoi folosește `azd pipeline config` pentru a-l conecta la GitHub Actions sau Azure Pipelines cu autentificare securizată Azure:
 
 ```bash
 # Configure CI/CD pipeline (interactive)
@@ -1192,14 +1213,14 @@ azd pipeline config --provider github
 ```
 
 Această comandă:
-- Creează sau configurează o identitate de pipeline; revizuiește domeniul de rol/permisii generate în loc să presupui cel mai mic privilegiu
-- Configurează credențiale federați (fără secrete stocate)
+- Creează sau configurează o identitate pipeline; revizuiește domeniul/permisiunile rolului generate în loc să presupui minimul privilegiilor
+- Configurează acreditări federate (fără secrete stocate)
 - Generează sau actualizează fișierul de definiție al pipeline-ului tău
 - Setează variabilele de mediu necesare în sistemul tău CI/CD
 
 #### Pas cu pas: primul tău pipeline GitHub Actions
 
-Iată parcursul complet de la un proiect azd funcțional la implementări automate la fiecare push.
+Iată ghidul complet de la un proiect azd funcțional la implementări automatizate la fiecare push.
 
 **1. Asigură-te că proiectul tău este pe GitHub**
 
@@ -1216,15 +1237,15 @@ gh repo create my-ai-app --private --source=. --push
 azd pipeline config --provider github
 ```
 
-azd va:
-- Întreba interactiv ce abonament Azure și mediu să țintească
-- Creează o înregistrare de aplicație Entra **+ principal de serviciu** pentru pipeline
-- Configurează **credențiale federate (OIDC)** — astfel încât GitHub să se autentifice la Azure cu tokenuri cu durată scurtă și **nu se stochează secrete**
-- Trimite **variabilele** necesare către repo-ul tău GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+azd va, interactiv:
+- Întreba ce abonament Azure și ce mediu să fie țintit
+- Creează o **înregistrare aplicație + principal de serviciu** Entra pentru pipeline
+- Configurează **acreditări federate (OIDC)** — astfel GitHub se autentifică la Azure cu token-uri temporare și **nu se stochează secrete**
+- Trimite **variabilele** necesare în depozitul tău GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
-**3. Înțelege fluxul de lucru generat**
+**3. Înțelege workflow-ul generat**
 
-Pentru un șablon suportat, configurează/revede `.github/workflows/azure-dev.yml`. Părțile cheie arată astfel (șablonul trebuie să furnizeze toolchain-ul aplicației și parametrii mediului):
+Pentru un șablon acceptat, configurează/revezi `.github/workflows/azure-dev.yml`. Exemplul Foundry următor păstrează pașii de checkout, autentificare OIDC și setările pentru mediul țintă și instalează pachetul GA plus evaluările pe runner. Adaugă cerințele toolchain-ului aplicației și ale furnizorului de infrastructură; pentru Terraform, păstrează configurația generată, starea remote și pașii de autentificare. Alege și fixează o versiune AZD revizuită la sau peste 1.37.0; acest fragment folosește minimul anunțat.
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1236,6 +1257,10 @@ on:
 permissions:
   id-token: write           # required for OIDC federated login
   contents: read
+
+concurrency:
+  group: foundry-production-deployment
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -1250,13 +1275,23 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install azd
         uses: Azure/setup-azd@v2
+        with:
+          version: 1.37.0
+      - name: Install Foundry extensions
+        run: azd ext install microsoft.foundry azure.ai.evaluations
       - name: Log in with OIDC
         run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
       - name: Provision infrastructure
         run: azd provision --no-prompt
       - name: Deploy application
         run: azd deploy --no-prompt
+      - name: Evaluate deployed agent
+        run: azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
+
+Pasul de evaluare necesită un `evals/azure.eval.yaml` comis, referința sa în `azure.yaml`, resurse test non-secrete revizuite și acces în pipeline la seturile de date, evaluatorii și implementările de modele referite. Configurează evaluarea `quality` înainte de a activa acest pas; omite atât pasul cât și instalarea evaluărilor dacă proiectul tău nu îl folosește. O rulare finalizată singură nu este un prag de calitate: acest exemplu cere cel puțin 90% din toate cazurile să treacă.
+
+Folosește un mediu AZD separat și aprobările corespunzătoare pentru fiecare etapă. Grupul de concurență serializează numai acest workflow, nu și alte unelte sau depozite care actualizează același agent. Acordă permisiunile necesare de resurse și Foundry identității din pipeline și stochează orice credențiale de runtime necesare în secrete, nu în configurație comisă. Vezi [ghidul complet Foundry CI/CD](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli) pentru cerințe specifice furnizorului.
 
 **4. Verifică dacă funcționează**
 
@@ -1266,13 +1301,13 @@ git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Deschide fila **Actions** din repo-ul tău GitHub și urmărește cum fluxul de lucru `azd provision` și `azd deploy` rulează automat.
+Deschide fila **Actions** în depozitul tău GitHub și urmărește rularea workflow-ului `azd provision` și `azd deploy` automat.
 
-> **De ce sunt importante acreditările federate:** pipeline-urile mai vechi stocau un secret client în GitHub. Acreditările federate OIDC elimină complet acel secret—GitHub solicită un token cu durată scurtă de valabilitate în timpul execuției, ceea ce este mai sigur și nu trebuie nici rotit, nici expus. Acesta este comportamentul implicit pe care `azd pipeline config` îl configurează.
+> **De ce contează credențialele federate:** pipeline-urile mai vechi stocau un secret client în GitHub. Credențialele federate OIDC elimină complet acel secret—GitHub solicită un token cu durată scurtă în timpul execuției, care este mai sigur și nu necesită rotație sau risc de scurgere. Aceasta este configurarea implicită a `azd pipeline config`.
 
-> **Secrete vs. variabile:** identificatorii nesensibili (`AZURE_CLIENT_ID` etc.) se plasează în **variabile** ale repo-ului. Dacă aplicația ta are realmente nevoie de un secret la timpul de build, adaugă-l ca **secret** în GitHub și referențiază-l cu `${{ secrets.NAME }}`—dar preferă Key Vault + identitate gestionată la runtime (vezi [Capitolul 3](../chapter-03-configuration/authsecurity.md)).
+> **Secrete vs. variabile:** identificatorii nesensibili (`AZURE_CLIENT_ID`, etc.) se pun în **variabile** în repo. Dacă aplicația ta are cu adevărat nevoie de un secret la build, adaugă-l ca **secret** GitHub și fă referire la el cu `${{ secrets.NAME }}`—dar preferă Key Vault + identitate gestionată la runtime (vezi [Capitolul 3](../chapter-03-configuration/authsecurity.md)).
 
-**Flux de lucru de producție cu configurarea pipeline-ului:**
+**Workflow de producție cu configurare pipeline:**
 
 ```bash
 # 1. Set up production environment
@@ -1287,11 +1322,11 @@ azd pipeline config --provider github
 
 #### Pas cu pas: Azure DevOps Pipelines
 
-Preferi Azure DevOps în loc de GitHub Actions? azd îl suportă nativ cu providerul `azdo`. Fluxul este aproape identic—azd generează fișierul pipeline, creează o conexiune de serviciu și configurează autentificarea.
+Preferi Azure DevOps în locul GitHub Actions? azd îl suportă nativ cu providerul `azdo`. Fluxul este aproape identic—azd generează fișierul pipeline, creează o conexiune de serviciu și configurează autentificarea.
 
 **1. Asigură-te că ai un proiect Azure DevOps**
 
-Ai nevoie de o organizație și de un proiect la `https://dev.azure.com/<your-org>`. Generează un Personal Access Token (PAT) cu permisiunile **Build (Read & execute)**, **Code (Read & write)** și **Service Connections (Read, query & manage)**—azd îți va cere acest token.
+Ai nevoie de o organizație și un proiect în `https://dev.azure.com/<your-org>`. Generează un Personal Access Token (PAT) cu permisiunile **Build (Read & execute)**, **Code (Read & write)** și **Service Connections (Read, query & manage)**—azd îți va cere acest token.
 
 **2. Configurează pipeline-ul**
 
@@ -1300,14 +1335,14 @@ azd pipeline config --provider azdo
 ```
 
 azd va:
-- Cere organizația și proiectul tău Azure DevOps
+- Solicita organizația și proiectul Azure DevOps
 - Crea (sau reutiliza) o **conexiune de serviciu** către Azure folosind un principal de serviciu
-- Configura **federarea identității workload (OIDC)** astfel încât să nu se stocheze niciun secret client
-- Configura o definiție de pipeline (frecvent `.azdo/pipelines/azure-dev.yml`) din șablonul pipeline-ului proiectului
+- Configura **federarea identității workload (OIDC)** astfel încât niciun secret client să nu fie stocat
+- Configura o definiție de pipeline (de obicei `.azdo/pipelines/azure-dev.yml`) din șablonul pipeline-ului proiectului
 
 **3. Revizuiește pipeline-ul generat**
 
-Folosește pipeline-ul generat al proiectului, inclusiv **conexiunea de serviciu Azure și pașii de autentificare AZD**. Ghidul oficial [Azure Pipelines setup guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) arată fragmentul instalatorului de mai jos; acesta este **doar pentru instalare**, nu un flux de lucru autenticat și rulabil pentru deploy:
+Folosește pipeline-ul generat al proiectului, incluzând **conexiunea de serviciu Azure și pașii de autentificare AZD**. Ghidul oficial [Azure Pipelines setup guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) arată fragmentul de instalare de mai jos; aceasta este **doar instalare**, nu un workflow de implementare autentificat executabil:
 
 ```yaml
 # .azdo/pipelines/azure-dev.yml (installer fragment only)
@@ -1322,13 +1357,13 @@ steps:
     displayName: Install azd
 ```
 
-Instalează extensia AZD Azure DevOps dacă această sarcină nu este disponibilă în organizația ta. Nu copia pașii shell `azd provision`/`azd deploy` fără autentificare: faptul că o conexiune de serviciu este configurată nu înseamnă că fiecare proces va fi logat automat în AZD. Urmează autentificarea OIDC și contextul autorizat al task-ului din șablonul generat și furnizează mediul/subscriptia/locația selectată.
+Instalează extensia AZD Azure DevOps dacă această sarcină nu este disponibilă în organizația ta. Pentru joburile Foundry, verifică AZD 1.37.0+ și instalează `microsoft.foundry` pe runner, plus `azure.ai.evaluations` când sunt necesare evaluări. Nu copia pașii `azd provision`/`azd deploy` goi fără autentificare: configurarea unei conexiuni de serviciu nu autentifică automat fiecare proces în AZD. Urmează autentificarea OIDC și contextul task-ului autorizat din șablonul generat și furnizează mediul/abonamentul/locația selectate.
 
 **4. De unde provin variabilele**
 
-azd stochează valorile mediului (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) ca un **grup de variabile** în Azure DevOps astfel încât pipeline-ul să le poată citi. Le poți vizualiza și edita sub **Pipelines → Library**.
+azd stochează valorile mediului (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) ca un **grup de variabile** în Azure DevOps pentru ca pipeline-ul să le poată citi. Le poți vizualiza și edita sub **Pipelines → Library**.
 
-> **Același beneficiu OIDC ca GitHub:** providerul `azdo` configurează de asemenea implicit federarea identității workload, deci nu este stocat niciun secret client în conexiunea de serviciu—Azure DevOps face schimb de tokenuri cu durată scurtă la runtime. Folosește `--auth-type client-credentials` doar dacă organizația ta nu poate utiliza încă OIDC.
+> **Același beneficiu OIDC ca GitHub:** providerul `azdo` configurează, de asemenea, federarea identității workload implicit, deci niciun secret client nu este salvat în conexiunea de serviciu—Azure DevOps schimbă un token cu durată scurtă la runtime. Transmite `--auth-type client-credentials` doar dacă organizația ta nu poate folosi încă OIDC.
 
 **5. Rulează-l**
 
@@ -1337,40 +1372,40 @@ git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Deschide **Pipelines** în Azure DevOps pentru a urmări rularea `azd provision` și `azd deploy`.
+Deschide **Pipelines** în Azure DevOps pentru a urmări rulările `azd provision` și `azd deploy`.
 
-### Adăugarea Componentelor cu `azd add`
+### Adăugarea componentelor cu `azd add`
 
-Adaugă gradual servicii Azure într-un proiect existent:
+Adaugă incremental servicii Azure unui proiect existent:
 
 ```bash
 # Add a new service component interactively
 azd add
 ```
 
-Acest lucru este deosebit de util pentru extinderea aplicațiilor AI de producție—for example, adăugând un serviciu de căutare vectorială, un nou endpoint de agent sau un component de monitorizare într-un deployment existent.
+Aceasta este utilă în special pentru extinderea aplicațiilor AI de producție—de exemplu, adăugarea unui serviciu de căutare vectorială, un nou punct final agent sau o componentă de monitorizare pentru o implementare existentă.
 
 ## Resurse suplimentare
 
-- **Azure Well-Architected Framework**: [Ghid pentru AI workload](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Ghid pentru sarcina AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Documentație oficială](https://learn.microsoft.com/azure/ai-studio/)
-- **Șabloane Comunitare**: [Exemple Azure](https://github.com/Azure-Samples)
-- **Comunitatea Discord**: [canalul #Azure](https://discord.gg/microsoft-azure)
-- **Agent Skills pentru Azure**: [microsoft/github-copilot-for-azure pe skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Abilități reutilizabile de agent pentru AI Azure, Foundry, deploy, optimizare costuri și diagnosticare. Instalează în editorul tău:
+- **Șabloane Comunitare**: [Mostre Azure](https://github.com/Azure-Samples)
+- **Comunitatea Discord**: [Canal #Azure](https://discord.gg/microsoft-azure)
+- **Competențe Agent pentru Azure**: [microsoft/github-copilot-for-azure pe skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Competențe reutilizabile ale agentului pentru Azure AI, Foundry, implementare, optimizare costuri și diagnosticare. Instalează-le în editorul tău:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigarea capitolelor:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 8 - Modele de Producție & Enterprise
+**Navigarea Capitolelor:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 8 - Modele pentru Producție și Întreprinderi
 - **⬅️ Capitolul anterior**: [Capitolul 7: Depanare](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ De asemenea relevant**: [Laborator AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
-- **🎯 Curs complet**: [AZD Pentru Începători](../../README.md)
+- **⬅️ De asemenea, legat**: [Laborator AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Curs finalizat**: [AZD Pentru Începători](../../README.md)
 
-**Amintește-ți**: Workload-urile AI de producție necesită planificare atentă, monitorizare și optimizare continuă. Începe cu aceste modele și adaptează-le cerințelor tale specifice.
+**Amintește-ți**: Sarcinile AI din producție necesită planificare atentă, monitorizare și optimizare continuă. Începe cu aceste modele și adaptează-le la cerințele tale specifice.
 
 ---
 

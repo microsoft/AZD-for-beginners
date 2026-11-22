@@ -1,653 +1,145 @@
-# ឧទាហរណ៍ - ទម្រង់ AZD និងការកំណត់រចនាសម្ព័ន្ធដែលអនុវត្តបាន
+# ឧទាហរណ៍ — ប្រភពភាសាអង់គ្លេស និងគំរូ Azure
 
-**សិក្សាតាមឧទាហរណ៍ - រៀបចំបំបែកតាមជំពូក**
-- **📚 ទំព័រដើមវគ្គ**: [AZD For Beginners](../README.md)
-- **📖 ផែនទីជំពូក**: ឧទាហរណ៍ដែលរៀបចំតាមកម្រិតភាពស្មុគស្មាញ
-- **🚀 ឧទាហរណ៍ក្នុងតំបន់**: [Retail Multi-Agent Solution](retail-scenario.md)
-- **🤖 ឧទាហរណ៍ AI ខាងក្រៅ**: តំណទៅឃ្លាំងឧទាហរណ៍ Azure Samples
+នេះជាគំរូសម្រាប់ការសិក្សា មិនមែនកម្មវិធីដែលបានទទួលការបញ្ជាក់សម្រាប់ផលិតកម្មទេ។ សូមអានការទាមទារមុន ការដែនកំណត់, ថ្លៃចំណាយ និងសេចក្តីណែនាំសម្រាប់សម្អាតមុនពេលរត់ពាក្យបញ្ជា។
 
-> **📍 សំខាន់: ឧទាហរណ៍ក្នុងតំបន់ និងខាងក្រៅ**  
-> ឃ្លាំងកូដនេះមាន **ឧទាហរណ៍ក្នុងតំបន់ពូកែ 4** ដែលមានការអនុវត្តពេញលេញ៖  
-> - **Microsoft Foundry Models Chat** (ការដាក់ប្រព័ន្ធ gpt-4.1 ជាមួយផ្ទៃមុខជជែក)  
-> - **Container Apps** (API Flask សាមញ្ញ + សេវាកម្មតូចៗ)  
-> - **Database App** (វេប + មូលដ្ឋានទិន្នន័យ SQL)  
-> - **Retail Multi-Agent** (ដំណោះស្រាយ AI សម្រាប់សហគ្រាស)  
->  
-> ឧទាហរណ៍បន្ថែមជាធាតុយោងខាងក្រៅទៅឃ្លាំង Azure-Samples ដែលអ្នកអាច clone បាន។
+អ្នកត្រូវតែពិនិត្យមើលសមត្ថភាព និងកម្រិតអនុញ្ញាតនៅក្នុងការជាវរបស់អ្នក។
 
-## ការណែនាំ
+- [ទំព័រមុខមេផ្លូវវគ្គ](../README.md)
+- [ការដំឡើង](../docs/chapter-01-foundation/installation.md)
+- [ដោះស្រាយបញ្ហា](../docs/chapter-07-troubleshooting/common-issues.md)
 
-ថតនេះផ្តល់ឧទាហរណ៍អនុវត្តន៍ និងយោងដើម្បីជួយអ្នករៀន Azure Developer CLI តាមរយៈការអនុវត្តដោយដៃ។ សេណារីយ៉ូ Retail Multi-Agent គឺជាការអនុវត្តពេញលេញ ដែលមានស្រាប់សម្រាប់ផលិតកម្ម ដែលបានបញ្ចូលក្នុងឃ្លាំងនេះ។ ឧទាហរណ៍បន្ថែមជាធាតុយោងទៅឃ្លាំង Azure Samples ផ្លូវការដើម្បីបង្ហាញគំរូ AZD ផ្សេងៗ។
+## អ្វីដែលមាននៅក្នុងម៉ាស៊ីនក្នុងជា
 
-### ការបរិយាយចំណាត់ថ្នាក់ភាពស្មុគស្មាញ
+មាន **គំរូកម្មវិធី ៤ មុខ** និង **សំណុំរចនាសម្ព័ន្ធមួយ**៖
 
-- ⭐ **អ្នកចាប់ផ្ដើម** - គំនិតមូលដ្ឋាន, សេវាឯកតា, 15-30 នាទី  
-- ⭐⭐ **មធ្យម** - សេវាជាច្រើន, ការតភ្ជាប់មូលដ្ឋានទិន្នន័យ, 30-60 នាទី  
-- ⭐⭐⭐ **កម្រិតខ្ពស់** - រចនាសម្ព័ន្ធស្មុគស្មាញ, បញ្ចូល AI, 1-2 ម៉ោង  
-- ⭐⭐⭐⭐ **អ្នកជំនាញ** - រួចរាល់សម្រាប់ផលិតកម្ម, គំរូសម្រាប់សហគ្រាស, 2+ ម៉ោង
+| ឧទាហរណ៍ | ការអនុវត្តក្នុងតំបន់ | ប្រធានការសិក្សា | កំរិត |
+|---|---|---|---|
+| [API Flask សាមញ្ញ](../../../examples/container-app/simple-flask-api) | Flask CRUD API, Dockerfile, Bicep, `azure.yaml` | ការចាត់ចែងផ្ទុកក្នុងконтេន, ការត្រួតពិនិត្យ, កំណត់ហេតុ | មូលដ្ឋាន |
+| [មីក្រូសេវាកម្មពីរតំណាង](../../../examples/container-app/microservices) | ទ្វារច្រក Node.js និងសេវាកម្ម Python អានបានប៉ុណ្ណោះ, Dockerfiles, Bicep, `azure.yaml` | ការទំនាក់ទំនង HTTPS ក្នុង, ការកំណត់ទំហំនៅឯករាជ្យ | មធ្យម |
+| [កម្មវិធីទិន្នន័យគត់](../../../examples/database-app) | Flask អាន API, Azure SQL, សេវាកម្មកម្មវិធី, Bicep, `azure.yaml` | ភ្ជាប់ SQL, ការបង្កើតដំណើរការ, កំណត់ហេតុ | មធ្យម |
+| [ការសន្ទនាជាមួយ Azure OpenAI](../../../examples/azure-openai-chat) | CLI Python ពាក់កណ្តាលក្នុងតំបន់, Bicep Azure OpenAI និង Key Vault, រចនាសម្ព័ន្ធតែប៉ុណ្ណោះ `azure.yaml` | ការផ្គត់ផ្គង់ម៉ូឌែល, ប្រវត្តិសន្ទនា, ការប៉ាន់ស្មានសូចនាករ | មធ្យម |
+| [រចនាសម្ព័ន្ធលក់រាយ](../../../examples/retail-multiagent-arm-template) | គំរូ ARM, ប៉ារ៉ាម៉ែត្រ, ស្គ្រីប Bash សម្រាប់ដំឡើង; **ផ្ទុកក្នុង hello-world containers ត្រឹមតែប៉ុណ្ណោះ** | រចនាសម្ព័ន្ធសម្រាប់កម្មវិធីមេដឹកនាំជាច្រើនពេលអនាគត | ជំនាញខ្ពស់ |
 
-## 🎯 អ្វីដែលមានក្នុងឃ្លាំងនេះពិតប្រាកដ
+សន្ទស្សន៍ [លក់រាយ](retail-scenario.md) គឺជារូបខ័ណ្ឌសំណង់មួយ **ផែនទីស្ថាបត្យកម្ម** មិនមែនជាការអនុវត្តអ្នកតំណាងពហុម្នាក់ពេញលេញទេ។
+គ្មានកូដអ្នកតំណាងលក់រាយមួយឡើយ មុខងារជជែកមុខជំពូក ក្រុមហ៊ុនផ្លូវ ឬ
+API, បណ្តាញទិន្នន័យស្វែងរក, CLI វិភាគ, ការបរាជ័យដោយស្វ័យប្រវត្តិ, ឬការពារជាក់លាក់ក្នុងផលិតកម្មត្រូវបានរួមបញ្ចូល។  
+អ្វីទាំងនេះត្រូវបានរចនា, សាងសង់, និងធ្វើតេស្តយ៉ាងដាច់ដោយឡែក។  
 
-### ✅ ការអនុវត្តក្នុងតំបន់ (រួចរាល់សម្រាប់ប្រើប្រាស់)
+ការពិពណ៌នាសង្ខេបអំពី [microservices](microservices/README.md) បង្ហាញទៅកាន់ការរត់បាន
+គំរូសេវាកម្មពីរ; វាមិនមែនជាឯកសារផ្ទុកការបញ្ជូនផ្សេងទេ។
 
-#### [Microsoft Foundry Models Chat Application](azure-openai-chat/README.md) 🆕
-**ការដាក់ប្រព័ន្ធ gpt-4.1 ពេញលេញជាមួយផ្ទៃមុខជជែកបានបញ្ចូលក្នុងឃ្លាំងនេះ**
+## ផ្លូវការសិក្សាប្រសើរ
 
-- **ទីតាំង:** `examples/azure-openai-chat/`
-- **កម្រិតស្មុគស្មាញ:** ⭐⭐ (មធ្យម)
-- **អ្វីដែលមានរួមបញ្ចូល:**
-  - ការដាក់ប្រព័ន្ធ Microsoft Foundry Models ពេញលេញ (gpt-4.1)
-  - ផ្ទៃមុខជជែក command-line ប្រើ Python
-  - បញ្ចូល Key Vault សម្រាប់កូនសោ API យ៉ាងសុវត្ថិភាព
-  - ទម្រង់ Bicep សម្រាប់ស្ថាបត្យកម្ម
-  - ការប្រើប្រាស់ token និងការតាមដានកម្រៃ
-  - កំណត់អត្រា និងការគ្រប់គ្រងកំហុស
+1. បង្ហោះ Flask API ហើយពិនិត្យ `/health` និងប្រតិបត្ដិការកែប្រែទិន្នន័យ CRUD។
+2. បង្ហោះកម្មវិធីមូលដ្ឋានទិន្នន័យ ហើយពិនិត្យផលិតផលប្រាំមួយដែលបានបញ្ចូល។
+3. បង្ហោះឧទាហរណ៍សេវាកម្មពីរហើយពិនិត្យការស្នើសុំពី gateway ទៅផលិតផល។
+4. រៀបចំធនធានជជែក និងដំណើរការសារ CLI **ក្នុងតំបន់**។
+5. សិក្សារ៉ូប្លូប៊ិចលក់រាយ បន្ទាប់ពីបញ្ចប់ឧទាហរណ៍ដែលដំណើរការ។
 
-**ចាប់ផ្ដើមយ៉ាងរហ័ស:**
+អនុញ្ញាតប្រហែល 30–60 នាទីសម្រាប់គំរូពាក្យស្នើសុំមួយទាំងផ្នែកតម្រូវជាមុន និង
+ការផ្ទៀងផ្ទាត់។ ការ​អនុវត្តនៅលើ​បច្ចេកវិទ្យាផ្ទាល់លក់​ជា​គម្រោង​អភិវឌ្ឍ​ធម្មតា​ផ្សេង​ទៀត​មិនមែន​ជា
+សិក្ខាសាលា 30 នាទីទេ។ ការអានរចនាសម្ព័ន្ធរបស់វា​ប្រហែល ២–៣ ម៉ោង; ការ​អនុវត្ត
+និង​ការរៀបចំ​ឱ្យប្រែប្រួល​ត្រៀមផលិតកម្ម​ទាមទារ​ពេលវេលា​ច្រើន​ជាង
+80–120 ម៉ោង​អភិវឌ្ឍ​នា​ឯកសារ​ណែនាំ។
+
+## ចាប់ផ្តើម​យ៉ាង​ឆាប់រហ័ស
+
+ពី​រុក្ខជាតិ​ឃ្លាំង​ទិន្នន័យ_ROOT សម្រាប់គំរូ​កុងតឺន័រ​ដំបូងៈ
+
 ```bash
-# ចូលទៅកាន់ឧទាហរណ៍
-cd examples/azure-openai-chat
-
-# ដាក់ឲ្យដំណើរការ​ទាំងអស់
+cd examples/container-app/simple-flask-api
+azd auth login
+azd env new flask-demo
 azd up
-
-# ដំឡើងផ្នែកដែលពឹងផ្អែក និងចាប់ផ្តើមជជែក
-pip install -r src/requirements.txt
-python src/chat.py
+API_URL=$(azd env get-value API_ENDPOINT)
+curl --fail-with-body "${API_URL}/health"
 ```
 
-**បច្ចេកវិទ្យា:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
+រង់ចាំ៖ HTTP 200 និង JSON រួមមាន `"status": "healthy"`។
+អ្នក​ត្រូវការ Docker ដំណើរការសម្រាប់សំណុំបង្ហាញ​កុងតឺន័រប្លុក​ផ្ទាល់។
 
-#### [Container App Examples](container-app/README.md) 🆕
-**ឧទាហរណ៍ដាក់ចេញ container ត្រូវបានបញ្ចូលទាំងស្រុងក្នុងឃ្លាំងនេះ**
+សម្រាប់ការជជែក អនុវត្តតាម [chat README](azure-openai-chat/README.md): ប្រើ
+`azd provision`, ផ្ទុក API key ពី Key Vault ទៅក្នុងកុងសុលបច្ចុប្បន្ន, ដំឡើង
+`src/requirements.txt`, ហើយរត់ `python src/chat.py`។ មិនមានសេវាកម្មជជែកផ្ទុកសេវាទេ។
 
-- **ទីតាំង:** `examples/container-app/`
-- **កម្រិតស្មុគស្មាញ:** ⭐-⭐⭐⭐⭐ (ពីអ្នកចាប់ផ្ដើម ទៅកម្រិតខ្ពស់)
-- **អ្វីដែលមានរួមបញ្ចូល:**
-  - [Master Guide](container-app/README.md) - ទិដ្ឋភាពទូទៅពេញលេញនៃការដាក់ចេញ container
-  - [Simple Flask API](../../../examples/container-app/simple-flask-api) - ឧទាហរណ៍ REST API ផ្នែកមូលដ្ឋាន
-  - [Microservices Architecture](../../../examples/container-app/microservices) - ការដាក់ចេញជាច្រើនសេវាដែលរួចរាល់សម្រាប់ផលិតកម្ម
-  - ចាប់ផ្ដើមរហ័ស, ផលិតកម្ម, និងគំរូកម្រិតខ្ពស់
-  - ការត្រួតពិនិត្យ, សុវត្ថិភាព, និងការបង្កើនប្រសិទ្ធភាពថ្លៃ
+សម្រាប់អាជីវកម្មរាយចែក, ប្រើ [ARM guide](retail-multiagent-arm-template/README.md)។
+វាមិនមាន `azure.yaml` ហើយ **មិន** ត្រូវបានដាក់បញ្ចូល ឬដកចេញដោយ `azd up`/`azd down`។
 
-**ចាប់ផ្ដើមយ៉ាងរហ័ស:**
+## ថ្លៃការចំណាយ និងការកំណត់ដែនកំណត់
+
+- ការដាក់បញ្ចូលទាំងអស់បង្កើតធនធាន Azure ដែលគិតថ្លៃបាន។ ការពង្រីកទៅសូន្យគ្រប់គ្រាន់តែលែង
+  ការគណនាអនុវត្តកម្ម; វាមិនលុបបំបាត់ ឃ្លាំងទិន្នន័យ, មូលដ្ឋានទិន្នន័យ, ស្តុក ទិន្នន័យ ស្វែងរក ឬថ្លៃកត់ត្រា។
+- តម្លៃដូចជាត្រឹមត្រូវអាស្រ័យលើតំបន់, រូបិយប័ណ្ណ, បរិមាណចរាចរណ៍, ម៉ូដែល/SKU, និងការរក្សាទុក។
+  ប្រើ [ការគណនាតម្លៃ Azure](https://azure.microsoft.com/pricing/calculator/)
+  មុនការដាក់បញ្ចូល និងកំណត់ថវិកានៅ Azure Cost Management។
+- ទិន្នន័យ CRUD របស់ Flask គឺនៅក្នុងអង្គចងចាំ, កំណត់តែម្ដងតែម្តងឱ្យកម្មករម្នាក់ និងពិបាកមួយចំនួនតែម្ដងដោយ
+  លំនាំដើម។ វាផុតលុបនៅពេលចាប់ផ្តើមម្តងទៀត ឬពេលពង្រីកទៅសូន្យ។ វាមិនមែនជាទីតាំងផ្ទុករឹងមាំទេ។
+- ម៉ីក្រូសេវាកម្មផលិតផលបង្ហាញតែមុខងារ GET ប៉ុណ្ណោះ។ គ្មានសេវាកម្មបញ្ជាទិញ, សេវាកម្មអ្នកប្រើ,
+  មូលដ្ឋានទិន្នន័យ, Service Bus, C#, ឬកម្មវិធី Go រួមបញ្ចូលទេ។
+- ធនធាន Application Insights មិនអូតូម៉ាស៊ីនវាស់វែងកម្មវិធីគ្រប់គ្រងទេ។
+  សូមពិគ្រោះអំពីគំរូនីមួយៗសម្រាប់តេលេមេទ្រីដែលបានចេញផ្សាយពិតប្រាកដ។
+- គំរូមិនអនុវត្តន៍ការផ្ទៀងផ្ទាត់កម្មវិធី។ បន្ថែមអត្តសញ្ញាណ ការអនុញ្ញាត,
+  ទីតាំងផ្ទុករឹងមាំ ការគ្រប់គ្រងបណ្តាញ តេស្ត និងនីតិវិធីប្រតិបត្តិការមុនចូលផលិតកម្ម។
+
+## គំរូ Azure ខាងក្រៅ — ស្ទូចចំឡងផ្សេងទៀត
+
+តំណរទាំងនេះជាឯកសារយោងទៅកាន់ឃ្លាំងផ្ទុកខុសៗគ្នា, **មិនមែនគំរូក្នុងតំបន់**។
+អ្នកថែទាំរបស់ពួកគេជាម្ចាស់កាន់ការណែនាំបង្កើត, ការអនុវត្ត, អាស្រ័យភាព, និងការចំណាយ។
+
+| គំរូ | យកចិត្តទុកដាក់ |
+|---|---|
+| [Node.js + MongoDB todo](https://github.com/Azure-Samples/todo-nodejs-mongo) | កម្មវិធី Node.js មានមូលដ្ឋានទិន្នន័យ |
+| [C# + SQL todo](https://github.com/Azure-Samples/todo-csharp-sql) | C# និង Azure SQL |
+| [Static Web Apps + Functions](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ផ្នែកមុខបង្ហាញ static ជាមួយ C# Functions និង SQL |
+| [Python Functions + MongoDB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | កម្មវិធី Python មិនមានម៉ាស៊ីនបម្រើ |
+| [Container Apps store API](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ផ្នែកខាងក្រោយហាង containerized |
+| [AI chat quickstart](https://github.com/Azure-Samples/get-started-with-ai-chat) | កម្មវិធីជជែក AI |
+| [AI agents quickstart](https://github.com/Azure-Samples/get-started-with-ai-agents) | កម្មវិធីភ្នាក់ងារជំនួយ |
+| [Search + OpenAI demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ការស្វែងរក RAG ជាមួយការស្វែងរក និងយោង |
+| [Contoso Chat](https://github.com/Azure-Samples/contoso-chat) | គំរូ AI ការជជែកត្រង់ |
+| [Java on Container Apps](https://github.com/Azure-Samples/java-on-aca) | សេវាកម្ម​ microservices Java |
+
+រកឃើញគម្រោងបន្ថែមនៅក្នុង [AZD template gallery](https://azure.github.io/awesome-azd/)។
+កុំសន្មតថាគម្រោងខាងក្រៅគាំទ្រ `azd` ដោយគ្មានការត្រួតពិនិត្យ README បច្ចុប្បន្នរបស់វា។
+
+## រចនាសម្ព័ន្ធដាក់រក្សាទុក
+
+```text
+examples/
+├── azure-openai-chat/               # Local CLI + model infrastructure
+├── container-app/
+│   ├── simple-flask-api/            # Single Flask API
+│   └── microservices/               # Gateway + read-only product service
+├── database-app/                    # Flask + Azure SQL on App Service
+├── microservices/README.md          # Navigation to the canonical example
+├── retail-multiagent-arm-template/  # Infrastructure scaffold only
+└── retail-scenario.md               # Architecture blueprint
+```
+
+គ្មានការសន្យាថាផ្ដល់ទៅនូវ `configurations/`, `scripts/` ឬថតសាកល្បងរួមដែលចែករំលែកដោយ
+បញ្ជីនេះទេ។ ឯកសារពិតប្រាកដ និងគំនិតបន្ថែមជំនួយត្រូវបានកំណត់នៅក្នុងមេរៀននីមួយៗ។
+
+## ការលុបចោល
+
+សម្រាប់ឧទាហរណ៍ AZD បួនឈុត ចាប់ផ្តើមបញ្ជារនេះ **ពីថតគំរូដែលបានជ្រើសរើស**៖
+
 ```bash
-# មើលមគ្គុទេសក៍មេ
-cd examples/container-app
-
-# ដាក់ប្រើ API Flask សាមញ្ញ
-cd simple-flask-api
-azd up
-
-# ដាក់ប្រើឧទាហរណ៍មីក្រូសេវាកម្ម
-cd ../microservices
-azd up
+azd down
 ```
 
-**បច្ចេកវិទ្យា:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
+ពិនិត្យសំណុំបែបបទលុបចោល។ សម្រាប់លក់រាយ ចូលចិត្តលុបក្រុមធនធានដែលអ្នកបង្កើតឡើងតែប៉ុណ្ណោះ
+ដោយប្រើការណែនាំក្នុងមេរៀន ARM របស់វា។ ពិនិត្យរបាយការណ៍ថ្លៃខ្លះបន្ទាប់ពីកំចាត់; ទិន្នន័យបង់ប្រាក់អាចមកយឺត។
 
-#### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
-**ការអនុវត្តពេញលេញសម្រាប់ផលិតកម្មបានបញ្ចូលក្នុងឃ្លាំងនេះ**
 
-- **ទីតាំង:** `examples/retail-multiagent-arm-template/`
-- **កម្រិតស្មុគស្មាញ:** ⭐⭐⭐⭐ (កម្រិតខ្ពស់)
-- **អ្វីដែលមានរួមបញ្ចូល:**
-  - ទម្រង់ ARM ដាក់ចេញពេញលេញ
-  - រចនាសម្ព័ន្ធ multi-agent (អតិថិជន + បញ្ជីសាក)
-  - បញ្ចូល Microsoft Foundry Models
-  - AI Search ជាមួយ RAG
-  - ការត្រួតពិនិត្យទូលំទូលាយ
-  - script ដាក់ចេញ One-click
+## ការចូលរួមរួម
 
-**ចាប់ផ្ដើមយ៉ាងរហ័ស:**
-```bash
-cd examples/retail-multiagent-arm-template
-./deploy.sh -g myResourceGroup
-```
+រួមបញ្ចូលប្រភព, ស្ថាបត្យកម្ម, ការកំណត់ការអភិវឌ្ឍ, ជំហានចាប់ផ្តើម និង
+ការត្រួតពិនិត្យ, កំណត់ដែនកំណត់, និងណែនាំលុបចោលជាមួយគំរូកម្មវិធី
+រៀងរាល់ដំណើរការ។ កំណត់សម្គាល់សម្ភារៈ architecture តែម្ដង និងស្នាដៃមិនទាន់ពេញលេញយ៉ាងច្បាស់។
+កុំមកអះអាងថាស្រាប់តែស្ថិតក្នុងភាពរួជ្ជឯកភាព ដោយគ្មានការអភិវឌ្ឍក្នុងផលិតកម្ម និងការធ្វើតេស្តដំណើរការ។
 
-**បច្ចេកវិទ្យា:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights
-
----
-
-## 🔗 ឧទាហរណ៍ Azure ខាងក្រៅ (Clone ដើម្បីប្រើប្រាស់)
-
-ឧទាហរណ៍ខាងក្រៅដូចខាងក្រោមត្រូវបានថែរក្សានៅក្នុងឃ្លាំង Azure-Samples ផ្លូវការណ៍។ Clone ពួកវា ដើម្បីស្វែងយល់ពីគំរូ AZD ផ្សេងៗ៖
-
-### កម្មវិធីសាមញ្ញ (ជំពូក 1-2)
-
-| ទម្រង់ | ឃ្លាំងកូដ | កម្រិតស្មុគស្មាញ | សេវាកម្ម |
-|:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [ក្នុងតំបន់: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Microservices** | [ក្នុងតំបន់: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | ច្រើនសេវា, Service Bus, Cosmos DB, SQL |
-| **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
-| **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
-| **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
-
-**វិធីប្រើប្រាស់:**
-```bash
-# ចម្លងគំរូណាមួយ
-git clone https://github.com/Azure-Samples/todo-nodejs-mongo
-cd todo-nodejs-mongo
-
-# បង្ហោះ
-azd up
-```
-
-### ឧទាហរណ៍កម្មវិធី AI (ជំពូក 2, 5, 8)
-
-| ទម្រង់ | ឃ្លាំងកូដ | កម្រិតស្មុគស្មាញ | ផ្តោត |
-|:---------|:-----------|:-----------|:------|
-| **Microsoft Foundry Models Chat** | [ក្នុងតំបន់: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | ការដាក់ប្រព័ន្ធ gpt-4.1 |
-| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | ជជែក AI មូលដ្ឋាន |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | ការគ្រប់គ្រងអភិបាល (Agent framework) |
-| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | គំរូ RAG |
-| **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | AI សម្រាប់សហគ្រាស |
-
-### មូលដ្ឋានទិន្នន័យ និង គំរូខ្ពស់ (ជំពូក 3-8)
-
-| ទម្រង់ | ឃ្លាំងកូដ | កម្រិតស្មុគស្មាញ | ផ្តោត |
-|:---------|:-----------|:-----------|:------|
-| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | ការបញ្ចូលមូលដ្ឋានទិន្នន័យ |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
-| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | ច្រើនសេវា |
-| **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
-
-## គោលដៅសិក្សា
-
-ដោយធ្វើការ​តាមឧទាហរណ៍ទាំងនេះ អ្នកនឹង:
-- អនុវត្ត workflow របស់ Azure Developer CLI ជាមួយសេណារីយ៉ូកម្មវិធីដែលមានភាពទាក់ទាញ
-- យល់ដឹងអំពីរចនាសម្ព័ន្ធកម្មវិធីផ្សេងៗ និងការអនុវត្ត azd របស់ពួកវា
-- ជំនាញលើគម្រោង Infrastructure as Code សម្រាប់សេវាកម្ម Azure ផ្សេងៗ
-- អនុវត្តគ្រប់គ្រងកំណត់តម្លៃ និងយុទ្ធសាស្ត្រដាក់ចេញតាមបរិស្ថាន
-- អនុវត្តត្រួតពិនិត្យ, សុវត្ថិភាព និងគំរូបង្ហាញកំណត់ទំហំក្នុងបរិបទអនុវត្ត
-- សាងសិទ្ធិបទពិសោធន៍ជាមួយការដោះស្រាយកំហុស និងដោះស្រាយបញ្ហាក្នុងសេណារីយ៉ូដាក់ចេញពិតប្រាកដ
-
-## លទ្ធផលសិក្សា
-
-បន្ទាប់ពីបញ្ចប់ឧទាហរណ៍ទាំងនេះ អ្នកនឹងអាច:
-- ដាក់ចេញប្រភេទកម្មវិធីផ្សេងៗដោយប្រើ Azure Developer CLI ដោយមានទំនុកចិត្ត
-- ប្ដូរទម្រង់ដែលបានផ្តល់ឲ្យសមស្របទៅតាមតម្រូវការកម្មវិធីរបស់អ្នក
-- រចនា និងអនុវត្តគំរូស្ថាបត្យកម្មផ្ទាល់ខ្លួនដោយប្រើ Bicep
-- កំណត់រចនាសម្ព័ន្ធកម្មវិធីច្រើនសេវាដោយមានការពឹងផ្អែកត្រឹមត្រូវ
-- អនុវត្តសុវត្ថិភាព, ត្រួតពិនិត្យ និងអនុវត្តអនុវត្តន៍ប្រសិទ្ធភាពល្អបំផុតក្នុងសេណារីយ៉ូពិតប្រាកដ
-- ដោះស្រាយ និងអូព្ទម៉ាយសមត្ថភាពដាក់ចេញដោយផ្អែកលើបទពិសោធន៍អនុវត្ត
-
-## រចនាសម្ព័ន្ធថតឯកសារ
-
-```
-Azure Samples AZD Templates (linked externally):
-├── todo-nodejs-mongo/       # Node.js Express with MongoDB
-├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
-├── container-apps-store-api/ # Python Flask containerized app
-├── todo-csharp-sql/         # C# Web API with Azure SQL
-├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
-├── java-microservices-aca-lab/ # Java microservices with Container Apps
-└── configurations/          # Common configuration examples
-    ├── environment-configs/
-    ├── bicep-modules/
-    └── scripts/
-```
-
-## ឧទាហរណ៍ចាប់ផ្ដើមយ៉ាងរហ័ស
-
-> **💡 ថ្មីចំពោះ AZD?** ចាប់ផ្ដើមជាមួយឧទាហរណ៍ #1 (Flask API) - ប្រហែល 20 នាទី និងបង្រៀនគំនិតមូលដ្ឋាន។
-
-### សម្រាប់អ្នកចាប់ផ្ដើម
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (ក្នុងតំបន់) ⭐  
-   ដាក់ឲ្យដំណើរការ REST API សាមញ្ញ មានមុខងារ scale-to-zero  
-   **ពេលវេលា:** 20-25 នាទី | **ថ្លៃ:** $0-5/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** Workflow azd មូលដ្ឋាន, ការត្រូវបញ្ចូលជា container, health probes  
-   **លទ្ធផលសង្ឃឹម:** Endpoint API ដែលដំណើរការ និងតប "Hello, World!" ជាមួយការត្រួតពិនិត្យ
-
-2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   ដាក់ប្រព័ន្ធ Node.js Express ជាមួយ MongoDB  
-   **ពេលវេលា:** 25-35 នាទី | **ថ្លៃ:** $10-30/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** ការតភ្ជាប់មូលដ្ឋានទិន្នន័យ, វរិយាករណ៍បរិយាកាស, connection strings  
-   **លទ្ធផលសង្ឃឹម:** កម្មវិធី Todo list មានមុខងារ create/read/update/delete
-
-3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   호សថាផ្ទាំង React static ជាមួយ Azure Static Web Apps  
-   **ពេលវេលា:** 20-30 នាទី | **ថ្លៃ:** $0-10/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** ការតភ្ជាប់ static hosting, serverless functions, ការដាក់ CDN  
-   **លទ្ធផលសង្ឃឹម:** UI React ជាមួយ backend API, SSL ស្វ័យប្រវត្តិ, CDN ទូទាំងពិភពលោក
-
-### សម្រាប់អ្នកកម្រិតមធ្យម
-4. **[Microsoft Foundry Models Chat Application](../../../examples/azure-openai-chat)** (ក្នុងតំបន់) ⭐⭐  
-   ដាក់ gpt-4.1 ជាមួយផ្ទៃមុខជជែក និងការគ្រប់គ្រងកូនសោ API សុវត្ថិភាព  
-   **ពេលវេលា:** 35-45 នាទី | **ថ្លៃ:** $50-200/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** ការដាក់ប្រព័ន្ធ Microsoft Foundry Models, បញ្ចូល Key Vault, តាមដាន token  
-   **លទ្ធផលសង្ឃឹម:** កម្មវិធីជជែកដែលដំណើរការ ជាមួយ gpt-4.1 និងការតាមដានថ្លៃ
-
-5. **[Container App - Microservices](../../../examples/container-app/microservices)** (ក្នុងតំបន់) ⭐⭐⭐⭐  
-   រចនាសម្ព័ន្ធច្រើនសេវាដែលរួចរាល់សម្រាប់ផលិតកម្ម  
-   **ពេលវេលា:** 45-60 នាទី | **ថ្លៃ:** $50-150/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** ការ​ទំនាក់ទំនងរវាងសេវា, សារ queueing, distributed tracing  
-   **លទ្ធផលសង្ឃឹម:** ប្រព័ន្ធ 2 សេវា (API Gateway + Product Service) ជាមួយការត្រួតពិនិត្យ
-
-6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   វេបអនុកម្មប្រ C# ជាមួយ Azure SQL Database  
-   **ពេលវេលា:** 30-45 នាទី | **ថ្លៃ:** $20-80/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** Entity Framework, ការផ្លាស់ប្តូររចនាបទបញ្ញត្តិ, សុវត្ថិភាព connection  
-   **លទ្ធផលសង្ឃឹម:** API C# ជាមួយ Azure SQL backend, ការដាក់ស្ដង់ដារ schema ស្វ័យប្រវត្តិ
-
-7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Python Azure Functions ជាមួយ HTTP triggers និង Cosmos DB  
-   **ពេលវេលា:** 30-40 នាទី | **ថ្លៃ:** $10-40/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** រចនាសម្ព័ន្ធ event-driven, serverless scaling, ការតភ្ជាប់ NoSQL  
-   **លទ្ធផលសង្ឃឹម:** Function app ដែលឆ្លើយតប HTTP requests ជាមួយផ្ទុក Cosmos DB
-
-8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   កម្មវិធី Java បាច់ច្រើនសេវា ជាមួយ Container Apps និង API gateway  
-   **ពេលវេលា:** 60-90 នាទី | **ថ្លៃ:** $80-200/ខែ  
-   **អ្វីដែលអ្នកនឹងរៀន:** ការដាក់ Spring Boot, service mesh, load balancing  
-   **លទ្ធផលសង្ឃ៊ីម:** ប្រព័ន្ធ Java ច្រើនសេវា មាន service discovery និង routing
-
-### ទំរង់ Microsoft Foundry
-
-1. **[Microsoft Foundry Models Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
-   ការដាក់ប្រព័ន្ធ gpt-4.1 ពេញលេញជាមួយផ្ទៃមុខជជែក  
-   **ពេលវេលា:** 35-45 នាទី | **ថ្លៃ:** $50-200/ខែ  
-   **លទ្ធផលសង្ឃឹម:** កម្មវិធីជជែកដែលដំណើរការ ជាមួយការតាមដាន token និងថ្លៃ
-
-2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   កម្មវិធីជជែកឆ្លាតវៃដែលមានរចនាសម្ព័ន្ធ RAG  
-   **ពេលវេលា:** 60-90 នាទី | **ថ្លៃ:** $100-300/ខែ  
-   **លទ្ធផលសង្ឃឹម:** ផ្ទៃមុខជជែក RAG ជាមួយការស្វែងរកឯកសារ និងយោង
-
-3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   ការវិភាគឯកសារប្រើប្រាស់សេវាកម្ម Azure AI  
-   **ពេលវេលា:** 40-60 នាទី | **ថ្លៃ:** $20-80/ខែ  
-   **លទ្ធផលសង្ឃឹម:** API ដកអត្ថបទ, តារាង និងអង្គធាតុពីឯកសារដែលបានផ្ទុក
-
-4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   វិធានការវិធី MLOps ជាមួយ Azure Machine Learning  
-   **ពេលវេលា:** 2-3 ម៉ោង | **ថ្លៃ:** $150-500/ខែ  
-   **លទ្ធផលសង្ខឹម:** បណ្តុំពិធី MLOps ឆ្នៃឆ្លង ដែលមានការបណ្តុះ, ដាក់ចេញ, និងត្រួតពិនិត្យ
-
-### សេណារីយ៉ូពិតប្រាកដ
-
-#### **Retail Multi-Agent Solution** 🆕  
-**[មគ្គុទេសក៍អនុវត្តពេញលេញ](./retail-scenario.md)**
-
-ដំណោះស្រាយ multi-agent សម្រាប់គាំទ្រអតិថិជន ដែលរួមបញ្ចូលការអនុវត្តនៅកម្រិតផលិតកម្ម និងបង្ហាញពីការដាក់កម្មវិធី AI សម្រាប់សហគ្រាសជាមួយ AZD។ សេណារីយ៉ូនេះផ្តល់៖
-
-- **រចនាសម្ព័ន្ធពេញលេញ**: ប្រព័ន្ធ multi-agent ជាមួយភ្នាក់ងារផ្តោតលើសេវាអតិថិជន និងការគ្រប់គ្រងស្តុក
-- **Production Infrastructure**: ការរៀបចំហេដ្ឋារចនាសម្ព័ន្ធសម្រាប់ផលិតកម្មក្នុងតំបន់ច្រើន សម្រាប់ Microsoft Foundry Models, AI Search, Container Apps, និងការត្រួតពិនិត្យពេញលេញ
-- **Ready-to-Deploy ARM Template**: ការដាក់បញ្ចូលដោយចុចម្តង មួយកន្លែងជាមួយម៉ូដកំណត់រចនាសម្ព័ន្ធជាច្រើន (Minimal/Standard/Premium)
-- **Advanced Features**: ការផ្ទៀងផ្ទាត់សន្តិសុខ Red teaming, ស៊ុមវេនវាយតម្លៃភ្នាក់ងារ (agent evaluation framework), ការបង្កើនប្រសិទ្ធភាពចំណាយ និងមគ្គុទេសក៍ដោះស្រាយបញ្ហា
-- **Real Business Context**: ករណីប្រើប្រាស់គាំទ្រអតិថិជនរបស់អ្នកលក់រាយ ជាមួយការអាប់ឡូដឯកសារ ការរួមបញ្ចូលស្វែងរក និងការពង្រីកធនធារដែលអាចផ្លាស់ប្តូរ
-
-**Technologies**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
-
-**Complexity**: ⭐⭐⭐⭐ (ឧត្តម - រួចរាល់សម្រាប់ផលិតកម្មសហគ្រាស)
-
-**Perfect for**: អភិវឌ្ឍន៍ AI, ស្ថាបត្យករដំណោះស្រាយ, និងក្រុមដែលកំពុងស្ថាបនាប្រពន្ធ multi-agent សម្រាប់ផលិតកម្ម
-
-**Quick Start**: ដាក់បញ្ចូលដំណោះស្រាយពេញលេញក្នុងរយៈពេលក្រោម 30 នាទី ដោយប្រើ ARM template ដែលភ្ជាប់មក ជាមួយ `./deploy.sh -g myResourceGroup`
-
-## 📋 របៀបប្រើប្រាស់
-
-### តម្រូវការមុនពេលចាប់ផ្ដើម
-
-មុនពេលដំណើរការឧទាហរណ៍ណាមួយ៖
-- ✅ បណ្តាញជាវ Azure ដែលមានសិទ្ធជា Owner ឬ Contributor
-- ✅ Azure Developer CLI ត្រូវបានដំឡើង ([Installation Guide](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop កំពុងដំណើរការ (សម្រាប់ឧទាហរណ៍ container)
-- ✅ កម្រិតគណនី Azure ដែលសមរម្យ (ពិនិត្យតម្រូវការពិសេសសម្រាប់ឧទាហរណ៍)
-
-> **💰 Cost Warning:** ឧទាហរណ៍ទាំងអស់បង្កើតធនធាន Azure ជាក់ស្តែង ដែលនឹងបណ្ដាលឲ្យមានការចំណាយ។ សូមមើល README នីមួយៗសម្រាប់ការប៉ាន់ស្មានថ្លៃ។ ចងចាំដំណើរការ `azd down` បន្ទាប់ពីបញ្ចប់ ដើម្បីជៀសវាងការចំណាយបន្ត។
-
-### រត់ឧទាហរណ៍នៅលើកុំព្យូទ័ររបស់អ្នក
-
-1. **ចម្លង ឬ នាំចូល ឧទាហរណ៍**
-   ```bash
-   # ចូលទៅកាន់ឧទាហរណ៍ដែលចង់បាន
-   cd examples/simple-web-app
-   ```
-
-2. **ចាប់ផ្ដើមបរិស្ថាន AZD**
-   ```bash
-   # ចាប់ផ្តើមដោយប្រើគំរូដែលមានរួច
-   azd init
-   
-   # ឬបង្កើតបរិយាកាសថ្មី
-   azd env new my-environment
-   ```
-
-3. **កំណត់បរិស្ថាន**
-   ```bash
-   # កំណត់អថេរដែលត្រូវការ
-   azd env set AZURE_LOCATION eastus
-   azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
-   ```
-
-4. **ដាក់បញ្ចូល**
-   ```bash
-   # ដាក់ឲ្យដំណើរការ ហេដ្ឋារចនាសម្ព័ន្ធ និងកម្មវិធី
-   azd up
-   ```
-
-5. **ផ្ទៀងផ្ទាត់ការដាក់បញ្ចូល**
-   ```bash
-   # យកចុងបញ្ចប់សេវាកម្ម
-   azd env get-values
-   
-   # សាកល្បងចុងបញ្ចប់ (ឧទាហរណ៍)
-   curl https://your-app-url.azurecontainer.io/health
-   ```
-   
-   **សញ្ញាដែលរំពឹងថាជោគជ័យ:**
-   - ✅ `azd up` បញ្ចប់ដោយគ្មានកំហុស
-   - ✅ Service endpoint ត្រឡប់ HTTP 200
-   - ✅ Azure Portal បង្ហាញស្ថានភាព "Running"
-   - ✅ Application Insights ទទួលទិន្នន័យ telemetry
-
-> **⚠️ មានបញ្ហា?** សូមមើល [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) សម្រាប់ការដោះស្រាយបញ្ហាក្នុងការដាក់បញ្ចូល
-
-### កែច្នៃឧទាហរណ៍
-
-ឧទាហរណ៍និមួយៗរួមមាន:
-- **README.md** - មគ្គុទេសក៍លម្អិតសម្រាប់ការតំឡើង និងការប្ដូរតាមតម្រូវការ
-- **azure.yaml** - ការកំណត់ AZD អមដោយកិរិយាសម្គាល់
-- **infra/** - ទំព័រ Bicep ជាមួយការពន្យល់អំពីប៉ារ៉ាម៉ែត្រ
-- **src/** - កូដកម្មវិធីឧទាហរណ៍
-- **scripts/** - ស្គ្រីបជំនួយសម្រាប់កិច្ចការពេញនិយម
-
-## 🎯 គោលបំណងរៀន
-
-### ប្រភេទឧទាហរណ៍
-
-#### **Basic Deployments**
-- កម្មវិធីមួយសេវា
-- ទ្រង់ទ្រាយហេដ្ឋារចនាសម្ព័ន្ធសាមញ្ញ
-- ការគ្រប់គ្រងកំណត់រចនាសម្ព័ន្ធមូលដ្ឋាន
-- ការតំឡើងអភិវឌ្ឍន៍ដែលមានប្រសិទ្ធភាពតម្លៃ
-
-#### **Advanced Scenarios**
-- ស្ថាបត្យកម្មច្រើនសេវា
-- ការកំណត់បណ្ដាញស្មុគស្មាញ
-- ទ្រង់ទ្រាយរួមបញ្ចូលមូលដ្ឋានទិន្នន័យ
-- ការអនុវត្តសន្តិសុខ និងការអនុលោមបទប្បញ្ញត្តិ
-
-#### **Production-Ready Patterns**
-- ការកំណត់សម្រាប់ភាពអាចប្រើបានខ្ពស់
-- ការត្រួតពិនិត្យ និងអាចមើលឃើញបាន
-- ការរួមបញ្ចូល CI/CD
-- ការតំឡើងសម្រាប់ស្ដារប្រព័ន្ធបាក់បែក
-
-## 📖 ពណ៌នាឧទាហរណ៍
-
-### Simple Web App - Node.js Express
-**Technologies**: Node.js, Express, MongoDB, Container Apps  
-**Complexity**: Beginner  
-**Concepts**: ការដាក់បញ្ចូលមូលដ្ឋាន, REST API, ការរួមបញ្ចូលទិន្នន័យ NoSQL
-
-### Static Website - React SPA
-**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Complexity**: Beginner  
-**Concepts**: ការផ្តល់សេវាស្ថិតស្ថេរ, មុខខាងបណ្តាញ serverless, អភិវឌ្ឍន៍វែបទំនើប
-
-### Container App - Python Flask
-**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Complexity**: Beginner  
-**Concepts**: ការបាំងបាំងជាកុងតេន័រ, REST API, scale-to-zero, health probes, ការត្រួតពិនិត្យ  
-**Location**: [ឧទាហរណ៍ក្នុងទីតាំងផ្ទាល់](../../../examples/container-app/simple-flask-api)
-
-### Container App - Microservices Architecture
-**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Complexity**: Advanced  
-**Concepts**: ស្ថាបត្យកម្មច្រើនសេវា, ការទំនាក់ទំនងសេវា, ការដាក់ចំណាត់ថ្នាក់សារ, distributed tracing  
-**Location**: [ឧទាហរណ៍ក្នុងទីតាំងផ្ទាល់](../../../examples/container-app/microservices)
-
-### Database App - C# with Azure SQL
-**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Complexity**: Intermediate  
-**Concepts**: Entity Framework, ការតភ្ជាប់ទៅមូលដ្ឋានទិន្នន័យ, ការអភិវឌ្ឍ Web API
-
-### Serverless Function - Python Azure Functions
-**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Complexity**: Intermediate  
-**Concepts**: ស្ថាបត្យកម្មដោយហេតុការណ៍, កម្មវិធី serverless, អភិវឌ្ឍន៍ full-stack
-
-### Microservices - Java Spring Boot
-**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Complexity**: Intermediate  
-**Concepts**: ការទំនាក់ទំនងក្នុង microservices, ប្រព័ន្ធចែកចាយ, គំរូសម្រាប់សហគ្រាស
-
-### Microsoft Foundry Examples
-
-#### Microsoft Foundry Models Chat App
-**Technologies**: Microsoft Foundry Models, Azure AI Search, App Service  
-**Complexity**: Intermediate  
-**Concepts**: រចនាសម្ព័ន្ធ RAG, ស្វែងរក vector, ការរួមបញ្ចូល LLM
-
-#### AI Document Processing
-**Technologies**: Azure AI Document Intelligence, Storage, Functions  
-**Complexity**: Intermediate  
-**Concepts**: វិភាគឯកសារ, OCR, ការដកយកទិន្នន័យ
-
-#### Machine Learning Pipeline
-**Technologies**: Azure ML, MLOps, Container Registry  
-**Complexity**: Advanced  
-**Concepts**: ការបណ្តុះបណ្តាលម៉ូដែល, ប៉ាយបណ្ដាញដាក់ចេញ, ការត្រួតពិនិត្យ
-
-## 🛠 ឧទាហរណ៍កំណត់រចនាសម្ព័ន្ធ
-
-ថត `configurations/` មានធតិចដែលអាចប្រើឡើងវិញ៖
-
-### កំណត់បរិស្ថាន
-- កំណត់បរិស្ថានអភិវឌ្ឍន៍
-- កំណត់បរិស្ថាន Staging
-- កំណត់រចនាសម្ព័ន្ធរួចរាល់សម្រាប់ផលិតកម្ម
-- ការដាក់ចេញនៅច្រើនតំបន់
-
-### ម៉ូឌុល Bicep
-- ធាតុហេដ្ឋារចនាសម្ព័ន្ធដែលអាចប្រើឡើងវិញ
-- គំរូធនធានទូទៅ
-- ទំព័រដែលបានបង្កើនសន្តិសុខ
-- ការកំណត់ដែលសមស្របសម្រាប់ការកាត់បន្ថយថ្លៃ
-
-### ស្គ្រីបជំនួយ
-- ស្វ័យក្រិតការតំឡើងបរិស្ថាន
-- ស្គ្រីបរំកិលមូលដ្ឋានទិន្នន័យ
-- ឧបករណ៍ផ្ទៀងផ្ទាត់ការដាក់បញ្ចូល
-- គ្រប់គ្រងតម្លៃ
-
-## 🔧 មគ្គុទេសក៍ការកែផ្លាស់ប្ដូរ
-
-### កែច្នៃឧទាហរណ៍សម្រាប់ករណីប្រើប្រាស់របស់អ្នក
-
-1. **ពិនិត្យតម្រូវការមុន**
-   - ពិនិត្យលក្ខណៈសេវាកម្ម Azure ដែលត្រូវការ
-   - ប្រាកដពីដែនកំណត់នៅក្នុង subscription
-   - យល់ពីផលប៉ះពាល់ទៅលើថ្លៃ
-
-2. **កែប្រែការកំណត់**
-   - បន្ទាន់សម័យ `azure.yaml` កំណត់សេវាកម្ម
-   - កែសម្រួលទំព័រ Bicep
-   - កំណត់អថេរបរិស្ថាន
-
-3. **សាកល្បងយ៉ាងម៉ាត់**
-   - ដាក់បញ្ចូលទៅបរិស្ថានអភិវឌ្ឍន៍ជាមួយជំហានដំបូង
-   - ផ្ទៀងផ្ទាត់មុខងារ
-   - សាកល្បងការពង្រីក និងការសម្របសម្រួលប្រសិទ្ធភាព
-
-4. **ពិនិត្យសន្តិសុខ**
-   - ពិនិត្យកម្មសិទ្ធិ និងការកំណត់ចូល
-   - អនុវត្តគ្រប់គ្រងសម្ងាត់
-   - បើកការត្រួតពិនិត្យ និងការជូនដំណឹង
-
-## 📊 Comparison Matrix
-
-| ឧទាហរណ៍ | សេវាកម្ម | មូលដ្ឋានទិន្នន័យ | ការផ្ទៀងផ្ទាត់ | ការត្រួតពិនិត្យ | កម្រិតស្មុគស្មាញ |
-|---------|----------|----------|------|------------|------------|
-| **Microsoft Foundry Models Chat** (ក្នុងស្រុក) | 2 | ❌ | Key Vault | ពេញលេញ | ⭐⭐ |
-| **Python Flask API** (ក្នុងស្រុក) | 1 | ❌ | មូលដ្ឋាន | ពេញលេញ | ⭐ |
-| **Microservices** (ក្នុងស្រុក) | 5+ | ✅ | Enterprise | កម្រិតខ្ពស់ | ⭐⭐⭐⭐ |
-| Node.js Express Todo | 2 | ✅ | ពាក់កណ្តាល | មូលដ្ឋាន | ⭐ |
-| React SPA + Functions | 3 | ✅ | ពាក់កណ្តាល | ពេញលេញ | ⭐ |
-| Python Flask Container | 2 | ❌ | ពាក់កណ្តាល | ពេញលេញ | ⭐ |
-| C# Web API + SQL | 2 | ✅ | ពេញលេញ | ពេញលេញ | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | ពេញលេញ | ពេញលេញ | ⭐⭐ |
-| Java Microservices | 5+ | ✅ | ពេញលេញ | ពេញលេញ | ⭐⭐ |
-| Microsoft Foundry Models Chat | 3 | ✅ | ពេញលេញ | ពេញលេញ | ⭐⭐⭐ |
-| AI Document Processing | 2 | ❌ | ពាក់កណ្តាល | ពេញលេញ | ⭐⭐ |
-| ML Pipeline | 4+ | ✅ | ពេញលេញ | ពេញលេញ | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (ក្នុងស្រុក) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
-
-## 🎓 ផ្លូវរៀន
-
-### ការតម្រូវភាពសមរម្យសម្រាប់ការរីកចម្រើន
-
-1. **ចាប់ផ្តើមជាមួយ Simple Web App**
-   - រៀនទ្រឹស្តីមូលដ្ឋាន AZD
-   - យល់ពីផ្លូវដាក់បញ្ចូល
-   - អនុវត្តការគ្រប់គ្រងបរិស្ថាន
-
-2. **សាកល្បង Static Website**
-   - สำรวจជម្រើសផ្នែកផ្ទុក
-   - រៀនអំពីការរួមបញ្ចូល CDN
-   - យល់ពីការកំណត់ DNS
-
-3. **ផ្លាស់ទៅ Container App**
-   - រៀនមូលដ្ឋាន containerization
-   - យល់ពីគំនិត scaling
-   - អនុវត្តជាមួយ Docker
-
-4. **បន្ថែមការរួមបញ្ចូលមូលដ្ឋានទិន្នន័យ**
-   - រៀនការបញ្ជូនមូលដ្ឋានទិន្នន័យ
-   - យល់ពី connection strings
-   - អនុវត្តគ្រប់គ្រងសម្ងាត់
-
-5. **ស្វែងរក Serverless**
-   - យល់ពីស្ថាបត្យកម្មដោយហេតុការណ៍
-   - រៀនពី triggers និង bindings
-   - អនុវត្តជាមួយ API
-
-6. **កសាង Microservices**
-   - រៀនការទំនាក់ទំនងសេវា
-   - យល់ពីប្រព័ន្ធចែកចាយ
-   - អនុវត្តការដាក់បញ្ចូលស្មុគស្មាញ
-
-## 🔍 រកឧទាហរណ៍សមរម្យ
-
-### តាមសំណុំបច្ចេកវិទ្យា
-- **Container Apps**: [Python Flask API (ក្នុងស្រុក)](../../../examples/container-app/simple-flask-api), [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (ក្នុងស្រុក)](../../../examples/container-app/microservices)
-- **Python**: [Python Flask API (ក្នុងស្រុក)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (ក្នុងស្រុក)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [Microservices Order Service (ក្នុងស្រុក)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
-- **Go**: [Microservices User Service (ក្នុងស្រុក)](../../../examples/container-app/microservices)
-- **Java**: Java Spring Boot Microservices
-- **React**: React SPA + Functions
-- **Containers**: [Python Flask (ក្នុងស្រុក)](../../../examples/container-app/simple-flask-api), [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices), Java Microservices
-- **Databases**: [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Microsoft Foundry Models Chat (ក្នុងស្រុក)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
-- **OpenAI Integration**: **[Microsoft Foundry Models Chat (ក្នុងស្រុក)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
-- **Enterprise Production**: [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
-
-### តាមរចនាសម្ព័ន្ធស្ថាបត្យកម្ម
-- **Simple REST API**: [Python Flask API (ក្នុងស្រុក)](../../../examples/container-app/simple-flask-api)
-- **Monolithic**: Node.js Express Todo, C# Web API + SQL
-- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservices**: [Production Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **Containerized**: [Python Flask (ក្នុងស្រុក)](../../../examples/container-app/simple-flask-api), [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices)
-- **AI-Powered**: **[Microsoft Foundry Models Chat (ក្នុងស្រុក)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
-- **Enterprise Multi-Service**: [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
-
-### តាមកម្រិតស្មុគស្មាញ
-- **Beginner**: [Python Flask API (ក្នុងស្រុក)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Intermediate**: **[Microsoft Foundry Models Chat (ក្នុងស្រុក)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
-- **Advanced**: ML Pipeline
-- **Enterprise Production-Ready**: [Microservices (ក្នុងស្រុក)](../../../examples/container-app/microservices) (Multi-service with message queuing), **Retail Multi-Agent Solution** (ប្រព័ន្ធ multi-agent ពេញលេញ ជាមួយការដាក់ចេញ ARM template)
-
-## 📚 ធនធានបន្ថែម
-
-### តំណភ្ជាប់ឯកសារ
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-
-### ឧទាហរណ៍សហគមន៍
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
-- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [កម្មវិធីវែប React ជាមួយ API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps Job (ការងារ)](https://github.com/Azure-Samples/container-apps-jobs)
-- [Azure Functions ជាមួយ Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
-
-### អនុវត្តិល្អបំផុត
-- [ស៊ុមរចនាបទល្អ Azure (Well-Architected Framework)](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [ស៊ុមការទទួលយកពពក (Cloud Adoption Framework)](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
-
-## 🤝 រួមចំណែកឧទាហរណ៍
-
-តើអ្នកមានឧទាហរណ៍ដែលមានប្រយោជន៍ចង់ចែករំលែកទេ? យើងសូមស្វាគមន៍ការរួមចំណែក!
-
-### កម្មវិធីឡើងស្នើ
-1. អនុវត្តតាមរចនាសម្ព័ន្ធថតដែលបានកំណត់
-2. រួមបញ្ចូល README.md ដែលពិពណ៌នាពេញលេញ
-3. បន្ថែមកំណត់សម្គាល់ទៅឯកសារ​កំណត់រចនា
-4. សាកល្បងយ៉ាងពេញលេញមុនដាក់ស្នើ
-5. រួមបញ្ចូលការប៉ាន់ស្មានថ្លៃ និងតម្រូវការមុន
-
-### រចនាសម្ព័ន្ធគំរូឧទាហរណ៍
-```
-example-name/
-├── README.md           # Detailed setup instructions
-├── azure.yaml          # AZD configuration
-├── infra/              # Infrastructure templates
-│   ├── main.bicep
-│   └── modules/
-├── src/                # Application source code
-├── scripts/            # Helper scripts
-├── .gitignore         # Git ignore rules
-└── docs/              # Additional documentation
-```
-
----
-
-**Pro Tip**: ចាប់ផ្ដើមដោយឧទាហរណ៍សាមញ្ញបំផុតដែលសមស្របនឹងស្តាក់បច្ចេកទេសរបស់អ្នក បន្ទាប់មកប្រថុយឡើងជាបន្តបន្ទាប់ទៅស្ថានភាពស្មុគស្មាញ។ ឧទាហរណ៍និមួយៗកសាងលើគំនិតពីឧទាហរណ៍មុន!
-
-## 🚀 រួចរាល់ដើម្បីចាប់ផ្ដើម?
-
-### ផ្លូវសិក្សារបស់អ្នក
-
-1. **អ្នកចាប់ផ្ដើមទាំងស្រុង?** → ចាប់ផ្តើមជាមួយ [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 នាទី)
-2. **មានចំណេះដឹងមូលដ្ឋាន​អំពី AZD?** → សាកល្បង [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 នាទី)
-3. **កំពុង​សាងសង់កម្មវិធី AI?** → ចាប់ផ្តើមជាមួយ [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 នាទី) ឬស្វែងយល់ [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ ម៉ោង)
-4. **តើត្រូវការស្តាក់បច្ចេកទេសជាក់លាក់?** → ប្រើផ្នែក [រកឧទាហរណ៍​ដែល​ត្រឹមត្រូវ](#-finding-the-right-example) ខាងលើ
-
-### ជំហានបន្ទាប់
-
-- ✅ ពិនិត្យឡើងវិញ [តម្រូវការមុន](#តម្រូវការមុនពេលចាប់ផ្ដើម) ខាងលើ
-- ✅ ជ្រើសរើសឧទាហរណ៍ដែលសមនឹងកម្រិតជំនាញរបស់អ្នក (មើល [ពិពណ៌នាគុណភាពស្មុគស្មាញ](#ការបរិយាយចំណាត់ថ្នាក់ភាពស្មុគស្មាញ))
-- ✅ អាន README របស់ឧទាហរណ៍យ៉ាងម៉ត់ចត់មុនការដាក់ប្រើ
-- ✅ ដាក់កំណត់ចំណាំដើម្បីរត់ `azd down` បន្ទាប់ពីសាកល្បង
-- ✅ ចែករំលែកបទពិសោធន៍របស់អ្នកតាម GitHub Issues ឬ Discussions
-
-### ត្រូវការ​ជំនួយ?
-
-- 📖 [FAQ](../resources/faq.md) - សំណួរដែលក្នុងការសួរញឹកញាប់បានឆ្លើយ
-- 🐛 [មគ្គុទេសក៍ដោះស្រាយបញ្ហា](../docs/chapter-07-troubleshooting/common-issues.md) - ដោះស្រាយបញ្ហាការដាក់ប្រើ
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - សួរដល់សហគមន៍
-- 📚 [មគ្គុទេសក៍សិក្សា](../resources/study-guide.md) - ពង្រឹងការសិក្សារបស់អ្នក
-
----
-
-**រុករក**
-- **📚 ទំព័រផ្ទះមេរៀន**: [AZD For Beginners](../README.md)
-- **📖 ឯកសារសិក្សា**: [មគ្គុទេសក៍សិក្សា](../resources/study-guide.md) | [កត់សង្ខេប](../resources/cheat-sheet.md) | [កម្រងពាក្យ](../resources/glossary.md)
-- **🔧 ធនធាន**: [FAQ](../resources/faq.md) | [មគ្គុទេសក៍ដោះស្រាយបញ្ហា](../docs/chapter-07-troubleshooting/common-issues.md)
-
----
-
-*បានធ្វើបច្ចុប្បន្នភាពចុងក្រោយ: វិច្ឆិកា 2025 | [របាយការណ៍បញ្ហា](https://github.com/microsoft/AZD-for-beginners/issues) | [រួមចំណែកឧទាហរណ៍](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+[សំណួរញឹកញាប់](../resources/faq.md) · [មគ្គុទ្ទេសក៍សិក្សា](../resources/study-guide.md) ·
+[រាយការណ៍បញ្ហា](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

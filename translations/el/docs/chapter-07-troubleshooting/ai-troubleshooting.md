@@ -1,30 +1,30 @@
 # Οδηγός Επίλυσης Προβλημάτων για Τεχνητή Νοημοσύνη
 
 **Πλοήγηση Κεφαλαίων:**
-- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 7 - Επίλυση Προβλημάτων & Αποσφαλμάτωση
 - **⬅️ Προηγούμενο**: [Οδηγός Αποσφαλμάτωσης](debugging.md)
-- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 8: Παραγωγικά & Επιχειρησιακά Μοντέλα](../chapter-08-production/production-ai-practices.md)
-- **🤖 Σχετικά**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην ΤΝ](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 8: Προτύπα Παραγωγής & Επιχειρήσεων](../chapter-08-production/production-ai-practices.md)
+- **🤖 Σχετικό**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Αυτός ο ολοκληρωμένος οδηγός επίλυσης προβλημάτων αντιμετωπίζει συνηθισμένα ζητήματα κατά την ανάπτυξη λύσεων ΤΝ με AZD, παρέχοντας λύσεις και τεχνικές αποσφαλμάτωσης ειδικές για τις υπηρεσίες Azure AI.
+Αυτός ο ολοκληρωμένος οδηγός επίλυσης προβλημάτων καλύπτει κοινά ζητήματα κατά την ανάπτυξη λύσεων AI με AZD, παρέχοντας λύσεις και τεχνικές αποσφαλμάτωσης ειδικές για τις υπηρεσίες Azure AI.
 
-> **Εύρος:** Οι εντολές χρησιμοποιούν παραδείγματα ονομάτων πόρων· αντικαταστήστε τα και επιλέξτε τη σωστή συνδρομή. Τα μπλοκ Bicep είναι αποσπάσματα για συγχώνευση σε υπάρχον πρότυπο, όχι αυτόνομες αναπτύξεις. Τα αποσπάσματα Python απαιτούν τα δηλωμένα SDK και ρύθμιση εφαρμογής. Δεν εκτελέστηκε ζωντανή ανάπτυξη στο Azure για αυτή την ανασκόπηση.
+> **Πεδίο Εφαρμογής:** Οι εντολές χρησιμοποιούν παραδείγματα ονομάτων πόρων· αντικαταστήστε τα και επιλέξτε τη σωστή συνδρομή. Τα μπλοκ Bicep είναι αποσπάσματα για συγχώνευση σε υπάρχον πρότυπο, όχι ανεξάρτητες αναπτύξεις. Τα αποσπάσματα Python απαιτούν τα αναφερόμενα SDK και παραμετροποίηση της εφαρμογής. Δεν έγινε ζωντανή ανάπτυξη Azure για αυτή την ανασκόπηση.
 
-## Πίνακας Περιεχομένων
+## Περιεχόμενα
 
-- [Προβλήματα Υπηρεσιών Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
-- [Προβλήματα Azure AI Search](#azure-ai-search-problems)
-- [Προβλήματα Ανάπτυξης Container Apps](#container-apps-deployment-issues)
+- [Προβλήματα στην Υπηρεσία Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
+- [Προβλήματα Αναζήτησης Azure AI](#azure-ai-search-problems)
+- [Προβλήματα Ανάπτυξης Εφαρμογών Container](#container-apps-deployment-issues)
 - [Σφάλματα Πιστοποίησης και Δικαιωμάτων](#authentication-and-permission-errors)
-- [Αποτυχίες Ανάπτυξης Μοντέλων](#model-deployment-failures)
+- [Αποτυχίες Ανάπτυξης Μοντέλου](#model-deployment-failures)
 - [Προβλήματα Απόδοσης και Κλιμάκωσης](#performance-and-scaling-issues)
-- [Διαχείριση Κόστους και Ποσοστώσεων](#cost-and-quota-management)
+- [Διαχείριση Κόστους και Ορίων](#cost-and-quota-management)
 - [Εργαλεία και Τεχνικές Αποσφαλμάτωσης](#debugging-tools-and-techniques)
 
-## Προβλήματα Υπηρεσίας Microsoft Foundry Models
+## Προβλήματα στην Υπηρεσία Microsoft Foundry Models
 
-### Ζήτημα: Η Υπηρεσία OpenAI Δεν Είναι Διαθέσιμη στην Περιοχή
+### Ζήτημα: Υπηρεσία OpenAI Μη Διαθέσιμη στην Περιοχή
 
 **Συμπτώματα:**
 ```
@@ -32,13 +32,13 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Αιτίες:**
-- Η υπηρεσία Microsoft Foundry Models δεν είναι διαθέσιμη στην επιλεγμένη περιοχή
-- Η ποσόστωση έχει εξαντληθεί στις προτιμώμενες περιοχές
-- Περιορισμοί χωρητικότητας στην περιοχή
+- Τα Microsoft Foundry Models δεν είναι διαθέσιμα στην επιλεγμένη περιοχή
+- Οι πόροι εξαντλήθηκαν στις προτιμώμενες περιοχές
+- Περιφερειακοί περιορισμοί χωρητικότητας
 
 **Λύσεις:**
 
-1. **Ελέγξτε τη Διαθεσιμότητα Περιοχής:**
+1. **Ελέγξτε τη Διαθεσιμότητα της Περιοχής:**
 ```bash
 # Inspect model/deployment-type offerings in a candidate region
 az cognitiveservices model list --location eastus2 --output json
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Ζήτημα: Υπέρβαση Ποσόστωσης Ανάπτυξης Μοντέλου
+### Ζήτημα: Υπέρβαση Ορίου Ανάπτυξης Μοντέλου
 
 **Συμπτώματα:**
 ```
@@ -74,15 +74,15 @@ Error: Deployment failed due to insufficient quota
 
 **Λύσεις:**
 
-1. **Ελέγξτε την Τρέχουσα Ποσόστωση:**
+1. **Ελέγξτε το Τρέχον Όριο:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
   --location eastus2 --output table
 ```
 
-2. **Ζητήστε Αύξηση Ποσόστωσης:**
-Χρησιμοποιήστε τη ροή εργασίας διαχείρισης ποσόστωσης στην πύλη Foundry για τη συνδρομή, περιοχή, μοντέλο και τύπο ανάπτυξης που επηρεάζεται. Δείτε τις [επίσημες οδηγίες ποσόστωσης](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Αίτημα ποσόστωσης VM δεν αυξάνει την ποσόστωση μοντέλου.
+2. **Αιτηθείτε Αύξηση Ορίου:**
+Χρησιμοποιήστε τη ροή διαχείρισης ορίων στο portal Foundry για τη συνδρομή, την περιοχή, το μοντέλο και τον τύπο ανάπτυξης που επηρεάζεται. Δείτε τις [επίσημες οδηγίες για όρια](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Ένα αίτημα ορίου VM δεν αυξάνει το όριο μοντέλων.
 
 3. **Βελτιστοποιήστε τη Χωρητικότητα Μοντέλου:**
 ```bicep
@@ -120,9 +120,9 @@ AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Ελέγξτε τη Συμβατότητα Έκδοσης API:**
-Ελέγξτε την [αναφορά κύκλου ζωής API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Οι εκδόσεις API παρόχου πόρων ARM **δεν** περιλαμβάνουν τις εκδόσεις API inference/data-plane. Οι νέοι v1 πελάτες χρησιμοποιούν `/openai/v1/` χωρίς μια χρονολογημένη `api-version`· μην αναμειγνύετε τις δύο ρυθμίσεις πελάτη.
+Ελέγξτε την [αναφορά ζωής API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Οι εκδόσεις API παρόχου πόρων ARM **δεν** περιλαμβάνουν τις εκδόσεις API για τη διεπαφή inference/data-plane. Οι νέοι πελάτες v1 χρησιμοποιούν `/openai/v1/` χωρίς ημερ. `api-version`· μην αναμειγνύετε τις δύο ρυθμίσεις πελάτη.
 
-## Προβλήματα Azure AI Search
+## Προβλήματα Αναζήτησης Azure AI
 
 ### Ζήτημα: Ανεπαρκές Επίπεδο Τιμολόγησης Υπηρεσίας Αναζήτησης
 
@@ -135,7 +135,7 @@ Error: Semantic search requires Basic tier or higher
 
 1. **Χρησιμοποιήστε Υποστηριζόμενο Επίπεδο Τιμολόγησης:**
 
-Ο σημασιολογικός κατάταξης απαιτεί Basic ή υψηλότερο επίπεδο. Η μετάβαση από Free/Basic σε διαφορετικό επίπεδο μπορεί να απαιτεί τη δημιουργία νέας υπηρεσίας αναζήτησης και την αναδόμηση δεικτών· η επεξεργασία SKU δεν εγγυάται αναβάθμιση επιτόπου.
+Ο σημασιολογικός ταξινομητής απαιτεί Basic ή ανώτερο. Η μετάβαση από Free/Basic σε διαφορετικό επίπεδο μπορεί να απαιτήσει τη δημιουργία νέας υπηρεσίας αναζήτησης και επανακατασκευή ευρετηρίων· η επεξεργασία SKU δεν εγγυάται αναβάθμιση in-place.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Απενεργοποιήστε τη Σημασιολογική Αναζήτηση (Ανάπτυξη):**
+2. **Απενεργοποιήστε τη Σημασιολογική Αναζήτηση (Κατά Ανάπτυξη):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -168,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Ζήτημα: Αποτυχίες Δημιουργίας Δείκτη
+### Ζήτημα: Αποτυχίες Δημιουργίας Ευρετηρίων
 
 **Συμπτώματα:**
 ```
@@ -185,7 +185,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Ελέγξτε το Σχήμα Δείκτη:**
+2. **Ελέγξτε το Σχήμα Ευρετηρίου:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -217,7 +217,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Προβλήματα Ανάπτυξης Container Apps
+## Προβλήματα Ανάπτυξης Εφαρμογών Container
 
 ### Ζήτημα: Αποτυχίες Κατασκευής Container
 
@@ -228,7 +228,7 @@ Error: Failed to build container image
 
 **Λύσεις:**
 
-1. **Ελέγξτε τη Σύνταξη του Dockerfile:**
+1. **Ελέγξτε τη Σύνταξη Dockerfile:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -250,7 +250,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Επικυρώστε τις Εξαρτήσεις:**
+2. **Επικυρώστε Εξαρτήσεις:**
 ```txt
 # Dependency names for these snippets. Resolve supported versions in your
 # project's environment, test together, then commit a lock/pinned requirements file.
@@ -275,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Ζήτημα: Αποτυχίες Εκκίνησης Container App
+### Ζήτημα: Αποτυχίες Εκκίνησης Εφαρμογής Container
 
 **Συμπτώματα:**
 ```
@@ -317,7 +317,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Βελτιστοποιήστε τη Φόρτωση Μοντέλου:**
+2. **Βελτιστοποιήστε το Φόρτωμα του Μοντέλου:**
 ```python
 # Lazy load models to reduce startup time
 # Illustrative skeleton: implement _initialize_client and synchronize concurrent
@@ -352,7 +352,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Σφάλματα Πιστοποίησης και Δικαιωμάτων
 
-### Ζήτημα: Άρνηση Δικαιώματος Διαχειριζόμενης Ταυτότητας
+### Ζήτημα: Απόρριψη Δικαιωμάτων Διαχειριζόμενης Ταυτότητας
 
 **Συμπτώματα:**
 ```
@@ -361,7 +361,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Λύσεις:**
 
-1. **Επαληθεύστε τις Αντιστοιχίσεις Ρόλων:**
+1. **Επαληθεύστε τις Αναθέσεις Ρόλων:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -369,7 +369,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Αναθέστε τους Απαιτούμενους Ρόλους:**
+2. **Αναθέστε τους Απαραίτητους Ρόλους:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -403,7 +403,7 @@ def test_authentication():
 test_authentication()
 ```
 
-Η απόκτηση token αποδεικνύει πιστοποίηση, όχι δικαίωμα για κλήση μοντέλου. Δοκιμάστε την επιθυμητή λειτουργία ξεχωριστά. Τοπικά, `DefaultAzureCredential` μπορεί να χρησιμοποιεί διαπιστευτήρια προγραμματιστή· στο Azure, ελέγξτε ότι η επιλεγμένη διαχειριζόμενη ταυτότητα είναι η επιθυμητή.
+Η απόκτηση διακριτικού αποδεικνύει πιστοποίηση, όχι δικαίωμα κλήσης μοντέλου. Δοκιμάστε τη συγκεκριμένη λειτουργία ξεχωριστά. Τοπικά, `DefaultAzureCredential` μπορεί να χρησιμοποιεί διαπιστευτήρια προγραμματιστή· στο Azure, επιβεβαιώστε ότι η ορθή διαχειριζόμενη ταυτότητα έχει επιλεγεί.
 
 ### Ζήτημα: Άρνηση Πρόσβασης σε Key Vault
 
@@ -414,9 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Λύσεις:**
 
-1. **Παρέχετε Δικαιώματα Key Vault:**
+1. **Παρέχετε Δικαιώματα στο Key Vault:**
 
-Χρησιμοποιήστε μόνο το ακόλουθο απόσπασμα πολιτικής πρόσβασης για δοχείο με `enableRbacAuthorization: false`. Για δοχείο με ενεργοποιημένο RBAC, χρησιμοποιήστε την επιλογή 2· η προσθήκη πολιτικής πρόσβασης δεν παρέχει πρόσβαση στη διεπαφή δεδομένων σε λειτουργία RBAC.
+Χρησιμοποιήστε το παρακάτω απόσπασμα πολιτικής πρόσβασης μόνο για vault με `enableRbacAuthorization: false`. Για vault με RBAC ενεργοποιημένο, χρησιμοποιήστε την επιλογή 2· η προσθήκη πολιτικής πρόσβασης δεν παρέχει πρόσβαση data-plane σε λειτουργία RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Χρησιμοποιήστε RBAC Αντί Πολιτικών Πρόσβασης:**
+2. **Χρησιμοποιήστε RBAC Αντί για Πολιτικές Πρόσβασης:**
 
-Το δοχείο πρέπει να έχει `enableRbacAuthorization: true`· η αλλαγή μοντέλου δικαιωμάτων απαιτεί προγραμματισμένη μετανάστευση της υπάρχουσας πρόσβασης.
+Το vault πρέπει να έχει `enableRbacAuthorization: true`· η αλλαγή μοντέλων αδειών απαιτεί προγραμματισμένη μετανάστευση της υπάρχουσας πρόσβασης.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -450,9 +450,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Αποτυχίες Ανάπτυξης Μοντέλων
+## Αποτυχίες Ανάπτυξης Μοντέλου
 
-### Ζήτημα: Έκδοση Μοντέλου Μη Διαθέσιμη
+### Ζήτημα: Μη Διαθέσιμη Έκδοση Μοντέλου
 
 **Συμπτώματα:**
 ```
@@ -508,7 +508,7 @@ az cognitiveservices account list-models \
 
 ## Προβλήματα Απόδοσης και Κλιμάκωσης
 
-### Ζήτημα: Μεγάλη Καθυστέρηση Απαντήσεων
+### Ζήτημα: Υψηλή Καθυστέρηση Απαντήσεων
 
 **Συμπτώματα:**
 - Χρόνοι απόκρισης > 30 δευτερόλεπτα
@@ -517,7 +517,7 @@ az cognitiveservices account list-models \
 
 **Λύσεις:**
 
-1. **Εφαρμόστε Χρονικούς Περιορισμούς Αιτήσεων:**
+1. **Υλοποιήστε Χρονικά Όρια Αιτημάτων:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -532,7 +532,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Προσθέστε Αποθήκευση Αποτελεσμάτων (Caching):**
+2. **Προσθέστε Κρυφή Μνήμη Απαντήσεων:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -552,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Διαμορφώστε Αυτόματο Κλιμάκωση:**
+3. **Διαμορφώστε Αυτόματη Κλιμάκωση:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -586,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Πρόβλημα: Σφάλματα Εξάντλησης Μνήμης
+### Ζήτημα: Σφάλματα Memory Out of
 
 **Συμπτώματα:**
 ```
@@ -595,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Λύσεις:**
 
-1. **Αύξηση Κατανομής Μνήμης:**
+1. **Αυξήστε την Κατανομή Μνήμης:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -614,7 +614,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Βελτιστοποίηση Χρήσης Μνήμης:**
+2. **Βελτιστοποιήστε τη Χρήση Μνήμης:**
 ```python
 # Memory-efficient model handling
 import gc
@@ -641,18 +641,18 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Διαχείριση Κόστους και Ποσοστώσεων
+## Διαχείριση Κόστους και Ορίων
 
-### Πρόβλημα: Απρόσμενα Υψηλά Κόστη
+### Ζήτημα: Απροσδόκητα Υψηλά Κόστη
 
 **Συμπτώματα:**
-- Λογαριασμός Azure υψηλότερος από τον αναμενόμενο
-- Χρήση token που υπερβαίνει τις εκτιμήσεις
-- Ενεργοποίηση ειδοποιήσεων προϋπολογισμού
+- Τιμολόγιο Azure υψηλότερο από το αναμενόμενο
+- Χρήση διακριτικών πέρα από τις εκτιμήσεις
+- Ειδοποιήσεις προϋπολογισμού ενεργοποιήθηκαν
 
 **Λύσεις:**
 
-1. **Εφαρμογή Ελέγχων Κόστους:**
+1. **Υλοποιήστε Ελέγχους Κόστους:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-Αυτό το μετρητή μνήμης εντός μνήμης είναι ενδεικτικό, όχι έλεγχος μηνιαίας δαπάνης: επαναρυθμίζεται κατά την επανεκκίνηση, δεν μοιράζεται ανάμεσα σε αντίγραφα και ελέγχει τη χρήση μόνο μετά από κλήση. Ένα πραγματικό όριο χρειάζεται ανθεκτική απογραφή, ασφαλείς κρατήσεις πριν από αιτήσεις και πολιτική μηνιαίας επαναφοράς. Τα μετρικά μνήμης κοντέινερ πρέπει επίσης να λαμβάνουν υπόψη τα όρια cgroup· `psutil.virtual_memory()` δεν είναι αξιόπιστο μέτρο ορίου κοντέινερ και η συλλογή απορριμμάτων δεν επιβάλλει όριο μνήμης.
+Αυτό το μετρητή μνήμης δείχνει παράδειγμα, δεν είναι έλεγχος μηνιαίων εξόδων: επανεκκινείται και δεν μοιράζεται μεταξύ αντιγράφων, ελέγχει τη χρήση μόνο μετά από κλήση. Ένα πραγματικό όριο απαιτεί ανθεκτική λογιστική, ασφαλείς ταυτόχρονες κρατήσεις πριν από αιτήματα και μηνιαία πολιτική επαναφοράς. Τα μετρικά μνήμης container πρέπει να λαμβάνουν υπόψη τα όρια cgroup· `psutil.virtual_memory()` δεν είναι αξιόπιστο μέτρο ορίου container, και ο καθαρισμός σκουπιδιών δεν επιβάλλει όριο μνήμης.
 
-2. **Ορισμός Ειδοποιήσεων Κόστους:**
+2. **Ρυθμίστε Ειδοποιήσεις Κόστους:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,9 +699,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Δηλώστε `budgetStartDate` και `budgetEndDate` στο πρότυπό σας. Οι προϋπολογισμοί ειδοποιούν· δεν σταματούν πόρους ή δεν επιβάλλουν αυστηρό όριο δαπανών.
+Δηλώστε `budgetStartDate` και `budgetEndDate` στο πρότυπό σας. Οι προϋπολογισμοί ειδοποιούν· δεν σταματούν πόρους ή επιβάλλουν σκληρό ανώτατο όριο δαπανών.
 
-3. **Βελτιστοποίηση Επιλογής Μοντέλου:**
+3. **Βελτιστοποιήστε την Επιλογή Μοντέλου:**
 ```python
 # Cost-aware model selection
 MODEL_COST_TIERS = {
@@ -740,17 +740,20 @@ azd env get-values
 
 ### Εντολές Επέκτασης AZD AI για Διαγνωστικά
 
-Εάν αναπτύξατε agents χρησιμοποιώντας `azd ai agent init`, αυτά τα επιπλέον εργαλεία είναι διαθέσιμα:
+Εάν αναπτύξατε agents με `azd ai agent init`, διαθέσιμα είναι επιπλέον αυτά τα εργαλεία:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,11 +762,13 @@ azd mcp start
 azd infra generate
 ```
 
-> **Συμβουλή:** Χρησιμοποιήστε `azd infra generate` για να γράψετε IaC στο δίσκο ώστε να μπορείτε να ελέγξετε ακριβώς ποιους πόρους προμήθευσατε. Αυτό είναι ανεκτίμητο όταν αποσφαλματώνετε ζητήματα διαμόρφωσης πόρων. Δείτε την [αναφορά AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) για πλήρεις λεπτομέρειες.
+> **Συμβουλή:** Χρησιμοποιήστε `azd infra generate` για να γράψετε IaC σε δίσκο ώστε να ελέγξετε ακριβώς τους πόρους που δημιουργήθηκαν. Αυτό είναι ανεκτίμητο κατά την αποσφαλμάτωση προβλημάτων διαμόρφωσης πόρων. Δείτε την [αναφορά AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) για πλήρεις λεπτομέρειες.
 
-**Διαγνωστικά με επίγνωση έκδοσης (2026-11-04):** Οι agents `1.0.0-beta.23` απαιτούν `azd >= 1.37.0`· αναβαθμίστε το βασικό CLI πριν από ασύμβατες επεκτάσεις. Αυτή η έκδοση agent διατηρεί προειδοποιήσεις RBAC προγραμματιστή στην τελική έξοδο ανάπτυξης και εντοπίζει την έκδοση που εμπλέκεται σε αποτυχημένες ενεργοποιήσεις/χρόνους αναμονής. Μια καθυστέρηση δεν αποδεικνύει αποτυχία ανάπτυξης: ελέγξτε την εκδοχή που επιχειρήθηκε πριν από επανάληψη. Διορθώνει επίσης τις κλήσεις A2A 0.3 που εμφάνιζαν μηνύματα κύκλου ζωής αντί για ολοκληρωμένες απαντήσεις. Η βασική `azd 1.37.1` διορθώνει τη μετάδοση ακύρωσης μεταξύ επεκτάσεων· η `1.37.2` βελτιώνει τις κρίσιμες επιβεβαιώσεις παροχής και τη διαχείριση ακυρώσεων.
+**Διαγνωστικά ροής εργασίας GA (2026-11-09):** Επιβεβαιώστε ότι `azd version` είναι τουλάχιστον 1.37.0 και ελέγξτε `azd ext list --installed`. Ενημερώστε πρώτα το κύριο CLI με `azd update` ή τον εγκαταστάτη του και μετά ενημερώστε το bundle με `azd ext upgrade microsoft.foundry`. Για τοπικά σφάλματα, ελέγξτε τον τρέχοντα uv, Python 3.13+ για το βασικό δείγμα, `PYTHONNOUSERSITE: "1"` στη διαμόρφωση υπηρεσίας του, και τα διαπιστευτήρια Azure που χρησιμοποιούνται από `DefaultAzureCredential`. Κρατήστε `azd ai agent run` σε λειτουργία ενώ καλείτε `--local` από δεύτερο τερματικό στον κατάλογο έργου.
 
-Εάν η εντολή αξιολόγησης παλαιότερου οδηγού τυπώνει μόνο οδηγίες μετανάστευσης, εγκαταστήστε `azure.ai.evaluations` (`1.0.0-beta.2` απαιτεί `azd >= 1.33.0`) και χρησιμοποιήστε `azd ai eval init`, `generate`, και `run start`. Το εργαλείο βελτιστοποίησης `--config` δεν δέχεται πλέον αρχεία αξιολόγησης παλαιάς μορφής. Δείτε [μετανάστευση αξιολόγησης](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) και [μετανάστευση βελτιστοποίησης](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Η επιτυχής παροχή δεν αποδεικνύει ότι ο προγραμματιστής έχει πρόσβαση data-plane. Ελέγξτε προειδοποιήσεις RBAC και τον [πίνακα δικαιωμάτων hosted-agent](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Ένα timeout δεν καθορίζει αποτυχία ανάπτυξης: επιθεωρήστε την έκδοση και τα αρχεία καταγραφής πριν δοκιμάσετε ξανά. Προηγούμενοι agents beta.23 βελτίωσαν αυτές τις προειδοποιήσεις και την έξοδο A2A· αυτές οι ιστορικές διορθώσεις περιγράφονται στις [σημειώσεις έκδοσης](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), όχι ως απαίτηση εγκατάστασης της beta.
+
+Αν `azd ai eval` δεν είναι διαθέσιμο, εγκαταστήστε `azure.ai.evaluations` ξεχωριστά· το GA bundle δεν το περιλαμβάνει. Εάν η εντολή agent-evaluation παλαιότερου tutorial εκτυπώνει μόνο κατευθύνσεις μετανάστευσης, χρησιμοποιήστε τη διακριτή ροή `azd ai eval`. Το `--config` της βελτιστοποίησης δεν δέχεται πλέον αρχεία πεπαλαιωμένης αξιολόγησης. Δείτε [μετανάστευση αξιολόγησης](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) και [μετανάστευση βελτιστοποίησης](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Αποσφαλμάτωση Εφαρμογής
 
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Σημεία Έλεγχου Υγείας:**
+2. **Σημεία Ελέγχου Υγείας:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -860,34 +865,34 @@ def monitor_performance(func):
 | Κωδικός Σφάλματος | Περιγραφή | Λύση |
 |------------|-------------|----------|
 | 401 | Μη Εξουσιοδοτημένο | Ελέγξτε τα κλειδιά API και τη διαμόρφωση διαχειριζόμενης ταυτότητας |
-| 403 | Απαγόρευση | Επαληθεύστε τις αναθέσεις ρόλων RBAC |
-| 429 | Περιορισμός Ροής | Εφαρμόστε λογική επανάληψης με εκθετική αύξηση καθυστέρησης |
-| 500 | Εσωτερικό Σφάλμα Διακομιστή | Ελέγξτε την κατάσταση ανάπτυξης μοντέλου και τα αρχεία καταγραφής |
-| 503 | Υπηρεσία Μη Διαθέσιμη | Επαληθεύστε την υγεία της υπηρεσίας και τη διαθεσιμότητα στην περιοχή |
+| 403 | Απαγορευμένο | Επαληθεύστε τις αναθέσεις ρόλων RBAC |
+| 429 | Περιορισμός Ρυθμού | Υλοποιήστε λογική επανάληψης με εκθετική απόσβεση |
+| 500 | Εσωτερικό Σφάλμα Διακομιστή | Ελέγξτε την κατάσταση και τα αρχεία καταγραφής ανάπτυξης μοντέλου |
+| 503 | Υπηρεσία Μη Διαθέσιμη | Επαληθεύστε την υγεία υπηρεσίας και τη διαθεσιμότητα περιοχής |
 
 ## Επόμενα Βήματα
 
-1. **Επανεξέταση του [Οδηγού Ανάπτυξης AI Μοντέλων](../chapter-02-ai-development/ai-model-deployment.md)** για βέλτιστες πρακτικές ανάπτυξης
-2. **Ολοκλήρωση των [Βέλτιστων Πρακτικών AI Παραγωγής](../chapter-08-production/production-ai-practices.md)** για λύσεις έτοιμες για επιχειρήσεις
-3. **Συμμετοχή στο [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** για υποστήριξη κοινότητας
-4. **Υποβολή ζητημάτων** στο [αποθετήριο AZD στο GitHub](https://github.com/Azure/azure-dev) για προβλήματα ειδικά στο AZD
+1. **Ανασκοπήστε τον [Οδηγό Ανάπτυξης Μοντέλων AI](../chapter-02-ai-development/ai-model-deployment.md)** για βέλτιστες πρακτικές ανάπτυξης
+2. **Ολοκληρώστε τις [Πρακτικές Παραγωγής AI](../chapter-08-production/production-ai-practices.md)** για λύσεις έτοιμες για επιχειρήσεις
+3. **Εγγραφείτε στο [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** για υποστήριξη κοινότητας
+4. **Υποβάλετε θέματα** στο [αποθετήριο AZD GitHub](https://github.com/Azure/azure-dev) για προβλήματα ειδικά του AZD
 
 ## Πόροι
 
-- [Αντιμετώπιση προβλημάτων ποσοστώσεων και ρύθμισης του Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [Αντιμετώπιση προβλημάτων Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Αντιμετώπιση προβλημάτων Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Δεξιότητα εργαλείων διάγνωσης Azure**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Εγκαταστήστε δεξιότητες αντιμετώπισης προβλημάτων Azure στον επεξεργαστή σας: `npx skills add microsoft/github-copilot-for-azure`
+- [Επίλυση προβλημάτων εξαντλήσεων και ορίων Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Επίλυση προβλημάτων Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Επίλυση προβλημάτων Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Δεξιότητα Διάγνωσης Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Εγκαταστήστε δεξιότητες διάγνωσης Azure στον επεξεργαστή σας: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Πλοήγηση Κεφαλαίου:**
+**Πλοήγηση Κεφαλαίων:**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 7 - Αντιμετώπιση Προβλημάτων & Αποσφαλμάτωση
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 7 - Επίλυση Προβλημάτων & Αποσφαλμάτωση
 - **⬅️ Προηγούμενο**: [Οδηγός Αποσφαλμάτωσης](debugging.md)
-- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 8: Παραγωγικά & Επιχειρησιακά Πρότυπα](../chapter-08-production/production-ai-practices.md)
-- **🤖 Σχετικό**: [Κεφάλαιο 2: Ανάπτυξη με AI Πρώτο](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Αναφορά**: [Azure Developer CLI Αντιμετώπιση Προβλημάτων](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 8: Προτύπα Παραγωγής & Επιχειρήσεων](../chapter-08-production/production-ai-practices.md)
+- **🤖 Σχετικό**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Αναφορά**: [Επίλυση Προβλημάτων Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

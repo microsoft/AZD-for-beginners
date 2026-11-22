@@ -1,27 +1,27 @@
-# Best Practice per il Carico di Lavoro AI in Produzione con AZD
+# Best practice per workload AI in produzione con AZD
 
-**Navigazione del Capitolo:**
-- **📚 Home del Corso**: [AZD per Principianti](../../README.md)
-- **📖 Capitolo Corrente**: Capitolo 8 - Modelli di Produzione e Enterprise
-- **⬅️ Capitolo Precedente**: [Capitolo 7: Risoluzione Problemi](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Correlati**: [Laboratorio AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
-- **🎯 Corso Completo**: [AZD per Principianti](../../README.md)
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD per principianti](../../README.md)
+- **📖 Capitolo corrente**: Capitolo 8 - Modelli di produzione e aziendali
+- **⬅️ Capitolo precedente**: [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Correlati**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Corso completo**: [AZD per principianti](../../README.md)
 
 ## Panoramica
 
-Questa guida spiega i modelli di progettazione AI per la produzione usando Azure Developer CLI (AZD). È un riferimento di progettazione, non un'applicazione distribuibile o una certificazione di produzione.
+Questa guida spiega i modelli di progettazione AI in produzione usando Azure Developer CLI (AZD). È un riferimento di design, non un'applicazione distribuibile o una certificazione di produzione.
 
-**Confini di esempio:** A meno che non sia esplicitamente descritto come completo, i frammenti Bicep presuppongono parametri e risorse referenziate da un template contenitore. Omettono immagini/piani host, identità, assegnazioni di ruolo, DNS, output e altre integrazioni necessarie. I percorsi YAML del servizio e gli script hook/test sono file illustrativi da creare **nella tua applicazione**; non sono forniti da questo corso. Usa un esempio AZD funzionante come base, compila l'infrastruttura completa e testala in un ambiente isolato prima della produzione.
+**Confini degli esempi:** A meno che non siano esplicitamente descritti come completi, i frammenti Bicep presumono parametri e risorse referenziate da un template contenitore. Omettono immagini/piani host, identità, assegnazioni ruoli, DNS, output e altre integrazioni richieste. I percorsi YAML del servizio e gli script hook/test sono file illustrativi da creare **nella tua applicazione**; non sono forniti da questo corso. Usa un esempio AZD funzionante come base, compila l'infrastruttura completa e testala in un ambiente isolato prima della produzione.
 
-## Principali Sfide Affrontate
+## Sfide chiave affrontate
 
-Le preoccupazioni comuni in produzione includono distribuzioni multi-servizio, gestione identità e segreti, scalabilità, controllo dei costi e monitoraggio. Non si dichiara qui una prevalenza misurata.
+Le preoccupazioni comuni in produzione includono distribuzioni multiservizio, gestione di identità e segreti, scalabilità, controllo dei costi e monitoraggio. Non si afferma qui una prevalenza misurata.
 
-## Modelli Architetturali per AI in Produzione
+## Modelli di architettura per AI in produzione
 
-### Modello 1: Architettura AI Microservizi
+### Modello 1: Architettura AI a microservizi
 
-**Quando usare**: Applicazioni AI complesse con capacità multiple
+**Quando usarlo**: Applicazioni AI complesse con molteplici capacità
 
 ```mermaid
 graph TD
@@ -57,9 +57,9 @@ services:
     host: containerapp
 ```
 
-### Modello 2: Elaborazione AI Event-Driven
+### Modello 2: Elaborazione AI basata su eventi
 
-**Quando usare**: Elaborazione batch, analisi documenti, workflow asincroni
+**Quando usarlo**: Elaborazioni batch, analisi documenti, workflow asincroni
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -106,48 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-Questo crea frammenti dello spazio dei nomi, non hub, code, sottoscrizioni o trigger Function. Una Function eseguibile richiede anche un piano host, configurazione runtime/storage, un'identità allegata, RBAC e accesso di rete. Il riferimento a Key Vault necessita del permesso di leggere il segreto; un URL endpoint di per sé non è una credenziale.
+Questo crea frammenti di namespace, non hub, code, sottoscrizioni o trigger di Function. Una Function eseguibile necessita anche di un piano host, configurazione runtime/storage, un'identità allegata, RBAC e accesso di rete. Il riferimento a Key Vault necessita permesso di lettura segreti; un URL endpoint non è una credenziale.
 
-## Considerazioni sulla Salute degli Agenti AI
+## Riflettendo sulla salute degli agenti AI
 
-Quando un'app web tradizionale si rompe, i sintomi sono familiari: una pagina non si carica, un'API restituisce un errore o un deployment fallisce. Le applicazioni AI possono rompersi in tutti questi modi—ma possono anche comportarsi in modo meno evidente senza produrre errori evidenti.
+Quando una web app tradizionale si guasta, i sintomi sono familiari: una pagina non si carica, un'API restituisce errore o un deployment fallisce. Le applicazioni AI basate su intelligenza artificiale possono guastarsi allo stesso modo—ma anche comportarsi in modi più sottili che non producono errori evidenti.
 
-Questa sezione ti aiuta a costruire un modello mentale per monitorare i carichi di lavoro AI, così sai dove cercare quando qualcosa non va.
+Questa sezione ti aiuta a costruire un modello mentale per monitorare i workload AI così sai dove guardare quando qualcosa non va.
 
-### Come la Salute degli Agenti Differisce dalla Salute di App Tradizionali
+### Come la salute degli agenti differisce dalla salute delle app tradizionali
 
-Anche le app tradizionali possono avere fallimenti sottili di correttezza. Un agente AI aggiunge qualità di risposta non deterministica ai consueti problemi di disponibilità e correttezza. Pensa alla salute dell'agente in due livelli:
+Anche le app tradizionali possono avere errori di correttezza sottili. Un agente AI aggiunge qualità di risposta non deterministica oltre ai soliti problemi di disponibilità e correttezza. Considera la salute dell'agente in due livelli:
 
-| Livello | Cosa Monitorare | Dove Guardare |
-|-------|--------------|---------------|
-| **Salute dell'infrastruttura** | Il servizio è in esecuzione? Le risorse sono fornite? Gli endpoint sono raggiungibili? | `azd monitor`, stato risorse nel portale Azure, log container/app |
-| **Salute comportamentale** | L’agente risponde correttamente? Le risposte sono tempestive? Il modello viene chiamato correttamente? | Tracce Application Insights, metriche latenza chiamata modello, log qualità risposte |
+| Livello | Cosa monitorare | Dove guardare |
+|-------|---------------|---------------|
+| **Salute infrastrutturale** | Il servizio è attivo? Le risorse sono allocate? Gli endpoint sono raggiungibili? | `azd monitor`, salute risorsa su Azure Portal, log container/app |
+| **Salute comportamentale** | L'agente risponde correttamente? Le risposte sono tempestive? Il modello viene chiamato correttamente? | Tracce Application Insights, metriche latenza chiamate modello, log qualità risposte |
 
-La salute dell'infrastruttura è familiare—uguale per qualsiasi app azd. La salute comportamentale è il nuovo livello introdotto dai carichi AI.
+La salute infrastrutturale è familiare—uguale per ogni app azd. La salute comportamentale è il nuovo livello introdotto dai workload AI.
 
-### Dove Guardare Quando le App AI Non Si Comportano Come Previsto
+### Dove guardare quando le app AI si comportano inaspettatamente
 
-Se la tua app AI non produce i risultati attesi, ecco una checklist concettuale:
+Se la tua app AI non produce i risultati attesi, ecco una lista concettuale di controllo:
 
-1. **Inizia dalle basi.** L’app è in esecuzione? Raggiunge le sue dipendenze? Controlla `azd monitor` e lo stato delle risorse proprio come faresti con qualsiasi app.
-2. **Verifica la connessione al modello.** La tua app chiama con successo il modello AI? Chiamate modello fallite o scadute sono la causa più comune e si vedranno nei log dell’applicazione.
-3. **Ispeziona input e base in modo sicuro.** Risposte errate possono derivare da recupero, istruzioni, limiti del modello o esecuzione degli strumenti. Usa dati diagnostici redatti e controllati; non abilitare il logging indiscriminato di prompt/risposte in produzione.
-4. **Controlla la latenza di risposta.** Le chiamate a modelli AI sono più lente dei tipici API call. Se l’app è lenta, verifica se i tempi di risposta modello sono aumentati—può indicare throttling, limiti di capacità o congestione a livello regionale.
-5. **Monitora segnali di costo.** Picchi inattesi nell’uso di token o chiamate API possono indicare un loop, prompt mal configurato o ripetizioni eccessive.
+1. **Inizia dal basilare.** L'app è attiva? Raggiunge le dipendenze? Controlla `azd monitor` e la salute delle risorse come faresti per qualsiasi app.
+2. **Verifica la connessione al modello.** La tua app chiama con successo il modello AI? Chiamate modello fallite o scadute sono la causa più comune dei problemi e si vedono nei log dell'app.
+3. **Ispeziona input e contesto in sicurezza.** Risposte errate possono derivare da recupero dati, istruzioni, limiti modello o esecuzione strumenti. Usa dati diagnostici accessibili con controllo, non abilitare logging indiscriminato di prompt/risposte in produzione.
+4. **Rivedi la latenza delle risposte.** Le chiamate a modelli AI sono più lente delle tipiche API. Se l'app sembra lenta, verifica se i tempi di risposta del modello sono aumentati—potrebbe indicare limitazioni, congestione o limiti di capacità.
+5. **Monitora segnali di costo.** Picchi inattesi in uso token o chiamate API possono indicare un loop, prompt errato o ritentativi eccessivi.
 
-Non devi padroneggiare subito gli strumenti di osservabilità. Il punto chiave è che le applicazioni AI hanno un livello comportamentale extra da monitorare, e il monitoraggio built-in di azd (`azd monitor`) ti dà un punto di partenza per indagare entrambi i livelli.
+Non devi padroneggiare subito gli strumenti di osservabilità. L'essenziale è che le app AI hanno un livello aggiuntivo di comportamento da monitorare, e il monitoraggio integrato di azd (`azd monitor`) ti offre un punto di partenza per entrambe le dimensioni.
 
 ---
 
-## Best Practice di Sicurezza
+## Best practice di sicurezza
 
-### 1. Modello di Sicurezza Zero-Trust
+### 1. Modello di sicurezza Zero-Trust
 
-**Strategia di Implementazione**:
-- Niente comunicazione servizio-servizio senza autenticazione
+**Strategia di implementazione**:
+- Nessuna comunicazione servizio-a-servizio senza autenticazione
 - Tutte le chiamate API usano identità gestite
 - Isolamento di rete con endpoint privati
-- Controlli di accesso a minimo privilegio
+- Controlli di accesso con privilegi minimi
 
 ```bicep
 // Managed Identity for each service
@@ -168,9 +168,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Gestione Sicura dei Segreti
+### 2. Gestione sicura dei segreti
 
-**Pattern di Integrazione Key Vault**:
+**Pattern di integrazione Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -203,11 +203,11 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-Assegna l'identità runtime `Key Vault Secrets User` all’ambito appropriato e allegala all’host; `enableRbacAuthorization` da sola non concede accesso. Preferisci l’autenticazione con identità gestita OpenAI usando `disableLocalAuth: true`. La chiave segreta opzionale ha senso solo per un account volutamente abilitato con chiave, e il principal di provisioning necessita anche del permesso di scrivere segreti.
+Assegna l'identità runtime `Key Vault Secrets User` al giusto ambito e collegala all'host; `enableRbacAuthorization` da sola non concede accesso. Preferisci autenticazione tramite identità gestita OpenAI con `disableLocalAuth: true`. Il segreto chiave opzionale ha senso solo per account abilitati specificamente, e il principale di provisioning ha bisogno di permesso scrittura segreti.
 
-### 3. Sicurezza di Rete
+### 3. Sicurezza di rete
 
-**Configurazione Endpoint Privato**:
+**Configurazione endpoint privati**:
 
 ```bicep
 // Virtual Network for AI services
@@ -265,13 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-Gli endpoint privati richiedono anche gruppi zone DNS private/collegamenti VNet e integrazione applicativa VNet. Non bloccano automaticamente l’accesso pubblico: disabilita esplicitamente l’accesso pubblico dell’account AI dopo aver validato connettività privata e accesso al deployment.
+Gli endpoint privati richiedono anche gruppi zone DNS privati/collegamenti VNet e integrazione app VNet. Non bloccano automaticamente l'accesso pubblico: disabilita esplicitamente l'accesso pubblico all'account AI dopo aver validato connettività privata e accesso al deployment.
 
-## Prestazioni e Scalabilità
+## Prestazioni e scalabilità
 
-### 1. Strategie di Auto-Scaling
+### 1. Strategie di auto-scalabilità
 
-**Auto-scaling Container Apps**:
+**Auto-scalabilità per Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -315,9 +315,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Strategie di Caching
+### 2. Strategie di caching
 
-**Redis Cache per Risposte AI**:
+**Cache Redis per risposte AI**:
 
 ```bicep
 // Legacy Azure Cache for Redis example (not recommended for new deployments)
@@ -344,9 +344,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-Azure Cache for Redis Basic/Standard/Premium è in una [fase di dismissione](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Usa Azure Managed Redis per nuovi design e la sua configurazione documentata di SKU, identità e TLS, invece di copiare questa risorsa legacy in un nuovo sistema di produzione. La stringa di connessione indicata è un segnaposto non funzionale, non una credenziale. Partiziona le chiavi cache per autorizzazione, modello/istruzioni e versione recuperata, con scadenza; una cache condivisa solo per query può esporre i dati di un altro utente.
+Azure Cache for Redis Basic/Standard/Premium è su un [percorso di sostituzione](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Usa Azure Managed Redis per nuovi progetti e la sua configurazione documentata di SKU, identità e TLS, invece di copiare questa risorsa legacy in un nuovo sistema di produzione. La riga connection-string è un segnaposto non funzionale, non una credenziale. Partiziona le chiavi cache per autorizzazione, modello/istruzioni e versione recupero, con scadenza; una cache condivisa solo per query può esporre dati di un altro utente.
 
-### 3. Bilanciamento del Carico e Gestione Traffico
+### 3. Bilanciamento del carico e gestione del traffico
 
 **Application Gateway con WAF**:
 
@@ -384,15 +384,15 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-Questa è una risorsa gateway parziale: un deployment reale necessita anche subnet gateway/configurazione IP, IP frontend e porte, listener/certificati TLS, impostazioni/probe HTTP backend, regole di routing e priorità, e una politica WAF rivista. Hostname/SNI TLS e autenticazione devono corrispondere al backend Container App.
+Questa è una risorsa parziale gateway: un deployment reale richiede subnet gateway/configurazione IP, IP frontend e porte, listener/certificati TLS, impostazioni HTTP backend/probe, regole e priorità di routing e una policy WAF revisionata. Hostname/SNI TLS e autenticazione devono corrispondere al backend Container App.
 
-## 💰 Ottimizzazione dei Costi
+## 💰 Ottimizzazione dei costi
 
-### 1. Dimensionamento Corretto delle Risorse
+### 1. Dimensionamento corretto delle risorse
 
-**Configurazioni Specifiche per Ambiente**:
+**Configurazioni specifiche ambientali**:
 
-Questi nomi sono **input personalizzati di template illustrativi**, non impostazioni AZD automatiche. Mappali prima su `infra/main.parameters.json`/Bicep e configurazione host. Per esempio, il sample RAG usa `AZURE_SEARCH_SERVICE_SKU` e `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, non i nomi generici sottostanti. Dai alla memoria Container Apps una unità supportata come `1Gi` nella risorsa effettiva. Applica modifiche infrastrutturali con `azd up` o `azd provision`; `azd deploy` da sola non applica modifiche Bicep.
+Questi nomi sono **input custom-template illustrativi**, non configurazioni automatiche AZD. Mappali prima in `infra/main.parameters.json`/Bicep e configurazione host. Per esempio, il sample RAG usa `AZURE_SEARCH_SERVICE_SKU` e `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, non i nomi generici seguenti. Dai la memoria ai Container Apps in un'unità supportata come `1Gi` nella risorsa reale. Applica modifiche infrastruttura con `azd up` o `azd provision`; `azd deploy` da solo non applica modifiche Bicep.
 
 ```bash
 # Development environment
@@ -412,7 +412,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Monitoraggio dei Costi e Budget
+### 2. Monitoraggio costi e budget
 
 ```bicep
 // Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
@@ -455,13 +455,13 @@ resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
 }
 ```
 
-Sostituisci i destinatari d’esempio e verifica ambito/permessi. Gli alert budget usano dati di fatturazione ritardati e non impongono un limite di spesa.
+Sostituisci i destinatari d'esempio e verifica ambito/permessi. Gli avvisi budget usano dati di fatturazione ritardati e non impongono un limite di spesa.
 
-### 3. Ottimizzazione Uso Token
+### 3. Ottimizzazione uso token
 
-**Gestione Costi OpenAI**:
+**Gestione costi OpenAI**:
 
-Questa è solo un’euristica basata sui caratteri per un’anteprima UI, **non** un validatore del limite token modello. Il codice di produzione deve usare un tokenizer appropriato al modello distribuito e considerare istruzioni di sistema, schemi degli strumenti, storia e budget output. Rifiuta un messaggio utente sovradimensionato piuttosto che troncarlo silenziosamente.
+Questa è solo una euristica basata sui caratteri per un'anteprima UI, **non** un validatore del limite token modello. Il codice di produzione deve usare un tokenizer adatto al modello distribuito e considerare istruzioni di sistema, schemi strumenti, storici e budget output. Rifiuta un messaggio utente sovradimensionato invece di tranciarlo silenziosamente.
 
 ```typescript
 // Application-level token optimization
@@ -495,9 +495,9 @@ class TokenOptimizer {
 }
 ```
 
-## Monitoraggio e Osservabilità
+## Monitoraggio e osservabilità
 
-### 1. Application Insights Completo
+### 1. Application Insights completo
 
 ```bicep
 // Application Insights with advanced features
@@ -542,9 +542,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitoraggio Specifico AI
+### 2. Monitoraggio specifico AI
 
-**Dashboard Personalizzate per Metriche AI**:
+**Dashboard personalizzate per metriche AI**:
 
 ```json
 {
@@ -572,9 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-Questo JSON è uno schema definito dall'applicazione, non un dashboard importabile del portale Azure. Le query token/costo richiedono che la tua app emetta esattamente queste metriche personalizzate; non sono create da AZD. Adatta i filtri di dipendenza per i nomi endpoint/span modello effettivi.
+Questo JSON è uno schizzo definito dall'app, non uno schema importabile del dashboard Azure portal. Le query token/costi richiedono che la tua app emetta esattamente quelle metriche personalizzate; non sono create da AZD. Adatta i filtri dipendenza ai nomi reali di endpoint/span del modello.
 
-### 3. Health Check e Monitoraggio Uptime
+### 3. Controlli di salute e monitoraggio uptime
 
 ```bicep
 // Application Insights availability tests
@@ -615,11 +615,11 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Disaster Recovery e Alta Disponibilità
+## Disaster Recovery e alta disponibilità
 
-Il test precedente presuppone un esistente App Service `webApp` e risorsa Application Insights. I test di disponibilità standard sono a pagamento e richiedono un endpoint raggiungibile; app solo private necessitano di un design monitoraggio privato appropriato. I test URL ping sono deprecati; usa [test di disponibilità standard](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+Il test precedente presume un App Service `webApp` e risorsa Application Insights esistenti. I test di disponibilità standard sono a tariffa e richiedono un endpoint raggiungibile; app solo private necessitano di un design di monitoraggio privato adeguato. I test URL ping sono obsoleti; usa [test disponibilità standard](https://learn.microsoft.com/azure/azure-monitor/app/availability).
 
-### 1. Deployment Multi-Regione
+### 1. Deployment multi-regione
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -681,9 +681,9 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-Le variabili d’ambiente non scelgono la posizione risorsa. IaC deve fornire host regionali distinti e legare ogni servizio con tag `resourceName` o `azd-service-name`. L’esempio Traffic Manager è una **topologia App Service separata** (`primaryAppService`/`secondaryAppService`), non routing per dichiarazioni Container Apps. Container Apps richiede un endpoint/front door esterno opportunamente configurato, routing TLS/dominio personalizzato e probe salute.
+Le variabili ambientali non determinano le localizzazioni risorsa. IaC deve fornire host regionali distinti e associare ogni servizio con tag `resourceName` o `azd-service-name`. Esempio Traffic Manager è una **topologia App Service separata** (`primaryAppService`/`secondaryAppService`), non un routing per le dichiarazioni Container Apps. Container Apps richiede endpoint/front door esterno configurato adeguatamente, routing TLS/dominio personalizzato e probe salute.
 
-### 2. Backup e Recupero Dati
+### 2. Backup e ripristino dati
 
 ```bicep
 // Backup configuration for critical data
@@ -705,9 +705,9 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
 
 ```
 
-Il vault da solo non esegue backup. Configura una **policy supportata e istanza backup specifiche per workload**, permessi sorgente, retention e test ripristino usando [matrici supporto Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Non esiste una policy di backup Azure generica per distribuzioni di modelli Azure OpenAI ospitati. Mantieni definizioni infrastruttura/distribuzione modello in controllo sorgente; proteggi documenti caricati, dati applicazione e artefatti fine-tuning usando funzionalità backup/export supportate da ogni servizio di backing. Definisci e testa RPO/RTO esplicitamente.
+Solo il vault non effettua backup. Configura una **policy supportata e istanza di backup specifiche del workload**, permessi sorgente, conservazione e test restore usando le [matrici di supporto Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Non esiste una policy Azure Backup generica per deployment modelli Azure OpenAI ospitati. Tieni definizioni deploy infrastruttura/modello sotto controllo versione; proteggi documenti caricati, dati applicazione e artefatti fine-tuning usando le funzionalità backup/export supportate di ogni servizio di supporto. Definisci e testa esplicitamente RPO/RTO.
 
-## Integrazione DevOps e CI/CD
+## DevOps e integrazione CI/CD
 
 ### 1. Workflow GitHub Actions
 
@@ -747,9 +747,9 @@ jobs:
 
 ```
 
-Questa è la **parte solo test** di un workflow e presuppone che tu abbia creato `requirements.txt`, `tests/`, e i due script di sicurezza. Aggiungi i job autenticati OIDC di provisioning/deployment da [Configurazione Pipeline CI/CD](#cicd-pipeline-configuration), con `needs: test`, trigger push/manuale affidabile e ambienti GitHub protetti. Non distribuire codice pull request non affidabile con credenziali cloud. Un runner nuovo non ha ambiente AZD locale selezionato; fornisci input ambiente/sottoscrizione/posizione e usa `azd auth login`, non solo `azure/login`.
+Questa è la **parte solo test** di un workflow e presume che tu abbia creato `requirements.txt`, `tests/` e i due script di sicurezza. Aggiungi i job autenticati OIDC per provisioning/deploy da [Configurazione pipeline CI/CD](#cicd-pipeline-configuration), con `needs: test`, trigger push/manuale fidato e ambienti GitHub protetti. Non deployare codice pull-request non fidato con credenziali cloud. Un runner fresco non ha ambiente AZD locale selezionato; fornisci input ambiente/sottoscrizione/posizione e usa `azd auth login`, non solo `azure/login`.
 
-### 2. Validazione Infrastruttura
+### 2. Validazione infrastruttura
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -789,24 +789,24 @@ fi
 echo "Infrastructure validation completed successfully!"
 ```
 
-Atteso: zero di uscita e messaggio di completamento solo se tutti i tipi attesi esistono e il deployment modello nominato è provisionato. Controlla lo stato inventario/provisioning, **non** salute risorse, topologia esatta, RBAC, raggiungibilità rete o comportamento modello. Adatta tipi attesi alla tua architettura, poi esegui un test separato di readiness applicativa autenticata.
+Atteso: uscita zero e messaggio completamento solo quando tutti i tipi attesi esistono e il deployment modello nominato è provisionato. Verifica inventario/stato provisioning, **non** la salute risorsa, topologia esatta, RBAC, raggiungibilità rete o comportamento modello. Adatta i tipi attesi alla tua architettura, poi esegui un test di readiness applicazione autenticato separato.
 
-## Checklist di Prontezza per la Produzione
+## Checklist di prontezza alla produzione
 
 ### Sicurezza ✅
 - [ ] Tutti i servizi usano identità gestite
-- [ ] Segreti conservati in Key Vault
+- [ ] Segreti archiviati in Key Vault
 - [ ] Endpoint privati configurati
-- [ ] Gruppi sicurezza di rete implementati
-- [ ] RBAC con minimo privilegio
+- [ ] Gruppi sicurezza rete implementati
+- [ ] RBAC con privilegi minimi
 - [ ] WAF abilitato sugli endpoint pubblici
 
 ### Prestazioni ✅
-- [ ] Auto-scaling configurato
+- [ ] Auto-scalabilità configurata
 - [ ] Caching implementato
-- [ ] Bilanciamento carico impostato
+- [ ] Bilanciamento carico configurato
 - [ ] CDN per contenuti statici
-- [ ] Pool di connessioni database
+- [ ] Pool connessioni database
 - [ ] Ottimizzazione uso token
 
 ### Monitoraggio ✅
@@ -814,51 +814,51 @@ Atteso: zero di uscita e messaggio di completamento solo se tutti i tipi attesi 
 - [ ] Metriche personalizzate definite
 - [ ] Regole alert impostate
 - [ ] Dashboard creata
-- [ ] Health check implementati
-- [ ] Politiche di conservazione log
+- [ ] Controlli di salute implementati
+- [ ] Policy di conservazione log
 
 ### Affidabilità ✅
-- [ ] Deploy multi-regione
-- [ ] Piano backup e recupero
+- [ ] Deployment multiregione
+- [ ] Piano backup e recovery
 - [ ] Circuit breaker implementati
-- [ ] Politiche di retry configurate
-- [ ] Degradazione graduale
-- [ ] Endpoint di health check
+- [ ] Policy di retry configurate
+- [ ] Degradazione controllata
+- [ ] Endpoint controlli salute
 
-### Gestione Costi ✅
+### Gestione costi ✅
 - [ ] Alert budget configurati
 - [ ] Dimensionamento corretto risorse
 - [ ] Sconti dev/test applicati
 - [ ] Acquisto istanze riservate
 - [ ] Dashboard monitoraggio costi
-- [ ] Revisioni regolari dei costi
+- [ ] Revisioni costi regolari
 
 ### Conformità ✅
-- [ ] Requisiti di residenza dati rispettati
-- [ ] Logging di audit abilitato
-- [ ] Policy di conformità applicate
-- [ ] Baseline di sicurezza implementate
-- [ ] Valutazioni di sicurezza regolari
-- [ ] Piano di risposta agli incidenti
+- [ ] Requisiti residenza dati soddisfatti
+- [ ] Logging audit abilitato
+- [ ] Policy conformità applicate
+- [ ] Baseline sicurezza implementate
+- [ ] Valutazioni sicurezza regolari
+- [ ] Piano risposta incidenti
 
-## Benchmark Prestazionali
+## Benchmark prestazionali
 
-### Obiettivi Produttivi Illustrativi
+### Obiettivi illustrativi di produzione
 
-Questi sono SLO di esempio da negoziare e testare con carico, non benchmark misurati o garanzie. La latenza di risposta dipende da modello/lunghezza output; la spesa mensile token dipende da traffico e prezzi, non solo dal conteggio token.
+Questi sono esempi di SLO da negoziare e testare con carico, non benchmark misurati o garanzie. La latenza di risposta dipende da modello/lunghezza output; la spesa mensile token dipende da traffico e prezzi, non solo dal conteggio token.
 
 | Metrica | Obiettivo | Monitoraggio |
-|--------|--------|------------|
+|--------|----------|-------------|
 | **Tempo di risposta** | < 2 secondi | Application Insights |
 | **Disponibilità** | 99.9% | Monitoraggio uptime |
 | **Tasso di errore** | < 0.1% | Log applicazione |
-| **Spesa Modello** | < $500/mese (budget esempio) | Gestione costi |
+| **Spesa modello** | < $500/mese (budget esemplificativo) | Gestione costi |
 | **Utenti concorrenti** | 1000+ | Test di carico |
 | **Tempo di Recupero** | < 1 ora | Test di disaster recovery |
 
 ### Test di Carico
 
-Di seguito è riportato uno schizzo dell’interfaccia per uno script di test di carico **che devi implementare**; questo repository non fornisce `scripts/load_test.py`. Definisci i payload di richiesta, l’autenticazione, i carichi di lavoro rappresentativi, le asserzioni di latenza/errore percentili e un limite di spesa nello strumento di test di carico scelto prima di eseguirlo:
+Di seguito è riportato uno schizzo dell'interfaccia per uno script di test di carico **che devi implementare**; questo repository non fornisce `scripts/load_test.py`. Definisci i payload delle richieste, l'autenticazione, i carichi di lavoro rappresentativi, le asserzioni di latenza/errore percentile e un limite di spesa nel tuo strumento di test di carico preferito prima di eseguirlo:
 
 ```bash
 # Load testing script for AI applications
@@ -869,46 +869,46 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Best Practice della Community
+## 🤝 Best Practice della Comunità
 
-Basato sul feedback della community Microsoft Foundry Discord:
+Basato sui feedback della community Discord di Microsoft Foundry:
 
-### Principali Raccomandazioni dalla Community:
+### Principali Raccomandazioni dalla Comunità:
 
-1. **Inizia in piccolo, scala gradualmente**: Inizia con SKU base e scala in base all’uso effettivo
+1. **Inizia in piccolo, scala gradualmente**: Parti con SKU di base e scala in base all'uso reale
 2. **Monitora tutto**: Imposta un monitoraggio completo fin dal primo giorno
-3. **Automatizza la sicurezza**: Usa infrastruttura come codice per una sicurezza coerente
-4. **Testa a fondo**: Includi test specifici per l’IA nella tua pipeline
-5. **Pianifica i costi**: Monitora l’uso dei token e imposta avvisi di budget precoci
+3. **Automatizza la sicurezza**: Usa l'infrastruttura come codice per una sicurezza coerente
+4. **Testa a fondo**: Includi test specifici per AI nella tua pipeline
+5. **Pianifica i costi**: Monitora l'uso dei token e imposta avvisi di budget precocemente
 
 ### Errori Comuni da Evitare:
 
 - ❌ Hardcoding delle chiavi API nel codice
 - ❌ Mancata configurazione di un monitoraggio adeguato
-- ❌ Ignorare l’ottimizzazione dei costi
-- ❌ Non testare scenari di errore
-- ❌ Distribuire senza controlli di integrità
+- ❌ Ignorare l'ottimizzazione dei costi
+- ❌ Non testare scenari di fallimento
+- ❌ Deployment senza controlli di integrità
 
-## Comandi ed Estensioni AZD AI CLI
+## Comandi e Estensioni AZD AI
 
-AZD include un set in crescita di comandi ed estensioni specifici per l’IA che semplificano i flussi di lavoro di produzione AI. Questi strumenti colmano il divario tra lo sviluppo locale e la distribuzione in produzione per carichi di lavoro AI.
+AZD include un set crescente di comandi ed estensioni specifiche per AI che semplificano i flussi di lavoro AI in produzione. Questi strumenti colmano il divario tra sviluppo locale e deployment in produzione per carichi di lavoro AI.
 
-> **Revisione della release (2026-11-04):** Le istruzioni CLI sottostanti sono state verificate contro le release pubblicate di `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, e `azure.ai.evaluations` **1.0.0-beta.2**. Gli agenti beta.23 richiedono `azd >= 1.37.0`; le valutazioni beta.2 richiedono `azd >= 1.33.0`. Usa almeno 1.37.0 per il flusso di lavoro combinato. Questa è una revisione di documentazione/sorgente, non una validazione live della distribuzione Azure.
+> **Aggiornamento Foundry GA (2026-11-09):** Il bundle `microsoft.foundry` ha raggiunto la **versione 1.0 / disponibilità generale** il [5 novembre 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Usa **`azd >= 1.37.0`** per questo flusso di lavoro. La precedente revisione di `azd 1.37.2`, agents beta.23 e evaluations beta.2 è mantenuta sotto come storia di migrazione, non come versione attuale del bundle. Questa è una revisione di documentazione/fonte, non una validazione di deployment live né una dichiarazione che ogni estensione opzionale, API o funzione in anteprima sia GA.
 
 ### Estensioni AZD per AI
 
-AZD usa un sistema di estensioni per aggiungere funzionalità specifiche per l’IA. Installa e gestisci le estensioni con:
+AZD utilizza un sistema di estensioni per aggiungere capacità specifiche per l'AI. Installa e gestisci estensioni con:
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Inspect installed extension details
+# Inspect installed versions
 azd version
-azd extension show azure.ai.agents
+azd ext list --installed
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle
+azd ext install microsoft.foundry
 
 # Install the separate Foundry evaluations extension
 azd extension install azure.ai.evaluations
@@ -919,51 +919,61 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Upgrade the Foundry bundle
+azd ext upgrade microsoft.foundry
 ```
 
 **Estensioni AI disponibili:**
 
 | Estensione | Scopo | Stato |
 |-----------|---------|--------|
-| `azure.ai.agents` | Gestione del servizio Foundry Agent | Anteprima |
-| `azure.ai.evaluations` | Dataset di valutazione, valutatori, gruppi di valutazione e esecuzioni | Anteprima |
-| `azure.ai.skills` | Competenze agenti riutilizzabili | Anteprima |
-| `azure.ai.connections` | Connessioni Foundry (fonti dati, strumenti) | Anteprima |
-| `azure.ai.finetune` | Fine-tuning modello Foundry | Anteprima |
-| `azure.ai.models` | Modelli personalizzati Foundry | Anteprima |
-| `azure.coding-agent` | Configurazione agente di codifica | Disponibile |
+| `microsoft.foundry` | Meta-pacchetto che installa le sette estensioni principali qui sotto; nessun gruppo comandi proprio | Bundle GA 1.0 |
+| `azure.ai.agents` | `azd ai agent`: configurazione agenti, esecuzione locale e operazioni | Inclusa; versione indipendente |
+| `azure.ai.connections` | `azd ai connection`: connessioni progetto | Inclusa; versione indipendente |
+| `azure.ai.inspector` | `azd ai inspector`: UI locale Agent Inspector | Inclusa; versione indipendente |
+| `azure.ai.projects` | `azd ai project`: risorse progetto e deployment modelli | Inclusa; versione indipendente |
+| `azure.ai.routines` | `azd ai routine`: pianificazioni e trigger | Inclusa; versione indipendente |
+| `azure.ai.skills` | `azd ai skill`: linee guida comportamentali riutilizzabili | Inclusa; versione indipendente |
+| `azure.ai.toolboxes` | `azd ai toolbox`: raccolte strumenti versionate | Inclusa; versione indipendente |
+| `azure.ai.evaluations` | Dataset di valutazione, valutatori, gruppi di valutazione e run | Installazione/rilascio separati |
+| `azure.ai.dataset` | Registrazione e versioning dataset | Installazione/rilascio separati |
+| `azure.ai.finetune` | Fine-tuning modello Foundry | Installazione/rilascio separati |
+| `azure.ai.models` | Modelli custom Foundry | Installazione/rilascio separati |
 
-> Esegui `azd extension list --installed` e `azd extension show azure.ai.evaluations` per ispezionare le versioni installate. Aggiorna prima il core della CLI usando le [istruzioni di installazione/aggiornamento](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (per un’installazione Windows winget: `winget upgrade Microsoft.Azd`), poi esegui `azd extension upgrade --all`. Non esiste un comando core `azd upgrade`. Rivedi le modifiche che introducono rotture prima di aggiornare l’automazione in produzione; non dare per scontato che un aggiornamento dell’estensione preservi vecchi formati di comando o configurazione.
+L'installazione individuale di `azure.ai.agents` rimane supportata e installa le dipendenze; il bundle è il default del corso per il flusso di lavoro GA. Bundle GA non è una garanzia generale di stato di rilascio per funzionalità opzionali dei suoi componenti. Vedi [packaging e verifica delle estensioni](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions) e ispeziona l'aiuto dei comandi installati prima di usarli.
 
-### Cambiamenti e Correzioni Recenti della Release
+> Aggiorna prima il core CLI con `azd update` o il metodo appropriato di [installazione/aggiornamento](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd), poi esegui `azd ext upgrade microsoft.foundry`. Aggiorna le valutazioni installate separatamente secondo necessità con `azd ext upgrade azure.ai.evaluations`. Non esiste un comando core `azd upgrade`. Registra e rivedi le estensioni con versioni indipendenti nell'automazione di produzione; un aggiornamento non migra automaticamente configurazioni vecchie.
 
-| Release | Cosa cambia per questo corso |
+### Cambiamenti e Fix Recenti del Rilascio
+
+| Rilascio | Cosa cambia per questo corso |
 |---------|------------------------------|
-| `azd 1.37.0` | Aggiunge API di anteprima di distribuzione stabili e corregge modifiche di estensioni che sovrascrivevano impostazioni `azure.yaml` non correlate. |
-| `azd 1.37.1` | Corregge la propagazione di Ctrl+C tra estensioni e distingue cancellazioni/timeouts da fallimenti generici. |
-| `azd 1.37.2` | Migliora la validazione del provisioning: avvisi critici a default su **No**, fallisce senza conferma nelle esecuzioni non presidiate e la cancellazione salta i post-hook di provisioning. Corregge anche valori ambiente irrisolti nelle deny list degli Stack di Distribuzione quando quella funzionalità alfa è abilitata. |
-| Agenti `beta.22` | Migra la valutazione a `azd ai eval`, cambia l’ottimizzazione all’API GA v1, richiede `toolboxes` plurale, e separa managed-harness, voice, e opt-in per anteprima a lunga esecuzione. Corregge selezione modello specifica per ambiente e autenticazione toolbox. |
-| Agenti `beta.23` | Espone `init --harness`; corregge output risposta A2A 0.3, percorsi/moduli prompt-agent invalidi attraverso i livelli di infrastruttura, diagnostica timeout attivazione, e avvisi RBAC sviluppatore conservati. |
-| Valutazioni `beta.2` | Richiede configurazione valutazione camelCase, aggiunge creazione conversazioni statica/simulata e fonti file locali esplicite, e corregge gestione identità/versione dataset, conteggi gate qualità, e diagnostica run fallite. |
+| `microsoft.foundry` 1.0 GA (2026-11-05) | Predefinito al bundle delle sette estensioni, conserva impostazioni agent/deployment in `azure.yaml`, testa localmente con Agent Inspector, e carica codice per build Foundry remota. Installa valutazioni separatamente e reinstalla estensioni richieste su runner CI. |
+| `azd 1.37.0` | Aggiunge API di anteprima stabili per deployment e corregge la riscrittura indesiderata di impostazioni `azure.yaml` da modifiche estensioni. |
+| `azd 1.37.1` | Corregge la propagazione di Ctrl+C attraverso le estensioni e distingue l'annullamento/timeouts da fallimenti generici. |
+| `azd 1.37.2` | Migliora la validazione provisioning: avvisi critici predefiniti a **No**, fallisce senza conferma in esecuzioni unattended, e l'annullamento salta hook post-provision. Corregge anche valori ambiente irrisolti nelle deny list Deployment Stacks quando feature alpha attiva. |
+| Agents `beta.22` | Migra valutazioni a `azd ai eval`, cambia ottimizzazione all'API GA v1, richiede `toolboxes` plurale, e separa opt-in managed-harness, voice, e long-running preview. Corregge selezione modelli specifica ambiente e autenticazione toolbox. |
+| Agents `beta.23` | Espone `init --harness`; corregge output risposte A2A 0.3, percorsi/moduli prompt-agent invalidi su diversi livelli infrastrutturali, diagnostica timeout attivazione e avvisi RBAC sviluppatore persistenti. |
+| Evaluations `beta.2` | Richiede configurazioni valutazione camelCase, aggiunge authoring conversazioni statiche/simulate e fonti file locali esplicite, e corregge gestione identità/versione dataset, conteggi quality-gate e diagnostica run falliti. |
 
-Un timeout di attivazione agente non dimostra un fallimento di distribuzione: ispeziona la versione tentata e il suo stato prima di riprovare. Avvisi RBAC sviluppatore possono rimanere anche se il provisioning ha successo; risolvi l’accesso mancante prima di invocare come quel developer.
+Un timeout di attivazione agente **non** dimostra un fallimento di deployment: ispeziona la versione tentata e il suo stato prima di ritentare. Avvisi RBAC sviluppatore possono rimanere anche se il provisioning ha successo; risolvi gli accessi mancanti prima di invocare come quel developer.
 
-Fonti: [AZD releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migration](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), e [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
+Le righe beta sopra descrivono fix e limiti di migrazione precedenti, non una richiesta di bloccare progetti nuovi a quelle versioni.
 
-**Cosa sono le più recenti estensioni `skills` e `connections`?**
+Fonti: [Annuncio Foundry GA](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/), [rilasci AZD](https://github.com/Azure/azure-dev/releases), [rilascio agents beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [migrazione agents beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), e [rilascio evaluations beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-Due estensioni in anteprima sono apparse insieme agli strumenti agenti e valgono la pena di essere comprese anche dai principianti:
+**Cosa sono le estensioni `skills` e `connections` incluse nel bundle?**
 
-- **`azure.ai.skills`** — Una **skill** è una capacità riutilizzabile (uno strumento o comportamento pacchettizzato) che puoi assegnare a uno o più agenti invece di riimplementarla ogni volta. Pensala come un blocco comune: definisci una skill "cerca nella documentazione" o "consulta un ordine" una volta sola, e poi riusala su diversi agenti. Questo mantiene i sistemi multi-agente (Capitolo 5) coerenti ed evita copia-incolla.
-- **`azure.ai.connections`** — Una **connessione** è un collegamento gestito dal tuo progetto Foundry a una risorsa esterna necessaria ai tuoi agenti—una fonte dati (come Azure AI Search), un endpoint di uno strumento, o un altro servizio. Le connessioni centralizzano *dove* e *come* gli agenti accedono ai dati, quindi credenziali e endpoint risiedono in un unico posto governato invece di essere sparsi nel codice.
+Queste sono installate con il bundle core ma hanno scopi diversi:
 
-Non ti servono per distribuire i tuoi primi agenti—usa `azure.ai.agents` mentre impari. Ricorri a `skills` quando ti ritrovi a duplicare lo stesso strumento tra agenti, e a `connections` quando più agenti condividono la stessa fonte dati.
+- **`azure.ai.skills`** — Una **skill** incapsula linee guida comportamentali riutilizzabili per agenti. Condividi istruzioni revisionate tra agenti invece di copiarle. Una skill non implementa uno strumento né concede accesso a dati; usa toolbox e codice applicativo per esecuzione strumenti.
+- **`azure.ai.connections`** — Una **connessione** è un collegamento gestito dal tuo progetto Foundry a una risorsa esterna necessaria agli agenti: una fonte dati (es. Azure AI Search), un endpoint strumento, o altro servizio. Le connessioni centralizzano *dove* e *come* gli agenti accedono ai dati, così credenziali ed endpoint stanno in un luogo governato anziché sparsi nel codice.
 
-### Inizializzare Progetti Agente con `azd ai agent init`
+Non è necessario configurare tutte le capacità incluse per distribuire il tuo primo agente. Usa le skill quando agenti condividono linee guida comportamentali e le connessioni quando condividono risorse esterne.
 
-Il comando `azd ai agent init` struttura un progetto agente Microsoft Foundry. Usa un modello progetto `azure.yaml` attuale, non un manifesto agente legacy implicito:
+### Inizializzare Progetti Agenti con `azd ai agent init`
+
+Il comando `azd ai agent init` crea lo scheletro di un progetto agente Microsoft Foundry. Per un esempio di deployment eseguibile con Python 3.13+ e uv attuale, segui la [guida GA hosted-agent](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). I comandi seguenti invece illustrano l’adozione di **un tuo** template progetto `azure.yaml` corrente; il template locale nominato non è fornito da questo corso:
 
 ```bash
 # Initialize a new agent project from a local project template
@@ -976,40 +986,48 @@ azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <
 azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**Flag principali:**
+**Flag chiave:**
 
 | Flag | Descrizione |
 |------|-------------|
 | `-t, --template` | Percorso o URI GitHub supportato a un documento progetto `azure.yaml` |
 | `-p, --project-id` | ID progetto Microsoft Foundry esistente per il tuo ambiente azd |
-| `-s, --src` | Directory sorgente per agenti generati, o directory target quando si adotta un progetto |
-| `--kind` | Inizializza un agente `hosted`, `prompt`, o in anteprima `prompt-voice` |
-| `--harness` | Esecuzione harness opzionale per `--kind prompt`; richiede opt-in in anteprima |
-| `-e, --environment` | L’ambiente azd da usare |
+| `-s, --src` | Directory di origine per agenti generati, o directory target se adotti un progetto |
+| `--deploy-mode code` | Carica sorgente per build Foundry remota invece di costruire un container locale |
+| `--model-deployment` | Riutilizza una deployment modello esistente nominata durante l’inizializzazione |
+| `--kind` | Inizializza un agente `hosted`, `prompt`, o preview `prompt-voice` |
+| `--harness` | Harness di esecuzione opzionale per `--kind prompt`; richiede opt-in preview |
+| `-e, --environment` | L'ambiente azd da usare |
 
-`--manifest`/`-m` è un alias deprecato per `--template`/`-t`; rinominare il flag non converte un vecchio manifesto in un documento progetto corrente. `--host containerapp` non è un flag agent-init attuale. Per una applicazione Container Apps ordinaria, usa `azd init --template` con un modello che dichiari `host: containerapp`.
+`--manifest`/`-m` è un alias deprecato per `--template`/`-t`; rinominare il flag non converte un vecchio manifest in documento progetto attuale. `--host containerapp` non è un flag agent-init attuale. Per un’app Container Apps ordinaria, usa `azd init --template` con template che dichiara `host: containerapp`.
 
-Per un progetto esistente con esattamente un servizio `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` aggiunge o aggiorna una definizione diretta agente senza provisioning o distribuzione. I comandi runtime rigettano manifeste legacy impliciti `agent.yaml`/AgentManifest e definizioni servizio nidificate `config:`; migrale a un servizio `azure.ai.agent` attuale. Quando init stampa un prossimo passo `cd`, eseguilo prima di `azd up`: init non cambia la directory del terminale.
+Per progetto esistente con esattamente un servizio `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` aggiunge o aggiorna definizione agente diretta senza provisioning o deployment. I comandi runtime rifiutano vecchie definizioni implicit `agent.yaml`/AgentManifest e servizi annidati `config:`; migrali a servizio `azure.ai.agent` attuale. Quando init stampa un passo successivo `cd`, eseguilo prima di `azd up`: init non cambia la directory della shell.
 
-**Suggerimento per la produzione**: Usa `--project-id` per connetterti direttamente a un progetto Foundry esistente, mantenendo il codice agente e le risorse cloud collegati fin dall’inizio.
+**Suggerimento produzione**: Usa `--project-id` per collegarti direttamente a un progetto Foundry esistente, mantenendo legati codice agente e risorse cloud sin dall'inizio.
 
-#### Funzionalità Anteprima Opzionali
+#### Funzionalità Preview Opzionali
 
-Managed harness, voice e invocazioni a lunga esecuzione sono disabilitati singolarmente per default. Imposta solo l’interruttore per la funzione necessaria nell’**ambiente processo shell/CI**, non con `azd env set`:
+Managed harness, voice e long-running invocation sono disabilitati indipendentemente di default. Imposta solo l'interruttore per la feature necessaria nell'**ambiente del processo shell/CI**, non con `azd env set`:
 
 | Funzionalità | Variabile ambiente processo |
 |---------|------------------------------|
 | Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
 | Voice (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
-| Invocazione a lunga esecuzione | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+| Invocazione long-running | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
 
-Per esempio, usa `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` in Bash o `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` in PowerShell prima di eseguire il comando pertinente. Un interruttore non abilita gli altri. Vedi il [README degli agenti rilasciati](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) per tutti gli switch di anteprima e limitazioni.
+Per esempio, usa `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` in Bash o `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` in PowerShell prima di eseguire il comando rilevante. Un interruttore non attiva gli altri. Vedi il [README agents rilasciati](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) per tutti gli switch preview e limitazioni.
 
-### Gestire il Ciclo di Vita dell’Agente
+### Gestione del Ciclo di Vita Agente
 
-Usa `azure.ai.agents` per testare, ispezionare, ottimizzare e ritirare gli agenti, e la separata estensione `azure.ai.evaluations` per misurare la qualità:
+L'estensione `azure.ai.agents` del bundle supporta test locale e operazioni agent in produzione. Installa `azure.ai.evaluations` separatamente per misurare qualità:
 
 ```bash
+# Start the local agent and Agent Inspector (leave running)
+azd ai agent run
+
+# From a second terminal in the project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
 # Invoke a deployed agent and view server response timing
 # (total latency and time to first byte)
 azd ai agent invoke
@@ -1026,39 +1044,42 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-**Ciclo di vita a colpo d’occhio:**
+**Ciclo di vita a colpo d'occhio:**
 
 | Fase | Comando | Uso in produzione |
 |-------|---------|----------------|
+| Test locale | `azd ai agent run`, poi `azd ai agent invoke --local "Test prompt"` | Ispeziona richieste e risposte prima del deployment; le chiamate ai modelli Azure sono comunque a pagamento |
+| Deploy | `azd deploy` | In modalità codice, costruisci sorgente caricato remotamente in Foundry |
 | Test | `azd ai agent invoke` | Valida risposte e misura latenza prima del rilascio |
-| Ispeziona | `azd ai agent endpoint show` | Rivedi autenticazione/config endpoint; individua cambiamenti critici presto |
-| Misura | `azd ai eval init`, `generate`, `run start` | Definisci, distribuisci ed esegui valutazioni ripetibili |
-| Migliora | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Riusa una valutazione compatibile per ottimizzare l’agente |
-| Recupera | `azd ai agent code download` | Recupera la fonte distribuita esatta per audit/rollback |
-| Ritira | `azd ai agent delete --force` | Smantella un agente e le sue versioni pulitamente |
+| Diagnosi | `azd ai agent doctor`, `azd ai agent monitor --follow` | Controlla configurazione/permessi e flusso log agent |
+| Ispezione | `azd ai agent endpoint show` | Rivedi auth/config endpoint; individua cambiamenti critici in anticipo |
+| Misura | `azd ai eval init`, `generate`, `run start` | Definisci, deploya e esegui valutazioni ripetibili |
+| Migliora | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Riutilizza una valutazione compatibile per ottimizzare l’agente |
+| Recupero | `azd ai agent code download` | Recupera esattamente la sorgente deployata per audit/rollback |
+| Ritiro | `azd ai agent delete --force` | Smantella un agente e le sue versioni pulitamente |
 
-> Questi sono comandi in anteprima e possono cambiare tra le versioni dell’estensione. Esegui `azd ai agent --help` per vedere i sottocomandi esatti disponibili nella tua versione installata.
+> Esegui `azd ai agent --help` per ispezionare i comandi nella tua versione installata. Il bundle è GA; le funzionalità preview con gating indipendente sono ancora opt-in. Prima del cleanup, distingui cancellazione agente da quella progetto: `azd down` cancella il resource group di un progetto appena creato, ma lascia risorse di progetti riutilizzati. Segui la [guida al cleanup](../chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately).
 
-`endpoint show` supporta agenti hosted, prompt e voice, ma gli aggiornamenti endpoint sono solo hosted; agenti workflow non sono supportati. Il download codice e l’esempio di ritiro agente hosted sopra non sono operazioni generiche per ogni tipo di agente.
+`endpoint show` supporta agenti hosted, prompt e voice, ma aggiornamenti endpoint sono solo hosted; workflow agents non supportati. Il download del codice e l'esempio di ritiro hosted-agent sopra non sono operazioni generiche per ogni tipo agente.
 
-#### Migrazione Valutazione e Controlli di Qualità
+#### Migrazione Valutazioni e Controlli Qualità
 
-A partire dagli agenti **1.0.0-beta.22 (2026-10-23)**, i comandi legacy `azd ai agent eval` forniscono guida alla migrazione invece del precedente flusso di lavoro di valutazione. Non copiare i vecchi esempi `eval generate --dataset ...`: la valutazione ora risiede sotto **`azd ai eval`**.
+A partire dagli agenti **1.0.0-beta.22 (2026-10-23)**, i comandi legacy `azd ai agent eval` forniscono guida migrazione invece del precedente flusso valutazione. Non copiare esempi vecchi `eval generate --dataset ...`: la valutazione ora è sotto **`azd ai eval`**.
 
-In un progetto agente inizializzato, autentica con `azd auth login`, conferma l’ambiente/progetto Foundry selezionato, e installa `azure.ai.evaluations`. Una distribuzione modello giudice è necessaria per scoring basato su modello; generazione e simulazione conversazione possono richiedere selezioni modello separate e generare costi aggiuntivi.
+In un progetto agent inizializzato, autenticarsi con `azd auth login`, confermare l'ambiente/progetto Foundry selezionato e installare `azure.ai.evaluations`. È necessaria una distribuzione del modello giudice per la valutazione basata sul modello; la generazione e la simulazione di conversazioni possono richiedere le proprie selezioni di modelli e comportare costi aggiuntivi.
 
 ```bash
-# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
-azd ai eval init
-
-# Optionally synthesize a rubric and dataset from the agent
+# Generate a draft rubric and dataset from the deployed agent
 azd ai eval generate
+
+# After reviewing the assets, configure a named evaluation
+azd ai eval init --name quality
 
 # Review generated files, then register datasets, evaluators, and eval groups
 azd up
 
 # Start an evaluation and wait for its results
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 
 # Inspect runs and available test-case output
 azd ai eval run list
@@ -1066,45 +1087,45 @@ azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
 ```
 
-Segui le selezioni interattive e i passi successivi stampati invece di assumere che le risorse generate siano già registrate. La configurazione valutazione normalmente risiede in `evals/azure.eval.yaml`, referenziata dal servizio `azure.ai.eval` in `azure.yaml`. Le chiavi sono in **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); le vecchie chiavi snake_case sono rigettate. I percorsi all’interno di una configurazione referenziata si risolvono relativi a quel file, non alla radice del repository.
+Per l'esempio dell'annuncio GA, selezionare **Dataset e valutatore** e **Turno** durante la generazione, quindi selezionare quegli asset revisionati e un modello giudice durante l'inizializzazione. Seguire i passaggi successivi stampati piuttosto che presumere che gli asset generati siano già registrati. È anche possibile inizializzare rispetto a un dataset/rubrica revisionata esistente senza generare nuovi dati. La configurazione della valutazione risiede normalmente in `evals/azure.eval.yaml`, referenziata dal servizio `azure.ai.eval` in `azure.yaml`. Le chiavi sono in **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); le vecchie chiavi di configurazione in snake_case vengono rifiutate. I percorsi all'interno di una configurazione referenziata si risolvono in relazione a quel file, non alla radice del repository.
 
-Per le valutazioni di conversazione, scegli **statico** per valutare trascrizioni completate senza invocare un agente, oppure **simulazione** per generare conversazioni da scenari di seed. La simulazione necessita un agente target, un modello simulatore, e una selezione modello giudice separata. Per comandi senza presenza umana, fornisci gli input elencati da `azd ai eval init --help` e `azd ai eval generate --help`; non assumere che il modello di generazione sia anche il giudice o simulatore.
+Per le valutazioni delle conversazioni, scegliere **statico** per valutare trascrizioni completate senza invocare un agente, oppure **simulazione** per generare conversazioni da semi di scenario. La simulazione richiede un target agente, un modello simulatore e una selezione separata del modello giudice. Per comandi non presidiati, fornire gli input elencati da `azd ai eval init --help` e `azd ai eval generate --help`; non presumere che il modello di generazione sia anche il giudice o il simulatore.
 
-Per CI, configura una policy di qualità esplicita usando `azd ai eval run start --help` (`--fail-on`) e tratta un’uscita host non zero come fallimento. Un run completato non è automaticamente un pass di qualità. Rivedi righe fallite/errore e diagnostiche; conteggi risultati mancanti o incoerenti non provano successo. Dataset registrati mantengono identità/versione servizio; `--max-samples` non può selezionare un subset di dataset registrato. Pubblica un dataset più piccolo intenzionalmente, o usa una fonte file locale supportata.
+Per CI, configurare una policy di qualità esplicita utilizzando `azd ai eval run start --help` (`--fail-on`) e considerare un'uscita dell'host non zero come fallimento. Una esecuzione completata non è automaticamente una promozione della qualità. Esaminare le righe fallite/errore e la diagnostica; conteggi dei risultati mancanti o incoerenti non sono prova di successo. I dataset registrati mantengono la loro identità/versione di servizio; `--max-samples` non può ridurre un dataset registrato. Pubblicare un dataset più piccolo deliberatamente, oppure usare una fonte locale supportata.
 
 ```bash
 # Example CI policy: at least 90% of all test cases must pass
-azd ai eval run start --wait --fail-on "pass-rate=0.9"
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
-La soglia di passaggio usa i test passati diviso il totale casi test; righe fallite, errore, saltate e non superate contano contro. Non combinare una soglia con `--no-wait`, che ritorna prima che un verdetto sia disponibile.
+Il gate della percentuale di passaggio utilizza i casi di test superati divisi per il totale dei casi di test; righe fallite, in errore, saltate e altrimenti non superate contribuiscono negativamente. Non combinare un gate con `--no-wait`, che ritorna prima che il verdetto sia disponibile.
 
-#### Migrazione Configurazione Ottimizzazione
+#### Migrazione della Configurazione di Ottimizzazione
 
-L’ottimizzazione ora usa l’API GA v1. Per riutilizzare una valutazione compatibile **a livello di turno, supportata da dataset** dal nuovo flusso di lavoro:
+L'ottimizzazione ora utilizza l'API GA v1. Per riutilizzare una valutazione compatibile **livello turno, basata su dataset** dal nuovo flusso di lavoro:
 
 ```bash
 # Replace placeholders with the evaluation name and optimizer model deployment
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-`--eval` seleziona una valutazione; `--eval-config` seleziona il suo file di configurazione (inclusi le definizioni basate su file). `--config` invece prende una **richiesta di ottimizzazione API autonoma** in YAML o JSON. Non passare un vecchio `eval.yaml` agent o il nuovo `azure.eval.yaml` a `--config`, e non combinare `--config` con `--eval`/`--eval-config`. Le valutazioni basate su conversazioni, tracce o simulazioni non sono intercambiabili con il collegamento diretto all’ottimizzazione basata sul dataset; usa il formato di richiesta di ottimizzazione supportato per quegli scenari. Rivedi i candidati prima di applicarli o distribuirli.
+`--eval` seleziona una valutazione; `--eval-config` seleziona il suo file di configurazione (incluse definizioni con file). `--config` invece prende una **richiesta API di ottimizzazione standalone** in YAML o JSON. Non passare un vecchio `eval.yaml` agente o il nuovo `azure.eval.yaml` a `--config`, e non combinare `--config` con `--eval`/`--eval-config`. Le valutazioni basate su conversazioni, tracce o simulazioni non sono intercambiabili con la scorciatoia di ottimizzazione basata su dataset; usare il formato di richiesta di ottimizzazione supportato per questi scenari. Rivedere i candidati prima di applicarli o distribuirli.
 
-Consulta il [riferimento alle valutazioni per la versione revisionata](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) e il [sorgente comando ottimizzazione per la versione revisionata](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) per le opzioni esatte.
+Vedere la [riferimento valutazioni per la release revisionata](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) e [fonte comando ottimizzazione per la release revisionata](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) per opzioni esatte.
 
-#### Anteprima Distribuzione Agent Ospitato in Sola Lettura
+#### Anteprima Distribuzione Hosted-Agent in Sola Lettura
 
-Per un ambiente esistente vincolato a Foundry con un servizio unificato `azure.ai.agent` di `kind: hosted`, confronta la configurazione supportata prima di distribuire:
+Per un ambiente esistente legato a Foundry con un servizio `azure.ai.agent` unificato di `kind: hosted`, confrontare la configurazione supportata prima della distribuzione:
 
 ```bash
 azd deploy <service-name> --preview --no-prompt
 ```
 
-Questa anteprima non distribuisce l'agente. Non è una differenza completa di infrastruttura/sicurezza: agenti prompt/voice/workflow, layout di configurazione legacy e alcune impostazioni ospitate sono fuori dal suo ambito. Un risultato `unknown` non equivale ad approvazione per distribuire. Non esiste un comando autonomo per `azd ai agent deploy` o agent `--dry-run`; usa il workflow di distribuzione principale.
+Questa anteprima non distribuisce l'agente. Non è una differenza completa di infrastruttura/sicurezza: agenti prompt/voce/workflow, layout di configurazione legacy e alcune impostazioni hosted sono fuori dal suo ambito. Un risultato `unknown` non autorizza la distribuzione. Non esiste un comando standalone `azd ai agent deploy` o `--dry-run` agente; usare il flusso di distribuzione core.
 
 ### Protocollo Contesto Modello (MCP) con `azd mcp`
 
-AZD include il supporto integrato al server MCP (Alpha), che permette agli agenti e strumenti AI di interagire con le tue risorse Azure attraverso un protocollo standardizzato:
+AZD include supporto nativo per server MCP (Alpha), consentendo agli agenti AI e agli strumenti di interagire con le tue risorse Azure attraverso un protocollo standardizzato:
 
 ```bash
 # Start the MCP server for your project
@@ -1114,30 +1135,30 @@ azd mcp start
 azd copilot consent list
 ```
 
-Il server MCP espone il contesto del tuo progetto azd—ambienti, servizi e risorse Azure—a strumenti di sviluppo potenziati dall’AI. Questo consente:
+Il server MCP espone il contesto del progetto azd—ambienti, servizi e risorse Azure—a strumenti di sviluppo basati su AI. Questo consente:
 
-- **Distribuzione assistita da AI**: lascia che gli agenti di codifica interrogino lo stato del progetto e inneschino distribuzioni
-- **Scoperta risorse**: gli strumenti AI possono scoprire quali risorse Azure utilizza il tuo progetto
-- **Gestione ambienti**: gli agenti possono passare tra ambienti sviluppo/staging/produzione
+- **Distribuzione assistita da AI**: permetti agli agenti di codice di interrogare lo stato del progetto e attivare distribuzioni
+- **Scoperta risorse**: gli strumenti AI possono scoprire quali risorse Azure usa il progetto
+- **Gestione ambiente**: gli agenti possono passare tra ambienti dev/staging/produzione
 
-### Generazione infrastruttura con `azd infra generate`
+### Generazione di Infrastruttura con `azd infra generate`
 
-Per carichi di lavoro AI in produzione, puoi generare e personalizzare Infrastructure as Code anziché affidarti al provisioning automatico:
+Per carichi di lavoro AI di produzione, puoi generare e personalizzare Infrastructure as Code invece di affidarti al provisioning automatico:
 
 ```bash
 # Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Il supporto dipende dal progetto/host e dai provider installati; questo non è un comando generale di reverse-engineering per risorse Azure arbitrarie né una promessa di generare sia Bicep che Terraform. Esegui `azd infra generate --help` e ispeziona il formato generato. Dove supportato, scrivere l'IaC su disco permette di:
-- Rivedere e controllare l'infrastruttura prima della distribuzione
+Il supporto dipende dal progetto/host e dai provider installati; questo non è un comando generale di reverse-engineering per risorse Azure arbitrariamente né una promessa di generare sia Bicep che Terraform. Esegui `azd infra generate --help` e ispeziona il formato generato. Dove supportato, scrivere IaC su disco ti permette di:
+- Esaminare e auditare l'infrastruttura prima della distribuzione
 - Aggiungere policy di sicurezza personalizzate (regole di rete, endpoint privati)
-- Integrare i processi di revisione IaC esistenti
-- Versionare le modifiche infrastrutturali separatamente dal codice applicativo
+- Integrare con processi esistenti di revisione IaC
+- Controllare le versioni delle modifiche infrastrutturali separatamente dal codice applicativo
 
-### Hook del Ciclo di Vita in Produzione
+### Hook del Ciclo di Vita di Produzione
 
-Gli hook di AZD ti permettono di iniettare logica personalizzata in ogni fase del ciclo di vita della distribuzione—critico per i workflow AI di produzione:
+I hook AZD ti consentono di inserire logica personalizzata in ogni fase del ciclo di vita della distribuzione—critici per i flussi di lavoro AI di produzione:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1170,18 +1191,18 @@ services:
 azd hooks run predeploy
 ```
 
-**Hook consigliati in produzione per carichi AI:**
+**Hook di produzione raccomandati per carichi di lavoro AI:**
 
-| Hook | Caso d’uso |
+| Hook | Caso d'Uso |
 |------|----------|
-| `preprovision` | Valida le quote dell’abbonamento per la capacità dei modelli AI |
-| `postprovision` | Verifica connettività privata e output risorsa richiesti |
-| `predeploy` | Esegui test di sicurezza AI, valida template prompt |
-| `postdeploy` | Test rapido delle risposte agente, verifica connettività modello |
+| `preprovision` | Validare le quote di sottoscrizione per la capacità del modello AI |
+| `postprovision` | Verificare connettività privata e output delle risorse richieste |
+| `predeploy` | Eseguire test di sicurezza AI, validare template di prompt |
+| `postdeploy` | Test rapidi delle risposte agente, verificare connettività modello |
 
 ### Configurazione Pipeline CI/CD
 
-Usa `azd pipeline config` per collegare il tuo progetto a GitHub Actions o Azure Pipelines con autenticazione Azure sicura:
+Prima convalidare il progetto localmente e completare un `azd up` con successo. Poi usare `azd pipeline config` per collegarlo a GitHub Actions o Azure Pipelines con autenticazione Azure sicura:
 
 ```bash
 # Configure CI/CD pipeline (interactive)
@@ -1192,16 +1213,16 @@ azd pipeline config --provider github
 ```
 
 Questo comando:
-- Crea o configura un'identità pipeline; rivedi il suo ambito permessi/ruolo generato anziché assumere il minimo privilegio
+- Crea o configura un'identità pipeline; rivedere il suo ambito/permessi di ruolo generati invece di presumere il minimo privilegio
 - Configura credenziali federate (nessun segreto memorizzato)
 - Genera o aggiorna il file di definizione pipeline
-- Imposta le variabili d’ambiente richieste nel sistema CI/CD
+- Imposta variabili d'ambiente richieste nel sistema CI/CD
 
-#### Passo per passo: la tua prima pipeline GitHub Actions
+#### Passo-passo: la tua prima pipeline GitHub Actions
 
-Ecco la guida completa da un progetto azd funzionante a distribuzioni automatizzate ad ogni push.
+Ecco il percorso completo da un progetto azd funzionante a distribuzioni automatizzate a ogni push.
 
-**1. Assicurati che il progetto sia su GitHub**
+**1. Assicurati che il tuo progetto sia su GitHub**
 
 ```bash
 git init
@@ -1216,15 +1237,15 @@ gh repo create my-ai-app --private --source=. --push
 azd pipeline config --provider github
 ```
 
-azd interattivamente:
-- Chiederà quale abbonamento Azure e ambiente targettare
-- Creerà una registrazione app Entra **+ service principal** per la pipeline
-- Configurerà **credenziali federate (OIDC)**—così GitHub autentica su Azure con token a breve durata e **nessun segreto è memorizzato**
-- Spingerà le **variabili** richieste al tuo repo GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+azd eseguirà, interattivamente:
+- Chiederà quale sottoscrizione Azure e ambiente targettare
+- Creerà una **registrazione app + service principal** Entra per la pipeline
+- Imposterà le **credenziali federate (OIDC)**—così GitHub si autentica su Azure con token a breve termine e **non vengono memorizzati segreti**
+- Spingerà le **variabili** richieste nel repo GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
 **3. Comprendi il workflow generato**
 
-Per un template supportato, configura/rivedi `.github/workflows/azure-dev.yml`. Le parti chiave sono così (il template deve fornire toolchain dell’app e parametri ambiente):
+Per un modello supportato, configura/rivedi `.github/workflows/azure-dev.yml`. L'esempio Foundry seguente mantiene checkout, accesso OIDC e impostazioni ambiente target e installa il bundle GA più le valutazioni sul runner. Aggiungi la toolchain della tua app e i requisiti del provider infrastruttura; per Terraform, mantieni setup generato, stato remoto e passaggi di autenticazione. Scegli e blocca una versione AZD revisionata uguale o superiore alla 1.37.0; questo estratto usa il minimo annuncio.
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1236,6 +1257,10 @@ on:
 permissions:
   id-token: write           # required for OIDC federated login
   contents: read
+
+concurrency:
+  group: foundry-production-deployment
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -1250,13 +1275,23 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install azd
         uses: Azure/setup-azd@v2
+        with:
+          version: 1.37.0
+      - name: Install Foundry extensions
+        run: azd ext install microsoft.foundry azure.ai.evaluations
       - name: Log in with OIDC
         run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
       - name: Provision infrastructure
         run: azd provision --no-prompt
       - name: Deploy application
         run: azd deploy --no-prompt
+      - name: Evaluate deployed agent
+        run: azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
+
+Il passaggio di valutazione richiede un `evals/azure.eval.yaml` committato, il suo riferimento di servizio in `azure.yaml`, asset di test non segreti revisionati e accesso pipeline a dataset, valutatori e distribuzioni modello referenziati. Configura la valutazione `quality` prima di abilitare questo passaggio; ometti sia il passaggio sia l'installazione delle valutazioni se il progetto non lo usa. Un'esecuzione completata da sola non è un gate di qualità: questo esempio richiede almeno il 90% di tutti i casi superati.
+
+Usa un ambiente AZD separato e approvazioni appropriate per ogni stadio. Il gruppo di concorrenza serializza solo questo workflow, non altri strumenti o repository che aggiornano lo stesso agente. Concedi alla pipeline l'identità le autorizzazioni risorsa e Foundry richieste e memorizza eventuali credenziali runtime necessarie in segreti, non in configurazione committata. Vedi la [guida completa Foundry CI/CD](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli) per i requisiti specifici del provider.
 
 **4. Verifica che funzioni**
 
@@ -1268,9 +1303,9 @@ git push
 
 Apri la scheda **Actions** nel tuo repo GitHub e osserva il workflow eseguire automaticamente `azd provision` e `azd deploy`.
 
-> **Perché le credenziali federate sono importanti:** pipelines più vecchie memorizzavano un client secret su GitHub. Le credenziali federate OIDC eliminano completamente quel segreto—GitHub richiede un token a breve durata al runtime, più sicuro e senza necessità di rotazione o perdita. Questo è il setup predefinito di `azd pipeline config`.
+> **Perché le credenziali federate sono importanti:** pipeline più vecchie memorizzavano un segreto client in GitHub. Le credenziali federate OIDC rimuovono completamente quel segreto—GitHub richiede un token breve a runtime, più sicuro e senza necessità di rotazione o perdite. Questa è la configurazione predefinita di `azd pipeline config`.
 
-> **Segreti vs. variabili:** identificatori non sensibili (`AZURE_CLIENT_ID`, etc.) vanno nelle **variabili** repo. Se la tua app realmente necessita di un segreto a build time, aggiungilo come **segreto** GitHub e riferiscilo con `${{ secrets.NAME }}`—ma preferisci Key Vault + identità gestita a runtime (vedi [Capitolo 3](../chapter-03-configuration/authsecurity.md)).
+> **Segreti vs. variabili:** identificatori non sensibili (`AZURE_CLIENT_ID`, ecc.) vanno nelle **variabili** del repo. Se la tua app necessita davvero di un segreto a build-time, aggiungilo come **secret** GitHub e riferiscilo con `${{ secrets.NAME }}`—ma preferisci Key Vault + identità gestita a runtime (vedi [Capitolo 3](../chapter-03-configuration/authsecurity.md)).
 
 **Workflow di produzione con configurazione pipeline:**
 
@@ -1285,13 +1320,13 @@ azd pipeline config --provider github
 # 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
-#### Passo per passo: Azure DevOps Pipelines
+#### Passo-passo: Azure DevOps Pipelines
 
-Preferisci Azure DevOps a GitHub Actions? azd lo supporta nativamente con il provider `azdo`. Il flusso è quasi identico—azd genera il file pipeline, crea una connessione di servizio e configura l’autenticazione.
+Preferisci Azure DevOps a GitHub Actions? azd lo supporta nativamente con il provider `azdo`. Il flusso è quasi identico—azd genera il file pipeline, crea una connessione servizio e monta l'autenticazione.
 
 **1. Assicurati di avere un progetto Azure DevOps**
 
-Ti serve una organizzazione e un progetto a `https://dev.azure.com/<your-org>`. Genera un Token di Accesso Personale (PAT) con ambiti **Build (Lettura & esecuzione)**, **Code (Lettura & scrittura)**, e **Service Connections (Lettura, query & gestione)**—azd te lo chiederà.
+Necessiti di un'organizzazione e di un progetto su `https://dev.azure.com/<your-org>`. Genera un Personal Access Token (PAT) con ambiti **Build (Leggi & esegui)**, **Code (Leggi & scrivi)** e **Service Connections (Leggi, consulta & gestisci)**—azd ti chiederà di inserirlo.
 
 **2. Configura la pipeline**
 
@@ -1300,14 +1335,14 @@ azd pipeline config --provider azdo
 ```
 
 azd:
-- Chiederà la tua organizzazione e progetto Azure DevOps
-- Creerà (o riutilizzerà) una **connessione di servizio** ad Azure usando un service principal
-- Configurerà **federazione identità workload (OIDC)** così nessun client secret è memorizzato
-- Configurerà una definizione pipeline (comunemente `.azdo/pipelines/azure-dev.yml`) dal template pipeline del progetto
+- Chiederà la tua organizzazione Azure DevOps e progetto
+- Creerà (o riutilizzerà) una **connessione servizio** ad Azure usando un service principal
+- Configurerà la **federazione identità workload (OIDC)** affinché nessun segreto client sia memorizzato
+- Configurerà una definizione pipeline (tipicamente `.azdo/pipelines/azure-dev.yml`) dal template pipeline del progetto
 
 **3. Rivedi la pipeline generata**
 
-Usa la pipeline generata dal progetto, inclusi i suoi **passi di connessione servizio Azure e autenticazione AZD**. La guida ufficiale [Azure Pipelines setup guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) mostra il frammento di installazione sotto; questo è solo **installazione**, non un workflow di distribuzione autenticato eseguibile:
+Usa la pipeline generata dal progetto, inclusi i suoi **passaggi di connessione servizio Azure e autenticazione AZD**. La guida ufficiale [Azure Pipelines setup](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) mostra il frammento di installazione qui sotto; questa è **solo installazione**, non un workflow di distribuzione autenticato eseguibile:
 
 ```yaml
 # .azdo/pipelines/azure-dev.yml (installer fragment only)
@@ -1322,24 +1357,24 @@ steps:
     displayName: Install azd
 ```
 
-Installa l’estensione AZD Azure DevOps se quel task non è disponibile nella tua organizzazione. Non copiare passi shell `azd provision`/`azd deploy` nudi senza autenticazione: avere una connessione di servizio configurata non fa automaticamente il login di ogni processo in AZD. Segui il login OIDC del template generato e il contesto autorizzato del task, e fornisci ambiente/abbonamento/posizione selezionati.
+Installa l'estensione AZD Azure DevOps se quel task non è disponibile nella tua organizzazione. Per i job Foundry, verifica AZD 1.37.0+ e installa `microsoft.foundry` sul runner, più `azure.ai.evaluations` quando sono richieste valutazioni. Non copiare passaggi shell `azd provision`/`azd deploy` nudi senza autenticazione: avere una connessione servizio configurata non accede automaticamente ogni processo in AZD. Segui il login OIDC del template generato e il contesto task autorizzato, e fornisci ambiente/sottoscrizione/posizione selezionati.
 
-**4. Da dove vengono le variabili**
+**4. Da dove provengono le variabili**
 
-azd memorizza i valori d’ambiente (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) come **variable group** in Azure DevOps affinché la pipeline li legga. Puoi visualizzarli e modificarli sotto **Pipelines → Library**.
+azd memorizza i valori dell'ambiente (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) come un **gruppo di variabili** in Azure DevOps così la pipeline può leggerli. Puoi visualizzarli e modificarli sotto **Pipelines → Library**.
 
-> **Stesso beneficio OIDC di GitHub:** il provider `azdo` configura anche la federazione identità workload di default, quindi non c’è client secret memorizzato nella connessione di servizio—Azure DevOps scambia un token a breve durata al runtime. Passa `--auth-type client-credentials` solo se la tua organizzazione non può ancora usare OIDC.
+> **Stesso vantaggio OIDC di GitHub:** il provider `azdo` configura anch'esso la federazione di identità workload per impostazione predefinita, quindi non c'è nessun segreto client memorizzato nella connessione servizio—Azure DevOps scambia un token breve a runtime. Passa `--auth-type client-credentials` solo se la tua organizzazione non può ancora usare OIDC.
 
-**5. Esegui la pipeline**
+**5. Esegui**
 
 ```bash
 git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Apri **Pipelines** in Azure DevOps per osservare `azd provision` e `azd deploy` eseguire.
+Apri **Pipelines** in Azure DevOps per osservare `azd provision` e `azd deploy` eseguirsi.
 
-### Aggiunta Componenti con `azd add`
+### Aggiunta di Componenti con `azd add`
 
 Aggiungi progressivamente servizi Azure a un progetto esistente:
 
@@ -1348,29 +1383,29 @@ Aggiungi progressivamente servizi Azure a un progetto esistente:
 azd add
 ```
 
-Questo è particolarmente utile per espandere applicazioni AI in produzione—per esempio, aggiungendo un servizio di ricerca vettoriale, un nuovo endpoint agente o un componente di monitoraggio a una distribuzione esistente.
+Questo è particolarmente utile per espandere applicazioni AI di produzione—per esempio aggiungendo un servizio di ricerca vettoriale, un nuovo endpoint agente o un componente di monitoraggio a una distribuzione esistente.
 
 ## Risorse Aggiuntive
 
-- **Azure Well-Architected Framework**: [Guida carichi AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Linee guida per carichi di lavoro AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Documentazione Microsoft Foundry**: [Documenti ufficiali](https://learn.microsoft.com/azure/ai-studio/)
-- **Template della Comunità**: [Esempi Azure](https://github.com/Azure-Samples)
-- **Comunità Discord**: [Canale #Azure](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure su skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Competenze agent riutilizzabili per Azure AI, Foundry, distribuzione, ottimizzazione costi e diagnostica. Installa nel tuo editor:
+- **Template della Community**: [Campioni Azure](https://github.com/Azure-Samples)
+- **Community Discord**: [Canale #Azure](https://discord.gg/microsoft-azure)
+- **Agent Skills per Azure**: [microsoft/github-copilot-for-azure su skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Abilità agent riutilizzabili per Azure AI, Foundry, distribuzione, ottimizzazione costi e diagnostica. Installa nel tuo editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigazione Capitolo:**
-- **📚 Home Corso**: [AZD Per Principianti](../../README.md)
-- **📖 Capitolo Corrente**: Capitolo 8 - Pattern Produzione & Enterprise
-- **⬅️ Capitolo Precedente**: [Capitolo 7: Risoluzione Problemi](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Anche Correlato**: [Laboratorio AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
+**Navigazione capitolo:**
+- **📚 Home Corso**: [AZD per Principianti](../../README.md)
+- **📖 Capitolo Corrente**: Capitolo 8 - Modelli Produzione & Enterprise
+- **⬅️ Capitolo Precedente**: [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Correlati anche**: [Laboratorio AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
 - **🎯 Corso Completo**: [AZD Per Principianti](../../README.md)
 
-**Ricorda**: i carichi AI in produzione richiedono pianificazione attenta, monitoraggio e ottimizzazione continua. Parti da questi pattern e adatta alle tue esigenze specifiche.
+**Ricorda**: I carichi di lavoro di AI in produzione richiedono pianificazione attenta, monitoraggio e ottimizzazione continua. Inizia con questi modelli e adattali alle tue esigenze specifiche.
 
 ---
 

@@ -1,39 +1,43 @@
-# 2. fejezet: AI-First Fejlesztés
+# 2. fejezet: AI-első fejlesztés
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 4-5 óra, beleértve a műhelyt | **⭐ Összetettség**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 4-5 óra, beleértve a műhelymunkát | **⭐ Bonyolultság**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet az AI által vezérelt alkalmazások telepítésére összpontosít az Azure Developer CLI és a Microsoft Foundry szolgáltatások használatával. Egyszerű AI csevegőalkalmazásoktól az eszközökkel felszerelt intelligens ügynökökig.
+Ez a fejezet az AI-alapú alkalmazások telepítésére koncentrál az Azure Developer CLI és a Microsoft Foundry szolgáltatások használatával. Egyszerű AI chat alkalmazásoktól az eszközökkel rendelkező intelligens ügynökökig.
 
-> **Kiadás áttekintés (2026-11-04):** Az AI CLI útmutatót összevetették a közzétett `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` és `azure.ai.evaluations` `1.0.0-beta.2` dokumentáció/forrással. A kombinált munkafolyamathoz használja a `azd >= 1.37.0` parancsot. Az értékelések most a különálló `azd ai eval` névteret használják; lásd a [kiadási változtatásokat és migrációs útmutatót](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ez nem élő telepítés érvényesítés.
+> **Foundry GA frissítés (2026-11-09):** Az `microsoft.foundry` 1.0 csomag [általánosan elérhető](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Használja az `azd >= 1.37.0`; az értékelések külön telepítést igényelnek. A [hosted-agent útmutató](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) lefedi a helyi Agent Inspector tesztelést és a távoli kód telepítést. Ez dokumentációs áttekintés, nem élő telepítés validáció; az opcionális előzetes funkciók megőrzik saját státuszukat.
 
 ## Tanulási célok
 
-E fejezet elvégzése után a következőket tanulja meg:
-- AI alkalmazások telepítése előre elkészített AZD sablonok segítségével
-- Microsoft Foundry integráció megértése az AZD-vel
-- AI ügynökök eszközökkel való konfigurálása és testreszabása
-- RAG (Retrieval-Augmented Generation) alkalmazások telepítése
+E fejezet elvégzésével képes lesz:
+- AI alkalmazásokat telepíteni előre elkészített AZD sablonokkal
+- Megérteni a Microsoft Foundry integrációját az AZD-vel
+- Telepíteni a GA csomagot, és helyileg tesztelni egy hosted agentet mielőtt forrását a Foundry-be telepítené
+- Áttekinteni az `azure.yaml`-t, az értékelési eszközöket és az új versus újrahasznosított projekt tisztítást
+- Konfigurálni és testreszabni AI ügynököket eszközökkel
+- RAG (Retrieval-Augmented Generation) alkalmazásokat telepíteni
 
 ---
 
-## 📚 Tananyagok
+## 📚 Tanórák
 
-| # | Lecke | Leírás | Idő |
+| # | Tanóra | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry integráció](microsoft-foundry-integration.md) | AZD összekapcsolása a Foundry szolgáltatásokkal | 30 perc |
-| 2 | [AI ügynökök útmutatója](agents.md) | Intelligens ügynökök telepítése eszközökkel | 45 perc |
-| 3 | [AI modell telepítés](ai-model-deployment.md) | AI modellek telepítése és konfigurálása | 30 perc |
-| 4 | [AI műhely labor](ai-workshop-lab.md) | Gyakorlati: Sablon felfedezése és konverziós terv készítése | 2-3 óra |
+| 1 | [Microsoft Foundry Integráció](microsoft-foundry-integration.md) | GA csomag, hosted-agent helyi és felhős munkafolyamat, értékelések | 60 perc |
+| 2 | [AI Ügynökök Útmutató](agents.md) | Intelligens ügynökök telepítése eszközökkel | 45 perc |
+| 3 | [AI Modell Telepítés](ai-model-deployment.md) | AI modellek telepítése és konfigurálása | 30 perc |
+| 4 | [AI Műhely Labor](ai-workshop-lab.md) | Gyakorlati: Sablon felfedezése és konverzió megtervezése | 2-3 óra |
 
 ---
 
-## 🚀 Gyors indulás
+## 🚀 Gyors kezdés
 
-Válasszon egy lehetőséget egy új, üres könyvtárban. A végén lévő `.` inicializálja az aktuális könyvtárat; különben az AZD létrehozhat egy alkönyvtárat anélkül, hogy az shell munkakönyvtárát megváltoztatná.
+Válasszon egy lehetőséget egy új, üres könyvtárban. A végző `.` inicializálja az aktuális könyvtárat; ellenkező esetben az AZD létrehozhat egy alkönyvtárat anélkül, hogy módosítaná a shell munkakönyvtárát.
+
+A **GA hosted-agent kódtelepítési folyamatához** kezdje a [vezetett útmutatóval](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Ehhez AZD 1.37.0+, aktuális uv, Python 3.13+, Foundry jogosultságok és modell kvóta szükséges. Az alábbi teljes alkalmazás sablonok alternatívák, nem feltételek az útmutatóhoz.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,27 +55,27 @@ azd up
 
 ---
 
-## 🤖 Kiemelt AI sablonok
+## 🤖 Kiemelt AI Sablonok
 
 | Sablon | Leírás | Szolgáltatások |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG csevegés hivatkozásokkal | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat hivatkozásokkal | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI ügynök eszközökkel | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Alap AI csevegő | OpenAI + Container Apps |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Alap AI chat | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Költségtudatosság
 
-Ezek csak illusztratív tartományok, nem árajánlatok vagy korlátok; a modelltforgalom, a Search/feldolgozó SKU-k, a régió és az opcionális funkciók meghaladhatják ezeket. Mielőtt indítaná, nézze meg a választott minta aktuális árképzését.
+Ezek szemléltető tartományok, nem árajánlatok vagy plafonok; a modell forgalom, Search/compute SKU-k, régió és opcionális funkciók meghaladhatják azokat. Tekintse át kiválasztott minta aktuális árazási iránymutatását a szolgáltatás előfizetése előtt.
 
-| Környezet | Becslések szerinti havi költség |
+| Környezet | Becslés havidíj |
 |-------------|----------------------|
-| Fejlesztés | $80-150 |
-| Tesztelés | $150-300 |
-| Éles | $300-3,500+ |
+| Fejlesztés | 80-150 $ |
+| Tesztelés | 150-300 $ |
+| Éles | 300-3,500+ $ |
 
-**Tipp:** Futtassa a `azd down` parancsot tesztelés után a díjak elkerülése érdekében.
+**Tisztítás:** Ellenőrizze az `azd down` használatát megerősítés előtt: újonnan létrehozott Foundry projekt esetén törli az erőforráscsoportot és minden benne lévőt. Újrahasznosított Foundry projektnél megtartja a projektet és az ügynök erőforrásokat; kövesse a [útmutató tisztítási tanácsait](microsoft-foundry-integration.md#7-clean-up-deliberately), hogy külön távolítsa el a nem kívánt erőforrásokat.
 
 ---
 
@@ -89,7 +93,7 @@ Ezek csak illusztratív tartományok, nem árajánlatok vagy korlátok; a modell
 
 - [AI hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Éles AI gyakorlatok](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [Alkalmazás elemzések](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

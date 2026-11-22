@@ -6,16 +6,16 @@
 
 ## Ikhtisar
 
-Bab ini membahas pola arsitektur multi-agen lanjutan, orkestrasi agen, dan penerapan AI siap produksi untuk skenario kompleks.
+Bab ini membahas pola arsitektur multi-agen yang canggih, orkestrasi agen, dan penerapan AI siap produksi untuk skenario kompleks.
 
-> Panduan perintah ditinjau terhadap referensi `azd 1.37.2` yang dirilis. Penerapan cloud tidak dijalankan.
+> Panduan perintah ditinjau berdasarkan referensi `azd 1.37.2` yang dirilis. Penyebaran cloud tidak dilaksanakan.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
 - Memahami pola arsitektur multi-agen
-- Menerapkan sistem agen AI yang terkoordinasi
-- Mengimplementasikan komunikasi antar-agen
+- Menyebarkan sistem agen AI yang terkoordinasi
+- Menerapkan komunikasi antar agen
 - Membangun solusi multi-agen siap produksi
 
 ---
@@ -24,30 +24,30 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Dasar Multi-Agen](multi-agent-basics.md) | Praktik langsung: terapkan aplikasi multi-agen yang berfungsi dengan `azd up` | 45 menit |
+| 1 | [Dasar-Dasar Multi-Agen](multi-agent-basics.md) | Praktik langsung: menyebarkan aplikasi multi-agen yang berfungsi dengan `azd up` | 45 menit |
 | 2 | [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) | Strategi orkestrasi agen (berlanjut di Bab 6) | 30 menit |
-| 3 | [Penerapan Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Contoh penerapan satu-klik | 30 menit |
+| 3 | [Penerapan Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Contoh penyebaran satu klik | 30 menit |
 
-> **Mulai dengan Pelajaran 1.** Ini satu-satunya pelajaran yang sepenuhnya praktis dan dapat diterapkan dalam bab ini. Pelajaran 2 ada di Bab 6 (dibagikan dengan perencanaan pra-penerapan), dan [Solusi Multi-Agen Retail](../../examples/retail-scenario.md) adalah cetak biru arsitektur—referensi desain, bukan template perintah tunggal.
+> **Mulai dengan Pelajaran 1.** Ini adalah satu-satunya pelajaran yang sepenuhnya praktis dan dapat disebarkan di bab ini. Pelajaran 2 ada di Bab 6 (berbagi dengan perencanaan pra-penyebaran), dan [Solusi Retail Multi-Agen](../../examples/retail-scenario.md) adalah cetak biru arsitektur—referensi desain, bukan template satu perintah.
 
 ---
 
-## 🚀 Mulai Cepat
+## 🚀 Memulai Cepat
 
 ```bash
 # Option 1: Deploy the multi-agent template used in Lesson 1
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Pendekatan mana?** Gunakan `azd init --template` untuk mulai dari sampel yang berfungsi. Gunakan `azd ai agent init` secara interaktif, atau `azd ai agent init --template <path-to-azure.yaml>` untuk mengadopsi proyek agen saat ini. Lihat [referensi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk persyaratan versi dan migrasi evaluasi.
+> **Pendekatan mana?** Gunakan `azd init --template` untuk memulai dari contoh yang berfungsi. Gunakan `azd ai agent init` secara interaktif, atau `azd ai agent init --template <path-to-azure.yaml>` untuk mengadopsi proyek agen yang sedang berjalan. Lihat [referensi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk persyaratan versi dan migrasi evaluasi.
 
-Jalankan alternatif-alternatif ini di folder kosong yang terpisah. Ekstensi agen `1.0.0-beta.23` membutuhkan `azd >= 1.37.0`; alur interaktifnya tidak menghasilkan pipeline Service Bus khusus dalam pelajaran koordinasi.
+Jalankan alternatif ini di folder kosong yang terpisah. Alur kerja GA Foundry membutuhkan `azd >= 1.37.0`; alur interaktifnya tidak menghasilkan pipeline Service Bus khusus dalam pelajaran koordinasi. Untuk pengujian lokal, penyebaran kode, dan pembersihan proyek baru versus yang digunakan ulang, ikuti [panduan agen terhost](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -63,12 +63,12 @@ graph TD
 
 ## 🎯 Solusi Unggulan: Retail Multi-Agen
 
-Solusi [Multi-Agen Ritel](../../examples/retail-scenario.md) menunjukkan:
+Solusi [Retail Multi-Agent](../../examples/retail-scenario.md) menunjukkan:
 
-- **Agen Pelanggan**: Menangani interaksi dan preferensi pengguna
-- **Agen Inventaris**: Mengelola stok dan pemrosesan pesanan
-- **Orkestrator**: Mengkoordinasikan antar agen
-- **Memori Bersama**: Manajemen konteks lintas agen
+- **Customer Agent**: Menangani interaksi dan preferensi pengguna
+- **Inventory Agent**: Mengelola stok dan pemrosesan pesanan
+- **Orchestrator**: Mengkoordinasikan antar agen
+- **Shared Memory**: Manajemen konteks lintas agen
 
 ### Layanan yang Digunakan
 
@@ -94,7 +94,7 @@ Solusi [Multi-Agen Ritel](../../examples/retail-scenario.md) menunjukkan:
 ## 📖 Sumber Terkait
 
 - [Panduan Agen AI](../chapter-02-ai-development/agents.md)
-- [Praktik Produksi AI](../chapter-08-production/production-ai-practices.md)
+- [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md)
 - [Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

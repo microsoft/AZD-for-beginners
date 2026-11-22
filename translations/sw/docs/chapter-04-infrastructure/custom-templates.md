@@ -1,67 +1,67 @@
-# Kuunda Kiolezo Chako cha azd
+# Kuandika Kiolezo Chako cha azd
 
 **Uelekezaji wa Sura:**
-- **📚 Mwanzo wa Kozi**: [AZD Kwa Wananchi Wachanga](../../README.md)
-- **📖 Sura ya Sasa**: Sura 4 - Miundombinu kama Msimbo & Utekelezaji
-- **⬅️ Iliyopita**: [Mwongozo wa Utekelezaji](deployment-guide.md)
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Hivi Sasa**: Sura 4 - Miundombinu kama Msimbo & Uwekaji wa Programu
+- **⬅️ Iliyopita**: [Mwongozo wa Uwekaji Programu](deployment-guide.md)
 - **🚀 Sura Ifuatayo**: [Sura 5: Suluhisho za Wakala Wengi](../chapter-05-multi-agent/README.md)
 
-> Imethibitishwa dhidi ya `azd 1.27.1` mnamo Julai 2026.
+> Imeangaliwa dhidi ya `azd 1.37.2` (Novemba 2026). Huu ni **mweleleo wa kuandika kwa sehemu za faili**, si kiolezo kamili: lazima utoe msimbo wa programu na `modules/web.bicep` pamoja na mazingira yake, rejista, Container App, na matokeo kabla ya uwekaji. Usambazaji wa Azure haukufanyika katika ukaguzi huu.
 
 ## Utangulizi
 
-Hadi sasa ume *tumia* viungo vya kiolezo na `azd init --template <name>`. Lakini mara tu unapopata mpangilio wa mradi unaopendelewa na timu yako—mfano, Programu ya Kontena yenye Cosmos DB na usimamizi sahihi—utataka kuibadilisha kuwa kiolezo cha kurudiarudia cha mtumiaji mwenyewe. Kiolezo ni tu hifadhi ya Git yenye muundo unaotegemewa ambao azd inajua kusoma. Somo hili linaonyesha jinsi ya kuunda moja kutoka mwanzoni, kuikagua, na (hiari) kuichapisha kwa maktaba ya jamii.
+Mpaka sasa umetumia *malaya* na `azd init --template <name>`. Lakini mara tu unapopata mpangilio wa mradi timu yako inapenda—sema, Container App na Cosmos DB na ufuatiliaji sahihi—utataka kuufanya kuwa kiolezo kinachoweza kutumika tena cha mwenyewe. Kiolezo ni tu hifadhidata ya Git yenye muundo unaoweza kutabirika ambayo azd inajua kusoma. Somo hili linaonyesha jinsi ya kutengeneza kutoka mwanzo, kuikagua, na (hiari) kuchapisha kwenye maktaba ya jumuiya.
 
 ## Malengo ya Kujifunza
 
-Mwisho wa somo hili, utajua:
+Mwishoni mwa somo hili, utaweza:
 - Elewa kinachofanya folda kuwa "kiolezo cha azd"
-- Jua faili zinazohitajika na mpangilio wa folda
+- Jua faili na mpangilio wa folda unaohitajika
 - Ongeza `azure.yaml` na `infra/` ambazo watu wengine wanaweza kutumia tena
 - Jaribu kiolezo chako kwa ndani kabla ya kushirikisha
-- Chapisha na (hiari) uwasilishe kwa Awesome AZD
+- Chupia na (hiari) kitume kwenye Awesome AZD
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha somo hili, utaweza:
-- Tengeneza hifadhi mpya ya kiolezo
-- Weka vigezo vya miundombinu ili ifanye kazi kwenye usajili wowote
-- Thibitisha kiolezo kwa `azd init` na `azd up`
-- Ongeza metadata inayotakiwa na maktaba ya jamii
+- Tengeneza hifadhidata mpya ya kiolezo
+- Andaa miundombinu ili ifanye kazi katika usajili wowote
+- Hakiki kiolezo kwa kutumia `azd init` na `azd up`
+- Ongeza meta-data inayohitajika na maktaba ya jumuiya
 
 ---
 
-## Kiolezo ni Nini, Kweli?
+## Kioleo ni Nini, Kweli?
 
-Kiolezo cha azd ni **hifadhi ya Git** inayojumuisha, kwa chini kabisa:
+Kiolezo cha azd ni **hifadhidata ya Git** inayojumuisha, angalau:
 
-| Faili / folda | Kusudi | Je, inahitajika? |
-|---------------|---------|------------------|
-| `azure.yaml` | Inabainisha huduma, mwenyeji, na mtoa huduma wa miundombinu | ✅ Ndiyo |
-| `infra/` | Bicep, Terraform, au Pulumi inayounda rasilimali | ✅ Ndiyo |
-| `src/` (au msimbo wako) | Msimbo wa programu unaotekelezwa na azd | ✅ Ndiyo |
-| `README.md` | Jinsi ya kutumia kiolezo | ✅ Inashauriwa sana |
-| `.azdo/` au `.github/` | Maelezo ya mchakato wa CI/CD | Hiari |
-| `.devcontainer/` | Mazingira ya maendeleo yanayorekebika | Hiari |
-| `azure.yaml` `metadata` | Taarifa za maktaba + telemetry | Hiari (inahitajika kuchapisha) |
+| Faili / folda | Kusudi | Inahitajika? |
+|---------------|---------|-----------|
+| `azure.yaml` | Inaelezea huduma, mwenyeji, na mtoa huduma wa miundombinu | ✅ Ndiyo |
+| `infra/` | Maelezo ya maandalizi ya Bicep au Terraform | Inahitajika kwa mfano huu wa IaC wazi; miradi ya miundombinu inayotengenezwa inaweza kuiacha |
+| `src/` (au msimbo wako) | Msimbo wa programu ambao azd huweka | Inahitajika kwa huduma zinazotegemea chanzo; sio violezo vyote vina msimbo wa programu |
+| `README.md` | Jinsi ya kutumia kiolezo | ✅ Inapendekezwa sana |
+| `.azdo/` au `.github/` | Maelezo ya mstari wa CI/CD | Hiari |
+| `.devcontainer/` | Mazingira ya ukuzaji yanayoweza kuirudiwa | Hiari |
+| `azure.yaml` `metadata` | Taarifa za utambulisho / telemetry ya kiolezo | Inapendekezwa; kuchapisha hifadhidata ya Git hakiitaji |
 
-Hakuna uchawi hapa: unapoendesha `azd init --template you/your-repo`, azd hunakili repositori na kusoma `azure.yaml`.
+Hakuna uchawi hapa: unapochukua `azd init --template you/your-repo`, azd hufanya kloni ya repo na kusoma `azure.yaml`.
 
 ---
 
-## Hatua 1: Tengeneza Hifadhi ya Kiolezo
+## Hatua ya 1: Tengeneza Hifadhidata
 
-Unda muundo wa folda kwa mkono au anza na kiolezo kidogo na ukibadilishe:
+Unda muundo wa folda kwa mkono au anza na kiolezo kidogo na kuhariri:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Unda mpangilio wa kawaida
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Mpangilio wa kawaida wa mwisho unaonyesha kama huu:
+Mpangilio wa kawaida wa mwisho unaonekana kama huu:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Hatua 2: Andika `azure.yaml`
+## Hatua ya 2: Andika `azure.yaml`
 
-Hii ni moyo wa kiolezo. Inamwambia azd nini cha kutekeleza na jinsi:
+Hili ndilo moyo wa kiolezo. Linaambia azd nini kuweka na jinsi:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Sehemu ya `metadata.template` ndio telemetry ya maktaba inayotumia kuhesabu matumizi. Tumia muktadha wa `name@version`.
+> Sehemu ya `metadata.template` ndilo telemetry ya maktaba inayo tumia kuhesabu matumizi. Tumia muktadha wa `name@version`.
 
 ---
 
-## Hatua 3: Weka Vigezo vya Miundombinu
+## Hatua ya 3: Panga Miundombinu kwa Vigezo
 
-Kanuni muhimu zaidi kwa kiolezo *kinachoweza kutumika tena*: **usihamasishe majina, mikoa, au thamani za usajili maalum.** Tumia vigezo na muundo wa tokeni ya rasilimali ili kiolezo kimoe kazi kwenye usajili wowote wa mtu yeyote.
+Kanuni muhimu zaidi kwa kiolezo kinachoweza kutumika tena: **usihamasishe majina, maeneo, au thamani za usajili maalum kwa mkono.** Tumia vigezo na muundo wa tokeni ya rasilimali ili kiolezo kionekane kwa usajili wowote.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Kitu kimoja kinachofanya kiolezo hiki kuwa rafiki kwa matumizi tena:
+Mambo mawili hufanya kiolezo hiki kirafiki:
 
-1. **lebo `azd-env-name`** — azd hutumia kufuatilia na kusafisha rasilimali kwa kila mazingira.
-2. **tokeni ya rasilimali `uniqueString(...)`** — hutengeneza kiambishi thabiti na cha kipekee duniani ili majina yasigongane.
+1. **lebo ya `azd-env-name`** — azd hutumia kufuatilia na kusafisha rasilimali kwa kila mazingira.
+2. **tokeni ya rasilimali ya `uniqueString(...)`** — huunda kiambatanishi thabiti cha hash kupunguza mgongano; si dhamana ya umaalum wa dunia.
 
-Toa faili za vigezo zinazolingana zinazosomeka thamani ambazo azd huingiza kutoka kwa mazingira:
+`modules/web.bicep` inakosekana lazima ikubali `name`, `location`, na `tags`, iandae mazingira / rejista ya Container Apps na programu, itambue programu yenye lebo ya `azd-service-name: web`, na ichapishe `uri`. Inapaswa pia kuonyesha thamani za rejista zinazohitajika na mtiririko ulioteuliwa wa ujenzi/uwekaji (kwa mfano `AZURE_CONTAINER_REGISTRY_ENDPOINT` kutoka moduli kuu). Matokeo ya kiungo pekee hayahusishi upatikanaji wa huduma, mipangilio ya programu, au uthibitishaji wa rejista.
+
+Toa faili ya vigezo inayolingana inayosoma thamani ambazo azd huingiza kutoka mazingira:
+
+Hifadhi yafuatayo kama `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,103 +167,107 @@ Toa faili za vigezo zinazolingana zinazosomeka thamani ambazo azd huingiza kutok
 }
 ```
 
-azd huingiza `${AZURE_ENV_NAME}` na `${AZURE_LOCATION}` kutoka kwa mazingira ya sasa moja kwa moja.
+azd huingiza `${AZURE_ENV_NAME}` na `${AZURE_LOCATION}` kutoka mazingira ya sasa moja kwa moja.
 
 ---
 
-## Hatua 4: Jaribu Kiolezo Chako Kwenye Kompyuta Yako
+## Hatua ya 4: Jaribu Kiolezo Chako Kwenye Kompyuta Binafsi
 
-Kabla ya kushirikisha, thibitisha kiolezo kinafanya kazi kutoka hali safi.
+Kabla ya kushirikisha, thibitisha kiolezo kinavyofanya kazi kutoka katika hali safi.
 
-**Jaribu kutoka kwenye folda ya ndani** (hakuna usukani wa Git unahitajika):
+**Jaribu kutoka folda ya ndani** (hakuna Git pressi inahitajika):
 
 ```bash
-# Kutoka kwenye saraka tupu, anzisha kwa kutumia njia ya kiolezo chako cha eneo
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Toa huduma + tumia kutoka mwanzo hadi mwisho
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Kisha jaribu kutokomeza**—kiolezo kizuri husafisha kabisa:
+**Kisha jaribu kuvunja**—kiolezo kizuri husafisha kwa ukamilifu:
 
 ```bash
 azd down --force --purge
 ```
 
-Ikiwa `azd down` inabaki na rasilimali, huenda ulikosa lebo ya `azd-env-name` kwenye rasilimali fulani.
+Ikiwa `azd down` inaacha rasilimali nyuma, angalia ugunduzi wa mazingira / kikundi cha rasilimali, rasilimali za nje / zilizoshirikiwa, ruhusa, viwambo, na ulinzi wa usafishaji. `--purge` haifuti hali ya ndani ya `.azure/`.
 
-> **Ushauri:** endesha `azd provision --preview` kwanza. Inafanya jaribio la “nini-kitakachotokea” na kuonyesha makosa ya kiolezo kabla rasilimali yoyote haijaundwa.
+> **Kidokezo:** baada ya kutoa faili zote zinazokosekana, endesha kwanza `azd provision --preview`. Kagua sehemu kabla ya onyesho kwa sababu zinaweza kutekeleza amri zenye athari za pembeni. Onyesho si makadirio ya gharama wala dhamana ya mafanikio ya usambazaji.
 
 ---
 
-## Hatua 5: Chapisha Kiolezo
+## Hatua ya 5: Chapisha Kiolezo
 
-Sukuma hifadhi kwenye GitHub (kwa umma ikiwa unataka wengine waitumie):
+Sogeza hifadhidata kwenye GitHub (ya umma ikiwa unataka wengine waitumie):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
 Sasa mtu yeyote anaweza kuitumia:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Hatua 6 (Hiari): Wasilisha kwa Awesome AZD
+## Hatua ya 6 (Hiari): Tuma kwa Awesome AZD
 
-[Maktaba ya Awesome AZD](https://azure.github.io/awesome-azd/) inaorodhesha viungo vya jamii. Ili kuorodheshwa, repositori yako inapaswa kujumuisha:
+Orodha ya [Koleksheni Bora ya AZD](https://azure.github.io/awesome-azd/) ina templati za jamii. Ili kuorodheshwa, repo yako inapaswa kujumuisha:
 
-- ✅ `README.md` wazi yenye mahitaji, mchoro wa usanifu, na maelezo ya gharama
+- ✅ `README.md` wazi yenye mahitaji ya awali, mchoro wa usanifu, na maelezo ya gharama
 - ✅ `azure.yaml` inayoendeshwa yenye `metadata.template`
-- ✅ Miundombinu inayounda kwa usafi kwenye usajili mpya
+- ✅ Miundombinu inayotoa kwa usafi katika usajili mpya
 - ✅ Faili la `LICENSE`
-- ✅ (Inashauriwa) `.devcontainer/` kwa Codespaces kwa bonyezo moja
+- ✅ (Inapendekezwa) `.devcontainer/` kwa Codespaces ya bofya moja
 
-Wasilishie kwa kufungua ombi la pull linaloongeza kiolezo chako kwenye faili la data la maktaba, ukiifuata mwongozo wa michango kwenye [repositori la Awesome AZD](https://github.com/Azure/awesome-azd).
+Tuma kwa kufungua pull request inayoongeza templeti yako kwenye faili la data la koleksheni, ukifuata mwongozo wa mchango katika [repo ya Bora ya AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
 ## Makosa ya Kawaida
 
-| Makosa | Rekebisha |
-|---------|-----------|
-| Majina ya rasilimali yaliyowekwa moja kwa moja | Tumia tokeni ya rasilimali `uniqueString()` |
-| `azd down` inaacha rasilimali | Leibisha kila rasilimali (au kikundi cha rasilimali) na `azd-env-name` |
-| Kiolezo kinafanya kazi kwako, kinashindwa kwa wengine | Ondoa vitambulisho vya usajili, vitambulisho vya mtenzi, na dhana za mikoa |
-| Matokeo hayajapo kwenye programu | Hamisha `SERVICE_<NAME>_ENDPOINT_URL` na matokeo mengine ya `AZURE_*` |
-| Uwasilishaji wa maktaba umekataliwa | Ongeza `README.md`, `LICENSE`, na `metadata.template` |
+| Matatizo | Suluhisho |
+|---------|-----|
+| Majina ya rasilimali yaliyowekwa kwa nguvu | Tumia tokeni ya rasilimali ya `uniqueString()` |
+| `azd down` hutoa rasilimali | Changanisha kila rasilimali (au kundi la rasilimali) na `azd-env-name` |
+| Kiolezo kinafanya kazi kwako, kinashindwa kwa wengine | Ondoa vitambulisho vya usajili, vitambulisho vya mpangaji, na dhana za eneo |
+| Matokeo hayajaunganishwa kwenye app | Linganisha `azd-service-name`/`resourceName` kwa ajili ya uenezaji na weka wazi matokeo kwenye mipangilio ya app |
+| Uwasilishaji wa matunzio uliokataliwa | Ongeza `README.md`, `LICENSE`, na `metadata.template` |
 
 ---
 
 ## Muhtasari
 
-- Kiolezo ni tu repositori ya Git yenye `azure.yaml`, `infra/`, na msimbo wako.
-- Weka vigezo kila sehemu—majina, mikoa, na vitambulisho—ili kiende kote.
-- Daima leba rasilimali na `azd-env-name` ili `azd down` ifanye kazi.
-- Jaribu ndani kwa kutumia `azd init --template <local-path>` kabla ya kuchapisha.
-- Ongeza metadata na README kuwasilisha kwa Awesome AZD.
+- Kiolezo ni tu hifadhidata ya Git yenye `azure.yaml`, `infra/`, na msimbo wako.
+- Panga kila kitu—majina, maeneo, na vitambulisho—ili kiweze kuendesha popote.
+- Daima weka lebo rasilimali na `azd-env-name` ili `azd down` ifanye kazi.
+- Jaribu kwa ndani kwa kutumia `azd init --template <local-path>` kabla ya kuchapisha.
+- Ongeza metadata na README ili kuwasilisha kwa Awesome AZD.
 
 ---
 
-## 🔗 Uelekezaji
+## 🔗 Uongozi
 
 | Mwelekeo | Rasilimali |
 |-----------|----------|
-| **Iliyopita** | [Mwongozo wa Utekelezaji](deployment-guide.md) |
-| **Mwanzo wa Sura** | [Sura 4: Miundombinu kama Msimbo](README.md) |
-| **Sura Ifuatayo** | [Sura 5: Suluhisho za Wakala Wengi](../chapter-05-multi-agent/README.md) |
+| **Iliyotangulia** | [Mwongozo wa Utekelezaji](deployment-guide.md) |
+| **Nyumbani kwa Sura** | [Sura ya 4: Miundombinu kama Msimbo](README.md) |
+| **Sura Ifuatayo** | [Sura ya 5: Suluhisho za Wakala Wengi](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Rasilimali Zinazohusiana
 
 - [Utoaji wa Rasilimali](provisioning.md)
 - [Maktaba ya Awesome AZD](https://azure.github.io/awesome-azd/)
-- [Nyaraka Rasmi za kiolezo cha azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Nyaraka rasmi za templeti za azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

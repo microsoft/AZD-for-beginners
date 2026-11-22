@@ -1,44 +1,44 @@
-# Mitmeagendi alused - juuruta oma esimene koordineeritud tehisintellekti süsteem
+# Mitme Agendi Põhitõed - Paigalda Oma Esimene Koordineeritud AI Süsteem
 
-**Peatüki navigeerimine:**
-- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 5 - Mitmeagendi AI lahendused
+**Peatüki Navigeerimine:**
+- **📚 Kursuse Kodu**: [AZD Algajatele](../../README.md)
+- **📖 Praegune Peatükk**: Peatükk 5 - Mitme Agendi AI Lahendused
 - **⬅️ Eelmine**: [Peatükk 4: Infrastruktuur](../chapter-04-infrastructure/README.md)
-- **➡️ Järgmine**: [Koordineerimismustrid](../chapter-06-pre-deployment/coordination-patterns.md)
+- **➡️ Järgmine**: [Koordineerimise Mustrid](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Käskluste juhendamine kontrolliti vabastatud `azd 1.37.2` viite järgi. Pilvejuurutused ei olnud tehtud.
+> Käskude juhised on üle vaadatud vabastatud `azd 1.37.2` viite alusel. Pilve paigaldusi ei teostatud.
 
 ## Sissejuhatus
 
-Varasemates peatükkides juurutasite ühe rakenduse—ja peatükis 2 juurutasite ühe AI agenti. See õppetund viib järgmise sammu: juurutada **mitmeagendi süsteemi**, kus mitmed spetsialiseerunud agendid teevad koostööd lahendamaks probleemi, mida üks agent üksi hästi teha ei suudaks.
+Varasemates peatükkides paigaldasid ühe rakenduse — ja Peatükis 2 paigaldasid ühe AI agendi. See õppetund astub järgmise sammu: paigaldada **mitme agendi süsteemi**, kus mitu spetsialiseerunud agenti töötavad koos, et lahendada probleem, mida üksainus agent üksi hästi lahendada ei suudaks.
 
-Hea uudis algajatele: **sul ei ole vaja uusi käske.** Mitmeagendi lahendus on ikka azd projekt. Sa `azd init`, `azd up`, testid ja `azd down`—täpselt see töövoog, mida sa juba tunned. Muutub vaid rakenduse *kuju* sees.
+Hea uudis algajatele: **sul ei ole vaja uusi käske.** Mitme agendi lahendus on endiselt azd projekt. Sa `azd init`, `azd up`, testid ja `azd down` — täpselt see töökäik, mida sa juba tead. Muutub rakenduse *kuju* sees.
 
 ## Õpieesmärgid
 
-Selle õppetunni lõpuks:
-- Mõistad, mida tähendab "mitmeagent" ja millal tasub keerukust lisada
-- Tunned ära levinud rollid mitmeagendisüsteemis (koordinaator + spetsialistid)
-- Juurutad tegeliku toimiva mitmeagendi malli koos `azd up`
-- Mõistad Azure ressursse, mis toetavad mitmeagendirakendust
-- Tead, kuidas lahendust turvaliselt kontrollida, kohandada ja maha võtta
+Selle õppetunni lõpuks sa:
+- Mõistad, mida "mitme agent" tähendab ja millal see on väärt lisakompleksust
+- Tunned ära tavalisi rolle mitme agendi süsteemis (koordinaator + spetsialistid)
+- Paigaldad toimiva mitme agendi malli kasutades `azd up`
+- Mõistad Azure ressursse, mis toetavad mitme agendi rakendust
+- Oskad turvaliselt lahendust kontrollida, kohandada ja likvideerida
 
 ## Õpitulemused
 
-Pärast selle õppetunni lõpetamist saad:
-- Selgitada, mis vahe on ühel agentil ja mitmeagendisüsteemil
-- Valida ühe agendi tööriistade ja tõelise mitmeagendilise disaini vahel
-- Juurutada ja testida mitmeagendi malli algusest lõpuni azd abil
-- Tuvastada, kus iga agent töötab ja kuidas nad suhtlevad
-- Puhastada kõik ressursid jooksva tasude vältimiseks
+Pärast selle õppetunni läbimist suudad:
+- Selgitada erinevust ühe agendi ja mitme agendi süsteemi vahel
+- Valida ühe agendi koos tööriistadega ja tõelise mitme agendi disaini vahel
+- Paigaldada ja testida mitme agendi malli algusest lõpuni azd abil
+- Tuua välja, kus iga agent töötab ja kuidas nad suhtlevad
+- Puhastada kõik ressursid, et vältida pidevaid kulusid
 
 ---
 
-## Mis on mitmeagendisüsteem?
+## Mis On Mitme Agendi Süsteem?
 
-Üks AI agent on üks mudel koos juhiste kogumiga ja (valikuliselt) mõningate tööriistadega. See toimib hästi keskendunud ülesannete puhul. Kuid kui ülesanne kasvab—uurimine, siis kirjutamine, siis redigeerimine, siis faktikontroll—siis kõike ühte päringusse mahutamine teeb agendi aeglasemaks, vähem usaldusväärseks ja raskemini siluma.
+Üks AI agent on üks mudel koos juhiste kogumiga ja (valikuliselt) mõne tööriistaga. See töötab hästi keskendunud ülesannete puhul. Kuid kui ülesanne kasvab — uurimisest kirjutamise, redigeerimise ja faktikontrollini —, annavad kõik ühte sisendi kimpupanekud agenti aeglasemaks, vähem usaldusväärseks ja raskemini silumitavaks.
 
-**Mitmeagendisüsteem** jagab töö spetsialistideks, kes kõik teevad ühe töö hästi, mida koordineerib orkestreerija:
+**Mitme agendi süsteem** jagab töö spetsialistideks, kes teevad igaüks ühe töö hästi, koordineerituna koordinaatori poolt:
 
 ```mermaid
 graph TD
@@ -55,41 +55,41 @@ graph TD
 ### Kaks rolli, mida sa alati näed
 
 | Roll | Töö | Näide |
-|------|-----|--------|
-| **Orkestreerija** | Otsustab *mis juhtub järgmisena* ja suunab tööd agentide vahel | "Esiteks uurimine, siis kirjutamine, siis redigeerimine" |
-| **Spetsialist** | Teeb ühe keskendunud töö ja tagastab tulemuse | "uurija", kes kogub ainult fakte |
+|------|-----|---------|
+| **Koordinaator** | Otsustab *mis järgmisena juhtub* ja suunab töö agentide vahel | "Esmalt uurimus, siis kirjutamine, siis redigeerimine" |
+| **Spetsialist** | Tegutseb ühe keskendunud ülesandega ja tagastab tulemuse | "Uurija", kes kogub ainult fakte |
 
-### Kas sa tegelikult vajad mitut agenti?
+### Kas sul on tõesti vaja mitut agenti?
 
-Alusta lihtsast. Kasuta mitmeagendi **ainult** kui kehtib üks neist:
+Alusta lihtsalt. Kasuta mitme agendi lahendust **ainult** siis, kui üks järgmistest kehtib:
 
-- ✅ Ülesandel on **erinevad etapid**, mis vajavad erinevaid juhiseid (uurimine vs. kirjutamine vs. ülevaatus)
-- ✅ Sa tahad, et spetsialistid töötaksid **samaaegselt**, et aega kokku hoida
+- ✅ Ülesandel on **erinevad etapid**, mis vajavad erinevaid juhiseid (uurimine vs kirjutamine vs ülevaatus)
+- ✅ Soovid, et spetsialistid töötaksid **paralleelselt** aja säästmiseks
 - ✅ Erinevad sammud vajavad **erinevaid tööriistu või andmeallikaid**
-- ✅ Sa vajad, et iga samm oleks **isesõltuvalt testitav ja silutav**
+- ✅ Vajad, et iga samm oleks **iseseisvalt testitav ja silutav**
 
-Kui su ülesanne on üks küsimus-vastus või lihtne tööriista väljakutse, on **üks agent koos tööriistadega** (peatükk 2) lihtsam, odavam ja kergemini hallatav.
+Kui su ülesanne on üks küsimus-vastus või lihtne tööriista kutsumine, on **üks agent koos tööriistadega** (Peatükk 2) lihtsam, odavam ja lihtsam hallata.
 
-> **Algaja nõuanne:** "Rohkem agente" ei ole "parem." Iga agent lisab latentsust, kulusid ja jälgimist. Lisa agente vaid siis, kui probleem selgelt jaguneb osadeks.
+> **Algaja näpunäide:** "Rohkem agente" ei tähenda "paremat." Iga agent lisab latentsust, kulusid ja uue jälgimisobjekti. Lisa agente vaid siis, kui probleem rõhutab selgelt eri osi.
 
 ---
 
-## Kaks viisi ehitada mitmeagent Azure peale
+## Kaks Viisi Mitme Agendi Loomiseks Azure'il
 
 | Lähenemine | Mis see on | Parim kasutus |
-|----------|-----------|--------------|
-| **Üks agent + tööriistad** | Üks Foundry agent, mis kutsub funktsioone/tööriistu | Lihtsad töövood, alustamine |
-| **Mitmed koordineeritud agendid** | Mitmed agendid koos orkestreerijaga | Erinevad etapid, samaaegne töö, spetsialiseerumine |
+|----------|-----------|----------|
+| **Üks agent + tööriistad** | Üks Foundry agent, mis kutsub funktsioone/tööriistu | Lihtsad töökäigud, alustamine |
+| **Mitmed koordineeritud agentid** | Mitmed agentid koos koordinaatoriga | Erilised etapid, paralleelne töö, spetsialiseerumine |
 
-See õppetund keskendub teisele lähenemisele, kasutades **valmis malli**, et saaksid enne enda ehitamist näha tõelist mitmeagendisüsteemi töötamas.
+See õppetund keskendub teisele lähenemisele, kasutades **valmis malli**, et saaksid näha toimivat mitme agendi süsteemi enne omaenda loomist.
 
 ---
 
-## Praktiline: juuruta toimiv mitmeagendirakendus
+## Käed-külge: Paigalda Töötav Mitme Agendi Rakendus
 
-Juurutame **Contoso Creative Writeri**, ametliku Azure näidise, mis koordineerib uurimis-, toote-, kirjutamis- ja redigeerimisagente, et toota artiklit. Enne jätkamist vaata [näidise eeltingimusi ja kulusid](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): see vajab mudelikvooti, Azure AI Searchi, Bing Grounding ligipääsu, Pythoni, Dockerit ja Bash-ühilduvaid konksusid. Mudeli ja regiooni saadavus sõltub sinu tellimusest; juurutamine pole kindlustatud ühegi regiooni valimisel.
+Paigaldame **Contoso Creative Writer'i**, ametliku Azure näidise, mis koordineerib uurimis-, toote-, kirjutamis- ja redigeerimisagente artikli loomiseks. Enne jätkamist vaata [näidise eeldused ja kulud](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): vaja on mudeli kvota, Azure AI Searchi, Bing Grounding ligipääsu, Pythonit, Dockerit ja Bash-kompatible hooks'e. Mudelite ja piirkondade saadavus sõltub sinu tellimusest; paigaldus ei ole garanteeritud valides konkreetset piirkonda.
 
-### Samm 1: Algusta mallit
+### Samm 1: Initsializeeri mall
 
 ```bash
 # Create a working folder
@@ -99,9 +99,9 @@ mkdir creative-writer && cd creative-writer
 azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Sirvi rohkem mitmeagendi malle igal ajal [Awesome AZD AI galeriis](https://azure.github.io/awesome-azd/?tags=ai). Teised algajasõbralikud võimalused on `get-started-with-ai-agents` ja `azure-ai-travel-agents`.
+> Sirvi rohkem mitme agendi malle igal ajal [Awesome AZD AI galeriis](https://azure.github.io/awesome-azd/?tags=ai). Teised algajasõbralikud valikud on näiteks `get-started-with-ai-agents` ja `azure-ai-travel-agents`.
 
-### Samm 2: Autendi
+### Samm 2: Autentimine
 
 ```bash
 # Required for azd workflows
@@ -120,7 +120,7 @@ azd env list
 # azd env new dev
 ```
 
-### Samm 4: Eelvaade, seejärel juuruta
+### Samm 4: Eelvaade ja seejärel paigalda
 
 ```bash
 # See what will be created before spending anything (recommended)
@@ -130,45 +130,45 @@ azd provision --preview
 azd up
 ```
 
-`azd up` küsib puuduvate tellimuse ja regiooni sätete kohta, seejärel loob ressursid ja juurutab rakenduse. Eelvaade ei reserveeri kvota ega garanteeri edu; mallilõksud võivad endiselt juurutuse eelvaate ajal käivituda, seega kontrolli neid esmalt. Azd suhtlemisaega iga **teenuse juurutuse** (mitte mudeli juurutuse) puhul pikendamiseks:
+`azd up` küsib puuduvaid tellimuse ja piirkonna seadeid ning seejärel tagab ressursid ja paigaldab rakenduse. Eelvaade ei reserveeri kvotat ega taga edu; malli hookid võivad siiski jooksutada paigalduse eelvaate ajal, seega vaata need enne üle. Kui soovid pikendada, kui kaua azd ootab iga **teenuse paigaldust** (mitte mudeli loomist):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-Timeout peatab azd ootamise; see ei tühista juurutust Azures. Kontrolli ressursi olekut enne uuesti proovimist.
+Aegumine peatab azd ooteaja; see ei tühista paigaldust Azure'is. Vaata ressursi olekut enne uuesti proovimist.
 
-> **Hoiatus kulu ja võimsuse kohta:** Mitmeagent-rakendused juurutavad tehisintellekti mudeleid, mis kasutavad kvotat ja tekitavad kulusid. Kui `azd up` ebaõnnestub mudelikvota tõttu, vaata [AI tõrkeotsingut](../chapter-07-troubleshooting/ai-troubleshooting.md) regiooni ja kvota paranduste jaoks ning peatükki 6 [Võimsuse planeerimine](../chapter-06-pre-deployment/capacity-planning.md).
+> **Mõtle kuludele ja mahule:** Mitme agendi rakendused paigaldavad AI mudeleid, mis tarbivad kvotat ja tekitavad kulusid. Kui `azd up` ebaõnnestub mudeli kvota tõttu, vaata [AI tõrkeotsingut](../chapter-07-troubleshooting/ai-troubleshooting.md) piirkondade ja kvota parandamiseks ning Peatükk 6-st [Mahtude planeerimine](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Arusaamine, mida sa juurutasid
+## Mõista, Mida Sa Paigaldasid
 
-Tüüpiline mitmeagent-rakendus juurutab komplekti Azure ressursse, mis kaarduvad otseselt ülaloleva diagrammi vastutustele:
+Tüüpiline mitme agendi rakendus nagu see loob Azure'i ressursside komplekti, mis vastavad otse eelpool näidatud vastutustele:
 
 | Ressurss | Miks see seal on |
 |----------|----------------|
-| **Microsoft Foundry / Mudelid** | Hostib iga agendi kasutatavaid keelemudeleid |
-| **Azure AI Search** | Annab teadustöötaja agendile asjakohased andmed otsimiseks |
-| **Container Apps** (või App Service) | Hostib orkestri ja agendi koodi |
-| **Cosmos DB** (mõnes näites) | Salvestab agendide vahel jagatud oleku/mälu |
-| **Application Insights** | Jälgib päringuid *agentide vahel*, et saaksid voo siluda |
+| **Microsoft Foundry / Mudelid** | Hosti keeltemudeleid, mida iga agent kasutab |
+| **Azure AI Search** | Annab uurimisagentile asjakohased andmed otsimiseks |
+| **Container Apps** (või App Service) | Hosti koordinaatori ja agentide koodi |
+| **Cosmos DB** (mõnes näites) | Salvestab jagatud oleku/mälu, mida agentide vahel vahetatakse |
+| **Application Insights** | Jälgib päringuid *agentide vahel*, et saaksid voogu siluda |
 
 ### Kuidas agendid omavahel suhtlevad
 
-Enamikus azd mitmeagent näidetes **käib orkestratsioon sinu rakenduse koodis** (näiteks Semantic Kernel või Microsoft Agent Framework raamistiku abil). Orkestri järjekorras kutsub ta iga spetsialisti agendi, edastab tulemused ja koondab lõpliku vastuse. Agendid jagavad konteksti läbi:
+Enamikes azd mitme agendi näidetes **jookseb koordinaator sinu rakenduse koodis** (näiteks kasutades Semantic Kernel või Microsoft Agent Framework raamistikke). Koordinaator kutsub iga spetsialisti järjest, edastab tulemused ja koondab lõpliku vastuse. Agendid jagavad konteksti järgmiste abil:
 
-- **Funktsioon-/tööriistakutsed** — orkestrija kutsub spetsialisti ja saab vastuse tagasi
-- **Jagatud mälu** — andmebaas (tavaliselt Cosmos DB) hoiab olekut, mida mõlemad agendid saavad lugeda
-- **Sõnumid/sündmused** — nõrgema sidumise jaoks suhtlevad agendid järjekorra või Service Busi kaudu
+- **Funktsioonide/tööriistade kutsed** — koordinaator kutsub spetsialisti ja saab tulemuse tagasi
+- **Jagatud mälu** — andmebaas (tihti Cosmos DB) hoiab olekut, mida mõlemad agendid loevad
+- **Sõnumid/sündmused** — nõrgemaks seotudks suhtlemiseks suhtlevad agendid järjekorra või Service Busi kaudu
 
-> **Miks see on silumisel oluline:** kuna iga samm on eraldi, näitab Application Insights sulle *milline* agent oli aeglane või ebaõnnestus. See on peamine põhjus töö jaotamiseks agentide vahel.
+> **Miks see on vigade puhul oluline:** kuna iga samm on eraldi, näitab Application Insights sulle, *milline* agent oli aeglane või ebaõnnestus. See ongi peamine põhjus, miks tööd agentide vahel jagada.
 
 ---
 
-## Kontrolli juurutust
+## Kontrolli Paigaldust
 
-Kinnita, et süsteem tegelikult töötab, enne kui edasi liigud:
+Veendu, et süsteem oleks tegelikult töökorras enne edasi liikumist:
 
 ```bash
 # Show the deployed endpoints
@@ -181,66 +181,68 @@ azd monitor
 azd monitor --logs
 ```
 
-Seejärel ava rakenduse URL, mis saadakse `azd show` kaudu, ja taotle lühikest artiklit. Kasuta näite silumisvaadet agentide töövoo kontrollimiseks. Application Insights tehingute otsing näitab üksikuid samme ainult siis, kui näide neid instrumendiga märgistab ja korreleerib; azd ei lisa agente automaatselt jälje vahemikku.
+Ava siis rakenduse URL aadress `azd show` ja palu lühikest artiklit. Kasuta näidise silumisvaadet, et uurida agendi töökäiku. Application Insights päringuotsing näitab üksiktasemeid ainult siis, kui näidis neid instrumenteerib ja seob; azd ei lisa agentide ulatusi automaatselt.
 
 **Edu kriteeriumid:**
-- ✅ `azd show` loetleb kättesaadava lõpp-punkti
-- ✅ Päring toodab tulemuse, mis läbis selgelt mitu etappi
+- ✅ `azd show` näitab kohale jõudvat lõpp-punkti
+- ✅ Päring toob tulemuse, mis on selgelt läbinud mitu etappi
 - ✅ Silumisvaade näitab mitut agendi sammu; kui jälgimine on lubatud, kontrolli vastavat telemeetrilist andmestikku pärast töötlemist
 
 ---
 
-## Kohanda: Lisa või muuda agenti
+## Kohanda: Lisa või Muuda Agent
 
-Kuna iga agent on lihtsalt juhised ja tööriistad, on kohandamine lähenemisviisilt mugav:
+Kuna iga agent on lihtsalt juhised pluss tööriistad, on kohandamine ligipääsetav:
 
-1. **Leia esindajate definitsioonid** mallis (tavaliselt `prompts/`, `agents/` või `*.prompty` failide komplekt).
-2. **Täpsemalt seab esindaja juhised** — näiteks käskige toimetaja agentil järgida kindlat tooni või sõnade arvu.
-3. **Uuesti juurutage ainult kood** (tарифтura ei muutu):
+1. **Leia agendi definitsioonid** mallist (tihti `prompts/`, `agents/` või `*.prompty` failid).
+2. **Reguleeri agendi juhiseid** — näiteks käsu anna toimetajale konkreetne toon või sõnade arv.
+3. **Paigalda ainult kood uuesti** (infrastruktuur jääb samaks):
 
    ```bash
    azd deploy
    ```
 
-Oma *enda* Foundry esindaja projekti puhul kasutage esindaja laiendi interaktiivset algatust:
+Oma *enda* Foundry agendi projektiga liikumiseks kasuta GA paketti AZD 1.37.0+ versioonis eraldi tühjas kaustas:
 
 ```bash
-azd extension install azure.ai.agents
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 azd ai agent invoke      # test, with response timing
 ```
 
-Vaadake [2. peatükk: Esindajad](../chapter-02-ai-development/agents.md) ja [AZD AI CLI viide](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kogu elutsükli jaoks: esindaja `invoke`, eraldi hinnangute laiendi `azd ai eval` töövoog, esindaja `optimize` ja esindaja `delete`.
+Vaata [GA hosted-agent juhendit](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) lokaliseks testimiseks, kaugpaigalduseks ja koristamise haldamiseks. [AZD AI CLI viide](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) hõlmab ka eraldi hindamise laiendust, optimeerimist ja agendi eemaldamist.
 
 ---
 
-## Puhastamine
+## Puhasta
 
-Mitme esindajaga rakendused käitavad mitut arveldusteenust. Kui olete lõpetanud, eemaldage kõik:
+Mitme agendi rakendused jooksevad mitmeid tasulisi teenuseid. Lõpeta kõik, kui oled lõpetanud:
 
 ```bash
 # Review the resources and confirm deletion interactively
 azd down
 ```
 
-Kustutamine on hävitav. Ühekordse labori puhul `azd down --force --purge` vahele jätab kustutamise ja toetatud pehme kustutamise kinnitused; puhastamine on pöördumatu, kus see on toetatud ja selle võib blokeerida puhastusprotseduuride kaitse. Pehme kustutamine on taastamis- / nime kordkasutuse probleem, mitte tõend jätkuvate tasude kohta. Kontrollige puhastamise järel säilinud ressursse ja arveldamist.
+Kustutamine on hävitav. Ajutise katsekeskkonna jaoks `azd down --force --purge` vahele jätab kustutamise ja toetatud pehme kustutuse kinnitamised; kustutamine on pöördumatu, kui see on toetatud ning võib olla blokeeritud puhastuskaitsega. Pehme kustutamine on taastamise/nime uuesti kasutamise küsimus, mitte ennast pikemaajalise tasu tõendus. Pärast puhastust vaata, kas ressursid ja arved on alles.
+
+Kui sa ka initsialiseerisid hosted agendi olemasoleva Foundry projekti vastu, `azd down` jätab selle projekti agendi ja muud ressursid alles. Eemalda ainult soovimatud ressursid, mis kuuluvad sulle eraldi. Uue Foundry projekti puhul, mille on loonud AZD keskkond, `azd down` kustutab ressursside grupi ja kõik selle sees.
 
 ---
 
-## Märkus tootmises kasutatavate mitme esindajaga süsteemide kohta
+## Märkus Tootmise Mitme Agendi Süsteemidest
 
-Selle repositooriumi [Jaemüügi mitme esindajaga lahendus](../../examples/retail-scenario.md) on **arhitektuuri plaan**, mitte ühe käsuga mall — see dokumenteerib, kuidas tootmissüsteem *võiks* olla üles ehitatud (ja rõhutab, et täielik ehitus on märkimisväärne ülesanne). Kasutage seda disainiviitena *pärast* töötava näidise juurutamist siin. Tootmisega seotud küsimuste (vastupidavus, kulud, järelevalve, juhtimine) korral vaadake [8. peatükk: Toote AI praktikad](../chapter-08-production/production-ai-practices.md).
+Selles repositooriumis olev [Retail Mitme Agendi Lahendus](../../examples/retail-scenario.md) on **arhitektuuri musternäidis**, mitte ühe käsuga mall — see dokumenteerib, kuidas tootmise jaemüügisüsteem *saaks* üles ehitada (ja rõhutab, et täielik ehitus on märkimisväärne pingutus). Kasuta seda kujundusviitana *pärast* siin toimiva näidise paigaldamist. Tootmisega seotud küsimuste (vastupidavus, kulud, jälgimine, haldus) jaoks vaata [Peatükk 8: Tootmise AI Praktikad](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Kokkuvõte
 
-- Mitme esindajaga süsteem jagab tööd spetsialistide vahel, mida koordineerib orkestreerija.
-- Kasutage seda ainult siis, kui ülesandel on erinevad etapiviisid, paralleelsus või sammude lõikes erinevad tööriistad — muidu eelistage ühes esindajat.
-- Azd töövoog ei muutu: `azd init` → `azd up` → test → `azd down`.
-- Tõeline mall nagu `contoso-creative-writer` võimaldab teil täna näha ja kohandada töötavat mitme esindajaga rakendust.
-- Rakenduse Insights jälgimine esindajate vahel on üks mitme esindajaga disaini suurimaid praktilisi eeliseid.
+- Mitme agendi süsteem jagab tööd spetsialistide vahel, mida koordineerib koordinaator.
+- Kasuta seda ainult siis, kui ülesandel on eristatavad etapid, paralleelsus või erinevad tööriistad igas etapis – muidu eelista üht agenti.
+- azd töökäik on muutumatuks jäänud: `azd init` → `azd up` → test → `azd down`.
+- Tõeline mall nagu `contoso-creative-writer` laseb sul täna näha ja kohandada toimivat mitme agendi rakendust.
+- Application Insightsi jälgimine agentide vahel on üks suurimaid praktilisi eeliseid mitme agendi disainis.
 
 ---
 
@@ -248,15 +250,15 @@ Selle repositooriumi [Jaemüügi mitme esindajaga lahendus](../../examples/retai
 
 | Suund | Õppetund |
 |-----------|--------|
-| **Eelmine** | [4. peatükk: Infrastruktuur](../chapter-04-infrastructure/README.md) |
-| **Järgmine** | [Koordineerimise mustrid](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Eelmine** | [Peatükk 4: Infrastruktuur](../chapter-04-infrastructure/README.md) |
+| **Järgmine** | [Koordineerimise Mustrid](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Seotud ressursid
+## 📖 Seotud Ressursid
 
-- [AI esindajate juhend](../chapter-02-ai-development/agents.md)
-- [Koordineerimise mustrid](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Tootmise AI praktikad](../chapter-08-production/production-ai-practices.md)
-- [AI tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Agentide Juhend](../chapter-02-ai-development/agents.md)
+- [Koordineerimise Mustrid](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Tootmise AI Praktikad](../chapter-08-production/production-ai-practices.md)
+- [AI Tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

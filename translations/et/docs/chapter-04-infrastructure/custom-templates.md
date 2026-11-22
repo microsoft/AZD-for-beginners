@@ -1,67 +1,67 @@
-# Oma azd-malli loomine
+# Oma azd-malli koostamine
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Käesolev peatükk**: Peatükk 4 - Infrastruktuur kui kood & juurutamine
+- **📖 Käesolev peatükk**: Peatükk 4 - Infrastruktuur koodina ja juurutamine
 - **⬅️ Eelmine**: [Juurutamisjuhend](deployment-guide.md)
 - **🚀 Järgmine peatükk**: [Peatükk 5: Mitmeagendi lahendused](../chapter-05-multi-agent/README.md)
 
-> Kontrollitud `azd 1.27.1` vastu 2026. aasta juulis.
+> Läbivaadatud vastu `azd 1.37.2` (november 2026). See on **malli koostamise juhend osaliste failidega**, mitte täielik mall: enne juurutamist peate lisama rakenduse koodi ja `modules/web.bicep` koos selle keskkonna, registri, konteinerirakenduse ja väljunditega. Azure'i varustamist selles ülevaates ei tehtud.
 
 ## Sissejuhatus
 
-Seni oled sa *kasutanud* malle käsuga `azd init --template <nimi>`. Kui sul on aga meeskonnas lemmikprojektistruktuur – näiteks konteinerirakendus koos Cosmos DB ja sobiva jälgimisega –, tahad sellest luua taaskasutatava omaenda malli. Mall on lihtsalt Git-repositoorium kindla struktuuriga, mida azd oskab lugeda. See õppetund näitab, kuidas seda nullist luua, testida ja (vajadusel) avalikkusele galerii kaudu avaldada.
+Seni olete *kasutanud* malle koos `azd init --template <name>`. Kui aga teil tekib projektistruktuur, mis teie meeskonnale meeldib — näiteks konteinerirakendus koos Cosmos DB ja sobiva jälgimissüsteemiga — soovite seda muuta taaskasutatavaks malliks. Mall on lihtsalt Git-hoidla etteaimatava struktuuriga, mida azd oskab lugeda. See õppetund näitab, kuidas ehitada selline nullist, testida ja (valikuliselt) avaldada see kogukonna galeriis.
 
 ## Õpieesmärgid
 
-Selle õppetunni lõpuks:
-- Mõistad, mis teeb kaustast "azd-malli"
-- Tead vajalikke faile ja kaustastruktuuri
-- Lisad `azure.yaml` ja `infra/`, mida teised saavad taaskasutada
-- Testid oma malli kohapeal enne jagamist
-- Avaldad selle ja (vajadusel) esitad Awesome AZD kogukonna galerii jaoks
+Selle peatüki lõpuks:
+- Mõistate, mis teeb kaustast "azd mall"
+- Teate vajalikke faile ja kausta struktuuri
+- Lisate `azure.yaml` ja `infra/`, mida teised saavad taaskasutada
+- Testite oma malli lokaalselt enne jagamist
+- Avaldate selle ja (valikuliselt) esitate Awesome AZD-le
 
 ## Õpitulemused
 
-Pärast õppetunni läbimist suudad:
-- Luua uue malli repositooriumi
-- Parametreerida infrastruktuuri nii, et see töötaks mistahes tellimuses
-- Kontrollida malli `azd init` ja `azd up` käskudega
-- Lisada metaandmed, mida kogukonna galerii nõuab
+Pärast selle õppetüki lõpetamist oskate:
+- Luua uue malli hoidla
+- Parameetriseerida infrastruktuuri nii, et see töötaks mis tahes tellimuses
+- Kinnitada malli `azd init` ja `azd up` abil
+- Lisada metaandmeid, mida kogukonna galerii nõuab
 
 ---
 
-## Mis täpselt on mall?
+## Mis see mall tegelikult on?
 
-Azd-mall on **Git-repositoorium**, mis sisaldab vähemalt:
+Azd mall on **Git-hoidla**, mis sisaldab vähemalt:
 
-| Fail / kaust | Eesmärk | Nõutud? |
-|------------|---------|-----------|
-| `azure.yaml` | Kirjeldab teenuseid, hosteid ja infrastruktuuri pakkujat | ✅ Jah |
-| `infra/` | Bicep, Terraform või Pulumi, mis loob ressursid | ✅ Jah |
-| `src/` (või sinu kood) | Rakenduse kood, mida azd juurutab | ✅ Jah |
-| `README.md` | Kuidas malli kasutada | ✅ Soovitav |
-| `.azdo/` või `.github/` | CI/CD torujuhtmete definitsioonid | Valikuline |
-| `.devcontainer/` | Reprodutseeritav arenduskeskkond | Valikuline |
-| `azure.yaml` `metadata` | Galerii + telemeetria info | Valikuline (nõutud avaldamiseks) |
+| Fail / kaust | Eesmärk | Vajalik? |
+|---------------|---------|-----------|
+| `azure.yaml` | Kirjeldab teenuseid, hoste ja infrastruktuuri pakkujat | ✅ Jah |
+| `infra/` | Bicep või Terraformi juurutusdefinitsioonid | Nõutud selle ekspressiivse SIG näite jaoks; genereeritud infrastruktuuriprojektid võivad selle vahele jätta |
+| `src/` (või teie kood) | Rakenduse kood, mida azd juurutab | Nõutud allika-põhiste teenuste jaoks; mitte kõigis mallides pole rakenduse koodi |
+| `README.md` | Kuidas malli kasutada | ✅ Soovitatav |
+| `.azdo/` või `.github/` | CI/CD torujuhtme definitsioonid | Valikuline |
+| `.devcontainer/` | Taastatav arenduskeskkond | Valikuline |
+| `azure.yaml` `metadata` | Malli identiteet/telemeetria info | Soovitatav; Git-hoidla avaldamine ei nõua seda |
 
-Siin pole midagi võlukunsti: kui jooksutad `azd init --template you/your-repo`, kloonib azd repositooriumi ja loeb `azure.yaml`.
+Siin pole midagi maagilist: kui te käivitate `azd init --template you/your-repo`, kloonib azd hoidla ja loeb `azure.yaml`.
 
 ---
 
-## Samm 1: Repositooriumi ülesehitus
+## 1. samm: Looge hoidla põhistruktuur
 
-Loo kaustastruktuur käsitsi või alusta minimaalsest mallist ning muuda seda:
+Looge kaustastruktuur käsitsi või alustage minimaalsest mallist ja muutke seda:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Loo standardne paigutus
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Tüüpiline lõpetatud paigutus näeb välja selline:
+Tüüpiline valmis struktuur näeb välja selline:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Samm 2: Kirjuta `azure.yaml`
+## 2. samm: Kirjutage `azure.yaml`
 
-See on malli süda. Sellega ütled azd-le, mida ja kuidas juurutada:
+See on malli süda. See ütleb azd-le, mida ja kuidas juurutada:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Väli `metadata.template` on see, mida galerii telemeetria kasutab kasutuse arvutamiseks. Kasuta konventsiooni `name@version`.
+> `metadata.template` väli on see, mida galeri telemeetria kasutab kasutuse loendamiseks. Kasutage `name@version` konventsiooni.
 
 ---
 
-## Samm 3: Parametreeri infrastruktuur
+## 3. samm: Parameetriseerige infrastruktuur
 
-Kõige olulisem reegel *taaskasutatavale* mallile: **ära kunagi kõvasti kodeeri nimesid, piirkondi ega tellimuse-spetsiifilisi väärtusi.** Kasuta parameetreid ja ressursi tokeni mustrit, et sama mall töötaks igas tellimuses.
+Kõige olulisem reegel *taaskasutatava* malli jaoks: **ärge kunagi kodeerige nimesid, regioonide või tellimuse-spetsiifilisi väärtusi püsivalt.** Kasutage parameetreid ja ressursi tokeni mustrit, et sama mall töötaks igaühe tellimuses.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Kaks asja muudavad selle malli sõbralikuks:
+Kaks asja teevad selle malli sõbralikuks:
 
-1. **`azd-env-name` silt** — azd kasutab seda, et keskkonniti ressursse jälgida ja puhastada.
-2. **`uniqueString(...)` ressursi token** — genereerib stabiilse ja globaalselt unikaalse järelliite, et nimed ei kattuks.
+1. **`azd-env-name` silt** — azd kasutab seda ressursside jälgimiseks ja koristamiseks keskkonna lõikes.
+2. **`uniqueString(...)` ressursi token** — toodab stabiilse räsi sufiksi kokkupõrgete vähendamiseks; see ei taga globaalselt unikaalsust.
 
-Lisa sobiv parameetrite fail, mis loeb väärtusi, mida azd keskkonnast süstib:
+Puuduv `modules/web.bicep` peab vastu võtma `name`, `location` ja `tags`, juurutama Container Apps keskkonna/registri ja rakenduse, märgistama rakenduse `azd-service-name: web` abil ning eksportima `uri`. Samuti peab see avaldama registri väärtused, mida vajab valitud ehitus/juurutusvoog (näiteks `AZURE_CONTAINER_REGISTRY_ENDPOINT` juurmoduulist). Ainult väljund lõpp-punkt ei seo teenuste avastust, rakenduse seadeid ega registri autentimist.
+
+Lisage sobiv parameetrite fail, mis loeb väärtusi, mida azd keskkonnast sisestab:
+
+Salvestage järgnev failina `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,103 +167,107 @@ Lisa sobiv parameetrite fail, mis loeb väärtusi, mida azd keskkonnast süstib:
 }
 ```
 
-azd asendab `${AZURE_ENV_NAME}` ja `${AZURE_LOCATION}` automaatselt sellest keskkonnast.
+azd asendab automaatselt `${AZURE_ENV_NAME}` ja `${AZURE_LOCATION}` praegusest keskkonnast.
 
 ---
 
-## Samm 4: Testi oma malli kohalikult
+## 4. samm: Testige oma malli lokaalselt
 
-Enne jagamist veendu, et mall töötab puhtast olekust.
+Enne jagamist tõestage, et mall töötab puhtalt olekult.
 
-**Testi kohalikust kaustast** (Git-push pole vajalik):
+**Testige kohalikust kaustast** (Git push ei ole vajalik):
 
 ```bash
-# Tühjast kataloogist alusta initsialiseerimist, kasutades oma lokaalseid malliradasid
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Loomine + juurutamine algusest lõpuni
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Testi siis eemaldamist** — hea mall puhastab täielikult:
+**Seejärel testige puhastust** — hea mall koristab täielikult:
 
 ```bash
 azd down --force --purge
 ```
 
-Kui `azd down` jätab ressursid alles, jäi sul tõenäoliselt puudu ressursi `azd-env-name` silt.
+Kui `azd down` jätab ressursse maha, kontrollige keskkonna/ressursigrupi avastust, väliseid/jagatud ressursse, õigusi, lukke ja puhastus-kaitset. `--purge` ei kustuta kohalikku `.azure/` olekut.
 
-> **Nipp:** käivita esmalt `azd provision --preview`. See teeb what-if simulatsiooni ja kuvab malli vead enne ressursside loomist.
+> **Nõuanne:** pärast kõigi puuduvate failide lisamist käivitage esmalt `azd provision --preview`. Kontrollige konksusid enne eelvaadet, sest need võivad käivitada kõrvalmõjuga käske. Eelvaade ei ole hinnang ega garantii, et juurutamine õnnestub.
 
 ---
 
-## Samm 5: Avalda mall
+## 5. samm: Avaldage mall
 
-Pushi repositoorium GitHubi (avalik, kui tahad, et teised seda kasutaksid):
+Lükake hoidla GitHubi (avalik, kui soovite, et teised saaksid seda kasutada):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Nüüd saab seda igaüks kasutada:
+Keegi saab seda nüüd kasutada:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Samm 6 (valikuline): Esita Awesome AZD kogukonna galeriisse
+## 6. samm (valikuline): Esitage Awesome AZD-sse
 
-[Awesome AZD galerii](https://azure.github.io/awesome-azd/) loetleb kogukonna malle. Selleks, et seal olla, peaks su repo sisaldama:
+Kogukonna malle loetleb [Awesome AZD galerii](https://azure.github.io/awesome-azd/). Selleks, et teie hoidla oleks loetletud, peaks see sisaldama:
 
-- ✅ Selget `README.md` koos eelduste, arhitektuuri diagrammi ja kulude märkustega
+- ✅ Selget `README.md` eeldustega, arhitektuuri skeemiga ja kulumärkmetega
 - ✅ Töötavat `azure.yaml` koos `metadata.template`-ga
-- ✅ Infrastruktuuri, mis loob puhtalt uues tellimuses
+- ✅ Infrastruktuuri, mis seob korrektselt uue tellimuse peale
 - ✅ `LICENSE` faili
-- ✅ (Soovitatav) `.devcontainer/` ühekordseks Codespaces'i avamiseks
+- ✅ (Soovitatav) Ühte klõpsuga Codespaces'i jaoks mõeldud `.devcontainer/`
 
-Esita see, avades pull requesti, mis lisab su malli galerii andmefaili, järgides panustamisjuhendit [Awesome AZD repositooriumis](https://github.com/Azure/awesome-azd).
+Esitage see, avades tõmbepäringu, mis lisab teie malli galeriisse andmefaili, järgides panustamisjuhendit [Awesome AZD hoidlas](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Levinumad lõksud
+## Levinud lõksud
 
-| Lõks | Lahendus |
-|------|---------|
-| Kõvasti kodeeritud ressursinimed | Kasuta `uniqueString()` ressursi tokenit |
-| `azd down` jätab ressursid alles | Sildi iga ressurss (või ressursigrupi) `azd-env-name`-ga |
-| Mall töötab sul, aga mitte teistel | Eemalda tellimuse ID-d, teenusepakkuja ID-d ja piirkonna eeldused |
-| Väljundid pole rakendusega ühendatud | Eksporti `SERVICE_<NAME>_ENDPOINT_URL` ja muud `AZURE_*` väljundid |
-| Galerii esitamine tagasi lükatud | Lisa `README.md`, `LICENSE` ja `metadata.template` |
+| Lõks | Parandus |
+|---------|-----|
+| Kõva kodeeringuga ressursinimed | Kasuta `uniqueString()` ressursitokenit |
+| `azd down` jätab ressursid alles | Märgista iga ressurss (või ressursside grupp) `azd-env-name`'ga |
+| Mall töötab sinu jaoks, aga mitte teiste jaoks | Eemalda tellimuse ID-d, kliendi ID-d ja piirkonna eeldused |
+| Väljundid pole rakendusega ühendatud | Sobita `azd-service-name`/`resourceName` juurutamisel ja kaardi väljundid rakenduse sättetega selgelt |
+| Galerii esitus tagasilükatud | Lisa `README.md`, `LICENSE` ja `metadata.template` |
 
 ---
 
 ## Kokkuvõte
 
-- Mall on lihtsalt Git repo, mis sisaldab `azure.yaml`, `infra/` ja sinu koodi.
-- Parametreeri kõik — nimed, regioonid ja ID-d — nii käib see kõikjal.
-- Sildi alati ressursid `azd-env-name`-ga, et `azd down` toimiks.
-- Testi kohalikult käsuga `azd init --template <local-path>` enne avaldamist.
-- Lisa metaandmed ja README, et saaksid esitada Awesome AZD-sse.
+- Mall on lihtsalt Git repositoorium koos `azure.yaml`, `infra/` ja su koodiga.
+- Parameetriseeri kõik—nimed, piirkonnad ja ID-d—et see töötaks kõikjal.
+- Alati märgi ressursid `azd-env-name` nii et `azd down` töötab.
+- Testi lokaalselt `azd init --template <local-path>` enne avaldamist.
+- Lisa metainfo ja README, et esitada Awesome AZD-le.
 
 ---
 
-## 🔗 Navigeerimine
+## 🔗 Navigatsioon
 
 | Suund | Ressurss |
-|-------|----------|
-| **Eelmine** | [Juurutamisjuhend](deployment-guide.md) |
-| **Peatüki avaleht** | [Peatükk 4: Infrastruktuur kui kood](README.md) |
-| **Järgmine peatükk** | [Peatükk 5: Mitmeagendi lahendused](../chapter-05-multi-agent/README.md) |
+|-----------|----------|
+| **Eelmine** | [Deploy juhend](deployment-guide.md) |
+| **Peatüki Kodu** | [4. peatükk: Infrastruktuur koodina](README.md) |
+| **Järgmine Peatükk** | [5. peatükk: Mitmeagendi lahendused](../chapter-05-multi-agent/README.md) |
 
-## 📖 Seotud ressursid
+## 📖 Seotud Ressursid
 
-- [Ressursside juurutamine](provisioning.md)
-- [Awesome AZD galerii](https://azure.github.io/awesome-azd/)
-- [Ametlik azd malli dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Ressursside loomiseks](provisioning.md)
+- [Awesome AZD Galerii](https://azure.github.io/awesome-azd/)
+- [Ametlik azd mallide dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

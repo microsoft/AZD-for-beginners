@@ -8,27 +8,27 @@
 
 ## Introduction
 
-Dis comprehensive FAQ dey provide ansa to di most common questions about Azure Developer CLI (azd) and Azure deployments. Find quick solutions to common problems, understand best practices, and get clarification on azd concepts and workflows.
+Disfala complete FAQ de for give ansa to di most common kwestin dem about Azure Developer CLI (azd) an Azure deployments. Find quick solushon dem to common wahala, sabi beta way dem de do am, an get klarifikeshon on top azd koncepts an workflow dem.
 
 ## Learning Goals
 
-By reading dis FAQ, you go:
-- Find quick ansa to common Azure Developer CLI questions and wahala
-- Understand key concepts and terminology through practical Q&A format
-- Access troubleshooting solutions for frequent problems and error scenarios
-- Learn best practices through commonly asked questions about optimization
-- Discover advanced features and capabilities through expert-level questions
-- Reference cost, security, and deployment strategy guidance efficiently
+If you review dis FAQ, you go:
+- Find quick ansa dem to common Azure Developer CLI kwestin dem an wahala dem
+- Understand di important koncepts an tok tok dem through beta Q&A style
+- Get troubleshooting solushons for di common problem dem an error dem
+- Learn beta beta way dem de use through common kwestin about beta way dem de do am
+- Find advanced feature an power through expert level kwestin dem
+- Use beta beta way for cost, security, and deployment strategy easily
 
 ## Learning Outcomes
 
-If you dey check dis FAQ regularly, you fit:
-- Solve common Azure Developer CLI problems by yourself using di solutions wey dey
-- Make correct decisions about how to deploy and how to set am
-- Understand how azd and other Azure tools and services relate
-- Use best practices wey community and experts recommend
-- Solve authentication, deployment, and configuration wahala well well
-- Cut cost and make performance beta using FAQ tips and advice
+If you dey use dis FAQ steady, you go fit:
+- Solve common Azure Developer CLI wahala dem yuself wit di solushons we dem provide
+- Make beta decision for deployment strategy an configurations
+- Understand how azd de work wit oda Azure tools an services
+- Follow beta beta way we community an expert dem recommend
+- Debug authentication, deployment, and configuration wahala well well
+- Save cost and improve performance using di FAQ info and beta tips
 
 ## Table of Contents
 
@@ -47,20 +47,20 @@ If you dey check dis FAQ regularly, you fit:
 ## Getting Started
 
 ### Q: Wetin be Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) na developer centered command-line tool wey dey make am fast to move your application from your local development environment go Azure. E dey provide best practices through templates and e dey help for the whole deployment life cycle.
+**A**: Azure Developer CLI (azd) na developer focused command-line tool wey dey fast-track how you fit move your app from local development environment go Azure. E dey provide beta way dem de do am through templates and e dey help di full deployment lifecycle.
 
 ### Q: How azd different from Azure CLI?
 **A**: 
-- **Azure CLI**: Na general-purpose tool for managing Azure resources
-- **azd**: Na developer-focused tool for application deployment workflows
-- azd get im own authentication and deployment workflow; Azure CLI na separate, complementary tool
-- azd get templates, environment management, and deployment automation
+- **Azure CLI**: Tool wey general purposes for managing Azure resources
+- **azd**: Tool wey focus on developer for application deployment workflow
+- azd get im own authentication an deployment workflow; Azure CLI na different, complementary tool
+- azd carry templates, environment management, an deployment automation inside
 
-### Q: I need Azure CLI make I fit use azd?
-**A**: No for the core AZD workflow. Authenticate with `azd auth login`. Install Azure CLI separately if template hook or exercise sharp run `az` commands.
+### Q: I need Azure CLI install before I fit take use azd?
+**A**: No be for core AZD workflow. You fit authenticate with `azd auth login`. Install Azure CLI separately if template hook or exercise call `az` commands explicitly.
 
-### Q: Wetin be the programming languages wey azd support?
-**A**: azd no dey limit to any language. E dey work with:
+### Q: Which programming language azd dey support?
+**A**: azd no get language bias. E dey work with:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -70,33 +70,41 @@ If you dey check dis FAQ regularly, you fit:
 - Static websites
 - Containerized applications
 
-### Q: I fit use azd with projects wey I don dey work on before?
-**A**: Yes o! You fit either:
-1. Use `azd init` to add azd configuration to your existing projects
-2. Adjust your existing projects to fit azd template structure
-3. Make custom templates based on your existing architecture
+### Q: I fit use azd with project we I don dae before?
+**A**: Yes o! You fit:
+1. Use `azd init` to add azd configuration to your old project dem
+2. Change your old project to fit azd template setup
+3. Make your own template based on how you don build am before
+
+### Q: Wetin change with Foundry extension wey don general available?
+**A**: Di `microsoft.foundry` bundle reach version 1.0 an GA on November 5, 2026. Wit AZD 1.37.0+ you fit use `azd ext install microsoft.foundry` to install seven core extension dem for agents, connections, inspector, projects, routines, skills, and toolboxes. E no be new command namespace, and dem components de version separately. Evaluations, datasets, fine-tuning, an custom models dem dey install separately; optional preview features no go turn GA just because the bundle na GA.
+
+Di [hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) dey use Python 3.13+ and current uv. `azd ai agent run` dey open Agent Inspector for your local, but model calls still dey use Azure and e go charge. Code-mode `azd deploy` dey upload source for remote build without necessity to build local container.
+
+### Q: Does `azd down` remove hosted agent from foundry project we dem don dey use?
+**A**: No for di reused-project road we the hosted-agent quickstart talk about: e go lef di project, hosted agent, and oda resource dem for where dem de. Make you remove di resource dem we you no want separately without deleting resource we dem de share. If environment create new Foundry project, `azd down` go delete im resource group and everything wey de inside. Make you check di [cleanup guidance](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately) and deletion prompt dem before you go commot am.
 
 ---
 
 ## Authentication & Access
 
-### Q: How I go take authenticate with Azure using azd?
+### Q: How I dey authenticate with Azure using azd?
 **A**: Use `azd auth login` wey go open browser window for Azure authentication. For CI/CD wahala, use service principals or managed identities.
 
 ### Q: I fit use azd with many Azure subscriptions?
-**A**: Yes. Use `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` to talk which subscription to use for each environment.
+**A**: Yes o. Use `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` to mark di subscription we you wan use for each environment.
 
-### Q: Which permissions I need to deploy with azd?
-**A**: Normally you need:
-- **Contributor** role on di resource group or subscription
-- **User Access Administrator** if you dey deploy resources require role assignments
-- Specific permissions dey vary by template and resources wey you dey deploy
+### Q: Which permission I go need to deploy wit azd?
+**A**: Normally you go need:
+- **Contributor** role for di resource group or subscription
+- **User Access Administrator** if you dey deploy resource wey need role assignments
+- Di specific permission fit change depend on di template and resource wey you wan deploy
 
-### Q: I fit use azd for CI/CD pipelines?
-**A**: Sure! azd design for CI/CD integration. Use service principals for authentication and set environment variables for configuration.
+### Q: I fit use azd for CI/CD pipeline dem?
+**A**: Of course! azd na tool we dey design for CI/CD join. Use service principals for authentication and set environment variable dem for configuration.
 
-### Q: How I go take handle authentication for GitHub Actions?
-**A**: Better make you use workload identity federation (OIDC), configured with `azd pipeline config`. The workflow wey dem generate dey install AZD and authenticate AZD directly with federated identity. Only `azure/login` step no fit establish AZD login. Login step for inside existing job na:
+### Q: How I go handle authentication for GitHub Action dem?
+**A**: Make you prefer workload identity federation (OIDC), wey you fit configure with `azd pipeline config`. Di generated workflow dey install AZD and dey authenticate AZD straight for federated identity. Only `azure/login` step alone no go set AZD login. Di login step we you put for inside existing job be:
 ```yaml
 permissions:
   contents: read
@@ -111,55 +119,55 @@ steps:
       --federated-credential-provider github
 ```
 
-After login, you fit provision or deploy, with correct AZD environment, subscription, and location configured. Di identity federated credential must trust workflow repository/ref or GitHub environment, and im Azure roles must allow di operations wey dem request.
+Deploy or provision after dem login, wit di AZD environment, subscription, and location we dem set. Di identity federated credential must trust workflow repository/ref or GitHub environment, an im Azure role dem must allow di operation dem we you ask.
 
 ---
 
 ## Templates & Projects
 
-### Q: Where I fit find azd templates?
+### Q: Where I fit find azd template dem?
 **A**: 
-- Official and community templates: [Awesome AZD](https://azure.github.io/awesome-azd/)
-- Community templates: GitHub search for "azd-template"
-- Use `azd template list` to look templates wey dey available
+- Official an community template dem: [Awesome AZD](https://azure.github.io/awesome-azd/)
+- Community template dem: GitHub search for "azd-template"
+- Use `azd template list` to look template wey dey available
 
-### Q: How I take create custom template?
+### Q: How I fit create my own custom template?
 **A**: 
-1. Start from existing template structure
-2. Change `azure.yaml`, infrastructure files, and application code
-3. Test well with `azd up`
-4. Publish am for GitHub with correct tags
+1. Start wit existing template structure
+2. Change `azure.yaml`, infrastructure file dem, and app code dem
+3. Test well well wit `azd up`
+4. Publish am for GitHub wit beta tags
 
 ### Q: I fit use azd without template?
-**A**: Yes, use `azd init` inside existing project to create di configuration files wey you need. You go still need to manually configure `azure.yaml` and infrastructure files.
+**A**: Yes o, use `azd init` for existing project to create di required configuration file dem. You go need to manually arrange `azure.yaml` and infrastructure file dem.
 
-### Q: Wetin be di difference between official and community templates?
+### Q: Wetin be di difference between official and community template dem?
 **A**: 
-- **Official templates**: Microsoft dey maintain am, dem dey update am regularly, e get full documentation
-- **Community templates**: Developers create am, dem fit get special use case, quality and maintenance fit change
+- **Official templates**: Di ones we Microsoft dey maintain, dem dey update am steady, get well documented
+- **Community templates**: Dem developers dey create am, fit get special use case, quality and maintenance fit different
 
-### Q: How I go take update template for my project?
+### Q: How I fit update template for my project?
 **A**: Templates no dey update automatically. You fit:
-1. Manually compare and merge changes from source template
-2. Start fresh with `azd init` to use updated template
-3. Cherry-pick specific better changes from updated templates
+1. Manually compare an join changes from source template
+2. Start fresh wit `azd init` using di updated template
+3. Pick beta beta improvement from updated template
 
 ---
 
 ## Deployment & Infrastructure
 
-### Q: Which Azure services azd fit deploy?
-**A**: azd fit deploy any Azure service through Bicep/ARM templates, including:
+### Q: Which Azure service dem azd fit deploy?
+**A**: azd fit deploy any Azure service through Bicep/ARM template dem, including:
 - App Services, Container Apps, Functions
 - Databases (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
-- Networking, security, and monitoring resources
+- Networking, security, an monitoring resource dem
 
-### Q: I fit deploy for more than one region?
-**A**: Yes, configure many regions for your Bicep templates and set the location parameter well for each environment.
+### Q: I fit deploy to many regions?
+**A**: Yes, set multiple regions for your Bicep template dem and set di location parameter right for each environment.
 
-### Q: How I take handle database schema migrations?
-**A**: Use deployment hooks inside `azure.yaml`:
+### Q: How I go manage database schema migration?
+**A**: Use deployment hooks for `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -169,137 +177,137 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: I fit deploy only infrastructure without applications?
-**A**: Yes, use `azd provision` to deploy just di infrastructure components wey your templates define.
+### Q: I fit deploy just infrastructure without application dem?
+**A**: Yes, use `azd provision` to deploy only infrastructure components wey your template talk about.
 
-### Q: How I take deploy to existing Azure resources?
-**A**: Yes, if di template support am. Use existing resources with Bicep's `existing` declarations or di template existing-resource parameters, and map application services to di targets wey dem need. Dis one no mean say you dey import ownership or automatically create permission wey no dey. Make sure say you check di template well before you deploy.
+### Q: How I take deploy to existing Azure resource dem?
+**A**: Yes, if di template allow am. Make you reference existing resource dem with Bicep's `existing` declarations or di template existing-resource parameters, and map app services to the target we dem intend. Dis one no dey import ownership or create missing permission dem automatically. Make you check di template well before you deploy.
 
-### Q: I fit use Terraform instead of Bicep?
-**A**: Yes. AZD dey support Terraform and Bicep. Choose Terraform-based template or configure `infra.provider: terraform` inside `azure.yaml`, with correct Terraform files and state/backend config. See [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+### Q: I fit use Terraform instead make I use Bicep?
+**A**: Yes o. AZD dey support Terraform as well as Bicep. Choose Terraform-based template or setup `infra.provider: terraform` in `azure.yaml`, wit beta Terraform file dem an state/backend setup. Make you check [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
 ## Configuration & Environments
 
-### Q: How I go manage different environments (dev, staging, prod)?
-**A**: Create separate environments with `azd env new <environment-name>` and set different settings for each:
+### Q: How I go manage different environment (dev, staging, prod)?
+**A**: Make separate environment dem wit `azd env new <environment-name>` and set different setting dem for each one:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Q: Where dem store environment configurations?
-**A**: Dem dey store am for `.azure` folder inside your project. Each environment get im own folder with config files.
+### Q: Where environment configuration dem de store?
+**A**: Na for `.azure` folder wey dey inside your project directory. Each environment get im own folder with configuration file dem.
 
-### Q: How I go fit set environment-specific configuration?
+### Q: How I go set environment-specific configuration?
 **A**: Use `azd env set` to set environment variables:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: I fit share environment configurations with my team?
-**A**: `.azure` folder get sensitive info and e no suppose dey commit to version control. Instead:
-1. Document the environment variables wey you need
-2. Use deployment scripts make you set up environment
+### Q: I fit share environment configuration among team member dem?
+**A**: Di `.azure` folder get sensitive tins inside an e no suppose enter version control. Instead:
+1. Write down required environment variable dem
+2. Use deployment scripts to setup environment dem
 3. Use Azure Key Vault for sensitive configuration
 
-### Q: How I go override template defaults?
-**A**: Set environment variables wey correspond to template parameters:
+### Q: How I fit override template default setting dem?
+**A**: Set environment variables wey go match template parameter dem:
 ```bash
 azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
-Only variables wey the template dey use go affect deployment. `SKU_NAME` wey dey above na example custom input, no be universal AZD setting.
+Only those variable dem we template dey use na dem go affect deployment. `SKU_NAME` wey dey above na example custom input, e no be universal AZD setting.
 
 ---
 
 ## Troubleshooting
 
 ### Q: Why `azd up` dey fail?
-**A**: Common reasons:
-1. **Authentication issues**: Run `azd auth login`
-2. **Insufficient permissions**: Check your Azure role assignments
-3. **Resource naming conflicts**: Check conflicting resource and template naming inputs; make separate environment with `azd env new` if you need isolation
-4. **Quota/capacity issues**: Check regional availability
-5. **Template errors**: Validate Bicep templates
+**A**: Common cause na:
+1. **Authentication matter**: Run `azd auth login`
+2. **Permission no enough**: Check your Azure role assignment dem
+3. **Resource name conflict**: Check the conflicting resource and di template naming input dem; create separate environment wit `azd env new` if you want isolation
+4. **Quota or capacity problem**: Check regional availability
+5. **Template error**: Validate Bicep template dem
 
-### Q: How I go debug deployment failures?
+### Q: How I go debug deployment failure dem?
 **A**: 
-1. Use `azd deploy --debug` for detailed output
+1. Use `azd deploy --debug` for verbose output
 2. Check Azure portal deployment history
-3. Review Activity Log inside Azure portal
-4. Use `azd show` to show current environment state
+3. Review Activity Log for Azure portal
+4. Use `azd show` to display current environment state
 
-### Q: Why my environment variables no dey work?
+### Q: Why my environment variable no dey work?
 **A**: Check:
-1. Variable names match template parameters exactly
-2. Values dey properly quoted if dem get spaces
-3. Environment dey selected: `azd env select <environment>`
-4. Variables dey set for correct environment
+1. Variable name na same as template parameter dem exactly
+2. Value dem get correct quote if e get space
+3. Environment wey you select: `azd env select <environment>`
+4. Variable dem set for correct environment
 
-### Q: How I go clean up failed deployments?
+### Q: How I fit clean failed deployment dem?
 **A**: 
 ```bash
 azd down
 ```
- Check di environment wey you select and delete confirmation first. Dis one go delete provisioned Azure resources, no be di local `.azure` environment config. `--purge` fit also request permanent deletion of supported soft-deleted resources and e fit block by retention/purge protection; na im no be normal recovery step.
+Make sure you check the environment we you select an confirmation for deletion before you proceed. Na for delete provisioned Azure resource dem, e no dey affect local `.azure` environment configuration. `--purge` still go ask make e delete protected resource dem permanently, and e fit block by retention or purge protection; dis no be usual recovery step.
 
 ### Q: Why my application no dey accessible after deployment?
 **A**: Check:
-1. Deployment finish well
+1. Deployment finish well well
 2. Application dey run (check logs for Azure portal)
-3. Network security groups allow traffic
-4. DNS/custom domains dey configured well
+3. Network security groups dey allow traffic
+4. DNS or custom domain dem set correctly
 
 ---
 
 ## Cost & Billing
 
-### Q: How much azd deployments go cost?
-**A**: Cost depend on:
-- Azure services wey you deploy
-- Service tiers/SKUs wey you select
-- Regional pricing differences
-- Usage patterns
+### Q: How much azd deployment go cost?
+**A**: Cost go depend on:
+- Azure service dem we you deploy
+- Service tiers or SKU we you choose
+- Regional price difference
+- How you dey use am
 
-Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate cost.
+Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate.
 
-### Q: How I go take control cost for azd deployments?
+### Q: How I go fit control cost for azd deployment dem?
 **A**: 
-1. Use lower-tier SKUs for development environments
-2. Set Azure budgets and alerts
-3. Use `azd down` to remove resource when you no need dem
-4. Choose right regions (cost dey different by location)
-5. Use Azure Cost Management tools
+1. Use lower-tier SKU for development environment dem
+2. Setup Azure budget an alert dem
+3. Use `azd down` to remove resource dem when you no need am
+4. Choose suitable region (cost fit change based on location)
+5. Use Azure Cost Management tool dem
 
 ### Q: Dem get free tier options for azd templates?
-**A**: Some services get free SKUs or monthly grants, but e dey depend on eligibility, hosting plan, region, and subscription limits. Dem no fit make whole template free: databases, search, networking, registry, telemetry, and model inference fit carry charges separate. Check [Azure free services list](https://azure.microsoft.com/free/) and current pricing before you deploy every resource.
+**A**: Some services get free SKUs or monthly grants, epp like eligibility, hosting plan, region, and subscription limits dey. Dem no mean say whole template free: databases, search, networking, registry, telemetry, and model inference fit still charge separately. Check the [Azure free services list](https://azure.microsoft.com/free/) and current pricing for every resource before you deploy.
 
-### Q: How I fit estimate costs before deployment?
+### Q: How I fit estimate cost before deployment?
 **A**: 
-1. Review template's `main.bicep` to know which resources go dey created
-2. Use Azure Pricing Calculator with specific SKUs
-3. Deploy for development environment first to monitor real cost
+1. Look template `main.bicep` to see the resources wey dem go create
+2. Use Azure Pricing Calculator with correct SKUs
+3. First deploy for development environment make you fit monitor actual costs
 4. Use Azure Cost Management for detailed cost analysis
 
 ---
 
 ## Best Practices
 
-### Q: Wetin be best practices for azd project structure?
+### Q: Wetin be the best practices for azd project structure?
 **A**: 
-1. Keep application code separate from infrastructure
-2. Use meaningful service names for `azure.yaml`
-3. Use proper error handling for build scripts
+1. Make application code separate from infrastructure
+2. Use meaningful service names inside `azure.yaml`
+3. Make sure correct error handling dey for build scripts
 4. Use environment-specific configuration
 5. Include full documentation
 
 ### Q: How I go take organize many services for azd?
-**A**: Use recommended structure:
+**A**: Use the recommended structure:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -316,20 +324,20 @@ Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) 
 .azure/
 ```
 
-### Q: How I go manage secrets and sensitive configuration?
+### Q: How I handle secrets and sensitive configuration?
 **A**: 
 1. Use Azure Key Vault for secrets
-2. Refer Key Vault secrets for application configuration
-3. No ever commit secrets for version control
-4. Use managed identities for service-to-service authentication
+2. Reference Key Vault secrets for application configuration
+3. No ever commit secrets to version control
+4. Use managed identities to do service-to-service authentication
 
-### Q: Wetin be the recommended way for CI/CD with azd?
+### Q: Wetin be the recommended approach for CI/CD with azd?
 **A**: 
-1. Use different environments for each stage (dev/staging/prod)
-2. Do automated testing before deployment
+1. Use separate environments for each stage (dev/staging/prod)
+2. Implement automated testing before deployment
 3. Use service principals for authentication
 4. Store sensitive configuration for pipeline secrets/variables
-5. Put approval gates for production deployments
+5. Implement approval gates for production deployments
 
 ---
 
@@ -345,17 +353,17 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: How I go take integrate azd with existing DevOps processes?
+### Q: How I fit integrate azd with existing DevOps processes?
 **A**: 
-1. Use azd commands inside existing pipeline scripts
-2. Standardize on azd templates across teams
+1. Use azd commands for existing pipeline scripts
+2. Standardize azd templates across teams
 3. Integrate with existing monitoring and alerting
 4. Use azd's JSON output for pipeline integration
 
 ### Q: I fit use azd with Azure DevOps?
-**A**: Yes, azd dey work with any CI/CD system. Make Azure DevOps pipelines wey dey use azd commands.
+**A**: Yes, azd dey work with any CI/CD system. Create Azure DevOps pipelines wey use azd commands.
 
-### Q: How I go contribute to azd or create community templates?
+### Q: How I fit contribute to azd or create community templates?
 **A**: 
 1. **azd tool**: Contribute to [Azure/azure-dev](https://github.com/Azure/azure-dev)
 2. **Templates**: Follow the [Awesome AZD gallery contribution instructions](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
@@ -366,19 +374,19 @@ hooks:
 
 ### Q: How I go migrate from other deployment tools to azd?
 **A**: 
-1. Check current deployment architecture well well
-2. Create equal Bicep templates
-3. Configure `azure.yaml` to fit current services
-4. Test am well for development environment
-5. Gradually migrate environments
+1. Analyze current deployment architecture
+2. Create equivalent Bicep templates
+3. Configure `azure.yaml` to match current services
+4. Test well-well for development environment
+5. Slowly migrate environments
 
 ---
 
-## You Still Get Questions?
+## You still get questions?
 
 ### **Search First**
 - Check the [official documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Search [GitHub issues](https://github.com/Azure/azure-dev/issues) for similar wahala
+- Search [GitHub issues](https://github.com/Azure/azure-dev/issues) for similar problems
 
 ### **Get Help**
 - [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Community support
@@ -387,7 +395,7 @@ hooks:
 
 ### **Report Issues**
 - [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Bug reports and feature requests
-- Put relevant logs, error messages, and steps to reproduce
+- Include relevant logs, error messages, and steps to reproduce
 
 ### **Learn More**
 - [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -396,7 +404,7 @@ hooks:
 
 ---
 
-*Technical guidance review na November 4, 2026. Cloud availability and pricing need to dey checked for your subscription and region.*
+*Technical guidance reviewed: November 4, 2026. Cloud availability and pricing must dey checked for your subscription and region.* 
 
 ---
 

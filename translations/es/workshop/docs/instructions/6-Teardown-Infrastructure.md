@@ -1,6 +1,6 @@
-# 6. Desmontar la infraestructura
+# 6. Desmontaje de la Infraestructura
 
-!!! tip "AL FINALIZAR ESTE MÓDULO PODRÁS"
+!!! tip "AL FINAL DE ESTE MÓDULO PODRÁS"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Ejercicios adicionales
+## Ejercicios Extra
 
-Antes de desmontar el proyecto, tómate unos minutos para hacer una exploración abierta.
+Antes de desmontar el proyecto, tómate unos minutos para realizar una exploración libre.
 
-!!! info "Prueba estas indicaciones de exploración"
+!!! info "Prueba estas sugerencias de exploración"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,6 +31,10 @@ Antes de desmontar el proyecto, tómate unos minutos para hacer una exploración
 
 ## Desaprovisionar Infraestructura
 
+!!! warning "Si también completaste el ejercicio del agente hospedado GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
 1. Desmontar la infraestructura es tan fácil como:
       
       ```bash title="" linenums="0"
@@ -38,7 +42,7 @@ Antes de desmontar el proyecto, tómate unos minutos para hacer una exploración
       azd show
       azd down
       ```
-1. Confirma el entorno seleccionado y revisa los recursos que serán eliminados. Esto elimina recursos de Azure y puede destruir datos. Mantén la solicitud de confirmación para este flujo de aprendizaje. Una vez completado verás una salida similar a:
+1. Confirma el entorno seleccionado y revisa los recursos que serán eliminados. Esto elimina recursos de Azure y puede destruir datos. Mantén el mensaje de confirmación para este flujo de trabajo de aprendizaje. Una vez completado verás una salida similar a:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Antes de desmontar el proyecto, tómate unos minutos para hacer una exploración
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Verifica la eliminación en el portal y chequea recursos fuera del alcance del despliegue. Los reportes de costo y las actualizaciones de cuota pueden retrasarse. La configuración local `.azure` permanece a menos que la elimines explícitamente.
+1. Verifica la eliminación en el portal y revisa si hay recursos fuera del alcance del despliegue. Los reportes de costos y actualizaciones de cuotas pueden tener retrasos. La configuración local `.azure` permanece a menos que la elimines explícitamente.
 
-1. `azd down --purge` también solicita la eliminación permanente de recursos borrados suavemente soportados. Úsalo solo cuando no se requiera recuperación y comprendas las políticas de retención/protección contra purga. No garantiza la liberación inmediata de cuotas.
+1. `azd down --purge` además solicita la eliminación permanente de recursos con eliminación suave soportada. Úsalo solo cuando no se requiera recuperación y comprendas las políticas de retención/protección contra purga. No garantiza la liberación inmediata de cuota.
 
-1. No redepliques solo para verificar la limpieza. Un `azd up` intencional posterior puede recrear recursos usando las entradas locales restantes y genera cargos nuevamente. Las actualizaciones del modelo normalmente usan cambios de aprovisionamiento soportados, no desmontaje.
+1. No vuelvas a desplegar solo para verificar la limpieza. Un `azd up` intencional posterior puede recrear recursos usando las entradas locales restantes, y generará cargos nuevamente. Las actualizaciones del modelo normalmente usan cambios de aprovisionamiento soportados, no desmontaje.
 
 ---
 

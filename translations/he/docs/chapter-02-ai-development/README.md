@@ -1,39 +1,43 @@
-# פרק 2: פיתוח מונחה בינה מלאכותית
+# פרק 2: פיתוח בשיטת AI-ראשון
 
-**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 4-5 שעות כולל סדנה | **⭐ מורכבות**: בינוני
+**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 4-5 שעות כולל סדנה | **⭐ רמת קושי**: בינונית
 
 ---
 
 ## סקירה כללית
 
-פרק זה מתמקד בפריסת יישומים המונעים על ידי בינה מלאכותית באמצעות Azure Developer CLI ושירותי Microsoft Foundry. מיישומי צ'אט בינה מלאכותית פשוטים ועד סוכנים אינטליגנטיים עם כלים.
+פרק זה מתמקד בפריסת יישומים המונעים בינה מלאכותית באמצעות Azure Developer CLI ושירותי Microsoft Foundry. מאפליקציות צ'אט מבוססות AI פשוטות לסוכנים חכמים עם כלים.
 
-> **סקירת גרסה (2026-11-04):** הנחיית CLI של בינה מלאכותית נבדקה מול התיעוד/המקור שפורסם של `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, ו-`azure.ai.evaluations` `1.0.0-beta.2`. השתמש ב-`azd >= 1.37.0` עבור זרימת העבודה המשולבת. הערכות משתמשות כעת במרחב השמות הנפרד `azd ai eval`; ראה [שינויים בגרסה והנחיות הגירה](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). זה אינו אימות פריסה חי.
+> **עדכון Foundry GA (2026-11-09):** חבילת `microsoft.foundry` 1.0 זמינה [לשימוש כללי](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). השתמש ב-`azd >= 1.37.0`; הערכות נשארו התקנה נפרדת. [מדריך הסוכן המתארח](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) כולל בדיקה מקומית של Agent Inspector ופריסת קוד מרחוק. זה סיקורת תיעודית, לא אימות פריסה בשידור חי; תכונות תצוגה מקדימה אופציונליות שומרים על מצבן.
 
 ## מטרות הלמידה
 
 בסיום פרק זה, תוכל:
-- לפרוס יישומי בינה מלאכותית באמצעות תבניות AZD מוכנות מראש
-- להבין אינטגרציה של Microsoft Foundry עם AZD
-- להגדיר ולהתאים אישית סוכני בינה מלאכותית עם כלים
-- לפרוס יישומי RAG (Retrieval-Augmented Generation)
+- לפרוס יישומי AI באמצעות תבניות AZD מוכנות מראש
+- להבין את האינטגרציה של Microsoft Foundry עם AZD
+- להתקין את חבילת GA ולבחון סוכן מתארח מקומית לפני פריסת המקור ל-Foundry
+- לסקור את `azure.yaml`, נכסי הערכה, וניקוי פרויקטים חדשים מול ממוחזרים
+- להגדיר ולהתאים סוכני AI עם כלים
+- לפרוס יישומי RAG (ייצור משולב עם שליפה)
 
 ---
 
 ## 📚 שיעורים
 
-| # | שיעור | תיאור | משך |
+| # | שיעור | תיאור | זמן |
 |---|--------|-------------|------|
-| 1 | [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md) | חיבור AZD עם שירותי Foundry | 30 דק |
-| 2 | [מדריך סוכני בינה מלאכותית](agents.md) | פריסת סוכנים אינטליגנטיים עם כלים | 45 דק |
-| 3 | [פריסת מודל בינה מלאכותית](ai-model-deployment.md) | לפרוס ולהגדיר מודלים של בינה מלאכותית | 30 דק |
-| 4 | [מעבדת סדנת בינה מלאכותית](ai-workshop-lab.md) | עבודה מעשית: חקור תבנית ותכנן את ההמרה שלך | 2-3 שעות |
+| 1 | [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md) | חבילת GA, זרימת עבודה של סוכן מתארח מקומי לענן, והערכות | 60 דק' |
+| 2 | [מדריך סוכני AI](agents.md) | פריסת סוכנים חכמים עם כלים | 45 דק' |
+| 3 | [פריסת מודל AI](ai-model-deployment.md) | פריסה והגדרה של מודלי AI | 30 דק' |
+| 4 | [סדנת מעבדה AI](ai-workshop-lab.md) | מעשי: חקר תבנית ותכנון ההמרה שלך | 2-3 שעות |
 
 ---
 
 ## 🚀 התחלה מהירה
 
-בחר אפשרות אחת בספריית קבצים חדשה וריקה. בסוף `.` מאתחל את הספרייה הנוכחית; אחרת AZD יכול ליצור תיקיית משנה מבלי לשנות את ספריית העבודה של הטרמינל שלך.
+בחר אפשרות אחת בתיקייה ריקה חדשה. `.` בסוף מאתחל את התיקייה הנוכחית; אחרת AZD יכול ליצור תיקיית משנה בלי לשנות את תיקיית העבודה של הטרמינל שלך.
+
+בשביל **נתיב פריסת הקוד של סוכן מתארח GA**, התחל במדריך המונחה [המדריך](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). נדרש AZD 1.37.0+, uv עדכנית, Python 3.13+, הרשאות Foundry וקווטת מודל. תבניות היישומים המלאות למטה הן אלטרנטיבות, לא דרישות מוקדמות למדריך זה.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,27 +55,27 @@ azd up
 
 ---
 
-## 🤖 תבניות בינה מלאכותית מובילות
+## 🤖 תבניות AI מומלצות
 
 | תבנית | תיאור | שירותים |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | צ'אט RAG עם ציטוטים | OpenAI + חיפוש בינה מלאכותית |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | סוכן בינה מלאכותית עם כלים | שירות סוכן בינה מלאכותית |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | צ'אט בסיסי של בינה מלאכותית | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | שיחת RAG עם אזכורים | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | סוכן AI עם כלים | שירות סוכני AI |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | צ'אט AI בסיסי | OpenAI + Container Apps |
 
 ---
 
 ## 💰 מודעות עלויות
 
-אלה טווחים להמחשה בלבד, לא הצעות מחיר או הגבלות; תעבורת מודל, SKU של חיפוש/חישוב, אזור ותכונות אופציונליות יכולים לחרוג מהם. סקור את הנחיות התמחור הנוכחיות של הדוגמה שבחרת לפני הספקה.
+אלו טווחים להמחשה בלבד, לא הצעות מחיר או תקרות; תעבורת מודל, SKU של חיפוש/מחשב, אזור ותכונות אופציונליות יכולים לחרוג מהן. עיין בהנחיות המחיר הנוכחיות של הדוגמה שבחרת לפני ההקצאה.
 
 | סביבה | עלות חודשית משוערת |
 |-------------|----------------------|
 | פיתוח | $80-150 |
-| סביבה לבחינה | $150-300 |
+| ניסוי | $150-300 |
 | ייצור | $300-3,500+ |
 
-**טיפ:** הרץ `azd down` לאחר הבדיקות כדי למנוע עלויות.
+**ניקוי:** סקור את `azd down` לפני אישור: לפרויקט Foundry חדש זה מוחק את קבוצת המשאבים ואת כל התכולה שלה. לפרויקט Foundry ממוחזר, משאבי הפרויקט והסוכן נשארים במקומם; פעל על פי [הנחיות ניקוי המדריך](microsoft-foundry-integration.md#7-clean-up-deliberately) כדי להסיר משאבים לא רצויים בנפרד.
 
 ---
 
@@ -79,17 +83,17 @@ azd up
 
 | כיוון | פרק |
 |-----------|---------|
-| **הקודם** | [פרק 1: היסודות](../chapter-01-foundation/README.md) |
+| **קודם** | [פרק 1: יסודות](../chapter-01-foundation/README.md) |
 | **הבא** | [פרק 3: תצורה](../chapter-03-configuration/README.md) |
-| **דילוג אל** | [פרק 8: דפוסי ייצור](../chapter-08-production/README.md) |
+| **קפיצה אל** | [פרק 8: דפוסי ייצור](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 משאבים קשורים
 
-- [פתרון תקלות בבינה מלאכותית](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [שיטות עבודה בבינה מלאכותית לייצור](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [פתרון בעיות בינה מלאכותית](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [שיטות הפקה בשימוש AI](../chapter-08-production/production-ai-practices.md)
+- [תובנות יישומים](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

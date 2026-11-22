@@ -2,72 +2,72 @@
 
 **Hoofdstuknavigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-Eerst Ontwikkeling
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
 - **⬅️ Vorige**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
 - **➡️ Volgende**: [AI Model Implementatie](ai-model-deployment.md)
-- **🚀 Geavanceerd**: [Multi-Agenten Oplossingen](../../examples/retail-scenario.md)
+- **🚀 Gevorderd**: [Multi-Agent Oplossingen](../../examples/retail-scenario.md)
 
 ---
 
 ## Introductie
 
-AI-agenten zijn autonome programma's die hun omgeving kunnen waarnemen, beslissingen nemen en acties uitvoeren om specifieke doelen te bereiken. In tegenstelling tot eenvoudige chatbots die op prompts reageren, kunnen agenten:
+AI-agenten zijn autonome programma's die hun omgeving kunnen waarnemen, beslissingen kunnen nemen en acties kunnen uitvoeren om specifieke doelstellingen te bereiken. In tegenstelling tot eenvoudige chatbots die reageren op prompts, kunnen agenten:
 
 - **Tools gebruiken** - APIs aanroepen, databases doorzoeken, code uitvoeren
-- **Plannen en redeneren** - Complexe taken opsplitsen in stappen
+- **Plannen en redeneren** - Complexe taken opdelen in stappen
 - **Leren van context** - Geheugen behouden en gedrag aanpassen
 - **Samenwerken** - Werken met andere agenten (multi-agent systemen)
 
-Deze gids laat zien hoe je AI-agenten implementeert naar Azure met Azure Developer CLI (azd).
+Deze handleiding laat zien hoe je AI-agenten implementeert in Azure met Azure Developer CLI (azd).
 
-Het gebruiken van gesprekscontext is geen modeltraining: persistent geheugen, toegangscontrole en retentie moeten door de applicatie worden geïmplementeerd/geconfigureerd.
+Gebruik van conversatiecontext is geen modeltraining: persistent geheugen, toegangscontrole en retentie moeten door de applicatie worden geïmplementeerd/geconfigureerd.
 
-> **Release review (04-11-2026):** CLI-voorbeelden zijn gecontroleerd tegen de documentatie/bronnen van `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, en `azure.ai.evaluations` `1.0.0-beta.2`, niet tegen een live Azure-implementatie. Gebruik `azd >= 1.37.0` voor de gecombineerde workflow. Zie [recente wijzigingen en fixes](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) voordat je oudere projecten bijwerkt.
+> **Foundry GA-update (2026-11-09):** Installeer het algemeen beschikbare `microsoft.foundry` 1.0 pakket met `azd >= 1.37.0`. Evaluaties worden apart geïnstalleerd; optionele preview-functies en het klassieke SDK-fragment hieronder worden niet gepromoot naar GA via de pakketaankondiging. Deze richtlijn is gebaseerd op de [GA aankondiging](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/) en documentatie, niet een live Azure-implementatie.
 
 ## Leerdoelen
 
-Na het voltooien van deze gids zal je:
+Door deze handleiding te volgen, zul je:
 - Begrijpen wat AI-agenten zijn en hoe ze verschillen van chatbots
 - Vooraf gebouwde AI-agent sjablonen implementeren met AZD
-- Foundry-agenten configureren voor aangepaste agenten
-- Basis agentpatronen implementeren (toolgebruik, RAG, multi-agent)
-- Geïmplementeerde agenten monitoren en debuggen
+- Foundry Agenten configureren voor aangepaste agenten
+- Basis agent-patronen implementeren (toolgebruik, RAG, multi-agent)
+- Gedeponeerde agenten monitoren en debuggen
 
-## Leeruitkomsten
+## Leerresultaten
 
-Na voltooiing kun je:
-- AI-agent applicaties met één commando naar Azure implementeren
-- Agent tools en mogelijkheden configureren
-- Retrieval-augmented generation (RAG) met agenten implementeren
-- Multi-agent architecturen ontwerpen voor complexe workflows
-- Veelvoorkomende problemen met agent-implementaties oplossen
+Na voltooiing zul je in staat zijn om:
+- AI-agent applicaties naar Azure te implementeren met één commando
+- Agent-tools en mogelijkheden te configureren
+- Retrieval-augmented generation (RAG) met agenten te implementeren
+- Multi-agent architecturen te ontwerpen voor complexe workflows
+- Veelvoorkomende implementatieproblemen voor agenten op te lossen
 
 ---
 
-## 🤖 Wat Maakt Een Agent Anders Dan Een Chatbot?
+## 🤖 Wat Maakt een Agent Anders dan een Chatbot?
 
 | Kenmerk | Chatbot | AI Agent |
 |---------|---------|----------|
 | **Gedrag** | Reageert op prompts | Neemt autonome acties |
-| **Tools** | Kan retrieval of tools gebruiken | Meestal tools in een doelgerichte lus |
-| **Geheugen** | Afhankelijk van de applicatie | Persistent geheugen alleen bij expliciete implementatie |
-| **Planning** | Enkelvoudige respons | Meerdere redeneringsstappen |
-| **Samenwerking** | Enkelvoudige entiteit | Kan samenwerken met andere agenten |
+| **Tools** | Kan retrieval of tools gebruiken | Gebruikt meestal tools in een doelgerichte cyclus |
+| **Geheugen** | Afhankelijk van applicatie | Persistent geheugen alleen als expliciet geïmplementeerd |
+| **Planning** | Enkelvoudige reactie | Meerstaps redeneren |
+| **Samenwerking** | Enkele entiteit | Kan met andere agenten samenwerken |
 
-### Simpele Analogie
+### Eenvoudige Analogie
 
-- **Chatbot** = Een behulpzaam persoon die vragen beantwoordt aan een informatiedesk
-- **AI Agent** = Een persoonlijke assistent die kan bellen, afspraken plannen en taken voor je afhandelen
+- **Chatbot** = Een behulpzaam persoon die vragen beantwoordt bij een informatiebalie
+- **AI Agent** = Een persoonlijke assistent die kan bellen, afspraken maken en taken voor je afronden
 
 ---
 
-## 🚀 Snel Starten: Implementeer Je Eerste Agent
+## 🚀 Snel Starten: Implementeer je Eerste Agent
 
-Kies één optie in een **nieuwe lege werkmap**. De achtervoegsel `.` initialiseert daar; zonder expliciete bestemming kan de huidige AZD een submap met template-naam aanmaken en verandert het je shell-map niet. Houd aparte sjablonen/omgevingen in aparte mappen.
+Kies één optie in een **nieuwe lege werkmap**. De trailing `.` initialiseert daar; zonder expliciete bestemming kan de huidige AZD een submap met de template-naam aanmaken en verandert de shell map niet. Houd aparte templates/omgevingen in aparte mappen.
 
-De onderstaande tijd-/kostencategorieën zijn illustratief, geen gevalideerde offertes. Controleer voor elke sample actuele vereisten, prijzen, modelquota en optionele diensten vóór implementatie.
+De onderstaande tijd-/kostencategorieën zijn illustratief, geen gevalideerde offertes. Controleer per voorbeeld de actuele vereisten, prijzen, modelquota en optionele services voor implementatie.
 
-### Optie 1: Foundry Agents Sjabloon (Aanbevolen)
+### Optie 1: Foundry Agents Template (Aanbevolen)
 
 ```bash
 # Initialize the AI agents template
@@ -77,12 +77,12 @@ azd init --template get-started-with-ai-agents .
 azd up
 ```
 
-**Wat er wordt geïmplementeerd:** De infrastructuur van de sample en geselecteerde opties bepalen het model, tools, hosting en monitoring resources. Lees de README en `infra/` voordat je provisiont; ga er niet vanuit dat elk agent-sjabloon Search of een webinterface bevat.
+**Wat wordt geïmplementeerd:** De infrastructuur en geselecteerde opties van het voorbeeld bepalen het model, de tools, hosting en monitoringresources. Bekijk de README en `infra/` voor provisioning; ga er niet van uit dat elk agent-template Search of een webinterface bevat.
 
 **Tijd:** ~15-20 minuten
-**Kosten:** ~$100-150/maand (ontwikkeling)
+**Kost:** ~$100-150/maand (ontwikkeling)
 
-### Optie 2: Creatieve Schrijfagenten met Prompty
+### Optie 2: Creatief Schrijven Agents met Prompty
 
 ```bash
 # Initialize the Prompty-based agent template
@@ -92,10 +92,10 @@ azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 azd up
 ```
 
-**Wat er wordt geïmplementeerd:** Een FastAPI/Prompty multi-agent schrijf-sample met Azure OpenAI, Bing Grounding en Azure AI Search. De voormalige `agent-openai-python-prompty` repository verwijst hierheen; het is geen minimaal Azure Functions weer-agent sjabloon. Volg de actuele README voor hosting, modelquota en Bing Grounding vereisten.
+**Wat wordt geïmplementeerd:** Een FastAPI/Prompty multi-agent schrijfsample met Azure OpenAI, Bing Grounding en Azure AI Search. Het voormalige `agent-openai-python-prompty` repository verwijst hierheen; het is geen minimale Azure Functions weather-agent template. Volg de huidige README voor hosting, modelquota en Bing Grounding vereisten.
 
 **Tijd:** ~10-15 minuten
-**Kosten:** ~$50-100/maand (ontwikkeling)
+**Kost:** ~$50-100/maand (ontwikkeling)
 
 ### Optie 3: RAG Chat Agent
 
@@ -107,54 +107,50 @@ azd init --template azure-search-openai-demo .
 azd up
 ```
 
-**Wat er wordt geïmplementeerd:**
+**Wat wordt geïmplementeerd:**
 - ✅ Microsoft Foundry Modellen
-- ✅ Azure AI Search met sample data
+- ✅ Azure AI Search met voorbeelddata
 - ✅ Documentverwerkingspipeline
-- ✅ Chatinterface met citaten
+- ✅ Chatinterface met citaties
 
 **Tijd:** ~15-25 minuten
-**Kosten:** ~$80-150/maand (ontwikkeling)
+**Kost:** ~$80-150/maand (ontwikkeling)
 
-### Optie 4: AZD AI Agent Init (Project Sjabloon Voorbeeld)
+### Optie 4: Gehoste Agent met de GA Foundry Bundle
 
-Gebruik `azd ai agent init` interactief, of neem een huidig `azure.yaml` agent project over met `--template`/`-t`. De oude `--manifest`/`-m` optie is een verouderde alias, geen converter voor legacy manifesten.
+Gebruik de [complete hosted-agent walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) voor het basisvoorbeeld Python Agent Framework Responses API. Dit deployment-traject vereist Python 3.13+, actuele uv, Foundry-permissies en regionale modelquota. Verifieer lokale SDK-aanroepen apart bij gebruik van Azure CLI-referenties.
 
 ```bash
-# Install the AI agents extension
-azd extension install azure.ai.agents
-
-# Optional: verify the installed preview version
-azd extension show azure.ai.agents
-
-# Initialize from a current agent project template (supply your template path)
-azd ai agent init --template ./templates/support-agent/azure.yaml
-
-# Deploy to Azure
-azd up
-
-# Test the deployed agent (shows latency + time-to-first-byte)
-azd ai agent invoke
+azd auth login
+azd ext install microsoft.foundry
 ```
+
+Initialiseer het voorbeeld in de lege map:
+
+```text
+azd ai agent init --template https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml --deploy-mode code --src .
+```
+
+Kies een nieuw of bestaand project, bekijk `azure.yaml`, en voer `azd provision` uit. Gebruik `azd ai agent run` om Agent Inspector te openen en, vanuit een andere terminal in die map, `azd ai agent invoke --local "Explain how this agent is hosted."`. Na lokale verificatie, gebruik `azd deploy` en `azd ai agent invoke "Explain how this agent is hosted."` om de geïmplementeerde response te vergelijken. Foundry bouwt de geüploade bron op afstand; lokaal container bouwen is niet vereist.
 
 **Wanneer gebruik je `azd ai agent init` versus `azd init --template`:**
 
-| Aanpak | Geschikt Voor | Hoe Het Werkt |
+| Benadering | Geschikt Voor | Hoe Het Werkt |
 |----------|----------|------|
-| `azd init --template` | Beginnen met een werkende sample-app | Klonen van een volledige template repo met code + infra |
-| `azd ai agent init --template` | Overnemen van een huidig Foundry agent project | Gebruikt een `azure.yaml` projectdocument en definities |
+| `azd init --template` | Starten vanuit een werkende voorbeeldapp | Cloneert een compleet template repository met code + infra |
+| `azd ai agent init --template` | Overnemen van een huidig Foundry agent project | Gebruikt een `azure.yaml` projectdocument en de definities |
 
-> **Tip:** Gebruik `azd init --template` voor het leren (Opties 1-3 hierboven). Gebruik `azd ai agent init` voor de Foundry agent workflow. Wil je een directe agent-definitie toevoegen aan een bestaand project, bekijk dan [initialisatie en migratie gids](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
+> **Tip:** Opties 1-3 starten vanuit volledige applicatiesjablonen; Optie 4 leert de GA hosted-agent workflow. Geen van beide initialisatiecommando's migreert automatisch legacy agent-manifesten. Voor directe agent-definitie aan een bestaand project, zie [initialisatie- en migratierichtlijnen](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Na `azd up` gebruik je `azd ai agent invoke` om te testen, de aparte `azure.ai.evaluations` extensie (`azd ai eval init`, `generate`, en `run start`) om kwaliteit te meten, en `azd ai agent optimize` om te verbeteren met de nieuwe evaluatieconfiguratie. Agents beta.22 verving de legacy evaluatieworkflow en veranderde het optimalisatie `--config` formaat. Zie [evaluatie migratie](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) en [optimalisatie migratie](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) voordat je oude voorbeelden hergebruikt.
+Installeer `azure.ai.evaluations` apart om testdata/rubrieken te genereren en te bekijken, configureren een evaluatie en voer deze uit met `azd ai eval`. Optimalisatie kan een compatibele evaluatie hergebruiken; bekijk kandidaten voordat je expliciet één implementeert. Volg de [evaluatie workflow](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) en [optimalisatie migratie](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) voor hergebruik van oudere voorbeelden. Voor opruiming blijven de resources bij hergebruik van een Foundry project na `azd down` bestaan; bij nieuw creatie wordt de resourcegroep verwijderd. Zie de [walkthrough opruimrichtlijnen](microsoft-foundry-integration.md#7-clean-up-deliberately).
 
 ---
 
-## 🏗️ Agent Architectuurpatronen
+## 🏗️ Agent Architectuur Patronen
 
 ### Patroon 1: Enkele Agent met Tools
 
-Het eenvoudigste agentpatroon - één agent die meerdere tools kan gebruiken.
+Het eenvoudigste agent-patroon - één agent die meerdere tools kan gebruiken.
 
 ```mermaid
 graph TD
@@ -167,13 +163,13 @@ graph TD
 **Geschikt voor:**
 - Klantenservice bots
 - Onderzoeksassistenten
-- Data analyse agenten
+- Data-analyse agenten
 
-**Gerelateerde applicatie sample:** `azure-search-openai-demo` toont RAG, geen generieke willekeurige-tool agentlus.
+**Gerelateerd applicatievoorbeeld:** `azure-search-openai-demo` demonstreert RAG, niet een generieke willekeurige-tool agentcyclus.
 
 ### Patroon 2: RAG Agent (Retrieval-Augmented Generation)
 
-Een agent die relevante documenten opzoekt voordat hij responsen genereert.
+Een agent die relevante documenten ophaalt voordat hij antwoorden genereert.
 
 ```mermaid
 graph TD
@@ -186,10 +182,10 @@ graph TD
 
 **Geschikt voor:**
 - Enterprise kennisbanken
-- Document Vraag & Antwoord systemen
-- Compliance en juridische research
+- Document Q&A systemen
+- Compliance en juridisch onderzoek
 
-**AZD Sjabloon:** `azure-search-openai-demo`
+**AZD Template:** `azure-search-openai-demo`
 
 ### Patroon 3: Multi-Agent Systeem
 
@@ -204,20 +200,20 @@ graph TD
 
 **Geschikt voor:**
 - Complexe contentgeneratie
-- Meerdere workflow stappen
-- Taken met verschillende expertisegebieden
+- Meerstaps workflows
+- Taken die verschillende expertise vereisen
 
-**Meer leren:** [Multi-Agent Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md)
+**Meer leren:** [Multi-Agent Coordinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Tools voor Agent Configureren
+## ⚙️ Agent Tools Configureren
 
-Agenten worden krachtig als zij tools kunnen gebruiken. Zo configureer je veelgebruikte tools:
+Agenten worden krachtig als ze tools kunnen gebruiken. Zo configureer je veelgebruikte tools:
 
 ### Toolconfiguratie in Foundry Agents
 
-Dit **klassiek Agent Service SDK fragment** richt zich op `azure-ai-projects==1.0.0` en `azure-ai-agents==1.1.0` met `azure-identity`. Het is niet de nieuwere versioned-agent/Responses API die sommige huidige Foundry sjablonen gebruiken, noch de `azure.ai.agents` AZD extensie (een ander pakket). Meng deze API-generaties niet. Stel `PROJECT_ENDPOINT` in op een klassiek Foundry project endpoint en `MODEL_DEPLOYMENT_NAME` op een bestaande ondersteunde model-implementatie; authenticatie met `az login` lokaal en geef vereiste projectrechten.
+Dit **klassieke Agent Service SDK-fragment** richt zich op `azure-ai-projects==1.0.0` en `azure-ai-agents==1.1.0` met `azure-identity`. Het is niet de nieuwere versioned-agent/Responses API die in sommige actuele Foundry templates wordt gebruikt, noch de `azure.ai.agents` AZD-extensie (een ander pakket). Meng deze API-generaties niet. Stel `PROJECT_ENDPOINT` in op een klassiek Foundry project endpoint en `MODEL_DEPLOYMENT_NAME` op een bestaande ondersteunde modelimplementatie; authenticatie op lokale SDK gebeurt met `az login` en verleen de benodigde projectrechten.
 
 ```python
 # agent_config.py
@@ -249,11 +245,11 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-Het registreren van een funktieschema voert geen Python uit op de service. In deze SDK draait `enable_auto_function_calls` plus `agents.runs.create_and_process(...)` geregistreerde callbacks in je clientproces. Zie de [uitgebrachte SDK voorbeeld](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Sluit de client en verwijder demonstratie-agenten/threads na gebruik.
+Het registreren van een functie-schema voert geen Python uit op de service. In deze SDK voert `enable_auto_function_calls` plus `agents.runs.create_and_process(...)` geregistreerde callbacks uit in je clientproces. Zie het [uitgebrachte SDK-voorbeeld](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Sluit de client en verwijder demonstratieagenten/threads na gebruik.
 
 ### Omgevingsconfiguratie
 
-De volgende namen zijn **illustratieve custom-template invoer**, geen ingebouwde AZD-schakelaars. Verwerk elke waarde eerst via `infra/main.parameters.json`, infrastructuur en applicatiecode. Alleen `azd env set` verandert niet de tools of instructies van een agent.
+De volgende namen zijn **illustratieve custom-template inputs**, geen ingebouwde AZD-schakelaars. Voer elke waarde eerst door `infra/main.parameters.json`, infrastructuur en applicatiecode. Alleen `azd env set` verandert niet de tools of instructies van een agent.
 
 ```bash
 # Set up agent-specific environment variables
@@ -268,11 +264,11 @@ azd up
 
 ---
 
-## 📊 Agenten Monitoren
+## 📊 Agent Monitoring
 
 ### Integratie met Application Insights
 
-Als je geselecteerde sjabloon Application Insights provisioneert en instrumentatie configureert:
+Als je geselecteerde template Application Insights implementeert en instrumentatie configureert:
 
 ```bash
 # Open monitoring dashboard
@@ -285,15 +281,15 @@ azd monitor --logs
 azd monitor --live
 ```
 
-### Belangrijke Metrics om te Volgen
+### Belangrijke statistieken om te volgen
 
-| Metric | Beschrijving | Doel |
-|--------|-------------|------|
-| Responsvertraging | Tijd om respons te genereren | < 5 seconden |
-| Tokengebruik | Tokens per aanvraag | Monitor voor kosten |
-| Succespercentage Tools | % geslaagde tooluitvoeringen | > 95% |
-| Foutpercentage | Mislukte agent-aanvragen | < 1% |
-| Gebruikerstevredenheid | Feedbackscores | > 4,0/5,0 |
+| Statistiek | Beschrijving | Doel |
+|--------|-------------|--------|
+| Respons-latentie | Tijd om antwoord te genereren | < 5 seconden |
+| Tokengebruik | Tokens per verzoek | Monitor voor kosten |
+| Succespercentage tool-aanroepen | % succesvolle uitvoering tools | > 95% |
+| Foutpercentage | Mislukte agent-verzoeken | < 1% |
+| Gebruikerstevredenheid | Feedbackscores | > 4.0/5.0 |
 
 ### Aangepaste Logging voor Agenten
 
@@ -319,31 +315,31 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Opmerking:** Installeer het benodigde pakket: `pip install azure-monitor-opentelemetry`. Deze brengt de OpenTelemetry afhankelijkheden mee; de import namespace is geen vereiste om een pakket genaamd `opentelemetry` te installeren.
+> **Opmerking:** Installeer het vereiste pakket: `pip install azure-monitor-opentelemetry`. Het brengt OpenTelemetry afhankelijkheden mee; de importnamespace is geen vereiste om een pakket genaamd `opentelemetry` te installeren.
 
 ---
 
 ## 💰 Kostenoverwegingen
 
-### Geschatte Maandelijkse Kosten per Patroon
+### Geschatte maandelijkse kosten per patroon
 
-Dit zijn illustratieve planningsranges, geen offertes of uitgavelimieten. Regio, modeltokens, Search/compute SKUs, tool sessies, opslag en verkeer kunnen hoger uitpakken. Bekijk de kosteninstructies van de sample en Azure prijzen vóór `azd up`.
+Dit zijn illustratieve planningsbereiken, geen offertes of uitgavelimieten. Regio, modeltokens, Search/compute SKUs, tool-sessies, opslag en verkeer kunnen deze overschrijden. Controleer de kostengids en Azure-prijzen van het voorbeeld voor `azd up`.
 
-| Patroon | Ontwikkomgeving | Productie |
+| Patroon | Ontwikkelomgeving | Productie |
 |---------|-----------------|------------|
 | Enkele Agent | $50-100 | $200-500 |
 | RAG Agent | $80-150 | $300-800 |
 | Multi-Agent (2-3 agenten) | $150-300 | $500-1,500 |
 | Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
 
-### Tips voor Kostenoptimalisatie
+### Tips voor kostenoptimalisatie
 
-1. **Gebruik gpt-4.1-mini voor eenvoudige taken** (alleen als je sjabloon deze input gebruikt)
+1. **Gebruik gpt-4.1-mini voor eenvoudige taken** (alleen als je template dit invoer gebruikt)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Implementeer scoped caching voor veilige, herhaalde queries.** Neem tenant-/gebruikersautorisatie, modelimplementatie, instructies en retrieval-versie op in de cache key; stel een vervaldatum in. Deel geen privé gespreksantwoorden via een systeemwijd alleen-lezen query cache. Het SDK agent object heeft geen generieke `agent.run()` methode.
+2. **Implementeer scoped caching voor veilige, herhaalde queries.** Neem tenant-/gebruikersautorisatie, modelimplementatie, instructies en retrievalversie op in de cache key; stel een vervaltijd in. Deel geen privégespreksantwoorden via een proces-brede query-only cache. Het SDK agent object heeft geen generieke `agent.run()` methode.
 
 3. **Stel tokenlimieten per run in**
    ```python
@@ -355,18 +351,18 @@ Dit zijn illustratieve planningsranges, geen offertes of uitgavelimieten. Regio,
    )
    ```
 
-4. **Schaal Container Apps die hiervoor in aanmerking komen naar nul wanneer niet in gebruik**
+4. **Schaal geschikte Container Apps naar nul als ze niet gebruikt worden**
    ```bash
    # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
-   Pas de infrastructuurwijziging toe met `azd provision` of `azd up`. Schalen naar nul heeft een geschikte trigger nodig en stopt Search, opslag of model/tool kosten niet.
+   Voer de infrastructuurwijziging uit met `azd provision` of `azd up`. Schalen naar nul vereist een geschikte trigger en stopt Search, opslag of model/tool kosten niet.
 
 ---
 
-## 🔧 Probleemoplossing Agenten
+## 🔧 Problemen Oplossen met Agenten
 
-### Veelvoorkomende Problemen en Oplossingen
+### Veelvoorkomende problemen en oplossingen
 
 <details>
 <summary><strong>❌ Agent reageert niet op tool-aanroepen</strong></summary>
@@ -385,13 +381,13 @@ azd monitor --logs
 ```
 
 **Veelvoorkomende oorzaken:**
-- Tool functie handtekening komt niet overeen
-- Vereiste rechten ontbreken
+- Niet-overeenkomende tool functiesignatuur
+- Ontbrekende vereiste permissies
 - API endpoint niet toegankelijk
 </details>
 
 <details>
-<summary><strong>❌ Hoge latency in agentrespons</strong></summary>
+<summary><strong>❌ Hoge latentie in agentantwoorden</strong></summary>
 
 ```bash
 # Check Application Insights for bottlenecks
@@ -403,13 +399,13 @@ azd up
 ```
 
 **Optimalisatietips:**
-- Gebruik streaming responses
+- Gebruik streaming-responses
 - Implementeer response caching
-- Verklein context window grootte
+- Verminder de contextvenstergrootte
 </details>
 
 <details>
-<summary><strong>❌ Agent geeft verkeerde of verzonnen informatie</strong></summary>
+<summary><strong>❌ Agent geeft onjuiste of gefantaseerde informatie</strong></summary>
 
 ```python
 # Improve with better system prompts
@@ -426,11 +422,11 @@ You are a helpful assistant. IMPORTANT:
 # then use FileSearchTool(vector_store_ids=[...]) and pass both its
 # .definitions and .resources when creating the agent.
 ```
-Instructies en retrieval verminderen risico; geen van beide garandeert feitelijke antwoorden. Evalueer gefundeerde en out-of-scope vragen tegen bekende antwoorden.
+Instructies en retrieval verminderen risico; geen van beide garandeert feitelijke antwoorden. Evalueer gegronde en out-of-scope vragen tegen bekende antwoorden.
 </details>
 
 <details>
-<summary><strong>❌ Tokenlimiet overschreden fouten</strong></summary>
+<summary><strong>❌ Foutmeldingen tokenlimiet overschreden</strong></summary>
 
 ```python
 # Implement context window management
@@ -450,12 +446,12 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
-Deze helper sluit rol/tool schemas uit, systeeminstructies, afbeeldingtokens en protocol overhead. Reserveer ruimte hiervoor en voor de completion; splitst tool-call/result paar niet en verwijder vereiste systeeminstructies niet. Installeer `tiktoken` apart. Het is geen algemene context-window validator.
+Deze helper sluit rol-/tool-schema's, systeeminstructies, beeldtokens en protocol-overhead uit. Reserveer ruimte voor deze en de completion; splits tool-aanroep/resultaat paren niet en verwijder vereiste systeeminstructies niet. Installeer `tiktoken` apart. Het is geen algemene contextvenster-validator.
 </details>
 
 ---
 
-## 🎓 Hands-on Oefeningen
+## 🎓 Praktische Oefeningen
 
 ### Oefening 1: Implementeer een Basis Agent (20 minuten)
 
@@ -481,20 +477,20 @@ azd up
 # Step 5: View monitoring
 azd monitor --overview
 
-# Step 6: Clean up
-azd down --force --purge
+# Step 6: Review the listed resources and confirm cleanup
+azd down
 ```
 
 **Succescriteria:**
 - [ ] Agent reageert op vragen
-- [ ] Kan de monitoring dashboard bereiken via `azd monitor`
-- [ ] Resources succesvol opgeruimd
+- [ ] Kan toegang krijgen tot het monitoringdashboard via `azd monitor`
+- [ ] Resources zijn succesvol opgeruimd
 
-### Oefening 2: Voeg een Aangepaste Tool toe (30 minuten)
+### Oefening 2: Voeg een aangepaste tool toe (30 minuten)
 
 **Doel:** Breid een agent uit met een aangepaste tool
 
-**Startpunt:** Gebruik de klassieke SDK client van [Toolconfiguratie](#tool-configuration-in-foundry-agents), niet een willekeurig sjabloon met een andere SDK-generatie.
+**Startpunt:** Gebruik de klassieke SDK-client van [Tool Configuration](#tool-configuration-in-foundry-agents), niet een willekeurige template met een andere SDK-generatie.
 
 1. Voeg deze deterministische fixture toe aan `agent_config.py`:
    ```python
@@ -507,7 +503,7 @@ azd down --force --purge
        print(f"TOOL_CALLED: {location}")
        return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-2. Vervang het blok voor registratie en creatie van de zoektool door:
+2. Vervang het registratie- en creatieblok van search-tool door:
    ```python
    weather_tool = FunctionTool(functions={get_weather})
    project_client.agents.enable_auto_function_calls(weather_tool)
@@ -535,7 +531,7 @@ azd down --force --purge
        project_client.agents.delete_agent(agent.id)
        project_client.close()
    ```
-3. Voer lokaal uit (dit roept het bestaande Azure-project aan en brengt modelkosten met zich mee):
+3. Draai lokaal (dit roept het bestaande Azure-project aan en veroorzaakt modelkosten):
    ```bash
    python agent_config.py
    # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
@@ -544,9 +540,9 @@ azd down --force --purge
 **Succescriteria:**
 - [ ] Agent herkent weergerelateerde vragen
 - [ ] Tool wordt correct aangeroepen
-- [ ] Antwoord bevat weerinformatie
+- [ ] Antwoord bevat weersinformatie
 
-### Oefening 3: Bouw een RAG Agent (45 minuten)
+### Oefening 3: Bouw een RAG-agent (45 minuten)
 
 **Doel:** Maak een agent die vragen beantwoordt vanuit je documenten
 
@@ -568,47 +564,47 @@ azd up
 ```
 
 **Succescriteria:**
-- [ ] Agent beantwoordt vanuit geüploade documenten
+- [ ] Agent antwoordt vanuit geüploade documenten
 - [ ] Antwoorden bevatten citaties
-- [ ] Testvragen buiten scope worden afgehandeld zonder ongefundeerde beweringen (geen garantie voor elke toekomstige vraag)
+- [ ] Vragen buiten scope worden afgehandeld zonder niet-ondersteunde beweringen (geen garantie voor elke toekomstige vraag)
 
-Als `USE_CLOUD_INGESTION=true` wordt gebruikt, gebruik dan in plaats daarvan de voorbeeldworkflow voor cloudingesting/upload; de lokale wrapper slaat opzettelijk ingestion over. Na het testen, voer `azd down` uit in de RAG-omgeving en bekijk de te verwijderen resources.
+Als `USE_CLOUD_INGESTION=true`, gebruik dan de cloud-ingsetal-/uploadworkflow van het voorbeeld; de lokale wrapper slaat bewust de ingestie over. Na het testen, voer `azd down` uit in de RAG-omgeving en bekijk de te verwijderen resources.
 
 ---
 
-## 📚 Volgende Stappen
+## 📚 Volgende stappen
 
-Nu je AI-agents begrijpt, verken deze geavanceerde onderwerpen:
+Nu je AI-agenten begrijpt, verken deze geavanceerde onderwerpen:
 
 | Onderwerp | Beschrijving | Link |
 |-------|-------------|------|
-| **Multi-Agent Systemen** | Bouw systemen met meerdere samenwerkende agents | [Retail Multi-Agent Voorbeeld](../../examples/retail-scenario.md) |
-| **Coördinatiepatronen** | Leer orkestratie- en communicatiepatronen | [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Productie-implementatie** | Enterprise-gereed agent-implementatie | [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluatie** | Test en evalueer agentprestaties | [AI Probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Multi-agent systemen** | Bouw systemen met meerdere samenwerkende agenten | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
+| **Coördinatiepatronen** | Leer orkestratie- en communicatiepatronen | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Productie-implementatie** | Agent-implementatie klaar voor de onderneming | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **Agent-evaluatie** | Test en evalueer agentprestaties | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
 | **AI Workshop Lab** | Praktijk: Maak je AI-oplossing AZD-klaar | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Aanvullende Bronnen
+## 📖 Aanvullende bronnen
 
-### Officiële Documentatie
+### Officiële documentatie
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### AZD-sjablonen voor Agents
-- [Begin met AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Creatieve Schrijvers Agents met Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
+### AZD-templates voor agenten
+- [Aan de slag met AI-agenten](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Creatieve schrijfagenten met Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### Communitybronnen
-- [Geweldige AZD - Agent Sjablonen](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Agent Skills voor je Editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Installeer herbruikbare AI agent vaardigheden voor Azure-ontwikkeling in GitHub Copilot, Cursor, of elke ondersteunde agent. Bevat vaardigheden voor [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [implementatie](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), en [diagnostiek](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Agentvaardigheden voor je editor
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Installeer herbruikbare AI-agentvaardigheden voor Azure-ontwikkeling in GitHub Copilot, Cursor, of elke ondersteunde agent. Bevat vaardigheden voor [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [implementatie](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), en [diagnostiek](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -616,8 +612,8 @@ Nu je AI-agents begrijpt, verken deze geavanceerde onderwerpen:
 ---
 
 **Navigatie**
-- **Vorige Les**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
-- **Volgende Les**: [AI Model Implementatie](ai-model-deployment.md)
+- **Vorige les**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **Volgende les**: [AI Model Deployment](ai-model-deployment.md)
 
 ---
 

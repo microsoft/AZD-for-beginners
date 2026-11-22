@@ -1,44 +1,44 @@
-# Mga Pangunahing Kaalaman sa Multi-Agent - I-deploy ang Iyong Unang Naka-Koordina na AI System
+# Mga Pangunahing Kaalaman sa Multi-Agent - I-deploy ang Iyong Unang Nakoordinadong Sistema ng AI
 
-**Pag-navigate sa Kabanata:**
-- **📚 Tahanan ng Kurso**: [AZD For Beginners](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 5 - Multi-Agent AI Solutions
-- **⬅️ Nakaraang Kabanata**: [Kabanata 4: Infrastructure](../chapter-04-infrastructure/README.md)
+**Pag-navigate ng Kabanata:**
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 5 - Mga Solusyong Multi-Agent AI
+- **⬅️ Nakaraan**: [Kabanata 4: Imprastraktura](../chapter-04-infrastructure/README.md)
 - **➡️ Susunod**: [Mga Pattern ng Koordinasyon](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Sinuri ang gabay sa utos laban sa inilabas na `azd 1.37.2` reference. Hindi naisagawa ang mga deployment sa cloud.
+> Sinuri ang gabay sa utos laban sa inilabas na reperensiyang `azd 1.37.2`. Hindi isinagawa ang mga cloud deployment.
 
 ## Panimula
 
-Sa mga naunang kabanata, nag-deploy ka ng isang application—at sa Kabanata 2, nag-deploy ka ng isang AI agent. Ang araling ito ay sumusulong: i-deploy ang **multi-agent system**, kung saan ilang mga espesyalistang agent ang nagtutulungan upang lutasin ang isang problema na hindi kaya ng isang agent nang mag-isa.
+Sa mga naunang kabanata, nag-deploy ka ng isang aplikasyon—at sa Kabanata 2, nag-deploy ka ng isang AI agent. Ang araling ito ay sumusunod sa susunod na hakbang: pag-deploy ng isang **multi-agent system**, kung saan ang ilang mga espesyalistang agent ay nagtutulungan upang lutasin ang isang problema na hindi kayang gawin ng isang agent nang mag-isa nang mabuti.
 
-Ang magandang balita para sa mga nagsisimula: **hindi mo kailangan ng bagong mga utos.** Ang multi-agent solution ay isa pa ring azd project. Mag-`azd init`, `azd up`, susubok, at mag-`azd down` ka—eksaktong proseso na alam mo na. Ang nagbabago ay ang *hugis* ng app sa loob.
+Ang magandang balita para sa mga nagsisimula: **hindi mo kailangan ng mga bagong utos.** Ang multi-agent na solusyon ay isa pa ring azd project. Gagawa ka ng `azd init`, `azd up`, mag-tetest, at `azd down`—eksakto ang workflow na alam mo na. Ang nagbabago ay ang *hugis* ng app sa loob.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa katapusan ng araling ito, matututuhan mo ang mga sumusunod:
-- Maunawaan kung ano ang ibig sabihin ng "multi-agent" at kung kailan sulit ang dagdag na komplikasyon
-- Kilalanin ang mga karaniwang papel sa isang multi-agent system (orchestrator + mga espesyalista)
-- Mag-deploy ng isang tunay at gumaganang multi-agent template gamit ang `azd up`
-- Maunawaan ang mga Azure resources na sumusuporta sa isang multi-agent app
-- Malaman kung paano i-verify, i-customize, at ligtas na i-tear down ang solusyon
+Sa pagtatapos ng araling ito,:
+- Maiintindihan mo kung ano ang ibig sabihin ng "multi-agent" at kailan ito sulit sa karagdagang kumplikasyon
+- Makikilala mo ang karaniwang mga papel sa multi-agent system (orchestrator + mga espesyalista)
+- Magde-deploy ng totoong gumaganang multi-agent template gamit ang `azd up`
+- Maiintindihan mo ang mga Azure resources na sumusuporta sa multi-agent app
+- Malalaman mo kung paano beripikahin, baguhin, at ligtas na alisin ang solusyon
 
 ## Mga Kinalabasan ng Pagkatuto
 
-Pagkatapos makumpleto ang araling ito, magagawa mong:
-- Ipaliwanag ang pagkakaiba ng isang single agent at isang multi-agent system
-- Pumili sa pagitan ng isang single agent na may tools at isang tunay na multi-agent design
-- Mag-deploy at subukan ang isang multi-agent template mula simula hanggang matapos gamit ang azd
-- Tukuyin kung saan tumatakbo ang bawat agent at kung paano sila nagkakausap
-- Linisin lahat ng resources upang maiwasan ang tuloy-tuloy na singil
+Pagkatapos makumpleto ang araling ito, magagawa mo:
+- Ipaliliwanag ang pagkakaiba sa pagitan ng isang solong agent at isang multi-agent system
+- Pumili sa pagitan ng isang solong agent na may mga kagamitan at isang tunay na disenyo ng multi-agent
+- Mag-deploy at mag-test ng multi-agent template mula umpisa hanggang dulo gamit ang azd
+- Tukuyin kung saan tumatakbo ang bawat agent at kung paano sila nag-uusap
+- Linisin ang lahat ng resources upang maiwasan ang tuloy-tuloy na singil
 
 ---
 
 ## Ano ang Multi-Agent System?
 
-Ang isang AI agent ay isang modelo na may set ng mga utos at (opsyonal) mga tools. Epektibo ito para sa mga tiyak na gawain. Ngunit habang lumalaki ang gawain—pananaliksik, pagsusulat, pag-edit, at pag-verify ng mga katotohanan—ang pagsiksik ng lahat sa isang prompt ay nagpapabagal sa agent, nagpapababa ng pagiging maaasahan, at nagpapahirap sa pag-debug.
+Isang AI agent ay isang modelo na may hanay ng mga utos at (opsyonal) ilang mga kagamitan. Maayos ito para sa mga nakatuong gawain. Ngunit habang lumalaki ang gawain—pananaliksik, pagsulat, pag-edit, pag-fact-check—ang pagsiksik ng lahat sa isang prompt ay nagpapabagal, nagpapababa ng katatagan, at nagpapahirap sa pag-debug ng agent.
 
-Ang **multi-agent system** ay naghahati sa trabaho sa mga espesyalista na bawat isa ay mahusay sa isang gawain, na inaayos ng isang orchestrator:
+Ang **multi-agent system** ay hinahati ang gawain sa mga espesiyalista na bawat isa ay mahusay sa isang gawain, na neko-coordinate ng isang orchestrator:
 
 ```mermaid
 graph TD
@@ -56,38 +56,38 @@ graph TD
 
 | Papel | Trabaho | Halimbawa |
 |------|-----|---------|
-| **Orchestrator** | Nagpapasya *ano ang susunod na gagawin* at nagra-route ng trabaho sa mga agent | "Unang magsaliksik, pagkatapos magsulat, pagkatapos mag-edit" |
-| **Espesyalista** | Gumagawa ng isang tiyak na gawain at nagbabalik ng resulta | Isang "mananaliksik" na nangongolekta lang ng mga katotohanan |
+| **Orchestrator** | Nagpapasiya kung *ano ang susunod na mangyayari* at nag-uugnay ng gawain sa mga agent | "Una magsaliksik, pagkatapos sumulat, pagkatapos mag-edit" |
+| **Espesyalista** | Gumagawa ng isang nakatuong gawain at nagbabalik ng resulta | Isang "researcher" na nangongolekta lang ng mga katotohanan |
 
 ### Talaga bang kailangan mo ng maraming agent?
 
-Magsimula sa simple. Gamitin ang multi-agent **kapag** totoo ang isa sa mga sumusunod:
+Magsimula sa simple. Gamitin ang multi-agent **lamang** kung alinman sa mga ito ay totoo:
 
-- ✅ Ang gawain ay may **mga malinaw na yugto** na mas mainam kung may magkakaibang mga utos (pananaliksik vs pagsulat vs pag-review)
-- ✅ Nais mong tumakbo ang mga espesyalista **ng sabay-sabay** upang makatipid ng oras
-- ✅ Kailangan ng iba't ibang mga hakbang ang **ibang mga tools o pinanggagalingang data**
-- ✅ Kailangan sabihin na ang bawat hakbang ay **maaari independiyenteng subukan at i-debug**
+- ✅ May **nagkakaibang mga yugto** ang gawain na nakikinabang sa iba't ibang mga utos (pananaliksik vs. pagsulat vs. pagrebisa)
+- ✅ Gusto mong magpatakbo ng mga espesiyalista **kasabay** para makatipid ng oras
+- ✅ Iba't ibang mga hakbang ang nangangailangan ng **ibang mga kagamitan o pinanggagalingan ng datos**
+- ✅ Kailangan mong ang bawat hakbang ay **mabisang matetest at madadagdagan ang debugging**
 
-Kung ang gawain mo ay isang simpleng tanong-sagot o simpleng pagtawag ng tool, mas madali, mas mura, at mas madaling patakbuhin ang **isang single agent na may tools** (Kabanata 2).
+Kung ang iyong gawain ay isang simpleng tanong-at-sagot o isang simpleng tawag sa kagamitan, ang **isang agent na may mga gamit** (Kabanata 2) ay mas simple, mas mura, at mas madaling patakbuhin.
 
-> **Tip para sa baguhan:** "Maraming agents" ay hindi lagi "mas mabuti." Bawat agent ay nagdadagdag ng latency, gastos, at bagong bagay na kailangang bantayan. Magdagdag ng agents lamang kung malinaw na nahahati ang problema sa mga bahagi.
+> **Tip para sa nagsisimula:** "Maraming agent" ay hindi laging "mas mabuti." Bawat agent ay nagdadagdag ng latency, gastos, at bagong bagay na imonitor. Magdagdag lang ng mga agent kapag malinaw na nahahati ang problema sa mga bahagi.
 
 ---
 
-## Dalawang Paraan sa Paggawa ng Multi-Agent sa Azure
+## Dalawang Paraan ng Paggawa ng Multi-Agent sa Azure
 
 | Paraan | Ano ito | Pinakamainam para sa |
 |----------|-----------|----------|
-| **Single agent + tools** | Isang Foundry agent na tumatawag ng mga function/tools | Simple na workflows, panimulang pag-aaral |
-| **Maramihang naka-koordinang agents** | Ilang agents na may orchestrator | Mga malinaw na yugto, sabayang trabaho, espesyalisasyon |
+| **Isang agent + mga gamit** | Isang Foundry agent na tumatawag ng mga function/kagamitan | Mga simpleng workflow, panimulang hakbang |
+| **Maraming naka-koordinadong agent** | Maraming agent na may orchestrator | Nagkakaibang yugto, sabayang trabaho, espesyalisasyon |
 
-Ang araling ito ay nakatuon sa pangalawang paraan gamit ang isang **handa nang template**, upang makita mo ang isang tunay na multi-agent system na tumatakbo bago ka gumawa ng sarili mo.
+Nakatuon ang araling ito sa pangalawang paraan gamit ang **handang template**, upang makita mo ang totoong multi-agent system na tumatakbo bago ka gumawa ng sarili mo.
 
 ---
 
-## Hands-On: Mag-deploy ng Gumaganang Multi-Agent App
+## Praktikal: Mag-deploy ng Gumaganang Multi-Agent App
 
-Mag-deploy tayo ng **Contoso Creative Writer**, isang opisyal na Azure sample na nagkokordina ng mga research, product, writing, at editing agents upang gumawa ng isang artikulo. Bago magpatuloy, tingnan ang [mga kinakailangan at gastos ng sample](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): kailangan nito ng model quota, Azure AI Search, Bing Grounding access, Python, Docker, at mga Bash-compatible na hooks. Nakadepende sa iyong subscription ang availability ng model at rehiyon; hindi ginagarantiyahan ang deployment sa pamamagitan ng pagpili ng isang partikular na rehiyon.
+Magde-deploy tayo ng **Contoso Creative Writer**, isang opisyal na Azure sample na nagpapakordina ng research, produkto, pagsulat, at editing na mga agent upang makagawa ng isang artikulo. Bago magpatuloy, tingnan ang [mga kinakailangan at gastos ng sample](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): kailangan nito ng model quota, Azure AI Search, access sa Bing Grounding, Python, Docker, at mga Bash-compatible na hook. Nakadepende sa iyong subscription ang pagkakaroon ng modelo at rehiyon; hindi ginagarantiyahan ang deployment sa pamamagitan lamang ng pagpili ng partikular na rehiyon.
 
 ### Hakbang 1: I-initialize ang template
 
@@ -99,9 +99,9 @@ mkdir creative-writer && cd creative-writer
 azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Magsuri ng iba pang multi-agent templates anumang oras sa [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Ang mga iba pang opsyon para sa mga baguhan ay kasama ang `get-started-with-ai-agents` at `azure-ai-travel-agents`.
+> Mag-browse ng iba pang multi-agent templates anumang oras sa [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Kasama rin sa iba pang mga madaling gamitin para sa mga nagsisimula ang `get-started-with-ai-agents` at `azure-ai-travel-agents`.
 
-### Hakbang 2: I-authenticate
+### Hakbang 2: Mag-authenticate
 
 ```bash
 # Required for azd workflows
@@ -120,7 +120,7 @@ azd env list
 # azd env new dev
 ```
 
-### Hakbang 4: Tingnan muna, pagkatapos ay mag-deploy
+### Hakbang 4: I-preview, pagkatapos mag-deploy
 
 ```bash
 # See what will be created before spending anything (recommended)
@@ -130,45 +130,45 @@ azd provision --preview
 azd up
 ```
 
-Hinihiling ng `azd up` ang mga nawawalang subscription at region settings, pagkatapos ay magpo-provision ng mga resources at mag-deploy ng application. Ang preview ay hindi nagre-reserve ng quota o naggagarantiya ng tagumpay; maaaring tumakbo pa rin ang mga template hooks sa panahon ng provisioning preview kaya suriin muna ang mga iyon. Para pahabain kung gaano katagal maghihintay ang azd para sa bawat **service deployment** (hindi model provisioning):
+Ang `azd up` ay magtatanong para sa kulang na mga setting ng subscription at rehiyon, pagkatapos ay magbibigay ng resources at magde-deploy ng aplikasyon. Ang preview ay hindi nagtatabi ng quota o nagpapangako ng tagumpay; maaaring tumakbo pa rin ang mga hook ng template habang sa provisioning preview, kaya suriin muna ito. Para palawigin kung gaano katagal maghihintay ang azd para sa bawat **pag-deploy ng serbisyo** (hindi pag-provision ng modelo):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-Humihinto ang timeout sa paghihintay ng azd; hindi nito kinakansela ang deployment sa Azure. Suriin ang estado ng resource bago muling subukan.
+Hihinto ang timeout sa paghihintay ng azd; hindi nito kinakansela ang deployment sa Azure. Suriin ang estado ng resource bago subukang muli.
 
-> **Babala sa gastos at kapasidad:** Ang mga multi-agent apps ay nag-de-deploy ng AI models na kumokonsumo ng quota at nagdudulot ng gastos. Kung nabigo ang `azd up` sa model quota, tingnan ang [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) para sa mga ayos sa rehiyon at quota, at Kabanata 6 [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md).
+> **Babala tungkol sa gastos at kapasidad:** Nagde-deploy ang multi-agent apps ng mga AI models na kumokonsumo ng quota at nagdudulot ng gastos. Kung mabigo ang `azd up` sa model quota, tingnan ang [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) para sa mga pag-aayos sa rehiyon at quota, at Kabanata 6 [Pagpaplano ng Kapasidad](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Pag-unawa sa iyong na-deploy
+## Pag-unawa sa Iyong Na-deploy
 
-Ang tipikal na multi-agent app tulad nito ay nagpo-provision ng mga Azure resources na diretsong tumutugma sa mga responsibilidad sa diagram sa itaas:
+Ang isang tipikal na multi-agent app tulad nito ay nagpo-provision ng isang set ng mga Azure resources na direktang tumutugma sa mga responsibilidad sa diagram sa itaas:
 
 | Resource | Bakit ito nandiyan |
 |----------|----------------|
-| **Microsoft Foundry / Models** | Kung saan naka-host ang language models na ginagamit ng bawat agent |
-| **Azure AI Search** | Nagbibigay sa researcher agent ng grounded na datos para sa paghahanap |
-| **Container Apps** (o App Service) | Naka-host ang orchestrator at agent code |
-| **Cosmos DB** (sa ilang samples) | Nagsisilbing shared state/memory na ipinapasa sa pagitan ng mga agent |
-| **Application Insights** | Nag-track ng mga request *sa lahat* ng agents para mag-debug ng flow |
+| **Microsoft Foundry / Mga Modelo** | Nagho-host ng mga language model na ginagamit ng bawat agent |
+| **Azure AI Search** | Nagbibigay sa researcher agent ng grounded na data para hanapin |
+| **Container Apps** (o App Service) | Nagho-host ng orchestrator at code ng agent |
+| **Cosmos DB** (sa ilang sample) | Nagtatago ng shared state/memory na ipinapasa sa mga agent |
+| **Application Insights** | Nagsusubaybay ng mga request *sa pagitan* ng mga agent para ma-debug ang daloy |
 
-### Paano nagkukuwentuhan ang mga agent
+### Paano nag-uusap ang mga agent sa isa't isa
 
-Sa karamihan ng azd multi-agent samples, ang **orchestrator ay tumatakbo sa iyong application code** (halimbawa, gamit ang framework tulad ng Semantic Kernel o Microsoft Agent Framework). Tumatawag ang orchestrator sa bawat specialist agent nang sunud-sunod, ipinapasa ang mga resulta, at binubuo ang panghuling sagot. Nagbabahaginan ang mga agent ng konteksto sa pamamagitan ng:
+Sa karamihan ng mga azd multi-agent na sample, ang **orchestrator ay tumatakbo sa iyong application code** (halimbawa, gamit ang isang framework tulad ng Semantic Kernel o Microsoft Agent Framework). Tinatawag ng orchestrator ang bawat espesyalistang agent isa-isa, ipinapasa ang mga resulta, at pinagsasama-sama ang panghuling sagot. Ang mga agent ay nagbabahagi ng konteksto sa pamamagitan ng:
 
-- **Function/tool calls** — tinatawag ng orchestrator ang isang espesyalista at nakakakuha ng resulta
-- **Shared memory** — isang database (madalas Cosmos DB) ang humahawak ng estado na mababasa ng dalawang agent
-- **Messages/events** — para sa mas maluwag na koneksyon, nakikipag-ugnayan ang mga agent sa pamamagitan ng queue o Service Bus
+- **Mga tawag sa function/kagamitan** — tinatawag ng orchestrator ang isang espesyalistang agent at bumabalik ang resulta
+- **Shared memory** — isang database (madalas Cosmos DB) ang naglalaman ng estado na pareho nilang mababasa
+- **Mga mensahe/kaganapan** — para sa mas maluwag na ugnayan, nakikipag-ugnayan ang mga agent sa pamamagitan ng queue o Service Bus
 
-> **Bakit mahalaga ito para sa pag-debug:** dahil hiwalay ang bawat hakbang, ipinapakita ng Application Insights kung aling agent ang mabagal o nabigo. Isang pangunahing dahilan ito para paghiwa-hiwalayin ang trabaho sa mga agent.
+> **Bakit mahalaga ito para sa debugging:** dahil ang bawat hakbang ay magkakahiwalay, ipinapakita ng Application Insights kung *alin* na agent ang mabagal o nabigo. Isa iyon sa mga pangunahing dahilan kung bakit hinahati ang gawain sa iba't ibang agent.
 
 ---
 
-## I-verify ang Deployment
+## Beripikahin ang Deployment
 
-Kumpirmahin na gumagana ang system bago magpatuloy:
+Kumpirmahin na aktwal na gumagana ang sistema bago magpatuloy:
 
 ```bash
 # Show the deployed endpoints
@@ -181,66 +181,68 @@ azd monitor
 azd monitor --logs
 ```
 
-Pagkatapos buksan ang app URL mula sa `azd show` at humiling ng maikling artikulo. Gamitin ang debug view ng sample para suriin ang workflow ng mga agent nito. Maaaring ipakita ng Application Insights transaction search ang mga hiwalay na hakbang kung na-instrument at na-correlate ng sample; hindi awtomatikong nadadagdagan ng azd ang mga agent spans.
+Pagkatapos buksan ang URL ng app mula sa `azd show` at humiling ng maikling artikulo. Gamitin ang debug view ng sample upang siyasatin ang workflow ng agent. Maaari ipakita ng Application Insights transaction search ang mga indibidwal na hakbang kung na-instrument at na-correlate ang mga ito; hindi awtomatikong nagdadagdag ang azd ng agent spans.
 
-**Pangunahing tagumpay na mga batayan:**
-- ✅ Ipinapakita ng `azd show` ang isang makukuhang endpoint
-- ✅ Ang isang kahilingan ay nagbubunga ng resulta na malinaw na dumaan sa maraming yugto
-- ✅ Ipinapakita ng debug view ang maraming hakbang ng agent; kung naka-enable ang tracing, i-verify ang kaukulang telemetry pagkatapos ng ingestion
+**Mga pamantayan ng tagumpay:**
+- ✅ Nagtatala ang `azd show` ng isang maaabot na endpoint
+- ✅ Ang isang kahilingan ay gumagawa ng resulta na malinaw na dumaan sa maraming yugto
+- ✅ Ipinapakita ng debug view ang maraming hakbang ng agent; kung nakabukas ang tracing, beripikahin ang kaukulang telemetry pagkatapos niya ingesyon
 
 ---
 
 ## I-customize: Magdagdag o Ayusin ang isang Agent
 
-Dahil ang bawat agent ay mga utos lang dagdag tools, madaling i-customize:
+Dahil ang bawat agent ay mga utos lang na may mga ginawa, madaling i-customize:
 
-1. **Hanapin ang mga agent definitions** sa template (madalas sa isang hanay ng mga file tulad ng `prompts/`, `agents/`, o `*.prompty`).
-2. **Ayusin ang mga utos ng agent** — halimbawa, utusan ang editor agent na ipatupad ang isang partikular na tono o bilang ng salita.
-3. **I-redeploy lamang ang code** (hindi nagbabago ang imprastraktura):
+1. **Hanapin ang mga definisyon ng agent** sa template (madalas isang set ng mga file na `prompts/`, `agents/`, o `*.prompty`).
+2. **Iayos ang mga utos ng agent** — halimbawa, sabihin sa editor agent na ipatupad ang isang partikular na tono o bilang ng salita.
+3. **I-redeploy ang code lamang** (hindi binabago ang imprastraktura):
 
    ```bash
    azd deploy
    ```
 
-Para mas malalim sa sariling Foundry agent project, gamitin ang interactive initialization ng agent extension:
+Para mas mapalawak gamit ang *sariling* Foundry agent project, gamitin ang GA bundle sa AZD 1.37.0+ sa hiwalay na walang laman na direktoryo:
 
 ```bash
-azd extension install azure.ai.agents
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 azd ai agent invoke      # test, with response timing
 ```
 
-Tingnan ang [Kabanata 2: Agents](../chapter-02-ai-development/agents.md) at ang [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa kumpletong lifecycle: agent `invoke`, ang hiwalay na evaluations extension na `azd ai eval` workflow, agent `optimize`, at agent `delete`.
+Tingnan ang [GA hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) para sa lokal na pagsusuri ng Agent Inspector, pag-deploy ng remote na code, at pag-aari ng paglilinis. Tinalakay din ng [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ang mga hiwalay na evaluation extension, optimization, at pagtanggal ng agent.
 
 ---
 
-## Linisin
+## Paglilinis
 
-Ang mga multi-agent apps ay nagpapatakbo ng maraming nasisingil na serbisyo. I-tear down ang lahat kapag tapos ka na:
+Nagpapatakbo ang multi-agent apps ng maraming serbisyong pwedeng singilin. Alisin lahat kapag tapos ka na:
 
 ```bash
 # Review the resources and confirm deletion interactively
 azd down
 ```
 
-Nakapipinsala ang pagtanggal. Para sa disposable lab, nilalaktawan ng `azd down --force --purge` ang pagtanggal at suportadong mga kumpirmasyon ng soft-delete purge; ang pagpurga ay hindi na mababawi kung saan ito suportado at maaaring hadlangan ng purge protection. Ang soft deletion ay usapin ng recovery/pag-reuse ng pangalan, hindi patunay ng tuloy-tuloy na singil. Suriin ang mga natitirang resources at pagsingil pagkatapos ng paglilinis.
+Ang pagtanggal ay nakakasira. Para sa isang disposable na lab, nilalaktawan ng `azd down --force --purge` ang pagtanggal at ang mga suportadong kumpirmasyon ng soft-delete purge; irreversible ang purge kung suportado at maaaring hadlangan ng purge protection. Ang soft deletion ay usapin ng recovery/pag-reuse ng pangalan, hindi patunay ng patuloy na singil. Suriin ang natitirang mga resources at singil pagkatapos ng paglilinis.
+
+Kung nag-initialize ka rin ng hosted agent laban sa umiiral na Foundry project, iniwan ng `azd down` ang agent ng project na iyon at iba pang mga resource sa lugar. Tanggalin lang ang mga hindi nais na resources na pag-aari mo nang hiwalay. Para sa bagong Foundry project na ginawa ng AZD environment nito, tinatanggal ng `azd down` ang resource group at lahat nang laman nito.
 
 ---
 
-## Tala tungkol sa Production Multi-Agent Systems
+## Paalala tungkol sa Production Multi-Agent Systems
 
-Ang [Retail Multi-Agent Solution](../../examples/retail-scenario.md) sa repo na ito ay isang **arkitektural na blueprint**, hindi isang one-command template—dinodokumento nito kung paano *ipapagawa* ang isang production retail system (at malinaw na malaki ang trabaho para dito). Gamitin ito bilang sanggunian sa disenyo *pagkatapos* mong makapag-deploy ng gumaganang sample dito. Para sa mga usapin sa production (resilience, gastos, monitoring, pamamahala), magpatuloy sa [Kabanata 8: Mga Praktis ng Produksyon AI](../chapter-08-production/production-ai-practices.md).
+Ang [Retail Multi-Agent Solution](../../examples/retail-scenario.md) sa repo na ito ay isang **blueprint ng arkitektura**, hindi isang template na isang utos lang—dinodokumento nito kung paano *gagawa* ng isang production retail system (at malinaw na nagsasabing malaki ang kinakailangang effort para sa full build). Gamitin ito bilang sanggunian sa disenyo *pagkatapos* mong mag-deploy ng gumaganang sample dito. Para sa mga usaping production (resilience, gastos, monitoring, pamamahala), magpatuloy sa [Kabanata 8: Mga Praktis ng Production AI](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Buod
 
-- Hinahati-hati ng multi-agent system ang trabaho sa mga espesyalista na inaayos ng isang orchestrator.
-- Gamitin ito lamang kapag ang gawain ay may malinaw na mga yugto, sabayang proseso, o iba't ibang mga tools bawat hakbang—kung hindi, mas piliin ang isang single agent.
-- Hindi nagbabago ang azd na proseso: `azd init` → `azd up` → test → `azd down`.
-- Ang isang tunay na template tulad ng `contoso-creative-writer` ay nagbibigay-daan sa iyo upang makita at i-customize ang isang gumaganang multi-agent app ngayon.
-- Ang Application Insights tracing sa pagitan ng mga agent ay isa sa pinakamalaking praktikal na benepisyo ng multi-agent design.
+- Hinahati ng multi-agent system ang gawain sa mga espesiyalista na kinokordina ng isang orchestrator.
+- Gamitin lang ito kapag ang gawain ay may iba't ibang yugto, parallelismo, o iba’t ibang gamit sa bawat hakbang—kung hindi, piliin ang isang agent lang.
+- Hindi nagbabago ang azd workflow: `azd init` → `azd up` → test → `azd down`.
+- Ang isang totoong template tulad ng `contoso-creative-writer` ay nagpapakita at nagpapahintulot sa pag-customize ng gumaganang multi-agent app ngayon.
+- Malaking praktikal na benepisyo ng multi-agent design ang pag-trace ng Application Insights sa pagitan ng mga agent.
 
 ---
 
@@ -248,14 +250,14 @@ Ang [Retail Multi-Agent Solution](../../examples/retail-scenario.md) sa repo na 
 
 | Direksyon | Aralin |
 |-----------|--------|
-| **Nakaraan** | [Kabanata 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| **Nakaraan** | [Kabanata 4: Imprastraktura](../chapter-04-infrastructure/README.md) |
 | **Susunod** | [Mga Pattern ng Koordinasyon](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Kaugnay na Mga Recursos
 
-- [Gabay sa AI Agents](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Mga Pattern ng Koordinasyon](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Mga Praktis ng Produksyon AI](../chapter-08-production/production-ai-practices.md)
+- [Mga Praktis ng Production AI](../chapter-08-production/production-ai-practices.md)
 - [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

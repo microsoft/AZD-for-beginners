@@ -1,29 +1,29 @@
-# Mitmeagendi koordineerimismustrid
+# Mitmeagendi koordineerimise mustrid
 
-⏱️ **Hinnanguline aeg**: 60-75 minutit lugemist; mitmed tunnid rakendamiseks | 💰 **Hinnanguline maksumus**: töökoormusest sõltuv | ⭐ **Keerukus**: Täiustatud
+⏱️ **Hinnanguline aeg**: 60-75 minutit lugemist; mitmed tunnid implementeerimiseks | 💰 **Hinnanguline maksumus**: töökoormusest sõltuv | ⭐ **Kompleksus**: Edasijõudnu
 
-**📚 Õppimisrada:**
+**📚 Õppeteekond:**
 - ← Eelmine: [Võimsuse planeerimine](capacity-planning.md) - Ressursside suuruse määramine ja skaleerimisstrateegiad
-- 🎯 **Te olete siin**: Mitmeagendi koordineerimismustrid (orkestreerimine, kommunikatsioon, oleku haldus)
-- → Järgmine: [SKU valideerimine](sku-selection.md) - Õigete Azure teenuste valimine
-- 🏠 [Kursuse avaaken](../../README.md)
+- 🎯 **Sa oled siin**: Mitmeagendi koordineerimise mustrid (orchestratsioon, kommunikatsioon, oleku haldamine)
+- → Järgmine: [SKU valik](sku-selection.md) - Õigete Azure teenuste valimine
+- 🏠 [Kursuse avaleht](../../README.md)
 
 ---
 
 ## Mida sa õpid
 
-Selle tunni lõpetamisel:
-- Sa mõistad **mitmeagendi arhitektuuri** mustreid ja millal neid kasutada
-- Sa rakendad **orkestreerimise mustreid** (tsentraliseeritud, detsentraliseeritud, hierarhiline)
-- Sa kavandad **agendi kommunikatsiooni** strateegiaid (sünkroonne, asünkroonne, sündmustepõhine)
-- Sa haldad **jagatud olekut** jaotatud agentide seas
-- Sa juurutad **mitmeagendi süsteeme** Azure’is AZD abil
-- Sa rakendad **koordineerimismustreid** reaalse maailma tehisintellekti stsenaariumite jaoks
-- Sa jälgid ja silud jaotatud agentide süsteeme
+Selle õppetunni läbimisel sa:
+- Mõistad **mitmeagendi arhitektuuri** mustreid ja millal neid kasutada
+- Rakendad **orchestratsiooni mustreid** (tsentraliseeritud, detsentraliseeritud, hierarhiline)
+- Kujundad **agendi kommunikatsiooni** strateegiaid (sünhoorne, asünkroonne, sündmuspõhine)
+- Halda **jagatud olekut** hajutatud agentide vahel
+- Paigaldad **mitmeagendi süsteeme** Azure'is AZD abil
+- Rakendad **koordineerimise mustreid** reaalse maailma tehisintellekti stsenaariumitele
+- Jälgid ja silud hajutatud agentide süsteeme
 
 ## Miks mitmeagendi koordineerimine on oluline
 
-### Evolutsioon: ühest agendist mitmeagendi süsteemini
+### Areng: Ühe agendi süsteemist mitmeagendi süsteemini
 
 **Üks agent (lihtne):**
 ```
@@ -31,11 +31,11 @@ User → Agent → Response
 ```
 - ✅ Lihtne mõista ja rakendada
 - ✅ Kiire lihtsate ülesannete puhul
-- ❌ Piiratud ühe mudeli võimete poolt
-- ❌ Kompleksseid ülesandeid ei saa paralleelselt täita
-- ❌ Puudub spetsialiseerumine
+- ❌ Piiratud ühe mudeli võimekusega
+- ❌ Ei saa keerukaid ülesandeid paralleelselt töödelda
+- ❌ Pole spetsialiseerumist
 
-**Mitmeagendi süsteem (edasijõudnud):**
+**Mitmeagendi süsteem (edasijõudnu):**
 ```mermaid
 graph TD
     Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
@@ -43,20 +43,20 @@ graph TD
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
 - ✅ Spetsialiseerunud agendid konkreetseteks ülesanneteks
-- ✅ Kiirem, sest paralleelne täideviimine
+- ✅ Kiireks tööks paralleeltöötlus
 - ✅ Modulaarne ja hooldatav
-- ✅ Tõhusam keerukate töövoogude korral
-- ⚠️ Nõuab koordineerimisloogikat
+- ✅ Parem keeruliste töökäikude haldamisel
+- ⚠️ Vajab koordineerimisloogikat
 
-**Analoogia**: Üks agent on nagu üks inimene, kes teeb kõik ülesanded. Mitmeagentne on nagu meeskond, kus iga liige on spetsialist (uurija, küljendaja, retsenseerija, kirjutaja), kes töötavad koos.
+**Analüogia**: Üks agent on nagu üks inimene, kes teeb kõik ülesanded. Mitmeagendi süsteem on nagu meeskond, kus iga liige on spetsiifiliste oskustega (uurija, programmeerija, arvustaja, kirjutaja), kes töötavad koos.
 
 ---
 
-## Peamised koordineerimismustrid
+## Põhilised koordineerimise mustrid
 
-### Muster 1: Järjestikune koordineerimine (Vastutusahela muster)
+### Muster 1: Järjekindel koordineerimine (Vastutusahela muster)
 
-**Millal kasutada**: ülesanded peavad toimuma kindlas järjekorras, iga agent kasutab eelmise väljundit.
+**Millal kasutada**: Ülesanded peavad toimuma kindlas järjekorras, iga agent ehitab eelmise väljundi peale.
 
 ```mermaid
 sequenceDiagram
@@ -81,23 +81,23 @@ sequenceDiagram
 **Eelised:**
 - ✅ Selge andmevoog
 - ✅ Lihtne siluda
-- ✅ Ennustatav täideviimise järjekord
+- ✅ Ennustatav täitmise järjekord
 
 **Piirangud:**
-- ❌ Aeglasem (puudub paralleelimine)
-- ❌ Üks tõrge blokeerib kogu ahela
-- ❌ Ei sobi vastastikku sõltuvate ülesannete jaoks
+- ❌ Aeglasem (puudub paralleeltöötlus)
+- ❌ Üks ebaõnnestumine peatab kogu ahela
+- ❌ Ei suuda hallata omavahel sõltuvaid ülesandeid
 
 **Näited:**
-- Sisu loomise voog (uurimine → kirjutamine → toimetamine → avaldamine)
+- Sisu loomise torujuhe (uurimine → kirjutamine → redigeerimine → avaldamine)
 - Koodi genereerimine (planeerimine → rakendamine → testimine → juurutamine)
-- Aruannete koostamine (andmekogumine → analüüs → visualiseerimine → kokkuvõte)
+- Aruande koostamine (andmete kogumine → analüüs → visualiseerimine → kokkuvõte)
 
 ---
 
-### Muster 2: Paralleelne koordineerimine (Harude jagamine / ühendamine)
+### Muster 2: Paralleelne koordineerimine (Fan-Out/Fan-In)
 
-**Millal kasutada**: sõltumatud ülesanded võivad töötada samal ajal, tulemused koondatakse lõpus.
+**Millal kasutada**: Sõltumatud ülesanded võivad töötada samaaegselt, tulemused koondatakse lõpus.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Eelised:**
-- ✅ Kiire (paralleeltäitmine)
-- ✅ Vigastuskindel (osalised tulemused aktsepteeritavad)
-- ✅ Horisontaalne skaleerumine
+- ✅ Kiire (paralleeltöötlus)
+- ✅ Taldlik vigade suhtes (osalised tulemused on aktsepteeritavad)
+- ✅ Horisontaalselt skaleeritav
 
 **Piirangud:**
-- ⚠️ Tulemused võivad saabuda väljajärjekorrast
-- ⚠️ Vajab koondamise loogikat
-- ⚠️ Keeruline oleku haldus
+- ⚠️ Tulemused võivad saabuda vales järjekorras
+- ⚠️ Vajab agregatsiooni loogikat
+- ⚠️ Keeruline oleku haldamine
 
 **Näited:**
-- Mitme allika andmekogumine (APId + andmebaasid + veebist kogumine)
-- Konkurentsianalüüs (mitmed mudelid genereerivad lahendusi, parim valitakse)
-- Tõlketeenused (samal ajal mitmesse keelde tõlkimine)
+- Mitmeallikatest andmete kogumine (API-d + andmebaasid + veebikraapimine)
+- Konkurentsianalüüs (mitmed mudelid genereerivad lahendusi, valitakse parim)
+- Tõlketeenused (tõlkimine mitmesse keelde samaaegselt)
 
 ---
 
-### Muster 3: Hierarhiline koordineerimine (Juht-Tööline)
+### Muster 3: Hierarhiline koordineerimine (Juhataja-Tööline)
 
-**Millal kasutada**: keerukad töövood koos alamülesannetega, vajalik delegeerimine.
+**Millal kasutada**: Keerukad töövood alamülesannetega, vajalik delegatsioon.
 
 ```mermaid
 graph TB
@@ -168,23 +168,23 @@ graph TB
 **Eelised:**
 - ✅ Haldab keerukaid töövooge
 - ✅ Modulaarne ja hooldatav
-- ✅ Selged vastutusalad
+- ✅ Selged vastutuspiirid
 
 **Piirangud:**
 - ⚠️ Keerulisem arhitektuur
-- ⚠️ Kõrgem latentsus (mitmed koordineerimiskihid)
-- ⚠️ Nõuab keerukat orkestreerimist
+- ⚠️ Suurem latentsus (mitmed koordineerimiskihid)
+- ⚠️ Vajab keerukat orchestratsiooni
 
 **Näited:**
-- Ettevõtte dokumentide töötlemine (klassifitseeri → suuna → töötle → arhiveeri)
-- Mitmeetapiline andmepiin (sissetoomine → puhastamine → teisendamine → analüüs → aruanne)
-- Keerukad automatiseerimistöövood (planeerimine → ressursside jaotus → täideviimine → jälgimine)
+- Ettevõtte dokumenditöötlus (klasifitseeri → suuna → töötle → arhiveeri)
+- Mitmeetapilised andmetorud (sissevõtt → puhastus → teisendus → analüüs → aruanne)
+- Keerukad automatiseerimise töövood (planeerimine → ressursside jagamine → täitmine → jälgimine)
 
 ---
 
-### Muster 4: Sündmustepõhine koordineerimine (Avalda-Telli muster)
+### Muster 4: Sündmuspõhine koordineerimine (Avalda-Telli)
 
-**Millal kasutada**: agentidel tuleb reageerida sündmustele, soovitav on lahtine sidusus.
+**Millal kasutada**: Agendid peavad reageerima sündmustele, soovitud on lahtine ühendus.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Eelised:**
-- ✅ Lahtine sidusus agentide vahel
-- ✅ Lihtne lisada uusi agente (vaid tellimine)
+- ✅ Lahtine ühendus agentide vahel
+- ✅ Lihtne lisada uusi agente (lihtsalt telli)
 - ✅ Asünkroonne töötlemine
-- ✅ Vastupidav (sõnumite püsivus)
+- ✅ Vastupidav (sõnumi püsivus)
 
 **Piirangud:**
-- ⚠️ Kokkuleppe saavutamine ajalises järjekorras
+- ⚠️ Lõplik järjepidevus
 - ⚠️ Keeruline silumine
-- ⚠️ Sõnumite järjekorra probleemid
+- ⚠️ Sõnumite tellimise väljakutsed
 
 **Näited:**
-- Reaalajas jälgimissüsteemid (hoiatused, juhtpaneelid, logid)
+- Reaalajas jälgimissüsteemid (häired, armatuurlaud, logid)
 - Mitmekanalilised teavitused (e-post, SMS, push, Slack)
-- Andmetöötlusvood (mitme tarbija sama andmestiku jaoks)
+- Andmetöötluskoridorid (mitmed samade andmete tarbijad)
 
 ---
 
-### Muster 5: Konsensusmuster (Häälte/Quorum põhjapanev koordineerimine)
+### Muster 5: Konsensusel põhinev koordineerimine (Häälte / Kvoorum)
 
-**Millal kasutada**: vajatakse mitme agendi nõusolekut enne jätkamist.
+**Millal kasutada**: Vajalik mitme agendi nõusolek enne jätkamist.
 
 ```mermaid
 graph TB
@@ -248,19 +248,19 @@ graph TB
 ```
 
 **Eelised:**
-- ✅ Täpsus paraneb (mitmed arvamused)
-- ✅ Vigastuskindel (väiksemad tõrked aktsepteeritavad)
-- ✅ Sisseehitatud kvaliteedikontroll
+- ✅ Suurem täpsus (mitmed arvamused)
+- ✅ Taldlik vigade suhtes (väiksemad vigaded aktsepteeritavad)
+- ✅ Kvaliteedi kontroll kaasas
 
 **Piirangud:**
-- ❌ Kallis (mitmed mudelikutsed)
-- ❌ Aeglasem (kõik agentide vastused peavad saabuma)
+- ❌ Kulukas (mitmed mudelikutsed)
+- ❌ Aeglasem (ootab kõiki agente)
 - ⚠️ Vajab konfliktide lahendamist
 
 **Näited:**
 - Sisu modereerimine (mitmed mudelid hindavad sisu)
-- Koodi ülevaatus (mitmed linterid/analüsaatorid)
-- Meditsiiniline diagnoos (mitmed tehisintellekti mudelid, ekspertide kinnitused)
+- Koodi ülevaatus (mitmed linters/analüsaatorid)
+- Meditsiiniline diagnoos (mitmed tehisintellekti mudelid, ekspertide valideerimine)
 
 ---
 
@@ -314,25 +314,25 @@ graph TB
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 
-**Peamised komponendid:**
+**Põhikompendid:**
 
 | Komponent | Eesmärk | Azure teenus |
 |-----------|---------|---------------|
-| **API värav** | Sisenemispunkt, kiiruse piiramine, autentimine | API Management |
-| **Orkestreerija** | Koordineerib agentide töövooge | Container Apps |
-| **Sõnumijärjekord** | Asünkroonne kommunikatsioon | Service Bus / Event Hubs |
+| **API värav** | Sisenemispunkt, sageduse piiramine, autentimine | API Management |
+| **Orchestrator** | Agentide töövoogude koordineerimine | Container Apps |
+| **Sõnumite järjekord** | Asünkroonne kommunikatsioon | Service Bus / Event Hubs |
 | **Agendid** | Spetsialiseerunud tehisintellekti töötajad | Container Apps / Functions |
-| **Olekuhoidla** | Jagatud olek, ülesannete jälgimine | Cosmos DB |
-| **Artefaktide salvestus** | Dokumendid, tulemused, logid | Blob Storage |
-| **Jälgimine** | Jaotatud jälgimine, logid | Application Insights |
+| **Oleku hoidla** | Jagatud olek, ülesannete jälgimine | Cosmos DB |
+| **Artefaktide hoidla** | Dokumendid, tulemused, logid | Blob Storage |
+| **Jälgimine** | Hajutatud jälgimine, logid | Application Insights |
 
-Service Bus järjekorrad/teemad ja Event Hubs on erinevad teenused erineva saatmis- ja tarbimismudeliga; Event Hubs ei ole asendaja Service Bus töötajakoodi jaoks allpool. Paralleelsus, püsivad sõnumid ja mudeli hääletamine ei taga iseenesest vigastuskindlust ega paremat täpsust.
+Service Busi järjekorrad/teemad ja Event Hubs on erinevad teenused erinevate edastuse/ tarbimise mudelitega; Event Hubs ei ole otse asendatav Service Busi töötajakoodiga allpool. Paralleelsus, püsivad sõnumid ja mudelite hääletus ei taga iseenesest vigadetaluvust ega suuremat täpsust.
 
 ---
 
 ## Eeltingimused
 
-### Vajalikud tööriistad
+### Nõutavad tööriistad
 
 ```bash
 # Verify Azure Developer CLI
@@ -351,29 +351,29 @@ docker --version
 ### Azure nõuded
 
 - Aktiivne Azure tellimus
-- Õigused luua:
+- Luba luua:
   - Container Apps
-  - Service Bus nimeruumid
+  - Service Busi nimed
   - Cosmos DB kontod
   - Salvestuskontod
   - Application Insights
 
-### Teadmiste eeldused
+### Teadmiste eeltingimused
 
-Võiksid olla läbinud:
+Tuleks olla läbitud:
 - [Konfiguratsiooni haldus](../chapter-03-configuration/configuration.md)
-- [Autentimine & turvalisus](../chapter-03-configuration/authsecurity.md)
+- [Autentimine ja turvalisus](../chapter-03-configuration/authsecurity.md)
 - [Mikroteenuste näide](../../../../examples/microservices)
 
 ---
 
-## Rakendamisjuhend
+## Teostusjuhend
 
-> **Disainifragmendid, mitte käivitatav labor:** Projekti struktuur ja `File:` sildid allpool kirjeldavad faile, mida luua oma projektis; see hoidla ei sisalda täielikku `multi-agent-system` rakendust. Puuduvad tükid sisaldavad põhisüsteemi/kirjeldusmallid, Container Apps keskkond/registrid, Dockerfailid ja sõltuvuste lukustused, Cosmos andmebaasi/konteinerite seadistamine, mudelite juurutamine, identiteedi/rolli seadistus, skaleerimisreeglid ning paralleelsed töötajad/järjekorrad. Ära oota, et `azd init` genereerib need failid või `azd up` juurutab näidiskoodide muutumatul kujul. Käivitatava lähtepunkina vaata lõpetatud [Mitmeagendi alused](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Disaini fragmendid, mitte juurutatav labor:** Projektistruktuur ja allpool olevad `File:` sildid kirjeldavad faile, mida luua oma projektis; see hoidla ei sisalda täielikku `multi-agent-system` rakendust. Puuduvad osad on peamallid/parameetrite mallid, Container Apps keskkond/registreerimine, Dockerfilid ja sõltuvuste lukustused, Cosmos andmebaasi/konteineri seadistused, mudelite juurutamine, identiteedi/rolli konfiguratsioon, skaleerimisreeglid ja paralleelsed töötajad/ järjekorrad. Ärge oodake, et `azd init` genereerib neid faile või `azd up` juurutab näited muutmatult. Käivitatava lähtepunkti jaoks lõpetage [Mitme agendi põhialused](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Käivitusaja eeldused:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask ja (jälgimiseks) `azure-monitor-opentelemetry`; saada `shared` Python'i importteede hulka igas teenuse pildis. Cosmos `agent-state/tasks` konteiner peab juba olemas olema koos partitsioonivõtmega `/id`. Võtmesäästlik ühendus lihtsustab neid fragmente, mitte tootmiskasutust: eelistada hallatud identiteete ulatusega Service Bus/Cosmos/OpenAI andmepõhiste rollidega. Ära tee võtmeid väljunditesse ega logisse nähtavaks.
+**Jooksutuse eeldused:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask ja (jälgimiseks) `azure-monitor-opentelemetry`; pange `shared` Python'i importimise teele igas teenuse pildis. Cosmos `agent-state/tasks` konteiner peab juba olemas olema koos partitsiooni võtmega `/id`. Võtme-põhised ühendused lihtsustavad neid fragmente, mitte tootmises juhendamiseks: eelistage hallatud identiteete, millel on määratud Service Bus/Cosmos/OpenAI andmetasandi rollid. Ärge avaldage võtmisi väljundites ega logides.
 
-Service Bus tarne on **vähemalt üks kord**. Säilita idempotentsus iga ülesande **ja sammu** kohta, kasuta optimistlikku konkurentsi (ETag'id) oleku lugemiseks/muutmiseks/kirjutamiseks ja uuenda sõnumilukust pika töötlemise ajal. Lihtne olekuhaldur allpool on ainult järjestikune ega pruugi tagada neid tootmiskinnitusi.
+Service Busi kohaletoimetamine on **vähemalt üks kord**. Säilitage idempotentsus iga ülesande **ja sammu** kohta, kasutage optimistlikku samaaegsust (ETag'id) oleku lugemiseks/muutmiseks/kirjutamiseks ja uuendage sõnumi lukke pikaajalise töötlemise jooksul. Allpool olev lihtne olekujuht on vaid järjestikune ega rakenda neid tootmise garantiisid.
 
 ### Projekti struktuur
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Tund 1: Järjestikuse koordineerimise muster
+## Õppetund 1: Järjestikuse koordineerimise muster
 
-### Rakendamine: Sisuloome voog
+### Teostus: Sisu loomise torujuhe
 
-Kavandame järjestikulise voogu: Uurimine → Kirjutamine → Toimetamine. Avaldamine on väljaspool seda näidet.
+Kujundame järjestikulise torujuhtme: Uurimine → Kirjutamine → Redigeerimine. Avaldamine jääb selle näite väljapoole.
 
 ### 1. AZD konfiguratsioon
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orkestreerimisteenus
+### 4. Orchestratori teenus
 
 **Fail: `src/orchestrator/app.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Uurimisagent
+### 5. Uurimise agent
 
 **Fail: `src/agents/research/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Toimetaja agent
+### 7. Redaktori agent
 
 **Fail: `src/agents/editor/app.py`**
 
@@ -893,21 +893,21 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Juuruta ja testi
+### 8. Paigalda ja testi
 
-Need käsud kehtivad **ainult pärast seda, kui olete puuduvad projektifailid rakendanud**. Interaktiivne Foundry agentide initsialiseerimine on eraldi töövoog; see ei genereeri seda Service Bus disaini.
+Need käsud kehtivad **ainult pärast seda, kui olete lisanud puuduvaid projektifaile**. Interaktiivne Foundry agendi initsialiseerimine on eraldi töövoog; see ei genereeri seda Service Busi disaini.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Vaata [AZD AI CLI käske](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kõigi `azd ai` lippude ja valikute kohta.
+> Vaata [AZD AI CLI käsud](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kõigi `azd ai` lipu ja valikute kohta.
 
 ```bash
 # Get orchestrator URL
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Ülesande edenemise kontroll:**
+**Kontrolli ülesande edenemist:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Oodatav väljund (lõpetatud):**
+**✅ Oodatav väljund (valmis):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -964,13 +964,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Tund 2: Paralleelse koordineerimise muster
+## Õppetund 2: Paralleelse koordineerimise muster
 
-### Rakendamine: Mitmest allikast uurimiste koondaja
+### Teostus: Mitmeallikas uurimise kogujak
 
-Loome paralleelse süsteemi, mis kogub infot mitmest allikast samaaegselt.
+Loome paralleelse süsteemi, mis kogub informatsiooni samaaegselt mitmest allikast.
 
-### Paralleelne orkestreerija
+### Paralleelne orchestrator
 
 **Fail: `src/orchestrator/parallel_workflow.py`**
 
@@ -1042,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Koondamise loogika
+### Agregatsiooni loogika
 
 **Fail: `src/agents/aggregator/app.py`**
 
@@ -1124,23 +1124,23 @@ if __name__ == '__main__':
 ```
 
 **Paralleelse mustri eelised:**
-- ⚡ **Võib olla madalama latentsusega** (piiratud aeglasima töötaja ja koordineerimise lisaga)
-- 🔄 **Toetab osalisi tulemusi** koos selgete tähtajatega ja tõrke poliitikaga (algeline koondaja ei rakenda)
-- 📈 **Skaleerub** (suppleri lihtne lisamine)
+- ⚡ **Võib-olla madalam latentsus** (piiratud kõige aeglasema töötaja ja koordineerimise overhead'iga)
+- 🔄 **Toetab osalisi tulemusi** selgete tähtaegade ja vigade poliitikaga (algne kogujaga pole rakendatud)
+- 📈 **Skaleeritav** (lihtne lisada rohkem agente)
 
 ---
 
 ## Praktilised harjutused
 
-### Harjutus 1: Lisa aegumise haldus ⭐⭐ (Keskmine)
+### Harjutus 1: Lisa ajalõpu käsitlemine ⭐⭐ (Keskmine)
 
-**Eesmärk**: Rakendada aja piirangut, et koondaja ei ootaks aeglaste agentide lõpmatuseni.
+**Eesmärk**: Rakendada ajalõpu loogika, et kogujak ei ootaks aeglasi agente lõputult.
 
-**Alguspunkt:** Käivita see kohalik tähtaja simulatsioon enne selle ühendamist järjekorra töölisele. Aegumine, mis kontrollitakse alles teise sõnumi saabumisel, ei aktiveeru, kui puuduva töötaja poolt pole sõnumit saadetud.
+**Alguspunkt:** Käivita see lokaalne tähtaega simuleeriv test enne, kui integreerid selle järjekorra töötajasse. Ajalõpp, mis kontrollitakse vaid kui tuleb uus sõnum, ei käivituks kunagi, kui puuduv töötaja pole midagi saatnud.
 
 **Sammud**:
 
-1. **Lisa aegumise jälgimine koondajale:**
+1. **Lisa ajalõpu jälgimine kogujale:**
 
 ```python
 import asyncio
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Järjekonnasüsteemi integreerimine (disainülesanne):** Säilita ülesande loomisel süsteemis saatmise tähtaeg ja oodatud agendid, käivita regulaarne tähtaja puhastamine sõltumatult saabuvatest tulemustest, lõpeta osalised tulemused atomaarse lõppviimisega ja ignoreeri hilinenud/duplikaatsõnumeid lõppenud ülesannete puhul. Kohalik aegumine ei tühista kaugtöötajaid.
+3. **Järjekorra-süsteemi integratsioon (disainitöö):** Säilita ülesande loomisel saatmise tähtaeg ja oodatavad agendid, käita perioodilist tähtaegade puhastust sõltumatult saabuvatest tulemustest, lõpeta osalised tulemused atomaarsete toimingutena ja ignoreeri hilinenud/duplikaatsõnumeid lõpetatud ülesannete jaoks. Kohalik ajalõpp ei tühista kaugtöötajaid.
 
-Ainult sinu rakendatud projekti jaoks:
+Ainult sinu implementeeritud projekti jaoks:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Kohalik test väljub oma sekundilise tähtaja järel isegi, kui agent on lõpetamata
+- ✅ Kohalik test tagastab pärast ühesekundilist tähtaega ka siis, kui agent pole lõpetanud
 - ✅ Vastus näitab osalisi tulemusi (`"timed_out": true`)
-- ✅ Tagastatakse olemasolevad tulemused (3 neljast agendist)
+- ✅ Tagastatakse saadaval olevad tulemused (3 neljast agentist)
 
 **Aeg**: 20-25 minutit
 
 ---
 
-### Harjutus 2: Rakenda katse kordus ⭐⭐⭐ (Täpsem)
+### Harjutus 2: Rakenda taasilmumise loogika ⭐⭐⭐ (Edasijõudnu)
 
-**Eesmärk**: Katse korrata ebaõnnestunud agentide ülesandeid automaatselt enne loobumist.
+**Eesmärk**: Tuleta automaatselt ebaõnnestunud agentide ülesanded uuesti enne loobumist.
 
 **Sammud**:
 
-1. **Kasuta Service Bus kohaletoimetamisloendust kordusloendurite asemel:**
+1. **Kasuta Service Busi edastusarve, mitte kohandatud taasilmumise loendurite sammumist:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Lisa katse korduse haldur agentidele:**
+2. **Lisa taasilmumiskäsitleja agentidele:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Ebaõnnestunud ülesanded korduvad automaatselt (kuni 3 korda)
-- ✅ Korduste vahel kasvav ooteaeg (5s, 10s, 20s) koos sõnumiluku uuendamisega vajalikul juhul
-- ✅ Pärast maksimaalseid katseid lähevad sõnumid dead letter järjekorda
-- ✅ Dead letter sõnumeid saab uurida; kordamine vajab eraldi idempotentset taastetöövoogu
+- ✅ Ebaõnnestunud ülesanded taotlevad automaatselt uuesti (kuni kolm katset)
+- ✅ Eksponentsiaalne tagasilöök taasilmumiste vahel (5s, 10s, 20s) koos sõnumi lukustuse uuendusega vajadusel
+- ✅ Maksimaalse katse järel lähevad sõnumid dead letter järjekorda
+- ✅ Dead letter sõnumeid saab uurida; taasesitus vajab eraldi idempotentset taastetöövoogu
 
 **Aeg**: 30-40 minutit
 
 ---
 
-### Harjutus 3: Rakenda lüliti katkestaja (Circuit Breaker) ⭐⭐⭐ (Täpsem)
+### Harjutus 3: Rakenda katkestuskaitsja (Circuit Breaker) ⭐⭐⭐ (Edasijõudnu)
 
-**Eesmärk**: Ennetada järjestikuseid tõrkeid peatades päringud tõrkeid tekitavatele agentidele.
+**Eesmärk**: Takistada tehtesüstivate vigade levikut, peatades päringud vigastele agentidele.
 
 **Sammud**:
 
-1. **Loo circuit breaker klass:**
+1. **Loo katkestuskaitsja klass:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Rakenda agentide kutsumisele:**
+2. **Kanna see agentidele rakendamisel:**
 
 ```python
 # In orchestrator
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-See vooluring kaitseb **saatmistoimingut**, mitte kaugtöötaja lõpetamist: sõnumi edukas järjekorda panemine ei ütle midagi selle kohta, kas agent on elus. `send_message` on teie rakenduse saatmisfunktsioon. Täideviimise vooluringide jaoks saatke täheldatud ülesannete tõrked/aegumised vastupidavasse koordinaatorisse. See mälus olev klass on ühe lõime demonstratsioon, mitte hajutatud vooluringi katkestaja.
+See vooluringkaitse kaitseb **saatsmistoimingut**, mitte kaugagentuuri lõpetamist: sõnumi edukas järjekorda lisamine ei ütle midagi selle kohta, kas agent on aktiivne. `send_message` on teie rakenduse saatmisfunktsioon. Täitmise vooluringide puhul edastage täheldatud ülesandete ebaõnnestumised/aegumised vastupidavasse koordinaatorisse. See mälu põhinev klass on ühe lõime demonstreerimiseks, mitte hajutatud vooluringkaitseks.
 
-3. **Testige vooluringi kohapeal:**
+3. **Testige vooluringkaitset lokaalselt:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1369,9 +1369,9 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Pärast 5 riket avaneb vooluring (keeldub päringutest)
-- ✅ Pärast 60 sekundit läheb vooluring poolavatuks (testib taastumist)
-- ✅ Teised agendid töötavad normaalselt edasi
+- ✅ Pärast 5 ebaõnnestumist avab vooluring (keeldub päringutest)
+- ✅ Pärast 60 sekundit muutub vooluring poolavaks (testib taastumist)
+- ✅ Teised agendid jätkavad tavapäraselt tööd
 - ✅ Vooluring sulgub automaatselt, kui agent taastub
 
 **Aeg**: 40-50 minutit
@@ -1437,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Agendi jõudluse võrdlus:**
+**Agentide jõudluse võrdlus:**
 
 ```kusto
 // Compare agent execution times
@@ -1451,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Tõrkeanalüüs:**
+**Rikkeanalüüs:**
 
 ```kusto
 // Find which agents fail most
@@ -1466,26 +1466,26 @@ exceptions
 
 ---
 
-## Kuluanalüüs
+## Kulude analüüs
 
 ### Mitme agendi süsteemi kulud (kuised hinnangud)
 
-Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on **240–565 dollarit kuus**. Kontrollige praeguseid piirkondlikke hindu, aktiivsete/tühikäigul olevate koopiate tunde, sisendi/väljundi tokenite segu, salvestust ja telemeetrit. Serverlessil puudub ette valmistatud läbilaskevõime miinimum, kuid siiski arvestatakse päringute ja salvestuse eest.
+Illustreerivad planeerimisnumbrid, mitte pakkumised: alljärgnev summa on **240–565 USD kuus**. Kontrollige kehtivaid piirkondlikke hindu, aktiivsete/pausil olevate replikate töötunde, sisendi/väljundi tokenite suhet, salvestust ja telemeetria andmeid. Serveriteta lahendusel puudub eelmääratud läbilaskevõime minimaalne nõue, kuid arvestatakse taotlusi ja salvestust.
 
 | Komponent | Konfiguratsioon | Kulu |
 |-----------|--------------|------|
-| **Orkestreerija** | 1 konteinerirakendus (1 vCPU, 2GB) | 30–50 $ |
-| **4 agenti** | 4 konteinerirakendust (igaüks 0,5 vCPU, 1GB) | 60–120 $ |
-| **Teenuse buss** | Standardtase, 10M sõnumit | 10–20 $ |
-| **Cosmos DB** | Serverless, 5GB salvestus, 1M RU-d | 25–50 $ |
-| **Blobi salvestus** | 10GB salvestus, 100K toimingut | 5–10 $ |
-| **Application Insights** | 5GB ingesteerimine | 10–15 $ |
-| **Microsoft Foundry mudelid** | gpt-4.1, 10M tokenit | 100–300 $ |
-| **Kokku** | | **240–565 $ kuus** |
+| **Orkestreerija** | 1 konteinerirakendus (1 vCPU, 2GB) | 30–50 USD |
+| **4 Agenti** | 4 konteinerirakendust (igaüks 0,5 vCPU, 1GB) | 60–120 USD |
+| **Service Bus** | Standardtase, 10M sõnumit | 10–20 USD |
+| **Cosmos DB** | Serveriteta, 5GB salvestus, 1M RUs | 25–50 USD |
+| **Blob Storage** | 10GB salvestus, 100K toimingut | 5–10 USD |
+| **Application Insights** | 5GB andmete sisselase | 10–15 USD |
+| **Microsoft Foundry mudelid** | gpt-4.1, 10M tokenit | 100–300 USD |
+| **Kokku** | | **240–565 USD kuus** |
 
 ### Kulude optimeerimise strateegiad
 
-1. **Kasutage serverless'i, kus võimalik:**
+1. **Kasutage serveriteta lahendusi, kus võimalik:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1494,7 +1494,7 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
    }
    ```
 
-2. **Skaleerige agendid nullini, kui nad on tühikäigul:**
+2. **Skaalake agendid tühikäigul nulli:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1502,7 +1502,7 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
    }
    ```
 
-3. **Kasutage teenuse bussi partiiteenust:**
+3. **Kasutage Service Bus jaoks partiitöötlust:**
    ```python
    # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
@@ -1517,9 +1517,9 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
 
 ---
 
-## Parimad tavad
+## Parimad praktikad
 
-### ✅ Tee nii:
+### ✅ TEHKE:
 
 1. **Kasutage idempotentseid toiminguid**
    ```python
@@ -1528,7 +1528,7 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Rakendage põhjalik logimine**
+2. **Rakendage ulatuslik logimine**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1542,7 +1542,7 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
    }
    ```
 
-4. **Seadke sõnumile TTL (eluiga)**
+4. **Määrake sõnumitele TTL (eluiga)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
@@ -1555,15 +1555,15 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
    monitor_dead_letters()
    ```
 
-### ❌ ÄRGE tehke:
+### ❌ ÄRGE:
 
-1. **Ärge looge ringi sõltuvusi**
+1. **Ärge looge ringsõltuvusi**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Ärge blokeerige agendi lõime**
+2. **Ärge blokeerige agentide lõime**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1572,13 +1572,13 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
    # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Ärge ignoreerige osalisi tõrkeid**
+3. **Ärge ignoreerige osalisi ebaõnnestumisi**
    ```python
    # ❌ BAD: Fail entire workflow if one agent fails
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Ärge kasutage lõpmatuid taaskatseid**
+4. **Ärge kasutage lõpmatuid kordusi**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1586,14 +1586,14 @@ Illustreerivad planeerimisnumbrid, mitte hinnapakkumised: alljärgnev summa on *
 
 ---
 
-## Tõrkeotsingu juhend
+## Veaotsingu juhend
 
 ### Probleem: sõnumid takerdunud järjekorda
 
-**Sümptomid:**
+**Sümbolid:**
 - Sõnumid kogunevad järjekorda
 - Agendid ei tööta
-- Ülesande staatus jääb "ootel"
+- Ülesande olek jääb "ootavale"
 
 **Diagnoos:**
 ```bash
@@ -1610,7 +1610,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **Lahendused:**
 
-1. **Suurendage agendi koopiate arvu:**
+1. **Suurendage agentide eksemplaride arvu:**
    ```bash
    az containerapp update \
      --resource-group "$RG_NAME" \
@@ -1630,12 +1630,12 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Probleem: Ülesande aegumine/mitte kunagi ei lõpeta
+### Probleem: ülesande aegumine/ei lõpeta kunagi
 
-**Sümptomid:**
-- Ülesande staatus jääb "töös"
+**Sümbolid:**
+- Ülesande olek jääb "töös"
 - Mõned agendid lõpetavad, teised mitte
-- Veateateid pole
+- Vigu sõnumideta
 
 **Diagnoos:**
 ```bash
@@ -1648,9 +1648,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Lahendused:**
 
-1. **Rakendage kogujas ajapiirang (harjutus 1)**
+1. **Rakendage ajatagastus agregaatris (Harjutus 1)**
 
-2. **Kontrollige agentide tõrkeid Azure Monitoriga:**
+2. **Kontrollige agentide rikkeid Azure Monitori abil:**
    ```bash
    # View logs via azd monitor
    azd monitor --logs
@@ -1676,13 +1676,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Kursuse järgmised sammud
-- ← Eelmine: [Mahukavandamine](capacity-planning.md)
-- → Järgmine: [SKU Valik](sku-selection.md)
+### Järgmised sammud selles kursuses
+- ← Eelmine: [Võimsuse planeerimine](capacity-planning.md)
+- → Järgmine: [SKU valik](sku-selection.md)
 - 🏠 [Kursuse avaleht](../../README.md)
 
 ### Seotud näited
-- [Mikroteenuste näide](../../../../examples/microservices) - Teenuste kommunikatsiooni mustrid
+- [Mikroteenuste näide](../../../../examples/microservices) - Teenuste side mustrid
 - [Microsoft Foundry mudelite näide](../../../../examples/azure-openai-chat) - AI integratsioon
 
 ---
@@ -1690,24 +1690,24 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ## Kokkuvõte
 
 **Olete õppinud:**
-- ✅ Viis koordineerimismustrit (sekventsiaalne, paralleelne, hierarhiline, sündmuspõhine, konsensus)
-- ✅ Mitme agendi arhitektuur Azure'is (Service Bus, Cosmos DB, Container Apps)
-- ✅ Oleku haldamine hajutatud agentide vahel
-- ✅ Aegumiste käsitlemine, taaskatse ja vooluringi katkestajad
+- ✅ Viis koordineerimise mustrit (järjestikune, paralleelne, hierarhiline, sündmuspõhine, konsensus)
+- ✅ Mitme agendi arhitektuur Azure’is (Service Bus, Cosmos DB, Container Apps)
+- ✅ Staatuse haldamine hajutatud agentide vahel
+- ✅ Ajatapamise haldamine, kordused ja vooluringkaitsed
 - ✅ Hajutatud süsteemide jälgimine ja silumine
 - ✅ Kulude optimeerimise strateegiad
 
-**Olulised punktid:**
-1. **Valige õige muster** - Sekventsiaalne järjekorrastatud töövoogude jaoks, paralleelne kiiruse jaoks, sündmuspõhine paindlikkuse jaoks
-2. **Haldage olekut hoolikalt** - Kasutage Cosmos DB või sarnast jagatud oleku jaoks
-3. **Käsitlege tõrkeid sujuvalt** - Aegumised, taaskatsed, vooluringi katkestajad, surnud kirjade järjekorrad
-4. **Jälgige kõike** - Hajutatud jälgimine on silumiseks hädavajalik
-5. **Optimeerige kulusid** - Skaleerige nullini, kasutage serverless'i, rakendage vahemällu salvestamist
+**Olulised võtmed:**
+1. **Valige sobiv muster** - Järjestikune tellitud töövoogude jaoks, paralleelne kiiruse saavutamiseks, sündmuspõhine paindlikkuse jaoks
+2. **Halduge staatust hoolikalt** - Kasutage Cosmos DB-d või sarnast jagatud staatuse jaoks
+3. **Käsitlege rikkeid mõistlikult** - Ajatapamised, kordused, vooluringkaitsed, surnud kirjade järjekorrad
+4. **Jälgige kõike** - Hajutatud jälgimine on silumise jaoks hädavajalik
+5. **Optimeerige kulusid** - Skaalake nulli, kasutage serveriteta lahendusi, rakendage vahemällu salvestamist
 
 **Järgmised sammud:**
 1. Täitke praktilised harjutused
-2. Looge mitme agendi süsteem oma juhtumile
-3. Uurige [SKU valikut](sku-selection.md), et optimeerida jõudlust ja kulusid
+2. Looge oma kasutusjuhtumile sobiv mitme agendi süsteem
+3. Uurige [SKU valik](sku-selection.md) jõudluse ja kulude optimeerimiseks
 
 ---
 

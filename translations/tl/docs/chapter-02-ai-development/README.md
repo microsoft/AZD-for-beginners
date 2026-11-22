@@ -1,22 +1,24 @@
-# Kabanata 2: Pag-develop na AI-First
+# Kabanata 2: AI-First Development
 
-**📚 Kurso**: [AZD Para sa Mga Baguhan](../../README.md) | **⏱️ Tagal**: 4-5 na oras kabilang ang workshop | **⭐ Antas ng Kahirapan**: Intermediate
+**📚 Kurso**: [AZD Para sa mga Baguhan](../../README.md) | **⏱️ Tagal**: 4-5 oras kabilang ang workshop | **⭐ Kahirapan**: Panggitna
 
 ---
 
 ## Pangkalahatang-ideya
 
-Nakatuon ang kabanatang ito sa pag-deploy ng mga AI-powered na aplikasyon gamit ang Azure Developer CLI at Microsoft Foundry services. Mula sa mga simpleng AI chat apps hanggang sa mga intelligent agents na may mga tool.
+Nakatuon ang kabanatang ito sa pag-deploy ng mga AI-powered na aplikasyon gamit ang Azure Developer CLI at Microsoft Foundry services. Mula sa simpleng AI chat apps hanggang sa matatalinong ahente na may mga tool.
 
-> **Review ng release (2026-11-04):** Sinuri ang gabay ng AI CLI laban sa nailathalang `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, at `azure.ai.evaluations` `1.0.0-beta.2` na dokumentasyon/source. Gamitin ang `azd >= 1.37.0` para sa pinagsamang workflow. Ngayon ay gumagamit ang mga pagsusuri ng hiwalay na `azd ai eval` namespace; tingnan ang [mga pagbabago sa release at gabay sa migrasyon](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ito ay hindi pagsusuri ng live deployment.
+> **Foundry GA update (2026-11-09):** Ang `microsoft.foundry` 1.0 bundle ay [generally available](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Gumamit ng `azd >= 1.37.0`; nananatiling hiwalay ang mga pagsusuri sa pag-install. Tinatalakay ng [hosted-agent walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) ang lokal na pagsusuri ng Agent Inspector at malayuang pag-deploy ng code. Ito ay isang pagsusuri ng dokumentasyon, hindi isang live na pag-validate ng pag-deploy; ang mga opsyonal na preview na tampok ay may sarili pa ring katayuan.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, ikaw ay:
-- Magde-deploy ng mga AI application gamit ang mga pre-built na AZD template
-- Maiintindihan ang integrasyon ng Microsoft Foundry sa AZD
-- Mai-configure at ma-customize ang mga AI agents na may mga tool
-- Makakapag-deploy ng RAG (Retrieval-Augmented Generation) na mga aplikasyon
+Sa pagtapos ng kabanatang ito, magagawa mong:
+- Mag-deploy ng mga AI na aplikasyon gamit ang mga pre-built na AZD na template
+- Maunawaan ang integrasyon ng Microsoft Foundry sa AZD
+- Mag-install ng GA bundle at subukan ang hosted agent nang lokal bago ideploy ang source nito sa Foundry
+- Suriin ang `azure.yaml`, mga evaluation assets, at paglilinis ng proyekto sa pagitan ng bago at muling ginagamit
+- I-configure at i-customize ang mga AI agent na may mga tool
+- Mag-deploy ng RAG (Retrieval-Augmented Generation) na mga aplikasyon
 
 ---
 
@@ -24,16 +26,18 @@ Sa pagtatapos ng kabanatang ito, ikaw ay:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Integrasyon ng Microsoft Foundry](microsoft-foundry-integration.md) | Ikonekta ang AZD sa Foundry services | 30 min |
-| 2 | [Gabay sa AI Agents](agents.md) | Mag-deploy ng mga intelligent agents na may mga tool | 45 min |
-| 3 | [Pag-deploy ng AI Model](ai-model-deployment.md) | Mag-deploy at mag-configure ng AI models | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Suriin ang isang template at planuhin ang iyong conversion | 2-3 oras |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | GA bundle, hosted-agent lokal-sa-cloud na workflow, at mga pagsusuri | 60 min |
+| 2 | [AI Agents Guide](agents.md) | Mag-deploy ng mga matatalinong agent na may mga tool | 45 min |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | Mag-deploy at mag-configure ng mga AI model | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Tuklasin ang isang template at planuhin ang iyong conversion | 2-3 oras |
 
 ---
 
-## 🚀 Mabilis na Pagsisimula
+## 🚀 Mabilisang Panimula
 
-Pumili ng isang opsyon sa isang bagong walang laman na direktoryo. Ang trailing na `.` ay nag-i-initialize ng kasalukuyang direktoryo; kung hindi, maaaring gumawa ang AZD ng subdirectory nang hindi binabago ang working directory ng iyong shell.
+Pumili ng isang opsyon sa isang bagong walang laman na direktoryo. Ang nakadugtong na `.` ay nag-i-initialize ng kasalukuyang direktoryo; kung hindi, maaaring gumawa ang AZD ng subdirectory nang hindi binabago ang working directory ng iyong shell.
+
+Para sa **GA hosted-agent code-deployment path**, simulan sa [guided walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Kinakailangan nito ng AZD 1.37.0+, kasalukuyang uv, Python 3.13+, Foundry permissions, at model quota. Ang mga buo na template ng aplikasyon sa ibaba ay mga alternatibo, hindi kinakailangan para sa walkthrough na iyon.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,7 +55,7 @@ azd up
 
 ---
 
-## 🤖 Tampok na mga AI Template
+## 🤖 Tampok na AI Template
 
 | Template | Paglalarawan | Mga Serbisyo |
 |----------|-------------|----------|
@@ -63,32 +67,32 @@ azd up
 
 ## 💰 Kamalayan sa Gastos
 
-Ito ay mga ilustratibong saklaw lamang, hindi mga quote o limitasyon; ang trapiko ng modelo, Search/compute SKUs, rehiyon, at opsyonal na mga tampok ay maaaring lumampas dito. Suriin ang kasalukuyang gabay sa pagpepresyo ng iyong piniling sample bago mag-provision.
+Ito ay mga halimbawa ng saklaw, hindi mga quote o limitasyon; maaaring lumampas ang trapiko ng model, Search/compute SKUs, rehiyon, at mga opsyonal na tampok sa mga ito. Suriin ang kasalukuyang gabay sa pagpepresyo ng iyong piniling sample bago mag-provision.
 
-| Kapaligiran | Tinatayang Gastos Buwanang |
-|-------------|--------------------------|
+| Kapaligiran | Tinatayang Buwanang Gastos |
+|-------------|----------------------|
 | Development | $80-150 |
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Tip:** Patakbuhin ang `azd down` pagkatapos ng pagsusuri upang maiwasan ang mga singil.
+**Paglilinis:** Suriin ang `azd down` bago mag-confirm: para sa bagong likhang Foundry project, binubura nito ang resource group at lahat ng nasa loob nito. Para sa muling nagamit na Foundry project, iniiwan nito ang proyekto at mga resource ng ahente sa lugar; sundin ang [walkthrough cleanup guidance](microsoft-foundry-integration.md#7-clean-up-deliberately) upang tanggalin nang hiwalay ang mga hindi nais na resource.
 
 ---
 
 ## 🔗 Navigasyon
 
 | Direksyon | Kabanata |
-|-----------|----------|
-| **Nakaraan** | [Kabanata 1: Pundasyon](../chapter-01-foundation/README.md) |
-| **Susunod** | [Kabanata 3: Konfigurasyon](../chapter-03-configuration/README.md) |
-| **Talaktakan sa** | [Kabanata 8: Mga Pattern ng Produksyon](../chapter-08-production/README.md) |
+|-----------|---------|
+| **Nakaraan** | [Kabanata 1: Foundation](../chapter-01-foundation/README.md) |
+| **Susunod** | [Kabanata 3: Configuration](../chapter-03-configuration/README.md) |
+| **Laktawan sa** | [Kabanata 8: Production Patterns](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 May Kaugnayang Mga Mapagkukunan
+## 📖 Kaugnay na Mga Sanggunian
 
-- [Pag-aayos ng Problema sa AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Mga Praktis sa Produksyon ng AI](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

@@ -1,6 +1,6 @@
 # 5. Pas een sjabloon aan
 
-!!! tip "AAN HET EINDE VAN DEZE MODULE KUN JE"
+!!! tip "AAN HET EINDE VAN DEZE MODULE KUNT U"
 
     - [ ] Distinguish configuration changes from application implementation
     - [ ] Plan a grounded retrieval customization
@@ -12,15 +12,15 @@
 
 ## 5.1 Stel een basislijn vast
 
-Gebruik de geïnitialiseerde repository [Aan de slag met AI-agenten](https://github.com/Azure-Samples/get-started-with-ai-agents) uit de vorige modules. Noteer de template-revisie, AZD-versie, geselecteerde omgeving, model-implementatie en werkende voorbeeldvragen voordat je iets verandert.
+Gebruik de geïnitialiseerde [Aan de slag met AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) repository van de vorige modules. Noteer de sjabloonrevisie, AZD-versie, geselecteerde omgeving, modelimplementatie en werkende voorbeeldvragen voordat u iets wijzigt.
 
-De voorbeeldtoepassing implementeert een chatapplicatie ondersteund door een agent. Het wordt **niet** automatisch een retail systeem met twee agenten door alleen omgevingsvariabelen in te stellen of extra instructiebestanden op te slaan. Extra agenten, tool-handlers, routering, autorisatie en gegevens-toegang vereisen applicatiecode.
+De voorbeeldapplicatie implementeert een chattoepassing ondersteund door een agent. Het wordt **niet** een tweedelige agent retail systeem louter door omgevingsvariabelen in te stellen of extra instructiebestanden op te slaan. Extra agents, tool handlers, routering, autorisatie en gegevensaccess vereisen applicatiecode.
 
-Bekijk de momenteel geïmplementeerde instructies en tools van de agent in Foundry. Test één feitelijke vraag, één ophaalvraag en één vraag die de voorbeeldgegevens niet kunnen beantwoorden. Verifieer citaties aan de hand van de daadwerkelijke brondocumenten in plaats van aan te nemen dat een vloeiende respons correct is.
+Inspecteer de momenteel geïmplementeerde agent's instructies en tools in Foundry. Test één feitelijke vraag, één zoekvraag en één vraag die de voorbeeldgegevens niet kunnen beantwoorden. Verifieer citaties aan de hand van de daadwerkelijke brondocumenten in plaats van aan te nemen dat een vloeiend antwoord correct is.
 
 ## 5.2 Pas kennisopvraging aan
 
-Het sjabloon ondersteunt op bestanden gebaseerde opvraging en optionele Azure AI Search-integratie. Volg de [huidige AI Search-gids](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) voor indexering en toolconfiguratie.
+Het sjabloon ondersteunt op bestanden gebaseerde opvraging en optionele Azure AI Search-integratie. Volg de [huidige AI Search gids](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) voor indexering en toolconfiguratie.
 
 ```bash
 # Infrastructure settings; these can add charges
@@ -29,101 +29,103 @@ azd provision --preview
 azd up
 ```
 
-Het inschakelen van de service is slechts een deel van de opvraging. Voordat je je eigen gegevens uploadt:
+Het inschakelen van de service is slechts een onderdeel van de opvraging. Voordat u uw eigen gegevens uploadt:
 
-1. Bevestig dat je toestemming hebt om de documenten te gebruiken en verwijder gevoelige informatie.
-2. Selecteer een embeddingmodel dat in jouw regio wordt ondersteund en stel de compatibele versie, implementatietype en vectordimensies in.
-3. Maak/de index op met het gedocumenteerde proces van de voorbeeldtoepassing.
-4. Configureer de opvragingstool van de agent om die index te gebruiken.
-5. Test opvraging, citaties, autorisatie en gedrag wanneer geen relevant document bestaat.
+1. Bevestig dat u toestemming hebt om de documenten te gebruiken en verwijder gevoelige informatie.
+2. Selecteer een embed-model dat in uw regio wordt ondersteund en stel de compatibele versie, implementatietype en vectordimensies in.
+3. Maak de index aan/vul deze met behulp van het gedocumenteerde proces van de voorbeeldapplicatie.
+4. Configureer het opvragingstool van de agent om die index te gebruiken.
+5. Test opvraging, citaties, autorisatie en gedrag wanneer er geen relevant document bestaat.
 
-Schakel niet zomaar over van `text-embedding-3-small` naar een ander embeddingmodel zonder dimensies te controleren en vectoren indien nodig te herbouwen/herindexeren. Een naam zoals `retail-products` is geen geïmplementeerde catalogus of toegangscontrolebeleid.
+Schakel niet van `text-embedding-3-small` naar een ander embed-model zonder de dimensies te controleren en vectoren indien nodig opnieuw op te bouwen/herindexeren. Een naam zoals `retail-products` is geen geïmplementeerde catalogus of een toegangscontrolebeleid.
 
 ## 5.3 Tracing en monitoring
 
-Volg de [observability-gids van de voorbeeldtoepassing](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Zorg dat de vereiste Application Insights-resource en verbinding al bestaan; gebruik `azd up` bij het wijzigen van infrastructuurinstellingen.
+Volg de [observability gids van de voorbeeldapplicatie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Zorg dat de vereiste Application Insights resource en verbinding al bestaan; gebruik `azd up` bij het wijzigen van infrastructuurinstellingen.
 
 ```bash
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 azd up
 ```
 
-Verstuur een testverzoek en inspecteer vervolgens de applicatielogs van de Container App en het tracing-overzicht van de agent in Foundry. Controleer latency, tool-aanroepen, fouten en correlatie tussen het verzoek en de trace. Ga er niet zomaar van uit dat telemetrie is verbonden alleen omdat de implementatie geslaagd is.
+Verstuur een testverzoek, inspecteer daarna de applicatielogs van de Container App en de tracing-weergave van de agent in Foundry. Controleer latentie, toolaanroepen, fouten en correlatie tussen verzoek en trace. Neem niet zomaar aan dat telemetrie is verbonden alleen omdat de implementatie geslaagd is.
 
-Laat `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` uitgeschakeld tenzij je expliciet toestemming, redactie, bewaartermijn en toegangscontroles hebt beoordeeld. Traces kunnen gevoelige tool-argumenten of documentinhoud bevatten zelfs wanneer gewone applicatielogs onschuldig lijken.
+Laat `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` uitgeschakeld tenzij u expliciet instemming, redactie, bewaartermijnen en toegangscontroles hebt beoordeeld. Traces kunnen gevoelige toolargumenten of documentinhoud bevatten, zelf wanneer gewone applicatielogs onschuldig lijken.
 
-## 5.4 Agentevaluatie
+## 5.4 Agent evaluatie
 
-Het evaluatie-entrypoint van de voorbeeldtoepassing is nu [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), niet een `evals/`-map. Gebruik vanaf de root van de voorbeeldtoepassing een Python-omgeving die aan de gedocumenteerde vereisten voldoet:
+Het evaluatie-entrypoint van de voorbeeldapplicatie is nu [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), niet een `evals/` map. Gebruik vanaf de root van de voorbeeldapplicatie een Python-omgeving die aan de gedocumenteerde eisen voldoet:
 
 ```bash
 python -m pip install -r src/requirements.txt
 pytest tests/test_evaluation.py -s
 ```
 
-Voer eerst de [evaluatie-vereisten](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md) uit. De tests laden configuratie uit het geselecteerde `.azure/<environment>/.env`; bevestig dat de bedoelde omgeving is geselecteerd. Belangrijke inputs zijn:
+Voltooi vóór het uitvoeren de [evaluatie-vereisten](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). De tests laden configuratie vanaf de geselecteerde `.azure/<environment>/.env`; bevestig dat de bedoelde omgeving is geselecteerd. Belangrijke invoeren zijn:
 
 - `AZURE_EXISTING_AIPROJECT_ENDPOINT`
-- `AZURE_EXISTING_AGENT_ID`, gebruikmakend van het formaat dat de huidige voorbeeldtoepassing vereist (de beoordeelde versie gebruikt `agent_name:agent_version`)
-- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, gebruikt als de judge-model implementatie
+- `AZURE_EXISTING_AGENT_ID`, in het formaat vereist door de huidige voorbeeldapplicatie (de beoordeelde versie gebruikt `agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, gebruikt als de rechter-modelimplementatie
 
-Bekijk de tests om evaluator-keuze, drempels, vereiste rollen en modelkosten te begrijpen. Een voltooide run is niet automatisch een geslaagde kwaliteitscontrole; inspecteer scores, mislukte/gefoute cases en de gekoppelde Foundry-resultaten.
+Inspecteer de tests om evaluatorkeuze, drempels, vereiste rollen en modelkosten te begrijpen. Een voltooide run is niet automatisch een geslaagde kwaliteitscontrole; bekijk scores, gefaalde/foutieve gevallen en de gekoppelde Foundry-resultaten.
 
-### Separaat AZD-evaluaties extensie
+### Separate AZD evaluaties extensie
 
-De bovengenoemde Python-test is een **specifieke workflow voor de voorbeeldtoepassing**. De optionele `azure.ai.evaluations` extensie is een andere workflow met een eigen `evals/azure.eval.yaml`-configuratie:
+De bovenstaande Python-test is een **voorbeeld-specifieke workflow**. De optionele `azure.ai.evaluations` extensie is een andere workflow, met een eigen `evals/azure.eval.yaml` configuratie. Deze wordt apart geïnstalleerd, niet opgenomen in de algemeen beschikbare `microsoft.foundry` 1.0 bundel:
 
 ```bash
 azd extension install azure.ai.evaluations
 azd ai eval --help
 ```
 
-Voor een volledige extensie-setup, zie [evaluatieworkflows en migratie](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Sinds agents extensie beta.22, gebruik niet de verwijderde `azd ai agent eval`-commando’s. Het installeren van de evaluatie-extensie converteert de Python-tests van de voorbeeldtoepassing niet en maakt ook geen evaluatieconfiguratie automatisch aan.
+Voor een complete extensie-installatie, zie [evaluatieworkflows en migratie](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Sinds agents extensie beta.22, gebruik niet de verwijderde `azd ai agent eval` commando's. Het installeren van de evaluatie-extensie converteert de Python-tests van de voorbeeldapplicatie niet automatisch of maakt een evaluatieconfiguratie aan.
+
+Voor een aparte **GA hosted-agent oefening**, gebruik een lege map buiten de sample van deze workshop en volg de [Foundry local-to-cloud walkthrough](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Deze gebruikt AZD 1.37.0+, de `microsoft.foundry` bundel, Python 3.13+ en de huidige uv. U inspecteert `azure.yaml`, test lokaal met Agent Inspector, implementeert broncode voor een externe Foundry-build en genereert/beoordeelt een dataset en rubric voordat u `azd ai eval init --name quality` configureert. Vervang de tests van deze sample niet en neem niet aan dat het installeren van de bundel het hostingmodel verandert.
 
 ## 5.5 AI red teaming en continue evaluatie
 
-De huidige voorbeeldtoepassing bevat [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Voltooi de vereisten en bekijk het bedoelde doel en kosten voordat je het uitvoert:
+De huidige voorbeeldapplicatie biedt [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Voltooi de vereisten en beoordeel het bedoelde doel en kosten voordat u begint:
 
 ```bash
 pytest tests/test_red_teaming.py -s
 ```
 
-Gebruik een geautoriseerde testimplementatie en synthetische data. Bekijk de gegenereerde aanvallen en resultaten; deze scan toont niet aan dat een applicatie veilig of compliant is.
+Gebruik een geautoriseerde testimplementatie en synthetische gegevens. Bekijk de gegenereerde aanvallen en resultaten; deze scan bewijst niet dat een applicatie veilig of compliant is.
 
-De [observability-gids](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) beschrijft ook continue evaluatie die bij container-start is geconfigureerd. Het evalueert echte gebruikersinteracties, geen gegenereerd testverkeer, en evaluator-ondersteuning varieert per regio. Geen interacties betekent geen evaluatiegevallen. Controleer de geïnstalleerde voorbeeldversie en evaluatorconfiguratie in plaats van aan te nemen dat elke implementatie dezelfde standaardinstellingen heeft.
+De [observability gids](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) beschrijft ook continue evaluatie die bij het opstarten van de container wordt geconfigureerd. Deze evalueert echte gebruikersinteracties, niet gegenereerd testverkeer, en evaluatorondersteuning varieert per regio. Geen interacties betekent geen evaluatie-items. Controleer de geïnstalleerde sample-versie en evaluatorconfiguratie in plaats van aan te nemen dat elke implementatie dezelfde standaardinstellingen heeft.
 
-Authenticatie is gescheiden van evaluatie. Volg de gedocumenteerde identiteit-/toegangsinstellingen van de voorbeeldtoepassing. Er is geen gedocumenteerde “basic auth fallback” om te vertrouwen op bescherming van een openbaar eindpunt.
+Authenticatie is gescheiden van evaluatie. Volg de gedocumenteerde identiteit-/toegangsinstellingen van de sample. Er is geen gedocumenteerde “basic auth fallback” om te vertrouwen voor de bescherming van een openbaar eindpunt.
 
-## 5.6 Ontwerp-oefening: retailaanpassing
+## 5.6 Ontwerpoefening: retailaanpassing
 
-!!! warning "Ontwerp-oefening, geen voltooide implementatie"
+!!! warning "Ontwerpoefening, geen voltooide implementatie"
 
     The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
 
-Schrijf een kort plan over:
+Schrijf een kort plan met aandacht voor:
 
-| Gebied | Beslissing en te verzamelen bewijsmateriaal |
-|------|-------------------------------------|
-| Agent verantwoordelijkheden | Begin met één agent, of motiveer aparte Shopper- en Loyalty-agenten en routeringslogica |
-| Gegevens | Definieer een synthetische catalogus/beloningsdataset en eigenaarschap van updates |
-| Tools | Implementeer eerst read-only handlers; specificeer autorisatie en validatie voor schrijfbewerkingen |
-| Modellen | Kies beschikbare model-/versie-/SKU-combinaties en verifieer quota; vermijd het provisioneren van ongebruikte modellen |
-| Opvraging | Definieer indexering, embeddingdimensies, citaties en toegangscontroles op documentniveau |
-| Evaluatie | Voeg cases toe voor verwachte antwoorden, niet-ondersteunde vragen, toolgebruik en veiligheidsgevallen met expliciete drempels |
-| Operaties | Definieer telemetrie, latency-/foutenbudgetten, kostlimieten en verantwoordelijkheden voor opschoning |
+| Gebied | Beslissing en te verzamelen bewijs |
+|------|-----------------------------|
+| Agentverantwoordelijkheden | Begin met één agent, of rechtvaardig aparte Shopper en Loyalty agents plus routeringslogica |
+| Gegevens | Definieer een synthetische catalogus/beloningen dataset en eigendom van updates |
+| Tools | Implementeer eerst alleen-lezen handlers; specificeer autorisatie en validatie voor schrijfbewerkingen |
+| Modellen | Kies beschikbare model/versie/SKU combinaties en controleer quota; voorkom provisionering van ongebruikte modellen |
+| Opvraging | Definieer indexering, embed-dimensies, citaties en documentniveau toegangscontroles |
+| Evaluatie | Voeg verwacht-antwoord, niet-ondersteunde-vraag, toolgebruik en veiligheidsgeval toe met expliciete drempels |
+| Operaties | Definieer telemetrie, latentie/foutbudgetten, kostengrenzen en eigendom van opruiming |
 
-Opslaan van `custom-agents/shopper-agent-instructions.md` zorgt er niet voor dat de voorbeeldtoepassing deze laadt. Zoek de applicatiecode die de agent maakt/bijwerkt, verbind daar je beoordeelde instructies mee en verifieer de resulterende agentversie voordat je test. Instructies kunnen geen toegang verlenen tot gegevens of tools die je niet hebt geïmplementeerd.
+Het opslaan van `custom-agents/shopper-agent-instructions.md` zorgt er niet voor dat de sample dit laadt. Zoek de applicatiecode die de agent aanmaakt/bijwerkt, verbind uw beoordeelde instructies daar en verifieer de resulterende agentversie voor testen. Instructies kunnen geen toegang verlenen tot data of tools die u niet hebt geïmplementeerd.
 
-Pas één wijziging per keer toe, implementeer de getroffen componenten opnieuw en herhaal je basislijnvragen en evaluaties. Houd een werkende revisie voor vergelijking. Voor architectuursuggesties, zie het [retail blueprint](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), dat ook geen complete retailapplicatie is.
+Pas één wijziging tegelijk toe, implementeer opnieuw de betrokken componenten, en voer weer uw basisvragen en evaluaties uit. Houd een werkende revisie voor vergelijking. Voor architectuurinspiratie, zie de [retail blueprint](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), die ook geen volledige retailapplicatie is.
 
-!!! quote "AAN HET EINDE VAN DEZE LABO MOET JE HEBBEN"
+!!! quote "AAN HET EINDE VAN DIT LAB HEEFT U"
 
     - [ ] A documented customization scope and cost/region checks
     - [ ] Evidence that retrieval and tracing work for your selected environment
     - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
     - [ ] A list of missing implementation work rather than a claim of automatic production readiness
 
-Ga verder naar [Infrastructuur afbreken](6-Teardown-Infrastructure.md).
+Ga verder met [Infrastructuur afbreken](6-Teardown-Infrastructure.md).
 
 ---
 

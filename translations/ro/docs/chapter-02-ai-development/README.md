@@ -6,17 +6,19 @@
 
 ## Prezentare generală
 
-Acest capitol se concentrează pe implementarea aplicațiilor alimentate de AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI la agenți inteligenți cu unelte.
+Acest capitol se concentrează pe implementarea aplicațiilor alimentate de AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI la agenți inteligenți cu instrumente.
 
-> **Recenzie lansare (2026-11-04):** Ghidul AI CLI a fost verificat în raport cu documentația/sursa publicată `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, și `azure.ai.evaluations` `1.0.0-beta.2`. Folosiți `azd >= 1.37.0` pentru fluxul de lucru combinat. Evaluările folosesc acum namespace separat `azd ai eval`; vezi [schimbările din lansare și ghidul de migrare](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Aceasta nu este o validare de implementare live.
+> **Actualizare Foundry GA (2026-11-09):** Pachetul `microsoft.foundry` 1.0 este [disponibil general](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Folosiți `azd >= 1.37.0`; evaluările rămân o instalare separată. [Tutorialul agentului găzduit](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) acoperă testarea Inspectorului Agent local și implementarea codului de la distanță. Aceasta este o revizuire a documentației, nu o validare a implementării live; funcțiile de previzualizare opționale își păstrează propriul statut.
 
-## Obiective de învățare
+## Obiective de Învățare
 
-Parcurgând acest capitol, vei:
+Finalizând acest capitol, vei:
 - Implementa aplicații AI folosind șabloane AZD predefinite
 - Înțelege integrarea Microsoft Foundry cu AZD
-- Configura și personaliza agenți AI cu unelte
-- Implementa aplicații RAG (Generare augmentată prin recuperare)
+- Instala pachetul GA și testează un agent găzduit local înainte de a implementa sursa sa în Foundry
+- Revizuiește `azure.yaml`, resursele de evaluare și curățarea proiectelor noi versus reutilizate
+- Configurează și personalizează agenți AI cu instrumente
+- Implementează aplicații RAG (Generare augmentată prin recuperare)
 
 ---
 
@@ -24,16 +26,18 @@ Parcurgând acest capitol, vei:
 
 | # | Lecție | Descriere | Durată |
 |---|--------|-------------|------|
-| 1 | [Integrare Microsoft Foundry](microsoft-foundry-integration.md) | Conectează AZD cu serviciile Foundry | 30 min |
-| 2 | [Ghid Agenți AI](agents.md) | Implementarea agenților inteligenți cu unelte | 45 min |
-| 3 | [Implementare Model AI](ai-model-deployment.md) | Implementare și configurare modele AI | 30 min |
-| 4 | [Atelier AI](ai-workshop-lab.md) | Practic: Explorează un șablon și planifică conversia ta | 2-3 ore |
+| 1 | [Integrarea Microsoft Foundry](microsoft-foundry-integration.md) | Pachet GA, flux de lucru agent găzduit local-în-cloud și evaluări | 60 min |
+| 2 | [Ghid pentru Agenți AI](agents.md) | Implementarea agenților inteligenți cu instrumente | 45 min |
+| 3 | [Implementarea Modelului AI](ai-model-deployment.md) | Implementarea și configurarea modelelor AI | 30 min |
+| 4 | [Atelier AI Laborator](ai-workshop-lab.md) | Practic: Explorează un șablon și planifică conversia ta | 2-3 ore |
 
 ---
 
-## 🚀 Pornire rapidă
+## 🚀 Pornire Rapidă
 
-Alege o opțiune într-un director nou și gol. `.` de la final inițializează directorul curent; în caz contrar AZD poate crea un subdirector fără a schimba directorul curent în shell-ul tău.
+Alege o opțiune într-un director nou gol. `.` la sfârșit inițializează directorul curent; altfel AZD poate crea un subdirector fără a schimba directorul de lucru al shell-ului tău.
+
+Pentru **calea de implementare a codului agentului găzduit GA**, începe cu [tutorialul ghidat](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Necesită AZD 1.37.0+, uv curent, Python 3.13+, permisiuni Foundry și cotă de modele. Șabloanele complete de aplicații de mai jos sunt alternative, nu prerechizite pentru acel tutorial.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,27 +55,27 @@ azd up
 
 ---
 
-## 🤖 Șabloane AI recomandate
+## 🤖 Șabloane AI Recomandate
 
 | Șablon | Descriere | Servicii |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG cu citări | OpenAI + Căutare AI |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu unelte | Serviciu Agent AI |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG cu citări | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu instrumente | Serviciul Agent AI |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI de bază | OpenAI + Container Apps |
 
 ---
 
-## 💰 Conștientizare a costurilor
+## 💰 Conștientizarea Costurilor
 
-Acestea sunt intervale ilustrative, nu oferte sau plafoane; traficul modelului, SKU-urile Search/compute, regiunea și opțiunile suplimentare pot depăși aceste valori. Consultă ghidul de prețuri curent al eșantionului ales înainte de aprovizionare.
+Acestea sunt intervale ilustrative, nu cotații sau limite; traficul modelului, SKU-urile de căutare/calcul, regiunea și funcțiile opționale pot depăși aceste valori. Consultă sfaturile actuale de preț pentru exemplul ales înainte de aprovizionare.
 
-| Mediu | Cost lunar estimat |
+| Mediu | Cost Lunar Estimat |
 |-------------|----------------------|
-| Dezvoltare | $80-150 |
-| Staging | $150-300 |
-| Producție | $300-3,500+ |
+| Dezvoltare | 80-150 $ |
+| Staging | 150-300 $ |
+| Producție | 300-3.500+ $ |
 
-**Sfat:** Rulează `azd down` după testare pentru a evita taxe.
+**Curățare:** Revizuiește `azd down` înainte de confirmare: pentru un proiect Foundry nou creat șterge grupul de resurse și tot ce conține. Pentru un proiect Foundry reutilizat, păstrează resursele proiectului și ale agentului; urmează [instrucțiunile de curățare din tutorial](microsoft-foundry-integration.md#7-clean-up-deliberately) pentru a elimina resursele nedorite separat.
 
 ---
 
@@ -79,16 +83,16 @@ Acestea sunt intervale ilustrative, nu oferte sau plafoane; traficul modelului, 
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Anterior** | [Capitolul 1: Fundație](../chapter-01-foundation/README.md) |
+| **Anterior** | [Capitolul 1: Fundament](../chapter-01-foundation/README.md) |
 | **Următor** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
-| **Sari la** | [Capitolul 8: Modele de producție](../chapter-08-production/README.md) |
+| **Salt la** | [Capitolul 8: Modele de Producție](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Resurse conexe
+## 📖 Resurse Aflate în Legătură
 
 - [Depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Practici AI de producție](../chapter-08-production/production-ai-practices.md)
+- [Practici AI pentru Producție](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

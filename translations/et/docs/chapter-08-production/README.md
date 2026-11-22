@@ -1,25 +1,25 @@
-# 8. peatükk: Tootmine ja ettevõtte mustrid
+# 8. peatükk: Tootmise ja ettevõtete mustrid
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2–3 tundi | **⭐ Kompleksus**: Edasijõudnud
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Keerukus**: Täiustatud
 
 ---
 
 ## Ülevaade
 
-Käesolevas peatükis käsitletakse ettevõttesiseseid juurutusmustreid, turvakihtide tugevdamist, jälgimist ja kulude optimeerimist tootmisvalmis tehisintellekti koormuste jaoks.
+See peatükk käsitleb ettevõttele valmis juurutamise mustreid, turvamistamist, jälgimist ja tootmise AI töökoormuste kulude optimeerimist.
 
-See on arhitektuuri viide, mitte täielik juurutatav tootmismall. Näited jätavad välja integratsioonidetailid, mis tuleb ise rakenduses lisada ja testida; kontrollnimekirja lugemine ei taga tootmiskõlblikkust.
+See on arhitektuuriviide, mitte täielik juurutamiseks valmis tootmismall. Näited jätavad välja integratsiooni üksikasjad, mis tuleb teie rakenduses lisada ja testida; kontrollnimekirja lugemine ei tõenda tootmisvalmidust.
 
-> **Väljalaske ülevaade (2026-11-04):** AI CLI juhendit kontrolliti `azd 1.37.2`, agentide `1.0.0-beta.23` ja hindamiste `1.0.0-beta.2` dokumentatsiooni/allika vastu. Ühilduvusnõuete ja migreerimise üksikasjade jaoks vaadake [väljalaske muudatusi ja parandusi](production-ai-practices.md#recent-release-changes-and-fixes); see ei ole reaalajas juurutuse valideerimine.
+> **Foundry GA uuendus (2026-11-09):** Kasutage Foundry töövoo jaoks `azd >= 1.37.0` ja üldiselt kättesaadavat `microsoft.foundry` 1.0 komplekti; hindamised installitakse eraldi. Vaadake [väljalaske ulatust ja migratsiooni](production-ai-practices.md#recent-release-changes-and-fixes) ja [autentimisega torujuhtme näidet](production-ai-practices.md#cicd-pipeline-configuration). See on dokumentatsiooni ülevaade, mitte reaalajakontroll juurutamise või valikuliste eelvaate funktsioonide üldise GA staatuse kohta.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisel:
-- Rakendate mitmeregioonilisi vastupidavaid rakendusi
-- Rakendate ettevõtete turvamustreid
-- Konfigureerite põhjaliku jälgimise
-- Optimeerite kulusid suures mahus
-- Seadistate AZD abil CI/CD torujuhtmed
+Selle peatüki läbimisel saate:
+- Juurutada mitmeregioonilisi vastupidavaid rakendusi
+- Rakendada ettevõtte turbemustreid
+- Konfigureerida põhjalikku jälgimist
+- Optimeerida kulusid mahus
+- Seada üles CI/CD torujuhtmeid AZD-ga
 
 ---
 
@@ -27,19 +27,19 @@ Selle peatüki lõpetamisel:
 
 | # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Tootmises AI tavad](production-ai-practices.md) | Ettevõtete juurutusmustrid | 90 min |
+| 1 | [Tootmise AI praktikad](production-ai-practices.md) | Ettevõtte juurutuse mustrid | 90 min |
 
 ---
 
 ## 🚀 Tootmise kontrollnimekiri
 
-- [ ] Mitmeregiooniline juurutus vastupidavuse tagamiseks
-- [ ] Halduse identiteet autentimiseks (ilma võtmeteta)
+- [ ] Mitmeregiooniline juurutus vastupidavuse jaoks
+- [ ] Haldusega identiteet autentimiseks (ilma võtmeteta)
 - [ ] Application Insights jälgimiseks
-- [ ] Kulude eelarved ja hoiatused seadistatud
-- [ ] Turvaskaneerimine lubatud
+- [ ] Kulude eelarved ja hoiatused konfigureeritud
+- [ ] Turbe skaneerimine lubatud
 - [ ] CI/CD torujuhtme integratsioon
-- [ ] Katastroofide taastumise plaan
+- [ ] Katastroofide taastamise plaan
 
 ---
 
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Muster 2: Sündmusel põhinev AI
+### Muster 2: Sündmustepõhine AI
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Turvalisuse parimad tavad
+## 🔐 Turbe parimad praktikad
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -87,12 +87,12 @@ properties: {
 
 | Strateegia | Peamine piirang |
 |----------|---------|
-| Skaala nullini (Container Apps) | Nõuab sobivat päästikut; muud teenused põhjustavad endiselt kulusid |
-| Kasuta tarbimiskihte arenduseks | Võrdle valitud teenuse hinnastust ja koormust |
-| Ajakavastatud skaleerimine | Skaala toetatud infrastruktuuri/automaatika kaudu |
-| Broneeringud/ette nähtud maht | Ainult siis, kui toetatud; kohustused võivad tõsta seisvaid kulusid |
+| Skaala nulli (Container Apps) | Nõuab sobivat päästikut; teised teenused tekitavad siiski kulusid |
+| Kasuta tarbimistasemeid arenduseks | Võrdle valitud teenuse hinnakujundust ja töökoormust |
+| Ajastatud skaala | Skaala toetatud infrastruktuuri/automaadiga |
+| Reserveeringud/ette nähtud võimsus | Ainult kui toetatud; kohustused võivad suurendada seisvaid kulusid |
 
-Kasuta [täielikku eelarve ressursimustrit](production-ai-practices.md#2-cost-monitoring-and-budgets) kehtiva alguskuupäeva, arvelduspiirkonna, saajate ja õigustega. Eelarve saadab hoiatusi; see ei piira kulutusi. Säästud sõltuvad mõõdetud kasutusest ega ole garantii protsentides.
+Kasutage [täielikku eelarve ressursimustrit](production-ai-practices.md#2-cost-monitoring-and-budgets) kehtiva alguskuupäeva, arvelduspiirkonna, saajate ja õigustega. Eelarve saadab hoiatusi; see ei piira kulutusi. Säästud sõltuvad mõõdetud kasutusest ja ei ole garanteeritud protsendid.
 
 ---
 
@@ -122,9 +122,9 @@ az monitor metrics list --resource <resource-id>
 
 ## 📖 Seotud ressursid
 
-- [AI agentide juhend](../chapter-02-ai-development/agents.md)
+- [AI agendid juhend](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Mitme agendi lahendused](../chapter-05-multi-agent/README.md)
+- [Mitmeagendi lahendused](../chapter-05-multi-agent/README.md)
 - [Mikroteenuste näide](../../examples/microservices/README.md)
 
 ---

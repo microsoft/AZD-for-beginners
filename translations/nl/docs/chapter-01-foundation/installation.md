@@ -1,43 +1,45 @@
 # Installatie- & Setupgids
 
 **Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start
-- **⬅️ Vorig**: [AZD Basisprincipes](azd-basics.md)
-- **➡️ Volgend**: [Je Eerste Project](first-project.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Fundament & Snelle Start
+- **⬅️ Vorige**: [AZD Basisprincipes](azd-basics.md)
+- **➡️ Volgende**: [Je Eerste Project](first-project.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-Georiënteerde Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introductie
+## Inleiding
 
-Deze uitgebreide gids leidt je door het installeren en configureren van Azure Developer CLI (azd) op jouw systeem. Je leert meerdere installatiemethoden voor verschillende besturingssystemen, authenticatie-instellingen en initiële configuratie om je ontwikkelomgeving klaar te maken voor Azure-implementaties.
+Deze uitgebreide gids leidt je door het installeren en configureren van Azure Developer CLI (azd) op je systeem. Je leert meerdere installatiemethoden voor verschillende besturingssystemen, het instellen van authenticatie en de initiële configuratie om je ontwikkelomgeving voor Azure-implementaties voor te bereiden.
 
 ## Leerdoelen
 
 Aan het einde van deze les zul je:
-- Succesvol Azure Developer CLI op je besturingssysteem installeren
-- Authenticatie met Azure configureren via meerdere methoden
-- Je ontwikkelomgeving opzetten met de benodigde vereisten
-- Verschillende installatie-opties begrijpen en weten wanneer je welke gebruikt
-- Veelvoorkomende installatie- en setupproblemen oplossen
+- Azure Developer CLI succesvol geïnstalleerd hebben op je besturingssysteem
+- Authenticatie met Azure geconfigureerd hebben met meerdere methoden
+- Je ontwikkelomgeving ingericht hebben met de nodige vereisten
+- Verschillende installatieopties begrijpen en wanneer je elke optie gebruikt
+- Veelvoorkomende installatie- en setupproblemen kunnen oplossen
 
-## Leerrendement
+## Leerresultaten
 
-Na het voltooien van deze les kun je:
-- azd installeren met de juiste methode voor jouw platform
-- Authenticeren met Azure via azd auth login
-- Je installatie verifiëren en basale azd-commando's testen
-- Je ontwikkelomgeving configureren voor optimaal azd-gebruik
-- Veelvoorkomende installatiefouten zelfstandig oplossen
+Na het voltooien van deze les ben je in staat om:
+- azd te installeren met de juiste methode voor jouw platform
+- Authenticeren bij Azure met azd auth login
+- Je installatie te verifiëren en basale azd-commando’s te testen
+- Je ontwikkelomgeving te configureren voor optimaal gebruik van azd
+- Veelvoorkomende installatieproblemen zelfstandig op te lossen
 
-Deze gids helpt je Azure Developer CLI te installeren en configureren, ongeacht je besturingssysteem of ontwikkelomgeving.
+Deze gids helpt je Azure Developer CLI op je systeem te installeren en configureren, ongeacht je besturingssysteem of ontwikkelomgeving.
 
 ## Vereisten
 
-Voordat je azd installeert, zorg dat je:
+Voordat je azd installeert, zorg je ervoor dat je:
 - **Azure-abonnement** - [Maak een gratis account aan](https://azure.microsoft.com/free/)
-- **Azure CLI** (optioneel) - Voor voorbeelden die expliciet `az` draaien; azd authenticeert onafhankelijk
-- **Git** - Voor het klonen van sjablonen en versiebeheer
-- **Docker** (optioneel) - Voor gecontaineriseerde applicaties
+- **Azure CLI** (optioneel) - Voor voorbeelden die expliciet `az` uitvoeren; azd verzorgt authenticatie zelfstandig
+- **Git** - Voor het klonen van templates en versiebeheer
+- **Docker** (optioneel) - Voor gecontaineriseerde toepassingen
+
+**Hoofdstuk 2 Foundry GA-pad:** Gebruik AZD **1.37.0 of later**, installeer de bundel met `azd ext install microsoft.foundry`, en gebruik Python **3.13+** en de actuele **uv** voor de hosted-agent sample. De code-deploymodus bouwt op afstand, dus een lokale Docker-build is niet vereist. Foundry-machtigingen, regionale modelbeschikbaarheid en quota blijven vereist; zie de [hosted-agent setup](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize).
 
 ## Installatiemethoden
 
@@ -59,8 +61,8 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 choco install azd
 ```
 
-#### Optie 4: Handmatige Installatie
-1. Download de laatste release van [GitHub](https://github.com/Azure/azure-dev/releases)
+#### Optie 4: Handmatige installatie
+1. Download de nieuwste release van [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Pak uit naar `C:\Program Files\azd\`
 3. Voeg toe aan de PATH-omgevingsvariabele
 
@@ -77,8 +79,8 @@ brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Optie 3: Handmatige Installatie
-Download het archief voor jouw macOS-architectuur van [de release assets](https://github.com/Azure/azure-dev/releases), pak het uit en voeg de `azd` binary toe aan je `PATH`.
+#### Optie 3: Handmatige installatie
+Download het archief voor je macOS-architectuur van [de release-assets](https://github.com/Azure/azure-dev/releases), pak het uit en voeg het `azd`-binaire bestand toe aan je `PATH`.
 
 ### Linux
 
@@ -87,9 +89,9 @@ Download het archief voor jouw macOS-architectuur van [de release assets](https:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Optie 2: Package Managers
+#### Optie 2: Pakketbeheerders
 
-**Handmatige installatie vanuit release assets:**
+**Handmatige installatie vanuit release-assets:**
 ```bash
 # Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
@@ -98,13 +100,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ### GitHub Codespaces
 
-Sommige Codespaces en dev container-omgevingen bevatten al `azd`, maar je moet dit verifiëren in plaats van ervan uitgaan:
+Sommige Codespaces en ontwikkelcontaineromgevingen bevatten al `azd`, maar je moet dit verifiëren in plaats van aannemen:
 
 ```bash
 azd version
 ```
 
-Als `azd` ontbreekt, installeer het dan met het standaard script voor de omgeving.
+Als `azd` ontbreekt, installeer deze dan met het standaard script voor de omgeving.
 
 ### Docker
 
@@ -116,11 +118,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure
 alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-Deze vluchtige container behoudt geen inlogstatus tussen uitvoeringen. Voor herhaalde implementaties gebruik je de [dev container setup](dev-containers.md); container builds vereisen ook een Docker daemon die van binnenuit de container toegankelijk is.
+Deze vluchtige container bewaart de inlogstatus niet tussen uitvoeringen. Voor herhaalde implementaties, gebruik de [dev container setup](dev-containers.md); container-builds vereisen ook een Docker-daemon die van binnenuit de container toegankelijk is.
 
-## ✅ Installatie Verifiëren
+## ✅ Verifieer Installatie
 
-Verifieer na installatie dat azd correct werkt:
+Controleer na installatie of azd correct werkt:
 
 ```bash
 # Check version
@@ -133,26 +135,26 @@ azd --help
 azd template list
 ```
 
-Verwachte output:
+Verwachte uitvoer:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Opmerking**: Het werkelijke versienummer kan variëren. Controleer [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) voor de nieuwste versie.
+**Opmerking**: Het daadwerkelijke versienummer kan verschillen. Bekijk [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) voor de nieuwste versie.
 
-**✅ Installatiesucces Checklijst:**
+**✅ Checklist Installatiesucces:**
 - [ ] `azd version` toont versienummer zonder fouten
 - [ ] `azd --help` toont commando-documentatie
-- [ ] `azd template list` toont beschikbare sjablonen
-- [ ] Je kunt een testmap aanmaken en succesvol `azd init` uitvoeren
+- [ ] `azd template list` toont beschikbare templates
+- [ ] Je kunt succesvol een testmap maken en `azd init` uitvoeren
 
-**Als alle controles lukken, ben je klaar om door te gaan naar [Je Eerste Project](first-project.md)!**
+**Als alle controles slagen, ben je klaar om door te gaan naar [Je Eerste Project](first-project.md)!**
 
 ## Authenticatie Setup
 
-### Aanbevolen Beginnersinstelling
+### Aanbevolen Beginnerssetup
 
-Voor AZD-first workflows, log in met `azd auth login`.
+Voor AZD-first workflows, meld je aan met `azd auth login`.
 
 ```bash
 # Required for AZD commands such as azd up
@@ -162,7 +164,7 @@ azd auth login
 azd auth login --check-status
 ```
 
-Gebruik Azure CLI-login alleen als je van plan bent zelf `az` commando's uit te voeren tijdens de cursus.
+Gebruik Azure CLI-aanmelding alleen wanneer je van plan bent zelf `az`-commando’s uit te voeren tijdens de cursus.
 
 ### Azure CLI Authenticatie (Optioneel)
 ```bash
@@ -178,14 +180,14 @@ az login
 az account show
 ```
 
-### Welke Aanmeldingsmethode Moet Je Gebruiken?
+### Welke Aanmeldflow Moet Je Gebruiken?
 
-- Gebruik `azd auth login` als je het beginnerstraject AZD volgt en vooral `azd` commando's draait.
-- Gebruik ook `az login` wanneer je Azure CLI-commando's wilt uitvoeren zoals `az account show` of resources direct inspecteren.
-- Als een oefening zowel `azd` als `az` commando's bevat, voer dan beide aanmeldcommando's één keer aan het begin uit.
+- Gebruik `azd auth login` als je het beginnende AZD-pad volgt en vooral `azd`-commando’s uitvoert.
+- Gebruik ook `az login` wanneer je Azure CLI-commando’s wilt uitvoeren zoals `az account show` of rechtstreeks bronnen wilt bekijken.
+- Als een oefening zowel `azd` als `az`-commando’s bevat, voer dan beide aanmeldcommando’s eenmaal aan het begin uit.
 
 ### Device Code Authenticatie
-Als je een headless systeem hebt of browserproblemen:
+Als je op een headless systeem zit of browserproblemen hebt:
 ```bash
 azd auth login --use-device-code
 ```
@@ -199,9 +201,9 @@ azd auth login \
   --tenant-id "<tenant-id>"
 ```
 
-### Valideer Je Volledige Setup
+### Valideer Je Complete Setup
 
-Als je snel wil controleren of je klaar bent voordat je begint met Hoofdstuk 1:
+Wil je een snelle klaarheidstest voordat je met Hoofdstuk 1 begint:
 
 **Windows:**
 ```powershell
@@ -238,7 +240,7 @@ export AZURE_LOCATION="eastus2"
 azd version --debug
 ```
 
-## IDE-integratie
+## IDE Integratie
 
 ### Visual Studio Code
 Installeer de Azure Developer CLI-extensie:
@@ -247,14 +249,14 @@ Installeer de Azure Developer CLI-extensie:
 3. Zoek naar "Azure Developer CLI"
 4. Installeer de extensie
 
-Functies:
+Functionaliteiten:
 - IntelliSense voor azure.yaml
-- Geïntegreerde terminalcommando's
-- Sjabloonbladeren
+- Geïntegreerde terminalcommando’s
+- Template-navigatie
 - Monitoring van implementaties
 
 ### GitHub Codespaces
-Maak een `.devcontainer/devcontainer.json`:
+Maak een `.devcontainer/devcontainer.json` aan:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -268,10 +270,10 @@ Maak een `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Installeer de Azure-plugin
-2. Configureer Azure-inloggegevens
-3. Gebruik de geïntegreerde terminal voor azd-commando's
+2. Configureer Azure-referenties
+3. Gebruik geïntegreerde terminal voor azd-commando’s
 
-## 🐛 Problemen bij Installatie
+## 🐛 Probleemoplossing Installatie
 
 ### Veelvoorkomende Problemen
 
@@ -328,13 +330,13 @@ azd show
 
 ## azd Bijwerken
 
-### Updatecontrole
-azd waarschuwt als een nieuwere release beschikbaar is, en je kunt je huidige build controleren met:
+### Update Controle
+azd waarschuwt wanneer een nieuwere release beschikbaar is, en je kunt je huidige build bevestigen met:
 ```bash
 azd version
 ```
 
-### Handmatige updates
+### Handmatige Updates
 
 **Windows (winget):**
 ```cmd
@@ -356,25 +358,25 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 <details>
 <summary><strong>Wat is het verschil tussen azd en az CLI?</strong></summary>
 
-**Azure CLI (az)**: Laag-niveau tool voor het beheren van individuele Azure-resources
+**Azure CLI (az)**: Low-level tool voor het beheren van individuele Azure-bronnen
 - `az webapp create`, `az storage account create`
-- Eén resource per keer
-- Focus op infrastructuurbeheer
+- Eén bron tegelijk
+- Infrastructuurbeheer focus
 
-**Azure Developer CLI (azd)**: Hoog-niveau tool voor complete applicatie-implementaties
-- `azd up` zet hele app met alle resources uit
-- Sjabloon-gebaseerde workflows
-- Focus op ontwikkelaar-productiviteit
+**Azure Developer CLI (azd)**: High-level tool voor volledige applicatie-implementaties
+- `azd up` implementeert volledige app met alle bronnen
+- Template-gebaseerde workflows
+- Focus op ontwikkelaarsefficiëntie
 
-**Ze zijn onafhankelijk**: azd gebruikt standaard eigen authenticatie. Installeer en meld aan bij Azure CLI alleen voor `az` commando's, of kies expliciet voor `azd config set auth.useAzCliAuth true`.
+**Ze zijn onafhankelijk**: azd gebruikt standaard eigen authenticatie. Installeer en meld aan bij Azure CLI alleen voor `az`-commando’s, of kies expliciet voor `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
-<summary><strong>Kan ik azd gebruiken met bestaande Azure-resources?</strong></summary>
+<summary><strong>Kan ik azd gebruiken met bestaande Azure-bronnen?</strong></summary>
 
-Zeker! Je kunt:
-1. Bestaande resources importeren in azd-omgevingen
-2. Bestaande resources refereren in je Bicep-sjablonen
+Ja! Je kunt:
+1. Bestaande bronnen importeren in azd-omgevingen
+2. Verwijzen naar bestaande bronnen in je Bicep-templates
 3. azd gebruiken voor nieuwe implementaties naast bestaande infrastructuur
 
 Zie [Configuratiegids](../chapter-03-configuration/configuration.md) voor details.
@@ -394,13 +396,13 @@ azd config set cloud.name AzureChinaCloud
 azd auth login
 ```
 
-Als je ook Azure CLI gebruikt, configureer `az cloud set --name ...` apart. Sjabloondiensten en modelbeschikbaarheid verschillen per cloud.
+Als je ook Azure CLI gebruikt, configureer `az cloud set --name ...` apart. Template-services en modelbeschikbaarheid variëren per cloud.
 </details>
 
 <details>
 <summary><strong>Kan ik azd gebruiken in CI/CD-pijplijnen?</strong></summary>
 
-Absoluut! azd is ontworpen voor automatisering:
+Zeker! azd is ontworpen voor automatisering:
 - GitHub Actions-integratie
 - Azure DevOps-ondersteuning
 - Service principal-authenticatie
@@ -410,41 +412,41 @@ Zie [Implementatiegids](../chapter-04-infrastructure/deployment-guide.md) voor C
 </details>
 
 <details>
-<summary><strong>Wat zijn de kosten voor het gebruik van azd?</strong></summary>
+<summary><strong>Wat zijn de kosten van het gebruik van azd?</strong></summary>
 
 azd zelf is **volledig gratis** en open-source. Je betaalt alleen voor:
-- Azure-resources die je uitrolt
-- Azure verbruikskosten (compute, opslag, etc.)
+- Azure-bronnen die je implementeert
+- Azure consumptiekosten (compute, opslag, enz.)
 
-Gebruik `azd provision --preview` om voorgestelde resources te inspecteren, en schat daarna de kosten met de [Azure Prijscalculator](https://azure.microsoft.com/pricing/calculator/). Preview berekent geen prijzen.
+Gebruik `azd provision --preview` om voorgestelde bronnen te inspecteren en schat hun kosten met de [Azure Prijscalculator](https://azure.microsoft.com/pricing/calculator/). Preview berekent geen prijzen.
 </details>
 
 ## Volgende Stappen
 
 1. **Voltooi authenticatie**: Zorg dat je toegang hebt tot je Azure-abonnement
-2. **Probeer je eerste implementatie**: Volg de [Eerste Projectgids](first-project.md)
-3. **Verken sjablonen**: Blader door beschikbare sjablonen met `azd template list`
-4. **Configureer je IDE**: Zet je ontwikkelomgeving op
+2. **Probeer je eerste implementatie**: Volg de [Gids Eerste Project](first-project.md)
+3. **Verken templates**: Bekijk beschikbare templates met `azd template list`
+4. **Configureer je IDE**: Richt je ontwikkelomgeving in
 
 ## Ondersteuning
 
-Als je problemen tegenkomt:
+Als je problemen ondervindt:
 - [Officiële Documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Meld Problemen](https://github.com/Azure/azure-dev/issues)
 - [Community Discussies](https://github.com/Azure/azure-dev/discussions)
-- [Azure Ondersteuning](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Ontvang Azure-commandohulp direct in je editor met `npx skills add microsoft/github-copilot-for-azure`
+- [Azure Support](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Krijg Azure commandohulp direct in je editor met `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start
-- **⬅️ Vorig**: [AZD Basisprincipes](azd-basics.md) 
-- **➡️ Volgend**: [Je Eerste Project](first-project.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Fundament & Snelle Start
+- **⬅️ Vorige**: [AZD Basisprincipes](azd-basics.md) 
+- **➡️ Volgende**: [Je Eerste Project](first-project.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-Georiënteerde Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installatie Voltooid!** Ga verder naar [Je Eerste Project](first-project.md) om te beginnen met bouwen met azd.
+**✅ Installatie Voltooid!** Ga verder naar [Je Eerste Project](first-project.md) om te starten met bouwen met azd.
 
 ---
 

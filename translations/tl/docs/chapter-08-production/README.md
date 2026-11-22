@@ -1,49 +1,49 @@
-# Kabanata 8: Mga Pattern sa Produksyon at Enterprise
+# Kabanata 8: Mga Pattern para sa Produksyon at Enterprise
 
-**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Hirap**: Advanced
+**📚 Kurso**: [AZD Para sa mga Baguhan](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Kahirapan**: Advanced
 
 ---
 
-## Pangkalahatang-ideya
+## Pangkalahatang Pagsusuri
 
-Tinalakay sa kabanatang ito ang mga pattern para sa enterprise-ready deployment, pagpapalakas ng seguridad, pagmo-monitor, at pag-optimize ng gastos para sa mga AI na workload sa produksyon.
+Sinasaklaw ng kabanatang ito ang mga pattern ng deployment na handa para sa enterprise, pagpapalakas ng seguridad, pagmamanman, at pag-optimize ng gastos para sa mga AI workload sa produksyon.
 
-Ito ay isang arkitekturang sanggunian, hindi isang kumpletong template na maaaring direktang i-deploy sa produksyon. Ang mga halimbawa ay hindi kasama ang mga detalye ng integrasyon na kailangang ipasok at subukan sa iyong sariling aplikasyon; ang pagbabasa ng checklist ay hindi nangangahulugang sertipikadong handa para sa produksyon.
+Ito ay isang sanggunian sa arkitektura, hindi isang kumpletong template na maaaring i-deploy nang diretso sa produksyon. Hindi isinama sa mga halimbawa ang mga detalye ng integrasyon na kailangang ibigay at subukan sa inyong sariling aplikasyon; ang pagbabasa ng checklist ay hindi nagpapatunay ng pagiging handa para sa produksyon.
 
-> **Pagsusuri ng release (2026-11-04):** Ang patnubay ng AI CLI ay sinuri laban sa dokumentasyon/source ng `azd 1.37.2`, mga ahente `1.0.0-beta.23`, at mga pagsusuri `1.0.0-beta.2`. Tingnan ang [mga pagbabago at pag-aayos sa release](production-ai-practices.md#recent-release-changes-and-fixes) para sa mga kinakailangan sa pagiging compatible at mga detalye ng migrasyon; hindi ito pagsusuri para sa aktwal na deployment.
+> **Foundry GA update (2026-11-09):** Gamitin ang `azd >= 1.37.0` at ang pangkalahatang magagamit na bundle na `microsoft.foundry` 1.0 para sa workflow ng Foundry; ang mga pagsusuri ay ini-install nang hiwalay. Tingnan ang [saklaw ng release at migrasyon](production-ai-practices.md#recent-release-changes-and-fixes) at ang [authenticated pipeline example](production-ai-practices.md#cicd-pipeline-configuration). Ito ay isang pagsusuri ng dokumentasyon, hindi isang live na pag-validate ng deployment o pangkalahatang GA status para sa mga opsyonal na preview na feature.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mong:
-- Mag-deploy ng mga multi-region na resilient na aplikasyon
-- Ipatupad ang mga pattern ng seguridad para sa enterprise
-- I-configure ang komprehensibong pagmo-monitor
-- I-optimize ang gastos sa malawakang sukat
+Sa pagtatapos ng kabanatang ito, matututunan mo ang mga sumusunod:
+- Mag-deploy ng mga matatag na aplikasyon sa maraming rehiyon
+- Magpatupad ng mga pattern ng seguridad para sa enterprise
+- I-configure ang malawak na pagmamanman
+- I-optimize ang mga gastos sa malaking sukat
 - Mag-set up ng mga CI/CD pipeline gamit ang AZD
 
 ---
 
 ## 📚 Mga Aralin
 
-| # | Aralin | Deskripsyon | Oras |
+| # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Kasanayan sa AI para sa Produksyon](production-ai-practices.md) | Mga pattern ng enterprise deployment | 90 min |
+| 1 | [Mga Praktis sa Produksyon ng AI](production-ai-practices.md) | Mga pattern ng deployment para sa enterprise | 90 min |
 
 ---
 
 ## 🚀 Checklist para sa Produksyon
 
 - [ ] Multi-region deployment para sa katatagan
-- [ ] Managed identity para sa pagpapatunay (walang mga susi)
-- [ ] Application Insights para sa pagmo-monitor
-- [ ] Nakakonfigyur na mga budget sa gastos at mga alerto
-- [ ] Na-enable na pag-scan sa seguridad
+- [ ] Managed identity para sa authentication (walang mga key)
+- [ ] Application Insights para sa pagmamanman
+- [ ] Na-configure ang mga budget sa gastos at alerto
+- [ ] Ina-enable ang security scanning
 - [ ] Integrasyon ng CI/CD pipeline
 - [ ] Plano para sa disaster recovery
 
 ---
 
-## 🏗️ Mga Pattern ng Arkitektura
+## 🏗️ Mga Pattern sa Arkitektura
 
 ### Pattern 1: Microservices AI
 
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Pinakamahusay na Kasanayan sa Seguridad
+## 🔐 Pinakamahuhusay na Praktis sa Seguridad
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -87,16 +87,16 @@ properties: {
 
 | Estratehiya | Pangunahing Limitasyon |
 |----------|---------|
-| Scale sa zero (Container Apps) | Nangangailangan ng angkop na trigger; ang ibang serbisyo ay patuloy na may gastos |
-| Gumamit ng consumption tiers para sa dev | Ihambing ang presyo ng piniling serbisyo at workload |
-| Scheduled scaling | Mag-scale gamit ang suportadong imprastraktura/automation |
-| Reservations/provisioned capacity | Kapag sinusuportahan lamang; maaaring tumaas ang gastos ng idle kapag may commitments |
+| Scale to zero (Container Apps) | Nangangailangan ng angkop na trigger; ang ibang serbisyo ay patuloy na nagkakaroon ng gastos |
+| Gumamit ng consumption tiers para sa dev | Ihambing ang napiling presyo ng serbisyo at workload |
+| Scheduled scaling | Mag-scale gamit ang suportadong imprastraktura/awtomasyon |
+| Reservations/provisioned capacity | Kapag sinusuportahan lamang; ang mga commitment ay maaaring magpataas ng mga idle na gastos |
 
-Gamitin ang [kumpletong budget resource pattern](production-ai-practices.md#2-cost-monitoring-and-budgets) na may balidong petsa ng pagsisimula, saklaw ng pagsingil, mga tatanggap, at mga permiso. Ang budget ay nagpapadala ng mga alerto; hindi ito nagsasaad ng limitasyon sa paggastos. Ang mga tipid ay nakadepende sa nasukatang paggamit at hindi garantisadong porsyento.
+Gamitin ang [kumpletong pattern para sa budget resource](production-ai-practices.md#2-cost-monitoring-and-budgets) na may wastong petsa ng pagsisimula, saklaw ng pagsingil, mga tatanggap, at mga pahintulot. Ang budget ay nagpapadala ng mga alerto; hindi nito nililimitahan ang paggastos. Ang mga pagtitipid ay nakadepende sa nasukat na paggamit at hindi garantisadong porsyento.
 
 ---
 
-## 📊 Pag-setup ng Pagmo-monitor
+## 📊 Setup ng Pagmamanman
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -115,17 +115,17 @@ az monitor metrics list --resource <resource-id>
 
 | Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 7: Pag-aayos ng Problema](../chapter-07-troubleshooting/README.md) |
-| **Kumpleto na ang Kurso** | [Home ng Kurso](../../README.md) |
+| **Nakaraan** | [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/README.md) |
+| **Kumpletong Kurso** | [Home ng Kurso](../../README.md) |
 
 ---
 
-## 📖 Kaugnay na mga Mapagkukunan
+## 📖 Mga Kaugnay na Mapagkukunan
 
-- [Patnubay para sa mga AI Agents](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Mga Solusyon sa Multi-Agent](../chapter-05-multi-agent/README.md)
-- [Halimbawa ng Microservices](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 

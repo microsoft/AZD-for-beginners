@@ -3,7 +3,7 @@
 **Navigasi Bab:**
 - **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 2 - Pembangunan AI-Pertama
-- **⬅️ Sebelum**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
 - **🚀 Lanjutan**: [Penyelesaian Multi-Ejen](../../examples/retail-scenario.md)
 
@@ -11,36 +11,36 @@
 
 ## Pengenalan
 
-Ejen AI adalah program autonomi yang boleh memahami persekitaran mereka, membuat keputusan, dan mengambil tindakan untuk mencapai matlamat tertentu. Berbeza dengan chatbot mudah yang memberi respon kepada arahan, ejen boleh:
+Ejen AI adalah program autonomi yang boleh menyedari persekitaran mereka, membuat keputusan, dan mengambil tindakan untuk mencapai matlamat tertentu. Berbeza dengan chatbot ringkas yang memberi respons kepada permintaan, ejen boleh:
 
-- **Menggunakan alat** - Memanggil API, mencari dalam pangkalan data, menjalankan kod
-- **Merancang dan berfikir** - Memecahkan tugasan kompleks kepada langkah-langkah
-- **Belajar dari konteks** - Menyimpan memori dan menyesuaikan tingkah laku
+- **Menggunakan alat** - Panggil API, cari dalam pangkalan data, jalankan kod
+- **Membuat rancangan dan berfikir** - Memecahkan tugas kompleks kepada langkah-langkah
+- **Belajar daripada konteks** - Mengekalkan memori dan menyesuaikan tingkah laku
 - **Bekerjasama** - Bekerja dengan ejen lain (sistem multi-ejen)
 
 Panduan ini menunjukkan cara menggunakan ejen AI ke Azure menggunakan Azure Developer CLI (azd).
 
-Menggunakan konteks perbualan bukanlah latihan model: memori berterusan, kawalan capaian, dan pengekalan mesti dilaksanakan/dikonfigurasi oleh aplikasi.
+Menggunakan konteks perbualan bukan latihan model: memori berterusan, kawalan akses, dan penyimpanan mesti dilaksanakan/dikonfigurasi oleh aplikasi.
 
-> **Ulasan keluaran (2026-11-04):** Contoh CLI telah diperiksa berdasarkan dokumentasi/sumber `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, dan `azure.ai.evaluations` `1.0.0-beta.2`, bukan penerapan Azure secara langsung. Gunakan `azd >= 1.37.0` untuk aliran kerja gabungan. Lihat [perubahan dan pembetulan terkini](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) sebelum menaik taraf projek lama.
+> **Kemas kini Foundry GA (2026-11-09):** Pasang bundel `microsoft.foundry` 1.0 yang tersedia umum dengan `azd >= 1.37.0`. Penilaian dipasang secara berasingan; ciri pratayang pilihan dan fragmen SDK klasik di bawah tidak dipromosikan ke GA oleh pengumuman bundel. Panduan ini berdasarkan pada [pengumuman GA](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/) dan dokumentasi, bukan pengendalian langsung Azure.
 
 ## Matlamat Pembelajaran
 
-Dengan menyiapkan panduan ini, anda akan:
+Dengan menyelesaikan panduan ini, anda akan:
 - Memahami apa itu ejen AI dan bagaimana ia berbeza daripada chatbot
-- Menggunakan templat ejen AI yang telah dibina dengan AZD
-- Mengkonfigurasi Ejen Foundry untuk ejen tersuai
-- Melaksanakan corak ejen asas (penggunaan alat, RAG, multi-ejen)
-- Memantau dan membuang pepijat ejen yang telah digunakan
+- Menyebarkan templat ejen AI pra-binaan menggunakan AZD
+- Mengkonfigurasikan Ejen Foundry untuk ejen tersuai
+- Melaksanakan corak asas ejen (penggunaan alat, RAG, multi-ejen)
+- Memantau dan membaiki ejen yang disebarkan
 
 ## Hasil Pembelajaran
 
-Setelah selesai, anda akan boleh:
-- Menggunakan aplikasi ejen AI ke Azure dengan satu arahan
-- Mengkonfigurasi alat dan kebolehan ejen
-- Melaksanakan penjanaan diperkaya pengambilan (RAG) dengan ejen
+Setelah selesai, anda akan dapat:
+- Menyebarkan aplikasi ejen AI ke Azure dengan satu arahan sahaja
+- Mengkonfigurasikan alat dan keupayaan ejen
+- Melaksanakan penghasilan dipertingkatkan pengambilan (RAG) dengan ejen
 - Mereka bentuk seni bina multi-ejen untuk aliran kerja kompleks
-- Mengesan masalah biasa dalam penggunaan ejen
+- Menyelesaikan masalah biasa dalam penyebaran ejen
 
 ---
 
@@ -48,26 +48,26 @@ Setelah selesai, anda akan boleh:
 
 | Ciri | Chatbot | Ejen AI |
 |---------|---------|----------|
-| **Tingkah Laku** | Memberi respon kepada arahan | Mengambil tindakan secara autonomi |
-| **Alat** | Mungkin menggunakan pengambilan atau alat | Biasa menggunakan alat dalam gelung berorientasikan matlamat |
-| **Memori** | Bergantung pada aplikasi | Memori berterusan hanya jika dilaksanakan dengan jelas |
-| **Perancangan** | Respon tunggal | Pemikiran berbilang langkah |
-| **Kerjasama** | Entiti tunggal | Boleh bekerjasama dengan ejen lain |
+| **Tingkah Laku** | Memberi respons kepada permintaan | Mengambil tindakan secara autonomi |
+| **Alat** | Mungkin menggunakan pengambilan atau alat | Biasanya menggunakan alat dalam kitaran berorientasikan matlamat |
+| **Memori** | Bergantung pada aplikasi | Memori berterusan hanya jika dilaksanakan secara jelas |
+| **Perancangan** | Respons tunggal | Pemikiran berbilang langkah |
+| **Kerjasama** | Entiti tunggal | Boleh bekerja dengan ejen lain |
 
-### Analogi Mudah
+### Analogi Ringkas
 
 - **Chatbot** = Seorang yang membantu menjawab soalan di kaunter maklumat
-- **Ejen AI** = Pembantu peribadi yang boleh membuat panggilan, menempah janji, dan menyelesaikan tugasan untuk anda
+- **Ejen AI** = Pembantu peribadi yang boleh membuat panggilan, menempah janji, dan melaksanakan tugas untuk anda
 
 ---
 
-## 🚀 Mula Pantas: Gunakan Ejen Pertama Anda
+## 🚀 Mula Pantas: Sebarkan Ejen Pertama Anda
 
-Pilih satu pilihan dalam **direktori kerja kosong baru**. Trailing `.` menginisialisasi di situ; tanpa destinasi eksplisit, AZD semasa mungkin mencipta subdirektori bernama template dan tidak menukar direktori shell anda. Simpan templat/persekitaran berasingan dalam direktori berasingan.
+Pilih satu pilihan dalam **direktori kerja baru yang kosong**. Arahan `.` di hujung memulakan di situ; tanpa destinasi jelas, AZD semasa mungkin membuat subdirektori bernama template dan tidak menukar direktori shell anda. Simpan templat/persekitaran berasingan dalam direktori berasingan.
 
-Julat masa/kos di bawah adalah ilustrasi, bukan sebut harga yang disahkan. Periksa keperluan semasa setiap sampel, harga, kuota model, dan perkhidmatan pilihan sebelum penggunaan.
+Julat masa/kos berikut adalah ilustratif, bukan sebut harga yang disahkan. Semak prasyarat, harga, kuota model dan perkhidmatan pilihan setiap sampel sebelum penyebaran.
 
-### Pilihan 1: Templat Ejen Foundry (Disyorkan)
+### Pilihan 1: Templat Ejen Foundry (Disarankan)
 
 ```bash
 # Initialize the AI agents template
@@ -77,7 +77,7 @@ azd init --template get-started-with-ai-agents .
 azd up
 ```
 
-**Apa yang digunakan:** Infrastruktur semasa sampel dan pilihan yang dipilih menentukan model, alat, hosting, dan sumber pemantauan. Semak README dan `infra/` sebelum membekalkan; jangan menganggap setiap templat ejen termasuk Carian atau antaramuka web.
+**Apa yang disebarkan:** Infrastruktur semasa sampel dan pilihan yang dipilih menentukan model, alat, hosting, dan sumber pemantauan. Semak README dan `infra/` sebelum penyediaan; jangan anggap setiap templat ejen termasuk Carian atau antara muka web.
 
 **Masa:** ~15-20 minit
 **Kos:** ~$100-150/bulan (pembangunan)
@@ -92,12 +92,12 @@ azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 azd up
 ```
 
-**Apa yang digunakan:** Sampel penulisan multi-ejen FastAPI/Prompty menggunakan Azure OpenAI, Bing Grounding, dan Azure AI Search. Repositori lama `agent-openai-python-prompty` mengarahkan ke sini; ia bukan templat ejen cuaca Azure Functions minimal. Ikuti README semasa untuk hosting, kuota model, dan keperluan Bing Grounding.
+**Apa yang disebarkan:** Sampel penulisan multi-ejen FastAPI/Prompty menggunakan Azure OpenAI, Bing Grounding, dan Azure AI Search. Repositori sebelumnya `agent-openai-python-prompty` mengalihkan ke sini; ini bukan templat ejen cuaca Azure Functions yang minimal. Ikuti README semasanya untuk hosting, kuota model, dan prasyarat Bing Grounding.
 
 **Masa:** ~10-15 minit
 **Kos:** ~$50-100/bulan (pembangunan)
 
-### Pilihan 3: Ejen Sembang RAG
+### Pilihan 3: Ejen RAG Chat
 
 ```bash
 # Initialize RAG chat template
@@ -107,46 +107,42 @@ azd init --template azure-search-openai-demo .
 azd up
 ```
 
-**Apa yang digunakan:**
+**Apa yang disebarkan:**
 - ✅ Model Microsoft Foundry
 - ✅ Azure AI Search dengan data sampel
-- ✅ Rantaian pemprosesan dokumen
-- ✅ Antaramuka sembang dengan rujukan
+- ✅ Saluran pemprosesan dokumen
+- ✅ Antara muka chat dengan sitasi
 
 **Masa:** ~15-25 minit
 **Kos:** ~$80-150/bulan (pembangunan)
 
-### Pilihan 4: AZD AI Agent Init (Pratonton Templat Projek)
+### Pilihan 4: Ejen Di-host dengan Bundel Foundry GA
 
-Gunakan `azd ai agent init` secara interaktif, atau guna projek ejen `azure.yaml` semasa dengan `--template`/`-t`. Pilihan lama `--manifest`/`-m` adalah alias yang tidak digunakan lagi, bukan penukar untuk manifest warisan.
+Gunakan [panduan lengkap ejen di-host](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) untuk contoh API Respons Rangka Kerja Ejen Python asas. Laluan penyebaran kod ini memerlukan Python 3.13+, uv semasa, kebenaran Foundry, dan kuota model serantau. Sahkan panggilan SDK tempatan secara berasingan apabila menggunakan kredensial Azure CLI.
 
 ```bash
-# Install the AI agents extension
-azd extension install azure.ai.agents
-
-# Optional: verify the installed preview version
-azd extension show azure.ai.agents
-
-# Initialize from a current agent project template (supply your template path)
-azd ai agent init --template ./templates/support-agent/azure.yaml
-
-# Deploy to Azure
-azd up
-
-# Test the deployed agent (shows latency + time-to-first-byte)
-azd ai agent invoke
+azd auth login
+azd ext install microsoft.foundry
 ```
 
-**Bila menggunakan `azd ai agent init` vs `azd init --template`:**
+Dalam direktori kosong, inisialisasi sampel:
 
-| Pendekatan | Sesuai Untuk | Cara Kerjanya |
+```text
+azd ai agent init --template https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml --deploy-mode code --src .
+```
+
+Pilih projek baru atau sedia ada, semak `azure.yaml`, dan jalankan `azd provision`. Gunakan `azd ai agent run` untuk membuka Agent Inspector dan, dari terminal lain dalam direktori itu, `azd ai agent invoke --local "Explain how this agent is hosted."`. Selepas pengesahan tempatan, gunakan `azd deploy` dan `azd ai agent invoke "Explain how this agent is hosted."` untuk membandingkan respons yang disebarkan. Foundry membina sumber yang dimuat naik secara jauh; pembinaan bekas tempatan tidak diperlukan.
+
+**Bilakah menggunakan `azd ai agent init` berbanding `azd init --template`:**
+
+| Pendekatan | Terbaik Untuk | Cara Kerjanya |
 |----------|----------|------|
-| `azd init --template` | Bermula dari aplikasi sampel berfungsi | Menyalin repositori templat penuh dengan kod + infrastruktur |
-| `azd ai agent init --template` | Mengguna projek ejen Foundry semasa | Menggunakan dokumen projek `azure.yaml` dan definisinya |
+| `azd init --template` | Bermula dari aplikasi sampel yang berfungsi | Mengklon repo templat penuh dengan kod + infra |
+| `azd ai agent init --template` | Mengadaptasi projek ejen Foundry semasa | Menggunakan dokumen projek `azure.yaml` dan definisinya |
 
-> **Petua:** Gunakan `azd init --template` semasa belajar (Pilihan 1-3 di atas). Gunakan `azd ai agent init` untuk aliran kerja ejen Foundry. Untuk menambah definisi ejen terus ke projek sedia ada, lihat [panduan inisialisasi dan migrasi](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
+> **Tip:** Pilihan 1-3 bermula dari templat aplikasi penuh; Pilihan 4 mengajar aliran kerja ejen di-host GA. Tiada arahan inisialisasi yang memindahkan manifes ejen lama secara automatik. Untuk menambah definisi ejen terus ke projek sedia ada, lihat [panduan inisialisasi dan migrasi](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Selepas `azd up`, gunakan `azd ai agent invoke` untuk menguji, peluasan `azure.ai.evaluations` berasingan (`azd ai eval init`, `generate`, dan `run start`) untuk mengukur kualiti, dan `azd ai agent optimize` untuk meningkatkannya menggunakan konfigurasi penilaian baru. Agents beta.22 menggantikan aliran kerja penilaian legacy dan mengubah format `--config` pengoptimuman. Lihat [migrasi penilaian](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [migrasi pengoptimuman](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) sebelum menggunakan semula contoh lama.
+Pasang `azure.ai.evaluations` secara berasingan untuk menjana dan menyemak data/parameter ujian, mengkonfigurasikan penilaian, dan menjalankannya menggunakan `azd ai eval`. Pengoptimuman boleh menggunakan semula penilaian yang serasi; semak calon sebelum menyebarkan secara eksplisit. Ikuti [aliran kerja penilaian](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [migrasi pengoptimuman](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) sebelum menggunakan semula contoh lama. Untuk pembersihan, sumber projek Foundry yang digunakan semula kekal selepas `azd down`; kumpulan sumber projek baru dipadamkan. Lihat [panduan pembersihan walkthrough](microsoft-foundry-integration.md#7-clean-up-deliberately).
 
 ---
 
@@ -154,7 +150,7 @@ Selepas `azd up`, gunakan `azd ai agent invoke` untuk menguji, peluasan `azure.a
 
 ### Corak 1: Ejen Tunggal dengan Alat
 
-Corak ejen paling mudah - satu ejen yang boleh menggunakan pelbagai alat.
+Corak ejen paling ringkas - satu ejen yang boleh menggunakan pelbagai alat.
 
 ```mermaid
 graph TD
@@ -164,16 +160,16 @@ graph TD
     Agent --> API[API Tool]
 ```
 
-**Sesuai untuk:**
+**Terbaik untuk:**
 - Bot sokongan pelanggan
 - Pembantu penyelidikan
 - Ejen analisis data
 
-**Contoh aplikasi berkaitan:** `azure-search-openai-demo` menunjukkan RAG, bukan gelung ejen alat sewenang-wenangnya generik.
+**Sampel aplikasi berkaitan:** `azure-search-openai-demo` menunjukkan RAG, bukan kitaran ejen alat sewenang-wenangnya.
 
-### Corak 2: Ejen RAG (Penjanaan Diperkaya Pengambilan)
+### Corak 2: Ejen RAG (Penghasilan Dipertingkatkan Pengambilan)
 
-Ejen yang mengambil dokumen berkaitan sebelum menjana respon.
+Ejen yang mengambil dokumen berkaitan sebelum menjana respons.
 
 ```mermaid
 graph TD
@@ -184,16 +180,16 @@ graph TD
     LLM --> Response[Response with Citations]
 ```
 
-**Sesuai untuk:**
+**Terbaik untuk:**
 - Pangkalan pengetahuan perusahaan
-- Sistem soal jawab dokumen
+- Sistem Q&A dokumen
 - Penyelidikan pematuhan dan undang-undang
 
 **Templat AZD:** `azure-search-openai-demo`
 
 ### Corak 3: Sistem Multi-Ejen
 
-Beberapa ejen khusus yang bekerjasama dalam tugasan kompleks.
+Beberapa ejen khusus bekerja bersama-sama dalam tugas kompleks.
 
 ```mermaid
 graph TD
@@ -202,22 +198,22 @@ graph TD
     Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
-**Sesuai untuk:**
-- Penjanaan kandungan kompleks
+**Terbaik untuk:**
+- Penghasilan kandungan kompleks
 - Aliran kerja berbilang langkah
-- Tugasan yang memerlukan kepakaran berbeza
+- Tugas yang memerlukan kepakaran berbeza
 
 **Ketahui Lebih Lanjut:** [Corak Penyelarasan Multi-Ejen](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Mengkonfigurasi Alat Ejen
+## ⚙️ Mengkonfigurasikan Alat Ejen
 
-Ejen menjadi berkuasa apabila mereka boleh menggunakan alat. Berikut cara mengkonfigurasi alat biasa:
+Ejen menjadi berkuasa apabila mereka boleh menggunakan alat. Berikut adalah cara mengkonfigurasikan alat biasa:
 
 ### Konfigurasi Alat dalam Ejen Foundry
 
-Fragmen **SDK Perkhidmatan Ejen klasik** ini menyasarkan `azure-ai-projects==1.0.0` dan `azure-ai-agents==1.1.0` dengan `azure-identity`. Ia bukan versi API versioned-agent/Responses yang lebih baru yang digunakan oleh beberapa templat Foundry semasa, juga bukan sambungan AZD `azure.ai.agents` (pakej berbeza). Jangan campurkan generasi API ini. Tetapkan `PROJECT_ENDPOINT` ke titik akhir projek Foundry klasik dan `MODEL_DEPLOYMENT_NAME` ke penempatan model yang disokong; sahkan dengan `az login` secara tempatan dan berikan kebenaran projek yang diperlukan.
+Serpihan **SDK Perkhidmatan Ejen klasik** ini menyasarkan `azure-ai-projects==1.0.0` dan `azure-ai-agents==1.1.0` dengan `azure-identity`. Ia bukan API ejen berversi baharu/respons yang digunakan oleh beberapa templat Foundry semasa, juga bukan peluasan AZD `azure.ai.agents` (pakej berbeza). Jangan mencampur generasi API ini. Tetapkan `PROJECT_ENDPOINT` ke hujung projek Foundry klasik dan `MODEL_DEPLOYMENT_NAME` ke penyebaran model yang disokong sedia ada; sahkan dengan `az login` secara tempatan dan berikan kebenaran projek yang diperlukan.
 
 ```python
 # agent_config.py
@@ -249,11 +245,11 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-Mendaftarkan skema fungsi tidak menjalankan Python pada perkhidmatan. Dalam SDK ini, `enable_auto_function_calls` ditambah `agents.runs.create_and_process(...)` menjalankan panggilan balik yang didaftarkan dalam proses klien anda. Lihat [contoh SDK yang dikeluarkan](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Tutup klien dan hapus agen/benang demonstrasi apabila selesai.
+Pendaftaran skema fungsi tidak menjalankan Python pada perkhidmatan. Dalam SDK ini, `enable_auto_function_calls` bersama `agents.runs.create_and_process(...)` menjalankan panggilan balik yang didaftarkan dalam proses klien anda. Lihat [contoh SDK yang dikeluarkan](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Tutup klien dan padamkan ejen/benang demonstrasi apabila selesai.
 
 ### Konfigurasi Persekitaran
 
-Nama berikut adalah **input templat tersuai ilustratif**, bukan suis terbina dalam AZD. Pertama hubungkan setiap nilai melalui `infra/main.parameters.json`, infrastruktur, dan kod aplikasi. `azd env set` sahaja tidak mengubah alat atau arahan agen.
+Nama berikut adalah **input templat tersuai ilustratif**, bukan suis AZD terbina dalam. Hantar setiap nilai dahulu melalui `infra/main.parameters.json`, infrastruktur, dan kod aplikasi. `azd env set` sahaja tidak mengubah alat atau arahan ejen.
 
 ```bash
 # Set up agent-specific environment variables
@@ -272,7 +268,7 @@ azd up
 
 ### Integrasi Application Insights
 
-Jika templat yang anda pilih menyediakan Application Insights dan mengkonfigurasi instrumentasi:
+Jika templat yang anda pilih menyediakan Application Insights dan mengkonfigurasikan instrumentasi:
 
 ```bash
 # Open monitoring dashboard
@@ -285,17 +281,17 @@ azd monitor --logs
 azd monitor --live
 ```
 
-### Metrik Utama Untuk Jejak
+### Metrik Utama untuk Dipantau
 
-| Metrik | Deskripsi | Sasaran |
+| Metrik | Penerangan | Sasaran |
 |--------|-------------|--------|
-| Purata Respons | Masa untuk menjana respons | < 5 saat |
-| Penggunaan Token | Token setiap permintaan | Pantau untuk kos |
-| Kadar Kejayaan Panggilan Alat | % pelaksanaan alat berjaya | > 95% |
+| Kelewatan Respons | Masa menjana respons | < 5 saat |
+| Penggunaan Token | Token per permintaan | Pantau untuk kos |
+| Kadar Kejayaan Panggilan Alat | % kejayaan pelaksanaan alat | > 95% |
 | Kadar Ralat | Permintaan ejen gagal | < 1% |
 | Kepuasan Pengguna | Skor maklum balas | > 4.0/5.0 |
 
-### Log Tersuai untuk Ejen
+### Log Khusus untuk Ejen
 
 ```python
 import os
@@ -319,7 +315,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Nota:** Pasang pakej yang diperlukan: `pip install azure-monitor-opentelemetry`. Ia membawa kebergantungan OpenTelemetry; namespace import bukan keperluan untuk memasang pakej bernama `opentelemetry`.
+> **Nota:** Pasang pakej diperlukan: `pip install azure-monitor-opentelemetry`. Ia membawa kebergantungan OpenTelemetry; namespace import bukan keperluan memasang pakej bernama `opentelemetry`.
 
 ---
 
@@ -327,7 +323,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ### Anggaran Kos Bulanan Mengikut Corak
 
-Ini adalah julat perancangan ilustratif, bukan sebut harga atau had perbelanjaan. Wilayah, token model, SKU Carian/pengkomputeran, sesi alat, penyimpanan, dan trafik boleh melebihi. Semak panduan kos contoh dan harga Azure sebelum `azd up`.
+Ini adalah julat perancangan ilustratif, bukan sebut harga atau had perbelanjaan. Wilayah, token model, SKU Carian/pengkomputeran, sesi alat, penyimpanan, dan trafik boleh melebihi mereka. Semak panduan kos sampel dan harga Azure sebelum `azd up`.
 
 | Corak | Persekitaran Dev | Pengeluaran |
 |---------|-----------------|------------|
@@ -336,14 +332,14 @@ Ini adalah julat perancangan ilustratif, bukan sebut harga atau had perbelanjaan
 | Multi-Ejen (2-3 ejen) | $150-300 | $500-1,500 |
 | Multi-Ejen Perusahaan | $300-500 | $1,500-5,000+ |
 
-### Petua Pengoptimuman Kos
+### Tips Pengoptimuman Kos
 
-1. **Guna gpt-4.1-mini untuk tugasan mudah** (hanya jika templat anda menggunakan input ini)
+1. **Gunakan gpt-4.1-mini untuk tugas ringkas** (hanya jika templat anda menggunakan input ini)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Laksanakan caching terhad untuk pertanyaan berulang yang selamat.** Sertakan kebenaran penyewa/pengguna, penempatan model, arahan, dan versi pengambilan dalam kunci cache; tetapkan tempoh luput. Jangan kongsi respons perbualan peribadi melalui cache pertanyaan sahaja seluruh proses. Objek ejen SDK tidak mempunyai kaedah generik `agent.run()`.
+2. **Laksanakan cache terhad untuk pertanyaan berulang yang selamat.** Sertakan kebenaran penyewa/pengguna, penyebaran model, arahan, dan versi pengambilan dalam kunci cache; tetapkan tarikh luput. Jangan kongsi respons perbualan peribadi melalui cache hanya-pertanyaan proses luas. Objek ejen SDK tidak mempunyai kaedah `agent.run()` generik.
 
 3. **Tetapkan had token setiap larian**
    ```python
@@ -355,12 +351,12 @@ Ini adalah julat perancangan ilustratif, bukan sebut harga atau had perbelanjaan
    )
    ```
 
-4. **Skala Container Apps layak ke sifar apabila tidak digunakan**
+4. **Skala Container Apps yang layak ke sifar apabila tidak digunakan**
    ```bash
    # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
-   Terapkan perubahan infrastruktur dengan `azd provision` atau `azd up`. Skala ke sifar memerlukan pencetus sesuai dan tidak menghentikan caj Carian, penyimpanan, atau model/alat.
+   Gunakan perubahan infrastruktur dengan `azd provision` atau `azd up`. Skala ke sifar memerlukan pencetus yang sesuai dan tidak menghentikan Carian, penyimpanan, atau caj model/alat.
 
 ---
 
@@ -369,7 +365,7 @@ Ini adalah julat perancangan ilustratif, bukan sebut harga atau had perbelanjaan
 ### Isu dan Penyelesaian Biasa
 
 <details>
-<summary><strong>❌ Ejen tidak responsif terhadap panggilan alat</strong></summary>
+<summary><strong>❌ Ejen tidak memberi respons kepada panggilan alat</strong></summary>
 
 ```bash
 # Inspect the application deployment (not the agent's registered tools)
@@ -386,12 +382,12 @@ azd monitor --logs
 
 **Punca biasa:**
 - Tandatangan fungsi alat tidak sepadan
-- Kebenaran diperlukan hilang
+- Kekurangan kebenaran diperlukan
 - Titik akhir API tidak boleh diakses
 </details>
 
 <details>
-<summary><strong>❌ Latensi tinggi dalam respons ejen</strong></summary>
+<summary><strong>❌ Kelewatan tinggi dalam respons ejen</strong></summary>
 
 ```bash
 # Check Application Insights for bottlenecks
@@ -402,14 +398,14 @@ azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd up
 ```
 
-**Petua pengoptimuman:**
-- Guna respons penstriman
-- Laksanakan caching respons
+**Tips pengoptimuman:**
+- Gunakan respons penstriman
+- Laksanakan cache respons
 - Kurangkan saiz tetingkap konteks
 </details>
 
 <details>
-<summary><strong>❌ Ejen memulangkan maklumat salah atau halusinasi</strong></summary>
+<summary><strong>❌ Ejen mengembalikan maklumat yang salah atau halusinasi</strong></summary>
 
 ```python
 # Improve with better system prompts
@@ -426,7 +422,7 @@ You are a helpful assistant. IMPORTANT:
 # then use FileSearchTool(vector_store_ids=[...]) and pass both its
 # .definitions and .resources when creating the agent.
 ```
-Arahan dan pengambilan mengurangkan risiko; tiada jaminan jawapan fakta. Nilai soalan berasaskan dan di luar skop terhadap jawapan diketahui.
+Arahan dan pengambilan mengurangkan risiko; tiada yang menjamin jawapan fakta. Nilai soalan berpenempatan dan luaran melawan jawapan yang diketahui.
 </details>
 
 <details>
@@ -450,16 +446,16 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
-Pembantu ini mengecualikan skema peranan/alat, arahan sistem, token gambar, dan overhead protokol. Simpan ruang untuk itu dan penyelesaian; jangan pisah pasangan panggilan alat/hasil atau buang arahan sistem yang diperlukan. Pasang `tiktoken` secara berasingan. Ia bukan validator tetingkap konteks umum.
+Pembantu ini mengecualikan skema peranan/alat, arahan sistem, token imej, dan overhead protokol. Simpan ruang untuk itu dan penyempurnaan; jangan pisahkan pasangan panggilan alat/hasil atau buang arahan sistem yang diperlukan. Pasang `tiktoken` secara berasingan. Ia bukan validator tetingkap konteks umum.
 </details>
 
 ---
 
-## 🎓 Latihan Praktikal
+## 🎓 Latihan Amali
 
-### Latihan 1: Lancarkan Ejen Asas (20 minit)
+### Latihan 1: Sebarkan Ejen Asas (20 minit)
 
-**Matlamat:** Lancarkan ejen AI pertama anda menggunakan AZD
+**Matlamat:** Sebarkan ejen AI pertama anda menggunakan AZD
 
 ```bash
 # Step 1: Initialize template
@@ -481,22 +477,22 @@ azd up
 # Step 5: View monitoring
 azd monitor --overview
 
-# Step 6: Clean up
-azd down --force --purge
+# Step 6: Review the listed resources and confirm cleanup
+azd down
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Ejen memberi respons kepada soalan
-- [ ] Boleh akses papan pemantauan melalui `azd monitor`
+- [ ] Agen menjawab soalan
+- [ ] Boleh mengakses papan pemuka pemantauan melalui `azd monitor`
 - [ ] Sumber dibersihkan dengan jayanya
 
-### Latihan 2: Tambah Alat Tersuai (30 minit)
+### Latihan 2: Tambah Alat Custom (30 minit)
 
-**Matlamat:** Luaskan ejen dengan alat tersuai
+**Matlamat:** Memperluaskan agen dengan alat custom
 
-**Titik mula:** Gunakan klien SDK klasik dari [Konfigurasi Alat](#tool-configuration-in-foundry-agents), bukan templat sewenang-wenangnya dengan generasi SDK berbeza.
+**Titik permulaan:** Gunakan klien SDK klasik dari [Tool Configuration](#tool-configuration-in-foundry-agents), bukan templat sewenang-wenangnya dengan generasi SDK berbeza.
 
-1. Tambahkan fixture deterministik ini ke `agent_config.py`:
+1. Tambah alat uji deterministik ini ke dalam `agent_config.py`:
    ```python
    def get_weather(location: str) -> str:
        """Return demonstration weather, not live conditions.
@@ -507,7 +503,7 @@ azd down --force --purge
        print(f"TOOL_CALLED: {location}")
        return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-2. Gantikan blok pendaftaran dan penciptaan alat carian dengan:
+2. Gantikan blok pendaftaran dan penciptaan search-tool dengan:
    ```python
    weather_tool = FunctionTool(functions={get_weather})
    project_client.agents.enable_auto_function_calls(weather_tool)
@@ -542,13 +538,13 @@ azd down --force --purge
    ```
 
 **Kriteria Kejayaan:**
-- [ ] Ejen mengenal pasti pertanyaan berkaitan cuaca
+- [ ] Agen mengenal pasti pertanyaan berkaitan cuaca
 - [ ] Alat dipanggil dengan betul
-- [ ] Respons termasuk maklumat cuaca
+- [ ] Respons mengandungi maklumat cuaca
 
-### Latihan 3: Bina Ejen RAG (45 minit)
+### Latihan 3: Bina Agen RAG (45 minit)
 
-**Matlamat:** Cipta ejen yang menjawab soalan daripada dokumen anda
+**Matlamat:** Cipta agen yang menjawab soalan dari dokumen anda
 
 ```bash
 # Step 1: Deploy RAG template
@@ -568,47 +564,47 @@ azd up
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Ejen menjawab dari dokumen yang dimuat naik
-- [ ] Respons mengandungi sitasi
-- [ ] Soalan ujian di luar skop ditangani tanpa tuntutan yang tidak disokong (bukan jaminan untuk setiap soalan masa hadapan)
+- [ ] Agen menjawab dari dokumen yang dimuat naik
+- [ ] Respons mengandungi petikan
+- [ ] Soalan ujian di luar skop ditangani tanpa tuntutan tidak disokong (bukan jaminan untuk setiap soalan masa depan)
 
-Jika `USE_CLOUD_INGESTION=true`, gunakan aliran kerja pengambilan/muat naik awan contoh sebaliknya; pembalut tempatan sengaja melewati pengambilan. Selepas ujian, jalankan `azd down` dalam persekitaran RAG dan semak sumber untuk dipadamkan.
+Jika `USE_CLOUD_INGESTION=true`, gunakan aliran kerja pengambilan/unggah awan contoh sebaliknya; pembungkus tempatan dengan sengaja melangkau pengambilan. Selepas menguji, jalankan `azd down` dalam persekitaran RAG dan semak sumber yang akan dipadamkan.
 
 ---
 
 ## 📚 Langkah Seterusnya
 
-Sekarang anda faham ejen AI, terokai topik lanjutan ini:
+Sekarang anda faham agen AI, terokai topik lanjutan ini:
 
 | Topik | Penerangan | Pautan |
 |-------|-------------|------|
-| **Sistem Pelbagai Ejen** | Bina sistem dengan beberapa ejen yang bekerjasama | [Contoh Runcit Pelbagai Ejen](../../examples/retail-scenario.md) |
-| **Corak Penyelarasan** | Pelajari pola orchestrasi dan komunikasi | [Corak Penyelarasan](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Penggunaan Produksi** | Penggunaan ejen sedia perusahaan | [Amalan AI Produksi](../chapter-08-production/production-ai-practices.md) |
-| **Penilaian Ejen** | Uji dan nilai prestasi ejen | [Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **Makmal Bengkel AI** | Hands-on: Jadikan penyelesaian AI anda sedia AZD | [Makmal Bengkel AI](ai-workshop-lab.md) |
+| **Sistem Multi-Agen** | Bina sistem dengan pelbagai agen yang bekerjasama | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
+| **Corak Penyelaras** | Pelajari pola orkestrasi dan komunikasi | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Pengeluaran Perlepasan** | Penyebaran agen sedia untuk perniagaan | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **Penilaian Agen** | Uji dan nilai prestasi agen | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Makmal Bengkel AI** | Praktikal: Jadikan penyelesaian AI anda sedia AZD | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 Sumber Tambahan
 
 ### Dokumentasi Rasmi
-- [Perkhidmatan Ejen Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Permulaan Cepat Perkhidmatan Ejen Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Kerangka Ejen Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### Templat AZD untuk Ejen
-- [Mulakan dengan Ejen AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Ejen Penulisan Kreatif dengan Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
+### Templat AZD untuk Agen
+- [Mulakan dengan Agen AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Agen Penulisan Kreatif dengan Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
 - [Demo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### Sumber Komuniti
-- [Awesome AZD - Templat Ejen](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Awesome AZD - Templat Agen](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Kemahiran Ejen untuk Penyunting Anda
-- [**Kemahiran Ejen Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Pasang kemahiran ejen AI boleh guna semula untuk pembangunan Azure dalam GitHub Copilot, Cursor, atau ejen yang disokong. Termasuk kemahiran untuk [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [penggunaan](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), dan [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Kemahiran Agen untuk Penyunting Anda
+- [**Kemahiran Agen Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Pasang kemahiran agen AI boleh guna semula untuk pembangunan Azure dalam GitHub Copilot, Cursor, atau mana-mana agen yang disokong. Termasuk kemahiran untuk [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [sebaran](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), dan [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -616,8 +612,8 @@ Sekarang anda faham ejen AI, terokai topik lanjutan ini:
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
-- **Pelajaran Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
+- **Pelajaran Sebelumnya**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **Pelajaran Seterusnya**: [AI Model Deployment](ai-model-deployment.md)
 
 ---
 

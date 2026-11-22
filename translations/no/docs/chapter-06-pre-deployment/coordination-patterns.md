@@ -1,41 +1,41 @@
-# Mønstre for koordinering av multi-agent
+# Mønstre for koordinering av flere agenter
 
-⏱️ **Estimert tid**: 60-75 minutter lesing; flere timer å implementere | 💰 **Estimert kostnad**: avhengig av arbeidsmengde | ⭐ **Kompleksitet**: Avansert
+⏱️ **Estimert tid**: 60-75 minutters lesing; flere timer å implementere | 💰 **Estimert kostnad**: avhengig av arbeidsmengde | ⭐ **Kompleksitet**: Avansert
 
-**📚 Læringssti:**
-- ← Forrige: [Kapasitetsplanlegging](capacity-planning.md) - Strategier for ressursdimensjonering og skalering
-- 🎯 **Du er her**: Mønstre for koordinering av multi-agent (Orkestrering, kommunikasjon, tilstandsadministrasjon)
-- → Neste: [SKU-utvalg](sku-selection.md) - Velge riktige Azure-tjenester
-- 🏠 [Kursoversikt](../../README.md)
+**📚 Læringsløype:**
+- ← Forrige: [Capacity Planning](capacity-planning.md) - Ressursstørrelse og skaleringsstrategier
+- 🎯 **Du er her**: Mønstre for koordinering av flere agenter (orkestrering, kommunikasjon, tilstandshåndtering)
+- → Neste: [SKU Selection](sku-selection.md) - Velge riktige Azure-tjenester
+- 🏠 [Kurs Hjem](../../README.md)
 
 ---
 
 ## Hva du vil lære
 
 Ved å fullføre denne leksjonen vil du:
-- Forstå **arkitektur for multi-agent** mønstre og når de skal brukes
+- Forstå **mønstre for multi-agent-arkitektur** og når man bruker dem
 - Implementere **orkestreringsmønstre** (sentralisert, desentralisert, hierarkisk)
-- Designe **agentkommunikasjons**strategier (synkron, asynkron, hendelsesdrevet)
-- Administrere **delt tilstand** over distribuert agenter
-- Distribuere **multi-agent systemer** på Azure med AZD
-- Anvende **koordineringsmønstre** for praktiske AI-scenarier
+- Designe **agentkommunikasjonsstrategier** (synkron, asynkron, hendelsesdrevet)
+- Administrere **delt tilstand** på tvers av distribuerte agenter
+- Distribuere **multi-agent-systemer** på Azure med AZD
+- Anvende **koordinasjonsmønstre** for virkelige AI-scenarier
 - Overvåke og feilsøke distribuerte agentsystemer
 
-## Hvorfor koordinering av multi-agent er viktig
+## Hvorfor koordinering av flere agenter er viktig
 
-### Utviklingen: Fra enkeltagent til multi-agent
+### Utviklingen: Fra én agent til flere agenter
 
-**Enkeltagent (enkel):**
+**Enkel agent (enkelt):**
 ```
 User → Agent → Response
 ```
-- ✅ Lett å forstå og implementere
+- ✅ Enkel å forstå og implementere
 - ✅ Rask for enkle oppgaver
-- ❌ Begrenset av enkeltmodellens evner
-- ❌ Kan ikke parallellisere komplekse oppgaver
+- ❌ Begrenset av en modell sin kapasitet
+- ❌ Kan ikke kjøre komplekse oppgaver parallelt
 - ❌ Ingen spesialisering
 
-**Multi-Agent System (avansert):**
+**Multi-agent system (avansert):**
 ```mermaid
 graph TD
     Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
@@ -44,19 +44,19 @@ graph TD
 ```
 - ✅ Spesialiserte agenter for spesifikke oppgaver
 - ✅ Parallell utførelse for hastighet
-- ✅ Modulær og vedlikeholdbar
+- ✅ Modulært og vedlikeholdbart
 - ✅ Bedre på komplekse arbeidsflyter
-- ⚠️ Krever koordineringslogikk
+- ⚠️ Krever koordinasjonslogikk
 
-**Analogt:** En enkel agent er som én person som gjør alle oppgavene. Multi-agent er som et team der hvert medlem har spesialiserte ferdigheter (forsker, koder, korrekturleser, skribent) som samarbeider.
+**Analogien**: En enkel agent er som én person som gjør alle oppgaver. Multi-agent er som ett team hvor hvert medlem har spesialiserte ferdigheter (forsker, koder, anmelder, skribent) som jobber sammen.
 
 ---
 
-## Kjernekoordinasjonsmønstre
+## Grunnleggende koordinasjonsmønstre
 
 ### Mønster 1: Sekvensiell koordinering (Ansvarskjede)
 
-**Når det brukes**: Oppgaver må fullføres i bestemt rekkefølge, hver agent bygger på tidligere output.
+**Når du skal bruke det**: Oppgaver må fullføres i bestemt rekkefølge, hver agent bygger på forrige resultat.
 
 ```mermaid
 sequenceDiagram
@@ -79,25 +79,25 @@ sequenceDiagram
 ```
 
 **Fordeler:**
-- ✅ Klar dataflyt
-- ✅ Lett å feilsøke
-- ✅ Forutsigbar kjøreorden
+- ✅ Klart dataflyt
+- ✅ Enkel å feilsøke
+- ✅ Forutsigbar utførelsesrekkefølge
 
 **Begrensninger:**
 - ❌ Langsommere (ingen parallellitet)
-- ❌ Én feil stopper hele kjeden
-- ❌ Kan ikke håndtere avhengige oppgaver
+- ❌ Én feil blokkerer hele kjeden
+- ❌ Kan ikke håndtere innbyrdes avhengige oppgaver
 
 **Eksempler på brukstilfeller:**
-- Innholdsproduksjonspipeline (forskning → skrive → redigere → publisere)
-- Kodegenerering (planlegge → implementere → teste → distribuere)
+- Innholdsproduksjon (forskning → skrive → redigere → publisere)
+- Kodegenerering (plan → implementer → test → distribuer)
 - Rapportgenerering (datainnsamling → analyse → visualisering → sammendrag)
 
 ---
 
 ### Mønster 2: Parallell koordinering (Fan-Out/Fan-In)
 
-**Når det brukes**: Uavhengige oppgaver kan kjøres samtidig, resultater samles til slutt.
+**Når du skal bruke det**: Uavhengige oppgaver kan kjøre samtidig, resultatene kombineres til slutt.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Fordeler:**
-- ✅ Rask (parallell kjøring)
+- ✅ Raskt (parallell utførelse)
 - ✅ Feiltolerant (delvise resultater akseptable)
 - ✅ Skalerer horisontalt
 
 **Begrensninger:**
-- ⚠️ Resultater kan ankomme utenfor rekkefølge
+- ⚠️ Resultater kan komme i feil rekkefølge
 - ⚠️ Krever aggregeringslogikk
-- ⚠️ Kompleks tilstandsadministrasjon
+- ⚠️ Kompleks tilstandshåndtering
 
 **Eksempler på brukstilfeller:**
-- Innsamling fra flere datakilder (API-er + databaser + webskraping)
+- Innsamling fra flere kilder (API-er + databaser + nettskraping)
 - Konkurranseanalyse (flere modeller genererer løsninger, beste velges)
-- Oversettelsestjenester (oversett til flere språk samtidig)
+- Oversettelsestjenester (oversette til flere språk samtidig)
 
 ---
 
-### Mønster 3: Hierarkisk koordinering (Sjef-Arbeider)
+### Mønster 3: Hierarkisk koordinering (Leder-arbeider)
 
-**Når det brukes**: Komplekse arbeidsflyter med underoppgaver, delegering nødvendig.
+**Når du skal bruke det**: Komplekse arbeidsflyter med deloppgaver, behov for delegering.
 
 ```mermaid
 graph TB
@@ -167,24 +167,24 @@ graph TB
 
 **Fordeler:**
 - ✅ Håndterer komplekse arbeidsflyter
-- ✅ Modulær og vedlikeholdbar
+- ✅ Modulært og vedlikeholdbart
 - ✅ Klare ansvarsgrenser
 
 **Begrensninger:**
 - ⚠️ Mer kompleks arkitektur
 - ⚠️ Høyere ventetid (flere koordinasjonslag)
-- ⚠️ Krever avansert orkestrering
+- ⚠️ Krever sofistikert orkestrering
 
 **Eksempler på brukstilfeller:**
-- Bedriftsdokumentbehandling (klassifiser → rute → prosesser → arkivere)
-- Data pipelines i flere trinn (hent inn → rengjør → transformer → analyser → rapporter)
-- Komplekse automatiseringsarbeidsflyter (planlegging → ressursallokering → utføring → overvåking)
+- Bedriftsdokumentbehandling (klassifiser → rute → prosesser → arkiver)
+- Flertrinns datapipelines (innhent → rens → transformer → analyser → rapporter)
+- Komplekse automatiseringsarbeidsflyter (planlegging → ressursallokering → utførelse → overvåking)
 
 ---
 
-### Mønster 4: Hendelsesdrevet koordinering (Publiser-Subscribers)
+### Mønster 4: Hendelsesdrevet koordinering (Publiser-Abonner)
 
-**Når det brukes**: Agenter må reagere på hendelser, ønskelig med løs kobling.
+**Når du skal bruke det**: Agenter må reagere på hendelser, ønsker løs kobling.
 
 ```mermaid
 sequenceDiagram
@@ -207,25 +207,25 @@ sequenceDiagram
 
 **Fordeler:**
 - ✅ Løs kobling mellom agenter
-- ✅ Lett å legge til nye agenter (bare abonner)
-- ✅ Asynkron behandling
-- ✅ Robust (meldingbestandighet)
+- ✅ Enkel å legge til nye agenter (bare abonner)
+- ✅ Asynkron prosessering
+- ✅ Robust (meldinglagring)
 
 **Begrensninger:**
-- ⚠️ Eventuell konsistens
-- ⚠️ Vanskelig feilsøking
+- ⚠️ Endelig konsistens
+- ⚠️ Vanskelig å feilsøke
 - ⚠️ Utfordringer med meldingsrekkefølge
 
 **Eksempler på brukstilfeller:**
-- Sanntidsovervåking (alarmer, dashbord, logger)
-- Varsling på flere kanaler (e-post, SMS, push, Slack)
-- Databehandlingspipeliner (flere forbrukere av samme data)
+- Sanntidsovervåkingssystemer (varsler, dashbord, logger)
+- Multi-kanal varslinger (epost, SMS, push, Slack)
+- Datapipelines (flere konsumenter av samme data)
 
 ---
 
-### Mønster 5: Konsensusbasert koordinering (Avstemming/Quorum)
+### Mønster 5: Konsensusbasert koordinering (Avstemning/Quorum)
 
-**Når det brukes**: Krever enighet fra flere agenter før videre fremgang.
+**Når du skal bruke det**: Trenger enighet fra flere agenter før fortsettelse.
 
 ```mermaid
 graph TB
@@ -249,13 +249,13 @@ graph TB
 
 **Fordeler:**
 - ✅ Høyere nøyaktighet (flere meninger)
-- ✅ Feiltolerant (minoritetsfeil akseptabelt)
-- ✅ Kvalitetssikring innebygd
+- ✅ Feiltolerant (minstevunnet akseptabelt)
+- ✅ Integrert kvalitetssikring
 
 **Begrensninger:**
 - ❌ Kostbart (flere modellkall)
 - ❌ Langsommere (venter på alle agenter)
-- ⚠️ Konfliktløsing nødvendig
+- ⚠️ Krever konfliktløsning
 
 **Eksempler på brukstilfeller:**
 - Innholdsmoderering (flere modeller vurderer innhold)
@@ -314,25 +314,25 @@ graph TB
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 
-**Hovedkomponenter:**
+**Nøkkelkomponenter:**
 
 | Komponent | Formål | Azure-tjeneste |
 |-----------|---------|---------------|
-| **API Gateway** | Inngangspunkt, ratebegrensning, autentisering | API Management |
+| **API Gateway** | Inngangspunkt, hastighetsbegrensing, autentisering | API Management |
 | **Orkestrator** | Koordinerer agentarbeidsflyter | Container Apps |
 | **Meldingskø** | Asynkron kommunikasjon | Service Bus / Event Hubs |
 | **Agenter** | Spesialiserte AI-arbeidere | Container Apps / Functions |
 | **Tilstandslager** | Delt tilstand, oppgaveoppfølging | Cosmos DB |
-| **Arkivlagring** | Dokumenter, resultater, logger | Blob Storage |
+| **Artefaktlagring** | Dokumenter, resultater, logger | Blob Storage |
 | **Overvåking** | Distribuert sporing, logger | Application Insights |
 
-Service Bus-køer/-emner og Event Hubs er forskjellige tjenester med ulike levering-/forbrukermodeller; Event Hubs er ikke en direkte erstatning for Service Bus-arbeiderkoden nedenfor. Parallellitet, vedvarende meldinger og modellavstemning garanterer ikke alene feiltoleranse eller høyere nøyaktighet.
+Service Bus-køer/emner og Event Hubs er forskjellige tjenester med ulike leverings-/konsum-modeller; Event Hubs er ikke en drop-in erstatning for Service Bus workers-koden nedenfor. Parallellitet, vedvarende meldinger og modellavstemming garanterer ikke alene feiltoleranse eller høyere nøyaktighet.
 
 ---
 
 ## Forutsetninger
 
-### Påkrevde verktøy
+### Nødvendige verktøy
 
 ```bash
 # Verify Azure Developer CLI
@@ -353,7 +353,7 @@ docker --version
 - Aktiv Azure-abonnement
 - Tillatelser til å opprette:
   - Container Apps
-  - Service Bus-navneområder
+  - Service Bus-navnerom
   - Cosmos DB-kontoer
   - Lagringskontoer
   - Application Insights
@@ -362,18 +362,18 @@ docker --version
 
 Du bør ha fullført:
 - [Konfigurasjonsstyring](../chapter-03-configuration/configuration.md)
-- [Autentisering & Sikkerhet](../chapter-03-configuration/authsecurity.md)
-- [Mikrotjenester Eksempel](../../../../examples/microservices)
+- [Autentisering og sikkerhet](../chapter-03-configuration/authsecurity.md)
+- [Microservices-eksempel](../../../../examples/microservices)
 
 ---
 
-## Implementeringsveiledning
+## Implementasjonsveiledning
 
-> **Designfragmenter, ikke et distribuerbart lab:** Prosjektstrukturen og `File:` etikettene nedenfor beskriver filer som skal opprettes i ditt eget prosjekt; dette depotet inneholder ikke en komplett `multi-agent-system` applikasjon. Manglende deler inkluderer hoved-/parametermaler, Container Apps-miljø/registre, Dockerfiler og avhengighetslås, Cosmos database-/containeroppsett, modellutrullinger, identitets-/rollekonfigurasjon, skalaregler og parallelle arbeidere/køer. Ikke forvent at `azd init` genererer disse filene eller at `azd up` distribuerer kodestykkene uendret. For et kjørbart utgangspunkt, fullfør [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Designfragmenter, ikke et deployerbart lab:** Prosjektmappa og `File:` etiketter nedenfor beskriver filer du må lage i ditt eget prosjekt; dette repositoriet inneholder ikke en komplett `multi-agent-system` applikasjon. Manglende deler inkluderer main/parameter-maler, Container Apps miljø/registry, Dockerfiler og avhengighetslås, Cosmos database/container-oppsett, modellutplasseringer, identitets-/rollekonfigurasjon, skaleringsregler og parallelle arbeider/køer. Ikke forvent at `azd init` genererer disse filene eller at `azd up` distribuerer kodestykkene uten endringer. For et kjørbart startpunkt, fullfør [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Kjøretidsantakelser:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, og (for overvåking) `azure-monitor-opentelemetry`; sett `shared` på Python-importstien i hvert tjenestebilde. Cosmos `agent-state/tasks` container må allerede eksistere med partisjonsnøkkel `/id`. Tilkoblinger med nøkler forenkler disse fragmentene, ikke veiledning for produksjon: foretrekk administrerte identiteter med scoped Service Bus/Cosmos/OpenAI data-plane roller. Ikke eksponer nøkler i utdata eller logger.
+**Forutsetninger for kjøring:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, og (for overvåking) `azure-monitor-opentelemetry`; sørg for `shared` i Python import-sti i hver tjenesteimage. Cosmos `agent-state/tasks` container må allerede finnes med partisjonsnøkkel `/id`. Nøkkelbaserte tilkoblinger forenkler disse fragmentene, ikke produktionsanbefaling: foretrekk styrte identiteter med scopes for Service Bus/Cosmos/OpenAI data-plane roller. Ikke eksponer nøkler i utdata eller logger.
 
-Service Bus-levering er **minst én gang**. Vedvar idempotens per oppgave **og steg**, bruk optimistisk samtidighet (ETags) for lese/modifisere/skrive tilstand, og forny meldinglås under lang prosessering. Den enkle tilstandsadministratoren nedenfor er kun sekvensiell og implementerer ikke disse produksjonsgarantiene.
+Service Bus-levering er **minst én gang**. Vedvar idempotens per oppgave **og steg**, bruk optimistisk samtidighet (ETags) for les/modifiser/skriv tilstand, og forny meldinglåser under lang behandling. Den enkle tilstandsadministratoren nedenfor er kun sekvensiell og implementerer ikke disse produksjonsgarantiene.
 
 ### Prosjektstruktur
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Leksjon 1: Sekvensielt koordineringsmønster
+## Leksjon 1: Sekvensielt koordinasjonsmønster
 
-### Implementering: Innholdsproduksjonspipeline
+### Implementasjon: Innholdsproduksjonspipeline
 
-La oss designe en sekvensiell pipeline: Forskning → Skrive → Redigere. Publisering er utenfor dette eksempelet.
+La oss designe en sekvensiell pipeline: Forskning → Skrive → Redigere. Publisering er utenfor dette eksemplet.
 
 ### 1. AZD-konfigurasjon
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Delt tilstandsadministrator
+### 3. Delt tilstandsbehandler
 
 **Fil: `src/shared/state_manager.py`**
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orkestratørtjeneste
+### 4. Orkestrator-tjeneste
 
 **Fil: `src/orchestrator/app.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Forskeragent
+### 5. Forskningsagent
 
 **Fil: `src/agents/research/app.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Skribentagent
+### 6. Skriveragent
 
 **Fil: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Redaktøragent
+### 7. Redigeringsagent
 
 **Fil: `src/agents/editor/app.py`**
 
@@ -895,19 +895,19 @@ if __name__ == '__main__':
 
 ### 8. Distribuer og test
 
-Disse kommandoene gjelder **kun etter at du har implementert de manglende prosjektfilene**. Interaktiv Foundry agent-initialisering er en separat arbeidsflyt; den genererer ikke denne Service Bus-designen.
+Disse kommandoene gjelder **bare etter at du har implementert de manglende prosjektfilene**. Interaktiv Foundry agent-initialisering er en separat arbeidsflyt; den genererer ikke denne Service Bus-designen.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Se [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for alle `azd ai` flagg og alternativer.
+> Se [AZD AI CLI-kommandoer](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for alle `azd ai` flagg og alternativer.
 
 ```bash
 # Get orchestrator URL
@@ -930,7 +930,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Sjekk oppgavefremdrift:**
+**Sjekk oppgaveprogresjon:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -964,9 +964,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Leksjon 2: Parallelt koordineringsmønster
+## Leksjon 2: Parallelt koordinasjonsmønster
 
-### Implementering: Multi-kilde forskningsaggregator
+### Implementasjon: Multi-kilde forskningsaggregator
 
 La oss bygge et parallelt system som samler informasjon fra flere kilder samtidig.
 
@@ -1042,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Aggregasjonslogikk
+### Aggregeringslogikk
 
 **Fil: `src/agents/aggregator/app.py`**
 
@@ -1124,23 +1124,23 @@ if __name__ == '__main__':
 ```
 
 **Fordeler med parallelt mønster:**
-- ⚡ **Potensielt lavere ventetid** (begrenset av den tregeste arbeideren pluss koordinasjonskostnad)
-- 🔄 **Kan støtte delvise resultater** med eksplisitte tidsfrister og feilhåndtering (ikke implementert i grunnleggende aggregator)
-- 📈 **Skalerbar** (legg til flere agenter enkelt)
+- ⚡ **Potensielt lavere ventetid** (begrenset av tregeste arbeider pluss koordinasjonskostnad)
+- 🔄 **Kan støtte delvise resultater** med eksplisitte tidsfrister og feilpolicy (ikke implementert i grunnleggende aggregator)
+- 📈 **Skalerbart** (legge til flere agenter enkelt)
 
 ---
 
 ## Praktiske øvelser
 
-### Øvelse 1: Legg til tidsavbruddsbehandling ⭐⭐ (Middels)
+### Øvelse 1: Legg til timeout-håndtering ⭐⭐ (Middels)
 
-**Mål**: Implementer tidsavbruddslogikk slik at aggregator ikke venter evig på trege agenter.
+**Mål**: Implementer timeout-logikk slik at aggregator ikke venter evig på trege agenter.
 
-**Startpunkt:** Kjør denne lokale simuleringen av tidsfrist før du integrerer den i en køarbeider. En tidsavbruddsjekk kun når en annen melding ankommer, utløses aldri hvis den manglende arbeideren ikke sender noe.
+**Startpunkt:** Kjør denne lokale deadline-simuleringen før du integrerer den i en køarbeider. Timeout kontrolleres bare når en annen melding ankommer, og utløses aldri hvis den manglende arbeideren ikke sender noe.
 
 **Steg**:
 
-1. **Legg til tidsavbruddsoppfølging i aggregator:**
+1. **Legg til timeout-sporing i aggregator:**
 
 ```python
 import asyncio
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integrasjon med køsystem (designoppgave):** Vedvar utsendelsesfrist og forventede agenter når oppgave opprettes, kjør periodisk tidsfrist-sjekk uavhengig av innkommende resultater, avslutt delvise resultater atomisk, og ignorer sene/dupliserte meldinger for avsluttede oppgaver. Lokal tidsavbrudd avbryter ikke fjerne arbeidere.
+3. **Køsystem-integrasjon (designoppgave):** Vedvar utsendelsesfrist og forventede agenter ved opprettelse av oppgave, kjør periodisk tidssjekk uavhengig av innkommende resultater, finaliser delvise resultater atomisk, og ignorer sene/dupliserte meldinger for finaliserte oppgaver. Lokal timeout avbryter ikke fjernarbeidere.
 
-Kun for ditt implementerte prosjekt:
+Bare for ditt implementerte prosjekt:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Den lokale testen returnerer etter sin ett-sekunders tidsfrist selv om en agent er ufullstendig
-- ✅ Respons indikerer delvise resultater (`"timed_out": true`)
+- ✅ Den lokale testen returnerer etter sin ett-sekunds frist selv om en agent er ufullstendig
+- ✅ Responsen indikerer delvise resultater (`"timed_out": true`)
 - ✅ Tilgjengelige resultater returneres (3 av 4 agenter)
 
 **Tid**: 20-25 minutter
 
 ---
 
-### Øvelse 2: Implementer logikk for ny forsøk (Retry) ⭐⭐⭐ (Avansert)
+### Øvelse 2: Implementer retry-logikk ⭐⭐⭐ (Avansert)
 
-**Mål**: Automatisk ny forsøk for mislykkede agentoppgaver før oppgivelse.
+**Mål**: Automatisk retry av feilede agentoppgaver før man gir opp.
 
 **Steg**:
 
-1. **Bruk leveringsantall fra Service Bus i stedet for egendefinerte teller for ny forsøk:**
+1. **Bruk Service Bus leveringsantall i stedet for egne retry-tellere i køen:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Legg til ny forsøk-håndterer i agenter:**
+2. **Legg til retry-håndtering i agenter:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Overvåk dead letter-kø:**
+3. **Overvåk død brev-kø:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Feilaktige oppgaver prøver automatisk på nytt (opptil 3 ganger)
-- ✅ Eksponentiell tilbakeføring mellom forsøk (5s, 10s, 20s), med fornying av meldinglås der nødvendig
-- ✅ Etter maks antall forsøk går meldinger til dead letter-kø
-- ✅ Dead letter-meldinger kan inspiseres; replay krever separat idempotent gjenopprettingsarbeidsflyt
+- ✅ Feilede oppgaver retryes automatisk (opptil 3 ganger)
+- ✅ Eksponentiell tilbakeoff mellom retries (5s, 10s, 20s), med fornyelse av meldinglås der nødvendig
+- ✅ Etter maks retries går meldinger til død brev-kø
+- ✅ Meldinger i død brev kan inspiseres; replay krever separat idempotent gjenopprettingsarbeidsflyt
 
 **Tid**: 30-40 minutter
 
 ---
 
-### Øvelse 3: Implementer "Circuit Breaker" ⭐⭐⭐ (Avansert)
+### Øvelse 3: Implementer sikring (Circuit Breaker) ⭐⭐⭐ (Avansert)
 
-**Mål**: Forhindre kjedereaksjon av feil ved å stoppe forespørsler til mislykkede agenter.
+**Mål**: Unngå kaskadefeil ved å stoppe forespørsler til feilende agenter.
 
 **Steg**:
 
-1. **Lag klasse for circuit breaker:**
+1. **Lag circuit breaker-klasse:**
 
 ```python
 from enum import Enum
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Denne kretsen beskytter **sendingsoperasjonen**, ikke fullføring av den eksterne arbeideren: å lykkes med å legge en melding i køen sier ingenting om hvorvidt en agent er aktiv. `send_message` er applikasjonens sendefunksjon. For eksekveringskretser, send observerte oppgavefeil/tidsavbrudd til en holdbar koordinator. Denne minnebaserte klassen er en enkeltrådet demonstrasjon, ikke en distribuert sikringskrets.
+Denne kretsen beskytter **sendoperasjonen**, ikke fullføring av den eksterne arbeideren: å lykkes med å sette en melding i kø sier ingenting om hvorvidt en agent er aktiv. `send_message` er applikasjonens senderfunksjon. For utførelseskretser, følg observerte oppgavefeil/tidsavbrudd inn i en varig koordinator. Denne minnesklassen er en enkelttrådet demonstrasjon, ikke en distribuert sikringsbryter.
 
-3. **Test sikringskretsen lokalt:**
+3. **Test sikringsbryter lokalt:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1368,11 +1368,11 @@ assert circuit.state == CircuitState.CLOSED
 print("Circuit breaker recovery verified")
 ```
 
-**✅ Vellykkede kriterier:**
-- ✅ Etter 5 feil åpnes kretsen (avviser forespørsler)
-- ✅ Etter 60 sekunder går kretsen til halvt åpen (tester gjenoppretting)
+**✅ Suksesskriterier:**
+- ✅ Etter 5 feil, åpnes kretsen (avviser forespørsler)
+- ✅ Etter 60 sekunder går kretsen til halv-åpen tilstand (tester gjenoppretting)
 - ✅ Andre agenter fortsetter å jobbe normalt
-- ✅ Kretsen lukkes automatisk når agenten har gjenopprettet
+- ✅ Kretsen lukkes automatisk når agenten gjenoppretter seg
 
 **Tid**: 40-50 minutter
 
@@ -1451,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Feilanalyse:**
+**Feil-analyse:**
 
 ```kusto
 // Find which agents fail most
@@ -1468,9 +1468,9 @@ exceptions
 
 ## Kostnadsanalyse
 
-### Kostnader for system med flere agenter (månedlige estimater)
+### Kostnader for Multi-Agent System (månedlige estimater)
 
-Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/måned**. Verifiser nåværende regionale priser, aktive/inaktive replika-timer, inn-/ut-token-miks, lagring og telemetri. Serverless har ingen minimum for provisjonert gjennomstrømning, men fakturerer fortsatt for forespørsler og lagring.
+Illustrative planleggingsfigurer kun, ikke tilbud: summen nedenfor er **$240-565/måned**. Verifiser gjeldende regionale priser, aktive/inaktive replika-timer, blanding av input/output-token, lagring og telemetri. Serverless har ingen minimum for tildelt gjennomstrømning, men fakturerer fortsatt for forespørsler og lagring.
 
 | Komponent | Konfigurasjon | Kostnad |
 |-----------|--------------|------|
@@ -1480,10 +1480,10 @@ Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/m�
 | **Cosmos DB** | Serverless, 5GB lagring, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB lagring, 100K operasjoner | $5-10 |
 | **Application Insights** | 5GB inntak | $10-15 |
-| **Microsoft Foundry-modeller** | gpt-4.1, 10M tokens | $100-300 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **Totalt** | | **$240-565/måned** |
 
-### Strategier for kostnadsoptimalisering
+### Kostnadsoptimaliseringsstrategier
 
 1. **Bruk serverless der det er mulig:**
    ```bicep
@@ -1508,7 +1508,7 @@ Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/m�
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache hyppig brukte resultater:**
+4. **Cache ofte brukte resultater:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1542,14 +1542,14 @@ Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/m�
    }
    ```
 
-4. **Sett meldingens tidsfrist (TTL)**
+4. **Sett meldings TTL (levetid)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Overvåk dead letter-køer**
+5. **Overvåk døde bokskøer**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1557,7 +1557,7 @@ Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/m�
 
 ### ❌ IKKE GJØR:
 
-1. **Ikke opprett sirkelavhengigheter**
+1. **Ikke lag sirkulære avhengigheter**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
@@ -1572,13 +1572,13 @@ Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/m�
    # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Ikke ignorer delvise feil**
+3. **Ignorer ikke delvise feil**
    ```python
    # ❌ BAD: Fail entire workflow if one agent fails
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Ikke bruk uendelige gjentagelser**
+4. **Ikke bruk uendelige forsøk**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1588,11 +1588,11 @@ Illustrative planleggingsfigurer, ikke tilbud: totalen nedenfor er **$240-565/m�
 
 ## Feilsøkingsguide
 
-### Problem: Meldinger sitter fast i kø
+### Problem: Meldinger sitter fast i køen
 
 **Symptomer:**
 - Meldinger hoper seg opp i køen
-- Agenter prosesserer ikke
+- Agenter behandler ikke meldinger
 - Oppgavestatus sitter fast på "ventende"
 
 **Diagnose:**
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Sjekk dead letter-køen:**
+2. **Sjekk døde bokskøen:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,11 +1630,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Oppgave tidsavbrudd/fullfører aldri
+### Problem: Oppgave tidsavbrudd/fullføres aldri
 
 **Symptomer:**
 - Oppgavestatus forblir "pågående"
-- Noen agenter fullfører, andre gjør det ikke
+- Noen agenter fullfører, andre ikke
 - Ingen feilmeldinger
 
 **Diagnose:**
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Løsninger:**
 
-1. **Implementer tidsavbrudd i aggregator (Øvelse 1)**
+1. **Implementer tidsavbrudd i aggregatoren (Øvelse 1)**
 
 2. **Sjekk for agentfeil med Azure Monitor:**
    ```bash
@@ -1668,7 +1668,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lær Mer
+## Lær mer
 
 ### Offisiell dokumentasjon
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -1682,8 +1682,8 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - 🏠 [Kurs Hjem](../../README.md)
 
 ### Relaterte eksempler
-- [Mikrotjenester Eksempel](../../../../examples/microservices) - Mønstre for tjenestekommunikasjon
-- [Microsoft Foundry Models Eksempel](../../../../examples/azure-openai-chat) - AI-integrasjon
+- [Mikrotjenesteeksempel](../../../../examples/microservices) - Mønstre for tjenestekommunikasjon
+- [Microsoft Foundry Models-eksempel](../../../../examples/azure-openai-chat) - AI-integrasjon
 
 ---
 
@@ -1691,22 +1691,22 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Du har lært:**
 - ✅ Fem koordineringsmønstre (sekvensiell, parallell, hierarkisk, hendelsesdrevet, konsensus)
-- ✅ Fleragentarkitektur på Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Multi-agent arkitektur på Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Tilstandshåndtering på tvers av distribuerte agenter
-- ✅ Håndtering av tidsavbrudd, gjentakelser og sikringskretser
+- ✅ Håndtering av tidsavbrudd, gjenforsøk, og sikringsbrytere
 - ✅ Overvåking og feilsøking av distribuerte systemer
-- ✅ Strategier for kostnadsoptimalisering
+- ✅ Kostnadsoptimaliseringsstrategier
 
-**Nøkkelpunkter:**
-1. **Velg riktig mønster** - Sekvensiell for ordnede arbeidsflyter, parallell for hastighet, hendelsesdrevet for fleksibilitet
+**Nøkkelkonklusjoner:**
+1. **Velg riktig mønster** - Sekvensiell for ordnede arbeidsflyter, parallell for fart, hendelsesdrevet for fleksibilitet
 2. **Håndter tilstand nøye** - Bruk Cosmos DB eller lignende for delt tilstand
-3. **Håndter feil grasiøst** - Tidsavbrudd, gjentakelser, sikringskretser, dead letter-køer
+3. **Håndter feil grasiøst** - Tidsavbrudd, gjenforsøk, sikringsbrytere, døde bokskøer
 4. **Overvåk alt** - Distribuert sporing er essensielt for feilsøking
 5. **Optimaliser kostnader** - Skaler til null, bruk serverless, implementer caching
 
 **Neste steg:**
 1. Fullfør de praktiske øvelsene
-2. Bygg et fleragentsystem for ditt bruksområde
+2. Bygg et multi-agent system for ditt brukstilfelle
 3. Studer [SKU-valg](sku-selection.md) for å optimalisere ytelse og kostnad
 
 ---

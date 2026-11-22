@@ -1,4 +1,4 @@
-# Bab 5: Penyelesaian AI Pelbagai Ejen
+# Bab 5: Penyelesaian AI Multi-Ejen
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
 
@@ -6,17 +6,17 @@
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi corak seni bina pelbagai ejen yang lanjutan, orkestrasi ejen, dan penyebaran AI yang siap untuk produksi bagi senario yang kompleks.
+Bab ini merangkumi corak seni bina multi-ejen lanjutan, pengurusan ejen, dan penyebaran AI sedia produksi untuk senario kompleks.
 
-> Panduan perintah disemak berbanding rujukan `azd 1.37.2` yang dikeluarkan. Penyebaran awan tidak dijalankan.
+> Panduan arahan disemak dengan rujukan `azd 1.37.2` yang telah dikeluarkan. Penyebaran awan tidak dijalankan.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
-- Memahami corak seni bina pelbagai ejen
-- Menyebarkan sistem ejen AI yang berkoordinasi
+Dengan melengkapkan bab ini, anda akan:
+- Memahami corak seni bina multi-ejen
+- Menyebarkan sistem ejen AI yang terkoordinasi
 - Melaksanakan komunikasi antara ejen
-- Membina penyelesaian pelbagai ejen yang siap untuk produksi
+- Membina penyelesaian multi-ejen sedia produksi
 
 ---
 
@@ -24,34 +24,34 @@ Dengan menyelesaikan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|----------|------------|------|
-| 1 | [Asas Pelbagai Ejen](multi-agent-basics.md) | Praktikal: menyebarkan aplikasi pelbagai ejen yang berfungsi dengan `azd up` | 45 min |
-| 2 | [Corak Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) | Strategi orkestrasi ejen (bersambung dalam Bab 6) | 30 min |
+| 1 | [Asas Multi-Ejen](multi-agent-basics.md) | Amali: menyebarkan aplikasi multi-ejen yang berfungsi dengan `azd up` | 45 min |
+| 2 | [Corak Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) | Strategi pengurusan ejen (bersambung di Bab 6) | 30 min |
 | 3 | [Penyebaran Templat ARM](../../examples/retail-multiagent-arm-template/README.md) | Contoh penyebaran satu klik | 30 min |
 
-> **Mula dengan Pelajaran 1.** Ia merupakan satu-satunya pelajaran yang sepenuhnya praktikal dan boleh disebarkan dalam bab ini. Pelajaran 2 terdapat dalam Bab 6 (dikongsi dengan perancangan pra-penyebaran), dan [Penyelesaian Pelbagai Ejen Runcit](../../examples/retail-scenario.md) adalah cetak biru seni bina—rujukan reka bentuk, bukan templat satu arahan.
+> **Mula dengan Pelajaran 1.** Ia adalah satu-satunya pelajaran amali sepenuhnya yang boleh disebarkan dalam bab ini. Pelajaran 2 berada di Bab 6 (ia dikongsi dengan perancangan sebelum penyebaran), dan [Penyelesaian Multi-Ejen Runcit](../../examples/retail-scenario.md) adalah pelan seni bina—rujukan reka bentuk, bukan templat satu arahan.
 
 ---
 
-## 🚀 Mula Pantas
+## 🚀 Mula Cepat
 
 ```bash
 # Option 1: Deploy the multi-agent template used in Lesson 1
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Pendekatan mana?** Gunakan `azd init --template` untuk bermula dari sampel yang berfungsi. Gunakan `azd ai agent init` secara interaktif, atau `azd ai agent init --template <path-to-azure.yaml>` untuk mengadaptasi projek ejen semasa. Lihat [rujukan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk keperluan versi dan migrasi penilaian.
+> **Pendekatan mana?** Gunakan `azd init --template` untuk bermula dari contoh yang berfungsi. Gunakan `azd ai agent init` secara interaktif, atau `azd ai agent init --template <path-to-azure.yaml>` untuk mengguna pakai projek ejen semasa. Lihat [rujukan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk keperluan versi dan migrasi penilaian.
 
-Jalankan alternatif ini dalam folder kosong yang berasingan. Sambungan ejen `1.0.0-beta.23` memerlukan `azd >= 1.37.0`; alur interaktifnya tidak menghasilkan saluran Service Bus khusus dalam pelajaran koordinasi.
+Jalankan alternatif ini dalam folder kosong yang berasingan. Aliran kerja GA Foundry memerlukan `azd >= 1.37.0`; aliran interaktifnya tidak menjana saluran perkhidmatan Service Bus khusus dalam pelajaran koordinasi. Untuk ujian tempatan, penyebaran kod, dan pembersihan projek baru berbanding yang digunakan semula, ikuti [panduan ejen yang dihoskan](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
-## 🤖 Seni Bina Pelbagai Ejen
+## 🤖 Seni Bina Multi-Ejen
 
 ```mermaid
 graph TD
@@ -61,23 +61,23 @@ graph TD
 
 ---
 
-## 🎯 Penyelesaian Pilihan: Pelbagai Ejen Runcit
+## 🎯 Penyelesaian Pilihan: Multi-Ejen Runcit
 
-Penyelesaian [Agen Pelbagai Runcit](../../examples/retail-scenario.md) menunjukkan:
+Penyelesaian [Ejen Pelbagai Runcit](../../examples/retail-scenario.md) menunjukkan:
 
-- **Agen Pelanggan**: Mengendalikan interaksi dan keutamaan pengguna
-- **Agen Inventori**: Menguruskan stok dan pemprosesan pesanan
-- **Pengaturcara**: Menyelaraskan antara agen
-- **Memori Kongsi**: Pengurusan konteks merentasi agen
+- **Ejen Pelanggan**: Mengendalikan interaksi dan keutamaan pengguna
+- **Ejen Inventori**: Mengurus stok dan pemprosesan pesanan
+- **Pengaturcara**: Menyelaras antara ejen
+- **Memori Berkongsi**: Pengurusan konteks rentas ejen
 
-### Perkhidmatan yang Digunakan
+### Perkhidmatan Digunakan
 
 | Perkhidmatan | Tujuan |
 |---------|---------|
 | Model Microsoft Foundry | Pemahaman bahasa |
 | Azure AI Search | Katalog produk |
-| Cosmos DB | Status dan memori agen |
-| Apl Kontena | Hos agen |
+| Cosmos DB | Keadaan dan memori ejen |
+| Aplikasi Kontena | Penghosting ejen |
 | Application Insights | Pemantauan |
 
 ---
@@ -86,14 +86,14 @@ Penyelesaian [Agen Pelbagai Runcit](../../examples/retail-scenario.md) menunjukk
 
 | Arah | Bab |
 |-----------|---------|
-| **Sebelum** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
+| **Sebelumnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 | **Seterusnya** | [Bab 6: Pra-Penerapan](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Sumber Berkaitan
 
-- [Panduan Agen AI](../chapter-02-ai-development/agents.md)
+- [Panduan Ejen AI](../chapter-02-ai-development/agents.md)
 - [Amalan AI Pengeluaran](../chapter-08-production/production-ai-practices.md)
 - [Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 

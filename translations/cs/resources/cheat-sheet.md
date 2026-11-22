@@ -1,36 +1,36 @@
-# Příručka příkazů - Základní příkazy AZD
+# Rychlý přehled příkazů - Základní příkazy AZD
 
-**Rychlá reference ke všem kapitolám**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../README.md)
+**Rychlá referencia ke všem kapitolám**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../README.md)
 - **📖 Rychlý start**: [Kapitola 1: Základy a rychlý start](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI příkazy**: [Kapitola 2: AI-First vývoj](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Pokročilé**: [Kapitola 4: Infrastruktura jako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 Příkazy AI**: [Kapitola 2: AI-převládající vývoj](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pokročilé**: [Kapitola 4: Infrastrukturou jako kódem](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
-Tato ucelená příručka nabízí rychlou referenci nejčastěji používaných příkazů Azure Developer CLI, uspořádaných podle kategorií s praktickými příklady. Ideální pro rychlé vyhledávání během vývoje, řešení problémů a každodenních operací s projekty azd.
+Tento komplexní rychlý přehled poskytuje rychlou referenci nejčastěji používaných příkazů Azure Developer CLI, uspořádaných podle kategorií s praktickými příklady. Perfektní pro rychlé dohledání během vývoje, řešení problémů a každodenních operací s projekty azd.
 
 ## Cíle učení
 
-Používáním této příručky:
-- Budete mít okamžitý přístup k základním příkazům a syntaxi Azure Developer CLI
-- Pochopíte organizaci příkazů podle funkčních kategorií a použití
-- Najdete praktické příklady pro běžné vývojové a deploy scénáře
-- Budete mít k dispozici příkazy pro řešení problémů pro rychlé odstranění potíží
-- Snadno najdete pokročilé možnosti konfigurace a přizpůsobení
-- Objevíte příkazy pro správu prostředí a multi-prostředí workflow
+Používáním tohoto rychlého přehledu budete:
+- Mít okamžitý přístup k základním příkazům a syntaxi Azure Developer CLI
+- Chápat organizaci příkazů podle funkčních kategorií a případů použití
+- Odkazovat na praktické příklady běžných scénářů vývoje a nasazení
+- Přistupovat k příkazům pro řešení problémů pro rychlé odstranění potíží
+- Efektivně najít pokročilé možnosti konfigurace a přizpůsobení
+- Najít příkazy pro správu prostředí a vícenásobný workflow prostředí
 
 ## Výsledky učení
 
-Pravidelným odkazováním na tuto příručku budete schopni:
-- Provádět příkazy azd s jistotou bez nutnosti plné dokumentace
+Při pravidelném používání tohoto přehledu budete schopni:
+- Provádět příkazy azd sebevědomě bez nutnosti plné dokumentace
 - Rychle řešit běžné problémy pomocí vhodných diagnostických příkazů
-- Efektivně spravovat více prostředí a scénáře nasazení
-- Používat pokročilé funkce azd a možnosti konfigurace podle potřeby
-- Řešit problémy s nasazením pomocí systematických sekvencí příkazů
-- Optimalizovat workflow efektivním používáním zkratek a možností azd
+- Efektivně spravovat vícenásobná prostředí a scénáře nasazení
+- Používat pokročilé funkce azd a možnosti konfigurace dle potřeby
+- Řešit nasazovací potíže pomocí systematických sekvencí příkazů
+- Optimalizovat pracovní postupy efektivním použitím zkratek a možností azd
 
-## Začátečnické příkazy
+## Začínající příkazy
 
 ### Autentizace
 ```bash
@@ -71,9 +71,9 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Hlavní příkazy nasazení
+## Základní příkazy nasazení
 
-### Kompletní workflow nasazení
+### Kompletní pracovní postup nasazení
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Sestavení a balení
+### Sestavení a balíčkování
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** stahuje závislosti vaší aplikace (npm, pip, NuGet, Maven atd.). Běží automaticky během `azd package` a `azd deploy`, takže jej zřídka voláte přímo — spusťte jej ručně pro předběžné stažení závislostí (například pro zahřátí CI cache nebo pozdější offline použití).
+> **`azd restore`** stáhne závislosti vaší aplikace (npm, pip, NuGet, Maven atd.). Probíhá automaticky během `azd package` a `azd deploy`, takže jej zřídka voláte přímo — spusťte jej ručně k přednačtení závislostí (například k "zahřátí" cache CI nebo práce offline později).
 
-> **`azd package`** připraví nasaditelný artefakt bez nasazení aplikační služby. Chování závisí na jazyce a hostiteli: balení kontejneru může využít Azure vzdálené sestavení a publikování imagí do registry, takže nemusí být nutně offline nebo bez zápisů do Azure. `azd deploy` může balit automaticky; použijte samostatný krok balení, když potřebujete artefakt nebo kontrolu sestavení.
+> **`azd package`** připraví nasaditelný artefakt, aniž by nasadil aplikační službu. Chování závisí na jazyce a hostiteli: balení kontejneru může používat vzdálené sestavení Azure a publikovat obrazy do registru, takže není nutně offline nebo bez zápisů do Azure. `azd deploy` může balit automaticky; použijte samostatný krok balení, pokud potřebujete artefakt nebo kontrolu sestavení.
 
 
 ## 🌍 Správa prostředí
@@ -170,9 +170,9 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Soubory prostředí jsou v prostém textu. Neukládejte `azd env set` jako úložiště tajemství; použijte odkazy na Key Vault nebo spravovanou identitu dle potřeby.
+Soubor prostředí je prostý text. Netrapte se s `azd env set` jako se skladováním tajemství; použijte odkazy Key Vault nebo spravovanou identitu podle potřeby.
 
-## ⚙️ Konfigurační příkazy
+## ⚙️ Příkazy konfigurace
 
 ### Globální konfigurace
 ```bash
@@ -204,7 +204,7 @@ azd show --output json
 
 ## 📊 Monitorování a diagnostika
 
-### Monitorovací dashboard
+### Dashboard monitorování
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights musí být nakonfigurován šablonou. Možnost Live Metrics v AZD aktuálně není podporována pro Python aplikace; použijte přehled, logy nebo dokumentovaný trasovací workflow vzorku.
+Application Insights musí být nakonfigurován šablonou. Volba Live Metrics v AZD momentálně není podporována pro Python aplikace; použijte místo toho přehled, logy nebo dokumentovaný sledovací workflow vzorku.
 
-### Zobrazení logů kontejneru
+### Prohlížení logů kontejneru
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Dotazy do Log Analytics
+### Dotazy Log Analytics
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -244,9 +244,9 @@ az monitor log-analytics query \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Údržbové příkazy
+## 🛠️ Příkazy údržby
 
-### Čištění
+### Úklid
 ```bash
 # Remove all Azure resources
 azd down
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI & rozšíření
+## 🤖 Příkazy AI a rozšíření
 
 ### Rozšíření AZD
 
-Referenční AI CLI přezkoumáno 2026-11-04: `azd 1.37.2`, agenti `1.0.0-beta.23`, vyhodnocení `1.0.0-beta.2`. Používejte `azd >= 1.37.0` pro kombinovaný workflow; aktualizujte základní CLI před nekompatibilními rozšířeními.
+Referenční GA Foundry aktualizováno 2026-11-09: `microsoft.foundry` balík 1.0, oznámený [5. listopadu 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Používejte `azd >= 1.37.0`; komponenty jsou samostatně verzovány a volitelné funkce ve výhledu si ponechávají svůj vlastní status.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI příkazy agentů
+Balík neobsahuje vyhodnocení, datové sady, ladění ani vlastní modely. Instalace jednotlivých základních rozšíření je nadále podporována. Postupujte podle [GA hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) pro spustitelný příklad s Python 3.13+, aktuální uv, oprávněními a kvótou modelů.
+
+### Příkazy AI agenta
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` nahrazuje zastaralý pravopis `--manifest`/`-m`; dědictví manifestů vyžaduje migraci. Momentálně není k dispozici agent-init `--host containerapp` možnost. Managed-harness, hlasové a dlouhotrvající preview vyžadují nezávislé povolení v shell/CI prostředí; viz [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` nahrazuje zastaralý `--manifest`/`-m` zápis; staré manifesty je třeba migrovat. Momentálně není agent-init `--host containerapp` možnost. Managed-harness, hlasové a dlouhodobé náhledy vyžadují samostatné shell/CI environment opt-in; viz [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### AI vyhodnocení a optimalizace
+Lokální testování stále používá nasazení Azure modelů a je zpoplatněno. K úklidu, `azd down` smaže nově vytvořenou resource group Foundry projektu, ale ponechá opakovaně použití projekční zdroje na místě; odstraňujte ručně jen nechtěné zdroje, které vlastníte.
+
+### Vyhodnocování AI a optimalizace
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,9 +417,24 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agenti beta.22 nahradili staré evaluační příkazy `azd ai eval` z `azure.ai.evaluations`. Nová konfigurace vyhodnocení používá camelCase klíče. Optimalizace `--config` probíhá samostatným API požadavkem, **nikoli** starým `eval.yaml` nebo novým `azure.eval.yaml`; pro znovupoužití vyhodnocení použijte `--eval`/`--eval-config`. Viz [nastavení vyhodnocení](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) a [migrace optimalizace](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agenti beta.22 nahradili staré vyhodnocovací příkazy `azd ai eval` z `azure.ai.evaluations`. Nová konfigurace vyhodnocení používá camelCase klíče. Optimalizace `--config` bere samostatný požadavek na API optimalizace, **nikoli** starý `eval.yaml` nebo nový `azure.eval.yaml`; používejte `--eval`/`--eval-config` pro opětovné použití vyhodnocení. Viz [nastavení vyhodnocení](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) a [migrace optimalizace](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-### MCP Server (alfa)
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Fragment runneru není úplný pracovní postup. Commitujte revidovanou konfiguraci vyhodnocení a ne tajná aktiva, povolte přístupy k datovým sadám/evaluatorům/modelům, a používejte jedno prostředí pro každou fázi. Viz [příklad autentizovaného CI/CD](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
+### MCP Server (alpha)
 ```bash
 # Start the MCP server for your project
 azd mcp start
@@ -419,9 +454,9 @@ azd infra --help
 
 ---
 
-## 🎯 Rychlé workflow
+## 🎯 Rychlé pracovní postupy
 
-### Vývojové workflow
+### Vývojový workflow
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Víceprostřední workflow
+### Více prostředí workflow
 ```bash
 # Set up environments
 azd env new dev
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### Workflow řešení potíží
+### Workflow řešení problémů
 ```bash
 # Check deployment status
 azd show --debug
@@ -473,9 +508,9 @@ azd monitor --logs
 azd show --output json
 ```
 
-## 🔍 Příkazy pro ladění
+## 🔍 Příkazy ladění
 
-### Ladící informace
+### Ladicí informace
 ```bash
 # Enable debug output for a command
 azd <command> --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Ladění šablon
+### Ladění šablony
 ```bash
 # List available templates with details
 azd template list --output json
@@ -502,7 +537,7 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 Příkazy pro soubory a adresáře
+## 📁 Příkazy souborů a adresářů
 
 ### Struktura projektu
 ```bash
@@ -519,7 +554,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 Formátování výstupu
 
-### Výstup ve formátu JSON
+### Výstup JSON
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -531,7 +566,7 @@ azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Výstup ve formátu tabulky
+### Výstup tabulky
 ```bash
 # Human-readable environment table
 azd env list
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### Skript pro čištění zdrojů
+### Skript pro úklid zdrojů
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -613,7 +648,7 @@ azd deploy
 azd show --output json
 ```
 
-### Obnovovací příkazy
+### Příkazy zotavení
 ```bash
 # Inspect before retrying; deletion/purge is not a routine recovery step
 azd show
@@ -626,9 +661,9 @@ azd provision
 azd deploy
 ```
 
-## 💡 Tipy profesionálů
+## 💡 Profesionální tipy
 
-### Aliasy pro rychlejší workflow
+### Alias pro rychlejší workflow
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Přidejte si tuto příručku do záložek a použijte `Ctrl+F` pro rychlé nalezení potřebných příkazů!
+**Tip**: Přidejte si tento rychlý přehled do záložek a používejte `Ctrl+F` pro rychlé nalezení potřebných příkazů!
 
 ---
 
 **Navigace**
-- **Předchozí lekce**: [Předletové kontroly](../docs/chapter-06-pre-deployment/preflight-checks.md)
-- **Další lekce**: [Glosář](glossary.md)
+- **Předchozí lekce**: [Kontroly před startem](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Další lekce**: [Slovníček pojmů](glossary.md)
 
 ---
 
-> **💡 Chcete pomoc s Azure příkazy přímo ve svém editoru?** Nainstalujte [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) s `npx skills add microsoft/github-copilot-for-azure` — 37 dovedností pro AI, Foundry, nasazení, diagnostiku a další.
+> **💡 Chcete pomoc s příkazy Azure přímo ve vašem editoru?** Nainstalujte si [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) s `npx skills add microsoft/github-copilot-for-azure` — 37 dovedností pro AI, Foundry, nasazení, diagnostiku a další.
 
 ---
 

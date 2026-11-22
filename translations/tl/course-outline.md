@@ -1,48 +1,48 @@
-# AZD Para sa Mga Baguhan: Balangkas ng Kurso at Balangkas ng Pagkatuto
+# AZD Para sa mga Baguhan: Balangkas ng Kurso at Balangkas ng Pagkatuto
 
 ## Pangkalahatang-ideya ng Kurso
 
-Maging bihasa sa Azure Developer CLI (azd) sa pamamagitan ng nakaayos na mga kabanata na idinisenyo para sa progresibong pagkatuto. **Espesyal na pagtutok sa pag-deploy ng aplikasyon ng AI gamit ang integrasyon ng Microsoft Foundry.**
+Maging bihasa sa Azure Developer CLI (azd) sa pamamagitan ng mga istrukturadong kabanata na dinisenyo para sa progresibong pagkatuto. **Espesyal na pokus sa pag-deploy ng mga AI application gamit ang integrasyon ng Microsoft Foundry.**
 
-### Bakit Mahalaga ang Kursong Ito para sa Modernong mga Developer
+### Bakit Mahalagang Kumuha ng Kursong Ito para sa mga Modernong Developer
 
-Kadalasang nangangailangan ng gabay ang mga developer na nagde-deploy ng AI workloads sa mga sumusunod na aspeto:
-- Komplikadong multi-service AI architectures
-- Mga pinakamahusay na gawi sa pag-deploy ng AI sa produksyon  
+Kadalasang kailangan ng mga developer na nagde-deploy ng mga AI workload ang gabay sa:
+- Masalimuot na multi-service AI architectures
+- Pinakamahuhusay na kasanayan sa pag-deploy ng AI sa produksyon  
 - Integrasyon at konfigurasyon ng Azure AI service
-- Pag-optimize ng gastos para sa AI workloads
-- Pagsasaayos ng mga isyu sa AI-specific deployment
+- Pag-optimize sa gastos para sa mga AI workload
+- Pagsasaayos ng mga isyu sa pag-deploy na kaugnay ng AI
 
-### Pangunahing Mga Layunin ng Pagkatuto
+### Pangunahing Mga Layunin sa Pagkatuto
 
-Sa pagtapos mo ng nakaayos na kurso na ito, ikaw ay:
-- **Magiging Dalubhasa sa AZD Fundamentals**: Pangunahing mga konsepto, pag-install, at konfigurasyon
-- **Magde-deploy ng AI Applications**: Gamitin ang AZD kasama ang mga serbisyo ng Microsoft Foundry
-- **Magpatupad ng Infrastructure as Code**: Pangasiwaan ang mga Azure resources gamit ang Bicep templates
-- **Mag-troubleshoot ng Mga Deployment**: Lutasin ang mga pangkaraniwan na isyu at mag-debug ng problema
-- **Mag-optimize para sa Produksyon**: Seguridad, scaling, monitoring, at pamamahala ng gastos
-- **Gumawa ng Multi-Agent Solutions**: Magdeploy ng komplikadong AI architectures
+Sa pagtatapos ng istrukturadong kursong ito, ikaw ay:
+- **Bihasa sa Mga Pangunahing Kaalaman ng AZD**: Pangunahing konsepto, pag-install, at konfigurasyon
+- **Mag-deploy ng AI Applications**: Gamitin ang AZD kasama ang mga serbisyo ng Microsoft Foundry
+- **Ipatupad ang Infrastructure as Code**: Pamahalaan ang mga Azure resources gamit ang mga Bicep template
+- **Ayusin ang mga Pag-deploy**: Lutasin ang mga karaniwang isyu at mag-debug ng mga problema
+- **Mag-optimize para sa Produksyon**: Seguridad, pag-scale, pagmamanman, at pamamahala ng gastos
+- **Gumawa ng Multi-Agent Solutions**: Mag-deploy ng masalimuot na AI architectures
 
-## 🎓 Karanasan sa Pagkatuto ng Workshop
+## 🎓 Karanasan sa Pagkatuto sa Workshop
 
-### Mga Flexible na Opsyon sa Paghahatid ng Pagkatuto
-Idinisenyo ang kursong ito upang suportahan ang parehong **sariling bilis na indibidwal na pagkatuto** at **pinamunuan na mga workshop session**, na nagbibigay-daan sa mga nag-aaral na magkaroon ng praktikal na karanasan sa AZD habang nagde-develop ng mga praktikal na kasanayan sa pamamagitan ng mga interactive na pagsasanay.
+### Mga Opsyon sa Flexible na Paraan ng Pagkatuto
+Ang kursong ito ay idinisenyo upang suportahan ang parehong **sariling bilis na indibidwal na pagkatuto** at **pinangasiwaang mga sesyon ng workshop**, na nagpapahintulot sa mga mag-aaral na magkaroon ng praktikal na karanasan gamit ang AZD habang nagpapaunlad ng mga kasanayang praktikal sa pamamagitan ng mga interactive na ehersisyo.
 
-#### 🚀 Mode ng Sariling Bilis na Pagkatuto
+#### 🚀 Paraan ng Sariling Bilis na Pagkatuto
 **Perpekto para sa mga indibidwal na developer at tuloy-tuloy na pagkatuto**
 
-**Mga Tampok:**
-- **Browser-Based Interface**: Kumpletong workshop gamit ang MkDocs na maa-access sa anumang web browser
-- **Integrasyon ng GitHub Codespaces**: One-click na development environment na may pre-configured na mga tool
-- **Interactive DevContainer Environment**: Walang kinakailangang lokal na setup - agad makapagsimula sa pag-code
-- **Pagsubaybay sa Pag-unlad**: May builtin checkpoints at validation exercises
-- **Suporta ng Komunidad**: Access sa mga Azure Discord channel para sa mga tanong at kolaborasyon
+**Mga Katangian:**
+- **Browser-Based Interface**: Kumpletong MkDocs-powered workshop na maa-access sa anumang web browser
+- **GitHub Codespaces Integration**: One-click na development environment na may pre-configured na mga tool
+- **Interactive DevContainer Environment**: Hindi kailangan ng lokal na setup - agad simulan ang pag-cocode
+- **Pagsubaybay sa Progreso**: May built-in checkpoints at mga ehersisyong pangberipikasyon
+- **Suporta ng Komunidad**: Access sa Azure Discord channels para sa mga tanong at kolaborasyon
 
-**Estruktura ng Pagkatuto:**
-- **Flexible na Oras**: Tapusin ang mga kabanata ayon sa sariling bilis sa loob ng mga araw o linggo
-- **Sistema ng Checkpoint**: I-validate ang pagkatuto bago sumulong sa mga komplikadong paksa
-- **Librarya ng mga Resources**: Komprehensibong dokumentasyon, mga halimbawa, at gabay sa troubleshooting
-- **Pagbuo ng Portfolio**: Gumawa ng mga puwedeng ideploy na proyekto para sa propesyonal na portfolio
+**Struktura ng Pagkatuto:**
+- **Flexible Timing**: Tapusin ang mga kabanata ayon sa sariling bilis sa loob ng mga araw o linggo
+- **Checkpoint System**: Beripikahin ang pagkatuto bago lumipat sa mas kumplikadong mga paksa
+- **Resource Library**: Komprehensibong dokumentasyon, mga halimbawa, at mga gabay sa pagsasaayos
+- **Pagbuo ng Portfolio**: Gumawa ng mga proyektong maaaring ideploy para sa propesyonal na mga portfolio
 
 **Pagsisimula (Sariling Bilis):**
 ```bash
@@ -55,117 +55,117 @@ cd azd-for-beginners/workshop
 # Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Pinamunuan na Workshop Sessions
-**Natatangi para sa corporate training, bootcamps, at mga institusyong pang-edukasyon**
+#### 🏛️ Pinangasiwaang Mga Sesyon ng Workshop
+**Perpekto para sa pagsasanay sa korporasyon, bootcamps, at mga institusyong pang-edukasyon**
 
 **Mga Opsyon sa Format ng Workshop:**
 
 **📚 Integrasyon sa Akademikong Kurso (8-12 linggo)**
-- **Mga Programa sa Unibersidad**: Semester-long na kurso na may lingguhang 2-oras na session
-- **Format na Bootcamp**: Masinsinang 3-5 araw na programa na may araw-araw na 6-8 oras na session
-- **Corporate Training**: Buwanang session ng team na may praktikal na implementasyon ng proyekto
-- **Balangkas ng Pagsusuri**: Na-grade na mga takdang-aralin, peer reviews, at pangwakas na proyekto
+- **Mga Programa ng Unibersidad**: Semester-long na kurso na may lingguhang 2-oras na mga sesyon
+- **Bootcamp Format**: Masigasig na 3-5 araw na programa na may araw-araw na 6-8 oras na sesyon
+- **Pagsasanay sa Korporasyon**: Buwanang sesyon ng koponan na may praktikal na pagpapatupad ng proyekto
+- **Balangkas sa Pagsusuri**: Mga graded na assignment, peer review, at mga panghuling proyekto
 
-**🚀 Masinsinang Workshop (1-3 araw)**
+**🚀 Masigasig na Workshop (1-3 araw)**
 - **Araw 1**: Pundasyon + AI Development (Mga Kabanata 1-2) - 6 na oras
 - **Araw 2**: Konfigurasyon + Infrastructure (Mga Kabanata 3-4) - 6 na oras  
-- **Araw 3**: Advanced Patterns + Produksyon (Mga Kabanata 5-8) - 8 na oras
+- **Araw 3**: Mga Advanced na Pattern + Produksyon (Mga Kabanata 5-8) - 8 na oras
 - **Follow-up**: Opsyonal na 2-linggong mentorship para sa pagtatapos ng proyekto
 
 **⚡ Executive Briefing (4-6 na oras)**
-- **Strategic Overview**: AZD value proposition at epekto sa negosyo (1 oras)
-- **Hands-On Demo**: Deploy ng AI application mula simula hanggang dulo (2 oras)
-- **Architecture Review**: Mga enterprise pattern at pamamahala (1 oras)
-- **Implementation Planning**: Estratehiya ng pag-adopt sa organisasyon (1-2 oras)
+- **Strategic Overview**: Halaga ng AZD at epekto sa negosyo (1 oras)
+- **Hands-On Demo**: Buong pag-deploy ng AI application (2 oras)
+- **Review sa Arkitektura**: Mga pattern ng enterprise at pamamahala (1 oras)
+- **Plano sa Pagpapatupad**: Estratehiya para sa pag-aampon ng organisasyon (1-2 oras)
 
-#### 🛠️ Pamamaraan sa Pagkatuto ng Workshop
-**Discovery → Deployment → Customization na lapit para sa hands-on na pagbuo ng kasanayan**
+#### 🛠️ Pamamaraan sa Pagkatuto sa Workshop
+**Discovery → Deployment → Customization na paraan para sa praktikal na pag-develop ng kasanayan**
 
 **Phase 1: Discovery (45 minuto)**
-- **Pagsusuri ng Template**: Suriin ang mga Microsoft Foundry template at serbisyo
-- **Pagsusuri ng Arkitektura**: Unawain ang multi-agent na mga pattern at mga estratehiya sa pag-deploy
-- **Pagtatasa ng Mga Pangangailangan**: Tukuyin ang mga pangangailangan at limitasyon ng organisasyon
-- **Pagsasaayos ng Kapaligiran**: I-configure ang development environment at mga Azure resource
+- **Paggalugad ng Template**: Suriin ang Microsoft Foundry templates at serbisyo
+- **Pagsusuri ng Arkitektura**: Unawain ang mga multi-agent na pattern at mga estratehiya sa pag-deploy
+- **Pagtasa ng Mga Pangangailangan**: Tukuyin ang mga pangangailangan at limitasyon ng organisasyon
+- **Pagsasaayos ng Kapaligiran**: I-configure ang development environment at mga Azure resources
 
 **Phase 2: Deployment (2 oras)**
-- **Pinamunuan na Implementasyon**: Hakbang-hakbang na pag-deploy ng AI applications gamit ang AZD
-- **Konfigurasyon ng Serbisyo**: I-configure ang mga Azure AI services, endpoints, at authentication
-- **Pagpapatupad ng Seguridad**: Ilapat ang enterprise security patterns at access controls
-- **Validation Testing**: Suriin ang mga deployment at mag-troubleshoot ng mga karaniwang isyu
+- **Gabay sa Pagpapatupad**: Sunod-sunod na pag-deploy ng mga AI application gamit ang AZD
+- **Konfigurasyon ng Serbisyo**: I-configure ang Azure AI services, endpoints, at authentication
+- **Pagpapatupad ng Seguridad**: Ipatupad ang mga pattern ng seguridad ng enterprise at mga access control
+- **Pagsubok sa Beripikasyon**: Suriin ang mga pag-deploy at ayusin ang mga karaniwang isyu
 
 **Phase 3: Customization (45 minuto)**
-- **Pagbabago ng Aplikasyon**: Iangkop ang mga template para sa mga partikular na kaso ng paggamit at pangangailangan
-- **Pag-optimize para sa Produksyon**: Ilapat ang monitoring, pamamahala ng gastos, at mga estratehiya sa scaling
-- **Advanced na mga Pattern**: Tuklasin ang multi-agent coordination at komplikadong mga arkitektura
-- **Pagpaplano ng Susunod na Hakbang**: Tukuyin ang landas ng pagkatuto para sa patuloy na pagbuo ng kasanayan
+- **Pagbabago ng Application**: I-adapt ang mga template para sa mga partikular na kaso at pangangailangan
+- **Pag-optimize para sa Produksyon**: Ipatupad ang pagmamanman, pamamahala ng gastos, at mga estratehiya sa pag-scale
+- **Mga Advanced na Pattern**: Suriin ang koordinasyon ng multi-agent at kumplikadong mga arkitektura
+- **Plano para sa Susunod na Hakbang**: Tukuyin ang landas ng pagkatuto para sa patuloy na paglinang ng kasanayan
 
 #### 🎯 Mga Kinalabasan sa Pagkatuto ng Workshop
-**Masusukat na kasanayan na nabuo sa pamamagitan ng hands-on practice**
+**Nasusukat na kasanayang nadevelop sa pamamagitan ng hands-on na pagsasanay**
 
-**Mga Teknikal na Kasanayan:**
-- **Mag-deploy ng AI Applications sa Produksyon**: Matagumpay na i-deploy at i-configure ang mga AI-powered na solusyon
-- **Kahusayan sa Infrastructure as Code**: Gumawa at pamahalaan ang custom na Bicep templates
-- **Multi-Agent Architecture**: Magpatupad ng magkakatugmang AI agent solutions
-- **Kahandaan sa Produksyon**: Ilapat ang seguridad, monitoring, at mga pattern ng pamamahala
-- **Ekspertis sa Troubleshooting**: Malaya na lutasin ang mga isyu sa deployment at konfigurasyon
+**Teknikal na Kasanayan:**
+- **Mag-deploy ng Production AI Applications**: Matagumpay na mag-deploy at mag-configure ng mga solusyong pinapagana ng AI
+- **Kahusayan sa Infrastructure as Code**: Gumawa at pamahalaan ang mga custom na Bicep template
+- **Multi-Agent Architecture**: Magpatupad ng mga koordinadong AI agent solution
+- **Kahandaan sa Produksyon**: Ipatupad ang mga pattern sa seguridad, pagmamanman, at pamamahala
+- **Ekspertong Pagsasaayos ng Problema**: Malaya na lutasin ang mga isyu sa pag-deploy at konfigurasyon
 
-**Mga Propesyonal na Kasanayan:**
-- **Pamumuno sa Proyekto**: Pamunuan ang mga teknikal na koponan sa mga cloud deployment initiative
-- **Disenyo ng Arkitektura**: Magdisenyo ng scalable at cost-effective na mga Azure solution
-- **Paglilipat ng Kaalaman**: Sanayin at mentor ang mga kasamahan sa pinakamahusay na gawi sa AZD
-- **Strategic Planning**: Maimpluwensiyahan ang mga estratehiya sa pag-adopt ng cloud ng organisasyon
+**Propesyonal na Kasanayan:**
+- **Pangunguna sa Proyekto**: Pamunuan ang mga teknikal na koponan sa mga inisyatibo sa pag-deploy sa ulap
+- **Disenyo ng Arkitektura**: Disenyuhin ang mga scalable at cost-effective na solusyon sa Azure
+- **Paglilipat ng Kaalaman**: Sanayin at mentor ang mga kasamahan sa mga pinakamahusay na kasanayan ng AZD
+- **Strategic Planning**: Impluwensyahan ang mga estratehiyang adopsyon sa ulap ng organisasyon
 
-#### 📋 Mga Resources at Materyales para sa Workshop
-**Komprehensibong toolkit para sa mga facilitator at mga nag-aaral**
+#### 📋 Mga Kagamitan at Materyales sa Workshop
+**Komprehensibong toolkit para sa mga facilitator at mag-aaral**
 
 **Para sa mga Facilitator:**
-- **Gabayan ng Instruktor**: [Workshop Overview](workshop/README.md) - Patnubay sa pagpaplano at paghahatid ng session
-- **Mga Materyales sa Presentasyon**: Mga slide deck, mga diagram ng arkitektura, at mga demo script
-- **Mga Tool para sa Pagsusuri**: Praktikal na mga ehersisyo, pagsusuri sa kaalaman, at mga rubrik ng ebalwasyon
-- **Teknikal na Setup**: Konfigurasyon ng kapaligiran, gabay sa troubleshooting, at mga backup plan
+- **Instructor Guide**: [Workshop Overview](workshop/README.md) - Gabay sa pagpaplano at paghahatid ng sesyon
+- **Mga Materyal sa Presentasyon**: Slide decks, mga diagram ng arkitektura, at script ng demo
+- **Mga Tool sa Pagsusuri**: Praktikal na mga ehersisyo, kaalaman sa pag-check, at mga rubric sa pagtatasa
+- **Teknikal na Setup**: Konfigurasyon ng kapaligiran, mga gabay sa troubleshooting, at mga backup plan
 
-**Para sa Mga Nag-aaral:**
-- **Interactive na Kapaligiran ng Workshop**: [Workshop Materials](workshop/README.md) - Browser-based na learning platform
-- **Hakbang-hakbang na Mga Tagubilin**: [Guided Exercises](../../workshop/docs/instructions) - Detalyadong paglalakad sa implementasyon  
-- **Dokumentasyong Sanggunian**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Deep dives na nakatuon sa AI
-- **Mga Resource ng Komunidad**: Azure Discord channel, diskusyon sa GitHub, at expert support
+**Para sa mga Mag-aaral:**
+- **Interactive Workshop Environment**: [Workshop Materials](workshop/README.md) - Browser-based na platform para sa pagkatuto
+- **Step-by-Step na Mga Instruksyon**: [Guided Exercises](../../workshop/docs/instructions) - Detalyadong walkthrough ng pagpapatupad  
+- **Reference Documentation**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Malalalim na pagtalakay tungkol sa AI
+- **Mga Mapagkukunan ng Komunidad**: Azure Discord channels, talakayan sa GitHub, at suporta mula sa eksperto
 
-#### 🏢 Implementasyon ng Workshop sa Enterprise
-**Mga estratehiya sa deployment at pagsasanay sa organisasyon**
+#### 🏢 Implementasyon ng Enterprise Workshop
+**Mga estratehiya sa pag-deploy at pagsasanay ng organisasyon**
 
-**Mga Programa sa Corporate Training:**
-- **Onboarding ng Developer**: Orientation para sa bagong empleyado gamit ang mga pangunahing kaalaman sa AZD (2-4 na linggo)
-- **Upskilling ng Team**: Quarterly workshops para sa umiiral na mga development team (1-2 araw)
-- **Pagsusuri ng Arkitektura**: Buwanang session para sa mga senior engineer at arkitekto (4 na oras)
-- **Leadership Briefings**: Executive workshops para sa mga teknikal na tagapagpasya (kalahating araw)
+**Mga Programa sa Pagsasanay ng Korporasyon:**
+- **Onboarding ng Developer**: Oryentasyon para sa bagong hire gamit ang mga pangunahing kaalaman sa AZD (2-4 na linggo)
+- **Pagpapalawak ng Kasanayan ng Koponan**: Quarterly workshops para sa mga umiiral na koponan sa development (1-2 araw)
+- **Review ng Arkitektura**: Buwanang sesyon para sa mga senior engineer at arkitekto (4 na oras)
+- **Leadership Briefings**: Executive workshops para sa mga tagagawa ng teknikal na desisyon (kalahating araw)
 
 **Suporta sa Implementasyon:**
-- **Custom Workshop Design**: Nilalapat na nilalaman para sa mga partikular na pangangailangan ng organisasyon
-- **Pamamahala ng Pilot Program**: Nakaayos na rollout na may mga sukatan ng tagumpay at mga loop ng feedback  
-- **Tuloy-tuloy na Mentorship**: Suporta pagkatapos ng workshop para sa implementasyon ng proyekto
-- **Pagbuo ng Komunidad**: Mga internal na Azure AI developer communities at pagbabahagi ng kaalaman
+- **Custom Workshop Design**: Nilalaman na iniangkop para sa mga tiyak na pangangailangan ng organisasyon
+- **Pamamahala ng Pilot Program**: Istrakturang rollout na may mga sukatan ng tagumpay at feedback loop  
+- **Patuloy na Mentorship**: Suporta matapos ang workshop para sa pagpapatupad ng proyekto
+- **Pagbuo ng Komunidad**: Internal na mga komunidad ng Azure AI developer at pagbabahagi ng kaalaman
 
 **Mga Sukatan ng Tagumpay:**
-- **Pagkuha ng Kasanayan**: Mga pre/post na pagsusuri na sumusukat sa paglago ng teknikal na kakayahan
-- **Tagumpay sa Deployment**: Porsyento ng mga kalahok na matagumpay na nagde-deploy ng mga aplikasyon sa produksyon
-- **Oras upang Maging Produktibo**: Pinababang oras ng onboarding para sa mga bagong Azure AI na proyekto
-- **Pagtipid ng Kaalaman**: Follow-up na pagsusuri sa 3-6 na buwan pagkatapos ng workshop
+- **Pagkuha ng Kasanayan**: Mga pre/post assessment na sumusukat ng paglago sa teknikal na kakayahan
+- **Tagumpay sa Pag-deploy**: Porsyento ng mga kalahok na matagumpay na nakakapag-deploy ng mga aplikasyon sa produksyon
+- **Oras para sa Produktibidad**: Pinabuting oras ng onboarding para sa mga bagong proyekto sa Azure AI
+- **Pagpapanatili ng Kaalaman**: Mga follow-up na pagsusuri 3-6 na buwan pagkatapos ng workshop
 
-## 8-Kabanatang Estruktura ng Pagkatuto
+## 8-Kabanatang Balangkas ng Pagkatuto
 
 ### Kabanata 1: Pundasyon at Mabilis na Pagsisimula (30-45 minuto) 🌱
 **Mga Kinakailangan**: Azure subscription, pangunahing kaalaman sa command line  
-**Kasukdulan**: ⭐
+**Kumplikado**: ⭐
 
-#### Ano ang Iyong Matututunan
-- Pag-unawa sa mga pundasyon ng Azure Developer CLI
+#### Ano ang Matututuhan Mo
+- Pag-unawa sa mga pangunahing kaalaman ng Azure Developer CLI
 - Pag-install ng AZD sa iyong platform  
-- Iyong unang matagumpay na deployment
-- Mga pangunahing konsepto at terminolohiya
+- Ang iyong unang matagumpay na pag-deploy
+- Pangunahing mga konsepto at terminolohiya
 
 #### Mga Mapagkukunan sa Pagkatuto
-- [AZD Basics](docs/chapter-01-foundation/azd-basics.md) - Mga pangunahing konsepto
-- [Installation & Setup](docs/chapter-01-foundation/installation.md) - Mga gabay ayon sa platform
+- [AZD Basics](docs/chapter-01-foundation/azd-basics.md) - Pangunahing mga konsepto
+- [Installation & Setup](docs/chapter-01-foundation/installation.md) - Mga gabay na tiyak sa platform
 - [Your First Project](docs/chapter-01-foundation/first-project.md) - Hands-on na tutorial
 - [Command Cheat Sheet](resources/cheat-sheet.md) - Mabilisang sanggunian
 
@@ -174,383 +174,387 @@ Matagumpay na mag-deploy ng isang simpleng web application sa Azure gamit ang AZ
 
 ---
 
-### Kabanata 2: AI-First Development (1-2 oras) 🤖
+### Kabanata 2: AI-First na Pag-develop (4-5 oras kasama ang workshop) 🤖
 **Mga Kinakailangan**: Nakumpleto ang Kabanata 1  
-**Kasukdulan**: ⭐⭐
+**Kumplikado**: ⭐⭐
 
-#### Ano ang Iyong Matututunan
-- Integrasyon ng Microsoft Foundry sa AZD
-- Pag-deploy ng mga AI-powered na aplikasyon
-- Pag-unawa sa mga konfigurasyon ng AI service
+#### Ano ang Matututuhan Mo
+- Integrasyon ng Microsoft Foundry gamit ang AZD
+- GA `microsoft.foundry` bundle installation at hosted-agent code deployment
+- Pagsubok ng Local Agent Inspector at hiwalay na mga dataset/rubric sa ebalwasyon
+- Pag-deploy ng mga AI-powered application
+- Pag-unawa sa konfigurasyon ng AI service
 - Mga pattern ng RAG (Retrieval-Augmented Generation)
 
 #### Mga Mapagkukunan sa Pagkatuto
 - [Microsoft Foundry Integration](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [Hosted-Agent Walkthrough (GA)](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) - Simulan, repasuhin ang `azure.yaml`, mag-provision, subukan lokal, mag-deploy, suriin, at maglinis
+- [AI Agents Guide](docs/chapter-02-ai-development/agents.md)
 - [AI Model Deployment](docs/chapter-02-ai-development/ai-model-deployment.md)
-- [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - **BAGO**: Komprehensibong 2-3 oras na hands-on lab
-- [Interactive Workshop Guide](workshop/README.md) - **BAGO**: Browser-based workshop gamit ang MkDocs preview
+- [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - **BAGO**: Komprehensibong 2-3 oras na hands-on na lab
+- [Interactive Workshop Guide](workshop/README.md) - **BAGO**: Browser-based workshop na may MkDocs preview
 - [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
-- [Workshop Instructions](../../workshop/docs/instructions) - **BAGO**: Hakbang-hakbang na pinamunuan na mga pagsasanay
+- [Workshop Instructions](../../workshop/docs/instructions) - **BAGO**: Sunod-sunod na mga gabay na ehersisyo
 
 #### Praktikal na Kinalabasan
-Mag-deploy at mag-configure ng AI-powered chat application na may mga kakayahan ng RAG
+Subukan ang isang hosted agent lokal at sa Foundry gamit ang GA bundle, repasuhin ang resulta ng ebalwasyon, at ihinlay ang paglilinis ng mga bagong proyekto at mga ginamit na muli. Ang hiwalay na RAG/workshop path ay sumasaklaw sa pag-configure ng AI-powered chat application.
 
 #### Landas ng Pagkatuto sa Workshop (Opsyonal na Pagpapahusay)
-**BAGONG Interactive Experience**: [Complete Workshop Guide](workshop/README.md)
+**BAGONG Interactive na Karanasan**: [Kompletong Gabay sa Workshop](workshop/README.md)
 1. **Discovery** (30 mins): Pagpili at pagsusuri ng template
-2. **Deployment** (45 mins): Mag-deploy at i-validate ang functionality ng AI template  
+2. **Deployment** (45 mins): Mag-deploy at beripikahin ang AI template functionality  
 3. **Deconstruction** (30 mins): Unawain ang arkitektura at mga bahagi ng template
 4. **Configuration** (30 mins): I-customize ang mga setting at parameter
-5. **Customization** (45 mins): Baguhin at ulitin para maging iyo ito
-6. **Teardown** (15 mins): Linisin ang mga resource at unawain ang lifecycle
+5. **Customization** (45 mins): Baguhin at ulitin upang maging sa'yo ito
+6. **Teardown** (15 mins): Linisin ang mga resources at unawain ang lifecycle
 7. **Wrap-up** (15 mins): Mga susunod na hakbang at advanced na landas ng pagkatuto
 
 ---
 
 ### Kabanata 3: Konfigurasyon at Authentication (45-60 minuto) ⚙️
 **Mga Kinakailangan**: Nakumpleto ang Kabanata 1  
-**Kasukdulan**: ⭐⭐
+**Kumplikado**: ⭐⭐
 
-#### Ano ang Iyong Matututunan
-- Pag-configure at pamamahala ng kapaligiran
-- Pinakamahusay na gawi sa authentication at seguridad
-- Pagpapangalan at pag-oorganisa ng resource
-- Mga deployment sa multi-environment
+#### Ano ang Matututuhan Mo
+- Konfigurasyon at pamamahala ng kapaligiran
+- Mga pinakamahuhusay na kasanayan sa authentication at seguridad
+- Pagpapangalan at pagsasaayos ng mga resources
+- Mga pag-deploy sa multi-environment
 
 #### Mga Mapagkukunan sa Pagkatuto
 - [Configuration Guide](docs/chapter-03-configuration/configuration.md) - Pagsasaayos ng kapaligiran
 - [Authentication & Security Patterns](docs/chapter-03-configuration/authsecurity.md) - Managed identity at Key Vault integration
-- Mga halimbawa sa multi-environment
+- Mga halimbawa ng multi-environment
 
 #### Praktikal na Kinalabasan
 Pamahalaan ang maraming kapaligiran na may tamang authentication at seguridad
 
 ---
 
-### Kabanata 4: Infrastructure as Code at Deployment (1-1.5 oras) 🏗️
-**Mga Kinakailangan**: Nakumpleto ang Mga Kabanata 1-3  
-**Kasukdulan**: ⭐⭐⭐
+### Kabanata 4: Infrastructure as Code at Pag-deploy (1-1.5 oras) 🏗️
+**Mga Kinakailangan**: Nakumpleto ang mga Kabanata 1-3  
+**Kumplikado**: ⭐⭐⭐
 
-#### Ano ang Iyong Matututunan
-- Mga advanced na pattern sa deployment
+#### Ano ang Matututuhan Mo
+- Mga advanced na pattern sa pag-deploy
 - Infrastructure as Code gamit ang Bicep
 - Mga estratehiya sa provisioning ng resources
-- Gumawa ng custom na template
+- Paggawa ng custom template
 
-- Pagdeploy ng containerized application gamit ang Azure Container Apps at AZD
+- Pag-deploy ng containerized application gamit ang Azure Container Apps at AZD
 
 #### Mga Mapagkukunan sa Pagkatuto
-- [Deployment Guide](docs/chapter-04-infrastructure/deployment-guide.md) - Kumpletong workflow
-- [Provisioning Resources](docs/chapter-04-infrastructure/provisioning.md) - Pamamahala ng resource
+- [Deployment Guide](docs/chapter-04-infrastructure/deployment-guide.md) - Kumpletong mga workflow
+- [Provisioning Resources](docs/chapter-04-infrastructure/provisioning.md) - Pamamahala ng resources
 - Mga halimbawa ng container at microservices
-- [Container App Examples](examples/container-app/README.md) - Mabilisang pagsisimula, produksyon, at advanced na mga pattern ng deployment
+- [Container App Examples](examples/container-app/README.md) - Mabilisang pagsisimula, produksyon, at advanced na mga pattern sa pag-deploy
 
 #### Praktikal na Kinalabasan
-Mag-deploy ng komplikadong multi-service na mga aplikasyon gamit ang custom na mga template ng imprastraktura
+Mag-deploy ng masalimuot na multi-service application gamit ang mga custom na infrastructure template
 
 ---
 
 ### Kabanata 5: Multi-Agent AI Solutions (2-3 oras) 🤖🤖
-**Mga Kinakailangan**: Nakumpleto ang Mga Kabanata 1-2  
-**Kasukdulan**: ⭐⭐⭐⭐
+**Mga Kinakailangan**: Nakumpleto ang mga Kabanata 1-2  
+**Kumplikado**: ⭐⭐⭐⭐
 
-#### Ano ang Iyong Matututunan
+#### Ano ang Matututuhan Mo
 - Mga pattern ng multi-agent architecture
-- Pag-oorganisa at koordinasyon ng mga agent
-- Mga production-ready na AI deployment
-- Implementasyon ng Customer at Inventory agent
+- Orkestrasyon at koordinasyon ng mga agent
+- Mga AI deployment na handa na para sa produksyon
+- Mga implementasyon ng Customer at Inventory agent
 
-- Integrasyon ng containerized microservices bilang bahagi ng agent-based na mga solusyon
+- Integrasyon ng containerized microservices bilang bahagi ng mga agent-based solution
 
 #### Mga Mapagkukunan sa Pagkatuto
-- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Blueprint ng arkitektura, hindi kumpletong aplikasyon
-- [ARM Template Package](../../examples/retail-multiagent-arm-template) - Scaffold ng imprastraktura na may mga kinakailangang prerequisites
+- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Blueprint ng arkitektura, hindi isang kompletong aplikasyon
+- [ARM Template Package](../../examples/retail-multiagent-arm-template) - Scaffold ng infrastructure na may mga kinakailangang implementasyon
 - Mga pattern ng koordinasyon ng multi-agent
-- [Microservices Architecture Example](../../examples/container-app/microservices) - Service-to-service communication, async messaging, at produksyon na deployment
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Komunikasyon mula serbisyo-sa-serbisyo, async messaging, at pag-deploy sa produksyon
 
 #### Praktikal na Kinalabasan
-Disenyo ng multi-agent AI solution at tukuyin ang implementasyon ng aplikasyon, validation, at operasyon na mga gawain na kailangan bukod sa provisioning ng imprastraktura
+Disenyuhin ang isang multi-agent AI solution at tukuyin ang kinakailangang implementasyon ng aplikasyon, beripikasyon, at operasyon maliban sa provisioning ng infrastructure
 
 ---
 
-### Kabanata 6: Pre-Deployment Validation at Planning (1 oras) 🔍
+### Kabanata 6: Pre-Deployment Validation at Pagpaplano (1 oras) 🔍
 **Mga Kinakailangan**: Nakumpleto ang Kabanata 4  
-**Kasukdulan**: ⭐⭐
-
-#### Ano ang Iyong Matututunan
-- Pagpaplano ng kapasidad at validation ng resource
-- Mga estratehiya sa pagpili ng SKU
-- Mga pre-flight check at automation
-- Pagpaplano para sa pag-optimize ng gastos
-
-#### Mga Mapagkukunan sa Pagkatuto
-- [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) - Validation ng resource
-- [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) - Mga cost-effective na pagpipilian
-- [Pre-flight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Mga automated script
-- [Application Insights Integration](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring at observability
-- [Multi-Agent Coordination Patterns](docs/chapter-06-pre-deployment/coordination-patterns.md) - Mga estratehiya sa pag-oorganisa ng agent
-
-#### Praktikal na Kinalabasan
-I-validate at i-optimize ang mga deployment bago isagawa
-
----
-
-### Kabanata 7: Troubleshooting at Debugging (1-1.5 oras) 🔧
-**Mga Kinakailangan**: Anumang natapos na kabanata sa deployment  
 **Kumplikado**: ⭐⭐
 
-#### Ano ang Iyong Malalaman
-- Sistematikong mga pamamaraan sa pag-debug
-- Karaniwang mga isyu at mga solusyon
-- AI-tiyak na troubleshooting
+#### Ano ang Matututuhan Mo
+- Pagpaplano sa kapasidad at beripikasyon ng resources
+- Mga estratehiya sa pagpili ng SKU
+- Pre-flight checks at automation
+- Pagpaplano sa pag-optimize ng gastos
+
+#### Mga Mapagkukunan sa Pagkatuto
+- [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) - Beripikasyon ng resources
+- [Pagpili ng SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Mga cost-effective na pagpipilian
+- [Mga Pre-flight na Pagsusuri](docs/chapter-06-pre-deployment/preflight-checks.md) - Mga automated na script
+- [Integrasyon ng Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring at obserbabilidad
+- [Mga Pattern ng Multi-Agent Coordination](docs/chapter-06-pre-deployment/coordination-patterns.md) - Mga estratehiya ng koordinasyon ng ahente
+
+#### Praktikal na Kinalabasan
+Patunayan at i-optimize ang mga deployment bago ang pagpapatupad
+
+---
+
+### Kabanata 7: Troubleshooting at Debugging (1-1.5 na oras) 🔧
+**Mga Kinakailangan**: Nakumpletong anumang kabanata sa deployment  
+**Kompleksidad**: ⭐⭐
+
+#### Mga Matututuhan Mo
+- Sistematikong mga pamamaraan sa debugging
+- Mga karaniwang isyu at mga solusyon
+- Pag-troubleshoot na nakatutok sa AI
 - Pag-optimize ng pagganap
 
 #### Mga Mapagkukunan sa Pag-aaral
-- [Karaniwang mga Isyu](docs/chapter-07-troubleshooting/common-issues.md) - FAQ at mga solusyon
-- [Gabayan sa Debugging](docs/chapter-07-troubleshooting/debugging.md) - Mga hakbang-hakbang na estratehiya
-- [AI-Tiyak na Troubleshooting](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Mga problema sa AI service
+- [Mga Karaniwang Isyu](docs/chapter-07-troubleshooting/common-issues.md) - FAQ at mga solusyon
+- [Gabay sa Debugging](docs/chapter-07-troubleshooting/debugging.md) - Mga hakbang-hakbang na estratehiya
+- [AI-Specific Troubleshooting](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Mga problema sa serbisyo ng AI
 
 #### Praktikal na Kinalabasan
-Malaya na mag-diagnose at lutasin ang mga karaniwang isyu sa deployment
+Makapag-diagnose at makapag-ayos ng mga karaniwang isyu sa deployment nang mag-isa
 
 ---
 
-### Kabanata 8: Mga Pattern sa Produksyon at Enterprise (2-3 oras) 🏢
-**Mga Kinakailangan**: Natapos ang mga Kabanata 1-4  
-**Kumplikado**: ⭐⭐⭐⭐
+### Kabanata 8: Mga Pattern sa Produksyon at Enterprise (2-3 na oras) 🏢
+**Mga Kinakailangan**: Nakumpletong mga Kabanata 1-4  
+**Kompleksidad**: ⭐⭐⭐⭐
 
-#### Ano ang Iyong Malalaman
+#### Mga Matututuhan Mo
 - Mga estratehiya sa production deployment
 - Mga pattern ng seguridad sa enterprise
-- Pagsubaybay at pag-optimize ng gastos
+- Monitoring at pag-optimize ng gastos
 - Scalability at pamamahala
 
-- Pinakamahuhusay na kasanayan para sa production container app deployments (seguridad, monitoring, gastos, CI/CD)
+- Pinakamahuhusay na kasanayan para sa production container app deployment (seguridad, monitoring, gastos, CI/CD)
 
 #### Mga Mapagkukunan sa Pag-aaral
-- [Pinakamahuhusay na Praktis sa Produksyon ng AI](docs/chapter-08-production/production-ai-practices.md) - Mga pattern ng enterprise
+- [Pinakamahuhusay na Kasanayan sa Production AI](docs/chapter-08-production/production-ai-practices.md) - Mga pattern ng enterprise
 - Mga halimbawa ng microservices at enterprise
-- Mga framework para sa pagsubaybay at pamamahala
-- [Halimbawa ng Microservices Architecture](../../examples/container-app/microservices) - Blue-green/canary deployment, distributed tracing, at pag-optimize ng gastos
+- Mga framework para sa monitoring at pamamahala
+- [Halimbawa ng Arkitektura ng Microservices](../../examples/container-app/microservices) - Blue-green/canary deployment, distributed tracing, at pag-optimize ng gastos
 
 #### Praktikal na Kinalabasan
-Mag-deploy ng mga aplikasyon na handa para sa enterprise na may buong mga kakayahan sa produksyon
+Mag-deploy ng mga aplikasyong handa na para sa enterprise na may buong kakayahan sa produksyon
 
 ---
 
-## Pag-unlad ng Pagkatuto at Kumplikado
+## Progresyon ng Pagkatuto at Kompleksidad
 
-### Progressive na Pagbuo ng Kasanayan
+### Pagsusulong ng Kasanayan
 
-- **🌱 Mga Baguhan**: Magsimula sa Kabanata 1 (Pundasyon) → Kabanata 2 (Pag-unlad ng AI)
-- **🔧 Intermediate**: Mga Kabanata 3-4 (Configuration at Infrastructure) → Kabanata 6 (Validation)
+- **🌱 Mga Baguhan**: Magsimula sa Kabanata 1 (Pundasyon) → Kabanata 2 (AI Development)
+- **🔧 Intermediate**: Mga Kabanata 3-4 (Configuration & Infrastructure) → Kabanata 6 (Validation)
 - **🚀 Advanced**: Kabanata 5 (Multi-Agent Solutions) → Kabanata 7 (Troubleshooting)
-- **🏢 Enterprise**: Kumpletuhin ang lahat ng kabanata, pagtuunan ng pansin ang Kabanata 8 (Mga Pattern sa Produksyon)
+- **🏢 Enterprise**: Kumpletuhin ang lahat ng kabanata, magpokus sa Kabanata 8 (Production Patterns)
 
-- **Daan ng Container App**: Mga Kabanata 4 (Containerized deployment), 5 (Microservices integration), 8 (Pinakamahuhusay na praktis sa produksyon)
+- **Daan ng Container App**: Mga Kabanata 4 (Containerized deployment), 5 (Microservices integration), 8 (Pinakamahuhusay sa Produksyon)
 
-### Mga Tagapagpahiwatig ng Kumplikado
+### Mga Palatandaan ng Kompleksidad
 
-- **⭐ Pangunahing Antas**: Isang konsepto, gabay na tutorials, 30-60 minuto
-- **⭐⭐ Intermediate**: Maramihang konsepto, hands-on na pagsasanay, 1-2 oras  
-- **⭐⭐⭐ Advanced**: Mga kumplikadong arkitektura, pasadyang solusyon, 1-3 oras
-- **⭐⭐⭐⭐ Eksperto**: Mga sistema sa produksyon, mga pattern ng enterprise, 2-4 na oras
+- **⭐ Basic**: Isa lamang ang konsepto, gabay na mga tutorial, 30-60 minuto
+- **⭐⭐ Intermediate**: Maramihang mga konsepto, gawa-gawang praktis, 1-2 na oras  
+- **⭐⭐⭐ Advanced**: Masalimuot na mga arkitektura, pasadyang mga solusyon, 1-3 na oras
+- **⭐⭐⭐⭐ Expert**: Mga production system, mga pattern sa enterprise, 2-4 na oras
 
-### Mga Flexible na Daan sa Pag-aaral
+### Flexible na mga Daan sa Pagkatuto
 
-#### 🎯 Mabilisang Landas ng AI Developer (4-6 na oras)
-1. **Kabanata 1**: Pundasyon at Mabilisang Pagsisimula (45 minuto)
+#### 🎯 AI Developer Fast Track (4-6 na oras)
+1. **Kabanata 1**: Pundasyon at Quick Start (45 minuto)
 2. **Kabanata 2**: AI-First Development (2 oras)  
 3. **Kabanata 5**: Multi-Agent AI Solutions (3 oras)
-4. **Kabanata 8**: Pinakamahuhusay na Praktis sa Produksyon ng AI (1 oras)
+4. **Kabanata 8**: Pinakamahuhusay na Kasanayan sa Production AI (1 oras)
 
-#### 🛠️ Landas ng Espesyalista sa Infrastructure (5-7 na oras)
-1. **Kabanata 1**: Pundasyon at Mabilisang Pagsisimula (45 minuto)
+#### 🛠️ Daan ng Infrastructure Specialist (5-7 na oras)
+1. **Kabanata 1**: Pundasyon at Quick Start (45 minuto)
 2. **Kabanata 3**: Configuration at Authentication (1 oras)
-3. **Kabanata 4**: Infrastructure bilang Code at Deployment (1.5 na oras)
-4. **Kabanata 6**: Pre-Deployment Validation at Pagpaplano (1 oras)
+3. **Kabanata 4**: Infrastructure as Code at Deployment (1.5 na oras)
+4. **Kabanata 6**: Pre-Deployment Validation at Planning (1 oras)
 5. **Kabanata 7**: Troubleshooting at Debugging (1.5 na oras)
 6. **Kabanata 8**: Production at Enterprise Patterns (2 oras)
 
-#### 🎓 Kumpletong Paglalakbay sa Pag-aaral (8-12 na oras)
-Sunud-sunod na pagtatapos ng lahat ng 8 kabanata na may hands-on na pagsasanay at pag-validate
+#### 🎓 Kumpletong Paglalakbay sa Pagkatuto (8-12 na oras)
+Sunud-sunod na pagkumpleto ng lahat ng 8 kabanata na may gawa-gawang praktis at pagpapatunay
 
-## Balangkas ng Pagtatapos ng Kurso
+## Balangkas ng Pagkumpleto ng Kurso
 
 ### Pagpapatunay ng Kaalaman
-- **Mga Checkpoint sa Kabanata**: Mga praktikal na gawain na may nasusukat na kinalabasan
-- **Hands-On na Pagpapatunay**: Mag-deploy ng mga gumaganang solusyon para sa bawat kabanata
-- **Pagsubaybay sa Pag-unlad**: Mga visual na tagapagpahiwatig at badges ng pagtatapos
-- **Pagpapatunay ng Komunidad**: Ibahagi ang mga karanasan sa mga Azure Discord channel
+- **Mga Checkpoint sa Kabanata**: Mga praktikal na pagsasanay na may masukat na kinalabasan
+- **Pagpapatunay na Hands-On**: Mag-deploy ng gumaganang mga solusyon para sa bawat kabanata
+- **Pagsubaybay ng Progreso**: Mga visual na palatandaan at badge ng pagkumpleto
+- **Pagpapatunay ng Komunidad**: Ibahagi ang mga karanasan sa mga channel ng Azure Discord
 
-### Pagtatasa ng Kinalabasan ng Pagkatuto
+### Pagtatasa ng Mga Kinalabasang Pagkatuto
 
-#### Pagtatapos ng Kabanata 1-2 (Pundasyon + AI)
-- ✅ Mag-deploy ng pangunahing web application gamit ang AZD
-- ✅ Mag-deploy ng AI-powered na chat application gamit ang RAG
-- ✅ Maunawaan ang mga pangunahing konsepto ng AZD at integrasyon ng AI
+#### Pagkumpleto ng Kabanata 1-2 (Pundasyon + AI)
+- ✅ Mag-deploy ng simpleng web application gamit ang AZD
+- ✅ Mag-deploy ng AI-powered chat application gamit ang RAG
+- ✅ Unawain ang mga pangunahing konsepto ng AZD at integrasyon ng AI
 
-#### Pagtatapos ng Kabanata 3-4 (Configuration + Infrastructure)  
-- ✅ Pamahalaan ang mga multi-environment deployment
-- ✅ Gumawa ng pasadyang Bicep infrastructure templates
-- ✅ Magpatupad ng mga secure na pattern ng authentication
+#### Pagkumpleto ng Kabanata 3-4 (Configuration + Infrastructure)  
+- ✅ Pamahalaan ang multi-environment deployments
+- ✅ Lumikha ng pasadyang mga Bicep infrastructure template
+- ✅ Magpatupad ng mga secure authentication pattern
 
-#### Pagtatapos ng Kabanata 5-6 (Multi-Agent + Validation)
+#### Pagkumpleto ng Kabanata 5-6 (Multi-Agent + Validation)
 - ✅ Mag-deploy ng komplikadong multi-agent AI solution
-- ✅ Magsagawa ng capacity planning at pag-optimize ng gastos
-- ✅ Magpatupad ng automated na pre-deployment validation
+- ✅ Magsagawa ng capacity planning at cost optimization
+- ✅ Magpatupad ng automated pre-deployment validation
 
-#### Pagtatapos ng Kabanata 7-8 (Troubleshooting + Produksyon)
-- ✅ Mag-debug at lutasin nang sarili ang mga problema sa deployment  
-- ✅ Magpatupad ng enterprise-grade na monitoring at seguridad
-- ✅ Mag-deploy ng mga aplikasyon na handa para sa produksyon na may pamamahala
+#### Pagkumpleto ng Kabanata 7-8 (Troubleshooting + Production)
+- ✅ Mag-debug at mag-ayos ng mga isyu sa deployment nang mag-isa  
+- ✅ Magpatupad ng enterprise-grade monitoring at security
+- ✅ Mag-deploy ng mga production-ready na aplikasyon na may pamamahala
 
 ### Sertipikasyon at Pagkilala
-- **Badge para sa Pagtatapos ng Kurso**: Kumpletuhin ang lahat ng 8 kabanata na may praktikal na pagpapatunay
+- **Badge ng Pagkumpleto ng Kurso**: Kumpletuhin ang lahat ng 8 kabanata na may praktikal na pagpapatunay
 - **Pagkilala ng Komunidad**: Aktibong partisipasyon sa Microsoft Foundry Discord
 - **Propesyonal na Pag-unlad**: Mga kasanayang nauugnay sa industriya sa AZD at AI deployment
-- **Pag-unlad sa Karera**: Kakayahan sa enterprise-ready na cloud deployment
+- **Pagsulong sa Karera**: Kakayahang mag-deploy ng cloud para sa enterprise
 
-## 🎓 Komprehensibong Kinalabasan ng Pagkatuto
+## 🎓 Komprehensibong Mga Kinalabasang Pagkatuto
 
 ### Antas ng Pundasyon (Mga Kabanata 1-2)
-Sa pagtatapos ng mga pundasyong kabanata, ipapakita ng mga mag-aaral:
+Sa pagkumpleto ng mga kabanata sa pundasyon, ipapakita ng mga mag-aaral:
 
-**Mga Teknikal na Kakayahan:**
+**Teknikal na Kakayahan:**
 - Mag-deploy ng simpleng web applications sa Azure gamit ang mga utos ng AZD
-- Mag-configure at mag-deploy ng AI-powered chat applications gamit ang RAG capabilities
-- Maunawaan ang mga pangunahing konsepto ng AZD: mga template, mga environment, daloy ng provisioning
-- Isama ang mga serbisyo ng Microsoft Foundry sa mga deployment ng AZD
-- Mag-navigate sa mga configuration ng Azure AI service at API endpoints
+- Mag-configure at mag-deploy ng AI-powered chat application gamit ang RAG
+- Unawain ang mga pangunahing konsepto ng AZD: mga template, mga environment, workflows ng provisioning
+- I-integrate ang mga serbisyo ng Microsoft Foundry sa mga deployment ng AZD
+- Mag-navigate sa mga configuration ng Azure AI service at mga API endpoint
 
-**Mga Propesyonal na Kasanayan:**
-- Sundin ang istrukturadong daloy ng deployment para sa tuloy-tuloy na resulta
-- Mag-troubleshoot ng mga pangunahing isyu sa deployment gamit ang mga log at dokumentasyon
-- Epektibong makipagkomunika tungkol sa mga proseso ng cloud deployment
-- Ipatupad ang pinakamahusay na mga kasanayan para sa secure na integrasyon ng AI service
+**Propesyonal na Kasanayan:**
+- Sundin ang mga istrakturang workflow ng deployment para sa pare-parehong resulta
+- Mag-troubleshoot ng mga pangunahing isyu sa deployment gamit ang mga logs at dokumentasyon
+- Makipagkomunika nang epektibo tungkol sa mga proseso ng cloud deployment
+- Mag-aplay ng pinakamahuhusay na paraan para sa secure na integrasyon ng AI service
 
 **Pagpapatunay ng Pagkatuto:**
 - ✅ Matagumpay na mag-deploy ng `todo-nodejs-mongo` template
 - ✅ Mag-deploy at mag-configure ng `azure-search-openai-demo` gamit ang RAG
-- ✅ Kumpletuhin ang mga interactive na workshop exercises (Discovery phase)
-- ✅ Makilahok sa mga diskusyon ng Azure Discord community
+- ✅ Kumpletuhin ang mga interaktibong pagsasanay sa workshop (Discovery phase)
+- ✅ Makilahok sa mga talakayan sa komunidad ng Azure Discord
 
 ### Antas ng Intermediate (Mga Kabanata 3-4)
-Sa pagtatapos ng mga intermediate na kabanata, ipapakita ng mga mag-aaral:
+Sa pagkumpleto ng mga intermediate na kabanata, ipapakita ng mga mag-aaral:
 
-**Mga Teknikal na Kakayahan:**
-- Pamahalaan ang mga multi-environment deployment (dev, staging, production)
-- Gumawa ng pasadyang mga Bicep template para sa infrastructure bilang code
-- Magpatupad ng mga secure na pattern ng authentication gamit ang managed identity
-- Mag-deploy ng kumplikadong multi-service applications na may pasadyang mga configuration
-- I-optimize ang mga estratehiya sa provisioning ng resource para sa gastos at pagganap
+**Teknikal na Kakayahan:**
+- Pamahalaan ang multi-environment na mga deployment (dev, staging, production)
+- Lumikha ng pasadyang mga Bicep template para sa infrastructure as code
+- Magpatupad ng secure authentication patterns gamit ang managed identity
+- Mag-deploy ng komplikadong multi-service applications na may pasadyang mga configuration
+- I-optimize ang mga estratehiya ng provisioning ng resource para sa gastos at pagganap
 
-**Mga Propesyonal na Kasanayan:**
-- Magdisenyo ng scalable na mga arkitektura ng infrastructure
-- Magpatupad ng mga pinakamahusay na kasanayan sa seguridad para sa mga cloud deployment
-- Gumawa ng dokumentasyon para sa mga pattern ng infrastructure para sa kolaborasyon ng grupo
+**Propesyonal na Kasanayan:**
+- Disenyo ng scalable na mga arkitektura ng imprastraktura
+- Magpatupad ng pinakamahuhusay na paraan sa seguridad para sa mga cloud deployment
+- Dokumentuhin ang mga pattern ng imprastraktura para sa pakikipagtulungan ng koponan
 - Suriin at pumili ng angkop na mga serbisyo ng Azure para sa mga pangangailangan
 
 **Pagpapatunay ng Pagkatuto:**
-- ✅ Mag-configure ng magkakahiwalay na mga environment na may mga environment-specific na setting
-- ✅ Gumawa at mag-deploy ng pasadyang Bicep template para sa multi-service application
+- ✅ Mag-configure ng magkahiwalay na mga environment gamit ang mga setting na animo'y environment-specific
+- ✅ Lumikha at mag-deploy ng pasadyang Bicep template para sa multi-service application
 - ✅ Magpatupad ng managed identity authentication para sa secure na access
-- ✅ Kumpletuhin ang mga configuration management exercises gamit ang mga totoong senaryo
+- ✅ Kumpletuhin ang mga pagsasanay sa configuration management gamit ang mga totoong senaryo
 
 ### Antas ng Advanced (Mga Kabanata 5-6)
-Sa pagtatapos ng mga advanced na kabanata, ipapakita ng mga mag-aaral:
+Sa pagkumpleto ng mga advanced na kabanata, ipapakita ng mga mag-aaral:
 
-**Mga Teknikal na Kakayahan:**
-- Mag-deploy at mag-orchestrate ng multi-agent AI solutions na may koordinadong daloy ng trabaho
-- Magpatupad ng arkitektura ng Customer at Inventory agent para sa mga retail na senaryo
-- Magsagawa ng komprehensibong capacity planning at pag-validate ng mga resources
-- Magpatupad ng automated na pre-deployment validation at optimization
+**Teknikal na Kakayahan:**
+- Mag-deploy at mag-orchestrate ng multi-agent AI solutions na may koordinadong workflows
+- Magpatupad ng mga arkitektura ng Customer at Inventory agent para sa mga retail na senaryo
+- Magsagawa ng komprehensibong capacity planning at pagpapatunay ng resource
+- Mag-execute ng automated pre-deployment validation at optimization
 - Magdisenyo ng mga cost-effective na pagpili ng SKU batay sa mga pangangailangan ng workload
 
-**Mga Propesyonal na Kasanayan:**
-- Mag-arkitekto ng mga komplikadong solusyon ng AI para sa mga environment ng produksyon
-- Pangunahan ang mga teknikal na talakayan tungkol sa mga estratehiya sa deployment ng AI
-- Mag-mentor ng mga junior developer sa mga pinakamahusay na praktis ng AZD at AI deployment
-- Suriin at irekomenda ang mga pattern ng arkitektura ng AI para sa mga pangangailangan ng negosyo
+**Propesyonal na Kasanayan:**
+- Magdisenyo ng komplikadong AI solutions para sa mga production environment
+- Pinamunuan ang mga teknikal na talakayan tungkol sa mga estratehiya ng AI deployment
+- Magmentora sa mga junior na developer sa pinakamahusay na praktis sa AZD at AI deployment
+- Suriin at irekomenda ang mga pattern ng AI architecture para sa mga pangangailangan ng negosyo
 
 **Pagpapatunay ng Pagkatuto:**
-- ✅ Suriin ang retail multi-agent blueprint at pagkilahin ang na-provision na infrastructure mula sa nawawalang implementasyon ng aplikasyon
-- ✅ Ipakita ang koordinasyon ng agent at orchestration ng daloy ng trabaho
-- ✅ Kumpletuhin ang mga capacity planning exercise gamit ang totoong limitasyon ng mga resource
-- ✅ I-validate ang kahandaan sa deployment sa pamamagitan ng automated pre-flight checks
+- ✅ Suriin ang retail multi-agent blueprint at tukuyin ang na-provision na imprastraktura mula sa nawawalang implementasyon ng aplikasyon
+- ✅ Ipakita ang koordinasyon ng ahente at workflow orchestration
+- ✅ Kumpletuhin ang mga pagsasanay sa capacity planning gamit ang totoong limitasyon ng resource
+- ✅ Patunayan ang kahandaan sa deployment sa pamamagitan ng automated na pre-flight checks
 
 ### Antas ng Eksperto (Mga Kabanata 7-8)
-Sa pagtatapos ng mga ekspertong kabanata, ipapakita ng mga mag-aaral:
+Sa pagkumpleto ng mga eksperto na kabanata, ipapakita ng mga mag-aaral:
 
-**Mga Teknikal na Kakayahan:**
-- Mag-diagnose at lutasin ang mga komplikadong isyu sa deployment nang mag-isa
-- Magpatupad ng mga enterprise-grade na pattern ng seguridad at mga framework ng pamamahala
-- Magdisenyo ng komprehensibong mga estratehiya sa pagsubaybay at alerto
-- I-optimize ang mga production deployment para sa scale, gastos, at pagganap
-- Magtatag ng mga CI/CD pipeline na may tamang pagsubok at pag-validate
+**Teknikal na Kakayahan:**
+- Mag-diagnose at mag-ayos ng masalimuot na isyu sa deployment nang mag-isa
+- Magpatupad ng enterprise-grade na mga pattern sa seguridad at mga balangkas ng pamamahala
+- Magdisenyo ng komprehensibong mga estratehiya sa monitoring at alerting
+- I-optimize ang mga production deployment para sa scalability, gastos, at pagganap
+- Magtatag ng mga CI/CD pipeline na may tamang testing at pagpapatunay
 
-**Mga Propesyonal na Kasanayan:**
-- Pamunuan ang mga enterprise cloud transformation initiative
-- Disenyuhan at ipatupad ang mga pamantayan sa deployment ng organisasyon
-- Mag-train at mag-mentor ng mga development team sa advanced na mga praktis ng AZD
-- Impluwensyahan ang teknikal na paggawa ng desisyon para sa mga enterprise AI deployment
+**Propesyonal na Kasanayan:**
+- Pangunahan ang mga inisyatiba sa enterprise cloud transformation
+- Magdisenyo at magpatupad ng mga pamantayan ng deployment ng organisasyon
+- Mag-train at mag-mentora ng mga development team sa advanced na mga praktis ng AZD
+- Makaimpluwensya sa teknikal na pagdedesisyon para sa mga enterprise AI deployment
 
 **Pagpapatunay ng Pagkatuto:**
-- ✅ Lutasin ang mga komplikadong pagkabigo sa multi-service deployment
-- ✅ Magpatupad ng mga pattern ng seguridad sa enterprise na may pagsunod sa mga pangangailangan
+- ✅ Ayusin ang mga malalalim na pagkabigo sa multi-service deployment
+- ✅ Magpatupad ng mga enterprise security pattern na may pagsunod sa mga kinakailangan
 - ✅ Magdisenyo at mag-deploy ng production monitoring gamit ang Application Insights
-- ✅ Kumpletuhin ang implementasyon ng enterprise governance framework
+- ✅ Kumpletuhin ang pagpapatupad ng balangkas ng enterprise governance
 
-## 🎯 Sertipikasyon sa Pagtatapos ng Kurso
+## 🎯 Sertipikasyon sa Pagkumpleto ng Kurso
 
-### Balangkas sa Pagsubaybay ng Pag-unlad
-Subaybayan ang iyong pag-unlad sa pag-aaral sa pamamagitan ng mga istrukturadong checkpoint:
+### Balangkas ng Pagsubaybay ng Progreso
+Subaybayan ang iyong pag-usad sa pag-aaral sa pamamagitan ng mga istrakturang checkpoint:
 
-- [ ] **Kabanata 1**: Pundasyon at Mabilisang Pagsisimula ✅
+- [ ] **Kabanata 1**: Pundasyon at Quick Start ✅
 - [ ] **Kabanata 2**: AI-First Development ✅  
 - [ ] **Kabanata 3**: Configuration at Authentication ✅
-- [ ] **Kabanata 4**: Infrastructure bilang Code at Deployment ✅
+- [ ] **Kabanata 4**: Infrastructure as Code at Deployment ✅
 - [ ] **Kabanata 5**: Multi-Agent AI Solutions ✅
-- [ ] **Kabanata 6**: Pre-Deployment Validation at Pagpaplano ✅
+- [ ] **Kabanata 6**: Pre-Deployment Validation at Planning ✅
 - [ ] **Kabanata 7**: Troubleshooting at Debugging ✅
 - [ ] **Kabanata 8**: Production at Enterprise Patterns ✅
 
 ### Proseso ng Pagpapatunay
 Pagkatapos makumpleto ang bawat kabanata, patunayan ang iyong kaalaman sa pamamagitan ng:
 
-1. **Pagtatapos ng Praktikal na Gawain**: Mag-deploy ng mga gumaganang solusyon para sa bawat kabanata
-2. **Pagsusulit sa Kaalaman**: Suriin ang mga seksyon ng FAQ at kumpletuhin ang self-assessments
-3. **Paglahok sa Komunidad**: Ibahagi ang mga karanasan at kunin ang feedback sa Azure Discord
+1. **Pagsasagawa ng Praktikal na Ehersisyo**: Mag-deploy ng gumaganang mga solusyon para sa bawat kabanata
+2. **Pagtatasa ng Kaalaman**: Balikan ang mga bahagi ng FAQ at kumpletuhin ang mga self-assessment
+3. **Pakikilahok sa Komunidad**: Ibahagi ang mga karanasan at kumuha ng feedback sa Azure Discord
 4. **Pagbuo ng Portfolio**: Idokumento ang iyong mga deployment at mga natutunang aral
-5. **Peer Review**: Makipagtulungan sa ibang mag-aaral sa mga komplikadong senaryo
+5. **Peer Review**: Makipagtulungan sa ibang mga mag-aaral sa mga komplikadong senaryo
 
-### Mga Benepisyo ng Pagtatapos ng Kurso
-Sa pagtatapos ng lahat ng kabanata na may pagpapatunay, magkakaroon ang mga nagtapos ng:
+### Mga Benepisyo ng Pagkumpleto ng Kurso
+Sa pagkumpleto ng lahat ng kabanata na may pagpapatunay, magkakaroon ang mga nagtapos ng:
 
 **Teknikal na Ekspertis:**
-- **Karanasang Produksyon**: Na-deploy ang mga totoong AI application sa mga Azure environment
-- **Mga Propesyonal na Kasanayan**: Kakayahan sa enterprise-ready deployment at troubleshooting  
-- **Kaalaman sa Arkitektura**: Mga multi-agent AI solution at komplikadong pattern ng infrastructure
-- **Kasanayan sa Troubleshooting**: Malaya na paglutas ng mga isyu sa deployment at configuration
+- **Karanasan sa Produksyon**: Nakapag-deploy ng mga totoong AI na aplikasyon sa mga kapaligiran ng Azure
+- **Propesyonal na Kasanayan**: Kakayahan sa enterprise-ready deployment at troubleshooting  
+- **Kaalaman sa Arkitektura**: Mga multi-agent AI solution at mga kumplikadong pattern sa imprastraktura
+- **Kakayahan sa Troubleshooting**: Malaya na paglutas ng mga isyu sa deployment at configuration
 
 **Propesyonal na Pag-unlad:**
-- **Pagkilala sa Industriya**: Napatunayang kasanayan sa mataas na demand na mga larangan ng AZD at AI deployment
-- **Pag-unlad sa Karera**: Mga kwalipikasyon para sa mga tungkulin bilang cloud architect at AI deployment specialist
-- **Pamumuno sa Komunidad**: Aktibong pagiging miyembro sa mga Azure developer at AI community
-- **Tuloy-tuloy na Pagkatuto**: Pundasyon para sa advanced na espesyalisasyon sa Microsoft Foundry
+- **Pagkilala ng Industriya**: Mapatunayan na mga kasanayan sa mga high-demand na lugar ng AZD at AI deployment
+- **Pagsulong sa Karera**: Kwalipikasyon para sa mga papel ng cloud architect at AI deployment specialist
+- **Pamumuno sa Komunidad**: Aktibong pagiging miyembro ng mga Azure developer at AI communities
+- **Patuloy na Pagkatuto**: Pundasyon para sa advanced na pagsasanay sa Microsoft Foundry
 
-**Mga Asset sa Portfolio:**
-- **Mga Na-deploy na Solusyon**: Mga gumaganang halimbawa ng AI application at mga pattern ng infrastructure
-- **Dokumentasyon**: Komprehensibong mga gabay sa deployment at mga pamamaraan sa troubleshooting  
-- **Kontribusyon sa Komunidad**: Mga talakayan, halimbawa, at mga pagpapabuti na ibinahagi sa Azure community
+**Mga Ari-arian ng Portfolio:**
+- **Mga Na-deploy na Solusyon**: Gumaganang mga halimbawa ng AI applications at pattern ng imprastraktura
+- **Dokumentasyon**: Malawakang mga gabay sa deployment at mga pamamaraan sa troubleshooting  
+- **Kontribusyon sa Komunidad**: Mga talakayan, halimbawa, at mga pagbuti na ibinahagi sa Azure community
 - **Propesyonal na Network**: Mga koneksyon sa mga eksperto sa Azure at mga practitioner ng AI deployment
 
-### Landas Pagkatapos ng Kurso
-Handang harapin ng mga nagtapos ang advanced na espesyalisasyon sa:
-- **Eksperto sa Microsoft Foundry**: Malalim na espesyalisasyon sa deployment at orchestration ng AI model
-- **Pamumuno sa Arkitektura ng Cloud**: Disenyo ng enterprise-scale deployment at pamamahala
-- **Pamumuno sa Komunidad ng Developer**: Pag-aambag sa Azure samples at mga community resources
-- **Pagsasanay sa Korporasyon**: Pagtuturo ng mga kasanayan sa AZD at AI deployment sa loob ng mga organisasyon
+### Post-Kurso na Landas sa Pagkatuto
+Handang-handa ang mga nagtapos para sa advanced na espesyalidad sa:
+- **Microsoft Foundry Expert**: Malalim na espesyalisasyon sa deployment at orchestration ng AI model
+- **Pamumuno sa Cloud Architecture**: Disenyo at pamamahala ng deployment sa enterprise-scale
+- **Pamumuno sa Developer Community**: Pagsusulong sa mga halimbawa at mga mapagkukunan ng komunidad sa Azure
+- **Corporate Training**: Pagtuturo ng mga kasanayan sa AZD at AI deployment sa loob ng mga organisasyon
 
 ---
 

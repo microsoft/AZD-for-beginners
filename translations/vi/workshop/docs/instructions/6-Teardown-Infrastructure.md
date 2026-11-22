@@ -1,6 +1,6 @@
-# 6. Gỡ bỏ Hạ tầng
+# 6. Dỡ bỏ Hạ tầng
 
-!!! tip "KHI KẾT THÚC MODULE NÀY BẠN SẼ CÓ KHẢ NĂNG"
+!!! tip "VÀO CUỐI MODULE NÀY BẠN SẼ CÓ THỂ"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Bài tập Thưởng
+## Bài Tập Thưởng
 
-Trước khi gỡ bỏ dự án, hãy dành vài phút để khám phá mở rộng.
+Trước khi chúng ta dỡ dự án, hãy dành vài phút để khám phá mở rộng.
 
-!!! info "Thử Những Gợi ý Khám phá Này"
+!!! info "Thử Những Gợi Ý Khám Phá Này"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Trước khi gỡ bỏ dự án, hãy dành vài phút để khám phá mở r�
 
 ---
 
-## Hủy cấp phát Hạ tầng
+## Thu hồi Hạ tầng
 
-1. Việc gỡ bỏ hạ tầng rất đơn giản:
+!!! warning "Nếu bạn cũng đã hoàn thành bài tập máy chủ được lưu trữ GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Việc dỡ bỏ hạ tầng thật dễ dàng như:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Xác nhận môi trường đã chọn và xem xét các tài nguyên sẽ bị xóa. Việc này sẽ loại bỏ tài nguyên Azure và có thể phá hủy dữ liệu. Giữ lại lời nhắc xác nhận cho quy trình học tập này. Khi hoàn thành bạn sẽ thấy kết quả tương tự:
+1. Xác nhận môi trường đã chọn và xem lại các tài nguyên sẽ bị xóa. Việc này sẽ loại bỏ các tài nguyên Azure và có thể làm mất dữ liệu. Giữ lời nhắc xác nhận cho quy trình học này. Khi hoàn thành bạn sẽ thấy đầu ra tương tự:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Trước khi gỡ bỏ dự án, hãy dành vài phút để khám phá mở r�
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Xác minh việc xóa trong cổng thông tin và kiểm tra các tài nguyên ngoài phạm vi triển khai. Báo cáo chi phí và cập nhật hạn mức có thể bị chậm. Cấu hình `.azure` cục bộ sẽ vẫn còn trừ khi bạn chủ động xoá nó.
+1. Kiểm tra việc xóa trong portal và kiểm tra các tài nguyên ngoài phạm vi triển khai. Báo cáo chi phí và cập nhật hạn mức có thể chậm. Cấu hình `.azure` cục bộ vẫn còn trừ khi bạn xóa nó rõ ràng.
 
-1. `azd down --purge` còn yêu cầu xóa vĩnh viễn các tài nguyên được xóa mềm được hỗ trợ. Chỉ sử dụng khi không cần khôi phục và bạn hiểu các chính sách giữ/bảo vệ xóa bỏ. Nó không đảm bảo việc giải phóng hạn mức ngay lập tức.
+1. `azd down --purge` còn yêu cầu xóa vĩnh viễn các tài nguyên bị xóa mềm được hỗ trợ. Chỉ dùng khi không cần khôi phục và bạn hiểu chính sách giữ/làm sạch bảo vệ. Nó không đảm bảo giải phóng hạn mức ngay lập tức.
 
-1. Không triển khai lại chỉ để xác minh việc dọn dẹp. Một `azd up` có chủ đích sau đó có thể tái tạo tài nguyên sử dụng các đầu vào cục bộ còn lại, và sẽ phát sinh phí lại. Việc cập nhật mô hình thường dùng các thay đổi cấp phát được hỗ trợ, không phải gỡ bỏ.
+1. Không triển khai lại chỉ để xác minh dọn dẹp. Một `azd up` có chủ ý sau này có thể tạo lại tài nguyên bằng đầu vào cục bộ còn lại và lại phát sinh phí. Các cập nhật mô hình thông thường dùng các thay đổi cấp phép được hỗ trợ, không phải dỡ bỏ.
 
 ---
 

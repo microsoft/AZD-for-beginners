@@ -1,34 +1,34 @@
-# ورقة الغش للأوامر - أوامر AZD الأساسية
+# ورقة غش الأوامر - أوامر AZD الأساسية
 
 **مرجع سريع لجميع الفصول**
-- **📚 صفحة الدورة**: [AZD للمبتدئين](../README.md)
-- **📖 بدء سريع**: [الفصل 1: الأساس والبدء السريع](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 أوامر الذكاء الاصطناعي**: [الفصل 2: تطوير AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../README.md)
+- **📖 البدء السريع**: [الفصل 1: الأساسيات والبدء السريع](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 أوامر الذكاء الاصطناعي**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 متقدم**: [الفصل 4: البنية التحتية كرمز](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## مقدمة
 
-توفر ورقة الغش الشاملة هذه مرجعًا سريعًا لأكثر أوامر Azure Developer CLI المستخدمة، منظمة حسب الفئة مع أمثلة عملية. مثالية للبحث السريع أثناء التطوير وحل المشكلات والعمليات اليومية مع مشاريع azd.
+توفر لك ورقة الغش هذه مرجعًا سريعًا لأكثر أوامر Azure Developer CLI استخدامًا، منظمة حسب الفئة مع أمثلة عملية. مثالية للبحث السريع أثناء التطوير، واستكشاف الأخطاء، والعمليات اليومية مع مشاريع azd.
 
 ## أهداف التعلم
 
-باستخدام هذه الورقة، سوف:
-- تحصل على وصول فوري إلى أوامر Azure Developer CLI الأساسية وبنيتها
-- تفهم تنظيم الأوامر حسب الفئات الوظيفية وحالات الاستخدام
-- تطلع على أمثلة عملية لسيناريوهات التطوير والنشر الشائعة
-- تصل إلى أوامر استكشاف الأخطاء وإصلاحها للحل السريع للمشاكل
-- تجد خيارات التكوين والتخصيص المتقدمة بكفاءة
-- تعرف على أوامر إدارة البيئة وتدفقات العمل المتعددة البيئات
+باستخدامك لورقة الغش هذه، ستتمكن من:
+- الوصول الفوري إلى أوامر Azure Developer CLI الأساسية والصياغة الخاصة بها
+- فهم تنظيم الأوامر حسب الفئات الوظيفية وحالات الاستخدام
+- الرجوع إلى أمثلة عملية لسيناريوهات التطوير والنشر الشائعة
+- الوصول إلى أوامر استكشاف الأخطاء لإصلاح المشكلات بسرعة
+- العثور على خيارات التهيئة والتخصيص المتقدمة بكفاءة
+- تحديد أوامر إدارة البيئة وتدفقات العمل متعددة البيئات
 
 ## نتائج التعلم
 
-باستخدام هذا المرجع المنتظم، ستتمكن من:
-- تنفيذ أوامر azd بثقة دون الرجوع إلى الوثائق الكاملة
+باستخدامك المنتظم لورقة الغش هذه، ستكون قادرًا على:
+- تنفيذ أوامر azd بثقة دون الحاجة إلى الرجوع للتوثيق الكامل
 - حل المشكلات الشائعة بسرعة باستخدام أوامر التشخيص المناسبة
-- إدارة بيئات متعددة وسيناريوهات النشر بكفاءة
+- إدارة بيئات ونشرات متعددة بكفاءة
 - تطبيق ميزات azd المتقدمة وخيارات التكوين حسب الحاجة
-- استكشاف مشكلات النشر باستخدام تسلسلات أوامر منهجية
-- تحسين سير العمل من خلال الاستخدام الفعال لاختصارات وخيارات azd
+- استكشاف مشكلات النشر باستخدام تتابعات أوامر منهجية
+- تحسين تدفقات العمل من خلال الاستخدام الفعال لاختصارات وخيارات azd
 
 ## أوامر البدء
 
@@ -73,7 +73,7 @@ cd my-awesome-app
 
 ## أوامر النشر الأساسية
 
-### سير عمل النشر الكامل
+### تدفق عمل النشر الكامل
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### البناء والحزمة
+### البناء والحزم
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** يحمل تبعيات التطبيق الخاصة بك (npm، pip، NuGet، Maven، إلخ). يتم تشغيله تلقائيًا أثناء `azd package` و`azd deploy`، لذا نادراً ما تدعو له مباشرة — شغله يدويًا لتحميل التبعيات مسبقًا (على سبيل المثال، لتسخين ذاكرة التخزين المؤقت لـ CI أو للعمل دون اتصال لاحقًا).
+> **`azd restore`** يقوم بتنزيل تبعيات تطبيقك (npm، pip، NuGet، Maven، إلخ). يتم تشغيله تلقائيًا أثناء `azd package` و`azd deploy`، لذلك نادرًا ما تستدعيه مباشرة — شغله يدويًا لتحميل التبعيات مسبقًا (على سبيل المثال، لتسخين ذاكرة التخزين المؤقت لـ CI أو للعمل دون اتصال بعد ذلك).
 
-> **`azd package`** يُجهز أثرًا قابلاً للنشر دون نشر خدمة التطبيق. يعتمد السلوك على اللغة والمضيف: يمكن لحزم الحاويات استخدام البناءات البعيدة في Azure ونشر الصور إلى سجل، لذا فهو ليس بالضرورة غير متصل أو خالٍ من عمليات الكتابة على Azure. يمكن لـ `azd deploy` التعبئة تلقائيًا؛ استخدم خطوة حزمة منفصلة عندما تحتاج إلى أثر أو فحص بناء.
+> **`azd package`** يحضر قطعة قابلة للنشر دون نشر خدمة التطبيق. يعتمد السلوك على اللغة والمضيف: يمكن أن يستخدم تغليف الحاويات عمليات بناء عن بُعد في Azure وينشر الصور إلى سجل، لذا قد لا يكون دائمًا دون اتصال أو خالي من عمليات الكتابة على Azure. يمكن لـ `azd deploy` التعبئة تلقائيًا؛ استخدم خطوة تعبئة منفصلة عندما تحتاج إلى قطعة أو فحص بناء.
 
 
 ## 🌍 إدارة البيئة
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-ملفات البيئة نص عادي. لا تعامل `azd env set` كمخزن أسرار؛ استخدم مراجع Key Vault أو الهوية المدارة حسب الاقتضاء.
+ملفات البيئة هي نص عادي. لا تعامل `azd env set` كمخزن أسرار؛ استخدم مراجع Key Vault أو الهوية المدار حسب الاقتضاء.
 
-## ⚙️ أوامر التكوين
+## ⚙️ أوامر التهيئة
 
-### التكوين العام
+### التهيئة العالمية
 ```bash
 # List all configuration
 azd config show
@@ -190,7 +190,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### تكوين المشروع
+### تهيئة المشروع
 ```bash
 # Inspect user configuration (this is not azure.yaml validation)
 azd config show
@@ -219,7 +219,7 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-يجب تكوين Application Insights بواسطة القالب. خيار AZD للقياسات الحية غير مدعوم حاليًا في تطبيقات Python؛ استخدم النظرة العامة، السجلات، أو سير العمل التتبعي الموثق للعينة بدلاً من ذلك.
+يجب تهيئة Application Insights بواسطة القالب. خيار المقاييس الحية في AZD غير مدعوم حاليًا لتطبيقات Python؛ استخدم النظرة العامة، السجلات، أو تدفق التتبع الموثق في العينة بدلاً من ذلك.
 
 ### عرض سجلات الحاوية
 ```bash
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### استعلامات تحليلات السجل
+### استعلامات تحليلات السجلات
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -275,7 +275,7 @@ azd config show
 
 ## 🔧 أوامر متقدمة
 
-### خط الأنابيب وCI/CD
+### خطوط الأنابيب وCI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -321,23 +321,22 @@ azd show --output json | jq '.services'
 
 ### إضافات AZD
 
-تمت مراجعة مرجع AI CLI بتاريخ 2026-11-04: `azd 1.37.2`، الوكلاء `1.0.0-beta.23`، التقييمات `1.0.0-beta.2`. استخدم `azd >= 1.37.0` لتدفق العمل المدمج؛ قم بترقية CLI الأساسي قبل الإضافات غير المتوافقة.
+تم تحديث مرجع Foundry GA في 09-11-2026: `microsoft.foundry` الحزمة 1.0، أعلن عنها في [5 نوفمبر 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). استخدم `azd >= 1.37.0`؛ المكونات يتم إصدارها بشكل مستقل وميزات المعاينة الاختيارية تحتفظ بوضعها الخاص.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### أوامر وكيل AI
+الحزمة لا تشمل التقييمات، أو مجموعات البيانات، أو التدريب الدقيق، أو النماذج المخصصة. لا يزال تثبيت الإضافات الأساسية الفردية مدعومًا. اتبع [دليل المضيف GA](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) لعينة قابلة للتشغيل مع Python 3.13+، uv الحالي، الأذونات، وحصة النماذج.
+
+### أوامر وكيل الذكاء الاصطناعي
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` تحل محل تهجئة `--manifest`/`-m` المهملة؛ يحتاج الكتالوج القديم إلى الترحيل. لا يوجد حالياً خيار وكيل-init `--host containerapp`. المعاينة المدارة، الصوت، والمعاينات طويلة التشغيل تحتاج إلى قبول مستقل لبيئة shell/CI؛ راجع [مرجع AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` يستبدل تهجئة `--manifest`/`-m` القديمة؛ تحتاج ملفات المظاهر القديمة إلى ترحيل. لا يوجد خيار `--host containerapp` agent-init حاليًا. تحتاج المعاينة المدارة والصوت والمعاينة طويلة التشغيل إلى خيارات صَدْفُ الغلاف / بيئة CI مستقلة؛ راجع [مرجع AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### تقييمات AI والتحسين
+لا يزال الاختبار المحلي يستخدم نشرات نماذج Azure ويتكبد رسومًا. للتنظيف، `azd down` يحذف مجموعة موارد مشروع Foundry الذي تم إنشاؤه حديثًا، لكنه يترك موارد المشاريع المعاد استخدامها في مكانها؛ قم بإزالة الموارد غير المرغوب فيها التي تملكها فقط بشكل منفصل.
+
+### تقييمات وتحسينات AI
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-استبدلت الوكلاء beta.22 أوامر التقييم القديمة بـ `azd ai eval` من `azure.ai.evaluations`. يستخدم التكوين الجديد للتقييم مفاتيح camelCase. يأخذ تحسين `--config` طلب API تحسين مستقل، **ليس** التقييم القديم `eval.yaml` أو الجديد `azure.eval.yaml`؛ استخدم `--eval`/`--eval-config` لإعادة استخدام التقييم. راجع [إعداد التقييم](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) و [هجرة التحسين](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+استبدلت Agents beta.22 أوامر التقييم القديمة بـ `azd ai eval` من `azure.ai.evaluations`. يستخدم تكوين التقييم الجديد مفاتيح camelCase. يأخذ تحسين `--config` طلب API تحسين مستقل، **وليس** أمر `eval.yaml` القديم أو `azure.eval.yaml` الجديد؛ استخدم `--eval`/`--eval-config` لإعادة استخدام التقييم. انظر [إعداد التقييم](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) و [ترحيل التحسين](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+مقطع المشغّل ليس سير عمل كامل. قم بإيداع تكوين التقييم المراجع والأصول غير السرية، وامنح الوصول إلى مجموعة البيانات/المُقيّم/النموذج، واستخدم بيئة منفصلة لكل مرحلة. راجع [مثال CI/CD المصادق عليه](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### خادم MCP (ألفا)
 ```bash
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### سير عمل استكشاف الأخطاء وإصلاحها
+### سير عمل استكشاف الأخطاء
 ```bash
 # Check deployment status
 azd show --debug
@@ -502,9 +537,9 @@ azd template show <template-name>
 azd template --help
 ```
 
-## 📁 أوامر الملفات والدلائل
+## 📁 أوامر الملفات والمجلدات
 
-### بنية المشروع
+### هيكل المشروع
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -517,7 +552,7 @@ cd /path/to/your/project
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 تنسيق المخرجات
+## 🎨 تنسيق الإخراج
 
 ### إخراج JSON
 ```bash
@@ -540,9 +575,9 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 تراكيب الأوامر الشائعة
+## 🔧 مجموعات الأوامر الشائعة
 
-### سكريبت فحص الصحة
+### برنامج فحص الصحة
 ```bash
 #!/bin/bash
 # Quick health check
@@ -560,7 +595,7 @@ azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### مقارنة البيئة
+### مقارنة البيئات
 ```bash
 #!/bin/bash
 # Compare environments
@@ -570,7 +605,7 @@ for env in dev staging production; do
 done
 ```
 
-### سكريبت تنظيف الموارد
+### برنامج تنظيف الموارد
 ```bash
 #!/bin/bash
 # Review environments, then explicitly select the one to remove
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 نصائح احترافية
 
-### ألقاب لتسريع سير العمل
+### الأسماء المستعارة لتسريع سير العمل
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**نصيحة**: احفظ هذه الورقة الخداعية واستخدم `Ctrl+F` للعثور بسرعة على الأوامر التي تحتاجها!
+**نصيحة**: أضف هذه الورقة المختصرة إلى المفضلة واستخدم `Ctrl+F` للعثور بسرعة على الأوامر التي تحتاجها!
 
 ---
 
 **التنقل**
-- **الدرس السابق**: [فحوصات ما قبل الرحلة](../docs/chapter-06-pre-deployment/preflight-checks.md)
-- **الدرس التالي**: [مسرد المصطلحات](glossary.md)
+- **الدرس السابق**: [فحوصات ما قبل الإقلاع](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **الدرس التالي**: [المعجم](glossary.md)
 
 ---
 
-> **💡 هل تريد مساعدة أوامر Azure في محررك؟** قم بتثبيت [مهارات وكيل Microsoft Azure](https://skills.sh/microsoft/github-copilot-for-azure) مع `npx skills add microsoft/github-copilot-for-azure` — 37 مهارة للذكاء الاصطناعي، Foundry، النشر، التشخيص، والمزيد.
+> **💡 هل تريد مساعدة أوامر Azure في محرر النصوص الخاص بك؟** قم بتثبيت [مهارات الوكيل مايكروسوفت أزور](https://skills.sh/microsoft/github-copilot-for-azure) باستخدام `npx skills add microsoft/github-copilot-for-azure` — 37 مهارة للذكاء الاصطناعي، Foundry، النشر، التشخيص والمزيد.
 
 ---
 

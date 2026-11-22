@@ -1,20 +1,22 @@
-# Bab 2: Pengembangan AI-First
+# Bab 2: Pengembangan AI-Pertama
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 4-5 jam termasuk lokakarya | **⭐ Kompleksitas**: Menengah
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 4-5 jam termasuk workshop | **⭐ Kompleksitas**: Menengah
 
 ---
 
 ## Ikhtisar
 
-Bab ini berfokus pada penerapan aplikasi bertenaga AI menggunakan Azure Developer CLI dan layanan Microsoft Foundry. Mulai dari aplikasi chat AI sederhana hingga agen cerdas dengan alat.
+Bab ini fokus pada penerapan aplikasi bertenaga AI menggunakan Azure Developer CLI dan layanan Microsoft Foundry. Dari aplikasi chat AI sederhana hingga agen cerdas dengan alat.
 
-> **Ulasan rilis (2026-11-04):** Panduan AI CLI telah diperiksa terhadap dokumentasi/sumber yang dipublikasikan `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, dan `azure.ai.evaluations` `1.0.0-beta.2`. Gunakan `azd >= 1.37.0` untuk alur kerja gabungan. Evaluasi sekarang menggunakan namespace `azd ai eval` yang terpisah; lihat [perubahan rilis dan panduan migrasi](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ini bukan validasi penerapan langsung.
+> **Pembaruan Foundry GA (2026-11-09):** Bundel `microsoft.foundry` 1.0 sudah [tersedia secara umum](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Gunakan `azd >= 1.37.0`; evaluasi tetap merupakan instalasi terpisah. [Panduan agen hosted](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) membahas pengujian Agent Inspector lokal dan penerapan kode jarak jauh. Ini adalah tinjauan dokumentasi, bukan validasi penerapan langsung; fitur pratinjau opsional mempertahankan statusnya sendiri.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menerapkan aplikasi AI menggunakan template AZD yang sudah dibuat
+- Menerapkan aplikasi AI menggunakan templat AZD yang sudah dibuat
 - Memahami integrasi Microsoft Foundry dengan AZD
+- Menginstal bundel GA dan menguji agen hosted secara lokal sebelum menerapkan sumbernya ke Foundry
+- Meninjau `azure.yaml`, aset evaluasi, dan pembersihan proyek baru vs yang digunakan kembali
 - Mengonfigurasi dan menyesuaikan agen AI dengan alat
 - Menerapkan aplikasi RAG (Retrieval-Augmented Generation)
 
@@ -24,16 +26,18 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Hubungkan AZD dengan layanan Foundry | 30 menit |
-| 2 | [Panduan Agen AI](agents.md) | Terapkan agen cerdas dengan alat | 45 menit |
-| 3 | [Penerapan Model AI](ai-model-deployment.md) | Terapkan dan konfigurasikan model AI | 30 menit |
-| 4 | [Lab Lokakarya AI](ai-workshop-lab.md) | Praktik langsung: Jelajahi template dan rencanakan konversi Anda | 2-3 jam |
+| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Bundel GA, alur kerja agen hosted lokal-ke-cloud, dan evaluasi | 60 menit |
+| 2 | [Panduan Agen AI](agents.md) | Menerapkan agen cerdas dengan alat | 45 menit |
+| 3 | [Penerapan Model AI](ai-model-deployment.md) | Menerapkan dan mengonfigurasi model AI | 30 menit |
+| 4 | [Laboratorium Workshop AI](ai-workshop-lab.md) | Praktik langsung: Jelajahi templat dan rencanakan konversi Anda | 2-3 jam |
 
 ---
 
-## 🚀 Memulai Cepat
+## 🚀 Mulai Cepat
 
-Pilih salah satu opsi di direktori kosong baru. `.` di akhir menginisialisasi direktori saat ini; jika tidak, AZD dapat membuat subdirektori tanpa mengubah direktori kerja shell Anda.
+Pilih satu opsi di direktori kosong baru. `.` di akhir menginisialisasi direktori saat ini; jika tidak, AZD dapat membuat subdirektori tanpa mengubah direktori kerja shell Anda.
+
+Untuk **jalur penerapan kode agen hosted GA**, mulailah dengan [panduan langkah-demi-langkah](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Ini memerlukan AZD 1.37.0+, uv saat ini, Python 3.13+, izin Foundry, dan kuota model. Templat aplikasi lengkap di bawah ini adalah alternatif, bukan prasyarat untuk panduan tersebut.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,27 +55,27 @@ azd up
 
 ---
 
-## 🤖 Template AI Unggulan
+## 🤖 Templat AI Unggulan
 
-| Template | Deskripsi | Layanan |
+| Templat | Deskripsi | Layanan |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG dengan sitasi | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Obrolan RAG dengan sitasi | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agen AI dengan alat | Layanan Agen AI |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI dasar | OpenAI + Container Apps |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Obrolan AI dasar | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Kesadaran Biaya
 
-Ini adalah rentang ilustrasi, bukan kutipan atau batas; lalu lintas model, SKU pencarian/komputasi, wilayah, dan fitur opsional bisa melebihi ini. Tinjau panduan harga terkini dari contoh yang Anda pilih sebelum penyediaan.
+Ini adalah kisaran ilustratif, bukan kutipan atau batas; lalu lintas model, SKU Pencarian/komputasi, wilayah, dan fitur opsional dapat melebihi angka ini. Tinjau panduan harga contoh pilihan Anda saat ini sebelum melakukan penyediaan.
 
 | Lingkungan | Perkiraan Biaya Bulanan |
-|-------------|------------------------|
+|-------------|----------------------|
 | Pengembangan | $80-150 |
-| Tahap Uji | $150-300 |
+| Staging | $150-300 |
 | Produksi | $300-3,500+ |
 
-**Tip:** Jalankan `azd down` setelah pengujian untuk menghindari biaya.
+**Pembersihan:** Tinjau `azd down` sebelum konfirmasi: untuk proyek Foundry yang baru dibuat, ini menghapus grup sumber daya dan semua isinya. Untuk proyek Foundry yang digunakan kembali, ini membiarkan sumber daya proyek dan agen tetap ada; ikuti [panduan pembersihan walkthrough](microsoft-foundry-integration.md#7-clean-up-deliberately) untuk menghapus sumber daya yang tidak diinginkan secara terpisah.
 
 ---
 
@@ -80,12 +84,12 @@ Ini adalah rentang ilustrasi, bukan kutipan atau batas; lalu lintas model, SKU p
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 1: Fondasi](../chapter-01-foundation/README.md) |
-| **Selanjutnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
-| **Langsung ke** | [Bab 8: Pola Produksi](../chapter-08-production/README.md) |
+| **Berikutnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
+| **Lewati ke** | [Bab 8: Pola Produksi](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
 - [Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md)

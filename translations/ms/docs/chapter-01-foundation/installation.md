@@ -9,7 +9,7 @@
 
 ## Pengenalan
 
-Panduan komprehensif ini akan membimbing anda melalui pemasangan dan konfigurasi Azure Developer CLI (azd) pada sistem anda. Anda akan mempelajari pelbagai kaedah pemasangan untuk sistem operasi yang berbeza, persediaan pengesahan, dan konfigurasi awal untuk menyediakan persekitaran pembangunan anda bagi penghantaran Azure.
+Panduan komprehensif ini akan membimbing anda langkah demi langkah memasang dan mengkonfigurasi Azure Developer CLI (azd) pada sistem anda. Anda akan belajar pelbagai kaedah pemasangan untuk sistem operasi yang berbeza, persediaan pengesahan, dan konfigurasi awal untuk menyediakan persekitaran pembangunan anda bagi penempatan Azure.
 
 ## Matlamat Pembelajaran
 
@@ -17,15 +17,15 @@ Pada akhir pelajaran ini, anda akan:
 - Berjaya memasang Azure Developer CLI pada sistem operasi anda
 - Mengkonfigurasi pengesahan dengan Azure menggunakan pelbagai kaedah
 - Menyediakan persekitaran pembangunan anda dengan prasyarat yang diperlukan
-- Memahami pelbagai pilihan pemasangan dan bila untuk menggunakan setiap satu
-- Menyelesaikan isu pemasangan dan persediaan yang biasa
+- Memahami pilihan pemasangan yang berbeza dan bila untuk menggunakannya
+- Menyelesaikan masalah pemasangan dan persediaan yang biasa
 
 ## Hasil Pembelajaran
 
-Selepas melengkapkan pelajaran ini, anda akan mampu:
+Setelah melengkapkan pelajaran ini, anda akan mampu:
 - Memasang azd menggunakan kaedah yang sesuai untuk platform anda
-- Mengesahkan dengan Azure menggunakan azd auth login
-- Mengesahkan pemasangan anda dan menguji arahan azd asas
+- Melakukan pengesahan dengan Azure menggunakan azd auth login
+- Mengesahkan pemasangan anda dan menguji arahan asas azd
 - Mengkonfigurasi persekitaran pembangunan anda untuk penggunaan azd yang optimum
 - Menyelesaikan masalah pemasangan yang biasa secara berdikari
 
@@ -34,10 +34,12 @@ Panduan ini akan membantu anda memasang dan mengkonfigurasi Azure Developer CLI 
 ## Prasyarat
 
 Sebelum memasang azd, pastikan anda mempunyai:
-- **Langganan Azure** - [Buat akaun percuma](https://azure.microsoft.com/free/)
-- **Azure CLI** (pilihan) - Untuk contoh yang secara eksplisit menjalankan `az`; azd mengesahkan secara bebas
-- **Git** - Untuk mengklon templat dan kawalan versi
-- **Docker** (pilihan) - Untuk aplikasi berbekas
+- **Langganan Azure** - [Cipta akaun percuma](https://azure.microsoft.com/free/)
+- **Azure CLI** (pilihan) - Untuk contoh yang secara eksplisit menjalankan `az`; azd mengesahkan secara berdikari
+- **Git** - Untuk menyalin templat dan kawalan versi
+- **Docker** (pilihan) - Untuk aplikasi berasaskan kontena
+
+**Jalan GA Foundry Bab 2:** Gunakan AZD **1.37.0 atau lebih baru**, pasang bundel dengan `azd ext install microsoft.foundry`, dan gunakan Python **3.13+** serta **uv** terkini untuk contoh hosted-agent. Mod penempatan kodnya membina secara jauh, jadi ia tidak memerlukan binaan Docker tempatan. Kebenaran Foundry, ketersediaan model serantau, dan kuota masih diperlukan; lihat [persediaan hosted-agent](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize).
 
 ## Kaedah Pemasangan
 
@@ -61,7 +63,7 @@ choco install azd
 
 #### Pilihan 4: Pemasangan Manual
 1. Muat turun keluaran terkini dari [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Nyahpek ke `C:\Program Files\azd\`
+2. Ekstrak ke `C:\Program Files\azd\`
 3. Tambah ke pembolehubah persekitaran PATH
 
 ### macOS
@@ -78,7 +80,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
 #### Pilihan 3: Pemasangan Manual
-Muat turun arkib untuk seni bina macOS anda dari [aset keluaran](https://github.com/Azure/azure-dev/releases), nyahpek, dan tambahkan binari `azd` ke `PATH` anda.
+Muat turun arkib untuk seni bina macOS anda dari [aset keluaran](https://github.com/Azure/azure-dev/releases), ekstrak, dan tambah binari `azd` ke `PATH` anda.
 
 ### Linux
 
@@ -98,13 +100,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ### GitHub Codespaces
 
-Sesetengah persekitaran Codespaces dan bekas dev sudah termasuk `azd`, tetapi anda harus mengesahkannya daripada menganggapnya:
+Sesetengah Codespaces dan persekitaran kontena pembangunan sudah menyertakan `azd`, tetapi anda harus mengesahkannya dan bukan menganggapnya:
 
 ```bash
 azd version
 ```
 
-Jika `azd` tiada, pasang dengan skrip standard untuk persekitaran tersebut.
+Jika `azd` tidak hadir, pasangkan ia dengan skrip standard untuk persekitaran tersebut.
 
 ### Docker
 
@@ -116,11 +118,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure
 alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-Bekas sementara ini tidak mengekalkan keadaan log masuk antara larian. Untuk penghantaran berulang, gunakan [persediaan bekas dev](dev-containers.md); binaan bekas juga memerlukan daemon Docker yang boleh diakses dari dalam bekas.
+Kontena sementara ini tidak menyimpan status log masuk antara sesi. Untuk penempatan berulang, gunakan [persediaan kontena pembangunan](dev-containers.md); binaan kontena juga memerlukan docker daemon yang diakses dari dalam kontena.
 
-## ✅ Pengesahan Pemasangan
+## ✅ Sahkan Pemasangan
 
-Setelah pemasangan, sahkan azd berfungsi dengan betul:
+Selepas pemasangan, sahkan azd berfungsi dengan betul:
 
 ```bash
 # Check version
@@ -133,18 +135,18 @@ azd --help
 azd template list
 ```
 
-Jangkaan output:
+Jangkaan keluaran:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Nota**: Nombor versi sebenar akan berbeza. Semak [Keluaran Azure Developer CLI](https://github.com/Azure/azure-dev/releases) untuk versi terkini.
+**Nota**: Nombor versi sebenar mungkin berbeza. Semak [keluaran Azure Developer CLI](https://github.com/Azure/azure-dev/releases) untuk versi terkini.
 
 **✅ Senarai Semak Kejayaan Pemasangan:**
 - [ ] `azd version` memaparkan nombor versi tanpa ralat
 - [ ] `azd --help` memaparkan dokumentasi arahan
 - [ ] `azd template list` menunjukkan templat yang tersedia
-- [ ] Anda boleh membuat direktori ujian dan menjalankan `azd init` dengan berjaya
+- [ ] Anda boleh mencipta direktori ujian dan menjalankan `azd init` dengan jayanya
 
 **Jika semua pemeriksaan lulus, anda sudah bersedia untuk meneruskan ke [Projek Pertama Anda](first-project.md)!**
 
@@ -178,19 +180,19 @@ az login
 az account show
 ```
 
-### Aliran Log Masuk Mana Yang Patut Anda Gunakan?
+### Aliran Log Masuk Yang Mana Yang Perlu Anda Gunakan?
 
-- Gunakan `azd auth login` jika anda mengikuti laluan AZD untuk pemula dan kebanyakannya menjalankan arahan `azd`.
-- Gunakan `az login` juga apabila anda mahu menjalankan arahan Azure CLI seperti `az account show` atau memeriksa sumber secara langsung.
-- Jika satu latihan mengandungi kedua-dua arahan `azd` dan `az`, jalankan kedua-dua arahan log masuk sekali pada permulaan.
+- Gunakan `azd auth login` jika anda mengikuti laluan AZD pemula dan kebanyakan menjalankan arahan `azd`.
+- Gunakan `az login` juga apabila anda ingin menjalankan arahan Azure CLI seperti `az account show` atau memeriksa sumber secara langsung.
+- Jika sesuatu latihan termasuk kedua-dua arahan `azd` dan `az`, jalankan kedua-dua arahan log masuk sekali pada permulaan.
 
 ### Pengesahan Kod Peranti
-Jika anda berada pada sistem tanpa kepala atau mengalami masalah pelayar:
+Jika anda menggunakan sistem tanpa antara muka atau menghadapi masalah pelayar:
 ```bash
 azd auth login --use-device-code
 ```
 
-### Perwakilan Perkhidmatan (CI/CD)
+### Prinsipal Perkhidmatan (CI/CD)
 Untuk persekitaran automatik:
 ```bash
 azd auth login \
@@ -201,7 +203,7 @@ azd auth login \
 
 ### Sahkan Persediaan Lengkap Anda
 
-Jika anda mahu pemeriksaan kesediaan pantas sebelum memulakan Bab 1:
+Jika anda mahu pemeriksaan kesiapsiagaan cepat sebelum memulakan Bab 1:
 
 **Windows:**
 ```powershell
@@ -241,20 +243,20 @@ azd version --debug
 ## Integrasi IDE
 
 ### Visual Studio Code
-Pasang sambungan Azure Developer CLI:
+Pasang peluasan Azure Developer CLI:
 1. Buka VS Code
-2. Pergi ke Sambungan (Ctrl+Shift+X)
+2. Pergi ke Extensions (Ctrl+Shift+X)
 3. Cari "Azure Developer CLI"
-4. Pasang sambungan
+4. Pasang peluasan
 
 Ciri-ciri:
 - IntelliSense untuk azure.yaml
 - Arahan terminal bersepadu
-- Penyemakan templat
-- Pemantauan penghantaran
+- Penjelajahan templat
+- Pemantauan penempatan
 
 ### GitHub Codespaces
-Buat `.devcontainer/devcontainer.json`:
+Cipta `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -271,9 +273,9 @@ Buat `.devcontainer/devcontainer.json`:
 2. Konfigurasi kelayakan Azure
 3. Gunakan terminal bersepadu untuk arahan azd
 
-## 🐛 Menyelesaikan Masalah Pemasangan
+## 🐛 Penyelesaian Masalah Pemasangan
 
-### Isu Biasa
+### Masalah Biasa
 
 #### Kebenaran Ditolak (Windows)
 ```powershell
@@ -281,7 +283,7 @@ Buat `.devcontainer/devcontainer.json`:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-#### Isu PATH
+#### Masalah PATH
 Tambah azd ke PATH anda secara manual:
 
 **Windows:**
@@ -295,7 +297,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Isu Rangkaian/Proksi
+#### Masalah Rangkaian/Proksi
 ```bash
 # Configure standard proxy environment variables for the current Bash session
 export HTTP_PROXY="http://proxy:8080"
@@ -329,7 +331,7 @@ azd show
 ## Mengemas Kini azd
 
 ### Semak Kemas Kini
-azd memberi amaran apabila keluaran yang lebih baru tersedia, dan anda boleh mengesahkan binaan semasa anda dengan:
+azd akan memberi amaran apabila ada keluaran baru, dan anda boleh mengesahkan binaan semasa anda dengan:
 ```bash
 azd version
 ```
@@ -354,36 +356,36 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## 💡 Soalan Lazim
 
 <details>
-<summary><strong>Apakah perbezaan antara azd dan az CLI?</strong></summary>
+<summary><strong>Apa perbezaan antara azd dan az CLI?</strong></summary>
 
-**Azure CLI (az)**: Alat tahap rendah untuk menguruskan sumber Azure individu
+**Azure CLI (az)**: Alat tahap rendah untuk mengurus sumber Azure secara individu
 - `az webapp create`, `az storage account create`
 - Satu sumber pada satu masa
-- Fokus pengurusan infrastruktur
+- Fokus pada pengurusan infrastruktur
 
-**Azure Developer CLI (azd)**: Alat tahap tinggi untuk penghantaran aplikasi lengkap
-- `azd up` menghantar seluruh aplikasi dengan semua sumber
+**Azure Developer CLI (azd)**: Alat tahap tinggi untuk penempatan aplikasi lengkap
+- `azd up` melaksanakan penempatan seluruh aplikasi dengan semua sumber
 - Aliran kerja berasaskan templat
-- Fokus produktiviti pembangun
+- Fokus pada produktiviti pembangun
 
-**Mereka adalah bebas**: azd menggunakan pengesahan sendiri secara lalai. Pasang dan log masuk ke Azure CLI hanya untuk arahan `az`, atau secara eksplisit memilih masuk ke `azd config set auth.useAzCliAuth true`.
+**Mereka bebas**: azd menggunakan pengesahan sendiri secara lalai. Pasang dan log masuk ke Azure CLI hanya untuk arahan `az`, atau secara eksplisit memilih `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
-<summary><strong>Bolehkah saya menggunakan azd dengan sumber Azure yang sedia ada?</strong></summary>
+<summary><strong>Bolehkah saya gunakan azd dengan sumber Azure sedia ada?</strong></summary>
 
 Ya! Anda boleh:
-1. Import sumber sedia ada ke dalam persekitaran azd
-2. Rujuk sumber sedia ada dalam templat Bicep anda
-3. Gunakan azd untuk penghantaran baru bersama infrastruktur sedia ada
+1. Mengimport sumber sedia ada ke dalam persekitaran azd
+2. Merujuk kepada sumber sedia ada dalam templat Bicep anda
+3. Gunakan azd untuk penempatan baru di samping infrastruktur sedia ada
 
-Lihat [Panduan Konfigurasi](../chapter-03-configuration/configuration.md) untuk butiran.
+Lihat [Panduan Konfigurasi](../chapter-03-configuration/configuration.md) untuk maklumat lanjut.
 </details>
 
 <details>
 <summary><strong>Adakah azd berfungsi dengan Azure Government atau Azure China?</strong></summary>
 
-Ya, konfigurasikan awan:
+Ya, konfigurasi awan:
 ```bash
 # Azure Government (azd)
 azd config set cloud.name AzureUSGovernment
@@ -403,37 +405,37 @@ Jika anda juga menggunakan Azure CLI, konfigurasikan `az cloud set --name ...` s
 Sudah tentu! azd direka untuk automasi:
 - Integrasi GitHub Actions
 - Sokongan Azure DevOps
-- Pengesahan perwakilan perkhidmatan
-- Mod tanpa interaksi
+- Pengesahan prinsip perkhidmatan
+- Mod bukan interaktif
 
-Lihat [Panduan Penghantaran](../chapter-04-infrastructure/deployment-guide.md) untuk corak CI/CD.
+Lihat [Panduan Penempatan](../chapter-04-infrastructure/deployment-guide.md) untuk corak CI/CD.
 </details>
 
 <details>
 <summary><strong>Berapakah kos menggunakan azd?</strong></summary>
 
-azd sendiri adalah **sepenuhnya percuma** dan sumber terbuka. Anda hanya membayar untuk:
-- Sumber Azure yang anda hantar
-- Kos penggunaan Azure (pengiraan, storan, dll.)
+azd itu sendiri adalah **percuma sepenuhnya** dan sumber terbuka. Anda hanya membayar untuk:
+- Sumber Azure yang anda tempatkan
+- Kos penggunaan Azure (pengkomputeran, penyimpanan, dsb.)
 
-Gunakan `azd provision --preview` untuk memeriksa sumber yang dicadangkan, kemudian anggarkan kos mereka dengan [Pengira Harga Azure](https://azure.microsoft.com/pricing/calculator/). Pratonton tidak mengira harga.
+Gunakan `azd provision --preview` untuk memeriksa sumber yang dicadangkan, kemudian anggarkan kosnya dengan [Kalkulator Harga Azure](https://azure.microsoft.com/pricing/calculator/). Pratonton tidak mengira harga.
 </details>
 
 ## Langkah Seterusnya
 
-1. **Lengkapkan pengesahan**: Pastikan anda boleh mengakses langganan Azure anda
-2. **Cuba penghantaran pertama anda**: Ikuti [Panduan Projek Pertama](first-project.md)
-3. **Terokai templat**: Semak templat yang tersedia dengan `azd template list`
+1. **Lengkapkan pengesahan**: Pastikan anda boleh akses langganan Azure anda
+2. **Cuba penempatan pertama anda**: Ikuti [Panduan Projek Pertama](first-project.md)
+3. **Terokai templat**: Layari templat tersedia dengan `azd template list`
 4. **Konfigurasikan IDE anda**: Sediakan persekitaran pembangunan anda
 
 ## Sokongan
 
 Jika anda menghadapi masalah:
 - [Dokumentasi Rasmi](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Laporkan Isu](https://github.com/Azure/azure-dev/issues)
+- [Lapor Masalah](https://github.com/Azure/azure-dev/issues)
 - [Perbincangan Komuniti](https://github.com/Azure/azure-dev/discussions)
 - [Sokongan Azure](https://azure.microsoft.com/support/)
-- [**Kemahiran Ejen Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Dapatkan panduan arahan Azure terus dalam editor anda dengan `npx skills add microsoft/github-copilot-for-azure`
+- [**Kemahiran Ejen Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Dapatkan panduan arahan Azure terus dalam penyunting anda dengan `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 

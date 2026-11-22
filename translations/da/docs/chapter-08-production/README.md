@@ -1,4 +1,4 @@
-# Kapitel 8: Produktions- og virksomheds-mønstre
+# Kapitel 8: Produktions- & Enterprise-Mønstre
 
 **📚 Kursus**: [AZD For Begyndere](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
 
@@ -6,17 +6,17 @@
 
 ## Oversigt
 
-Dette kapitel dækker virksomheds-klare udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for AI arbejdsbelastninger i produktion.
+Dette kapitel dækker enterprise-klar udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for produktions-AI arbejdsbelastninger.
 
-Dette er en arkitektonisk reference, ikke en komplet udrulbar produktion skabelon. Eksempler udelader integrationsdetaljer, som skal leveres og testes i din egen applikation; gennemlæsning af tjeklisten certificerer ikke produktionsegnede løsninger.
+Dette er en arkitektonisk reference, ikke en komplet produktionstemplate til udrulning. Eksempler udelader integrationsdetaljer, som skal leveres og testes i din egen applikation; læsning af tjeklisten certificerer ikke produktionsklarhed.
 
-> **Udgivelsesgennemgang (2026-11-04):** AI CLI vejledning blev kontrolleret mod `azd 1.37.2`, agenter `1.0.0-beta.23`, og evalueringer `1.0.0-beta.2` dokumentation/kilde. Se [udgivelsesændringer og rettelser](production-ai-practices.md#recent-release-changes-and-fixes) for kompatibilitetskrav og migrationsdetaljer; dette er ikke en validering af live udrulning.
+> **Foundry GA-opdatering (2026-11-09):** Brug `azd >= 1.37.0` og den generelt tilgængelige `microsoft.foundry` 1.0-pakke til Foundry-arbejdsgangen; evalueringer installeres separat. Se [release-omfang og migration](production-ai-practices.md#recent-release-changes-and-fixes) og det [autentificerede pipeline-eksempel](production-ai-practices.md#cicd-pipeline-configuration). Dette er en dokumentationsgennemgang, ikke en live-udrulningsvalidering eller bred GA-status for valgfrie forhåndsvisningsfunktioner.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
 - Udrulle multi-region robuste applikationer
-- Implementere virksomhedssikkerheds-mønstre
+- Implementere enterprise sikkerhedsmønstre
 - Konfigurere omfattende overvågning
 - Optimere omkostninger i stor skala
 - Opsætte CI/CD pipelines med AZD
@@ -27,14 +27,14 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Produktions AI Praksis](production-ai-practices.md) | Virksomheds-udrulningsmønstre | 90 min |
+| 1 | [Produktions-AI praksis](production-ai-practices.md) | Enterprise udrulningsmønstre | 90 min |
 
 ---
 
-## 🚀 Produktions-tjekliste
+## 🚀 Produktions Tjekliste
 
 - [ ] Multi-region udrulning for robusthed
-- [ ] Styret identitet til autentificering (ingen nøgler)
+- [ ] Administreret identitet til autentificering (ingen nøgler)
 - [ ] Application Insights til overvågning
 - [ ] Omkostningsbudgetter og alarmer konfigureret
 - [ ] Sikkerhedsscanning aktiveret
@@ -43,7 +43,7 @@ Ved at gennemføre dette kapitel vil du:
 
 ---
 
-## 🏗️ Arkitektur-mønstre
+## 🏗️ Arkitektur Mønstre
 
 ### Mønster 1: Microservices AI
 
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Mønster 2: Begivenhedsdrevet AI
+### Mønster 2: Hændelsesdrevet AI
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Sikkerhedsbedste praksis
+## 🔐 Bedste Sikkerhedspraksis
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -87,12 +87,12 @@ properties: {
 
 | Strategi | Hovedbegrænsning |
 |----------|---------|
-| Skaler til nul (Container Apps) | Kræver en passende udløser; andre tjenester pådrager stadig omkostninger |
-| Brug forbrugsniveauer til udvikling | Sammenlign valgte tjenestepriser og arbejdsbelastning |
-| Planlagt skalering | Skaler via understøttet infrastruktur/automatisering |
+| Skaler til nul (Container Apps) | Kræver en passende trigger; andre tjenester medfører stadig omkostninger |
+| Brug forbrugsniveauer til udvikling | Sammenlign udvalgte tjenestepriser og arbejdsbyrde |
+| Planlagt skalering | Skaler via understøttet infrastruktur/automation |
 | Reservationer/provisioneret kapacitet | Kun når understøttet; forpligtelser kan øge inaktive omkostninger |
 
-Brug [det komplette budget-ressource mønster](production-ai-practices.md#2-cost-monitoring-and-budgets) med en gyldig startdato, faktureringsomfang, modtagere og tilladelser. Et budget sender alarmer; det begrænser ikke forbruget. Besparelser afhænger af målt udnyttelse og er ikke garanterede procenter.
+Brug det [komplette budgetressourcestyringsmønster](production-ai-practices.md#2-cost-monitoring-and-budgets) med en gyldig startdato, faktureringsomfang, modtagere og rettigheder. Et budget sender alarmer; det begrænser ikke forbruget. Besparelser afhænger af målte udnyttelse og er ikke garanterede procentdele.
 
 ---
 
@@ -116,16 +116,16 @@ az monitor metrics list --resource <resource-id>
 | Retning | Kapitel |
 |-----------|---------|
 | **Forrige** | [Kapitel 7: Fejlfinding](../chapter-07-troubleshooting/README.md) |
-| **Kursus færdig** | [Kursusforside](../../README.md) |
+| **Kursus fuldført** | [Kursus Startside](../../README.md) |
 
 ---
 
-## 📖 Relaterede ressourcer
+## 📖 Relaterede Ressourcer
 
-- [AI Agenter Guide](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-Agent Løsninger](../chapter-05-multi-agent/README.md)
-- [Microservices Eksempel](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 

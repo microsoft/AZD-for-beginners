@@ -1,29 +1,29 @@
 # Modele de coordonare multi-agent
 
-⏱️ **Timp estimat**: 60-75 minute pentru lectură; câteva ore pentru implementare | 💰 **Cost estimat**: în funcție de volum de muncă | ⭐ **Complexitate**: Avansat
+⏱️ **Timp estimat**: 60-75 minute de citit; câteva ore pentru implementare | 💰 **Cost estimat**: dependent de volum de lucru | ⭐ **Complexitate**: Avansat
 
 **📚 Parcurs de învățare:**
 - ← Anterior: [Planificarea capacității](capacity-planning.md) - Strategii de dimensionare și scalare a resurselor
-- 🎯 **Ești aici**: Modele de coordonare multi-agent (Orchestrare, comunicare, gestionare a stării)
-- → Următor: [Selectarea SKU](sku-selection.md) - Alegerea serviciilor Azure potrivite
+- 🎯 **Ești aici**: Modele de coordonare multi-agent (orchestrare, comunicare, gestionare stare)
+- → Următor: [Selecția SKU](sku-selection.md) - Alegerea serviciilor Azure potrivite
 - 🏠 [Pagina cursului](../../README.md)
 
 ---
 
 ## Ce vei învăța
 
-După finalizarea acestei lecții, vei:
-- Înțelege **modelele de arhitectură multi-agent** și când să le folosești
-- Implementa **modele de orchestrare** (centralizate, descentralizate, ierarhice)
-- Proiecta strategii de **comunicare între agenți** (sincron, asincron, bazat pe evenimente)
-- Gestiona **starea partajată** între agenții distribuiți
-- Implementa **sisteme multi-agent** pe Azure cu AZD
-- Aplică **modele de coordonare** pentru scenarii reale AI
-- Monitoriza și depana sisteme distribuite de agenți
+La finalizarea acestei lecții, vei fi capabil să:
+- Înțelegi modele de **arhitectură multi-agent** și când să le folosești
+- Implementezi **modele de orchestrare** (centralizate, descentralizate, ierarhice)
+- Proiectezi strategii de **comunicare între agenți** (sincron, asincron, orientat evenimente)
+- Gestionezi **stare partajată** între agenți distribuiți
+- Depliezi **sisteme multi-agent** pe Azure cu AZD
+- Aplici **modele de coordonare** pentru scenarii AI din lumea reală
+- Monitorizezi și depanezi sisteme distribuite de agenți
 
 ## De ce contează coordonarea multi-agent
 
-### Evoluția: de la Agent Unic la Multi-Agent
+### Evoluția: De la agent unic la multi-agent
 
 **Agent unic (simplu):**
 ```
@@ -31,7 +31,7 @@ User → Agent → Response
 ```
 - ✅ Ușor de înțeles și implementat
 - ✅ Rapid pentru sarcini simple
-- ❌ Limitat de capabilitățile modelului unic
+- ❌ Limitat de capacitățile modelului unic
 - ❌ Nu poate paraleliza sarcini complexe
 - ❌ Fără specializare
 
@@ -43,20 +43,20 @@ graph TD
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
 - ✅ Agenți specializați pentru sarcini specifice
-- ✅ Executare paralelă pentru viteză
+- ✅ Execuție paralelă pentru viteză
 - ✅ Modular și ușor de întreținut
-- ✅ Mai bun la fluxuri de lucru complexe
+- ✅ Mai performant în fluxuri de lucru complexe
 - ⚠️ Necesită logică de coordonare
 
-**Analogie**: Agentul unic e ca o singură persoană care face toate sarcinile. Sistemul multi-agent e ca o echipă unde fiecare membru are abilități specializate (cercetător, programator, recenzor, scriitor) care lucrează împreună.
+**Analogic**: Agentul unic este ca o persoană care face toate sarcinile. Multi-agent este ca o echipă în care fiecare membru are abilități specializate (cercetător, programator, recenzor, scriitor) și lucrează împreună.
 
 ---
 
 ## Modele principale de coordonare
 
-### Model 1: Coordonare secvențială (Lanțul responsabilității)
+### Model 1: Coordonare Secvențială (Lanțul de Responsabilitate)
 
-**Când se folosește**: Sarcinile trebuie să se finalizeze într-o ordine specifică, fiecare agent construind pe baza rezultatului anterior.
+**Când să folosești**: Sarcinile trebuie finalizate într-o anumită ordine, fiecare agent construind pe baza outputului precedent.
 
 ```mermaid
 sequenceDiagram
@@ -79,25 +79,25 @@ sequenceDiagram
 ```
 
 **Beneficii:**
-- ✅ Flux clar de date
+- ✅ Flux clar al datelor
 - ✅ Ușor de depanat
-- ✅ Ordine de execuție previzibilă
+- ✅ Ordine previzibilă a execuției
 
 **Limitări:**
-- ❌ Mai încet (fără paralelism)
-- ❌ O singură eroare blochează întreg lanțul
+- ❌ Mai lent (fără paralelism)
+- ❌ O singură eroare blochează întregul lanț
 - ❌ Nu poate gestiona sarcini interdependente
 
 **Exemple de utilizare:**
-- Flux de creare conținut (cercetare → scriere → editare → publicare)
+- Flux de creare conținut (cercetare → scris → editare → publicare)
 - Generare cod (planificare → implementare → testare → implementare)
-- Generare raport (colectare date → analiză → vizualizare → rezumat)
+- Generare rapoarte (colectare date → analiză → vizualizare → sumar)
 
 ---
 
-### Model 2: Coordonare paralelă (Fan-Out/Fan-In)
+### Model 2: Coordonare Paralelă (Fan-Out/Fan-In)
 
-**Când se folosește**: Sarcini independente pot rula simultan, rezultatele se combină la final.
+**Când să folosești**: Sarcini independente pot rula simultan, iar rezultatele se combină la final.
 
 ```mermaid
 graph TB
@@ -125,23 +125,23 @@ graph TB
 **Beneficii:**
 - ✅ Rapid (execuție paralelă)
 - ✅ Tolerant la erori (rezultate parțiale acceptabile)
-- ✅ Scalabil horizontal
+- ✅ Scalabil orizontal
 
 **Limitări:**
-- ⚠️ Rezultatele pot sosi în ordine diferită
+- ⚠️ Rezultatele pot ajunge în ordine greșită
 - ⚠️ Necesită logică de agregare
-- ⚠️ Gestionarea stării este complexă
+- ⚠️ Gestionarea complexă a stării
 
 **Exemple de utilizare:**
-- Colectare date din surse multiple (APIs + baze de date + web scraping)
+- Colectare date din mai multe surse (API-uri + baze de date + scraping web)
 - Analiză competitivă (mai multe modele generează soluții, se selectează cea mai bună)
-- Servicii de traducere (traduceri simultane în mai multe limbi)
+- Servicii de traducere (traducere simultană în mai multe limbi)
 
 ---
 
-### Model 3: Coordonare ierarhică (Manager - Lucrător)
+### Model 3: Coordonare Ierarhică (Manager-Lucrător)
 
-**Când se folosește**: Fluxuri complexe cu sub-sarcini, este necesară delegarea.
+**Când să folosești**: Fluxuri de lucru complexe cu sub-sarcini, unde este nevoie de delegare.
 
 ```mermaid
 graph TB
@@ -172,19 +172,19 @@ graph TB
 
 **Limitări:**
 - ⚠️ Arhitectură mai complexă
-- ⚠️ Latentă mai mare (mai multe straturi de coordonare)
+- ⚠️ Latență mai mare (mai multe straturi de coordonare)
 - ⚠️ Necesită orchestrare sofisticată
 
 **Exemple de utilizare:**
-- Procesarea documentelor enterprise (clasificare → rutare → procesare → arhivare)
-- Pipeline-uri de date în mai multe etape (ingestie → curățare → transformare → analiză → raport)
+- Procesare documente enterprise (clasificare → rutare → procesare → arhivare)
+- Pipeline-uri de date în etape multiple (ingestie → curățare → transformare → analiză → raportare)
 - Fluxuri automate complexe (planificare → alocare resurse → execuție → monitorizare)
 
 ---
 
-### Model 4: Coordonare bazată pe evenimente (Publicare - Abonare)
+### Model 4: Coordonare Orientată pe Evenimente (Publicare-Abonare)
 
-**Când se folosește**: Agenții trebuie să reacționeze la evenimente, se dorește un cuplaj slab.
+**Când să folosești**: Agenții trebuie să reacționeze la evenimente, cuplare slabă dorită.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Beneficii:**
-- ✅ Cuplaj slab între agenți
-- ✅ Ușor de adăugat noi agenți (doar se abonează)
+- ✅ Cuplare slabă între agenți
+- ✅ Ușor de adăugat noi agenți (doar abonează-te)
 - ✅ Procesare asincronă
-- ✅ Reziliență (persistența mesajelor)
+- ✅ Reziliență (persistență mesaje)
 
 **Limitări:**
 - ⚠️ Consistență eventuală
-- ⚠️ Depanare complexă
+- ⚠️ Debugging complex
 - ⚠️ Provocări în ordonarea mesajelor
 
 **Exemple de utilizare:**
-- Sisteme de monitorizare în timp real (alerte, panouri, jurnale)
-- Notificări multi-channel (email, SMS, push, Slack)
-- Pipeline-uri de procesare date (consumatori multipli pentru aceleași date)
+- Sisteme de monitorizare în timp real (alerte, dashboard-uri, loguri)
+- Notificări multicanal (email, SMS, push, Slack)
+- Pipeline-uri de procesare date (mai mulți consumatori pentru aceleași date)
 
 ---
 
-### Model 5: Coordonare bazată pe consens (Vot / Cvorum)
+### Model 5: Coordonare bazată pe Consens (Vot/Quorum)
 
-**Când se folosește**: Este nevoie de acordul mai multor agenți înainte de a continua.
+**Când să folosești**: Necesită acord din partea mai multor agenți înainte de a continua.
 
 ```mermaid
 graph TB
@@ -248,23 +248,23 @@ graph TB
 ```
 
 **Beneficii:**
-- ✅ Precizie mai mare (mai multe opinii)
-- ✅ Tolerant la erori (eșecuri minoritare acceptabile)
-- ✅ Asigurarea calității integrată
+- ✅ Acuare mai mare (mai multe opinii)
+- ✅ Tolerant la erori (eșecuri ale minorității acceptabile)
+- ✅ Garanție de calitate încorporată
 
 **Limitări:**
-- ❌ Costisitor (apeluri multiple către modele)
-- ❌ Mai lent (așteptarea tuturor agenților)
-- ⚠️ Necesită rezolvare a conflictelor
+- ❌ Costisitor (multiple apeluri de modele)
+- ❌ Mai lent (așteptând toți agenții)
+- ⚠️ Necesită rezolvare conflicte
 
 **Exemple de utilizare:**
-- Moderare conținut (mai multe modele analizează conținutul)
-- Revizuire cod (mai mulți linteri/analizatori)
-- Diagnostic medical (mai multe modele AI, validare expert)
+- Moderare conținut (mai multe modele revizuiesc conținutul)
+- Review cod (mai mulți linteri/analiști)
+- Diagnostic medical (mai multe modele AI, validare expertă)
 
 ---
 
-## Prezentare arhitectură
+## Privire de ansamblu arhitecturală
 
 ### Sistem complet multi-agent pe Azure
 
@@ -319,14 +319,14 @@ graph TB
 | Componentă | Scop | Serviciu Azure |
 |-----------|---------|---------------|
 | **API Gateway** | Punct de intrare, limitare rată, autentificare | API Management |
-| **Orchestrator** | Coordonează fluxurile de lucru ale agenților | Container Apps |
+| **Orchestrator** | Coordonează fluxuri agenți | Container Apps |
 | **Message Queue** | Comunicare asincronă | Service Bus / Event Hubs |
 | **Agenți** | Lucrători AI specializați | Container Apps / Functions |
 | **State Store** | Stare partajată, urmărire sarcini | Cosmos DB |
-| **Artifact Storage** | Documente, rezultate, jurnale | Blob Storage |
-| **Monitoring** | Tracing distribuit, jurnale | Application Insights |
+| **Artifact Storage** | Documente, rezultate, loguri | Blob Storage |
+| **Monitorizare** | Tracing distribuit, loguri | Application Insights |
 
-Service Bus queues/topics și Event Hubs sunt servicii diferite cu modele diferite de livrare/consum; Event Hubs nu este un înlocuitor direct pentru codul worker Service Bus de mai jos. Paralelismul, mesajele persistente și votul pe modele nu garantează singure toleranța la erori sau acuratețe mai mare.
+Cozile/subiectele Service Bus și Event Hubs sunt servicii diferite cu modele de livrare/consum diferite; Event Hubs nu este un înlocuitor direct pentru codul worker Service Bus de mai jos. Paralelismul, mesajele persistente și votarea modelului singure nu garantează toleranță la erori sau acuratețe mai mare.
 
 ---
 
@@ -351,29 +351,29 @@ docker --version
 ### Cerințe Azure
 
 - Abonament Azure activ
-- Permisiuni pentru crearea:
+- Permisiuni pentru creație:
   - Container Apps
   - Namespace-uri Service Bus
   - Conturi Cosmos DB
   - Conturi Storage
   - Application Insights
 
-### Cunoștințe necesare
+### Cunoștințe prealabile
 
 Ar trebui să fi finalizat:
-- [Managementul configurațiilor](../chapter-03-configuration/configuration.md)
+- [Management configurări](../chapter-03-configuration/configuration.md)
 - [Autentificare și securitate](../chapter-03-configuration/authsecurity.md)
-- [Exemplu Microservicii](../../../../examples/microservices)
+- [Exemplu microservicii](../../../../examples/microservices)
 
 ---
 
 ## Ghid de implementare
 
-> **Fragmente de design, nu un laborator de implementare:** Arborele proiectului și etichetele `File:` de mai jos descriu fișierele de creat în propriul proiect; acest repository nu conține o aplicație `multi-agent-system` completă. Lipsesc șabloanele principale/de parametri, mediul/registrul Container Apps, Dockerfiles și blocările de dependențe, configurarea bazei și containerului Cosmos, implementări model, configurare identitate/rol, reguli de scalare și workeri/cozi paralele. Nu te aștepta ca `azd init` să genereze aceste fișiere sau `azd up` să implementeze fragmentele nemodificate. Pentru un punct de plecare executabil, finalizează [Bazele multi-agent](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Fragmente de design, nu laborator complet:** Arborele proiectului și etichetele `File:` de mai jos descriu fișierele de creat în propriul proiect; acest depozit nu conține o aplicație completă `multi-agent-system`. Lipsesc șabloanele main/parametri, mediul/registrul Container Apps, Dockerfile-uri și blocaje dependențe, configurarea bazei/containerului Cosmos, implementări modele, configurare identitate/rol, reguli de scalare și lucrători/cozi paraleli. Nu te aștepta ca `azd init` să genereze aceste fișiere sau `azd up` să implementeze fragmentele nemodificate. Pentru un punct de pornire executabil, finalizează [Bazele Multi-Agent](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Presupuneri la runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask și (pentru monitorizare) `azure-monitor-opentelemetry`; pune `shared` pe calea de import Python în fiecare imagine de serviciu. Containerul Cosmos `agent-state/tasks` trebuie să existe deja cu cheia de partiționare `/id`. Conexiunile prin chei simplifică aceste fragmente, nu sunt recomandări pentru producție: preferă identități gestionate cu roluri Service Bus/Cosmos/OpenAI pe planuri de date cu acces limitat. Nu expune cheile în outputuri sau jurnale.
+**Presupuneri runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, și (pentru monitorizare) `azure-monitor-opentelemetry`; pune `shared` în calea de import Python din fiecare imagine serviciu. Containerul Cosmos `agent-state/tasks` trebuie să existe deja cu cheia partiției `/id`. Conexiunile bazate pe chei simplifică aceste fragmente, nu sunt recomandări pentru producție: preferă identități gestionate cu roluri la nivel data-plane scoped pentru Service Bus/Cosmos/OpenAI. Nu expune cheile în outputuri sau loguri.
 
-Livrarea Service Bus este **cel puțin o dată**. Păstrează idempotent mesajele pe sarcină **și pas**, folosește concurență optimistă (ETags) pentru citire/modificare/scriere stare, și reînnoiește blocarea mesajului în timpul procesării lungi. Simplul manager de stare de mai jos este doar secvențial și nu implementează aceste garanții de producție.
+Livrarea Service Bus este **cel puțin o dată**. Menține idempotenta per sarcină **și pas**, folosește concurență optimistă (ETag-uri) pentru citire/modificare/scriere stare, și reînnoiește blocările mesajelor pe durata procesării lungi. Managerul de stare simplu de mai jos este secvențial și nu implementează aceste garanții de producție.
 
 ### Structura proiectului
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Lecția 1: Modelul de coordonare secvențială
+## Lecția 1: Model de coordonare secvențială
 
 ### Implementare: Pipeline de creare conținut
 
-Hai să proiectăm un pipeline secvențial: Cercetare → Scriere → Editare. Publicarea este în afara acestui exemplu.
+Să proiectăm un pipeline secvențial: Cercetare → Scris → Editare. Publicarea este în afara acestui exemplu.
 
 ### 1. Configurare AZD
 
@@ -562,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Serviciu Orchestrator
+### 4. Serviciu orchestrator
 
 **Fișier: `src/orchestrator/app.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Agent de cercetare
+### 5. Agent cercetare
 
 **Fișier: `src/agents/research/app.py`**
 
@@ -893,21 +893,21 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Implementare și testare
+### 8. Depliați și testați
 
-Aceste comenzi se aplică **doar după ce implementezi fișierele lipsă din proiect**. Inițializarea agentului Foundry interactiv este un flux de lucru separat; nu generează acest design Service Bus.
+Aceste comenzi se aplică **numai după ce implementați fișierele lipsă din proiect**. Inițializarea interactivă a agentului Foundry este un flux de lucru separat; nu generează acest design Service Bus.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Vezi [Comenzi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru toate steagurile și opțiunile `azd ai`.
+> Vezi [Comenzile AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru toate flagurile și opțiunile `azd ai`.
 
 ```bash
 # Get orchestrator URL
@@ -919,7 +919,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Rezultat așteptat:**
+**✅ Output așteptat:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -936,7 +936,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Rezultat așteptat (finalizat):**
+**✅ Output așteptat (finalizat):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -964,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lecția 2: Modelul de coordonare paralelă
+## Lecția 2: Model de coordonare paralelă
 
-### Implementare: Agregator de cercetare multi-surse
+### Implementare: Agregator multi-sursă pentru cercetare
 
-Hai să construim un sistem paralel care colectează informații din mai multe surse simultan.
+Să construim un sistem paralel care adună informații din mai multe surse simultan.
 
 ### Orchestrator paralel
 
@@ -1124,23 +1124,23 @@ if __name__ == '__main__':
 ```
 
 **Beneficiile modelului paralel:**
-- ⚡ **Potrivit pentru latență mai mică** (limitata de cel mai lent worker plus suprasarcină de coordonare)
-- 🔄 **Poate susține rezultate parțiale** cu termene explicite și politică de eșec (neimplementată de agregatorul de bază)
-- 📈 **Scalabil** (adaugă ușor mai mulți agenți)
+- ⚡ **Latenta potențial mai mică** (limitată de cel mai lent lucrător plus overhead de coordonare)
+- 🔄 **Poate susține rezultate parțiale** cu termene explicite și politici de eșec (neimplementate de agregatorul simplu)
+- 📈 **Scalabil** (adăugare ușoară de agenți)
 
 ---
 
 ## Exerciții practice
 
-### Exercițiul 1: Adaugă gestionare timeout ⭐⭐ (Mediu)
+### Exercițiul 1: Adăugați gestionare timeout ⭐⭐ (Mediu)
 
-**Scop**: Implementează logica de timeout astfel încât agregatorul să nu aștepte la nesfârșit agenți lenți.
+**Scop**: Implementați logica de timeout astfel încât agregatorul să nu aștepte la nesfârșit agenții lenți.
 
-**Punct de plecare:** Rulează această simulare locală de termen-limită înainte de a o integra într-un worker de coadă. Un timeout verificat doar când sosește alt mesaj nu se declanșează dacă workerul lipsă nu trimite nimic.
+**Punct de plecare:** Rulați această simulare locală de termen-limită înainte să o integrați în workerul cozii. Verificarea timeout-ului doar când sosește un alt mesaj nu se declanșează dacă lucrătorul lipsă nu trimite nimic.
 
 **Pași**:
 
-1. **Adaugă urmărirea timeout-ului la agregator:**
+1. **Adăugați urmărirea timeout-ului în agregator:**
 
 ```python
 import asyncio
@@ -1164,13 +1164,13 @@ async def main():
 asyncio.run(main())
 ```
 
-2. **Rezultat așteptat:**
+2. **Output așteptat:**
 
 ```text
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integrare sistem coadă (sarcină de design):** Păstrează deadline-ul dispecerat și agenții așteptați la crearea sarcinii, rulează sweep periodic de deadline independent de rezultatele sosite, finalizează atomic rezultatele parțiale, și ignoră mesaje întârziate/duplicate pentru sarcini finalizate. Un timeout local nu anulează workerii remoti.
+3. **Integrare sistem cozi (sarcină de design):** Persistă termenul-limită de expediere și agenții așteptați când creezi sarcina, rulează sweep periodic al termenelor-limită independent de rezultatele sosite, finalizează atomic rezultatele parțiale și ignoră mesajele târzii/duplicat pentru sarcinile finalizate. Timeout-ul local nu întrerupe lucrătorii de la distanță.
 
 Pentru proiectul tău implementat doar:
 
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Criterii de succes:**
-- ✅ Testul local se termină după un termen-limită de o secundă, chiar dacă un agent nu este complet
+- ✅ Testul local returnează după termenul-limită de o secundă chiar dacă un agent nu a finalizat
 - ✅ Răspunsul indică rezultate parțiale (`"timed_out": true`)
-- ✅ Se returnează rezultatele disponibile (3 din 4 agenți)
+- ✅ Rezultatele disponibile sunt returnate (3 din 4 agenți)
 
 **Timp**: 20-25 minute
 
 ---
 
-### Exercițiul 2: Implementează logică de retry ⭐⭐⭐ (Avansat)
+### Exercițiul 2: Implementați logica retry ⭐⭐⭐ (Avansat)
 
-**Scop**: Reîncearcă automat sarcinile agenților eșuate înainte de a renunța.
+**Scop**: Reîncercați automat sarcinile agenților eșuați înainte de a renunța.
 
 **Pași**:
 
-1. **Folosește numărul de livrări Service Bus în loc de contori de retry personalizați pentru reintroducerea în coadă:**
+1. **Folosiți contorul de livrări Service Bus în loc de retrimiterea manuală a unui contor personalizat:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Adaugă handler de retry agenților:**
+2. **Adăugați handler retry agenților:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Monitorizează coada de mesaje nereușite (dead letter queue):**
+3. **Monitorizați coada dead letter:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Criterii de succes:**
-- ✅ Sarcinile eșuate se reîncearcă automat (până la 3 ori)
-- ✅ Backoff exponențial între reîncercări (5s, 10s, 20s), cu reînnoire blocare mesaj unde este necesar
-- ✅ După max. reîncercări, mesajele merg în coada dead letter
-- ✅ Mesajele dead letter pot fi inspectate; rejucarea necesită workflow de recuperare idempotent separat
+- ✅ Sarcinile eșuate reîncercate automat (până la 3 ori)
+- ✅ Backoff exponențial între încercări (5s, 10s, 20s), cu reînnoire lock mesaj când este nevoie
+- ✅ După încercările maxime, mesajele merg în coada dead letter
+- ✅ Mesajele din dead letter pot fi inspectate; redarea necesită flux separat de recuperare idempotentă
 
 **Timp**: 30-40 minute
 
 ---
 
-### Exercițiul 3: Implementează Circuit Breaker ⭐⭐⭐ (Avansat)
+### Exercițiul 3: Implementați Circuit Breaker ⭐⭐⭐ (Avansat)
 
-**Scop**: Previne căderile în cascadă oprind cererile către agenți care eșuează.
+**Scop**: Preveniți eșecurile în cascadă prin oprirea cererilor către agenții care eșuează.
 
 **Pași**:
 
-1. **Creează clasa circuit breaker:**
+1. **Creați clasa circuit breaker:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Aplică la apelurile agenților:**
+2. **Aplicați la apelurile agenților:**
 
 ```python
 # In orchestrator
@@ -1348,7 +1348,7 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Acest circuit protejează **operațiunea de trimitere**, nu finalizarea de către lucrătorul la distanță: înscrierea cu succes a unui mesaj în coadă nu spune nimic despre dacă un agent este activ. `send_message` este funcția de expeditor a aplicației tale. Pentru circuitele de execuție, introdu eșecurile/timeout-urile observate ale sarcinii într-un coordonator durabil. Această clasă din memorie este o demonstrație single-thread, nu un circuit breaker distribuit.
+Acest circuit protejează **operațiunea de trimitere**, nu finalizarea de către lucrătorul la distanță: adăugarea cu succes a unui mesaj în coadă nu spune nimic despre faptul dacă un agent este activ. `send_message` este funcția de trimitere a aplicației tale. Pentru circuite de execuție, introdu eșecurile/sesizările de timeout ale sarcinilor observate într-un coordonator durabil. Această clasă în memorie este o demonstrație cu un singur fir, nu un circuit breaker distribuit.
 
 3. **Testează circuit breaker local:**
 
@@ -1374,13 +1374,13 @@ print("Circuit breaker recovery verified")
 - ✅ Alți agenți continuă să funcționeze normal
 - ✅ Circuitul se închide automat când agentul se recuperează
 
-**Timp:** 40-50 minute
+**Durata**: 40-50 minute
 
 ---
 
 ## Monitorizare și depanare
 
-### Tracing Distribuit cu Application Insights
+### Tracing distribuit cu Application Insights
 
 **Fișier: `src/shared/tracing.py`**
 
@@ -1427,7 +1427,7 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
 
 ### Interogări Application Insights
 
-**Urmărește fluxurile de lucru multi-agent:**
+**Urmărește fluxuri de lucru multi-agent:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1466,24 +1466,24 @@ exceptions
 
 ---
 
-## Analiza Costurilor
+## Analiza costurilor
 
-### Costurile Sistemului Multi-Agent (Estimări lunare)
+### Costuri sistem multi-agent (estimări lunare)
 
-Numere ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565$/lună**. Verifică tarifele regionale curente, orele active/inactive ale replicilor, mixul de tokeni input/output, stocarea și telemetria. Serverless nu are un minim de debit alocat, dar facturează cererile și stocarea.
+Doar cifre ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565 $/lună**. Verifică tarifele regionale curente, orele active/inactive ale replicilor, mixul de tokeni de intrare/ieșire, stocarea și telemetria. Serverless nu are un minim de throughput alocat, dar tot facturează cererile și stocarea.
 
 | Componentă | Configurație | Cost |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | 30-50$ |
-| **4 Agenți** | 4 Container Apps (0.5 vCPU, 1GB fiecare) | 60-120$ |
-| **Service Bus** | Nivel Standard, 10M mesaje | 10-20$ |
-| **Cosmos DB** | Serverless, 5GB stocare, 1M RU | 25-50$ |
-| **Blob Storage** | 10GB stocare, 100K operațiuni | 5-10$ |
-| **Application Insights** | 5GB ingestie | 10-15$ |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokeni | 100-300$ |
-| **Total** | | **240-565$/lună** |
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | 30-50 $ |
+| **4 Agenți** | 4 Container Apps (0.5 vCPU, 1GB fiecare) | 60-120 $ |
+| **Service Bus** | nivel Standard, 10M mesaje | 10-20 $ |
+| **Cosmos DB** | Serverless, 5GB stocare, 1M RU | 25-50 $ |
+| **Blob Storage** | 10GB stocare, 100K operațiuni | 5-10 $ |
+| **Application Insights** | 5GB ingestie | 10-15 $ |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokeni | 100-300 $ |
+| **Total** | | **240-565 $/lună** |
 
-### Strategii de Optimizare a Costurilor
+### Strategii de optimizare a costurilor
 
 1. **Folosește serverless unde este posibil:**
    ```bicep
@@ -1502,13 +1502,13 @@ Numere ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565
    }
    ```
 
-3. **Folosește batching pentru Service Bus:**
+3. **Folosește batch-uri pentru Service Bus:**
    ```python
    # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache pentru rezultatele utilizate frecvent:**
+4. **Cachează rezultatele folosite frecvent:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1517,18 +1517,18 @@ Numere ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565
 
 ---
 
-## Cele Mai Bune Practici
+## Cele mai bune practici
 
-### ✅ FAC:
+### ✅ FA:
 
-1. **Folosește operațiuni idempotente**
+1. **Folosește operații idempotente**
    ```python
    # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Implementarea unei jurnalizări cuprinzătoare**
+2. **Implementează logging complet**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1542,14 +1542,14 @@ Numere ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565
    }
    ```
 
-4. **Setează TTL (time-to-live) pentru mesaje**
+4. **Setează TTL (durata de viață) pentru mesaje**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Monitorizează cozile dead letter**
+5. **Monitorizează cozi de tip dead letter**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1578,7 +1578,7 @@ Numere ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Nu folosi retrieri infinite**
+4. **Nu folosi retry-uri infinite**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1586,16 +1586,16 @@ Numere ilustrative pentru planificare, nu oferte: suma de mai jos este **240-565
 
 ---
 
-## Ghid de Depanare
+## Ghid de depanare
 
-### Problema: Mesaje blocate în coadă
+### Problemă: Mesaje blocate în coadă
 
 **Simptome:**
 - Mesajele se acumulează în coadă
 - Agenții nu procesează
-- Starea sarcinii rămâne "în așteptare"
+- Starea sarcinii este blocată pe "în așteptare"
 
-**Diagnoză:**
+**Diagnostic:**
 ```bash
 # Check queue depth
 az servicebus queue show \
@@ -1610,7 +1610,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **Soluții:**
 
-1. **Crește replicile agentului:**
+1. **Crește replica agenților:**
    ```bash
    az containerapp update \
      --resource-group "$RG_NAME" \
@@ -1630,14 +1630,14 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problema: Timeout sarcină/nu se finalizează niciodată
+### Problemă: Timeout la sarcină/nu se finalizează niciodată
 
 **Simptome:**
 - Starea sarcinii rămâne "în progres"
 - Unii agenți finalizează, alții nu
 - Fără mesaje de eroare
 
-**Diagnoză:**
+**Diagnostic:**
 ```bash
 # Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Verifică dacă toți agenții rulează:**
+3. **Asigură-te că toți agenții rulează:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1668,21 +1668,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Află Mai Multe
+## Află mai multe
 
-### Documentație Oficială
+### Documentație oficială
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Pattern-uri de Orchestrare AI Agent](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Următorii Pași în Curs
-- ← Anterior: [Planificarea Capacității](capacity-planning.md)
+### Pașii următori în acest curs
+- ← Anterior: [Planificarea capacității](capacity-planning.md)
 - → Următor: [Selecția SKU](sku-selection.md)
-- 🏠 [Acasă Curs](../../README.md)
+- 🏠 [Acasă curs](../../README.md)
 
-### Exemple Relaționate
-- [Exemplu Microservicii](../../../../examples/microservices) - Pattern-uri de comunicare a serviciilor
+### Exemple conexe
+- [Exemplu microservicii](../../../../examples/microservices) - Modele de comunicare între servicii
 - [Exemplu Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Integrare AI
 
 ---
@@ -1690,24 +1690,24 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ## Rezumat
 
 **Ai învățat:**
-- ✅ Cinci pattern-uri de coordonare (secuențial, paralel, ierarhic, bazat pe evenimente, consens)
+- ✅ Cinci modele de coordonare (secuențial, paralel, ierarhic, bazat pe evenimente, consens)
 - ✅ Arhitectură multi-agent pe Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Managementul stării în agenți distribuiți
-- ✅ Tratarea timeout-urilor, retrierilor și circuit breaker-elor
+- ✅ Administrarea stării între agenți distribuiți
+- ✅ Gestionarea timeout-urilor, retry-urilor și circuit breaker-elor
 - ✅ Monitorizarea și depanarea sistemelor distribuite
 - ✅ Strategii de optimizare a costurilor
 
-**Concluzii Cheie:**
-1. **Alege pattern-ul potrivit** - Secvențial pentru fluxuri ordonate, paralel pentru viteză, bazat pe evenimente pentru flexibilitate
-2. **Gestionează starea cu grijă** - Folosește Cosmos DB sau similar pentru stare partajată
-3. **Gestionează eșecurile cu eleganță** - Timeout-uri, retrieri, circuit breaker-e, cozi dead letter
-4. **Monitorizează totul** - Tracing distribuit este esențial pentru depanare
+**Puncte cheie:**
+1. **Alege modelul potrivit** - Secvențial pentru fluxuri ordonate, paralel pentru viteză, bazat pe evenimente pentru flexibilitate
+2. **Gestionează starea cu atenție** - Folosește Cosmos DB sau similar pentru starea partajată
+3. **Gestionează eșecurile elegant** - Timeout-uri, retry-uri, circuit breaker-e, cozi dead letter
+4. **Monitorizează totul** - Tracing distribuit esențial pentru depanare
 5. **Optimizează costurile** - Scalează la zero, folosește serverless, implementează caching
 
-**Următorii Pași:**
+**Pașii următori:**
 1. Finalizează exercițiile practice
 2. Construiește un sistem multi-agent pentru cazul tău de utilizare
-3. Studiază [Selecția SKU](sku-selection.md) pentru optimizarea performanței și costului
+3. Studiază [Selecția SKU](sku-selection.md) pentru a optimiza performanța și costul
 
 ---
 

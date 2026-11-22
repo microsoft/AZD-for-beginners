@@ -1,6 +1,6 @@
-# 6. Démantèlement de l'infrastructure
+# 6. Démantèlement de l'Infrastructure
 
-!!! tip "À LA FIN DE CE MODULE, VOUS SAUREZ"
+!!! tip "À LA FIN DE CE MODULE, VOUS SEREZ CAPABLE DE"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Exercices bonus
+## Exercices Bonus
 
-Avant de démanteler le projet, prenez quelques minutes pour une exploration libre.
+Avant de démanteler le projet, prenez quelques minutes pour une exploration ouverte.
 
-!!! info "Essayez ces pistes d'exploration"
+!!! info "Essayez ces incitations à l'exploration"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Avant de démanteler le projet, prenez quelques minutes pour une exploration lib
 
 ---
 
-## Déprovisionnement de l'infrastructure
+## Suppression de l'infrastructure
 
-1. Démanteler l'infrastructure est aussi simple que :
+!!! warning "Si vous avez également terminé l'exercice avec l'agent hébergé GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Le démantèlement de l'infrastructure est aussi simple que :
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Confirmez l'environnement sélectionné et examinez les ressources à supprimer. Cela supprime les ressources Azure et peut détruire les données. Conservez l'invite de confirmation pour ce workflow d'apprentissage. Une fois terminé, vous verrez une sortie similaire à :
+1. Confirmez l'environnement sélectionné et examinez les ressources à supprimer. Cela supprime les ressources Azure et peut détruire des données. Conservez l'invite de confirmation pour ce flux d'apprentissage. Une fois terminé, vous verrez une sortie similaire à :
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Avant de démanteler le projet, prenez quelques minutes pour une exploration lib
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Vérifiez la suppression dans le portail et recherchez les ressources en dehors du périmètre du déploiement. Les rapports de coûts et les mises à jour des quotas peuvent être retardés. La configuration locale `.azure` reste en place sauf si vous la supprimez explicitement.
+1. Vérifiez la suppression dans le portail et vérifiez les ressources en dehors du périmètre du déploiement. Les rapports de coûts et les mises à jour de quota peuvent être retardés. La configuration locale `.azure` reste à moins que vous ne la supprimiez explicitement.
 
-1. `azd down --purge` demande également la suppression permanente des ressources supprimées de manière temporaire prises en charge. Utilisez-le uniquement si la récupération n'est pas nécessaire et si vous comprenez les politiques de rétention/protection contre la purge. Cela ne garantit pas la libération immédiate des quotas.
+1. `azd down --purge` demande en plus la suppression permanente des ressources prises en charge en suppression douce. Utilisez-le uniquement lorsque la récupération n'est pas nécessaire et que vous comprenez les politiques de rétention/protection contre la purge. Cela ne garantit pas la libération immédiate du quota.
 
-1. Ne redéployez pas juste pour vérifier le nettoyage. Un `azd up` intentionnel ultérieur peut recréer les ressources en utilisant les entrées locales restantes, ce qui engendre de nouveau des frais. Les mises à jour du modèle utilisent normalement des modifications de provisionnement prises en charge, pas un démantèlement.
+1. Ne redéployez pas juste pour vérifier le nettoyage. Un `azd up` ultérieur intentionnel peut recréer des ressources en utilisant les entrées locales restantes et entraîner à nouveau des frais. Les mises à jour du modèle utilisent normalement des modifications de provisionnement prises en charge, pas un démantèlement.
 
 ---
 

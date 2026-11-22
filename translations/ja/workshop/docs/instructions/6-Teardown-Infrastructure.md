@@ -1,6 +1,6 @@
-# 6. インフラの解体
+# 6. インフラストラクチャの解体
 
-!!! tip "このモジュールの終了時には以下ができるようになります"
+!!! tip "このモジュールの終わりには以下のことができるようになります"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## ボーナス演習
+## 追加演習
 
-プロジェクトを解体する前に、数分間かけてオープンエンドな探索をしてみましょう。
+プロジェクトを解体する前に、数分間を使って自由形式の探索をしてみましょう。
 
-!!! info "これらの探索用の問いかけを試してみてください"
+!!! info "これらの探索プロンプトを試してください"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,14 +31,18 @@
 
 ## インフラの解放
 
-1. インフラを解体するのは簡単です:
+!!! warning "もしGAホステッドエージェントの演習も完了しているなら"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. インフラの解体は次のように簡単です:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. 選択された環境を確認し、削除されるリソースを見直します。これによりAzureリソースが削除され、データが消失する可能性があります。この学習ワークフローでは確認プロンプトを維持してください。完了すると次のような出力が表示されます:
+1. 選択した環境を確認し、削除されるリソースをレビューします。これはAzureリソースを削除し、データを破壊する可能性があります。この学習ワークフローでは確認プロンプトを維持してください。完了すると次のような出力が表示されます：
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. ポータルで削除を確認し、デプロイメントの範囲外のリソースがないかチェックします。コスト報告やクォータの更新には遅延があります。ローカルの`.azure`設定は明示的に削除しない限り残ります。
+1. ポータルで削除を確認し、デプロイメントのスコープ外のリソースもチェックします。コストレポートや割り当ての更新には遅延が生じることがあります。ローカルの`.azure`設定は明示的に削除しない限り残ります。
 
-1. `azd down --purge` はサポートされているソフト削除されたリソースの永久削除も要求します。リカバリが不要で、保持・削除保護ポリシーを理解している場合のみ使ってください。即時クォータ解放を保証するわけではありません。
+1. `azd down --purge` は、対応しているソフト削除リソースの恒久的な削除も要求します。復旧が不要で、保持・パージ保護ポリシーを理解している場合にのみ使用してください。即時の割り当て解放は保証されません。
 
-1. クリーンアップを確認するためだけに再デプロイしないでください。後から意図的に`azd up`を実行すれば、残っているローカルの入力を使ってリソースを再作成できますが、再び料金が発生します。モデルの更新は通常、解体ではなくサポートされたプロビジョニング変更を使用します。
+1. クリーンアップ確認のためだけに再デプロイしないでください。後で意図的に `azd up` を行うことで、残っているローカルの入力を使ってリソースを再作成でき、再度料金が発生します。モデルの更新は通常、対応可能なプロビジョニング変更で行われ、解体ではありません。
 
 ---
 

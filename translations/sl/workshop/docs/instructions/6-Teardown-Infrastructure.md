@@ -1,4 +1,4 @@
-# 6. Razstavljanje infrastrukture
+# 6. Odstranitev infrastrukture
 
 !!! tip "NA KONCU TEGA MODULA BOSTE ZMOGLI"
 
@@ -9,11 +9,11 @@
 
 ---
 
-## Dodatne vaje
+## Bonus vaje
 
-Preden razstavite projekt, si vzemite nekaj minut za odprto raziskovanje.
+Preden odstranite projekt, si vzemite nekaj minut za odprto raziskovanje.
 
-!!! info "Poskusite te raziskovalne iztočnice"
+!!! info "Poskusite te raziskovalne izzive"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,14 +31,18 @@ Preden razstavite projekt, si vzemite nekaj minut za odprto raziskovanje.
 
 ## Odstranitev infrastrukture
 
-1. Razstavljanje infrastrukture je enostavno:
+!!! warning "Če ste prav tako opravili vajo z GA hostanim agentom"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Odstranitev infrastrukture je enostavno:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Potrdite izbrano okolje in preglejte vire, ki jih je treba izbrisati. To odstrani Azure vire in lahko uniči podatke. Obdržite potrditveni poziv za ta učni potek. Ko je končano, boste videli izhod, podoben temu:
+1. Potrdite izbrano okolje in preglejte vire, ki bodo izbrisani. To odstrani Azure vire in lahko uniči podatke. Za ta učni postopek obdržite potrditveni poziv. Ko je končano, boste videli izhod, podoben naslednjemu:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Preden razstavite projekt, si vzemite nekaj minut za odprto raziskovanje.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Preverite izbris v portalu in preverite vire zunaj obsega namestitve. Poročanje stroškov in posodobitve kvot lahko zamujajo. Lokalna konfiguracija `.azure` ostane, razen če jo izrecno odstranite.
+1. Preverite izbris v portalu in poiščite vire zunaj obsega implementacije. Poročanje stroškov in posodobitve kvot lahko zaostajajo. Lokalna konfiguracija `.azure` ostane, razen če jo izrecno odstranite.
 
-1. `azd down --purge` dodatno zahteva trajni izbris podprtih mehko izbrisanih virov. Uporabite ga samo, ko ni potrebna obnovitev in ko razumete politike shranjevanja/zaščite pred čiščenjem. Ne zagotavlja takojšnje sprostitve kvote.
+1. `azd down --purge` dodatno zahteva trajen izbris podprtih mehko izbrisanih virov. Uporabite ga le, ko obnova ni potrebna in razumete politike zadrževanja/zaščite pred izbrisom. Ne zagotavlja takojšnje sprostitve kvote.
 
-1. Ne ponovno uvajajte samo za preverjanje čiščenja. Kasnejši namerni `azd up` lahko znova ustvari vire z uporabo preostalih lokalnih vhodov in spet povzroči stroške. Posodobitve modela običajno uporabljajo podprte spremembe namestitve, ne razstavljanja.
+1. Ne ponovno uvajajte samo za preverjanje čiščenja. Kasnejši namerni `azd up` lahko ponovno ustvari vire z uporabo preostalih lokalnih vhodov in spet zaračunava. Posodobitve modela običajno uporabljajo podprte spremembe oskrbe, ne odstranitve.
 
 ---
 

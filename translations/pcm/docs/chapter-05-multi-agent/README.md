@@ -8,11 +8,11 @@
 
 Dis chapter dey cover advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
 
-> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments no run.
+> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments were not executed.
 
 ## Learning Objectives
 
-After you finish dis chapter, you go:
+By completing dis chapter, you go:
 - Understand multi-agent architecture patterns
 - Deploy coordinated AI agent systems
 - Implement agent-to-agent communication
@@ -24,11 +24,11 @@ After you finish dis chapter, you go:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Hands-on: deploy working multi-agent app with `azd up` | 45 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies (continue for Chapter 6) | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Hands-on: deploy a working multi-agent app with `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies (continues in Chapter 6) | 30 min |
 | 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment example | 30 min |
 
-> **Start with Lesson 1.** Na the only hands-on, deployable lesson for dis chapter. Lesson 2 dey Chapter 6 (e join with pre-deployment planning), and the [Retail Multi-Agent Solution](../../examples/retail-scenario.md) na architecture blueprint—design reference, no be one-command template.
+> **Start with Lesson 1.** Na di only fully hands-on, deployable lesson for dis chapter. Lesson 2 dey for Chapter 6 (e share wit pre-deployment planning), and the [Retail Multi-Agent Solution](../../examples/retail-scenario.md) na architecture blueprint—design reference, no be one-command template.
 
 ---
 
@@ -39,15 +39,15 @@ After you finish dis chapter, you go:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Which approach?** Use `azd init --template` to start from working sample. Use `azd ai agent init` interactively, or `azd ai agent init --template <path-to-azure.yaml>` to adopt current agent project. See [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for version requirements and evaluation migration.
+> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` interactively, or `azd ai agent init --template <path-to-azure.yaml>` to adopt a current agent project. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for version requirements and evaluation migration.
 
-Run these options for different empty folders. Agents extension `1.0.0-beta.23` need `azd >= 1.37.0`; its interactive flow no dey generate custom Service Bus pipeline for coordination lesson.
+Run these alternatives in separate empty folders. The GA Foundry workflow requires `azd >= 1.37.0`; im interactive flow no dey generate the custom Service Bus pipeline for the coordination lesson. For local testing, code deployment, and new-versus-reused-project cleanup, follow the [hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -65,12 +65,12 @@ graph TD
 
 The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 
-- **Customer Agent**: Manages how user dey interact and e preference dem
-- **Inventory Agent**: Dey manage stock and order processing
-- **Orchestrator**: E dey coordinate between agents
+- **Customer Agent**: Handles user interactions and preferences
+- **Inventory Agent**: Manages stock and order processing
+- **Orchestrator**: Coordinates between agents
 - **Shared Memory**: Cross-agent context management
 
-### Services Wey Dem Use
+### Services Used
 
 | Service | Purpose |
 |---------|---------|

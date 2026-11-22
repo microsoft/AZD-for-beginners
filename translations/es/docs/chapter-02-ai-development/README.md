@@ -1,22 +1,24 @@
-# Capítulo 2: Desarrollo con IA como Prioridad
+# Capítulo 2: Desarrollo AI-First
 
-**📚 Curso**: [AZD para Principiantes](../../README.md) | **⏱️ Duración**: 4-5 horas incluyendo el taller | **⭐ Complejidad**: Intermedio
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 4-5 horas incluyendo el taller | **⭐ Complejidad**: Intermedio
 
 ---
 
 ## Resumen
 
-Este capítulo se centra en desplegar aplicaciones con IA usando Azure Developer CLI y los servicios de Microsoft Foundry. Desde simples aplicaciones de chat con IA hasta agentes inteligentes con herramientas.
+Este capítulo se centra en desplegar aplicaciones potenciadas por IA usando Azure Developer CLI y servicios Microsoft Foundry. Desde aplicaciones simples de chat IA hasta agentes inteligentes con herramientas.
 
-> **Revisión de lanzamiento (2026-11-04):** La guía de AI CLI fue verificada contra la documentación/fuentes publicadas `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, y `azure.ai.evaluations` `1.0.0-beta.2`. Use `azd >= 1.37.0` para el flujo de trabajo combinado. Las evaluaciones ahora usan el namespace separado `azd ai eval`; vea [cambios de lanzamiento y guía de migración](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Esto no es una validación en tiempo real de despliegue.
+> **Actualización Foundry GA (2026-11-09):** El paquete `microsoft.foundry` 1.0 está [disponible en general](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use `azd >= 1.37.0`; las evaluaciones siguen siendo una instalación separada. El [recorrido del agente alojado](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) cubre pruebas locales con Agent Inspector y despliegue de código remoto. Esto es una revisión de la documentación, no una validación de despliegue en vivo; las características previas opcionales mantienen su propio estado.
 
 ## Objetivos de Aprendizaje
 
 Al completar este capítulo, usted podrá:
-- Desplegar aplicaciones de IA usando plantillas preconstruidas de AZD
+- Desplegar aplicaciones IA usando plantillas AZD preconstruidas
 - Entender la integración de Microsoft Foundry con AZD
-- Configurar y personalizar agentes de IA con herramientas
-- Desplegar aplicaciones RAG (Generación Aumentada por Recuperación)
+- Instalar el paquete GA y probar un agente alojado localmente antes de desplegar su código fuente a Foundry
+- Revisar `azure.yaml`, activos de evaluación y limpieza de proyectos nuevos frente a reutilizados
+- Configurar y personalizar agentes IA con herramientas
+- Desplegar aplicaciones RAG (Generación aumentada por recuperación)
 
 ---
 
@@ -24,16 +26,18 @@ Al completar este capítulo, usted podrá:
 
 | # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Integración Microsoft Foundry](microsoft-foundry-integration.md) | Conectar AZD con servicios Foundry | 30 min |
+| 1 | [Integración Microsoft Foundry](microsoft-foundry-integration.md) | Paquete GA, flujo de trabajo local a nube con agente alojado y evaluaciones | 60 min |
 | 2 | [Guía de Agentes IA](agents.md) | Desplegar agentes inteligentes con herramientas | 45 min |
-| 3 | [Despliegue de Modelos IA](ai-model-deployment.md) | Desplegar y configurar modelos de IA | 30 min |
-| 4 | [Laboratorio Taller de IA](ai-workshop-lab.md) | Práctica: Explorar una plantilla y planificar tu conversión | 2-3 horas |
+| 3 | [Despliegue de Modelos IA](ai-model-deployment.md) | Desplegar y configurar modelos IA | 30 min |
+| 4 | [Laboratorio Taller IA](ai-workshop-lab.md) | Práctica: Explora una plantilla y planea tu conversión | 2-3 horas |
 
 ---
 
 ## 🚀 Inicio Rápido
 
-Elige una opción en un directorio vacío nuevo. El `.` final inicializa el directorio actual; de lo contrario AZD puede crear un subdirectorio sin cambiar el directorio de trabajo de tu shell.
+Elige una opción en un directorio nuevo y vacío. El sufijo `.` inicializa el directorio actual; de lo contrario AZD puede crear un subdirectorio sin cambiar el directorio de trabajo del shell.
+
+Para la **ruta GA de despliegue de código con agente alojado**, comienza con el [recorrido guiado](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Requiere AZD 1.37.0+, uv actual, Python 3.13+, permisos Foundry y cuota de modelo. Las plantillas completas de aplicación abajo son alternativas, no prerrequisitos para ese recorrido.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,27 +55,27 @@ azd up
 
 ---
 
-## 🤖 Plantillas Destacadas de IA
+## 🤖 Plantillas IA Destacadas
 
 | Plantilla | Descripción | Servicios |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG con citas | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente IA con herramientas | Servicio de Agentes IA |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat IA básico | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG con citas | OpenAI + Búsqueda IA |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente IA con herramientas | Servicio Agente IA |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat IA básico | OpenAI + Aplicaciones en contenedores |
 
 ---
 
-## 💰 Consciencia de Costos
+## 💰 Conciencia de Costos
 
-Estos son rangos ilustrativos, no cotizaciones ni topes; el tráfico del modelo, SKUs de búsqueda/cómputo, región y características opcionales pueden excederlos. Revise la guía de precios actual de su ejemplo elegido antes de provisionar.
+Estos son rangos ilustrativos, no cotizaciones ni topes; el tráfico de modelos, SKU de Búsqueda/cómputo, región y características opcionales pueden excederlos. Revise la guía de precios actual de su ejemplo elegido antes de aprovisionar.
 
-| Entorno | Coste Mensual Estimado |
+| Entorno | Costo Mensual Estimado |
 |-------------|----------------------|
 | Desarrollo | $80-150 |
 | Pruebas | $150-300 |
 | Producción | $300-3,500+ |
 
-**Consejo:** Ejecute `azd down` después de probar para evitar cargos.
+**Limpieza:** Revise `azd down` antes de confirmar: para un proyecto Foundry recién creado borra el grupo de recursos y todo en él. Para un proyecto Foundry reutilizado deja el proyecto y recursos del agente en su lugar; siga la [guía de limpieza del recorrido](microsoft-foundry-integration.md#7-clean-up-deliberately) para eliminar recursos no deseados por separado.
 
 ---
 
@@ -88,7 +92,7 @@ Estos son rangos ilustrativos, no cotizaciones ni topes; el tráfico del modelo,
 ## 📖 Recursos Relacionados
 
 - [Resolución de Problemas IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Prácticas de Producción IA](../chapter-08-production/production-ai-practices.md)
+- [Prácticas de IA en Producción](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

@@ -1,6 +1,6 @@
-# 6. Smantellare l'Infrastruttura
+# 6. Smantellare l’Infrastruttura
 
-!!! tip "ALLA FINE DI QUESTO MODULO SARAI IN GRADO DI"
+!!! tip "AL TERMINE DI QUESTO MODULO SARAI IN GRADO DI"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,9 +9,9 @@
 
 ---
 
-## Esercizi Bonus
+## Esercizi Extra
 
-Prima di smantellare il progetto, prenditi qualche minuto per fare un'esplorazione aperta.
+Prima di smantellare il progetto, prenditi qualche minuto per un’esplorazione aperta.
 
 !!! info "Prova questi spunti di esplorazione"
 
@@ -29,7 +29,11 @@ Prima di smantellare il progetto, prenditi qualche minuto per fare un'esplorazio
 
 ---
 
-## Deprovisionamento Infra
+## Deprovisionare l'Infra
+
+!!! warning "Se hai anche completato l’esercizio con l’hosted-agent GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
 
 1. Smantellare l'infrastruttura è semplice come:
       
@@ -38,7 +42,7 @@ Prima di smantellare il progetto, prenditi qualche minuto per fare un'esplorazio
       azd show
       azd down
       ```
-1. Confermare l'ambiente selezionato e rivedere le risorse da eliminare. Questo rimuove risorse Azure e può distruggere i dati. Mantieni il prompt di conferma per questo flusso di apprendimento. Una volta completato vedrai un output simile a:
+1. Conferma l'ambiente selezionato e rivedi le risorse da eliminare. Questo rimuove risorse Azure e può distruggere dati. Mantieni il prompt di conferma per questo workflow di apprendimento. Al termine vedrai un output simile a:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Prima di smantellare il progetto, prenditi qualche minuto per fare un'esplorazio
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Verificare l'eliminazione nel portale e controllare le risorse al di fuori dell'ambito della distribuzione. I report sui costi e gli aggiornamenti delle quote possono subire ritardi. La configurazione locale `.azure` rimane a meno che non venga rimossa esplicitamente.
+1. Verifica l'eliminazione nel portale e controlla risorse al di fuori dell'ambito della distribuzione. I report di costo e gli aggiornamenti di quota possono essere ritardati. La configurazione locale `.azure` rimane a meno che non venga esplicitamente rimossa.
 
-1. `azd down --purge` richiede inoltre l'eliminazione permanente delle risorse soft-deleted supportate. Usalo solo quando il recupero non è necessario e comprendi le politiche di conservazione/protezione dall'eliminazione. Non garantisce il rilascio immediato della quota.
+1. `azd down --purge` richiede inoltre l'eliminazione permanente delle risorse soft-deleted supportate. Usalo solo quando il recupero non è necessario e conosci le politiche di retention/protezione dalla cancellazione. Non garantisce il rilascio immediato della quota.
 
-1. Non ridistribuire solo per verificare la pulizia. Un successivo `azd up` intenzionale può ricreare le risorse utilizzando gli input locali rimanenti e comporta nuovamente addebiti. Gli aggiornamenti del modello normalmente utilizzano modifiche di provisioning supportate, non lo smantellamento.
+1. Non ridistribuire solo per verificare la pulizia. Una successiva `azd up` intenzionale può ricreare risorse usando gli input locali rimanenti, e genera di nuovo costi. Gli aggiornamenti del modello normalmente usano modifiche di provisioning supportate, non lo smantellamento.
 
 ---
 

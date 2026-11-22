@@ -1,4 +1,4 @@
-# Luku 8: Tuotanto- ja Yrityskäytännöt
+# Luku 8: Tuotanto- ja yrityskäytännöt
 
 **📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2-3 tuntia | **⭐ Vaativuus**: Edistynyt
 
@@ -6,20 +6,20 @@
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään yrityskäyttöön soveltuvia käyttöönotto-malleja, tietoturvan vahvistamista, valvontaa ja kustannusten optimointia tuotannon AI-kuormituksille.
+Tässä luvussa käsitellään yrityskäyttöön soveltuvia käyttöönottoja, turvallisuuden vahvistamista, valvontaa ja kustannusten optimointia tuotannon tekoälytyökuormille.
 
-Tämä on arkkitehtoninen viite, ei valmis tuotantoon otettava käyttöönotto-malli. Esimerkit jättävät pois integraatiodetaljit, jotka on lisättävä ja testattava omassa sovelluksessasi; tarkistuslistan lukeminen ei takaa tuotantovalmiutta.
+Tämä on arkkitehtuuriviite, ei täydellinen käyttöön sopiva tuotantomalli. Esimerkit jättävät pois integraatiotiedot, jotka tulee antaa ja testata omassa sovelluksessasi; tarkistuslistan lukeminen ei takaa tuotantovalmiutta.
 
-> **Julkaisuarviointi (2026-11-04):** AI CLI -ohjeistus tarkistettiin `azd 1.37.2`, agenttien `1.0.0-beta.23` ja arviointien `1.0.0-beta.2` dokumentaation/lähteen perusteella. Katso [julkaisumuutokset ja korjaukset](production-ai-practices.md#recent-release-changes-and-fixes) yhteensopivuusvaatimuksista ja migraatiotiedoista; tämä ei ole reaaliaikainen käyttöönoton validaatio.
+> **Foundryn GA-päivitys (2026-11-09):** Käytä `azd >= 1.37.0` ja yleisesti saatavilla olevaa `microsoft.foundry` 1.0 -pakettia Foundry-työnkuluille; arvioinnit asennetaan erikseen. Katso [julkaisun laajuus ja migraatio](production-ai-practices.md#recent-release-changes-and-fixes) sekä [valtuutettu putkiesimerkki](production-ai-practices.md#cicd-pipeline-configuration). Tämä on dokumentaation katsaus, ei suoran käyttöönoton vahvistus tai kattava GA-status valinnaisille esikatseluominaisuuksille.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamisen jälkeen osaat:
-- Ottaa käyttöön monialueisia resilienttejä sovelluksia
-- Toteuttaa yritystason tietoturvakäytännöt
-- Määrittää kattavan valvonnan
-- Optimoida kustannuksia suuressa mittakaavassa
-- Perustaa CI/CD-putket AZD:llä
+Tässä luvussa opit:
+- Ottamaan käyttöön monialueiset vikasietoiset sovellukset
+- Toteuttamaan yritysturvallisuusmalleja
+- Konfiguroimaan kattava valvonta
+- Optimoimaan kustannuksia laajassa mittakaavassa
+- Määrittämään CI/CD-putket AZD:llä
 
 ---
 
@@ -27,25 +27,25 @@ Tämän luvun suorittamisen jälkeen osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Tuotannon AI-käytännöt](production-ai-practices.md) | Yrityskäyttöön soveltuvat käyttöönotto-mallit | 90 min |
+| 1 | [Tuotannon tekoälykäytännöt](production-ai-practices.md) | Yrityskäyttöön soveltuvat mallit | 90 min |
 
 ---
 
 ## 🚀 Tuotannon tarkistuslista
 
-- [ ] Monialueinen käyttöönotto resilienttiyttä varten
-- [ ] Hallinnoitu identiteetti tunnistautumiseen (ei avaimia)
+- [ ] Monialueinen käyttöönotto vikasietoisuutta varten
+- [ ] Hallittu identiteetti todennukseen (ei avaimia)
 - [ ] Application Insights valvontaan
-- [ ] Kustannusbudjetit ja hälytykset määritetty
-- [ ] Tietoturvaskannaus otettu käyttöön
-- [ ] CI/CD-putkiston integrointi
-- [ ] Katastrofipalautussuunnitelma
+- [ ] Kustannusbudjetit ja hälytykset konfiguroituina
+- [ ] Turvallisuusskannaus aktivoitu
+- [ ] CI/CD-putken integrointi
+- [ ] Varmuuskopiointisuunnitelma
 
 ---
 
 ## 🏗️ Arkkitehtuurimallit
 
-### Malli 1: Mikropalveluiden AI
+### Malli 1: Mikroserviisit AI
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Tietoturvan parhaat käytännöt
+## 🔐 Turvallisuuden parhaat käytännöt
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -83,16 +83,16 @@ properties: {
 
 ---
 
-## 💰 Kustannusten optimointi
+## 💰 Kustannusoptimointi
 
-| Strategia | Keskeinen rajoite |
+| Strategia | Päärajoitus |
 |----------|---------|
-| Skaalaus nollaan (Container Apps) | Tarvitsee asianmukaisen laukaisevan tapahtuman; muut palvelut aiheuttavat silti kustannuksia |
-| Käytä kulutusluokkia kehitykseen | Vertaa valitun palvelun hinnoittelua ja kuormaa |
+| Skaalaa nollaan (Container Apps) | Tarvitsee sopivan laukaisimen; muut palvelut tuottavat edelleen kustannuksia |
+| Käytä kulutustasoja kehityksessä | Vertaa valittua palvelun hinnoittelua ja työkuormaa |
 | Aikataulutettu skaalaus | Skaalaa tuetun infrastruktuurin/automaation kautta |
-| Varaus/varattu kapasiteetti | Vain tuetuissa tapauksissa; sitoumukset voivat lisätä seisokkikustannuksia |
+| Varaus/provisioitu kapasiteetti | Vain kun tuettu; sitoumukset voivat lisätä käyttämättömiä kustannuksia |
 
-Käytä [täydellistä budjettikuvioresurssia](production-ai-practices.md#2-cost-monitoring-and-budgets) kelvollisella aloituspäivällä, laskutusalueella, vastaanottajilla ja käyttöoikeuksilla. Budjetti lähettää hälytyksiä; se ei rajoita kulutusta. Säästöt riippuvat mitatusta käytöstä, eivätkä ne ole taattuja prosentteja.
+Käytä [täydellistä budjettimallia](production-ai-practices.md#2-cost-monitoring-and-budgets) kelvollisella aloituspäivällä, laskutusalueella, vastaanottajilla ja käyttöoikeuksilla. Budjetti lähettää hälytyksiä; se ei rajoita menoja. Säästöt riippuvat mitatusta käytöstä, eivätkä ole taattuja prosentteja.
 
 ---
 
@@ -115,14 +115,14 @@ az monitor metrics list --resource <resource-id>
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 7: Vianmääritys](../chapter-07-troubleshooting/README.md) |
-| **Kurssi valmis** | [Kurssin etusivu](../../README.md) |
+| **Edellinen** | [Luku 7: Ongelmien ratkominen](../chapter-07-troubleshooting/README.md) |
+| **Kurssi valmis** | [Kurssin koti](../../README.md) |
 
 ---
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [AI Agenttien opas](../chapter-02-ai-development/agents.md)
+- [AI-agenttien opas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Moniagenttiratkaisut](../chapter-05-multi-agent/README.md)
 - [Mikropalveluesimerkki](../../examples/microservices/README.md)

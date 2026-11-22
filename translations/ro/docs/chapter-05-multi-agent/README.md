@@ -1,4 +1,4 @@
-# Capitolul 5: Soluții AI Multi-Agent
+# Capitolul 5: Soluții AI Multi-Agenti
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
 
@@ -8,14 +8,14 @@
 
 Acest capitol acoperă modele avansate de arhitectură multi-agent, orchestrarea agenților și implementări AI pregătite pentru producție în scenarii complexe.
 
-> Ghidul de comandă revizuit conform referinței `azd 1.37.2` publicate. Implementările în cloud nu au fost executate.
+> Ghidul de comandă a fost revizuit în raport cu referința lansată `azd 1.37.2`. Implementările în cloud nu au fost executate.
 
-## Obiectivele de învățare
+## Obiective de învățare
 
-Parcurgând acest capitol, vei:
-- Înțelege modele de arhitectură multi-agent
-- Implementa sisteme coordonate de agenți AI
-- Implementa comunicarea agent-la-agent
+Prin finalizarea acestui capitol, vei:
+- Înțelege modelele de arhitectură multi-agent
+- Implementa sisteme AI de agenți coordonați
+- Implementa comunicarea între agenți
 - Construi soluții multi-agent pregătite pentru producție
 
 ---
@@ -26,9 +26,9 @@ Parcurgând acest capitol, vei:
 |---|--------|-------------|------|
 | 1 | [Bazele Multi-Agent](multi-agent-basics.md) | Practic: implementează o aplicație multi-agent funcțională cu `azd up` | 45 min |
 | 2 | [Modele de coordonare](../chapter-06-pre-deployment/coordination-patterns.md) | Strategii de orchestrare a agenților (continuă în Capitolul 6) | 30 min |
-| 3 | [Implementarea modelului ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemplu de implementare cu un singur clic | 30 min |
+| 3 | [Implementare șablon ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemplu de implementare cu un singur click | 30 min |
 
-> **Începe cu Lecția 1.** Este singura lecție complet practică și implementabilă din acest capitol. Lecția 2 este în Capitolul 6 (este împărțită cu planificarea pre-implementare), iar [Soluția Multi-Agent pentru Retail](../../examples/retail-scenario.md) este un plan de arhitectură — o referință de design, nu un șablon cu o singură comandă.
+> **Începe cu Lecția 1.** Este singura lecție complet practică și implementabilă din acest capitol. Lecția 2 este în Capitolul 6 (este împărțită cu planificarea pre-implementare), iar [Soluția Retail Multi-Agent](../../examples/retail-scenario.md) este un plan de arhitectură—un reper de design, nu un șablon executabil cu o singură comandă.
 
 ---
 
@@ -39,15 +39,15 @@ Parcurgând acest capitol, vei:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Ce abordare?** Folosește `azd init --template` pentru a începe de la un exemplu funcțional. Folosește `azd ai agent init` interactiv sau `azd ai agent init --template <path-to-azure.yaml>` pentru a adopta un proiect actual de agent. Vezi [referința AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru cerințe de versiune și migrarea evaluării.
+> **Ce abordare alegi?** Folosește `azd init --template` pentru a începe de la un exemplu funcțional. Folosește `azd ai agent init` interactiv, sau `azd ai agent init --template <path-to-azure.yaml>` pentru a adopta un proiect actual de agent. Vezi [referința AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru cerințe de versiune și migrare de evaluare.
 
-Rulează aceste alternative în dosare separate și goale. Extensia agenților `1.0.0-beta.23` necesită `azd >= 1.37.0`; fluxul său interactiv nu generează pipeline-ul personalizat Service Bus în lecția de coordonare.
+Rulează aceste alternative în dosare separate, goale. Fluxul GA Foundry necesită `azd >= 1.37.0`; fluxul său interactiv nu generează pipeline-ul personalizat Service Bus în lecția de coordonare. Pentru testare locală, implementare de cod și curățare de proiecte noi versus reutilizate, urmează [parcursul agentului gazdă](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -61,14 +61,14 @@ graph TD
 
 ---
 
-## 🎯 Soluția prezentată: Retail Multi-Agent
+## 🎯 Soluția evidențiată: Retail Multi-Agent
 
 Soluția [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrează:
 
-- **Agentul Client**: Gestionează interacțiunile și preferințele utilizatorului
-- **Agentul Inventar**: Administrează stocul și procesarea comenzilor
-- **Orchestratorul**: Coordonează între agenți
-- **Memorie Comună**: Gestionarea contextului între agenți
+- **Agent Client**: Gestionează interacțiunile și preferințele utilizatorului
+- **Agent Inventar**: Administrează stocul și procesarea comenzilor
+- **Orchestrator**: Coordonează între agenți
+- **Memorie Partajată**: Gestionarea contextului între agenți
 
 ### Servicii Utilizate
 
@@ -77,7 +77,7 @@ Soluția [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrează:
 | Microsoft Foundry Models | Înțelegerea limbajului |
 | Azure AI Search | Catalog de produse |
 | Cosmos DB | Starea și memoria agentului |
-| Container Apps | Găzduirea agenților |
+| Container Apps | Găzduirea agentului |
 | Application Insights | Monitorizare |
 
 ---
@@ -87,7 +87,7 @@ Soluția [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrează:
 | Direcție | Capitol |
 |-----------|---------|
 | **Anterior** | [Capitolul 4: Infrastructură](../chapter-04-infrastructure/README.md) |
-| **Următor** | [Capitolul 6: Pre-Implementare](../chapter-06-pre-deployment/README.md) |
+| **Următor** | [Capitolul 6: Pre-implementare](../chapter-06-pre-deployment/README.md) |
 
 ---
 
@@ -95,7 +95,7 @@ Soluția [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrează:
 
 - [Ghidul Agenților AI](../chapter-02-ai-development/agents.md)
 - [Practici AI pentru Producție](../chapter-08-production/production-ai-practices.md)
-- [Depanarea AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

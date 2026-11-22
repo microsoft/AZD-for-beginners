@@ -1,34 +1,34 @@
-# Kommandosschema - Viktiga AZD-kommandon
+# Kommandosnyttarkort - Viktiga AZD-kommandon
 
 **Snabbreferens för alla kapitel**
-- **📚 Kurshemsida**: [AZD För Nybörjare](../README.md)
-- **📖 Kom igång snabbt**: [Kapitel 1: Grundläggande & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
+- **📚 Kursstart**: [AZD För nybörjare](../README.md)
+- **📖 Snabbstart**: [Kapitel 1: Grundläggande & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI-kommandon**: [Kapitel 2: AI-Först Utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduktion
 
-Detta omfattande kommandosschema ger snabb referens för de mest använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och daglig hantering av azd-projekt.
+Detta omfattande snyttarkort ger snabbreferens för de mest använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och daglig användning med azd-projekt.
 
-## Läromål
+## Lärandemål
 
-Genom att använda detta kommandosschema kommer du att:
-- Ha omedelbar tillgång till viktiga Azure Developer CLI-kommandon och syntax
-- Förstå kommandosorganisering efter funktionella kategorier och användningsfall
-- Ha referens till praktiska exempel för vanliga utvecklings- och distributionsscenarier
-- Få tillgång till felsökningskommandon för snabb problemlösning
+Genom att använda detta snyttarkort kommer du att:
+- Ha omedelbar åtkomst till viktiga Azure Developer CLI-kommandon och syntax
+- Förstå hur kommandon organiseras efter funktionella kategorier och användningsfall
+- Ha praktiska exempel för vanliga utvecklings- och distributionsscenarier
+- Ha åtkomst till felsökningskommandon för snabb problemlösning
 - Hitta avancerade konfigurations- och anpassningsalternativ effektivt
-- Lokalisera kommandon för miljöhantering och flermiljöarbetsflöden
+- Lokalisera miljöhantering och kommandon för arbetsflöden med flera miljöer
 
-## Inlärningsresultat
+## Läranderesultat
 
-Med regelbunden användning av detta kommandosschema kommer du kunna:
-- Utföra azd-kommandon självsäkert utan att behöva full dokumentation
-- Snabbt lösa vanliga problem med rätt diagnoskommandon
+Med regelbunden användning av detta snyttarkort kommer du att kunna:
+- Utföra azd-kommandon säkert utan att behöva hänvisa till fullständig dokumentation
+- Snabbt lösa vanliga problem med lämpliga diagnostiska kommandon
 - Effektivt hantera flera miljöer och distributionsscenarier
 - Använda avancerade azd-funktioner och konfigurationsalternativ vid behov
-- Felsöka distributionsproblem med systematiska kommando-sekvenser
-- Optimera arbetsflöden genom effektiv användning av azd-snabbkommandon och inställningar
+- Felsöka distributionsproblem med systematiska kommandosekvenser
+- Optimera arbetsflöden genom effektiv användning av azd-genvägar och alternativ
 
 ## Kom igång-kommandon
 
@@ -71,7 +71,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Kärndistributionskommandon
+## Kärnkommandon för distribution
 
 ### Komplett distributionsarbetsflöde
 ```bash
@@ -89,7 +89,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-### Endast Infrastruktur
+### Endast infrastruktur
 ```bash
 # Provision Azure resources
 azd provision
@@ -100,7 +100,7 @@ azd provision --preview
 # It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Endast Applikation
+### Endast applikation
 ```bash
 # Deploy application code
 azd deploy
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Bygg och Paketera
+### Bygg och paketera
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** laddar ner appens beroenden (npm, pip, NuGet, Maven, etc.). Det körs automatiskt under `azd package` och `azd deploy`, så det kallar du sällan direkt – kör det manuellt för att förhämta beroenden (till exempel för att värma en CI-cache eller arbeta offline senare).
+> **`azd restore`** laddar ner ditt apps beroenden (npm, pip, NuGet, Maven etc.). Det körs automatiskt under `azd package` och `azd deploy`, så du behöver sällan köra det direkt — kör det manuellt för att förhämta beroenden (till exempel för att värma upp en CI-cache eller arbeta offline efteråt).
 
-> **`azd package`** förbereder en deploybar artefakt utan att distribuera applikationstjänsten. Beteendet beror på språk och värd: containerpaketering kan använda Azure-fjärrbyggen och publicera bilder till ett register, så det är inte nödvändigtvis offline eller utan Azure-skrivningar. `azd deploy` kan paketera automatiskt; använd ett separat paketsteg när du behöver en artefakt eller en byggkontroll.
+> **`azd package`** förbereder en deployerbar artefakt utan att distribuera applikationstjänsten. Beteendet beror på språk och värd: containerpaketering kan använda Azure fjärrbyggen och publicera bilder till ett register, så det är inte nödvändigtvis offline eller fritt från Azure-skrivningar. `azd deploy` kan paketera automatiskt; använd ett separat paketsteg när du behöver en artefakt eller byggkontroll.
 
 
 ## 🌍 Miljöhantering
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Miljöfiler är ren text. Behandla inte `azd env set` som säker lagring; använd Key Vault-referenser eller hanterad identitet vid behov.
+Miljöfiler är textfiler. Behandla inte `azd env set` som ett hemligt lagringsutrymme; använd Key Vault-referenser eller managed identity efter behov.
 
 ## ⚙️ Konfigurationskommandon
 
-### Global Konfiguration
+### Global konfiguration
 ```bash
 # List all configuration
 azd config show
@@ -202,9 +202,9 @@ azd show
 azd show --output json
 ```
 
-## 📊 Övervakning och Diagnostik
+## 📊 Övervakning och diagnostik
 
-### Övervakningsdashboard
+### Övervakningsinstrumentpanel
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,7 +219,7 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights måste konfigureras av mallen. AZD:s Live Metrics-alternativ stöds inte för närvarande för Python-applikationer; använd istället översikten, loggar eller exempelns dokumenterade spårningsarbetsflöde.
+Application Insights måste konfigureras via mallen. AZD:s Live Metrics-alternativ stöds för närvarande inte för Python-applikationer; använd istället översikten, loggar eller arbetsflödet för spårning dokumenterat i exemplet.
 
 ### Visa containerloggar
 ```bash
@@ -273,7 +273,7 @@ azd version
 azd config show
 ```
 
-## 🔧 Avancerade Kommandon
+## 🔧 Avancerade kommandon
 
 ### Pipeline och CI/CD
 ```bash
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI & Tilläggskommandon
+## 🤖 AI och Extensions-kommandon
 
-### AZD Tillägg
+### AZD Extensions
 
-AI CLI-referens granskat 2026-11-04: `azd 1.37.2`, agenter `1.0.0-beta.23`, utvärderingar `1.0.0-beta.2`. Använd `azd >= 1.37.0` för den sammansatta arbetsflödet; uppgradera kärn-CLI innan inkompatibla tillägg.
+Foundry GA-referens uppdaterad 2026-11-09: `microsoft.foundry` bundle 1.0, tillkännagiven [5 november 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Använd `azd >= 1.37.0`; komponenter är oberoende versionerade och valfria preview-funktioner behåller egen status.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI-agentkommandon
+Bundeln inkluderar inte utvärderingar, datamängder, finjustering eller egna modeller. Installation av enskilda kärnextensions stöds fortfarande. Följ [GA hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) för ett körbart exempel med Python 3.13+, aktuell uv, behörigheter och modellkvot.
+
+### AI Agent-kommandon
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` ersätter den föråldrade `--manifest`/`-m` stavningen; äldre manifest behöver migreras. Det finns inget aktuellt agent-init `--host containerapp` alternativ. Hanterad-harnes, röst och långvariga förhandsvisningar behöver självständigt shell-/CI-miljögodkännande; se [AI CLI-referensen](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` ersätter den utfasade `--manifest`/`-m` stavningen; gamla manifest behöver migreras. Det finns inget aktuellt agent-init `--host containerapp`-alternativ. Managed-harness, voice och långvariga previews kräver självständigt shell/CI-miljö opt-in; se [AI CLI-referensen](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+Lokal testning använder fortfarande Azure modell-distributioner och medför kostnader. För rensning tar `azd down` bort en nyskapad Foundry-projektsresursgrupp men lämnar resurser i återanvända projekt intakta; ta bort endast oönskade resurser du äger separat.
 
 ### AI-utvärderingar och optimering
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,9 +417,24 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agenter beta.22 ersatte äldre utvärderingskommandon med `azd ai eval` från `azure.ai.evaluations`. Ny utvärderingskonfiguration använder camelCase-nycklar. Optimering `--config` tar en fristående optimerings-API-förfrågan, **inte** äldre `eval.yaml` eller nya `azure.eval.yaml`; använd `--eval`/`--eval-config` för återanvändning av utvärdering. Se [utvärderingsinställning](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) och [optimeringsmigrering](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agent beta.22 ersatte gamla utvärderingskommandon med `azd ai eval` från `azure.ai.evaluations`. Ny utvärderingskonfiguration använder camelCase-nycklar. Optimering `--config` tar en fristående optimerings-API-förfrågan, **inte** gamla `eval.yaml` eller nya `azure.eval.yaml`; använd `--eval`/`--eval-config` för återanvändning av utvärdering. Se [utvärderingsinställning](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) och [optimeringsmigrering](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-### MCP Server (Alpha)
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Runner-fragmentet är inte ett komplett arbetsflöde. Bekräfta granskad utvärderingskonfiguration och icke-hemliga resurser, bevilja dataset-/utvärderare-/modellåtkomst och använd en miljö per steg. Se [exempel på autentiserad CI/CD](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
+### MCP-server (Alpha)
 ```bash
 # Start the MCP server for your project
 azd mcp start
@@ -419,7 +454,7 @@ azd infra --help
 
 ---
 
-## 🎯 Snabba Arbetsflöden
+## 🎯 Snabba arbetsflöden
 
 ### Utvecklingsarbetsflöde
 ```bash
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Flermiljöarbetsflöde
+### Arbetsflöde med flera miljöer
 ```bash
 # Set up environments
 azd env new dev
@@ -517,7 +552,7 @@ cd /path/to/your/project
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Utdataformatering
+## 🎨 Utdataformattering
 
 ### JSON-utdata
 ```bash
@@ -540,9 +575,9 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Vanliga Kommando-kombinationer
+## 🔧 Vanliga kommando kombinationer
 
-### Hälsokontroll-skript
+### Hälsokontrollsskript
 ```bash
 #!/bin/bash
 # Quick health check
@@ -580,7 +615,7 @@ azd down --environment <environment-name>
 
 ## 📝 Miljövariabler
 
-### Vanliga Miljövariabler
+### Vanliga miljövariabler
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -598,7 +633,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Akutkommandon
 
-### Snabba fixar
+### Snabba lösningar
 ```bash
 # Reauthenticate AZD without changing Azure CLI's account cache
 azd auth login
@@ -658,7 +693,7 @@ azd-status() {
 }
 ```
 
-## 📖 Hjälp och Dokumentation
+## 📖 Hjälp och dokumentation
 
 ### Få hjälp
 ```bash
@@ -676,7 +711,7 @@ azd version
 azd version --output json
 ```
 
-### Dokumentationslänkar
+### Länkar till dokumentation
 ```bash
 # Open documentation in browser
 azd docs
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Tips**: Bokmärk detta kommandosschema och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
+**Tips**: Bokmärk detta snyttarkort och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
 
 ---
 
 **Navigering**
-- **Föregående lektion**: [Förhandskontroller](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Föregående lektion**: [Preflight Checks](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Nästa lektion**: [Ordlista](glossary.md)
 
 ---
 
-> **💡 Vill du ha Azure-kommandohjälp i din editor?** Installera [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 färdigheter för AI, Foundry, distribution, diagnostik med mera.
+> **💡 Vill du ha Azure-kommandohjälp i din editor?** Installera [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 färdigheter för AI, Foundry, distribution, diagnostik och mer.
 
 ---
 

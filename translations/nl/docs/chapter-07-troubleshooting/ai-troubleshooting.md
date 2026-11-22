@@ -1,28 +1,28 @@
-# AI-specifieke Probleemoplossingsgids
+# AI-specifieke probleemoplossingsgids
 
 **Hoofdstuk Navigatie:**
-- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Probleemoplossing & Debugging
 - **⬅️ Vorige**: [Debugging Gids](debugging.md)
 - **➡️ Volgend Hoofdstuk**: [Hoofdstuk 8: Productie- & Enterprisepatronen](../chapter-08-production/production-ai-practices.md)
-- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-Eerst Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Deze uitgebreide probleemoplossingsgids behandelt veelvoorkomende problemen bij het implementeren van AI-oplossingen met AZD en biedt oplossingen en debuggingtechnieken specifiek voor Azure AI-diensten.
+Deze uitgebreide probleemoplossingsgids behandelt veelvoorkomende problemen bij het implementeren van AI-oplossingen met AZD, en biedt oplossingen en debuggingstechnieken specifiek voor Azure AI-diensten.
 
-> **Reikwijdte:** Commando's gebruiken voorbeeld resource-namen; vervang deze en selecteer de juiste abonnement. Bicep-blokken zijn fragmenten om in een bestaande template te integreren, geen zelfstandige implementaties. Python-fragmenten vereisen de vermelde SDK's en applicatieconfiguratie. Er is geen live Azure-implementatie uitgevoerd voor deze review.
+> **Bereik:** Commando's gebruiken voorbeeld resource-namen; vervang deze en selecteer de juiste abonnement. Bicep-blokken zijn fragmenten om in een bestaand template te integreren, geen zelfstandige implementaties. Python fragmenten vereisen de vermelde SDK's en applicatieconfiguratie. Er was geen live Azure-implementatie uitgevoerd voor deze beoordeling.
 
 ## Inhoudsopgave
 
-- [Microsoft Foundry Models Serviceproblemen](#microsoft-foundry-models-service-issues)
+- [Microsoft Foundry Models Service Problemen](#microsoft-foundry-models-service-issues)
 - [Azure AI Search Problemen](#azure-ai-search-problems)
-- [Container Apps Implementatieproblemen](#container-apps-deployment-issues)
-- [Authenticatie- en Machtigingsfouten](#authentication-and-permission-errors)
-- [Modelimplementatiefouten](#model-deployment-failures)
-- [Prestaties en Schaalproblemen](#performance-and-scaling-issues)
-- [Kosten- en Quotabeheer](#cost-and-quota-management)
+- [Container Apps Implementatie Problemen](#container-apps-deployment-issues)
+- [Authenticatie en Machtigingsfouten](#authentication-and-permission-errors)
+- [Model Implementatie Fouten](#model-deployment-failures)
+- [Prestatie- en Schaalproblemen](#performance-and-scaling-issues)
+- [Kosten- en Quota Beheer](#cost-and-quota-management)
 - [Debugging Tools en Technieken](#debugging-tools-and-techniques)
 
-## Microsoft Foundry Models Serviceproblemen
+## Microsoft Foundry Models Service Problemen
 
 ### Probleem: OpenAI Service Niet Beschikbaar in Regio
 
@@ -33,19 +33,19 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Oorzaken:**
 - Microsoft Foundry Models niet beschikbaar in geselecteerde regio
-- Quota uitgeput in de voorkeursregio's
-- Capaciteitsbeperkingen per regio
+- Quota uitgeput in voorkeurregio's
+- Regionale capaciteitsbeperkingen
 
 **Oplossingen:**
 
-1. **Controleer Regio-beschikbaarheid:**
+1. **Controleer Regio Beschikbaarheid:**
 ```bash
 # Inspect model/deployment-type offerings in a candidate region
 az cognitiveservices model list --location eastus2 --output json
 # Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
-2. **Werk AZD-configuratie bij:**
+2. **Update AZD Configuratie:**
 ```bash
 # For a new environment: choose a supported region with available quota
 azd env set AZURE_LOCATION eastus2
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Probleem: Modelimplementatie Quota Overschreden
+### Probleem: Model Implementatie Quota Overschreden
 
 **Symptomen:**
 ```
@@ -81,10 +81,10 @@ az cognitiveservices usage list \
   --location eastus2 --output table
 ```
 
-2. **Vraag Quota-verhoging aan:**
-Gebruik de quota-beheerstroom van de Foundry-portal voor het betreffende abonnement, regio, model en implementatietype. Zie de [officiële quotarichtlijnen](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Een VM-quota-aanvraag verhoogt niet de modelquota.
+2. **Vraag Quota Verhoging Aan:**
+Gebruik de quota beheerstroom van het Foundry-portaal voor het betrokken abonnement, regio, model en type implementatie. Zie de [officiële quota richtlijnen](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Een VM quota-aanvraag verhoogt de modelquota niet.
 
-3. **Optimaliseer Modelcapaciteit:**
+3. **Optimaliseer Model Capaciteit:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -104,7 +104,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Probleem: Ongeldige API-versie
+### Probleem: Ongeldige API Versie
 
 **Symptomen:**
 ```
@@ -113,18 +113,18 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Oplossingen:**
 
-1. **Gebruik Ondersteunde API-versie:**
+1. **Gebruik Ondersteunde API Versie:**
 ```python
 # Stable dated Azure OpenAI data-plane API, where supported by your feature
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Controleer API-versiecompatibiliteit:**
-Controleer de [Azure OpenAI API lifecycle referentie](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM resource-provider API-versies vermelden **niet** de inferentie/data-plane API-versies. Nieuwe v1-clients gebruiken `/openai/v1/` zonder een gedateerde `api-version`; meng deze twee clientconfiguraties niet.
+2. **Controleer API Versie Compatibiliteit:**
+Controleer de [Azure OpenAI API lifecycle referentie](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM resource-provider API-versies vermelden **niet** de inference/data-plane API-versies. Nieuwe v1 clients gebruiken `/openai/v1/` zonder een gedateerde `api-version`; meng deze twee clientconfiguraties niet.
 
 ## Azure AI Search Problemen
 
-### Probleem: Onvoldoende Pricing Tier voor Search Service
+### Probleem: Search Service Prijsniveau Onvoldoende
 
 **Symptomen:**
 ```
@@ -133,9 +133,9 @@ Error: Semantic search requires Basic tier or higher
 
 **Oplossingen:**
 
-1. **Gebruik een Ondersteunde Pricing Tier:**
+1. **Gebruik een Ondersteund Prijsniveau:**
 
-Semantic ranker vereist Basic of hoger. Overschakelen van Free/Basic naar een andere tier kan vereisen dat je een nieuwe zoekservice maakt en indexen opnieuw opbouwt; het bewerken van een SKU is geen gegarandeerde upgrade op locatie.
+Semantische ranker vereist Basic of hoger. Overschakelen van Free/Basic naar een ander niveau kan vereisen dat een nieuwe search service wordt gemaakt en indexen opnieuw worden opgebouwd; het aanpassen van een SKU is geen gegarandeerde upgrade ter plaatse.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Schakel Semantisch Zoeken uit (Ontwikkeling):**
+2. **Schakel Semantisch Zoeken Uit (Ontwikkeling):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -168,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Probleem: Mislukkingen bij het Maken van Indexen
+### Probleem: Index Aanmaak Fouten
 
 **Symptomen:**
 ```
@@ -217,7 +217,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps Implementatieproblemen
+## Container Apps Implementatie Problemen
 
 ### Probleem: Container Build Fouten
 
@@ -228,7 +228,7 @@ Error: Failed to build container image
 
 **Oplossingen:**
 
-1. **Controleer Dockerfile-syntaxis:**
+1. **Controleer Dockerfile Syntax:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -263,7 +263,7 @@ azure-search-documents
 azure-cosmos
 ```
 
-3. **Voeg Gezondheidscontrole toe:**
+3. **Voeg Health Check Toe:**
 ```python
 # main.py - Add health check endpoint
 from fastapi import FastAPI
@@ -275,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Probleem: Fouten bij het Opstarten van Container Apps
+### Probleem: Container App Opstart Fouten
 
 **Symptomen:**
 ```
@@ -284,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Oplossingen:**
 
-1. **Verhoog Opstart-timeout:**
+1. **Verhoog Opstart Time-out:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -317,7 +317,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimaliseer Modelladen:**
+2. **Optimaliseer Model Laden:**
 ```python
 # Lazy load models to reduce startup time
 # Illustrative skeleton: implement _initialize_client and synchronize concurrent
@@ -350,7 +350,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Authenticatie- en Machtigingsfouten
+## Authenticatie en Machtigingsfouten
 
 ### Probleem: Managed Identity Machtiging Geweigerd
 
@@ -403,7 +403,7 @@ def test_authentication():
 test_authentication()
 ```
 
-Tokenverwerving bewijst authenticatie, niet toestemming om een model aan te roepen. Test de bedoelde operatie afzonderlijk. Lokaal kan `DefaultAzureCredential` ontwikkelaarsreferenties gebruiken; controleer in Azure of de bedoelde managed identity is geselecteerd.
+Token acquisitie bewijst authenticatie, niet de permissie om een model aan te roepen. Test de bedoelde operatie apart. Lokaal kan `DefaultAzureCredential` ontwikkelaarsreferenties gebruiken; in Azure, verifieer dat de bedoelde managed identity is geselecteerd.
 
 ### Probleem: Key Vault Toegang Geweigerd
 
@@ -414,9 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Oplossingen:**
 
-1. **Verleen Key Vault-machtigingen:**
+1. **Verleen Key Vault Machtigingen:**
 
-Gebruik het volgende access-policy-fragment alleen voor een vault met `enableRbacAuthorization: false`. Voor een RBAC-ingeschakelde vault, gebruik optie 2; het toevoegen van een toegangsbeleid verleent geen data-plane toegang in RBAC-modus.
+Gebruik het volgende access-policy fragment alleen voor een kluis met `enableRbacAuthorization: false`. Voor een RBAC-ingeschakelde kluis, gebruik optie 2; het toevoegen van een toegangspolicy geeft geen data-plane toegang in RBAC modus.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Gebruik RBAC in Plaats van Toegangsbeleidsregels:**
+2. **Gebruik RBAC in Plaats van Toegangspolicy's:**
 
-De vault moet `enableRbacAuthorization: true` hebben; het wijzigen van machtigingsmodellen vereist een geplande migratie van bestaande toegang.
+De kluis moet `enableRbacAuthorization: true` hebben; het veranderen van machtigingsmodellen vereist een geplande migratie van bestaande toegang.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -450,7 +450,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Modelimplementatiefouten
+## Model Implementatie Fouten
 
 ### Probleem: Modelversie Niet Beschikbaar
 
@@ -506,18 +506,18 @@ az cognitiveservices account list-models \
 # Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Prestaties en Schaalproblemen
+## Prestatie- en Schaalproblemen
 
-### Probleem: Hoge Latentie Reacties
+### Probleem: Hoge Latency Responstijden
 
 **Symptomen:**
-- Reactietijden > 30 seconden
-- Timeout fouten
+- Responstijden > 30 seconden
+- Time-out fouten
 - Slechte gebruikerservaring
 
 **Oplossingen:**
 
-1. **Implementeer Request Timeouts:**
+1. **Implementeer Request Time-outs:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -586,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Probleem: Out-of-Memory Errors
+### Probleem: Out of Memory Fouten
 
 **Symptomen:**
 ```
@@ -595,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Oplossingen:**
 
-1. **Verhoog Geheugenallocatie:**
+1. **Verhoog Geheugen Toewijzing:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -641,14 +641,14 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Kosten- en Quotabeheer
+## Kosten- en Quota Beheer
 
 ### Probleem: Onverwacht Hoge Kosten
 
 **Symptomen:**
-- Azure-factuur hoger dan verwacht
-- Tokengebruik dat de schattingen overschrijdt
-- Budgetwaarschuwingen geactiveerd
+- Azure factuur hoger dan verwacht
+- Token gebruik hoger dan schatting
+- Budget waarschuwingen geactiveerd
 
 **Oplossingen:**
 
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-Deze in-memory teller is illustratief, geen maandelijkse uitgavencontrole: hij reset bij herstart, wordt niet gedeeld tussen replicas, en controleert gebruik pas na een oproep. Een echte limiet vereist duurzame verantwoording, concurrerende reserveringen vóór verzoeken, en een maandelijks resetbeleid. Container-metrics moeten ook rekening houden met cgroup-limieten; `psutil.virtual_memory()` is geen betrouwbare containerlimietmeting en garbage collection dwingt geen geheugenlimiet af.
+Deze in-memory teller is illustratief, geen maandelijkse uitgavencontrole: hij reset bij herstart, wordt niet gedeeld tussen replica's, en controleert gebruik pas na een oproep. Een echte limiet vereist duurzame boekhouding, gelijktijdig-veilige reserveringen vóór verzoeken, en een maandelijkse reset beleidsregel. Container geheugenstatistieken moeten ook rekening houden met cgroup limieten; `psutil.virtual_memory()` is geen betrouwbare container-limietmeting en garbage collection handhaaft geen geheugencap.
 
-2. **Stel Kostenwaarschuwingen in:**
+2. **Stel Kostenwaarschuwingen In:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,9 +699,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Declareer `budgetStartDate` en `budgetEndDate` in je template. Budgetten waarschuwen; ze stoppen bronnen niet of stellen geen harde uitgavenlimiet in.
+Declareer `budgetStartDate` en `budgetEndDate` in je template. Budgetten waarschuwen; ze stoppen geen resources en leggen geen harde uitgavelimiet op.
 
-3. **Optimaliseer Modelselectie:**
+3. **Optimaliseer Model Selectie:**
 ```python
 # Cost-aware model selection
 MODEL_COST_TIERS = {
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### AZD AI Extension Commando's voor Diagnostiek
+### AZD AI Extensie Commando's voor Diagnostiek
 
-Als je agents hebt ingezet met `azd ai agent init`, zijn deze extra tools beschikbaar:
+Indien je agents hebt geïmplementeerd met `azd ai agent init`, zijn de volgende extra tools beschikbaar:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,11 +762,13 @@ azd mcp start
 azd infra generate
 ```
 
-> **Tip:** Gebruik `azd infra generate` om IaC naar schijf te schrijven zodat je precies kunt bekijken welke resources zijn ingericht. Dit is onmisbaar bij het debuggen van resourceconfiguratieproblemen. Zie de [AZD AI CLI referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
+> **Tip:** Gebruik `azd infra generate` om IaC op schijf te schrijven zodat je exact kunt inspecteren welke resources zijn geprovisioneerd. Dit is onmisbaar bij het debuggen van resourceconfiguratieproblemen. Zie de [AZD AI CLI referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
 
-**Release-aware diagnostiek (2026-11-04):** Agents `1.0.0-beta.23` vereist `azd >= 1.37.0`; upgrade de core CLI vóór incompatibele extensies. Deze agent-release behoudt ontwikkelaar RBAC-waarschuwingen in de uiteindelijke implementatie-output en identificeert de versie die betrokken is bij activatiefouten/time-outs. Een time-out betekent niet dat de implementatie is mislukt: bekijk de pogingde versie vóór herhaling. Het repareert ook A2A 0.3-aanroepen die lifecycle-berichten tonen in plaats van voltooide antwoorden. Core `azd 1.37.1` verbetert afbrekingspropagatie over extensies; `1.37.2` verbetert kritieke provisioneringsbevestigingen en afbrekingsafhandeling.
+**GA workflow diagnostiek (2026-11-09):** Verifieer dat `azd version` minimaal 1.37.0 is en inspecteer `azd ext list --installed`. Update eerst de core CLI met `azd update` of de installer, update daarna de bundle met `azd ext upgrade microsoft.foundry`. Voor lokale fouten, controleer de huidige uv, Python 3.13+ voor de basisvoorbeeld, `PYTHONNOUSERSITE: "1"` in de serviceconfiguratie, en de Azure-referenties gebruikt door `DefaultAzureCredential`. Houd `azd ai agent run` draaiende terwijl je `--local` vanuit een tweede terminal binnen de projectmap aanroept.
 
-Als een ouder tutorial-evaluatiecommando alleen migratierichtlijnen print, installeer `azure.ai.evaluations` (`1.0.0-beta.2` vereist `azd >= 1.33.0`) en gebruik `azd ai eval init`, `generate` en `run start`. Optimalisatie's `--config` accepteert geen legacy evaluatiebestanden meer. Zie [evaluatiemigratie](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) en [optimalisatiemigratie](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Succesvolle provisioning bewijst niet dat de ontwikkelaar data-plane toegang heeft. Bekijk RBAC waarschuwingen en de [hosted-agent permissiematrix](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Een time-out bewijst geen implementatiefout: inspecteer de poging, versie en logs vóór het opnieuw proberen. Eerdere agents beta.23 verbeterden deze waarschuwingen en A2A-uitvoer; die historische fixes staan beschreven in de [release notes](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), het is geen vereiste om die beta te installeren.
+
+Als `azd ai eval` niet beschikbaar is, installeer dan `azure.ai.evaluations` apart; de GA bundel bevat het niet. Indien het agent-evaluatiecommando van een oudere tutorial alleen migratierichtlijnen toont, gebruik de aparte `azd ai eval` workflow. Optimalisatie's `--config` accepteert geen legacy evaluatiebestanden meer. Zie [evaluatie migratie](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) en [optimalisatie migratie](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Applicatie Debugging
 
@@ -824,7 +829,7 @@ async def detailed_health_check(response: Response):
     return checks
 ```
 
-3. **Performance Monitoring:**
+3. **Prestatiemonitoring:**
 ```python
 import time
 from functools import wraps
@@ -858,35 +863,35 @@ def monitor_performance(func):
 ## Veelvoorkomende Foutcodes en Oplossingen
 
 | Foutcode | Beschrijving | Oplossing |
-|------------|-------------|----------|
-| 401 | Niet Geautoriseerd | Controleer API-sleutels en managed identity-configuratie |
+|---------|--------------|----------|
+| 401 | Niet Geautoriseerd | Controleer API-sleutels en managed identity configuratie |
 | 403 | Verboden | Verifieer RBAC roltoewijzingen |
-| 429 | Rate Limiet | Implementeer retry-logica met exponentiële backoff |
+| 429 | Rate-limited | Implementeer retry-logica met exponentiële backoff |
 | 500 | Interne Serverfout | Controleer modelimplementatiestatus en logs |
 | 503 | Service Niet Beschikbaar | Verifieer servicegezondheid en regionale beschikbaarheid |
 
 ## Volgende Stappen
 
-1. **Bekijk de [AI Modelimplementatie Gids](../chapter-02-ai-development/ai-model-deployment.md)** voor implementatiebest practices
-2. **Voltooi [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)** voor bedrijfsrijpe oplossingen
-3. **Word lid van de [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** voor gemeenschapssteun
-4. **Meld problemen** bij de [AZD GitHub-repository](https://github.com/Azure/azure-dev) voor AZD-specifieke problemen
+1. **Bekijk de [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** voor beste implementatiepraktijken
+2. **Voltooi [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)** voor enterprise-klare oplossingen
+3. **Word lid van de [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** voor community-ondersteuning
+4. **Dien issues in** bij de [AZD GitHub repository](https://github.com/Azure/azure-dev) voor AZD-specifieke problemen
 
 ## Bronnen
 
 - [Azure OpenAI quota en throttling probleemoplossing](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
 - [Container Apps Probleemoplossing](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI Search Probleemoplossing](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installeer Azure probleemoplossingsskills in je editor: `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installeer Azure probleemoplossingsvaardigheden in je editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Hoofdstuk Navigatie:**
-- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Probleemoplossing & Debugging
 - **⬅️ Vorige**: [Debugging Gids](debugging.md)
 - **➡️ Volgend Hoofdstuk**: [Hoofdstuk 8: Productie- & Enterprisepatronen](../chapter-08-production/production-ai-practices.md)
-- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-Eerst Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **📖 Referentie**: [Azure Developer CLI Probleemoplossing](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---

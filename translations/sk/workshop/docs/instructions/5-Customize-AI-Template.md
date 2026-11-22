@@ -1,6 +1,6 @@
 # 5. Prispôsobenie šablóny
 
-!!! tip "NA KONCI TOHTO MODULU BUDETE VEDIEŤ"
+!!! tip "NA KONCI TOHTO MODULU BUDETE SCHOPNÍ"
 
     - [ ] Distinguish configuration changes from application implementation
     - [ ] Plan a grounded retrieval customization
@@ -10,17 +10,17 @@
 
 ---
 
-## 5.1 Stanovenie východiskovej úrovne
+## 5.1 Stanovenie východiskového bodu
 
-Použite inicializovaný repozitár [Začnite s AI agentmi](https://github.com/Azure-Samples/get-started-with-ai-agents) z predchádzajúcich modulov. Pred zmenou čohokoľvek si zaznamenajte revíziu šablóny, verziu AZD, zvolené prostredie, nasadenie modelu a vzorové otázky.
+Použite inicializované úložisko [Začíname s AI agentmi](https://github.com/Azure-Samples/get-started-with-ai-agents) z predchádzajúcich modulov. Pred zmenou čohokoľvek si zaznamenajte revíziu šablóny, verziu AZD, vybrané prostredie, nasadenie modelu a pracovné ukážkové otázky.
 
-Vzor implementuje chatovaciu aplikáciu poháňanú agentom. Nezmení sa na maloobchodný systém s dvoma agentmi iba nastavením premenných prostredia alebo uložením ďalších inštrukčných súborov. Dodatoční agenti, obsluha nástrojov, smerovanie, autorizácia a prístup k dátam vyžadujú aplikačný kód.
+Ukážka implementuje aplikáciu konverzačného agenta. NEPRERASTIE na maloobchodný systém dvoch agentov len nastavením premenných prostredia alebo uložením ďalších inštrukčných súborov. Extra agenti, spracovanie nástrojov, smerovanie, autorizácia a prístup k údajom vyžadujú aplikačný kód.
 
-Preskúmajte pokyny a nástroje aktuálne nasadeného agenta vo Foundry. Otestujte jednu faktickú otázku, jednu otázku na vyhľadávanie a jednu otázku, na ktorú vzorové dáta nevedia odpovedať. Overte citácie proti skutočným zdrojovým dokumentom namiesto predpokladania, že plynulá odpoveď je správna.
+Prezrite si inštrukcie a nástroje aktuálne nasadeného agenta vo Foundry. Otestujte jednu faktickú otázku, jednu otázku vyhľadávania a jednu otázku, na ktorú ukážkové dáta nevedia odpovedať. Overte citácie voči skutočným zdrojovým dokumentom namiesto toho, aby ste predpokladali, že plynulá odpoveď je správna.
 
-## 5.2 Prispôsobenie získavania znalostí
+## 5.2 Prispôsobenie vyhľadávania poznatkov
 
-Šablóna podporuje získavanie údajov založené na súboroch a voliteľnú integráciu Azure AI Search. Postupujte podľa [aktuálneho návodu AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) pre indexovanie a konfiguráciu nástrojov.
+Šablóna podporuje vyhľadávanie založené na súboroch a voliteľnú integráciu Azure AI Search. Postupujte podľa [aktuálneho návodu AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) pre indexovanie a konfiguráciu nástrojov.
 
 ```bash
 # Infrastructure settings; these can add charges
@@ -29,101 +29,103 @@ azd provision --preview
 azd up
 ```
 
-Povolenie služby je len jednou súčasťou získavania dát. Pred nahraním vlastných údajov:
+Povoľovanie služby je iba jedna časť vyhľadávania. Pred nahraním vlastných údajov:
 
-1. Overte si, že máte povolenie na použitie dokumentov a odstráňte citlivé informácie.
-2. Vyberte model na vkladanie údajov podporovaný vo vašom regióne a nastavte jeho kompatibilnú verziu, typ nasadenia a rozmery vektorov.
-3. Vytvorte / naplňte index pomocou zdokumentovaného postupu vo vzore.
-4. Nakonfigurujte nástroj agenta na získavanie údajov tak, aby používal daný index.
-5. Otestujte získavanie údajov, citácie, autorizáciu a správanie, keď neexistuje žiadny relevantný dokument.
+1. Overte, že máte povolenie používať dokumenty a odstráňte citlivé informácie.
+2. Vyberte model vkladania podporovaný vo vašom regióne a nastavte jeho kompatibilnú verziu, typ nasadenia a dimenzie vektorov.
+3. Vytvorte/naplňte index podľa dokumentovaného postupu ukážky.
+4. Nakonfigurujte vyhľadávací nástroj agenta tak, aby používal tento index.
+5. Otestujte vyhľadávanie, citácie, autorizáciu a správanie, keď neexistuje žiadny relevantný dokument.
 
-Neprehadzujte `text-embedding-3-small` na iný model vkladania bez kontroly rozmerov a prípadného prerobenia / znovuindexovania vektorov. Názov ako `retail-products` nie je implementovaný katalóg ani politika prístupu.
+Neprepínajte z `text-embedding-3-small` na iný model vkladania bez overenia rozmerov a podľa potreby znovuvytvorenia alebo preindexovania vektorov. Názov ako `retail-products` nie je implementovaný katalóg ani politika prístupu.
 
-## 5.3 Trasovanie a monitorovanie
+## 5.3 Sledovanie a monitorovanie
 
-Postupujte podľa [sprievodcu pozorovateľnosťou vzoru](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Uistite sa, že vyžadovaný zdroj Application Insights a pripojenie už existujú; ak meníte infraštruktúru, použite `azd up`.
+Postupujte podľa [návodu na pozorovateľnosť vzorky](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Uistite sa, že požadovaný zdroj Application Insights a spojenie už existujú; ak meníte nastavenia infraštruktúry, použite `azd up`.
 
 ```bash
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 azd up
 ```
 
-Pošlite testovací dopyt a potom skúmajte aplikačné logy Container App a zobrazenie trasovania agenta vo Foundry. Skontrolujte latenciu, volania nástrojov, chyby a koreláciu medzi dopytom a trasou. Nepredpokladajte, že telemetria je pripojená len preto, že nasadenie prebehlo úspešne.
+Pošlite testovaciu požiadavku, potom si prezrite aplikačné logy Container App a zobrazenie sledovania agenta vo Foundry. Skontrolujte latenciu, volania nástrojov, chyby a koreláciu medzi požiadavkou a sledovaním. Nepredpokladajte, že telemetria je pripojená len preto, že nasadenie bolo úspešné.
 
-Nechávejte `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` vypnutý, pokiaľ ste výslovne nezvážili súhlas, redakciu, uchovávanie a kontroly prístupu. Trasovanie môže obsahovať citlivé argumenty nástrojov alebo obsah dokumentov aj keď bežné aplikačné logy vyzerajú neškodne.
+Nechajte `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` vypnuté, pokiaľ ste explicitne nepreskúmali súhlas, redakciu, uchovávanie a kontrolu prístupu. Sledovania môžu obsahovať citlivé argumenty nástrojov alebo obsah dokumentov, aj keď obyčajné aplikačné logy vyzerajú neškodne.
 
-## 5.4 Vyhodnotenie agenta
+## 5.4 Hodnotenie agenta
 
-Vstupným miestom vyhodnotenia vzoru je teraz [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), nie priečinok `evals/`. Zo základne vzoru použite Python prostredie, ktoré spĺňa jeho dokumentované požiadavky:
+Vstupný bod hodnotenia vzorky je teraz [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), nie adresár `evals/`. Z koreňového adresára vzorky použite Python prostredie spĺňajúce dokumentované požiadavky:
 
 ```bash
 python -m pip install -r src/requirements.txt
 pytest tests/test_evaluation.py -s
 ```
 
-Pred spustením dokončite [požiadavky na vyhodnotenie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). Testy načítavajú konfiguráciu z vybraného `.azure/<environment>/.env`; overte, či je vybrané správne prostredie. Medzi dôležité vstupy patrí:
+Pred spustením dokončite [požiadavky hodnotenia](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). Testy načítajú konfiguráciu z vybraného `.azure/<environment>/.env`; overte, že je vybrané požadované prostredie. Dôležité vstupy zahŕňajú:
 
 - `AZURE_EXISTING_AIPROJECT_ENDPOINT`
-- `AZURE_EXISTING_AGENT_ID`, vo formáte požadovanom aktuálnym vzorom (uverejnená verzia používa `agent_name:agent_version`)
-- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, používaný ako nasadenie rozhodujúceho modelu
+- `AZURE_EXISTING_AGENT_ID`, použitý vo formáte požadovanom aktuálnou ukážkou (recenzovaná verzia používa `agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, používaný ako nasadenie súdneho modelu
 
-Preskúmajte testy, aby ste pochopili výber hodnotiteľa, prahové hodnoty, požadované roly a náklady modelu. Dokončený beh nie je automaticky úspešným kvalitatívnym bránovi; prezrite si skóre, neúspešné / chybné prípady a prepojené výsledky vo Foundry.
+Prezrite si testy, aby ste porozumeli voľbe hodnotiteľa, prahom, potrebným rolám a nákladom na model. Dokončené spustenie nie je automaticky úspešným kvalitatívnym filtrom; prezrite si skóre, neúspešné/chybné prípady a prepojené výsledky vo Foundry.
 
-### Rozšírenie samostatných hodnotení AZD
+### Rozšírenie samostatného hodnotenia AZD
 
-Uvedený Python test je **týmto vzorom špecifický pracovný tok**. Voliteľné rozšírenie `azure.ai.evaluations` je iný pracovný tok s vlastnou konfiguráciou `evals/azure.eval.yaml`:
+Python test vyššie je **workflow špecifický pre vzorku**. Voliteľné rozšírenie `azure.ai.evaluations` je iný workflow, s vlastnou konfiguráciou `evals/azure.eval.yaml`. Inštaluje sa samostatne, nie je súčasťou všeobecne dostupného balíka `microsoft.foundry` 1.0:
 
 ```bash
 azd extension install azure.ai.evaluations
 azd ai eval --help
 ```
 
-Pre kompletné nastavenie rozšírenia pozrite [pracovné toky a migráciu hodnotení](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Od beta verzie agentov s rozšírením 22 nepoužívajte odstránené príkazy `azd ai agent eval`. Inštalácia rozšírenia hodnotení neprevádza Python testy vzoru ani automaticky nevytvára konfiguráciu hodnotenia.
+Pre kompletné nastavenie rozšírenia pozrite [workflow hodnotenia a migráciu](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Od beta.22 rozšírenia agentov nepoužívajte odstránené príkazy `azd ai agent eval`. Inštalácia rozšírenia hodnotení neupravuje Python testy vzorky ani automaticky nevytvára konfiguráciu hodnotenia.
 
-## 5.5 AI red teaming a kontinuálne hodnotenie
+Pre samostatné **cvičenie hosteného agenta GA** použite prázdnu zložku mimo ukážok tohto workshopu a postupujte podľa [návodu Foundry z lokálu do cloudu](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Používa AZD 1.37.0+, balík `microsoft.foundry`, Python 3.13+ a aktuálny uv. Preskúmate `azure.yaml`, testujete lokálne s Agent Inspector, nasadíte kód pre vzdialenú zostavu Foundry a vygenerujete/preskúmate dataset a klasifikáciu pred konfigurovaním `azd ai eval init --name quality`. Nenahrádzajte testy tejto vzorky ani nepredpokladajte, že inštalácia balíka zmení jeho hostingový model.
 
-Aktuálny vzor poskytuje [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Dokončite jeho predpoklady a preskúmajte cieľ a náklady pred spustením:
+## 5.5 Red teaming AI a kontinuálne hodnotenie
+
+Aktuálna vzorka poskytuje [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Dokončite jej požiadavky a preštudujte zamýšľaný cieľ a náklady pred spustením:
 
 ```bash
 pytest tests/test_red_teaming.py -s
 ```
 
-Použite autorizované testovacie nasadenie a syntetické dáta. Preskúmajte generované útoky a výsledky; toto skenovanie neurčuje, že aplikácia je bezpečná alebo v súlade.
+Použite autorizované testovacie nasadenie a syntetické dáta. Prezrite generované útoky a výsledky; toto skenovanie nepreukazuje, že aplikácia je bezpečná alebo v súlade.
 
-Sprievodca [pozorovateľnosťou](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) tiež popisuje nepretržitú evaluáciu nakonfigurovanú pri spustení kontajnera. Vyhodnocuje skutočné interakcie používateľov, nie generovaný testovací prevádzku, a podpora vyhodnotenia sa líši podľa regiónu. Žiadne interakcie znamenajú žiadne záznamy vyhodnotenia. Overte si nainštalovanú verziu príkladu a konfiguráciu vyhodnotenia namiesto predpokladu, že každé nasadenie má rovnaké predvolené hodnoty.
+Sprievodca [pozorovateľnosťou](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) tiež popisuje kontinuálne hodnotenie konfigurované pri spustení kontajnera. Vyhodnocuje skutočné interakcie používateľov, nie generovaný testovací prenos, a podpora vyhodnocovateľa sa líši podľa regiónu. Žiadne interakcie znamenajú žiadne záznamy o hodnotení. Overte nainštalovanú vzorovú verziu a konfiguráciu vyhodnocovateľa namiesto toho, aby ste predpokladali, že každé nasadenie má rovnaké predvolené nastavenia.
 
-Overovanie je oddelené od vyhodnotenia. Postupujte podľa zdokumentovaného nastavenia identity/prístupu v príklade. Neexistuje žiadny zdokumentovaný „basic auth fallback“, na ktorý by sa dalo spoľahnúť pri ochrane verejného koncového bodu.
+Autentifikácia je oddelená od hodnotenia. Postupujte podľa zdokumentovaného nastavenia identity/prístupu vo vzore. Neexistuje zdokumentovaný „fallback základnej autentifikácie“ na ochranu verejného koncového bodu.
 
-## 5.6 Návrhové cvičenie: prispôsobenie maloobchodu
+## 5.6 Dizajnové cvičenie: prispôsobenie maloobchodu
 
-!!! warning "Návrhové cvičenie, nie dokončené nasadenie"
+!!! warning "Dizajnové cvičenie, nie hotové nasadenie"
 
     The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
 
-Napíšte krátky plán, ktorý rieši:
+Napíšte krátky plán riešiaci:
 
-| Oblasť | Rozhodnutie a zber dôkazov |
+| Oblasť | Rozhodnutie a zhromaždené dôkazy |
 |------|----------------------------------|
-| Zodpovednosti agenta | Začnite s jedným agentom alebo zdôvodnite samostatné agentov Shopper a Loyalty a logiku smerovania |
-| Dáta | Definujte syntetický katalóg/databázu odmien a vlastníctvo aktualizácií |
-| Nástroje | Najprv implementujte handler-y iba na čítanie; špecifikujte autorizáciu a overenie pre akékoľvek zápisy |
-| Modely | Vyberte dostupné kombinácie model/ verzia/ SKU a overte kvótu; vyhnite sa poskytovaniu nepoužívaných modelov |
-| Vyhľadávanie | Definujte indexovanie, rozmery embeddingu, citácie a prístupové kontroly na úrovni dokumentov |
-| Vyhodnotenie | Pridajte prípady očakávaných odpovedí, nepodporovaných otázok, použitia nástrojov a bezpečnostné prípady s explicitnými prahmi |
-| Prevádzka | Definujte telemetriu, latenciu/rozpočet chýb, limity nákladov a vlastníctvo čistenia |
+| Zodpovednosti agenta | Začnite s jedným agentom alebo zdôvodnite samostatných agentov Shopper a Loyalty a logiku smerovania |
+| Dáta | Definujte syntetický katalóg/dáta odmien a vlastníctvo aktualizácií |
+| Nástroje | Najprv implementujte iba obsluhu na čítanie; špecifikujte autorizáciu a validáciu pre akékoľvek zápisy |
+| Modely | Vyberte dostupné kombinácie modelu/verzie/SKU a overte kvótu; vyhnite sa nasadeniu nepoužitých modelov |
+| Vyhľadávanie | Definujte indexovanie, rozmery vkladov, citácie a prístupové kontroly na úrovni dokumentov |
+| Hodnotenie | Pridajte prípady očakávanej odpovede, nepodporovanej otázky, použitia nástroja a bezpečnosti s explicitnými prahmi |
+| Prevádzka | Definujte telemetriu, rozpočty latencie/chýb, limity nákladov a vlastníctvo čistenia |
 
-Uloženie `custom-agents/shopper-agent-instructions.md` nespôsobí, že príklad ho načíta. Nájdite aplikačný kód, ktorý vytvára/aktualizuje agenta, pripojte svoje skontrolované inštrukcie tam a pred testovaním overte výslednú verziu agenta. Inštrukcie nemôžu udeliť prístup k dátam alebo nástrojom, ktoré ste neimplementovali.
+Uloženie `custom-agents/shopper-agent-instructions.md` nezpôsobí jeho načítanie vo vzorovom príklade. Nájdite aplikačný kód, ktorý vytvára/aktualizuje agenta, pripojte tam svoje prekontrolované inštrukcie a pred testovaním overte výslednú verziu agenta. Inštrukcie nemôžu udeliť prístup k dátam alebo nástrojom, ktoré ste neimplementovali.
 
-Aplikujte jednu zmenu naraz, znovu nasadte ovplyvnené komponenty a opäť spustite svoje základné otázky a vyhodnotenia. Udržiavajte funkčnú revíziu na porovnanie. Pre architektonickú inšpiráciu pozrite [maloobchodný blueprint](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), ktorý tiež nie je kompletnou maloobchodnou aplikáciou.
+Aplikujte jednu zmenu naraz, znovu nasadte dotknuté komponenty a opakovane spustite svoje základné otázky a hodnotenia. Uchovajte funkčnú revíziu na porovnanie. Pre inšpiráciu architektúry pozrite [retail blueprint](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), ktorý tiež nie je kompletnou maloobchodnou aplikáciou.
 
-!!! quote "NA KONCI TOHTO CVIČENIA BY STE MALI MAŤ"
+!!! quote "NA KONCI TOHTO LABÁKU BY STE MALI MAŤ"
 
     - [ ] A documented customization scope and cost/region checks
     - [ ] Evidence that retrieval and tracing work for your selected environment
     - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
     - [ ] A list of missing implementation work rather than a claim of automatic production readiness
 
-Pokračujte na [Odstránenie infraštruktúry](6-Teardown-Infrastructure.md).
+Pokračujte na [Demontáž infraštruktúry](6-Teardown-Infrastructure.md).
 
 ---
 

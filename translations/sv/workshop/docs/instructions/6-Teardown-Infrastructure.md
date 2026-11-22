@@ -1,6 +1,6 @@
-# 6. Nedmontering av infrastruktur
+# 6. Avveckla Infrastruktur
 
-!!! tip "VID SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
+!!! tip "NÄR DU ÄR KLAR MED DENNA MODUL KOMMER DU ATT KUNNA"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -11,9 +11,9 @@
 
 ## Bonusövningar
 
-Innan vi river ner projektet, ta några minuter för att göra lite öppen utforskning.
+Innan vi avvecklar projektet, ta några minuter för att göra en öppen explorering.
 
-!!! info "Prova dessa utforskningsuppmaningar"
+!!! info "Prova Dessa Utforskningsuppmaningar"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Innan vi river ner projektet, ta några minuter för att göra lite öppen utfor
 
 ---
 
-## Avveckla infrastruktur
+## Avveckla Infra
 
-1. Att riva ner infrastrukturen är lika enkelt som:
+!!! warning "Om du också har slutfört GA-hostade agentövningen"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Att avveckla infrastrukturen är lika enkelt som:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Bekräfta den valda miljön och granska resurserna som ska tas bort. Detta tar bort Azure-resurser och kan förstöra data. Behåll bekräftelseprompten för detta lärande arbetsflöde. När det är klart kommer du att se en utdata liknande:
+1. Bekräfta den valda miljön och granska resurserna som ska tas bort. Detta tar bort Azure-resurser och kan förstöra data. Behåll bekräftelseprompten för detta inlärningsflöde. När det är klart kommer du att se output som liknar:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Innan vi river ner projektet, ta några minuter för att göra lite öppen utfor
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Verifiera borttagning i portalen och kontrollera resurser utanför distributionens omfattning. Kostnadsrapportering och kvotuppdateringar kan fördröjas. Lokal `.azure` konfiguration kvarstår om du inte uttryckligen tar bort den.
+1. Verifiera borttagningen i portalen och kontrollera efter resurser utanför distributionens omfattning. Kostnadsrapportering och kvotuppdateringar kan fördröjas. Lokal `.azure`-konfiguration kvarstår såvida du inte explicit tar bort den.
 
-1. `azd down --purge` begär dessutom permanent borttagning av stödda mjuk-borttagna resurser. Använd den endast när återställning inte krävs och du förstår behållnings-/renskyddspolicys. Den garanterar inte omedelbar kvotfrigörelse.
+1. `azd down --purge` begär dessutom permanent borttagning av stödda mjukborttagna resurser. Använd det endast när återställning inte krävs och du förstår behållnings-/raderingsskyddspolicys. Det garanterar inte omedelbar kvotfrigivning.
 
-1. Distribuera inte om bara för att verifiera rensning. En senare avsiktlig `azd up` kan återskapa resurser med de återstående lokala inmatningarna, och medför avgifter igen. Modelluppdateringar använder normalt sett stödda provisioneringsändringar, inte nedmontering.
+1. Distribuera inte om bara för att verifiera städningen. En senare avsiktlig `azd up` kan återskapa resurser med de kvarvarande lokala indata, och medför kostnader igen. Modelluppdateringar använder normalt stödda provisionsändringar, inte avveckling.
 
 ---
 

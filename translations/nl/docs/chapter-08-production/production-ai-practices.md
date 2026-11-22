@@ -1,27 +1,27 @@
 # Best Practices voor Productie AI Workloads met AZD
 
 **Hoofdstuk Navigatie:**
-- **📚 Cursus Start**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 8 - Productie & Enterprise Patronen
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 8 - Productie- en Enterprisepatronen
 - **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 7: Probleemoplossing](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Ook Gerelateerd**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
 - **🎯 Cursus Voltooid**: [AZD Voor Beginners](../../README.md)
 
 ## Overzicht
 
-Deze gids legt productie AI ontwerp patronen uit met behulp van Azure Developer CLI (AZD). Het is een ontwerpgids, geen inzetbare applicatie of productcertificering.
+Deze gids legt productie AI-ontwerppatronen uit met behulp van Azure Developer CLI (AZD). Het is een ontwerpreferentie, geen inzetbare applicatie of productiecertificering.
 
-**Voorbeeld grenzen:** Tenzij expliciet beschreven als compleet, veronderstellen Bicep-fragmenten parameters en geraadpleegde bronnen uit een omvattende template. Ze laten host afbeeldingen/plannen, identiteiten, roltoewijzingen, DNS, outputs en andere vereiste integraties weg. YAML servicepaden en hook/test scripts zijn illustratieve bestanden om in **je eigen applicatie** te maken; ze worden niet geleverd door deze cursus. Gebruik een werkende AZD voorbeeld als basis, compileer de volledige infrastructuur en test deze in een geïsoleerde omgeving voor productie.
+**Voorbeeldgrenzen:** Tenzij expliciet als volledig beschreven, gaan Bicep-fragmenten uit van parameters en verwezen resources vanuit een omvattende template. Ze laten host-afbeeldingen/plannen, identiteiten, roltoewijzingen, DNS, outputs en andere vereiste integratie weg. YAML-servicepaden en hook/testscripts zijn illustratieve bestanden om in **je eigen applicatie** te maken; ze worden niet geleverd door deze cursus. Gebruik een werkend AZD-voorbeeld als basis, compileer de volledige infrastructuur en test deze in een geïsoleerde omgeving voordat je in productie gaat.
 
-## Belangrijkste Uitdagingen Aangepakt
+## Belangrijke Uitdagingen Aangepakt
 
-Veelvoorkomende zorgen voor productie zijn multi-service implementaties, identiteit en geheimbeheer, opschalen, kostenbewaking, en monitoring. Er wordt hier geen gemeten prevalentie geclaimd.
+Veelvoorkomende productieaandachtspunten omvatten multi-service uitrol, identiteit- en geheimebeheer, schaalbaarheid, kostenbeheersing en toezicht. Er wordt hier geen gemeten prevalentie geclaimd.
 
 ## Architectuurpatronen voor Productie AI
 
 ### Patroon 1: Microservices AI Architectuur
 
-**Wanneer te gebruiken**: Complexe AI-applicaties met meerdere mogelijkheden
+**Wanneer te gebruiken**: Complexe AI-toepassingen met meerdere mogelijkheden
 
 ```mermaid
 graph TD
@@ -59,7 +59,7 @@ services:
 
 ### Patroon 2: Event-Driven AI Verwerking
 
-**Wanneer te gebruiken**: Batchverwerking, documentanalyse, async workflows
+**Wanneer te gebruiken**: Batchverwerking, documentanalyse, asynchrone workflows
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -106,48 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-Dit maakt namespace-fragmenten aan, geen hubs, wachtrijen, abonnementen of Function triggers. Een uitvoerbare Function heeft ook een hostingplan, runtime/opslag configuratie, een gekoppelde identiteit, RBAC en netwerktoegang nodig. De Key Vault referentie heeft toestemming nodig om het geheim te lezen; een endpoint URL zelf is geen referentie.
+Dit creëert namespace-fragmenten, geen hubs, wachtrijen, abonnementen of Function triggers. Een uitvoerbare Function heeft ook een hostingplan, runtime/opslagconfiguratie, een gekoppelde identiteit, RBAC en netwerktoegang nodig. De Key Vault-referentie heeft permissie nodig om het geheim te lezen; een endpoint-URL zelf is geen referentie.
 
-## Nadenken over AI Agent Gezondheid
+## Denken over AI Agent Gezondheid
 
-Wanneer een traditionele webapp breekt, zijn de symptomen bekend: een pagina laadt niet, een API retourneert een fout, of een implementatie mislukt. AI-gestuurde applicaties kunnen op al die manieren breken—maar ook subtieler gedrag vertonen dat geen voor de hand liggende foutmeldingen oplevert.
+Wanneer een traditionele webapplicatie faalt, zijn de symptomen bekend: een pagina laadt niet, een API geeft een foutmelding, of een uitrol mislukt. Door AI aangedreven applicaties kunnen op al deze manieren falen — maar ze kunnen zich ook subtieler misdragen zonder duidelijke foutmeldingen.
 
-Deze sectie helpt je een mentaal model op te bouwen voor het monitoren van AI workloads zodat je weet waar je moet kijken als er iets mis lijkt.
+Deze sectie helpt je een mentaal model te bouwen voor het monitoren van AI workloads zodat je weet waar je moet kijken als dingen niet lijken te kloppen.
 
 ### Hoe Agent Gezondheid Verschilt van Traditionele App Gezondheid
 
-Traditionele apps kunnen ook subtiele correctheidsfouten hebben. Een AI-agent voegt niet-deterministische responskwaliteit toe aan de gebruikelijke beschikbaarheids- en correctheidszorgen. Denk aan agent gezondheid in twee lagen:
+Traditionele apps kunnen ook subtiele correctheidsfouten hebben. Een AI-agent voegt niet-deterministische antwoordkwaliteit toe aan de gebruikelijke beschikbaarheids- en correctheidszorgen. Zie agentgezondheid als twee lagen:
 
-| Laag | Waarop letten | Waar kijken |
-|------|--------------|-------------|
-| **Infrastructuur gezondheid** | Draait de service? Zijn resources toegewezen? Zijn endpoints bereikbaar? | `azd monitor`, Azure Portal resource gezondheid, container/app logs |
-| **Gedragsgezondheid** | Reageert de agent accuraat? Zijn de reacties tijdig? Wordt het model correct aangeroepen? | Application Insights traces, model oproep latency metrics, responskwaliteit logs |
+| Laag | Waarop Te Letten | Waar Te Kijken |
+|-------|--------------|---------------|
+| **Infrastructuurgezondheid** | Draait de service? Zijn resources toegewezen? Zijn endpoints bereikbaar? | `azd monitor`, Azure Portal resource gezondheid, container/app logs |
+| **Gedrag Gezondheid** | Reageert de agent accuraat? Zijn reacties tijdig? Wordt het model correct aangeroepen? | Application Insights traces, model oproep latency metrieken, response-kwaliteitslogs |
 
-Infrastructuur gezondheid is vertrouwd—het is dezelfde voor elke azd app. Gedragsgezondheid is de nieuwe laag die AI workloads introduceren.
+Infrastructuurgezondheid is bekend — het is hetzelfde voor elke azd-app. Gedrag gezondheid is de nieuwe laag die AI workloads toevoegen.
 
-### Waar te kijken als AI Apps zich niet gedragen zoals verwacht
+### Waar Te Kijken Als AI Apps Zich Niet Gedragen Zoals Verwacht
 
-Als je AI-applicatie niet de verwachte resultaten oplevert, is hier een conceptuele checklist:
+Als je AI-applicatie niet de verwachte resultaten produceert, is hier een conceptuele checklist:
 
-1. **Begin met de basis.** Draait de app? Kan hij zijn afhankelijkheden bereiken? Controleer `azd monitor` en resource gezondheid net als bij elke app.
-2. **Controleer de modelverbinding.** Roept je applicatie het AI-model succesvol aan? Mislukte of verlopen modeloproepen zijn de meest voorkomende oorzaak van AI app problemen en verschijnen in je applicatielogs.
-3. **Inspecteer input en gronding veilig.** Verkeerde antwoorden kunnen voortkomen uit ophalen, instructies, modelbeperkingen, of tooluitvoering. Gebruik toegang-gecontroleerde, geredigeerde diagnostische data; zet geen ongerichte prompt/respons logging aan in productie.
-4. **Beoordeel respons latency.** AI model oproepen zijn trager dan typische API oproepen. Voelt je app traag aan, controleer dan of de modelresponsetijden zijn gestegen—dit kan wijzen op throttling, capaciteitslimieten, of regio-congestie.
-5. **Let op kostensignalen.** Onverwachte pieken in token gebruik of API oproepen kunnen wijzen op een lus, verkeerd geconfigureerde prompt, of overmatige herhalingen.
+1. **Begin met de basis.** Draait de app? Kan het zijn afhankelijkheden bereiken? Controleer `azd monitor` en resource gezondheid zoals je bij elke app zou doen.
+2. **Controleer de modelverbinding.** Roept je applicatie succesvol het AI-model aan? Mislukte of time-out modeloproepen zijn de meest voorkomende oorzaak van AI-app problemen en verschijnen in je applicatielogs.
+3. **Inspecteer input en onderbouwing veilig.** Foute antwoorden kunnen voortkomen uit ophalen, instructies, modelbeperkingen of tooluitvoering. Gebruik toegang-gecontroleerde, geredigeerde diagnostische data; schakel geen ongerichte prompt/response logging in productie in.
+4. **Controleer reactietijd.** AI-model oproepen zijn trager dan typische API calls. Als je app traag aanvoelt, controleer dan of de modelrespons tijden zijn gestegen — dit kan throttling, capaciteitslimieten of regio-brede congestie aangeven.
+5. **Let op kostensignalen.** Onverwachte pieken in token gebruik of API oproepen kunnen wijzen op een lus, een verkeerd geconfigureerde prompt of overmatige herhalingen.
 
-Je hoeft niet meteen expert te zijn in observability tooling. De kernboodschap is dat AI applicaties een extra laag gedrag hebben om te monitoren, en azd's ingebouwde monitoring (`azd monitor`) geeft een startpunt voor het onderzoeken van beide lagen.
+Je hoeft niet meteen expert te zijn in observability tools. De belangrijkste les is dat AI-applicaties een extra gedraglaag hebben om te monitoren, en azd’s ingebouwde monitoring (`azd monitor`) geeft je een startpunt om beide lagen te onderzoeken.
 
 ---
 
-## Beveiligingsbest Practices
+## Security Best Practices
 
 ### 1. Zero-Trust Beveiligingsmodel
 
 **Implementatiestrategie**:
-- Geen communicatie tussen services zonder authenticatie
-- Alle API oproepen gebruiken managed identities
+- Geen service-naar-service communicatie zonder authenticatie
+- Alle API oproepen gebruiken beheerde identiteiten
 - Netwerkisolatie met private endpoints
-- Toegang op basis van het minst noodzakelijke privilege
+- Least privilege toegangscontrole
 
 ```bicep
 // Managed Identity for each service
@@ -168,7 +168,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Veilig Geheimbeheer
+### 2. Beveiligd Geheimbeheer
 
 **Key Vault Integratiepatroon**:
 
@@ -203,7 +203,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-Ken de runtime identiteit `Key Vault Secrets User` toe op het juiste scope en koppel deze aan de host; `enableRbacAuthorization` alleen verleent geen toegang. Verkies OpenAI managed identity authenticatie met `disableLocalAuth: true`. Het optionele sleutelgeheim heeft alleen zin voor een bewust sleutel-ingeschakeld account, en de provisioning principal moet ook toestemming hebben om geheimen te schrijven.
+Wijs de runtime-identiteit `Key Vault Secrets User` toe op het juiste scope-niveau en koppel deze aan de host; `enableRbacAuthorization` op zichzelf geeft geen toegang. Geef de voorkeur aan OpenAI beheerde identiteit-authenticatie met `disableLocalAuth: true`. Het optionele sleutelgeheim heeft alleen zin voor een bewust sleutel ingeschakeld account, en de provisioningprincipal heeft ook toestemming nodig om geheimen te schrijven.
 
 ### 3. Netwerkbeveiliging
 
@@ -265,9 +265,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-Private endpoints vereisen ook private DNS zone groepen/VNet links en applicatie VNet integratie. Ze blokkeren niet automatisch publieke toegang: schakel na verificatie van private connectiviteit en implementatietoegang expliciet het publieke netwerktoegang voor het AI-account uit.
+Private endpoints vereisen ook private DNS zone groepen/VNet-links en applicatie VNet-integratie. Ze blokkeren niet automatisch publieke toegang: schakel de publieke netwerkaan toegang voor het AI-account expliciet uit nadat je private connectiviteit en uitroltoegang hebt gevalideerd.
 
-## Prestaties en Opschalen
+## Prestaties en Schalen
 
 ### 1. Auto-Scaling Strategieën
 
@@ -317,7 +317,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Caching Strategieën
 
-**Redis Cache voor AI Responsen**:
+**Redis Cache voor AI Antwoorden**:
 
 ```bicep
 // Legacy Azure Cache for Redis example (not recommended for new deployments)
@@ -344,7 +344,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-Azure Cache voor Redis Basic/Standard/Premium bevindt zich op een [uitfaseringstraject](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Gebruik Azure Managed Redis voor nieuwe ontwerpen en zijn gedocumenteerde SKU, identiteit, en TLS-configuratie, in plaats van deze legacy resource in een nieuw productie systeem te kopiëren. De connection-string regel is een niet-functionele placeholder, geen referentie. Partitioneer cache sleutels op autorisatie, model/instructies, en ophaalversie, met een verloop; een gedeelde query-only cache kan data van een andere gebruiker blootgeven.
+Azure Cache for Redis Basic/Standard/Premium bevindt zich op een [uitfaseringstraject](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Gebruik Azure Managed Redis voor nieuwe ontwerpen en de gedocumenteerde SKU, identiteit en TLS-configuratie, in plaats van deze legacy resource te kopiëren in een nieuw productiesysteem. De connection-string regel is een niet-functionele placeholder, geen referentie. Partitioneer cache-sleutels op autorisatie, model/instructies en versie van ophalen, met vervaldatum; een gedeelde alleen-query cache kan data van een andere gebruiker blootleggen.
 
 ### 3. Load Balancing en Verkeersbeheer
 
@@ -384,15 +384,15 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-Dit is een gedeeltelijke gateway resource: een echte implementatie heeft ook gateway subnet/IP configuratie, frontend IP's en poorten, TLS-ontvangers/certificaten, backend HTTP instellingen/probes, routeringsregels en prioriteiten, en een gereviewd WAF beleid nodig. TLS hostnaam/SNI en authenticatie moeten overeenkomen met de Container App backend.
+Dit is een gedeeltelijke gateway-resource: een daadwerkelijke uitrol heeft ook gateway subnet/IP-configuratie, frontend IP’s en poorten, TLS-listeners/certificaten, backend HTTP instellingen/probes, routeringsregels en prioriteiten, en een herzien WAF-beleid nodig. TLS-hostnaam/SNI en authenticatie moeten overeenkomen met de backend van de Container App.
 
 ## 💰 Kostenoptimalisatie
 
-### 1. Resource Juiste Grootte
+### 1. Juiste Grootte voor Resources
 
 **Omgevingsspecifieke Configuraties**:
 
-Deze namen zijn **illustratieve custom-template inputs**, geen automatische AZD instellingen. Vertaal elk naar `infra/main.parameters.json`/Bicep en host configuraties eerst. Bijvoorbeeld, het RAG voorbeeld gebruikt `AZURE_SEARCH_SERVICE_SKU` en `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, niet de algemene namen hieronder. Geef Container Apps geheugen in een ondersteunde eenheid zoals `1Gi` in de daadwerkelijke resource. Pas infrastructuurwijzigingen toe met `azd up` of `azd provision`; `azd deploy` alleen past geen Bicep-wijzigingen toe.
+Deze namen zijn **illustratieve custom-template inputs**, geen automatische AZD-instellingen. Koppel elk eerst aan `infra/main.parameters.json`/Bicep en hostconfiguratie. Bijvoorbeeld, het RAG-voorbeeld gebruikt `AZURE_SEARCH_SERVICE_SKU` en `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, niet de generieke namen hieronder. Geef Container Apps geheugen een ondersteunde eenheid zoals `1Gi` in de daadwerkelijke resource. Pas infrastructuurwijzigingen toe met `azd up` of `azd provision`; `azd deploy` alleen past geen Bicep-wijzigingen toe.
 
 ```bash
 # Development environment
@@ -412,7 +412,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kostenbewaking en Budgetten
+### 2. Kostenmonitoring en Budgetten
 
 ```bicep
 // Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
@@ -455,13 +455,13 @@ resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
 }
 ```
 
-Vervang de voorbeeldontvangers en controleer scope/rechten. Budgetwaarschuwingen gebruiken vertraagde factureringsdata en dwingen geen uitgavelimiet af.
+Vervang de voorbeeldontvangers en controleer scope/permities. Budgetwaarschuwingen gebruiken vertraagde factureringsgegevens en handhaven geen uitgavelimiet.
 
 ### 3. Token Gebruik Optimalisatie
 
 **OpenAI Kostenbeheer**:
 
-Dit is slechts een karakter-gebaseerde heuristiek voor een UI preview, **geen** validator van model token-limieten. Productiecode moet een tokenizer gebruiken passend bij het geïmplementeerde model en rekening houden met systeeminstructies, tool schema's, historie en output budget. Weiger een te groot gebruikersbericht in plaats van het stilletjes af te kappen.
+Dit is slechts een karaktergebaseerde heuristiek voor een UI-preview, **geen** validatie van model tokenlimiet. Productiecode moet een tokenizer gebruiken die passend is voor het uitgerolde model en rekening houden met systeeminstructies, toolschema’s, geschiedenis en outputbudget. Wijs een te groot gebruikersbericht af in plaats van het stilletjes af te kappen.
 
 ```typescript
 // Application-level token optimization
@@ -495,7 +495,7 @@ class TokenOptimizer {
 }
 ```
 
-## Monitoring en Observability
+## Monitoring en Observeerbaarheid
 
 ### 1. Uitgebreide Application Insights
 
@@ -544,7 +544,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI-Specifieke Monitoring
 
-**Aangepaste Dashboards voor AI Metrics**:
+**Aangepaste Dashboards voor AI Metrieken**:
 
 ```json
 {
@@ -572,9 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-Deze JSON is een applicatie-gedefinieerde schets, geen importeerbare Azure portal dashboardschema. De token/kosten queries vereisen dat jouw app exact die custom metrics uitzendt; ze worden niet door AZD aangemaakt. Pas afhankelijkheidsfilters aan voor jouw daadwerkelijke model endpoint/span namen.
+Deze JSON is een toepassingsgedefinieerde schets, geen importeerbaar Azure portal dashboardschema. De token/kosten queries vereisen dat je app die exacte aangepaste metrieken uitzendt; ze worden niet aangemaakt door AZD. Pas afhankelijkheidsfilters aan je daadwerkelijke model endpoint/span namen aan.
 
-### 3. Health Checks en Uptime Monitoring
+### 3. Gezondheidscontroles en Uptime Monitoring
 
 ```bicep
 // Application Insights availability tests
@@ -617,9 +617,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Disaster Recovery en Hoge Beschikbaarheid
 
-De voorafgaande test gaat uit van een bestaande App Service `webApp` en Application Insights resource. Standaard beschikbaarheidstests zijn betaalbaar en vereisen een bereikbaar endpoint; enkel-private apps hebben een passend privé monitoring ontwerp nodig. URL ping tests zijn verouderd; gebruik [standaard beschikbaarheidstests](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+De voorgaande test gaat uit van een bestaande App Service `webApp` en Application Insights resource. Standaard beschikbaarheidstests zijn factureerbaar en vereisen een bereikbaar endpoint; alleen private apps hebben een passend ontwerp voor private monitoring nodig. URL ping-tests zijn verouderd; gebruik [standaard beschikbaarheidstests](https://learn.microsoft.com/azure/azure-monitor/app/availability).
 
-### 1. Multi-Regio Implementatie
+### 1. Multi-Regio Uitrol
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -681,7 +681,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-Omgevingsvariabelen kiezen geen resource locaties. IaC moet aparte regionale hosts provisionen en elke service koppelen met `resourceName` of `azd-service-name` tags. Het Traffic Manager voorbeeld is een **aparte App Service topologie** (`primaryAppService`/`secondaryAppService`), geen routering voor de Container Apps declaraties. Container Apps vereist een passend geconfigureerd extern endpoint/front door, TLS/custom-domain routering, en health probes.
+Omgevingsvariabelen kiezen geen resource locaties. IaC moet verschillende regionale hosts provisioneren en elke dienst koppelen met `resourceName` of `azd-service-name` tags. Het Traffic Manager voorbeeld is een **aparte App Service topologie** (`primaryAppService`/`secondaryAppService`), geen routering voor de Container Apps declaraties. Container Apps vereist een passend geconfigureerde externe endpoint/front door, TLS/custom-domain routering en gezondheidsprobes.
 
 ### 2. Data Backup en Herstel
 
@@ -705,7 +705,7 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
 
 ```
 
-De vault alleen back-upt niets. Configureer een **workload-specifiek ondersteund beleid en back-up instantie**, bronrechten, retentie en hersteltests met behulp van [Azure Backup ondersteuningsmatrixen](https://learn.microsoft.com/azure/backup/backup-support-matrix). Er is geen generiek Azure Backup beleid voor gehoste Azure OpenAI model deployments. Houd infrastructuur/model implementatie-definities in source control; bescherm geüploade documenten, applicatiegegevens, en fine-tuning artefacten met de ondersteunde back-up/export functies van elke backing service. Definieer en test RPO/RTO expliciet.
+De vault alleen maakt geen back-up. Configureer een **workload-specifiek ondersteund beleid en backup-instance**, bronpermissies, retentie en hersteltests met behulp van [Azure Backup ondersteuningsmatrices](https://learn.microsoft.com/azure/backup/backup-support-matrix). Er is geen generiek Azure Backup-beleid voor gehoste Azure OpenAI modeluitrol. Bewaar infrastructuur-/modeldeploy definitie in bronbeheer; bescherm geüploade documenten, applicatiegegevens en fine-tuning artefacten met de ondersteunde backup/exportfunctionaliteit van elke back-end service. Definieer en test RPO/RTO expliciet.
 
 ## DevOps en CI/CD Integratie
 
@@ -747,7 +747,7 @@ jobs:
 
 ```
 
-Dit is het **enkel testgedeelte** van een workflow en gaat ervan uit dat je `requirements.txt`, `tests/`, en de twee safety scripts hebt gemaakt. Voeg de geauthenticeerde OIDC provisioning/deployment taken toe uit [CI/CD Pipeline Configuratie](#cicd-pipeline-configuration), met `needs: test`, een vertrouwde push/manual trigger, en beveiligde GitHub omgevingen. Plaats geen onbetrouwbare pull-request code met cloud-referenties. Een verse runner heeft geen geselecteerde lokale AZD omgeving; lever de environment/subscription/location inputs aan en gebruik `azd auth login`, niet alleen `azure/login`.
+Dit is het **alleen-test** deel van een workflow en gaat ervan uit dat je `requirements.txt`, `tests/`, en de twee safety scripts hebt gemaakt. Voeg de geauthenticeerde OIDC provisioning/deployment jobs toe uit [CI/CD Pipeline Configuratie](#cicd-pipeline-configuration), met `needs: test`, een vertrouwde push/handmatige trigger, en beschermde GitHub-omgevingen. Rol geen onbetrouwbare pull-requestcode uit met cloudreferenties. Een verse runner heeft geen geselecteerde lokale AZD-omgeving; lever de omgeving/subscriptie/locatie inputs en gebruik `azd auth login`, niet alleen `azure/login`.
 
 ### 2. Infrastructuur Validatie
 
@@ -789,76 +789,76 @@ fi
 echo "Infrastructure validation completed successfully!"
 ```
 
-Verwacht: een nul exit en het voltooimelding alleen als alle verwachte types bestaan en de benoemde modelimplementatie is toegewezen. Dit controleert inventaris/provisioning status, **niet** resource gezondheid, exacte topologie, RBAC, netwerk bereikbaarheid of modelgedrag. Pas de verwachte types aan op jouw architectuur, en voer daarna een aparte geauthenticeerde applicatie gereedheidstest uit.
+Verwacht: een exitcode nul en alleen het voltooiingsbericht als alle verwachte types bestaan en de genoemde modeluitrol is provisioned. Dit controleert inventaris/provisioning status, **niet** resource gezondheid, exacte topologie, RBAC, netwerk bereikbaarheid of modelgedrag. Pas de verwachte types aan je architectuur aan, en voer daarna een aparte geauthenticeerde applicatie gereedheidstest uit.
 
-## Productieklaar Checklist
+## Productiegereedheidschecklist
 
 ### Beveiliging ✅
-- [ ] Alle services gebruiken managed identities
+- [ ] Alle services gebruiken beheerde identiteiten
 - [ ] Geheimen opgeslagen in Key Vault
 - [ ] Private endpoints geconfigureerd
 - [ ] Netwerkbeveiligingsgroepen geïmplementeerd
-- [ ] RBAC met het minst noodzakelijke privilege
+- [ ] RBAC met least privilege
 - [ ] WAF ingeschakeld op publieke endpoints
 
-### Prestatie ✅
+### Prestaties ✅
 - [ ] Auto-scaling geconfigureerd
 - [ ] Caching geïmplementeerd
 - [ ] Load balancing ingesteld
 - [ ] CDN voor statische content
-- [ ] Database verbindingspools
+- [ ] Database verbinding pooling
 - [ ] Token gebruik optimalisatie
 
 ### Monitoring ✅
 - [ ] Application Insights geconfigureerd
-- [ ] Aangepaste metrics gedefinieerd
-- [ ] Waarschuwingsregels ingesteld
-- [ ] Dashboard gemaakt
-- [ ] Health checks geïmplementeerd
-- [ ] Log bewaarbeleid
+- [ ] Aangepaste metrieken gedefinieerd
+- [ ] Alertregels ingesteld
+- [ ] Dashboard aangemaakt
+- [ ] Gezondheidscontroles geïmplementeerd
+- [ ] Logretentiebeleid
 
 ### Betrouwbaarheid ✅
-- [ ] Multi-regio implementatie
-- [ ] Backup en herstel plan
+- [ ] Multi-regio uitrol
+- [ ] Backup- en herstelplan
 - [ ] Circuit breakers geïmplementeerd
 - [ ] Retry policies geconfigureerd
-- [ ] Vlotte degradatie
-- [ ] Health check endpoints
+- [ ] Gracieuze degradatie
+- [ ] Gezondheidscheck endpoints
 
 ### Kostenbeheer ✅
-- [ ] Budgetwaarschuwingen geconfigureerd
-- [ ] Resource juiste grootte
-- [ ] Ontwikkel/test kortingen toegepast
-- [ ] Gereserveerde instanties aangeschaft
-- [ ] Kostenmonitoring dashboard
+- [ ] Budget-waarschuwingen geconfigureerd
+- [ ] Juiste grootte van resources
+- [ ] Dev/test kortingen toegepast
+- [ ] Gereserveerde instanties aangekocht
+- [ ] Kostenbewaking dashboard
 - [ ] Regelmatige kostenreviews
 
 ### Compliance ✅
-- [ ] Data locatievereisten nageleefd
-- [ ] Audit logging ingeschakeld
-- [ ] Compliance beleid toegepast
-- [ ] Beveiligingsbaselines geïmplementeerd
+- [ ] Data-locatievereisten nageleefd
+- [ ] Auditlogging ingeschakeld
+- [ ] Compliance-beleid toegepast
+- [ ] Beveiligingsbasislijnen geïmplementeerd
 - [ ] Regelmatige beveiligingsbeoordelingen
 - [ ] Incident response plan
 
-## Prestatie Benchmark
+## Prestatiebenchmarks
 
-### Illustratieve Productie Doelen
+### Illustratieve Productiedoelstellingen
 
-Dit zijn voorbeeld SLO's om afspraken te maken en load-testen, geen gemeten benchmarks of garanties. Respons latency hangt af van model/output lengte; maandelijkse tokenuitgaven hangen af van traffic en prijzen, niet alleen token aantal.
+Dit zijn voorbeeld-SLO’s om te onderhandelen en load-testen, geen gemeten benchmarks of garanties. Respons-latentie hangt af van model- en outputlengte; maandelijkse tokenuitgaven hangen af van verkeer en prijzen, niet alleen van tokenaantal.
 
-| Metric | Doel | Monitoring |
+| Metriek | Doel | Monitoring |
 |--------|--------|------------|
-| **Responstijd** | < 2 seconden | Application Insights |
+| **Reactietijd** | < 2 seconden | Application Insights |
 | **Beschikbaarheid** | 99,9% | Uptime monitoring |
 | **Foutpercentage** | < 0,1% | Applicatielogs |
-| **Model Uitgaven** | < $500/maand (voorbeeld budget) | Kostenbeheer |
-| **Gelijktijdige gebruikers** | 1000+ | Load testen |
-| **Hersteltijd** | < 1 uur | Rampenhersteltesten |
+| **Modeluitgaven** | < $500/maand (voorbeeldbudget) | Kostenbeheer |
+| **Gelijktijdige gebruikers** | 1000+ | Load testing |
+| **Hersteltijd** | < 1 uur | Hersteltests bij rampen |
 
-### Load Testing
+### Loadtesten
 
-Hieronder volgt een interfaceschets voor een load-testscript **dat u moet implementeren**; deze repository levert `scripts/load_test.py` niet. Definieer verzoekpayloads, authenticatie, representatieve workloads, percentiel latentie/foutasserties en een bestedingslimiet in uw gekozen load-testtool voordat u deze uitvoert:
+Het volgende is een interface-schets voor een load-testscript **dat u moet implementeren**; deze repository levert `scripts/load_test.py` niet. Definieer requestpayloads, authenticatie, representatieve workloads, percentile-latentie/foutasserties en een budgetlimiet in uw gekozen load-testtool voordat u deze uitvoert:
 
 ```bash
 # Load testing script for AI applications
@@ -869,31 +869,31 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Beste praktijken van de gemeenschap
+## 🤝 Gemeenschapsbest practices
 
 Gebaseerd op feedback van de Microsoft Foundry Discord-gemeenschap:
 
-### Belangrijkste aanbevelingen van de gemeenschap:
+### Topaanbevelingen van de gemeenschap:
 
-1. **Begin klein, schaal geleidelijk op**: Begin met basis-SKU's en schaal op aan de hand van het daadwerkelijke gebruik
-2. **Monitor alles**: Stel vanaf dag één uitgebreide monitoring in
+1. **Begin klein, schaal geleidelijk op**: Begin met basis-SKU's en schaal op basis van daadwerkelijk gebruik
+2. **Monitor alles**: Zet vanaf dag één uitgebreide monitoring op
 3. **Automatiseer beveiliging**: Gebruik infrastructuur als code voor consistente beveiliging
 4. **Test grondig**: Neem AI-specifieke tests op in uw pipeline
-5. **Plan voor kosten**: Houd tokengebruik in de gaten en stel vroeg budgetwaarschuwingen in
+5. **Plan voor kosten**: Monitor tokengebruik en stel vroeg budgetwaarschuwingen in
 
 ### Veelvoorkomende valkuilen om te vermijden:
 
-- ❌ API-sleutels hardcoderen in code
-- ❌ Geen juiste monitoring instellen
+- ❌ Hardcoded API-sleutels in code
+- ❌ Ontbrekende correcte monitoringinstellingen
 - ❌ Kostenoptimalisatie negeren
-- ❌ Faalscenario's niet testen
+- ❌ Niet testen van faalscenario's
 - ❌ Implementeren zonder health checks
 
-## AZD AI CLI-commando's en uitbreidingen
+## AZD AI CLI-commando's en extensies
 
-AZD bevat een groeiende set AI-specifieke commando's en extensies die productie- AI-werkstromen stroomlijnen. Deze tools overbruggen de kloof tussen lokale ontwikkeling en productie-implementatie van AI-werkbelastingen.
+AZD bevat een groeiende set AI-specifieke commando's en extensies die productieworkflows voor AI stroomlijnen. Deze tools overbruggen de kloof tussen lokale ontwikkeling en productie-implementatie voor AI-workloads.
 
-> **Release review (2026-11-04):** De CLI-richtlijnen hieronder zijn gecontroleerd tegen de gepubliceerde releases van `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, en `azure.ai.evaluations` **1.0.0-beta.2**. Agents beta.23 vereist `azd >= 1.37.0`; evaluations beta.2 vereist `azd >= 1.33.0`. Gebruik minimaal 1.37.0 voor de gecombineerde workflow. Dit is een documentatie-/bronreview, geen live Azure-implementatievalidatie.
+> **Foundry GA update (2026-11-09):** De `microsoft.foundry` bundel bereikte **1.0 / algemene beschikbaarheid** op [5 november 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Gebruik **`azd >= 1.37.0`** voor deze workflow. De eerdere `azd 1.37.2`, agents beta.23 en evaluations beta.2 review staan hieronder als migratiegeschiedenis, niet als huidige bundelversie. Dit is een documentatie-/bronreview, geen live implementatievalidatie of claim dat elke optionele extensie, API of preview-functie GA is.
 
 ### AZD-extensies voor AI
 
@@ -903,12 +903,12 @@ AZD gebruikt een extensiesysteem om AI-specifieke mogelijkheden toe te voegen. I
 # List all available extensions (including AI)
 azd extension list
 
-# Inspect installed extension details
+# Inspect installed versions
 azd version
-azd extension show azure.ai.agents
+azd ext list --installed
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle
+azd ext install microsoft.foundry
 
 # Install the separate Foundry evaluations extension
 azd extension install azure.ai.evaluations
@@ -919,51 +919,61 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Upgrade the Foundry bundle
+azd ext upgrade microsoft.foundry
 ```
 
 **Beschikbare AI-extensies:**
 
 | Extensie | Doel | Status |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service beheer | Preview |
-| `azure.ai.evaluations` | Evaluatiedatasets, beoordelaars, evalgroepen en runs | Preview |
-| `azure.ai.skills` | Herbruikbare agentvaardigheden | Preview |
-| `azure.ai.connections` | Foundry-verbindingen (gegevensbronnen, tools) | Preview |
-| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
-| `azure.ai.models` | Foundry aangepaste modellen | Preview |
-| `azure.coding-agent` | Configuratie van coding agent | Beschikbaar |
+| `microsoft.foundry` | Meta-pakket dat de onderstaande zeven kernextensies installeert; geen eigen opdrachtgroep | GA bundel 1.0 |
+| `azure.ai.agents` | `azd ai agent`: agentinstelling, lokale uitvoering en operaties | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.connections` | `azd ai connection`: projectverbindingen | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.inspector` | `azd ai inspector`: lokale Agent Inspector UI | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.projects` | `azd ai project`: projectmiddelen en modelimplementaties | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.routines` | `azd ai routine`: schema's en triggers | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.skills` | `azd ai skill`: herbruikbare gedragsrichtlijnen | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.toolboxes` | `azd ai toolbox`: geversioneerde toolverzamelingen | Inbegrepen; onafhankelijk geversioneerd |
+| `azure.ai.evaluations` | Evaluatiedatasets, evaluators, evaluatiegroepen en runs | Aparte installatie/releases |
+| `azure.ai.dataset` | Datasetregistratie en versiebeheer | Aparte installatie/releases |
+| `azure.ai.finetune` | Foundry model fine-tuning | Aparte installatie/releases |
+| `azure.ai.models` | Foundry aangepaste modellen | Aparte installatie/releases |
 
-> Voer `azd extension list --installed` en `azd extension show azure.ai.evaluations` uit om geïnstalleerde versies te inspecteren. Upgrade eerst de core CLI met de [installatie-/update-instructies](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (voor een Windows winget-installatie: `winget upgrade Microsoft.Azd`), voer vervolgens `azd extension upgrade --all` uit. Er is geen core `azd upgrade` commando. Bekijk breaking changes voordat u productie-automatisering upgrade; ga er niet van uit dat een extensie-upgrade oude commando- of configuratieformaten behoudt.
+Het afzonderlijk installeren van `azure.ai.agents` blijft ondersteund en installeert afhankelijkheden; de bundel is de standaard van de cursus voor de GA-workflow. Bundel-GA is geen algemene releasediteitsgarantie voor optionele functies van de onderdelen. Zie [extensieverpakking en verificatie](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions) en inspecteer hulp voor geïnstalleerde commando's alvorens te gebruiken.
+
+> Upgrade eerst de kern-CLI met `azd update` of de juiste [installatie/update-methode](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd), en voer daarna `azd ext upgrade microsoft.foundry` uit. Werk afzonderlijk geïnstalleerde evaluaties indien nodig bij met `azd ext upgrade azure.ai.evaluations`. Er is geen kern-`azd upgrade` commando. Registreer en beheer onafhankelijk geversioneerde extensies in productieautomatisering; een upgrade migreert oude configuraties niet automatisch.
 
 ### Recente releasewijzigingen en fixes
 
 | Release | Wat verandert er voor deze cursus |
 |---------|------------------------------|
-| `azd 1.37.0` | Voegt stabiele deployment-preview APIs toe en repareert extensiebewerkingen die ongerelateerde `azure.yaml` instellingen overschrijven. |
-| `azd 1.37.1` | Verhelpt Ctrl+C-propagatie over extensies en onderscheidt annulering/time-outs van generieke fouten. |
-| `azd 1.37.2` | Verbetert provisioning-validatie: kritieke waarschuwingen standaard op **Nee**, falen zonder bevestiging bij onbeheerde runs, en annulering slaat post-provision hooks over. Lost ook onopgeloste omgevingswaarden in Deployment Stacks deny lijsten op wanneer die alfa-functie is ingeschakeld. |
-| Agents `beta.22` | Migreert evaluatie naar `azd ai eval`, wijzigt optimalisatie naar de GA v1 API, vereist meervoudige `toolboxes`, en scheidt managed-harness, voice en langlopende preview opt-ins. Verhelpt omgevingsspecifieke modelselectie en toolbox-authenticatie. |
-| Agents `beta.23` | Stelt `init --harness` bloot; verhelpt A2A 0.3 antwoordoutput, ongeldige prompt-agent-paden/modules over infrastructuurniveaus, activatietime-outdiagnostiek, en behouden ontwikkelaar-RBAC-waarschuwingen. |
-| Evaluations `beta.2` | Vereist camelCase evaluatieconfiguratie, voegt statische/gesimuleerde conversatie-autorisatie en expliciete lokale-bestandbronnen toe, en verhelpt datasetidentiteit/-versiebehandeling, quality-gate tellingen en mislukte-run-diagnostiek. |
+| `microsoft.foundry` 1.0 GA (2026-11-05) | Standaard naar de zeven-extensie bundel, behoud agent-/implementatie-instellingen in `azure.yaml`, lokaal testen met Agent Inspector, en upload code voor een remote Foundry build. Installeer evaluaties apart en installeer vereiste extensies opnieuw op CI-runners. |
+| `azd 1.37.0` | Voegt stabiele deployment-preview APIs toe en repareert extensiebewerkingen die niet-gerelateerde `azure.yaml` instellingen herschreven. |
+| `azd 1.37.1` | Lost Ctrl+C-propagatie over extensies op en onderscheidt annulering/time-outs van generieke fouten. |
+| `azd 1.37.2` | Verbetert validatie van provisioning: kritische waarschuwingen standaard op **Nee**, mislukken zonder bevestiging bij onbewaakte runs, en annulering slaat post-provision hooks over. Repareert ook niet-opgeloste omgevingswaarden in Deployment Stacks deny-lijsten wanneer die alfa-feature aanstaat. |
+| Agents `beta.22` | Migreert evaluatie naar `azd ai eval`, verandert optimalisatie naar de GA v1 API, vereist meervoudige `toolboxes`, en splitst managed-harness, voice en long-running preview opt-ins. Repareert omgevingsspecifieke modelselectie en toolbox-authenticatie. |
+| Agents `beta.23` | Blaast `init --harness` open; repareert A2A 0.3 antwoordoutput, invalid prompt-agent paden/modules over infrastructuurniveaus, activatietime-out diagnoses, en bewaarde developer RBAC-waarschuwingen. |
+| Evaluations `beta.2` | Vereist camelCase evaluatieconfiguratie, voegt statisch/gesimuleerd gespreksbeheer en expliciete lokale-bestandbronnen toe, repareert dataset-identiteit-/versiebeheer, quality-gate-tellingen en diagnose van mislukte runs. |
 
-Een actueringstijdoverschrijding van een agent bewijst **niet** de implementatiefout: inspecteer de beproefde versie en de status ervan voordat u een nieuwe poging doet. Ontwikkelaar-RBAC-waarschuwingen kunnen blijven bestaan, zelfs als provisioning slaagt; los het ontbrekende toegangsprobleem op voordat u deze als die ontwikkelaar aanroept.
+Een agent-activatietime-out bewijst **niet** dat de implementatie is mislukt: inspecteer de geprobeerd versie en zijn staat voordat u opnieuw probeert. Developer RBAC-waarschuwingen kunnen blijven bestaan zelfs als provisioning slaagt; los de ontbrekende toegang op voordat u deze ontwikkelaar oproept.
 
-Bronnen: [AZD releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migratie](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), en [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
+De beta-rijen hierboven beschrijven eerdere fixes en migratiegrenzen, niet de vereiste om nieuwe projecten aan die versies te koppelen.
 
-**Wat zijn de nieuwere `skills` en `connections` extensies?**
+Bronnen: [Foundry GA aankondiging](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/), [AZD-releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migratie](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), en [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-Twee preview-extensies verschenen naast de agent-tools en zijn het waard om te begrijpen, zelfs als beginner:
+**Wat zijn de gebundelde `skills` en `connections` extensies?**
 
-- **`azure.ai.skills`** — Een **vaardigheid** is een herbruikbare capaciteit (een verpakte tool of gedrag) die u aan een of meerdere agents kunt koppelen in plaats van deze elke keer opnieuw te implementeren. Zie het als een gedeelde bouwsteen: definieer een “zoek in de docs” of “zoek een bestelling op” vaardigheid één keer, en hergebruik deze over agents. Dit houdt multi-agent systemen (Hoofdstuk 5) consistent en voorkomt copy-paste.
-- **`azure.ai.connections`** — Een **verbinding** is een beheerde koppeling van uw Foundry-project naar een externe bron die uw agents nodig hebben — een gegevensbron (zoals Azure AI Search), een toolendpoint of een andere service. Verbindingen centraliseren *waar* en *hoe* agents data benaderen, zodat referenties en eindpunten op één beheerde plek bestaan in plaats van door de code verspreid.
+Deze worden geïnstalleerd met de kernbundel maar dienen verschillende doelen:
 
-U heeft deze niet nodig om uw eerste agents te implementeren — blijf bij `azure.ai.agents` tijdens de leerfase. Pak `skills` als u merkt dat u dezelfde tool dupliceert over agents, en `connections` als meerdere agents dezelfde gegevensbron delen.
+- **`azure.ai.skills`** — Een **skill** verpakt herbruikbare gedragsrichtlijnen voor agents. Deel beoordeelde instructies over agents in plaats van ze te kopiëren. Een skill implementeert zelf geen tool of verleent toegang tot data; gebruik toolboxes en applicatiecode voor uitvoering van tools.
+- **`azure.ai.connections`** — Een **connection** is een beheerde koppeling van uw Foundry-project naar een externe bron die uw agents nodig hebben — een databron (zoals Azure AI Search), een toolendpoint of een andere dienst. Verbindingen centraliseren *waar* en *hoe* agents toegang tot data krijgen, zodat credentials en endpoints op één gecontroleerde plek leven in plaats van gespreid door code.
+
+U hoeft niet elke gebundelde mogelijkheid te configureren om uw eerste agent te implementeren. Gebruik skills wanneer agents gedragsrichtlijnen delen en connections wanneer zij externe bronnen delen.
 
 ### Initialiseren van agentprojecten met `azd ai agent init`
 
-Het `azd ai agent init` commando scaffoldt een Microsoft Foundry agentproject. Gebruik een actuele `azure.yaml` projecttemplate, geen impliciet legacy agentmanifest:
+Het commando `azd ai agent init` scaffoldt een Microsoft Foundry agentproject. Voor een uitvoerbaar code-implementatievoorbeeld met Python 3.13+ en huidige uv, volg de [GA hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). De onderstaande commando’s illustreren het adopteren van **uw eigen** huidige `azure.yaml` projecttemplate; de genoemde lokale template wordt niet geleverd door deze cursus:
 
 ```bash
 # Initialize a new agent project from a local project template
@@ -980,36 +990,44 @@ azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents
 
 | Vlag | Beschrijving |
 |------|-------------|
-| `-t, --template` | Pad of ondersteunde GitHub-URI naar een `azure.yaml` projectdocument |
+| `-t, --template` | Pad of ondersteunde GitHub URI naar een `azure.yaml` projectdocument |
 | `-p, --project-id` | Bestaande Microsoft Foundry Project-ID voor uw azd-omgeving |
 | `-s, --src` | Bronmap voor gegenereerde agents, of doelmap bij adoptie van een project |
-| `--kind` | Initialiseer een `hosted`, `prompt` of preview `prompt-voice` agent |
-| `--harness` | Optionele uitvoeringsharness voor `--kind prompt`; vereist de preview opt-in |
-| `-e, --environment` | De azd-omgeving om te gebruiken |
+| `--deploy-mode code` | Upload bron voor een remote Foundry build in plaats van lokaal container bouwen |
+| `--model-deployment` | Hergebruik een bestaande benoemde modelimplementatie tijdens initialisatie |
+| `--kind` | Initialiseer een `hosted`, `prompt`, of preview `prompt-voice` agent |
+| `--harness` | Optioneel uitvoeringsharnas voor `--kind prompt`; vereist preview opt-in |
+| `-e, --environment` | De te gebruiken azd-omgeving |
 
-`--manifest`/`-m` is een verouderde alias voor `--template`/`-t`; het hernoemen van de vlag zet een oud manifest niet om in een actueel projectdocument. `--host containerapp` is geen actuele agent-init-vlag. Voor een gewone Container Apps-app, gebruik `azd init --template` met een template die `host: containerapp` declareert.
+`--manifest`/`-m` is een verouderde alias voor `--template`/`-t`; het hernoemen van de vlag zet een oud manifest niet om in een actueel projectdocument. `--host containerapp` is geen huidige agent-init vlag. Voor een gewone Container Apps-applicatie gebruikt u `azd init --template` met een template die `host: containerapp` verklaart.
 
-Voor een bestaand project met precies één `azure.ai.project` service, voegt `azd ai agent add support-agent --file ./agents/support-agent.yaml` een directe agentdefinitie toe of werkt deze bij zonder provisionen of implementeren. Runtime-commando's weigeren legacy impliciete `agent.yaml`/AgentManifest en geneste service-`config:` definities; migreer ze naar een actuele `azure.ai.agent` service. Wanneer init een `cd` als volgende stap print, voer die dan uit voordat u `azd up` doet: init verandert uw shell-directory niet.
+Voor een bestaand project met precies één `azure.ai.project` service voegt `azd ai agent add support-agent --file ./agents/support-agent.yaml` een directe agentdefinitie toe of werkt die bij zonder provisioning of uitrol. Runtime-commando's weigeren legacy impliciete `agent.yaml`/AgentManifest en geneste service `config:` definities; migreer deze naar een actuele `azure.ai.agent` service. Wanneer init een `cd` next step print, voert u die uit voordat u `azd up` draait: init wijzigt uw shellmap niet.
 
-**Productietip**: Gebruik `--project-id` om direct verbinding te maken met een bestaand Foundry-project, zodat uw agentcode en cloudresources vanaf het begin gekoppeld blijven.
+**Productietip**: Gebruik `--project-id` om direct te verbinden met een bestaand Foundry-project, en houd uw agentcode en cloudresources vanaf het begin gekoppeld.
 
-#### Optionele preview-functies
+#### Optionele previewfuncties
 
-Managed harness, voice, en langlopende aanroepen zijn standaard uitgeschakeld. Stel alleen de schakelaar in voor de functie die u nodig hebt in de **shell/CI-procesomgeving**, niet met `azd env set`:
+Managed harness, voice en long-running invoked worden standaard onafhankelijk uitgeschakeld. Zet alleen de schakelaar voor de functie die u nodig hebt in de **shell-/CI-procesomgeving**, niet met `azd env set`:
 
-| Functie | Procesomgevingsvariabele |
+| Functie | Proces-omgevingsvariabele |
 |---------|------------------------------|
 | Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
-| Stem (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
-| Langlopende aanroep | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+| Voice (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Long-running invocation | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
 
-Gebruik bijvoorbeeld `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` in Bash of `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` in PowerShell voordat u het relevante commando uitvoert. Eén schakelaar zet de andere niet aan. Zie de [gereleasete agents README](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) voor alle preview-schakelaars en beperkingen.
+Gebruik bijvoorbeeld `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` in Bash of `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` in PowerShell vóór het uitvoeren van het relevante commando. Eén schakelaar schakelt de anderen niet in. Zie de [gereleasete agents README](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) voor alle preview-schakelaars en beperkingen.
 
-### Beheer van de agentlevenscyclus
+### Het beheer van de agentlevenscyclus
 
-Gebruik `azure.ai.agents` om agents te testen, inspecteren, optimaliseren en buiten gebruik te stellen, en de aparte `azure.ai.evaluations` extensie om kwaliteit te meten:
+De bundel-`azure.ai.agents` extensie ondersteunt lokale tests en uitrol-agentoperaties. Installeer `azure.ai.evaluations` apart om kwaliteit te meten:
 
 ```bash
+# Start the local agent and Agent Inspector (leave running)
+azd ai agent run
+
+# From a second terminal in the project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
 # Invoke a deployed agent and view server response timing
 # (total latency and time to first byte)
 azd ai agent invoke
@@ -1026,39 +1044,42 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-**Levenscyclus in één oogopslag:**
+**Levenscyclus in vogelvlucht:**
 
 | Fase | Commando | Productiegebruik |
 |-------|---------|----------------|
-| Test | `azd ai agent invoke` | Valideer reacties en meet latentie vóór release |
-| Inspecteer | `azd ai agent endpoint show` | Bekijk endpoint-auth/config; zie breaking changes vroegtijdig |
+| Lokale test | `azd ai agent run`, vervolgens `azd ai agent invoke --local "Test prompt"` | Inspecteer requests en responses vóór implementatie; Azure modelaanroepen brengen nog steeds kosten met zich mee |
+| Uitrollen | `azd deploy` | In codemodus, bouw de geüploade bron remote in Foundry |
+| Test | `azd ai agent invoke` | Valideer antwoorden en meet latentie vóór release |
+| Diagnosticeer | `azd ai agent doctor`, `azd ai agent monitor --follow` | Controleer setup/rechten en stream agentlogs |
+| Inspecteer | `azd ai agent endpoint show` | Review endpoint auth/config; herken vroegtijdig brekende wijzigingen |
 | Meet | `azd ai eval init`, `generate`, `run start` | Definieer, implementeer en voer herhaalbare evaluaties uit |
 | Verbeter | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Hergebruik een compatibele evaluatie om de agent te optimaliseren |
 | Herstel | `azd ai agent code download` | Haal de exact geïmplementeerde bron op voor audit/rollback |
-| Uit dienst | `azd ai agent delete --force` | Demonteer een agent en haar versies netjes |
+| Uit dienst nemen | `azd ai agent delete --force` | Demonteer een agent en zijn versies netjes |
 
-> Dit zijn preview-commando's die kunnen veranderen tussen extensiereleases. Voer `azd ai agent --help` uit om de exacte subcommando's in uw geïnstalleerde versie te zien.
+> Voer `azd ai agent --help` uit om de commando's in uw geïnstalleerde versie te inspecteren. De bundel is GA; onafhankelijk beheerde previewfuncties zijn nog steeds opt-in. Onderscheid bij opruiming agentverwijdering van projectverwijdering: `azd down` verwijdert een nieuw gemaakt project-resourcesgroep, maar laat middelen van hergebruikte projecten staan. Volg de [opruimrichtlijnen](../chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately).
 
-`endpoint show` ondersteunt hosted, prompt en voice agents, maar endpointupdates zijn alleen voor hosted; workflow-agents worden niet ondersteund. Code downloaden en het voorbeeld van hosted-agent buiten gebruik stellen hierboven zijn geen generieke acties voor elk type agent.
+`endpoint show` ondersteunt hosted, prompt en voice agents, maar endpointupdates zijn alleen voor hosted; workflow-agents worden niet ondersteund. Code-download en het pensioenvoorbeeld van hosted agents hierboven zijn geen algemene operaties voor elk agenttype.
 
 #### Evaluatiemigratie en kwaliteitscontroles
 
 Vanaf agents **1.0.0-beta.22 (2026-10-23)** bieden legacy `azd ai agent eval` commando's migratierichtlijnen in plaats van de vroegere evaluatieworkflow. Kopieer geen oude `eval generate --dataset ...` voorbeelden: evaluatie leeft nu onder **`azd ai eval`**.
 
-In een geïnitialiseerd agentproject, authenticeren met `azd auth login`, bevestig de geselecteerde omgeving/Foundry-project, en installeer `azure.ai.evaluations`. Een judge-model-implementatie is nodig voor modelgebaseerde scoring; generatie en conversatiesimulatie kunnen hun eigen modelselecties vereisen en extra kosten veroorzaken.
+In een geïnitialiseerd agentproject, autenticeer met `azd auth login`, bevestig het geselecteerde environment/Foundry-project en installeer `azure.ai.evaluations`. Een judge model implementatie is nodig voor modelgebaseerde scoring; generatie en conversatiesimulatie kunnen hun eigen modelselecties vereisen en extra kosten met zich meebrengen.
 
 ```bash
-# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
-azd ai eval init
-
-# Optionally synthesize a rubric and dataset from the agent
+# Generate a draft rubric and dataset from the deployed agent
 azd ai eval generate
+
+# After reviewing the assets, configure a named evaluation
+azd ai eval init --name quality
 
 # Review generated files, then register datasets, evaluators, and eval groups
 azd up
 
 # Start an evaluation and wait for its results
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 
 # Inspect runs and available test-case output
 azd ai eval run list
@@ -1066,45 +1087,45 @@ azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
 ```
 
-Volg de interactieve keuzes en geprinte volgende stappen in plaats van aan te nemen dat gegenereerde assets al geregistreerd zijn. Evaluatieconfiguratie woont normaal in `evals/azure.eval.yaml`, gerefereerd door de `azure.ai.eval` service in `azure.yaml`. Sleutels zijn **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); oude snake_case configuratiesleutels worden geweigerd. Paden in een gerefereerde configuratie lossen relatief ten opzichte van dat bestand op, niet de repository-root.
+Voor het voorbeeld van de GA-aankondiging selecteer je **Dataset and evaluator** en **Turn** tijdens generatie, en selecteer vervolgens die beoordeelde assets en een judge model tijdens initialisatie. Volg de afgedrukte volgende stappen in plaats van aan te nemen dat gegenereerde assets al zijn geregistreerd. Je kunt ook initialiseren tegen een bestaande beoordeelde dataset/rubric zonder nieuwe gegevens te genereren. Evaluatieconfiguratie bevindt zich normaal gesproken in `evals/azure.eval.yaml`, waarnaar verwezen wordt door de `azure.ai.eval` service in `azure.yaml`. Sleutels zijn **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); oude snake_case configuratiesleutels worden geweigerd. Paden binnen een gerefereerde configuratie worden relatief ten opzichte van dat bestand opgelost, niet van de root van de repository.
 
-Kies voor conversatie-evaluaties **statisch** om voltooide transcripties te scoren zonder een agent aan te roepen, of **simulatie** om conversaties te genereren vanuit scenariozaadjes. Simulatie heeft een agentdoel, een simulator-model en een aparte judge-modelselectie nodig. Voor onbeheerde commando's levert u de inputs zoals gemeld door `azd ai eval init --help` en `azd ai eval generate --help` aan; ga er niet van uit dat het generatiemodel ook de judge of simulator is.
+Voor conversatie-evaluaties kies je **static** om voltooide transcripties te scoren zonder een agent aan te roepen, of **simulation** om gesprekken te genereren vanuit scenario seeds. Simulatie heeft een agent target, een simulator-model en een aparte judge-model selectie nodig. Voor onbeheerde commando's lever je de inputs zoals vermeld door `azd ai eval init --help` en `azd ai eval generate --help` aan; ga er niet vanuit dat het generatiemodel ook de judge of simulator is.
 
-Voor CI configureer een expliciet kwaliteitsbeleid met `azd ai eval run start --help` (`--fail-on`) en behandel een niet-nul host-exit als falen. Een voltooide run betekent niet automatisch een kwaliteitsdoorloop. Bekijk mislukte/gefoutceerde rijen en diagnostiek; ontbrekende of inconsistente resultaatentellingen zijn geen bewijs van succes. Geregistreerde datasets behouden hun service-identiteit/-versie; `--max-samples` kan geen subset van een geregistreerde dataset maken. Publiceer een kleinere dataset bewust, of gebruik een ondersteunde lokale-bestandbron.
+Voor CI configureer je een expliciet kwaliteitsbeleid met `azd ai eval run start --help` (`--fail-on`) en beschouw een niet-nul host exit als falen. Een voltooide run is niet automatisch een kwaliteitsdoorlaat. Bekijk mislukte/gefailleerde rijen en diagnostiek; ontbrekende of inconsistente resultaat aantallen zijn geen bewijs van succes. Geregistreerde datasets behouden hun service-identiteit/-versie; `--max-samples` kan geen subset van een geregistreerde dataset maken. Publiceer een kleinere dataset bewust, of gebruik een ondersteunde lokale-bestandsbron.
 
 ```bash
 # Example CI policy: at least 90% of all test cases must pass
-azd ai eval run start --wait --fail-on "pass-rate=0.9"
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
-De doorlooppoort gebruikt geslaagde testgevallen gedeeld door het totaal aantal testgevallen; mislukte, gevraagde, overgeslagen en anders niet-geslaagde rijen tellen mee als niet geslaagd. Combineer geen poort met `--no-wait`, die retourneert voordat een oordeel beschikbaar is.
+De doorstroomdrempel gebruikt geslaagde testcases gedeeld door totale testcases; mislukte, geërroeerde, overgeslagen en anderszins niet-geslaagde rijen tellen mee als falen. Combineer geen drempel met `--no-wait`, wat terugkeert voordat een oordeel beschikbaar is.
 
 #### Migratie van optimalisatieconfiguratie
 
-Optimalisatie gebruikt nu de GA v1 API. Om een compatibele **beurt-niveau, dataset-ondersteunde** evaluatie uit de nieuwe workflow te hergebruiken:
+Optimalisatie gebruikt nu de GA v1 API. Om een compatibele **turn-level, dataset-ondersteunde** evaluatie vanuit de nieuwe workflow te hergebruiken:
 
 ```bash
 # Replace placeholders with the evaluation name and optimizer model deployment
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-`--eval` selecteert een evaluatie; `--eval-config` selecteert het configuratiebestand (inclusief op bestand gebaseerde definities). `--config` neemt in plaats daarvan een **standalone optimalisatie-API-verzoek** in YAML of JSON aan. Geef geen oude agent `eval.yaml` of de nieuwe `azure.eval.yaml` door aan `--config`, en combineer `--config` niet met `--eval`/`--eval-config`. Evaluaties op basis van conversaties, traceback of simulaties zijn niet uitwisselbaar met de dataset-ondersteunde optimalisatie-snelkoppeling; gebruik het ondersteunde optimalisatieverzoekformaat voor die scenario's. Beoordeel kandidaten voordat je ze toepast of implementeert.
+`--eval` selecteert een evaluatie; `--eval-config` selecteert het configuratiebestand (inclusief bestand-ondersteunde definities). `--config` neemt in plaats daarvan een **standalone optimalisatie API-verzoek** in YAML of JSON op. Geef geen oude agent `eval.yaml` of de nieuwe `azure.eval.yaml` aan `--config` door, en combineer `--config` niet met `--eval`/`--eval-config`. Conversatie-, trace-backed of simulatie-evaluaties zijn niet uitwisselbaar met de dataset-ondersteunde optimalisatiesnelkoppeling; gebruik voor die scenario's het ondersteunde optimalisatie-aanvraagformaat. Beoordeel kandidaten zorgvuldig voor implementatie of inzet.
 
-Zie de [evaluatiesreferentie voor de beoordeelde release](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) en [optimalisatiecommando-bron voor de beoordeelde release](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) voor exacte opties.
+Zie de [evaluatiesreferentie voor de beoordeelde release](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) en [optimalisatie commandobron voor de beoordeelde release](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) voor exacte opties.
 
-#### Alleen-lezen Hosted-Agent Implementatievoorbeeld
+#### Read-Only Hosted-Agent Deployment Preview
 
-Voor een bestaande Foundry-gebonden omgeving met een verenigde `azure.ai.agent`-dienst van `kind: hosted`, vergelijk ondersteunde configuraties voordat je deze implementeert:
+Voor een bestaand Foundry-gebonden environment met een verenigde `azure.ai.agent`-service van `kind: hosted`, vergelijk ondersteunde configuratie vóór inzet:
 
 ```bash
 azd deploy <service-name> --preview --no-prompt
 ```
 
-Dit voorbeeld implementeert de agent niet. Het is geen volledige infrastructuur-/beveiligingsvergelijking: prompt-/spraak-/workflow-agents, legacy configuratielay-outs en enkele gehoste instellingen vallen buiten het bereik. Een `unknown` resultaat is geen goedkeuring om te implementeren. Er is geen standalone `azd ai agent deploy`- of agent `--dry-run`-commando; gebruik de kern-implementatieworkflow.
+Deze preview zet de agent niet in. Het is geen volledige infrastructuur-/beveiligingsvergelijking: prompt/voice/workflow agents, legacy configuratielay-outs en sommige hosted instellingen vallen buiten dit overzicht. Een `unknown` resultaat is geen goedkeuring om te deployen. Er is geen standalone `azd ai agent deploy` of agent `--dry-run` commando; gebruik de kern-implementatieworkflow.
 
 ### Model Context Protocol (MCP) met `azd mcp`
 
-AZD bevat ingebouwde MCP-serverondersteuning (Alpha), waarmee AI-agents en tools met je Azure-bronnen kunnen communiceren via een gestandaardiseerd protocol:
+AZD bevat ingebouwde MCP-serverondersteuning (Alpha), waarmee AI-agents en tools via een gestandaardiseerd protocol met je Azure-resources kunnen communiceren:
 
 ```bash
 # Start the MCP server for your project
@@ -1114,30 +1135,30 @@ azd mcp start
 azd copilot consent list
 ```
 
-De MCP-server stelt de context van je azd-project bloot — omgevingen, diensten en Azure-bronnen — aan AI-aangedreven ontwikkeltools. Dit maakt het mogelijk om:
+De MCP-server stelt je azd projectcontext beschikbaar—omgevingen, services en Azure-resources—aan AI-gestuurde ontwikkeltools. Dit maakt mogelijk:
 
-- **AI-ondersteunde implementatie**: Laat codeeragents je projectstatus opvragen en implementaties activeren
-- **Bronontdekking**: AI-tools kunnen ontdekken welke Azure-bronnen je project gebruikt
-- **Omgevingsbeheer**: Agents kunnen schakelen tussen dev/staging/productie-omgevingen
+- **AI-ondersteunde implementatie**: Laat codeeragents je projectstatus opvragen en implementaties starten
+- **Resource ontdekking**: AI-tools kunnen ontdekken welke Azure-resources je project gebruikt
+- **Omgevingsbeheer**: Agents kunnen schakelen tussen dev/staging/production omgevingen
 
 ### Infrastructuurgeneratie met `azd infra generate`
 
-Voor productie-AI-werkbelastingen kun je Infrastructure as Code genereren en aanpassen in plaats van te vertrouwen op automatische provisioning:
+Voor AI-productieworkloads kun je Infrastructure as Code genereren en aanpassen in plaats van te vertrouwen op automatische provisioning:
 
 ```bash
 # Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Ondersteuning hangt af van het project/host en geïnstalleerde providers; dit is geen algemene reverse-engineering opdracht voor willekeurige Azure-bronnen of een belofte om zowel Bicep als Terraform te genereren. Voer `azd infra generate --help` uit en controleer het gegenereerde formaat. Waar ondersteund, stelt het schrijven van IaC naar schijf je in staat om:
-- De infrastructuur te beoordelen en auditen voordat je deze implementeert
-- Aangepaste beveiligingsregels toe te voegen (netwerkregels, private endpoints)
-- Te integreren met bestaande IaC beoordelingsprocessen
-- Versiebeheer van infrastructuurwijzigingen afzonderlijk van applicatiecode toe te passen
+Ondersteuning hangt af van het project/host en geïnstalleerde providers; dit is geen algemene reverse-engineering opdracht voor willekeurige Azure-resources of een belofte om zowel Bicep als Terraform te genereren. Voer `azd infra generate --help` uit en inspecteer het gegenereerde formaat. Waar ondersteund, kun je met het schrijven van IaC naar schijf:
+- De infrastructuur beoordelen en auditen vóór implementatie
+- Aangepaste beveiligingsbeleid toevoegen (netwerkregels, private endpoints)
+- Integreren met bestaande IaC-beoordelingsprocessen
+- Infrastructuurwijzigingen apart van applicatiecode in versiebeheer zetten
 
-### Lifecycle Hooks voor productie
+### Production Lifecycle Hooks
 
-AZD-hooks laten je aangepaste logica injecteren in elke fase van de implementatie-lifecycle — cruciaal voor productie-AI-werkstromen:
+AZD-hooks laten je aangepaste logica injecteren in elke fase van de implementatiecyclus—kritisch voor AI-productieworkflows:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1170,18 +1191,18 @@ services:
 azd hooks run predeploy
 ```
 
-**Aanbevolen productiehooks voor AI-werkbelastingen:**
+**Aanbevolen production hooks voor AI-workloads:**
 
-| Hook | Gebruiksscenario |
+| Hook | Gebruikscasus |
 |------|----------|
-| `preprovision` | Controleer abonnementquota voor AI-modelcapaciteit |
-| `postprovision` | Verifieer private connectiviteit en benodigde resource-uitvoer |
-| `predeploy` | Voer AI-veiligheidstests uit, valideer prompttemplates |
-| `postdeploy` | Voer rooktests uit op agentresponsen, verifieer modelconnectiviteit |
+| `preprovision` | Controleer abonnementquota voor AI-model capaciteit |
+| `postprovision` | Verifieer private connectiviteit en vereiste resource outputs |
+| `predeploy` | Voer AI veiligheidstests uit, valideer prompt-sjablonen |
+| `postdeploy` | Voer rooktesten uit op agent-reacties, controleer modelconnectiviteit |
 
-### CI/CD-pijplijnconfiguratie
+### CI/CD Pipeline Configuratie
 
-Gebruik `azd pipeline config` om je project te verbinden met GitHub Actions of Azure Pipelines met veilige Azure-authenticatie:
+Valideer het project eerst lokaal en voltooi een succesvolle `azd up`. Gebruik dan `azd pipeline config` om verbinding te maken met GitHub Actions of Azure Pipelines met veilige Azure-authenticatie:
 
 ```bash
 # Configure CI/CD pipeline (interactive)
@@ -1192,14 +1213,14 @@ azd pipeline config --provider github
 ```
 
 Dit commando:
-- Maakt of configureert een pijplijnauthenticiteit; controleer de gegenereerde rolomvang/rechten in plaats van aan te nemen dat het het minste privilege heeft
-- Configureert federatieve referenties (geen opgeslagen geheimen)
-- Genereert of werkt je pijplijndefinitiebestand bij
+- Maakt of configureert een pipeline identiteit; beoordeel het gegenereerde roepscope/permissions in plaats van uit te gaan van minimale toestemming
+- Configureert federated credentials (geen opgeslagen secrets)
+- Genereert of werkt je pipeline definitiebestand bij
 - Stelt vereiste omgevingsvariabelen in in je CI/CD-systeem
 
-#### Stap voor stap: je eerste GitHub Actions-pijplijn
+#### Stap-voor-stap: je eerste GitHub Actions pipeline
 
-Hier is de volledige doorloop van een werkend azd-project tot geautomatiseerde implementaties bij iedere push.
+Hier is de volledige walkthrough van een werkend azd-project tot geautomatiseerde deploys bij elke push.
 
 **1. Zorg dat je project op GitHub staat**
 
@@ -1210,21 +1231,21 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Voer pijplijnconfiguratie uit**
+**2. Voer pipeline config uit**
 
 ```bash
 azd pipeline config --provider github
 ```
 
-azd zal interactief:
-- Vragen welke Azure-abonnement en omgeving getarget moeten worden
-- Een Entra **app-registratie + service-principal** voor de pijplijn aanmaken
-- **Federatieve referenties (OIDC)** instellen—zodat GitHub authenticatie uitvoert naar Azure met kortdurende tokens en **geen geheimen worden opgeslagen**
-- Vereiste **variabelen** naar je GitHub-repo pushen (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+azd zal, interactief:
+- Vragen welke Azure-abonnement en omgeving je wilt targeten
+- Een Entra **app-registratie + service principal** maken voor de pipeline
+- Federated credentials (OIDC) instellen—zodat GitHub authenticatie uitvoert met tijdelijke tokens en **geen secrets worden opgeslagen**
+- Vereiste **variabelen** pushen naar je GitHub repo (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
 **3. Begrijp de gegenereerde workflow**
 
-Voor een ondersteund sjabloon configureer/beoordeel `.github/workflows/azure-dev.yml`. De belangrijkste onderdelen zien er zo uit (het sjabloon moet de toolchain en omgevingsparameters van de app leveren):
+Voor een ondersteund sjabloon configureer/beoordeel `.github/workflows/azure-dev.yml`. Het volgende Foundry voorbeeld behoudt checkout, OIDC-aanmelding en target environment-instellingen en installeert het GA-bundel plus evaluaties op de runner. Voeg de toolchain en infrastructure-provider vereisten van je app toe; voor Terraform behoud zijn gegenereerde setup, remote-state en authenticatiestappen. Kies en pin een beoordeelde AZD-versie op of boven 1.37.0; dit fragment gebruikt het minimum uit de aankondiging.
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1236,6 +1257,10 @@ on:
 permissions:
   id-token: write           # required for OIDC federated login
   contents: read
+
+concurrency:
+  group: foundry-production-deployment
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -1250,15 +1275,25 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install azd
         uses: Azure/setup-azd@v2
+        with:
+          version: 1.37.0
+      - name: Install Foundry extensions
+        run: azd ext install microsoft.foundry azure.ai.evaluations
       - name: Log in with OIDC
         run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
       - name: Provision infrastructure
         run: azd provision --no-prompt
       - name: Deploy application
         run: azd deploy --no-prompt
+      - name: Evaluate deployed agent
+        run: azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
-**4. Verifieer of het werkt**
+De evaluatiestap vereist een gecommitteerde `evals/azure.eval.yaml`, diens servicereferentie in `azure.yaml`, beoordeelde niet-geheime testassets en pipeline-toegang tot gerefereerde datasets, evaluators en modeldeploys. Configureer de `quality` evaluatie vóór het inschakelen van deze stap; laat zowel de stap als de installatie van evaluaties weg als je project het niet gebruikt. Een voltooide run alleen is geen kwaliteitspoort: dit voorbeeld vereist minstens 90% geslaagde gevallen.
+
+Gebruik een aparte AZD-omgeving en passende goedkeuringen voor elke fase. De concurrency group serialiseert alleen deze workflow, niet andere tools of repositories die dezelfde agent bijwerken. Verleen vereiste resource- en Foundry-permissies aan de pipeline identiteit en bewaar noodzakelijke runtime-gegevens in secrets, niet in gecommitteerde configuratie. Zie de [complete Foundry CI/CD gids](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli) voor provider-specifieke vereisten.
+
+**4. Verifieer dat het werkt**
 
 ```bash
 # Push a change to trigger the pipeline
@@ -1266,13 +1301,13 @@ git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Open het tabblad **Actions** in je GitHub-repo en zie de workflow automatisch uitvoeren `azd provision` en `azd deploy`.
+Open het **Actions** tabblad in je GitHub repo en bekijk de workflow die automatisch `azd provision` en `azd deploy` draait.
 
-> **Waarom federatieve referenties belangrijk zijn:** oudere pijplijnen bewaarden een clientgeheim in GitHub. OIDC federatieve referenties verwijderen dat geheim volledig—GitHub vraagt bij runtime om een kortdurend token, wat zowel veiliger is als niets is om te roteren of te lekken. Dit is de standaardopzet die `azd pipeline config` configureert.
+> **Waarom federated credentials belangrijk zijn:** oudere pipelines bewaarden een client secret in GitHub. OIDC federated credentials verwijderen dat geheim volledig—GitHub vraagt tijdens runtime een tijdelijk token aan, wat zowel veiliger is als niets om te draaien of te lekken. Dit is de standaard die `azd pipeline config` instelt.
 
-> **Geheimen versus variabelen:** niet-gevoelige identificaties (`AZURE_CLIENT_ID`, enz.) gaan in repo **variabelen**. Als je app echt een geheim nodig heeft tijdens buildtijd, voeg het dan toe als een GitHub **secret** en verwijs ernaar met `${{ secrets.NAME }}`—maar geef de voorkeur aan Key Vault + beheerde identiteit tijdens runtime (zie [Hoofdstuk 3](../chapter-03-configuration/authsecurity.md)).
+> **Secrets vs. variabelen:** niet-gevoelige identifiers (`AZURE_CLIENT_ID`, enz.) gaan in repo **variabelen**. Als je app echt een geheim nodig heeft tijdens build, voeg het toe als een GitHub **secret** en verwijs ernaar met `${{ secrets.NAME }}`—maar geef voorkeur aan Key Vault + managed identity tijdens runtime (zie [Hoofdstuk 3](../chapter-03-configuration/authsecurity.md)).
 
-**Productieworkflow met pijplijnconfiguratie:**
+**Productieworkflow met pipeline config:**
 
 ```bash
 # 1. Set up production environment
@@ -1285,29 +1320,29 @@ azd pipeline config --provider github
 # 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
-#### Stap voor stap: Azure DevOps Pipelines
+#### Stap-voor-stap: Azure DevOps Pipelines
 
-Heb je liever Azure DevOps dan GitHub Actions? azd ondersteunt dit natively met de `azdo` provider. De flow is vrijwel identiek — azd genereert het pijplijnbestand, maakt een serviceverbinding aan en zorgt voor authenticatie.
+Geef je de voorkeur aan Azure DevOps boven GitHub Actions? azd ondersteunt het native met de `azdo`-provider. De flow is bijna identiek—azd genereert het pipelinebestand, maakt een serviceverbinding en regelt authenticatie.
 
 **1. Zorg dat je een Azure DevOps-project hebt**
 
-Je hebt een organisatie en een project nodig bij `https://dev.azure.com/<your-org>`. Genereer een Personal Access Token (PAT) met **Build (Lezen & uitvoeren)**, **Code (Lezen & schrijven)** en **Service Connections (Lezen, opvragen & beheren)** rechten — azd zal erom vragen.
+Je hebt een organisatie en project nodig bij `https://dev.azure.com/<your-org>`. Genereer een Personal Access Token (PAT) met **Build (Read & execute)**, **Code (Read & write)**, en **Service Connections (Read, query & manage)** scopes—azd vraagt hierom.
 
-**2. Configureer de pijplijn**
+**2. Configureer de pipeline**
 
 ```bash
 azd pipeline config --provider azdo
 ```
 
 azd zal:
-- Vragen naar je Azure DevOps-organisatie en project
-- Een **serviceverbinding** naar Azure creëren (of hergebruiken) via een service-principal
-- **Workload identiteit federatie (OIDC)** configureren zodat geen clientgeheim wordt opgeslagen
-- Een pijplijndefinitie instellen (vaak `.azdo/pipelines/azure-dev.yml`) uit het projectpijplijnsjabloon
+- Vragen naar je Azure DevOps organisatie en project
+- Een **serviceverbinding** naar Azure maken (of hergebruiken) met een service principal
+- Workload identity federation (OIDC) configureren zodat geen client secret wordt opgeslagen
+- Een pipeline definitie configureren (meestal `.azdo/pipelines/azure-dev.yml`) van de pipeline sjabloon van het project
 
-**3. Beoordeel de gegenereerde pijplijn**
+**3. Beoordeel de gegenereerde pipeline**
 
-Gebruik de gegenereerde projectpijplijn, inclusief de **Azure-serviceverbinding en AZD-authenticatiestappen**. De officiële [Azure Pipelines-setupgids](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) toont het onderstaande installatiefregement; dit is **alleen installatie**, geen uitvoerbare geauthenticeerde implementatieworkflow:
+Gebruik de gegenereerde pipeline van het project, inclusief de **Azure serviceverbinding en AZD authenticatiestappen**. De officiële [Azure Pipelines setupgids](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) toont het onderstaande installerfragment; dit is **alleen installatie**, geen uitvoerbare geauthenticeerde implementatieworkflow:
 
 ```yaml
 # .azdo/pipelines/azure-dev.yml (installer fragment only)
@@ -1322,13 +1357,13 @@ steps:
     displayName: Install azd
 ```
 
-Installeer de AZD Azure DevOps-extensie als die taak niet beschikbaar is in je organisatie. Kopieer geen kale `azd provision`/`azd deploy` shell-stappen zonder authenticatie: het hebben van een geconfigureerde serviceverbinding logt niet automatisch elk proces in AZD. Volg de OIDC-login van het gegenereerde sjabloon en de geautoriseerde taakcontext en lever de geselecteerde omgeving/abonnement/locatie aan.
+Installeer de AZD Azure DevOps-extensie als die taak niet beschikbaar is in je organisatie. Voor Foundry-jobs, verifieer AZD 1.37.0+ en installeer `microsoft.foundry` op de runner, plus `azure.ai.evaluations` wanneer evaluaties nodig zijn. Kopieer geen kale `azd provision`/`azd deploy` shellstappen zonder authenticatie: het configureren van een serviceverbinding logt niet automatisch elk proces in bij AZD. Volg de OIDC-login van het gegenereerde sjabloon en geautoriseerde taakcontext, en geef de geselecteerde omgeving/abonnement/locatie op.
 
-**4. Waar de variabelen vandaan komen**
+**4. Waar komen de variabelen vandaan**
 
-azd slaat de omgevingswaarden (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) op als een **variabelengroep** in Azure DevOps zodat de pijplijn deze kan lezen. Je kunt ze bekijken en bewerken onder **Pipelines → Library**.
+azd slaat de omgevingswaarden (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) op als een **variable group** in Azure DevOps zodat de pipeline ze kan lezen. Je kunt ze bekijken en bewerken onder **Pipelines → Library**.
 
-> **Zelfde OIDC-voordeel als GitHub:** de `azdo` provider configureert ook standaard workload identiteit federatie, zodat er geen clientgeheim is opgeslagen in de serviceverbinding — Azure DevOps wisselt bij runtime een kortdurend token uit. Geef `--auth-type client-credentials` alleen door als je organisatie OIDC nog niet kan gebruiken.
+> **Zelfde OIDC-voordeel als GitHub:** de `azdo` provider configureert ook workload identity federation standaard, dus er is geen client secret opgeslagen in de serviceverbinding—Azure DevOps wisselt een tijdelijk token uit tijdens runtime. Geef `--auth-type client-credentials` alleen door als je organisatie OIDC nog niet kan gebruiken.
 
 **5. Voer het uit**
 
@@ -1337,26 +1372,26 @@ git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Open **Pipelines** in Azure DevOps om te zien hoe `azd provision` en `azd deploy` worden uitgevoerd.
+Open **Pipelines** in Azure DevOps om te zien hoe `azd provision` en `azd deploy` draaien.
 
 ### Componenten toevoegen met `azd add`
 
-Voeg stapsgewijs Azure-diensten toe aan een bestaand project:
+Voeg incrementeel Azure-services toe aan een bestaand project:
 
 ```bash
 # Add a new service component interactively
 azd add
 ```
 
-Dit is vooral handig voor het uitbreiden van productie-AI-toepassingen — bijvoorbeeld het toevoegen van een vectorzoekdienst, een nieuw agent-eindpunt of een monitoringcomponent aan een bestaande implementatie.
+Dit is vooral nuttig om productieve AI-applicaties uit te breiden—bijvoorbeeld het toevoegen van een vectorzoeksdienst, een nieuw agentendpoint, of een monitoringcomponent aan een bestaande implementatie.
 
 ## Aanvullende bronnen
 
-- **Azure Well-Architected Framework**: [AI workload gids](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [AI workload richtlijnen](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentatie**: [Officiële docs](https://learn.microsoft.com/azure/ai-studio/)
-- **Community-sjablonen**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord-community**: [#Azure-kanaal](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure op skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Herbruikbare agentvaardigheden voor Azure AI, Foundry, implementatie, kostenoptimalisatie en diagnostiek. Installeer in je editor:
+- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
+- **Discord Community**: [#Azure kanaal](https://discord.gg/microsoft-azure)
+- **Agent Skills voor Azure**: [microsoft/github-copilot-for-azure op skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Herbruikbare agentvaardigheden voor Azure AI, Foundry, implementatie, kostenoptimalisatie en diagnostiek. Installeer in je editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1364,13 +1399,13 @@ Dit is vooral handig voor het uitbreiden van productie-AI-toepassingen — bijvo
 ---
 
 **Hoofdstuknavigatie:**
-- **📚 Cursus thuisbasis**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 8 - Productie & Enterprise Patronen
-- **⬅️ Vorig hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Ook gerelateerd**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
-- **🎯 Cursus afgerond**: [AZD Voor Beginners](../../README.md)
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 8 - Productie- & Enterprise-patronen
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Ook Gerelateerd**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Cursus Voltooid**: [AZD Voor Beginners](../../README.md)
 
-**Onthoud**: Productie-AI-werkbelastingen vereisen zorgvuldige planning, bewaking en voortdurende optimalisatie. Begin met deze patronen en pas ze aan op je specifieke eisen.
+**Onthoud**: Productie AI workloads vereisen zorgvuldige planning, monitoring en voortdurende optimalisatie. Begin met deze patronen en pas ze aan je specifieke behoeften aan.
 
 ---
 

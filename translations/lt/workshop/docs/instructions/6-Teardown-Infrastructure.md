@@ -1,6 +1,6 @@
-# 6. Infrastruktūros naikinimas
+# 6. Infrastruktūros naikimas
 
-!!! tipas "ŠIO MODULIO PABAIGOJE JŪS SUDEBĖSITE"
+!!! tip "ŠIO MODULIO PABAIGOJE SUKURSITE SU ŠIAIS ĮGŪDŽIAIS"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## Papildomos užduotys
+## Papildomi pratimai
 
-Prieš naikindami projektą, skirkite kelias minutes atviram tyrinėjimui.
+Prieš naikindami projektą, skirkite kelias minutes atvirajai tyrinėjimui.
 
-!!! info "Išbandykite šiuos tyrinėjimo užuominas"
+!!! info "Išbandykite šiuos tyrinėjimo nurodymus"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,7 +29,11 @@ Prieš naikindami projektą, skirkite kelias minutes atviram tyrinėjimui.
 
 ---
 
-## Infrastruktūros pašalinimas
+## Infrastruktūros atšaukimas
+
+!!! warning "Jei taip pat atlikote GA talpinamo agento pratimą"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
 
 1. Infrastruktūros naikinimas yra toks paprastas:
       
@@ -38,7 +42,7 @@ Prieš naikindami projektą, skirkite kelias minutes atviram tyrinėjimui.
       azd show
       azd down
       ```
-1. Patvirtinkite pasirinktą aplinką ir peržiūrėkite ištrinsite resursus. Tai pašalins Azure resursus ir gali sunaikinti duomenis. Išlaikykite patvirtinimo užklausą šiam mokymosi srautui. Baigę matysite panašų rezultatą:
+1. Patvirtinkite pasirinktą aplinką ir peržiūrėkite naikintinus išteklius. Tai pašalina „Azure“ išteklius ir gali sunaikinti duomenis. Laikykitės patvirtinimo užklausos šiam mokymosi procesui. Baigus, pamatysite panašų išvesties rezultatą:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Prieš naikindami projektą, skirkite kelias minutes atviram tyrinėjimui.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Patikrinkite ištrynimą portale ir patikrinkite resursus už diegimo ribų. Sąnaudų ataskaitos ir kvotų atnaujinimai gali vėluoti. Vietinė `.azure` konfigūracija išlieka, jei ją nepašalinate explicitiai.
+1. Patikrinkite naikinimą portale ir ieškokite išteklių už diegimo ribų. Sąnaudų ataskaita ir kvotų atnaujinimas gali vėluoti. Vietinė `.azure` konfigūracija išlieka, nebent ją išimtai pašalinsite.
 
-1. `azd down --purge` taip pat prašo nuolatinio palaikomų minkštai ištrintų resursų ištrynimo. Naudokite tik tada, kai atkūrimas nereikalingas ir suprantate saugojimo/šalinimo apsaugos politiką. Tai negarantuoja greito kvotų atlaisvinimo.
+1. `azd down --purge` taip pat prašo nuolatinio palaikomų minkštai ištrintų išteklių naikinimo. Naudokite tik tada, kai atkūrimas nereikalingas ir suprantate saugojimo/valymo apsaugos taisykles. Tai negarantuoja kvotų išleidimo iš karto.
 
-1. Neperdieginėkite tik patikrinti išvalymą. Vėlesnis tyčinis `azd up` gali perkurti resursus naudodamas likusius vietinius įvesties duomenis ir vėl sukelti išlaidas. Modelio atnaujinimai paprastai naudoja palaikomus teikimo pakeitimus, o ne naikinimą.
+1. Nenaudokite pakartotinai diegti tik norint patikrinti valymą. Vėliau tyčinis `azd up` gali atkurti išteklius naudodamas likusius vietinius įvesties duomenis ir vėl suskaičiuoja mokesčius. Modelio atnaujinimams paprastai naudojami palaikomi aprovizavimo pakeitimai, o ne naikinimas.
 
 ---
 

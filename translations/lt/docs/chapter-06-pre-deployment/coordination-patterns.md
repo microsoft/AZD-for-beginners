@@ -1,29 +1,29 @@
-# Daugiaagentinės koordinacijos modeliai
+# Daugiaveiksmių agentų koordinacijos modeliai
 
-⏱️ **Apskaičiuotas laikas**: 60-75 minučių skaitymui; keli valandų įgyvendinimui | 💰 **Apskaičiuotos sąnaudos**: priklauso nuo darbo krūvio | ⭐ **Sudėtingumas**: pažengęs
+⏱️ **Numatomas laikas**: 60-75 minučių skaityti; keli valandos įgyvendinimui | 💰 **Numatomos sąnaudos**: priklauso nuo darbo krūvio | ⭐ **Sudėtingumas**: pažengęs
 
 **📚 Mokymosi kelias:**
-- ← Ankstesnis: [Talpos planavimas](capacity-planning.md) - Resursų dydžio nustatymas ir mastelio keitimo strategijos
-- 🎯 **Jūs čia esate**: Daugiaagentinės koordinacijos modeliai (Orkestracija, komunikacija, būsenos valdymas)
-- → Kitas: [SKU parinkimas](sku-selection.md) - Tinkamų Azure paslaugų pasirinkimas
-- 🏠 [Kurso pradžia](../../README.md)
+- ← Ankstesnis: [Talpos planavimas](capacity-planning.md) - išteklių dydžio ir mastelio keitimo strategijos
+- 🎯 **Jūs esate čia**: Daugiaveiksmių agentų koordinacijos modeliai (orkestravimas, komunikacija, būsenos valdymas)
+- → Toliau: [SKU parinkimas](sku-selection.md) - Tinkamų Azure paslaugų pasirinkimas
+- 🏠 [Kursų pradžia](../../README.md)
 
 ---
 
 ## Ko išmoksite
 
-Įvykdę šią pamoką, jūs:
-- Suprasite **daugiaagentinės architektūros** modelius ir kada juos naudoti
-- Įgyvendinsite **orkestracijos modelius** (centralizuotą, decentralizuotą, hierarchinę)
-- Sukursite **agentų komunikacijos** strategijas (sinchronines, asinchronines, įvykių valdomas)
-- Valdysite **bendrą būseną** tarp paskirstytų agentų
-- Diegsite **daugiaagentines sistemas** Azure naudojant AZD
-- Taikysite **koordinacijos modelius** realioms dirbtinio intelekto situacijoms
+Baigę šią pamoką, Jūs:
+- Suprasite **daugiaveiksmių architektūros** modelius ir kada juos naudoti
+- Įgyvendinsite **orkestracijos modelius** (cenzralizuotą, decentralizuotą, hierarchinę)
+- Sukursite **agentų komunikacijos** strategijas (sinchroninė, asinchroninė, įvykių pagrindu)
+- Valdysite **bendrą būseną** paskirstytuose agentuose
+- Diegsite **daugiaveiksmių sistemų** Azure su AZD
+- Naudosite **koordinacijos modelius** realaus pasaulio DI scenarijuose
 - Stebėsite ir derinsite paskirstytas agentų sistemas
 
-## Kodėl svarbi daugiaagentinė koordinacija
+## Kodėl svarbi daugiaagentų koordinacija
 
-### Evoliucija: nuo vieno agento iki daugiaagentinės sistemos
+### Evoliucija: Nuo vieno agente iki daugiaveiksmių agentų
 
 **Vienas agentas (paprasta):**
 ```
@@ -32,10 +32,10 @@ User → Agent → Response
 - ✅ Lengva suprasti ir įgyvendinti
 - ✅ Greita paprastoms užduotims
 - ❌ Ribojama vieno modelio galimybėmis
-- ❌ Negalima atlikti sudėtingų užduočių lygiagrečiai
+- ❌ Negalima vykdyti sudėtingų užduočių paraleliai
 - ❌ Nėra specializacijos
 
-**Daugiaagentinė sistema (pažengusi):**
+**Daugiaveiksmių agentų sistema (pažengęs):**
 ```mermaid
 graph TD
     Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
@@ -43,20 +43,20 @@ graph TD
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
 - ✅ Specializuoti agentai konkrečioms užduotims
-- ✅ Lygiagretus vykdymas greičiui
-- ✅ Modulinė ir prižiūrima struktūra
-- ✅ Geresnė sudėtingiems darbo srautams
+- ✅ Paralelinis vykdymas greičiui
+- ✅ Modulinė ir prižiūrima sistema
+- ✅ Geriau tvarko sudėtingus darbo srautus
 - ⚠️ Reikalauja koordinacijos logikos
 
-**Panašumas**: vienas agentas kaip viena asmenybė, atliekanti visas užduotis. Daugiaagentė sistema – kaip komanda, kur kiekvienas narys turi specializuotus įgūdžius (tyrėjas, programuotojas, vertintojas, rašytojas), dirbdama kartu.
+**Panašumas**: Vienas agentas yra kaip vienas žmogus, atliekantis visas užduotis. Daugiaveiksmių agentų sistema – tai kaip komanda, kur kiekvienas narys turi specializuotų įgūdžių (tyrėjas, programuotojas, peržiūrėtojas, rašytojas), kurie dirba kartu.
 
 ---
 
 ## Pagrindiniai koordinacijos modeliai
 
-### Modelis 1: Sekvencinė koordinacija (atsakomybės grandinė)
+### Modelis 1: Sekveninė koordinacija (atsakomybės grandinė)
 
-**Kada naudoti**: užduotys turi būti atliekamos tam tikra tvarka, kiekvienas agentas remiasi ankstesniu rezultatu.
+**Kada naudoti**: Užduotys turi būti atliekamos tam tikra tvarka, kiekvienas agentas remiasi ankstesnio rezultatu.
 
 ```mermaid
 sequenceDiagram
@@ -81,23 +81,23 @@ sequenceDiagram
 **Privalumai:**
 - ✅ Aiškus duomenų srautas
 - ✅ Lengva derinti klaidas
-- ✅ Prognozuojama vykdymo tvarka
+- ✅ Nuspėjama vykdymo tvarka
 
-**Trūkumai:**
-- ❌ Lėtesnis vykdymas (nėra lygiagretumo)
-- ❌ Viena klaida blokuoja visą grandinę
-- ❌ Negali apdoroti tarpusavyje priklausomų užduočių
+**Apribojimai:**
+- ❌ Lėtesnis (nėra paralelizmo)
+- ❌ Vieno klaida blokuoja visą grandinę
+- ❌ Negali tvarkyti tarpusavyje priklausančių užduočių
 
-**Pavyzdiniai naudojimo atvejai:**
-- Turinio kūrimo kanalas (tyrimai → rašymas → redagavimas → publikavimas)
+**Pavyzdinės panaudojimo srities:**
+- Turinio kūrimo srautas (tyrimas → rašymas → redagavimas → publikuoti)
 - Kodo generavimas (planavimas → įgyvendinimas → testavimas → diegimas)
-- Ataskaitų kūrimas (duomenų rinkimas → analizė → vizualizacija → santrauka)
+- Ataskaitų generavimas (duomenų surinkimas → analizė → vizualizacija → santrauka)
 
 ---
 
-### Modelis 2: Lygiagretus koordinavimas (Fan-Out/Fan-In)
+### Modelis 2: Lygiateisė koordinacija (išskleidimas / sujungimas)
 
-**Kada naudoti**: nepriklausomos užduotys vykdomos tuo pačiu metu, rezultatai sujungiami gale.
+**Kada naudoti**: Nepriklausomos užduotys gali vykti lygiagrečiai, rezultatai sujungiami pabaigoje.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Privalumai:**
-- ✅ Greitas (lygiagretus vykdymas)
+- ✅ Greitas (paralelinis vykdymas)
 - ✅ Atsparus klaidoms (daliniai rezultatai priimtini)
-- ✅ Horizontaliai mastelį keičiantis
+- ✅ Horizontaliai plečiamas
 
-**Trūkumai:**
-- ⚠️ Rezultatai gali atvykti ne tvarka
-- ⚠️ Reikia agregacijos logikos
+**Apribojimai:**
+- ⚠️ Rezultatai gali atkeliauti ne tvarkingai
+- ⚠️ Reikalinga agregavimo logika
 - ⚠️ Sudėtingas būsenos valdymas
 
-**Pavyzdiniai naudojimo atvejai:**
-- Daugiakanalių duomenų rinkimas (API + duomenų bazės + interneto nuskaitymas)
-- Konkurencinė analizė (keli modeliai generuoja sprendimus, parenkamas geriausias)
-- Vertimo paslaugos (vertimas į kelias kalbas vienu metu)
+**Pavyzdinės panaudojimo sritys:**
+- Daugių šaltinių duomenų rinkimas (API + duomenų bazės + interneto nuskaitymas)
+- Konkurencinė analizė (kelios modelių generuoja sprendimus, parenkamas geriausias)
+- Vertimo paslaugos (vienu metu verčiama į kelias kalbas)
 
 ---
 
-### Modelis 3: Hierarchinė koordinacija (Vadovas-Darbuotojas)
+### Modelis 3: Hierarchinė koordinacija (vadovas-darbuotojas)
 
-**Kada naudoti**: sudėtingi darbo srautai su po-užduotimis, reikia delegavimo.
+**Kada naudoti**: Sudėtingi darbo srautai su posistemiais, reikia delegavimo.
 
 ```mermaid
 graph TB
@@ -167,24 +167,24 @@ graph TB
 
 **Privalumai:**
 - ✅ Tvarko sudėtingus darbo srautus
-- ✅ Modulinis ir prižiūrimas
+- ✅ Modulinė ir lengvai prižiūrima
 - ✅ Aiškios atsakomybės ribos
 
-**Trūkumai:**
+**Apribojimai:**
 - ⚠️ Sudėtingesnė architektūra
-- ⚠️ Didesnis delsimas (daug sluoksnių)
-- ⚠️ Reikalauja sudėtingos orkestracijos
+- ⚠️ Didesnis vėlavimas (kelios koordinacijos sluoksniai)
+- ⚠️ Reikia sudėtingos orkestracijos
 
-**Pavyzdiniai naudojimo atvejai:**
+**Pavyzdinės panaudojimo sritys:**
 - Įmonių dokumentų apdorojimas (klasifikuoti → nukreipti → apdoroti → archyvuoti)
-- Daugiapakopės duomenų srovės (rinkti → valyti → transformuoti → analizuoti → ataskaitos)
-- Sudėtingos automatizacijos darbo tėkmės (planavimas → resursų paskirstymas → vykdymas → stebėjimas)
+- Daugiapakopiai duomenų vamzdynai (surinkti → išvalyti → transformuoti → analizuoti → paruošti ataskaitą)
+- Sudėtingi automatizavimo darbo srautai (planavimas → išteklių paskirstymas → vykdymas → stebėsena)
 
 ---
 
-### Modelis 4: Įvykių valdymo koordinacija (Publikavimas-Prenumeravimas)
+### Modelis 4: Įvykių sukelta koordinacija (leidimas-prenumerata)
 
-**Kada naudoti**: agentai turi reaguoti į įvykius, pageidautinas silpnas sujungimas.
+**Kada naudoti**: Agentai turi reaguoti į įvykius, pageidautinas laisvas sujungimas.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Privalumai:**
-- ✅ Silpnas susiejimas tarp agentų
-- ✅ Lengva pridėti naujus agentus (tiesiog užsiprenumeruokite)
+- ✅ Laisvas sujungimas tarp agentų
+- ✅ Lengva pridėti naujus agentus (tiesiog užsiprenumeruoti)
 - ✅ Asinchroninis apdorojimas
-- ✅ Atsparumas (pranešimų išlikimas)
+- ✅ Atsparus klaidoms (pranešimų išlikimas)
 
-**Trūkumai:**
-- ⚠️ Galutinė duomenų nuoseklumas
+**Apribojimai:**
+- ⚠️ Galiausiai užtikrina nuoseklumą
 - ⚠️ Sudėtingas derinimas
-- ⚠️ Pranešimų užsakymo problemos
+- ⚠️ Pranešimų užsakymo iššūkiai
 
-**Pavyzdiniai naudojimo atvejai:**
-- Realaus laiko stebėjimo sistemos (įspėjimai, prietaisų skydeliai, žurnalai)
-- Daugiakanalės pranešimų sistemos (el. paštas, SMS, push, Slack)
-- Duomenų apdorojimo srovės (keletas vartotojų to paties duomenų srauto)
+**Pavyzdinės panaudojimo sritys:**
+- Realiojo laiko stebėjimo sistemos (įspėjimai, valdymo pultai, žurnalai)
+- Daugialypės pranešimų siuntimo kanalai (el. paštas, SMS, push, Slack)
+- Duomenų apdorojimo vamzdynai (vienas duomenų šaltinis su keliais vartotojais)
 
 ---
 
-### Modelis 5: Konsenso pagrindu veikianti koordinacija (Balsavimas/Quorum)
+### Modelis 5: Sutarimu grindžiama koordinacija (balsavimas / kvoraumas)
 
-**Kada naudoti**: reikalingas kelių agentų sutarimas prieš tęsiant.
+**Kada naudoti**: Reikia kelių agentų sutarimo prieš tęsiant.
 
 ```mermaid
 graph TB
@@ -248,25 +248,25 @@ graph TB
 ```
 
 **Privalumai:**
-- ✅ Didresnis tikslumas (kelios nuomonės)
-- ✅ Atsparumas klaidoms (mažumos klaidos priimtinos)
-- ✅ Įdiegta kokybės užtikrinimo sistema
+- ✅ Didinamas tikslumas (kelios nuomonės)
+- ✅ Atsparus klaidoms (priimtini mažumos gedimai)
+- ✅ Užtikrinta kokybė
 
-**Trūkumai:**
-- ❌ Brangu (daugybė modelių kvietimų)
-- ❌ Lėtesnis (laukiama visų agentų)
-- ⚠️ Reikalingas konfliktų sprendimas
+**Apribojimai:**
+- ❌ Brangus (daugkartiniai modelių kvietimai)
+- ❌ Lėtesnis (laukia visų agentų)
+- ⚠️ Reikia spręsti konfliktus
 
-**Pavyzdiniai naudojimo atvejai:**
-- Turinio moderavimas (kelis modeliai peržiūri turinį)
-- Kodo peržiūra (keli tikrintojai/analizatoriai)
-- Medicininė diagnozė (keli DI modeliai, ekspertų patvirtinimas)
+**Pavyzdinės panaudojimo sritys:**
+- Turinio moderavimas (kelios modelių apžvelgia turinį)
+- Kodo peržiūra (kelios linter'iai / analizatoriai)
+- Medicininė diagnozė (keletas DI modelių, ekspertų patvirtinimas)
 
 ---
 
 ## Architektūros apžvalga
 
-### Pilna daugiaagentinė sistema Azure platformoje
+### Pilna daugiaveiksmių agentų sistema Azure
 
 ```mermaid
 graph TB
@@ -318,21 +318,21 @@ graph TB
 
 | Komponentas | Paskirtis | Azure paslauga |
 |-----------|---------|---------------|
-| **API Gateway** | Įėjimo taškas, srautų ribojimas, autentifikacija | API Management |
+| **API vartai** | Įėjimo taškas, eismo ribojimas, autentifikacija | API valdymas |
 | **Orkestratorius** | Koordinuoja agentų darbo srautus | Container Apps |
-| **Žinučių eilė** | Asinchroninė komunikacija | Service Bus / Event Hubs |
+| **Pranešimų eilė** | Asinchroninė komunikacija | Service Bus / Event Hubs |
 | **Agentai** | Specializuoti DI darbuotojai | Container Apps / Functions |
 | **Būsenos saugykla** | Bendroji būsena, užduočių sekimas | Cosmos DB |
-| **Vertybių saugykla** | Dokumentai, rezultatai, žurnalai | Blob Storage |
-| **Stebėjimas** | Paskirstytas sekimas, žurnalai | Application Insights |
+| **Artefaktų saugykla** | Dokumentai, rezultatai, žurnalai | Blob Storage |
+| **Stebėsena** | Paskirstytas sekimas, žurnalai | Application Insights |
 
-Service Bus eilės/temos ir Event Hubs yra skirtingos paslaugos su skirtingais pristatymo/naudojimo modeliais; Event Hubs nėra tiesioginis Service Bus darbuotojo kodo pakaitalas žemiau. Lygiagretumas, išlikę pranešimai ir modelių balsavimas patys savaime negarantuoja klaidų tolerancijos ar didesnio tikslumo.
+Service Bus eilės / temos ir Event Hubs yra skirtingos paslaugos su skirtingais pristatymo / vartojimo modeliais; Event Hubs nėra tiesioginė Service Bus darbuotojo kodo žemesniojo varianto pakeitimas. Paralelizmas, išsaugoti pranešimai ir modelių balsavimas savaime negarantuoja atsparumo klaidoms ar didesnio tikslumo.
 
 ---
 
-## Išankstiniai reikalavimai
+## Reikalavimai
 
-### Būtinos priemonės
+### Reikalingi įrankiai
 
 ```bash
 # Verify Azure Developer CLI
@@ -348,32 +348,32 @@ docker --version
 # ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Azure reikalavimai
+### Azure sąlygos
 
 - Aktyvi Azure prenumerata
 - Leidimai kurti:
   - Container Apps
-  - Service Bus erdves
-  - Cosmos DB paskyras
-  - Saugyklos paskyras
+  - Service Bus sritims
+  - Cosmos DB paskyroms
+  - Saugyklos paskyroms
   - Application Insights
 
-### Žinių išankstiniai reikalavimai
+### Žinių reikalavimai
 
-Jūs turėtumėte būti baigę:
+Turėtumėte būti baigę:
 - [Konfigūracijos valdymas](../chapter-03-configuration/configuration.md)
-- [Autentifikacija ir saugumas](../chapter-03-configuration/authsecurity.md)
+- [Autentifikavimas ir saugumas](../chapter-03-configuration/authsecurity.md)
 - [Mikropaslaugų pavyzdys](../../../../examples/microservices)
 
 ---
 
 ## Įgyvendinimo vadovas
 
-> **Tai yra dizaino fragmentai, o ne diegiamas laboratorinis darbas:** Projekto medžio ir žemiau pateikti `File:` žymėjimai aprašo failus, kuriuos turite sukurti savo projekte; šis saugyklos repo neturi visos `multi-agent-system` programos. Trūksta pagrindinių/parametrų šablonų, Container Apps aplinkos/registre, Docker failų ir priklausomybių užrakinimo, Cosmos duomenų bazės/ konteinerio nustatymo, modelių diegimų, tapatybės/vaidmenų konfigūracijos, mastelio keitimo taisyklių ir lygiagrečių darbuotojų/eilių. Nereikėtų tikėtis, kad `azd init` sugeneruos šiuos failus ar `azd up` įdiegs fragmentus nepakitusius. Norint gauti įvykdomą pradžią, užbaikite [Daugiaagentinės pagrindus](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Projektavimo fragmentai, ne pilnas laboratorinis darbas:** Projekto medžio ir `File:` žymos žemiau aprašo failus, kuriuos reikia sukurti savo projekte; šis saugykla neturi pilnos `multi-agent-system` programos. Trūksta pagrindinių / parametrų šablonų, Container Apps aplinkos / registro, Dockerfile ir priklausomybių fiksacijų, Cosmos DB duomenų bazės / konteinerio konfigūracijos, modelių diegimų, tapatybės / vaidmenų nustatymų, mastelio keitimo taisyklių ir paralelinių darbuotojų / eilių. Nesitikėkite, kad `azd init` generuos šiuos failus arba `azd up` diegs fragmentus be pakeitimų. Veiksmingam startui užbaikite [Daugiaveiksmių agentų pagrindai](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Vykdymo prielaidos:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask ir (stebėjimui) `azure-monitor-opentelemetry`; įdėkite `shared` į Python importavimo kelią kiekviename paslaugos paveiksle. Cosmos `agent-state/tasks` konteineris jau turi egzistuoti su šaknimis raktu `/id`. Pagrindais pagrįstos jungtys supaprastina šiuos fragmentus, bet tai nėra gamybinės rekomendacijos: pirmenybę teikite valdomoms tapatybėms su apribotais Service Bus/Cosmos/OpenAI duomenų plano vaidmenimis. Neskelbkite raktų išvestyse ar žurnaluose.
+**Laikymo prielaidos:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask ir (stebėjimui) `azure-monitor-opentelemetry`; pridėkite `shared` į Python importavimo kelią kiekviename paslaugos vaizde. Cosmos `agent-state/tasks` konteineris turi būti jau sukurtas su skaidymo raktu `/id`. Raktų pagrindu sukurti ryšiai palengvina šiuos fragmentus, bet rekomenduojama gamyboje naudoti valdomas identybes su ribotais Service Bus / Cosmos / OpenAI duomenų plokštės vaidmenimis. Nerodykite raktų išvestyje ar žurnaluose.
 
-Service Bus pristatymas yra **bent vienas**. Išlaikykite užduoties **ir žingsnio** idempotentiškumą, naudokite optimistinę konkurenciją (ETags) nuskaityti/keisti/rašyti būseną ir atnaujinkite žinutės užraktus ilgo apdorojimo metu. Žemiau esantis paprastas būsenos valdytojas yra tik sekvencinis ir neįgyvendina šių gamybinių garantijų.
+Service Bus pristatymas yra **mažiausiai vieną kartą**. Išlaikykite užduoties **ir žingsnio** idempotenciją, naudokite optimistinę konkurenciją (ETags) būsena perskaitymo / modifikavimo / rašymo metu ir atnaujinkite žinutės užraktą ilgai apdorojant. Žemiau pateiktas paprastas būsenos valdymas palaiko tik sekvencinį vykdymą ir neįgyvendina šių gamybos garantijų.
 
 ### Projekto struktūra
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Pamoka 1: Sekvencinio koordinavimo modelis
+## Pamoka 1: Sekvencinės koordinacijos modelis
 
-### Įgyvendinimas: Turinio kūrimo kanalas
+### Įgyvendinimas: turinio kūrimo srautas
 
-Sukurkime sekvencinį kanalą: tyrinėjimas → rašymas → redagavimas. Publikavimas neįtrauktas į šį pavyzdį.
+Sukurkime sekvencinį srautą: Tyrimas → Rašymas → Redagavimas. Leidyba neįtraukta.
 
 ### 1. AZD konfigūracija
 
@@ -444,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastruktūra: Service Bus koordinavimui
+### 2. Infrastruktūra: Service Bus koordinacijai
 
 **Failas: `infra/core/servicebus.bicep`**
 
@@ -895,19 +895,19 @@ if __name__ == '__main__':
 
 ### 8. Diegimas ir testavimas
 
-Šie komandiniai įrašai taikomi **tik po to, kai įgyvendinate trūkstamus projekto failus**. Interaktyvi „Foundry“ agente inicializacija yra atskiras darbo srautas; jis negamina šio Service Bus dizaino.
+Šie komandų pavyzdžiai taikomi **tik po to, kai įgyvendinsite trūkstamus projekto failus**. Interaktyvi Foundry agentų inicijacija yra atskiras procesas; ji negeneruoja šio Service Bus sprendimo.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> Peržiūrėkite [AZD DI CLI komandas](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dėl visų `azd ai` žymų ir parinkčių.
+> Žr. [AZD DI CLI komandas](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) visiems `azd ai` žymėms ir parinktims.
 
 ```bash
 # Get orchestrator URL
@@ -919,7 +919,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Tikėtinas rezultatas:**
+**✅ Tikėtina išvestis:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Patikrinkite užduoties eigą:**
+**Patikrinkite užduoties pažangą:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Tikėtinas rezultatas (baigta):**
+**✅ Tikėtina išvestis (baigta):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -964,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Pamoka 2: Lygiagretaus koordinavimo modelis
+## Pamoka 2: Lygiagrečios koordinacijos modelis
 
-### Įgyvendinimas: daugiakanalio tyrimo agregatorius
+### Įgyvendinimas: daugiašaltinis tyrimų agregatorius
 
-Sukurkime lygiagretų sistemą, kuris renka informaciją iš kelių šaltinių vienu metu.
+Sukurkime lygiagrečią sistemą, kuri tuo pačiu metu renka informaciją iš kelių šaltinių.
 
 ### Lygiagretus orkestratorius
 
@@ -1042,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Agregacijos logika
+### Agregavimo logika
 
 **Failas: `src/agents/aggregator/app.py`**
 
@@ -1123,24 +1123,24 @@ if __name__ == '__main__':
     main()
 ```
 
-**Lygiagretaus modelio privalumai:**
-- ⚡ **Galimai mažesnis delsimas** (ribojamas lėčiausio darbuotojo plius koordinavimo sąnaudos)
-- 🔄 **Gali palaikyti dalinius rezultatus** su aiškiomis terminų ir klaidų politika (neįgyvendinta paprastame agregatoriuje)
-- 📈 **Mastelį keičianti** (lengva pridėti daugiau agentų)
+**Lygiagrečio modelio privalumai:**
+- ⚡ **Potencialiai mažesnis delsimas** (ribojamas lėčiausio darbuotojo ir koordinacijos pertekliaus)
+- 🔄 **Galimi daliniai rezultatai** su aiškiomis pabaigos datomis ir klaidų politika (neįgyvendinta pagrindiniame agregatoriuje)
+- 📈 **Plečiamas** (lengva pridėti daugiau agentų)
 
 ---
 
 ## Praktinės užduotys
 
-### Užduotis 1: Pridėti laiko išskyrimą ⭐⭐ (Vidutinis)
+### Užduotis 1: Pridėti laiko limitų valdymą ⭐⭐ (vidutinis)
 
-**Tikslas**: įgyvendinti laiko pabaigos logiką, kad agregatorius nelauktų amžinai lėtų agentų.
+**Tikslas**: Įgyvendinti rimto laiko logiką, kad agregatorius nelauktų amžinai už lėtus agentus.
 
-**Pradinis taškas:** paleiskite vietinę terminų imitaciją prieš įtraukdami į eilės darbuotoją. Laiko išskyrimas, tikrinamas tik atvykstant kitai žinutei, niekada nesuveikia, jeigu trūkstantis darbuotojas nieko nesiunčia.
+**Pradinis taškas:** Paleiskite šią vietinę terminų simuliaciją prieš integruodami į eilės darbuotoją. Laiko limitas, tikrinamas tik atvykstant kitam pranešimui, niekada neaktyvuojasi, jei trūkstamas darbuotojas nieko nesiunčia.
 
 **Žingsniai**:
 
-1. **Pridėkite laiko išskyrimo stebėjimą agregatoriui:**
+1. **Pridėkite terminų sekimą agregatoriui:**
 
 ```python
 import asyncio
@@ -1164,15 +1164,15 @@ async def main():
 asyncio.run(main())
 ```
 
-2. **Tikėtinas rezultatas:**
+2. **Tikėtina išvestis:**
 
 ```text
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Eilių sistemos integracija (dizaino užduotis):** Išlaikyti siuntimo terminą ir laukiamus agentus kuriant užduotį, periodiškai perbraukti terminą nepriklausomai nuo gaunamų rezultatų, atomizuotai užbaigti dalinius rezultatus, ir ignoruoti vėlyvas/dubliuotas žinutes užbaigtoms užduotims. Vietinis laiko išskyrimas neatšaukia nuotolinių darbuotojų.
+3. **Eilių sistemos integracija (projektavimo užduotis):** Įrašykite paskirstymo terminą ir laukiamų agentų skaičių sukuriant užduotį, periodiškai tikrinkite terminą nepriklausomai nuo gautų rezultatų, atomizuotai užbaikite dalinius rezultatus ir ignoruokite vėluojančius / dubliuotus pranešimus užbaigtoms užduotims. Vietinis laiko limitas neatšaukia nuotolinių darbininkų.
 
-Tik jūsų įgyvendintam projektui:
+Tik Jūsų įgyvendintai projekto daliai:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Vietinis testas baigiasi po vienos sekundės termino, net jei vienas agentas nebaigtas
-- ✅ Atsakymas rodo dalinius rezultatus (`"timed_out": true`)
-- ✅ Grąžinami visi turimi rezultatai (3 iš 4 agentų)
+- ✅ Vietinis testas grąžina rezultatą po vienos sekundės termino, net jei agentas nėra baigtas
+- ✅ Atsakyme nurodomi daliniai rezultatai (`"timed_out": true`)
+- ✅ Grąžinami turimi rezultatai (3 iš 4 agentų)
 
 **Laikas**: 20-25 minutės
 
 ---
 
-### Užduotis 2: Įgyvendinti pakartotinio bandymo logiką ⭐⭐⭐ (Pažengęs)
+### Užduotis 2: Įgyvendinti pakartotinio paleidimo logiką ⭐⭐⭐ (pažengęs)
 
-**Tikslas**: automatiškai kartoti nesėkmingas agentų užduotis, kol nepasiduoda.
+**Tikslas**: Automatiškai bandyti pakartotinai nepavykusias užduotis prieš pasiduodant.
 
 **Žingsniai**:
 
-1. **Naudokite Service Bus pristatymo skaičius vietoje savarankiškų pakartotinių skaitiklių:**
+1. **Naudokite Service Bus pristatymo skaičius vietoje rankinių bandymo skaitiklių pakartotiniam įstatymui:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Pridėkite pakartotinio bandymo apdorotoją agentams:**
+2. **Pridėkite pakartotinio paleidimo valdiklį agentams:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Stebėkite „dead letter“ eilę:**
+3. **Stebėkite „Dead Letter“ eilę:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Nepavykusios užduotys automatiškai kartojamos (iki 3 kartų)
-- ✅ Pakartojimų laikotarpiuose taikomas eksponentinis atidėjimas (5s, 10s, 20s), su žinutės užraktų atnaujinimu, kur reikia
-- ✅ Po maksimalaus pakartojimų skaičiaus, žinutės siunčiamos į dead letter eilę
-- ✅ Dead letter žinutės gali būti peržiūrėtos; atkūrimas vyksta atskiru idempotentiniu darbo srautu
+- ✅ Nepavykusios užduotys bandomos pakartotinai automatiškai (iki 3 kartų)
+- ✅ Eksponentinis atidėliojimas tarp pakartojimų (5s, 10s, 20s), su žinučių užraktų atnaujinimu, kur reikia
+- ✅ Pasiekus maksimalų bandymų skaičių, žinutės nukreipiamos į „Dead Letter“ eilę
+- ✅ „Dead Letter“ žinutės gali būti peržiūrėtos; pakartotinis paleidimas reikalauja atskiro idempotento atkūrimo darbo srauto
 
 **Laikas**: 30-40 minučių
 
 ---
 
-### Užduotis 3: Įgyvendinti grandinės nutrūkimo mechanizmą (Circuit Breaker) ⭐⭐⭐ (Pažengęs)
+### Užduotis 3: Įgyvendinti grandinės pertraukiklį ⭐⭐⭐ (pažengęs)
 
-**Tikslas**: užkirsti kelią gedimų pagreičiui, sustabdant užklausas klaidaujančiam agentui.
+**Tikslas**: Užkirsti kelią gedimų grandinės sukėlimui sustabdant užklausas nefunkcionuojantiems agentams.
 
 **Žingsniai**:
 
-1. **Sukurkite grandinės nutrūkimo klasę:**
+1. **Sukurkite grandinės pertraukiklio klasę:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Pritaikykite agentų kvietimams:**
+2. **Panaudokite agentų kvietimuose:**
 
 ```python
 # In orchestrator
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Ši grandinė saugo **siuntimo operaciją**, o ne nuotolinio darbo baigtį: sėkmingas žinutės užkėlimas į eilę nieko nepasako apie tai, ar agentas yra gyvas. `send_message` yra jūsų programos siuntimo funkcija. Vykdymo grandinėms stebėkite užduočių klaidas/laiko viršijimus ir perduokite jas patvariam koordinatoriui. Ši atminties klasė yra vieno gijos demonstracija, ne paskirstytas grandinės svertuvas.
+Ši grandinė apsaugo **siuntimo operaciją**, ne nuotolinio darbuotojo užbaigimą: sėkmingas pranešimo įdėjimas į eilę nieko nesako apie tai, ar agentas yra gyvas. `send_message` yra jūsų programos siuntėjo funkcija. Vykdymo grandinėms stebimų užduočių nesėkmes/laiko limitus perduokite patvariam koordinatoriui. Ši atmintinė klasė yra vienos gijos demonstracija, ne paskirstytas grandinės pertraukiklis.
 
-3. **Išbandykite grandinės svertuvą vietoje:**
+3. **Išbandykite grandinės pertraukiklį vietoje:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1369,18 +1369,18 @@ print("Circuit breaker recovery verified")
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Po 5 klaidų grandinė atsiveria (atmeta užklausas)
+- ✅ Po 5 nesėkmių grandinė atsidaro (atsisako užklausų)
 - ✅ Po 60 sekundžių grandinė tampa pusiau atvira (testuoja atkūrimą)
-- ✅ Kiti agentai toliau dirba normaliai
-- ✅ Grandinė automatiškai užsidaro, kai agentas pasveiksta
+- ✅ Kiti agentai toliau dirba įprastai
+- ✅ Grandinė automatiškai užsidaro, kai agentas atsigauna
 
-**Laikas**: 40–50 minučių
+**Laikas**: 40-50 minučių
 
 ---
 
 ## Stebėjimas ir derinimas
 
-### Paskirstytasis sekimas su Application Insights
+### Paskirstytoji sekimo sistema su Application Insights
 
 **Failas: `src/shared/tracing.py`**
 
@@ -1437,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Agentų našumo palyginimas:**
+**Agentų efektyvumo palyginimas:**
 
 ```kusto
 // Compare agent execution times
@@ -1451,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Klaidų analizė:**
+**Nesėkmių analizė:**
 
 ```kusto
 // Find which agents fail most
@@ -1466,24 +1466,24 @@ exceptions
 
 ---
 
-## Sąnaudų analizė
+## Kaštų analizė
 
-### Kelių agentų sistemos sąnaudos (mėnesio apytiksliai duomenys)
+### Kelių agentų sistemos kaštai (mėnesio įvertinimai)
 
-Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$240–565 per mėnesį**. Patikrinkite dabartinius regioninius tarifus, aktyvių/nemandagiai naudojamų kopijų valandas, įvesties/išvesties simbolių mišinį, saugyklą ir telemetriją. Serverless neturi minimalaus rezervuoto pralaidumo, bet vis tiek apmokestina už užklausas ir saugyklą.
+Iliustratyvūs planavimo duomenys tik, ne pasiūlymai: žemiau suma yra **240–565 USD/mėn.** Patikrinkite dabartinius regioninius tarifus, aktyvių/tuščių replikuočių valandas, įvesties/išvesties žetonų mišinius, saugyklą ir telemetriją. Serverless neturi minimalaus rezervuoto pralaidumo, bet vis tiek apmokestina už užklausas ir saugyklą.
 
 | Komponentas | Konfigūracija | Kaina |
 |-----------|--------------|------|
-| **Orkestras** | 1 konteinerio programa (1 vCPU, 2GB) | $30–50 |
-| **4 agentai** | 4 konteinerių programos (0.5 vCPU, po 1GB) | $60–120 |
-| **Service Bus** | Standartinis lygis, 10M žinučių | $10–20 |
-| **Cosmos DB** | Serverless, 5GB saugykla, 1M RUs | $25–50 |
-| **Blob Storage** | 10GB saugykla, 100K operacijų | $5–10 |
-| **Application Insights** | 5GB įkėlimas | $10–15 |
-| **Microsoft Foundry modeliai** | gpt-4.1, 10M simbolių | $100–300 |
-| **Viso** | | **$240–565/mėn** |
+| **Orkestratorius** | 1 konteinerių programa (1 vCPU, 2GB) | 30–50 USD |
+| **4 agentai** | 4 konteinerių programos (po 0.5 vCPU, 1GB kiekviena) | 60–120 USD |
+| **Service Bus** | Standartinis lygis, 10M žinučių | 10–20 USD |
+| **Cosmos DB** | Serverless, 5GB saugykla, 1M RUs | 25–50 USD |
+| **Blob saugykla** | 10GB saugykla, 100K operacijų | 5–10 USD |
+| **Application Insights** | 5GB duomenų įvedimas | 10–15 USD |
+| **Microsoft Foundry modeliai** | gpt-4.1, 10M žetonų | 100–300 USD |
+| **Iš viso** | | **240–565 USD/mėn.** |
 
-### Sąnaudų optimizavimo strategijos
+### Kaštų optimizavimo strategijos
 
 1. **Naudokite serverless, kur įmanoma:**
    ```bicep
@@ -1494,7 +1494,7 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
    }
    ```
 
-2. **Agentus pritemdykite iki nulio, kai nenaudojami:**
+2. **Mastelizuokite agentus iki nulio, kai jie nenaudojami:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1502,7 +1502,7 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
    }
    ```
 
-3. **Naudokite grupavimą Service Bus:**
+3. **Naudokite paketavimą Service Bus:**
    ```python
    # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
@@ -1517,7 +1517,7 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
 
 ---
 
-## Gerosios praktikos
+## Geriausios praktikos
 
 ### ✅ DARYKITE:
 
@@ -1528,7 +1528,7 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Įgyvendinkite išsamų žurnalo vedimą**
+2. **Įgyvendinkite išsamią žurnalo vedimą**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1542,14 +1542,14 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
    }
    ```
 
-4. **Nustatykite žinutės galiojimo laiką (TTL)**
+4. **Nustatykite pranešimų TTL (gyvavimo trukmę)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Stebėkite negyvų laiškų eilutes**
+5. **Stebėkite „dead letter“ eilutes**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1557,13 +1557,13 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
 
 ### ❌ NEDARYKITE:
 
-1. **Nesukurkite ciklinių priklausomybių**
+1. **Nesukurkite apskritų priklausomybių**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Neužblokuokite agentų gijų**
+2. **Blokuokite agentų gijas**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1572,13 +1572,13 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
    # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Nelaikykite nepilnų klaidų nepaisomomis**
+3. **Neleiskite dalinėms klaidoms likti nepastebėtoms**
    ```python
    # ❌ BAD: Fail entire workflow if one agent fails
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Nenaudokite neribotų pakartojimų**
+4. **Nenaudokite begalinių pakartojimų**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1588,14 +1588,14 @@ Iliustraciniai planavimo skaičiai, ne kainų pasiūlymai: žemiau suma yra **$2
 
 ## Gedimų šalinimo vadovas
 
-### Problema: Žinutės įstringa eilėje
+### Problema: Pranešimai užstringa eilėje
 
 **Simptomai:**
-- Žinutės kaupiasi eilėje
+- Pranešimai kaupiasi eilėje
 - Agentai neapdoroja
-- Užduoties būsena įstringa "laukiama"
+- Užduoties būsena užstrigusi „laukiama“
 
-**Diagnozė:**
+**Diagnostika:**
 ```bash
 # Check queue depth
 az servicebus queue show \
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Patikrinkite negyvų laiškų eilutę:**
+2. **Patikrinkite „dead letter“ eilę:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,14 +1630,14 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problema: Užduoties laiko limitas / neužbaigiama
+### Problema: Užduotis išeina iš laiko / niekada nesibaigia
 
 **Simptomai:**
-- Užduoties būsena „vykdoma“
-- Kai kurie agentai baigia, kiti – ne
+- Užduoties būsena lieka „vykdoma“
+- Kai kurios agentai užbaigia, kiti ne
 - Nėra klaidų pranešimų
 
-**Diagnozė:**
+**Diagnostika:**
 ```bash
 # Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Sprendimai:**
 
-1. **Įgyvendinkite laiko limitą agregatoriuje (1 pratimas)**
+1. **Įgyvendinkite laikmatį agregatoriuje (pratimas 1)**
 
 2. **Patikrinkite agentų klaidas naudodami Azure Monitor:**
    ```bash
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Įsitikinkite, kad visi agentai veikia:**
+3. **Patikrinkite, ar visi agentai veikia:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1670,44 +1670,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Sužinokite daugiau
 
-### Oficialioji dokumentacija
+### Oficialūs dokumentai
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Tolimesni veiksmai šiame kurse
+### Tolimesni žingsniai šiame kurse
 - ← Ankstesnis: [Talpos planavimas](capacity-planning.md)
-- → Sekantis: [SKU pasirinkimas](sku-selection.md)
+- → Kitas: [SKU pasirinkimas](sku-selection.md)
 - 🏠 [Kurso pradžia](../../README.md)
 
 ### Susiję pavyzdžiai
-- [Mikropaslaugų pavyzdys](../../../../examples/microservices) - Paslaugų komunikacijos šablonai
+- [Mikropaslaugų pavyzdys](../../../../examples/microservices) - Paslaugų komunikacijos modeliai
 - [Microsoft Foundry modelių pavyzdys](../../../../examples/azure-openai-chat) - DI integracija
 
 ---
 
 ## Santrauka
 
-**Jūs išmokote:**
-- ✅ Penki koordinacijos šablonai (seka, lygiagretusis, hierarchinis, įvykių valdomas, konsensusas)
-- ✅ Kelių agentų architektūra Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Būsenos valdymas paskirstytuose agentuose
-- ✅ Laiko limitų valdymas, pakartotiniai bandymai ir grandinės svertuvai
-- ✅ Paskirstytų sistemų stebėjimas ir derinimas
-- ✅ Sąnaudų optimizavimo strategijos
+**Jūs sužinojote:**
+- ✅ Penkis koordinavimo modelius (seka, lygiagrečiai, hierarchiškai, įvykių pagrindu, sutarimu)
+- ✅ Kelių agentų architektūrą Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Būseno valdymą per paskirstytus agentus
+- ✅ Laiko limitų valdymą, pakartojimus ir grandinės pertraukiklius
+- ✅ Paskirstytų sistemų stebėjimą ir derinimą
+- ✅ Kaštų optimizavimo strategijas
 
-**Pagrindinės išvados:**
-1. **Pasirinkite tinkamą šabloną** – sekos užduotims, lygiagrečiai – greičiui, įvykių valdomam – lankstumui
-2. **Atsargiai valdykite būseną** – naudokite Cosmos DB ar panašų bendrąją būseną
-3. **Tvarkykite klaidas gražiai** – laiko limitai, pakartotiniai bandymai, grandinės svertuvai, negyvų laiškų eilutės
-4. **Stebėkite viską** – paskirstytasis sekimas būtinas derinimui
-5. **Optimizuokite sąnaudas** – sumažinkite iki nulio, naudokite serverless, įgyvendinkite talpyklą
+**Svarbiausios išvados:**
+1. **Pasirinkite tinkamą modelį** – seka tvarkingiems srautams, lygiagrečiai greičiui, įvykių pagrindu lankstumui
+2. **Atidžiai valdykite būseną** – naudokite Cosmos DB ar panašią dalelę bendrai būsenai
+3. **Įvertinkite klaidas elegantiškai** – laiko limitai, pakartojimai, grandinės pertraukikliai, „dead letter“ eilutės
+4. **Stebėkite viską** – paskirstytoji sekimo sistema būtina derinimui
+5. **Optimizuokite kaštus** – mastelizuokite iki nulio, naudokite serverless, įgyvendinkite talpinimą
 
-**Tolimesni veiksmai:**
+**Tolesni žingsniai:**
 1. Atlikite praktinius pratimus
-2. Sukurkite kelių agentų sistemą savo naudai
-3. Išmokite [SKU pasirinkimą](sku-selection.md), kad optimizuotumėte našumą ir sąnaudas
+2. Sukurkite kelių agentų sistemą savo atvejui
+3. Studijuokite [SKU pasirinkimą](sku-selection.md), kad optimizuotumėte veikimą ir kaštus
 
 ---
 

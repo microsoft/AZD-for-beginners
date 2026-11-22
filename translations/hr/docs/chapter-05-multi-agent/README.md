@@ -1,4 +1,4 @@
-# Poglavlje 5: Rješenja umjetne inteligencije s više agenata
+# Poglavlje 5: Višestruka AI rješenja s agentima
 
 **📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 2-3 sata | **⭐ Kompleksnost**: Napredno
 
@@ -6,17 +6,17 @@
 
 ## Pregled
 
-Ovo poglavlje pokriva napredne obrasce arhitekture s više agenata, orkestraciju agenata i implementacije AI spremne za produkciju za složene scenarije.
+Ovo poglavlje pokriva napredne obrasce višestruke arhitekture agenata, koordinaciju agenata i AI implementacije spremne za proizvodnju u složenim scenarijima.
 
-> Upute za naredbe pregledane su u odnosu na objavljenu referencu `azd 1.37.2`. Implementacije u oblaku nisu izvršene.
+> Smjernice za naredbe pregledane su u odnosu na objavljenu referencu `azd 1.37.2`. Implementacije u oblaku nisu izvršene.
 
 ## Ciljevi učenja
 
-Završetkom ovog poglavlja naučit ćete:
-- Razumjeti obrasce arhitekture s više agenata
-- Implementirati koordinirane sustave AI agenata
-- Provoditi komunikaciju između agenata
-- Izgraditi rješenja s više agenata spremna za produkciju
+Završetkom ovog poglavlja ćete:
+- Razumjeti obrasce arhitekture višestrukih agenata
+- Implementirati koordinirane AI sustave agenata
+- Provoditi komunikaciju među agentima
+- Izgraditi rješenja višestrukih agenata spremna za proizvodnju
 
 ---
 
@@ -24,11 +24,11 @@ Završetkom ovog poglavlja naučit ćete:
 
 | # | Lekcija | Opis | Vrijeme |
 |---|--------|-------------|------|
-| 1 | [Osnove više agenata](multi-agent-basics.md) | Praktično: implementirajte funkcionalnu aplikaciju s više agenata koristeći `azd up` | 45 min |
+| 1 | [Osnove višestrukih agenata](multi-agent-basics.md) | Praktično: implementirajte radnu aplikaciju s višestrukim agentima koristeći `azd up` | 45 min |
 | 2 | [Obrasci koordinacije](../chapter-06-pre-deployment/coordination-patterns.md) | Strategije orkestracije agenata (nastavlja se u Poglavlju 6) | 30 min |
 | 3 | [Implementacija ARM predloška](../../examples/retail-multiagent-arm-template/README.md) | Primjer implementacije jednim klikom | 30 min |
 
-> **Započnite s Lekcijom 1.** To je jedina potpuno praktična i implementabilna lekcija u ovom poglavlju. Lekcija 2 je u Poglavlju 6 (dio je planiranja prije implementacije), a [Rješenje za maloprodaju s više agenata](../../examples/retail-scenario.md) je arhitektonski nacrt — referenca za dizajn, a ne predložak s jednom naredbom.
+> **Započnite s Lekcijom 1.** To je jedina u potpunosti praktična i implementabilna lekcija u ovom poglavlju. Lekcija 2 nalazi se u Poglavlju 6 (dijeli se s planiranjem prije implementacije), a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) je arhitektonski nacrt—referenca za dizajn, a ne predložak jednim naredbom.
 
 ---
 
@@ -39,19 +39,19 @@ Završetkom ovog poglavlja naučit ćete:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Koji pristup odabrati?** Koristite `azd init --template` za početak s radnim uzorkom. Koristite `azd ai agent init` interaktivno ili `azd ai agent init --template <path-to-azure.yaml>` za usvajanje postojećeg projekta agenta. Pogledajte [AZD AI CLI referencu](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za zahtjeve verzije i migraciju evaluacije.
+> **Koji pristup?** Koristite `azd init --template` za početak s radnim uzorkom. Koristite `azd ai agent init` interaktivno ili `azd ai agent init --template <path-to-azure.yaml>` za usvajanje postojećeg projekta agenata. Pogledajte [AZD AI CLI referencu](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za zahtjeve verzije i migraciju evaluacije.
 
-Pokrenite ove alternative u odvojenim praznim mapama. Proširenje agenata `1.0.0-beta.23` zahtijeva `azd >= 1.37.0`; njegov interaktivni tijek ne generira prilagođeni Service Bus pipeline u lekciji koordinacije.
+Pokrenite ove alternative u zasebnim praznim mapama. GA Foundry tijek zahtijeva `azd >= 1.37.0`; njegov interaktivni tijek ne generira prilagođeni Service Bus proces u lekciji koordinacije. Za lokalno testiranje, implementaciju koda i čišćenje novih u odnosu na ponovno korištene projekte, slijedite [vodstvo za hostirane agente](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
-## 🤖 Arhitektura s više agenata
+## 🤖 Arhitektura višestrukih agenata
 
 ```mermaid
 graph TD
@@ -61,12 +61,12 @@ graph TD
 
 ---
 
-## 🎯 Istaknuto rješenje: Maloprodaja s više agenata
+## 🎯 Izdvojeno rješenje: Maloprodajni višestruki agent
 
-Rješenje [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrira:
+Rješenje [Maloprodajni Višestruki Agent](../../examples/retail-scenario.md) prikazuje:
 
-- **Agent kupca**: Rukuje korisničkim interakcijama i preferencijama
-- **Agent zaliha**: Upravljanje zalihama i obradom narudžbi
+- **Agent Kupca**: Rukuje korisničkim interakcijama i preferencijama
+- **Agent Zaliha**: Upravljanje zalihama i obrada narudžbi
 - **Orkestrator**: Koordinira između agenata
 - **Zajednička memorija**: Upravljanje kontekstom između agenata
 
@@ -76,9 +76,9 @@ Rješenje [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrira:
 |---------|---------|
 | Microsoft Foundry Models | Razumijevanje jezika |
 | Azure AI Search | Katalog proizvoda |
-| Cosmos DB | Stanje i memorija agenta |
-| Container Apps | Hostanje agenta |
-| Application Insights | Nadgledanje |
+| Cosmos DB | Stanje i memorija agenata |
+| Container Apps | Hosting agenata |
+| Application Insights | Praćenje |
 
 ---
 
@@ -87,15 +87,15 @@ Rješenje [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrira:
 | Smjer | Poglavlje |
 |-----------|---------|
 | **Prethodno** | [Poglavlje 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
-| **Sljedeće** | [Poglavlje 6: Prije raspoređivanja](../chapter-06-pre-deployment/README.md) |
+| **Sljedeće** | [Poglavlje 6: Pred Implementaciju](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Povezani resursi
 
-- [Vodič za AI agente](../chapter-02-ai-development/agents.md)
-- [Prakse AI u produkciji](../chapter-08-production/production-ai-practices.md)
-- [Otklanjanje poteškoća s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Vodič za AI Agente](../chapter-02-ai-development/agents.md)
+- [Prakse proizvodnje AI](../chapter-08-production/production-ai-practices.md)
+- [Rješavanje problema AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

@@ -1,4 +1,4 @@
-# Bab 8: Pola Produksi & Perusahaan
+# Bab 8: Pola Produksi & Enterprise
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 jam | **⭐ Kompleksitas**: Lanjutan
 
@@ -6,20 +6,20 @@
 
 ## Ikhtisar
 
-Bab ini membahas pola penyebaran siap perusahaan, penguatan keamanan, pemantauan, dan optimasi biaya untuk beban kerja AI produksi.
+Bab ini membahas pola penerapan siap enterprise, penguatan keamanan, pemantauan, dan optimasi biaya untuk beban kerja AI produksi.
 
-Ini adalah referensi arsitektur, bukan template produksi yang dapat langsung diterapkan. Contoh menghilangkan detail integrasi yang harus disediakan dan diuji dalam aplikasi Anda sendiri; membaca daftar periksa tidak menjamin kesiapan produksi.
+Ini adalah referensi arsitektur, bukan template produksi lengkap yang dapat diterapkan. Contoh menghilangkan detail integrasi yang harus disediakan dan diuji dalam aplikasi Anda sendiri; membaca daftar periksa tidak menjamin kesiapan produksi.
 
-> **Tinjauan rilis (2026-11-04):** Panduan AI CLI telah diperiksa melawan dokumentasi/sumber `azd 1.37.2`, agen `1.0.0-beta.23`, dan evaluasi `1.0.0-beta.2`. Lihat [perubahan dan perbaikan rilis](production-ai-practices.md#recent-release-changes-and-fixes) untuk persyaratan kompatibilitas dan detail migrasi; ini bukan validasi penyebaran secara langsung.
+> **Pembaruan Foundry GA (2026-11-09):** Gunakan `azd >= 1.37.0` dan bundel `microsoft.foundry` 1.0 yang tersedia secara umum untuk alur kerja Foundry; evaluasi diinstal terpisah. Lihat [ruang lingkup rilis dan migrasi](production-ai-practices.md#recent-release-changes-and-fixes) dan [contoh pipeline dengan otentikasi](production-ai-practices.md#cicd-pipeline-configuration). Ini adalah tinjauan dokumentasi, bukan validasi penerapan langsung atau status GA menyeluruh untuk fitur pratinjau opsional.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menyebarkan aplikasi multi-wilayah yang tahan banting
-- Menerapkan pola keamanan perusahaan
-- Mengonfigurasi pemantauan menyeluruh
+- Menerapkan aplikasi tahan banting multi-wilayah
+- Menerapkan pola keamanan enterprise
+- Mengonfigurasi pemantauan komprehensif
 - Mengoptimalkan biaya dalam skala besar
-- Menyiapkan pipeline CI/CD dengan AZD
+- Mengatur pipeline CI/CD dengan AZD
 
 ---
 
@@ -27,13 +27,13 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penyebaran perusahaan | 90 mnt |
+| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penerapan enterprise | 90 menit |
 
 ---
 
 ## 🚀 Daftar Periksa Produksi
 
-- [ ] Penyebaran multi-wilayah untuk ketahanan
+- [ ] Penerapan multi-wilayah untuk ketahanan
 - [ ] Identitas terkelola untuk otentikasi (tanpa kunci)
 - [ ] Application Insights untuk pemantauan
 - [ ] Anggaran biaya dan peringatan dikonfigurasi
@@ -45,7 +45,7 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ## 🏗️ Pola Arsitektur
 
-### Pola 1: AI Microservices
+### Pola 1: Microservices AI
 
 ```mermaid
 graph LR
@@ -63,7 +63,7 @@ graph LR
 
 ---
 
-## 🔐 Praktik Keamanan Terbaik
+## 🔐 Praktik Terbaik Keamanan
 
 ```bicep
 // Illustrative properties from different resources, NOT a standalone Bicep file.
@@ -87,12 +87,12 @@ properties: {
 
 | Strategi | Kendala Utama |
 |----------|---------|
-| Skalakan ke nol (Container Apps) | Memerlukan pemicu yang sesuai; layanan lain tetap menimbulkan biaya |
-| Gunakan tingkat konsumsi untuk pengembangan | Bandingkan harga layanan terpilih dan beban kerja |
-| Skalasi terjadwal | Skalakan melalui infrastruktur/otomasi yang didukung |
-| Reservasi/kapasitas penyediaan | Hanya ketika didukung; komitmen dapat meningkatkan biaya menganggur |
+| Skala ke nol (Container Apps) | Memerlukan pemicu yang sesuai; layanan lain tetap menimbulkan biaya |
+| Gunakan tingkat konsumsi untuk dev | Bandingkan harga layanan yang dipilih dan beban kerja |
+| Skala terjadwal | Skala melalui infrastruktur/otomasi yang didukung |
+| Reservasi/kapasitas yang disediakan | Hanya saat didukung; komitmen dapat meningkatkan biaya menganggur |
 
-Gunakan [pola sumber daya anggaran lengkap](production-ai-practices.md#2-cost-monitoring-and-budgets) dengan tanggal mulai yang valid, ruang lingkup penagihan, penerima, dan izin. Anggaran mengirimkan peringatan; tidak membatasi pengeluaran. Penghematan bergantung pada pemanfaatan yang diukur dan tidak dijamin persentasenya.
+Gunakan [pola sumber daya anggaran lengkap](production-ai-practices.md#2-cost-monitoring-and-budgets) dengan tanggal mulai yang valid, ruang lingkup penagihan, penerima, dan izin. Anggaran mengirim peringatan; itu tidak membatasi pengeluaran. Penghematan tergantung pada pemanfaatan yang diukur dan tidak dijamin dalam persentase.
 
 ---
 
@@ -116,11 +116,11 @@ az monitor metrics list --resource <resource-id>
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/README.md) |
-| **Selesai Kursus** | [Beranda Kursus](../../README.md) |
+| **Kursus Selesai** | [Beranda Kursus](../../README.md) |
 
 ---
 
-## 📖 Sumber Daya Terkait
+## 📖 Sumber Terkait
 
 - [Panduan Agen AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)

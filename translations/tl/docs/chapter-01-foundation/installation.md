@@ -1,45 +1,47 @@
-# Gabay sa Pag-install at Pag-setup
+# Gabay sa Pag-install at Pagsasaayos
 
-**Pagbaba ng Kabanata:**
+**Pag-navigate ng Kabanata:**
 - **📚 Tahanan ng Kurso**: [AZD Para sa mga Baguhan](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisan na Pagsisimula
 - **⬅️ Nakaraan**: [Mga Pangunahing Kaalaman sa AZD](azd-basics.md)
 - **➡️ Susunod**: [Ang Iyong Unang Proyekto](first-project.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 2: AI-Unang Pag-unlad](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay gagabay sa iyo sa pag-install at pagsasaayos ng Azure Developer CLI (azd) sa iyong sistema. Matututuhan mo ang iba't ibang paraan ng pag-install para sa mga iba't ibang operating system, pagsasaayos ng authentication, at paunang setup upang ihanda ang iyong development environment para sa mga deployment sa Azure.
+Ang komprehensibong gabay na ito ay dadalhin ka sa proseso ng pag-install at pagsasaayos ng Azure Developer CLI (azd) sa iyong sistema. Matututuhan mo ang iba't ibang paraan ng pag-install para sa iba't ibang operating system, pagsasaayos ng pagpapatotoo, at paunang pagsasaayos upang ihanda ang iyong kapaligiran sa pag-develop para sa mga deployment sa Azure.
 
-## Mga Layunin ng Pag-aaral
+## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng araling ito, mayroon kang kakayahan na:
-- Matagumpay na mai-install ang Azure Developer CLI sa iyong operating system
-- Maisaayos ang authentication sa Azure gamit ang iba't ibang paraan
-- Masetup ang iyong development environment na may mga kinakailangang paunang kondisyon
-- Maunawaan ang iba't ibang opsyon sa pag-install at kung kailan gagamitin ang bawat isa
-- Malutas ang mga karaniwang isyu sa pag-install at setup
+Sa pagtatapos ng araling ito, ikaw ay:
+- Matagumpay na naka-install ang Azure Developer CLI sa iyong operating system
+- Nasetup ang pagpapatotoo sa Azure gamit ang iba't ibang pamamaraan
+- Naayos ang iyong kapaligiran sa pag-develop kasama ang mga kinakailangang paunang kahilingan
+- Naiintindihan ang iba't ibang opsyon sa pag-install at kung kailan gagamitin ang bawat isa
+- Nakakalutas ng karaniwang mga problema sa pag-install at pagsasaayos
 
-## Mga Kinalabasan ng Pag-aaral
+## Mga Kinalabasan ng Pagkatuto
 
-Pagkatapos makumpleto ang araling ito, magagawa mo nang:
-- Mag-install ng azd gamit ang angkop na paraan para sa iyong platform
-- Mag-authenticate sa Azure gamit ang azd auth login
-- Beripikahin ang iyong pag-install at subukan ang mga pangunahing utos ng azd
-- Isaayos ang iyong development environment para sa pinakamainam na paggamit ng azd
-- Malutas ang mga karaniwang problema ng pag-install nang mag-isa
+Pagkatapos makumpleto ang araling ito, magagawa mong:
+- I-install ang azd gamit ang tamang pamamaraan para sa iyong platform
+- Magpatotoo sa Azure gamit ang azd auth login
+- Siguraduhin ang iyong pag-install at subukan ang mga pangunahing utos ng azd
+- Isaayos ang iyong kapaligiran sa pag-develop para sa pinakamainam na paggamit ng azd
+- Lutasin nang mag-isa ang mga karaniwang problema sa pag-install
 
-Tinutulungan ka ng gabay na ito na mai-install at maayos ang Azure Developer CLI sa iyong sistema, anuman ang iyong operating system o development environment.
+Ang gabay na ito ay tutulong sa iyo na i-install at i-configure ang Azure Developer CLI sa iyong sistema, anuman ang iyong operating system o kapaligiran sa pag-develop.
 
 ## Mga Kinakailangan
 
-Bago mag-install ng azd, tiyaking mayroon ka:
-- **Azure subscription** - [Gumawa ng libreng account](https://azure.microsoft.com/free/)
-- **Azure CLI** (opsyonal) - Para sa mga halimbawa na tahasang nagpapatakbo ng `az`; ang azd ay nag-authenticate nang nakapag-isa
-- **Git** - Para sa pag-clone ng mga template at version control
-- **Docker** (opsyonal) - Para sa mga containerized na aplikasyon
+Bago mag-install ng azd, siguraduhing mayroon kang:
+- **Azure subscription** - [Lumikha ng libreng account](https://azure.microsoft.com/free/)
+- **Azure CLI** (opsyonal) - Para sa mga halimbawa na tahasang nagpapatakbo ng `az`; ang azd ay nagpapapatotoo nang hiwalay
+- **Git** - Para sa pag-clone ng mga template at kontrol sa bersyon
+- **Docker** (opsyonal) - Para sa containerized na mga aplikasyon
 
-## Paraan sa Pag-install
+**Daan ng Foundry GA ng Kabanata 2:** Gamitin ang AZD **1.37.0 o mas bago**, i-install ang bundle gamit ang `azd ext install microsoft.foundry`, at gamitin ang Python **3.13+** at kasalukuyang **uv** para sa hosted-agent na halimbawa. Ang mode ng pag-deploy ng code nito ay nagtatayo nang malayo, kaya hindi kailangan ng lokal na Docker build. Kailangan pa rin ng mga permiso ng Foundry, availability ng regional model, at quota; tingnan ang [hosted-agent setup](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize).
+
+## Mga Paraan ng Pag-install
 
 ### Windows
 
@@ -78,7 +80,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
 #### Opsyon 3: Manwal na Pag-install
-I-download ang archive para sa iyong macOS architecture mula sa [the release assets](https://github.com/Azure/azure-dev/releases), i-extract ito, at idagdag ang `azd` binary sa iyong `PATH`.
+I-download ang archive para sa iyong arkitektura ng macOS mula sa [the release assets](https://github.com/Azure/azure-dev/releases), i-extract ito, at idagdag ang `azd` binary sa iyong `PATH`.
 
 ### Linux
 
@@ -87,7 +89,7 @@ I-download ang archive para sa iyong macOS architecture mula sa [the release ass
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opsyon 2: Package Managers
+#### Opsyon 2: Mga Package Manager
 
 **Manwal na pag-install mula sa release assets:**
 ```bash
@@ -98,7 +100,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ### GitHub Codespaces
 
-Ang ilan sa mga Codespaces at dev container environment ay mayroon nang `azd`, ngunit dapat mo itong tiyaking umiiral kaysa magsagawa ng palagay:
+Ilang Codespaces at dev container environments ay kasama na ang `azd`, ngunit dapat mong siguraduhin iyon sa halip na ipagpalagay:
 
 ```bash
 azd version
@@ -116,11 +118,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure
 alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-Ang ephemeral container na ito ay hindi nagpapanatili ng estado ng pag-login sa pagitan ng mga pagpapatakbo. Para sa paulit-ulit na mga deployment, gamitin ang [dev container setup](dev-containers.md); nangangailangan din ang mga container builds ng Docker daemon na maa-access mula sa loob ng container.
+Ang episodikong container na ito ay hindi nag-iingat ng estado ng pag-login sa pagitan ng mga pagtakbo. Para sa paulit-ulit na mga deployment, gamitin ang [dev container setup](dev-containers.md); nangangailangan din ang container builds ng Docker daemon na naa-access mula sa loob ng container.
 
-## ✅ Beripikahin ang Pag-install
+## ✅ Suriin ang Pag-install
 
-Pagkatapos ng pag-install, beripikahin na gumagana ng maayos ang azd:
+Pagkatapos ng pag-install, tiyaking gumagana nang tama ang azd:
 
 ```bash
 # Check version
@@ -138,21 +140,21 @@ Inaasahang output:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Tandaan**: Magkakaiba-iba ang aktwal na bersyon. Tingnan ang [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) para sa pinakabagong bersyon.
+**Tandaan**: Ang aktwal na numero ng bersyon ay mag-iiba. Tingnan ang [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) para sa pinakabagong bersyon.
 
 **✅ Checklist ng Tagumpay sa Pag-install:**
-- [ ] Ipinapakita ng `azd version` ang version number nang walang error
-- [ ] Nagpapakita ang `azd --help` ng dokumentasyon ng mga utos
-- [ ] Ipinapakita ng `azd template list` ang mga available na template
-- [ ] Maaari kang gumawa ng test directory at magpatakbo ng `azd init` nang matagumpay
+- [ ] Ipinapakita ng `azd version` ang numero ng bersyon nang walang mga error
+- [ ] Nagpapakita ang `azd --help` ng dokumentasyon ng utos
+- [ ] Ipinapakita ng `azd template list` ang mga magagamit na template
+- [ ] Makakagawa ka ng test na direktoryo at matagumpay na mapatakbo ang `azd init`
 
-**Kung lahat ng tsek ay pasado, handa ka nang magpatuloy sa [Ang Iyong Unang Proyekto](first-project.md)!**
+**Kung matagumpay ang lahat ng pagsusuri, handa ka nang magpatuloy sa [Ang Iyong Unang Proyekto](first-project.md)!**
 
-## Pag-setup ng Authentication
+## Pagsasaayos ng Pagpapatotoo
 
-### Inirekomendang Setup para sa mga Baguhan
+### Inirerekomendang Setup para sa Mga Baguhan
 
-Para sa AZD-first workflows, mag-sign in gamit ang `azd auth login`.
+Para sa mga daloy ng trabaho na AZD-first, mag-sign in gamit ang `azd auth login`.
 
 ```bash
 # Required for AZD commands such as azd up
@@ -162,7 +164,7 @@ azd auth login
 azd auth login --check-status
 ```
 
-Gamitin ang Azure CLI sign-in lamang kapag plano mong patakbuhin ang mga utos na `az` mismo sa kurso.
+Gumamit ng Azure CLI sign-in lamang kapag balak mong patakbuhin ang mga `az` na utos mismo sa kurso.
 
 ### Azure CLI Authentication (Opsyonal)
 ```bash
@@ -180,18 +182,18 @@ az account show
 
 ### Alin ang Dapat Mong Gamitin na Sign-In Flow?
 
-- Gamitin ang `azd auth login` kung sinusundan mo ang beginner AZD path at pangunahing nagpapatakbo ng `azd` mga utos.
-- Gamitin din ang `az login` kapag nais mong magpatakbo ng Azure CLI commands tulad ng `az account show` o direktang inspeksyunin ang mga resources.
-- Kung ang isang exercise ay may kasamang parehong `azd` at `az` na mga utos, patakbuhin ang parehong sign-in commands nang isang beses sa simula.
+- Gamitin ang `azd auth login` kung sumusunod ka sa beginner AZD path at pangunahin na nagpapatakbo ng mga `azd` na utos.
+- Gamitin din ang `az login` kapag nais mong magpatakbo ng Azure CLI commands tulad ng `az account show` o tingnan ang mga resources nang direkta.
+- Kung parehong kasama sa isang exercise ang `azd` at `az` na mga utos, isagawa ang parehong sign-in commands isang beses sa simula.
 
 ### Device Code Authentication
-Kung ikaw ay nasa headless na sistema o may mga problema sa browser:
+Kung ikaw ay nasa headless na sistema o may problema sa browser:
 ```bash
 azd auth login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
-Para sa automated na mga environment:
+Para sa mga automated na environment:
 ```bash
 azd auth login \
   --client-id "<client-id>" \
@@ -199,9 +201,9 @@ azd auth login \
   --tenant-id "<tenant-id>"
 ```
 
-### Beripikahin ang Iyong Kumpletong Setup
+### Suriin ang Buong Setup Mo
 
-Kung nais mo ng mabilisang readiness check bago simulan ang Kabanata 1:
+Kung gusto mo ng mabilisang pagsusuri ng kahandaan bago simulan ang Kabanata 1:
 
 **Windows:**
 ```powershell
@@ -213,7 +215,7 @@ Kung nais mo ng mabilisang readiness check bago simulan ang Kabanata 1:
 bash ./validate-setup.sh
 ```
 
-## Konfigurasyon
+## Pagsasaayos
 
 ### Global Configuration
 ```bash
@@ -227,7 +229,7 @@ azd config set defaults.location eastus2
 azd config show
 ```
 
-### Environment Variables
+### Mga Variable ng Kapaligiran
 Idagdag sa iyong shell profile (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
@@ -238,7 +240,7 @@ export AZURE_LOCATION="eastus2"
 azd version --debug
 ```
 
-## Integrasyon sa IDE
+## IDE Integration
 
 ### Visual Studio Code
 I-install ang Azure Developer CLI extension:
@@ -249,12 +251,12 @@ I-install ang Azure Developer CLI extension:
 
 Mga Tampok:
 - IntelliSense para sa azure.yaml
-- Integrated terminal commands
-- Pagsusuri ng mga template
+- Pinagsamang mga terminal na utos
+- Pag-browse ng mga template
 - Pagsubaybay ng deployment
 
 ### GitHub Codespaces
-Gumawa ng isang `.devcontainer/devcontainer.json`:
+Gumawa ng `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -269,11 +271,11 @@ Gumawa ng isang `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. I-install ang Azure plugin
 2. Isaayos ang Azure credentials
-3. Gamitin ang integrated terminal para sa mga utos ng azd
+3. Gamitin ang pinagsamang terminal para sa azd commands
 
-## 🐛 Pag-troubleshoot ng Pag-install
+## 🐛 Pag-aayos ng Problema sa Pag-install
 
-### Karaniwang mga Isyu
+### Karaniwang Mga Isyu
 
 #### Permission Denied (Windows)
 ```powershell
@@ -282,7 +284,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### Mga Isyu sa PATH
-Manu-manong idagdag ang azd sa iyong PATH:
+Mano-manong idagdag ang azd sa iyong PATH:
 
 **Windows:**
 ```cmd
@@ -303,7 +305,7 @@ export HTTPS_PROXY="http://proxy:8080"
 # Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
-#### Mga Hindi Pagkakatugma ng Bersyon
+#### Mga Salungatan sa Bersyon
 ```bash
 # Remove old installations
 # Windows: winget uninstall microsoft.azd
@@ -314,7 +316,7 @@ export HTTPS_PROXY="http://proxy:8080"
 rm -rf ~/.azd
 ```
 
-### Pagtanggap ng Karagdagang Tulong
+### Paghahanap ng Dagdag na Tulong
 ```bash
 # Enable debug logging
 azd show --debug
@@ -329,12 +331,12 @@ azd show
 ## Pag-update ng azd
 
 ### Pagsusuri ng Update
-Nagbibigay babala ang azd kapag may mas bagong release, at maaari mong tiyakin ang kasalukuyan mong build gamit ang:
+Nagbibigay babala ang azd kapag may bagong release na available, at maaari mong kumpirmahin ang iyong kasalukuyang build gamit ang:
 ```bash
 azd version
 ```
 
-### Manwal na Pag-update
+### Manwal na Mga Update
 
 **Windows (winget):**
 ```cmd
@@ -351,31 +353,31 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Mga Madalas Itanong
+## 💡 Madalas Itanong
 
 <details>
 <summary><strong>Ano ang pagkakaiba ng azd at az CLI?</strong></summary>
 
-**Azure CLI (az)**: Mababang-antig na kasangkapan para sa pamamahala ng indibidwal na Azure resources
+**Azure CLI (az)**: Mababang lebel na kasangkapan para sa pamamahala ng mga indibidwal na Azure na resources
 - `az webapp create`, `az storage account create`
-- Isang resource lamang sa isang pagkakataon
+- Isang resource sa bawat pagkakataon
 - Pokus sa pamamahala ng imprastraktura
 
-**Azure Developer CLI (azd)**: Mataas-na-antig na kasangkapan para sa kumpletong deployment ng aplikasyon
-- `azd up` nagde-deploy ng buong app kasama ang lahat ng resources
-- Nakabatay sa template na workflows
+**Azure Developer CLI (azd)**: Mataas na lebel na kasangkapan para sa kumpletong deployment ng aplikasyon
+- `azd up` nagpapatupad ng buong app kasama ang lahat ng resources
+- Mga daloy na batay sa template
 - Pokus sa produktibidad ng developer
 
-**Sila ay hiwalay**: Ang azd ay gumagamit ng sariling authentication bilang default. Mag-install at mag-sign in sa Azure CLI lamang para sa `az` na mga utos, o tahasang piliin ang `azd config set auth.useAzCliAuth true`.
+**Sila ay independyente**: gumagamit ang azd ng sariling pagpapatotoo sa default. Mag-install at mag-sign in sa Azure CLI lamang para sa mga `az` na utos, o tahasang piliin ang `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
-<summary><strong>Maaari ko bang gamitin ang azd sa umiiral na Azure resources?</strong></summary>
+<summary><strong>Maaari ko bang gamitin ang azd sa mga umiiral nang Azure resources?</strong></summary>
 
 Oo! Maaari mong:
-1. I-import ang umiiral na mga resources sa mga azd environments
-2. I-referensya ang mga umiiral na resources sa iyong mga Bicep templates
-3. Gamitin ang azd para sa mga bagong deployment kasama ang umiiral na imprastraktura
+1. I-import ang umiiral nang mga resources sa mga azd environments
+2. I-reference ang mga umiiral nang resources sa iyong mga Bicep templates
+3. Gamitin ang azd para sa mga bagong deployment kasabay ng umiiral na imprastraktura
 
 Tingnan ang [Configuration Guide](../chapter-03-configuration/configuration.md) para sa mga detalye.
 </details>
@@ -383,7 +385,7 @@ Tingnan ang [Configuration Guide](../chapter-03-configuration/configuration.md) 
 <details>
 <summary><strong>Gumagana ba ang azd sa Azure Government o Azure China?</strong></summary>
 
-Oo, i-configure ang cloud:
+Oo, isaayos ang cloud:
 ```bash
 # Azure Government (azd)
 azd config set cloud.name AzureUSGovernment
@@ -394,17 +396,17 @@ azd config set cloud.name AzureChinaCloud
 azd auth login
 ```
 
-Kung ginagamit mo rin ang Azure CLI, i-configure ang `az cloud set --name ...` nang hiwalay. Nagkakaiba-iba ang mga serbisyo at availability ng modelo depende sa cloud.
+Kung gagamit ka rin ng Azure CLI, isaayos nang hiwalay ang `az cloud set --name ...`. Nag-iiba ang mga serbisyo ng template at availability ng modelo ayon sa cloud.
 </details>
 
 <details>
-<summary><strong>Maaari ko bang gamitin ang azd sa CI/CD pipelines?</strong></summary>
+<summary><strong>Maaari ko bang gamitin ang azd sa mga CI/CD pipeline?</strong></summary>
 
-Oo naman! Disenyo ang azd para sa awtomasyon:
+Oo! Dinisenyo ang azd para sa automation:
 - Integrasyon sa GitHub Actions
 - Suporta sa Azure DevOps
-- Authentication gamit ang service principal
-- Non-interactive mode
+- Pagpapatotoo gamit ang service principal
+- Non-interactive na mode
 
 Tingnan ang [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) para sa mga pattern ng CI/CD.
 </details>
@@ -412,39 +414,39 @@ Tingnan ang [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 <details>
 <summary><strong>Ano ang gastos sa paggamit ng azd?</strong></summary>
 
-Ang azd mismo ay **lubos na libre** at open-source. Nagbabayad ka lamang para sa:
-- Mga Azure resources na dineploy mo
-- Gastos sa paggamit ng Azure (compute, storage, atbp.)
+Ang azd mismo ay **ganap na libre** at open-source. Nagbabayad ka lamang para sa:
+- Mga Azure resources na iyong dina-deploy
+- Mga gastos sa pagkonsumo ng Azure (compute, storage, at iba pa)
 
-Gamitin ang `azd provision --preview` upang suriin ang mga iminungkahing resources, pagkatapos ay estima ang mga gastos gamit ang [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/). Hindi tinatantiya ng preview ang mga presyo.
+Gamitin ang `azd provision --preview` para tingnan ang mga iminungkahing resources, pagkatapos ay tantiyahin ang kanilang gastos gamit ang [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/). Hindi kinukuwenta ang mga presyo sa preview.
 </details>
 
 ## Mga Susunod na Hakbang
 
-1. **Kumpletuhin ang authentication**: Tiyakin na may access ka sa iyong Azure subscription
-2. **Subukan ang iyong unang deployment**: Sundan ang [First Project Guide](first-project.md)
-3. **Suriin ang mga template**: I-browse ang mga available na template gamit ang `azd template list`
-4. **I-configure ang iyong IDE**: I-set up ang iyong development environment
+1. **Kumpletuhin ang pagpapatotoo**: Siguraduhing maa-access mo ang iyong Azure subscription
+2. **Subukan ang unang deployment**: Sundan ang [First Project Guide](first-project.md)
+3. **Galugarin ang mga template**: Mag-browse ng mga magagamit na template gamit ang `azd template list`
+4. **Ayusin ang iyong IDE**: Isaayos ang iyong kapaligiran sa pag-develop
 
 ## Suporta
 
-Kung may makita kang mga isyu:
-- [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Report Issues](https://github.com/Azure/azure-dev/issues)
-- [Community Discussions](https://github.com/Azure/azure-dev/discussions)
-- [Azure Support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Kunin ang gabay sa Azure commands direkta sa iyong editor gamit ang `npx skills add microsoft/github-copilot-for-azure`
+Kung makaranas ng mga isyu:
+- [Opisyal na Dokumentasyon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Mag-ulat ng mga Isyu](https://github.com/Azure/azure-dev/issues)
+- [Mga Talakayan ng Komunidad](https://github.com/Azure/azure-dev/discussions)
+- [Suporta sa Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Kumuha ng patnubay sa Azure command nang diretso sa iyong editor gamit ang `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Paglalakbay sa Kabanata:**
-- **📚 Pahina ng Kurso**: [AZD Para sa mga Baguhan](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Pagsisimula
-- **⬅️ Nakaraan**: [Batayan ng AZD](azd-basics.md) 
-- **➡️ Susunod**: [Iyong Unang Proyekto](first-project.md)
+**Pag-navigate ng Kabanata:**
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisan na Pagsisimula
+- **⬅️ Nakaraan**: [Mga Pangunahing Kaalaman sa AZD](azd-basics.md) 
+- **➡️ Susunod**: [Ang Iyong Unang Proyekto](first-project.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Kumpletong Instalasyon!** Magpatuloy sa [Iyong Unang Proyekto](first-project.md) upang simulan ang pagbuo gamit ang azd.
+**✅ Kumpleto na ang Pag-install!** Magpatuloy sa [Ang Iyong Unang Proyekto](first-project.md) upang simulan ang paggawa gamit ang azd.
 
 ---
 

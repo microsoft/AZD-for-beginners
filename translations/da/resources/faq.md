@@ -1,41 +1,41 @@
 # Ofte Stillede Spørgsmål (FAQ)
 
-**Få Hjælp efter Kapitel**
-- **📚 Kursus Hjem**: [AZD For Beginners](../README.md)
+**Få hjælp efter kapitel**
+- **📚 Kursus Forside**: [AZD For Beginners](../README.md)
 - **🚆 Installationsproblemer**: [Kapitel 1: Installation & Opsætning](../docs/chapter-01-foundation/installation.md)
-- **🤖 AI-spørgsmål**: [Kapitel 2: AI-First Udvikling](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 AI Spørgsmål**: [Kapitel 2: AI-Første Udvikling](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 - **🔧 Fejlfinding**: [Kapitel 7: Fejlfinding & Debugging](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Introduktion
 
-Denne omfattende FAQ giver svar på de mest almindelige spørgsmål om Azure Developer CLI (azd) og Azure-implementeringer. Find hurtige løsninger på typiske problemer, forstå bedste praksis, og få afklaring på azd-koncepter og arbejdsprocesser.
+Denne omfattende FAQ giver svar på de mest almindelige spørgsmål om Azure Developer CLI (azd) og Azure-udrulninger. Find hurtige løsninger på almindelige problemer, forstå bedste praksis, og få afklaring om azd-koncept og arbejdsgange.
 
 ## Læringsmål
 
-Ved at gennemgå denne FAQ vil du:
-- Finde hurtige svar på almindelige Azure Developer CLI spørgsmål og problemer
+Når du gennemgår denne FAQ, vil du:
+- Finde hurtige svar på ofte stillede spørgsmål og problemstillinger om Azure Developer CLI
 - Forstå nøglebegreber og terminologi gennem praktisk Q&A-format
-- Få adgang til fejlfinding for hyppige problemer og fejlsituationer
-- Lære bedste praksis via ofte stillede spørgsmål om optimering
-- Opdage avancerede funktioner og muligheder gennem ekspertspørgsmål
-- Effektivt referere til vejledning om omkostninger, sikkerhed og implementeringsstrategi
+- Få adgang til fejlfinding for hyppige problemer og fejlscenarier
+- Lære bedste praksis gennem almindeligt stillede optimeringsspørgsmål
+- Opdage avancerede funktioner og muligheder gennem ekspertniveau-spørgsmål
+- Effekivt henvise til vejledning om omkostninger, sikkerhed og udrulningsstrategi
 
 ## Læringsresultater
 
-Ved regelmæssig brug af denne FAQ vil du kunne:
-- Selvstændigt løse almindelige Azure Developer CLI-problemer med de givne løsninger
-- Træffe informerede beslutninger om implementeringsstrategier og konfigurationer
-- Forstå forholdet mellem azd og andre Azure-værktøjer og -tjenester
+Ved regelmæssigt at henvise til denne FAQ vil du kunne:
+- Selvstændigt løse almindelige Azure Developer CLI-problemer ved brug af de angivne løsninger
+- Træffe velinformerede beslutninger om udrulningsstrategier og konfigurationer
+- Forstå sammenhængen mellem azd og andre Azure-værktøjer og -tjenester
 - Anvende bedste praksis baseret på fællesskabserfaring og ekspertanbefalinger
-- Effektivt fejlfinde autentificerings-, implementerings- og konfigurationsproblemer
-- Optimere omkostninger og ydeevne ved brug af FAQ-indsigter og anbefalinger
+- Effektivt fejlsøge autentificerings-, udrulnings- og konfigurationsproblemer
+- Optimere omkostninger og ydeevne ved hjælp af FAQ-indblik og anbefalinger
 
 ## Indholdsfortegnelse
 
-- [Kom godt i gang](#getting-started)
+- [Kom i gang](#getting-started)
 - [Autentificering & Adgang](#authentication--access)
 - [Skabeloner & Projekter](#templates--projects)
-- [Implementering & Infrastruktur](#deployment--infrastructure)
+- [Udrulning & Infrastruktur](#deployment--infrastructure)
 - [Konfiguration & Miljøer](#configuration--environments)
 - [Fejlfinding](#troubleshooting)
 - [Omkostninger & Fakturering](#cost--billing)
@@ -44,23 +44,23 @@ Ved regelmæssig brug af denne FAQ vil du kunne:
 
 ---
 
-## Kom godt i gang
+## Kom i gang
 
 ### Q: Hvad er Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) er et udviklercentreret kommandolinjeværktøj, der forkorter tiden det tager at få din applikation fra lokal udviklingsmiljø til Azure. Det leverer bedste praksis gennem skabeloner og hjælper med hele implementeringslivscyklussen.
+**A**: Azure Developer CLI (azd) er et udviklercentreret kommandolinjeværktøj, der fremskynder den tid, det tager at få din applikation fra den lokale udviklingsmiljø til Azure. Det leverer bedste praksis via skabeloner og hjælper med hele udrulningslivscyklussen.
 
 ### Q: Hvordan adskiller azd sig fra Azure CLI?
 **A**: 
-- **Azure CLI**: Generelt værktøj til styring af Azure-ressourcer
-- **azd**: Udviklerfokuseret værktøj til applikationsimplementerings-arbejdsprocesser
-- azd har sin egen autentifikations- og implementeringsworkflow; Azure CLI er et separat, supplerende værktøj
-- azd inkluderer skabeloner, miljøstyring og implementeringsautomatisering
+- **Azure CLI**: Generelt værktøj til at administrere Azure-ressourcer
+- **azd**: Udviklerfokuseret værktøj til applikationsudrulningsarbejdsgange
+- azd har sin egen autentificerings- og udrulningsarbejdsgang; Azure CLI er et separat, supplerende værktøj
+- azd inkluderer skabeloner, miljøstyring og udrulningsautomatisering
 
 ### Q: Skal jeg have Azure CLI installeret for at bruge azd?
-**A**: Ikke til den kerne AZD-arbejdsproces. Autentificer med `azd auth login`. Installer Azure CLI separat, når en skabelon-hook eller en øvelse eksplicit kører `az`-kommandoer.
+**A**: Ikke til den grundlæggende AZD-arbejdsgang. Autentificer med `azd auth login`. Installer Azure CLI separat, når en skabelon-hook eller en øvelse eksplicit kører `az`-kommandoer.
 
 ### Q: Hvilke programmeringssprog understøtter azd?
-**A**: azd er sproguniversel. Det fungerer med:
+**A**: azd er sprogunafhængig. Det fungerer med:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -76,27 +76,35 @@ Ved regelmæssig brug af denne FAQ vil du kunne:
 2. Tilpasse eksisterende projekter til at matche azd-skabelonstrukturen
 3. Oprette brugerdefinerede skabeloner baseret på din eksisterende arkitektur
 
+### Q: Hvad ændrede sig med Foundry-udvidelsens generelle tilgængelighed?
+**A**: `microsoft.foundry`-pakken nåede version 1.0 og GA den 5. november 2026. Med AZD 1.37.0+ brug `azd ext install microsoft.foundry` til at installere syv kerneudvidelser for agenter, forbindelser, inspektør, projekter, rutiner, færdigheder og værktøjskasser. Det er ikke et nyt kommando-navneområde, og dets komponenter versionsstyres uafhængigt. Evalueringer, datasæt, finjustering og brugerdefinerede modeller installeres separat; valgfrie preview-funktioner bliver ikke GA bare fordi pakken er GA.
+
+Gennemgangen af [hosted-agent](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) bruger Python 3.13+ og nuværende uv. `azd ai agent run` åbner Agent Inspector lokalt, men modelkald bruger stadig Azure og medfører gebyrer. Code-mode `azd deploy` uploader kildekode til en fjernbygning uden at kræve en lokal containerbygning.
+
+### Q: Fjerner `azd down` en hosted agent fra et eksisterende Foundry-projekt?
+**A**: Ikke for den genbrugte projektsti beskrevet i hosted-agent quickstart: den efterlader projektet, hosted agenten og andre ressourcer intakte. Fjern uønskede ressourcer separat uden at slette delte ressourcer. Hvis miljøet har oprettet et nyt Foundry-projekt, sletter `azd down` dets ressourcegruppe og alt i den. Gennemgå [vejledning til oprydning](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately) og slettebekræftelser før bekræftelse.
+
 ---
 
-## Autentificering & Adgang
+## Godkendelse & Adgang
 
-### Q: Hvordan autentificerer jeg med Azure ved brug af azd?
-**A**: Brug `azd auth login` som åbner et browservindue til Azure-autentificering. Til CI/CD-scenarier brug serviceprincipaler eller styrede identiteter.
+### Q: Hvordan godkender jeg med Azure ved hjælp af azd?
+**A**: Brug `azd auth login`, som åbner et browservindue til Azure-godkendelse. Til CI/CD-scenarier anvendes service principals eller managed identities.
 
 ### Q: Kan jeg bruge azd med flere Azure-abonnementer?
-**A**: Ja. Brug `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` til at angive hvilket abonnement der skal bruges for hvert miljø.
+**A**: Ja. Brug `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` til at angive hvilket abonnement, der skal bruges for hvert miljø.
 
-### Q: Hvilke rettigheder skal jeg have for at implementere med azd?
-**A**: Typisk har du brug for:
+### Q: Hvilke tilladelser har jeg brug for til deployment med azd?
+**A**: Typisk skal du have:
 - **Contributor**-rollen på ressourcegruppen eller abonnementet
-- **User Access Administrator**, hvis du implementerer ressourcer der kræver rolle-tildelinger
-- Specifikke tilladelser varierer efter skabelon og de ressourcer der implementeres
+- **User Access Administrator** hvis du deployer ressourcer, der kræver rolle-tildelinger
+- Specifikke tilladelser varierer efter skabelon og de ressourcer, der deployeres
 
-### Q: Kan jeg bruge azd i CI/CD-pipelines?
-**A**: Absolut! azd er designet til CI/CD-integration. Brug serviceprincipaler til autentificering og sæt miljøvariabler til konfiguration.
+### Q: Kan jeg bruge azd i CI/CD pipelines?
+**A**: Absolut! azd er designet til CI/CD-integration. Brug service principals til godkendelse og sæt miljøvariabler for konfiguration.
 
-### Q: Hvordan håndterer jeg autentificering i GitHub Actions?
-**A**: Foretræk workload identity federation (OIDC), konfigureret med `azd pipeline config`. Den genererede workflow installerer AZD og autentificerer AZD direkte med en fødereret identitet. En `azure/login`-trin alene etablerer ikke en AZD-login. Et logintrin inden for et eksisterende job er:
+### Q: Hvordan håndterer jeg godkendelse i GitHub Actions?
+**A**: Foretræk workload identity federation (OIDC), konfigureret med `azd pipeline config`. Det genererede workflow installerer AZD og godkender AZD direkte med en fødereret identitet. Et `azure/login`-trin alene etablerer ikke en AZD-login. Et login-trin i en eksisterende job er:
 ```yaml
 permissions:
   contents: read
@@ -111,7 +119,7 @@ steps:
       --federated-credential-provider github
 ```
 
-Provisionér eller implementér efter login med det tilsigtede AZD-miljø, abonnement og placering konfigureret. Identity's fødererede legitimationsoplysninger skal have tillid til workflowens repository/ref eller GitHub-miljø, og dets Azure-roller skal tillade de forespurgte operationer.
+Provisions- eller deployment efter login med det tilsigtede AZD-miljø, abonnement og lokation konfigureret. Identitetens fødererede legitimationsoplysninger skal stole på workflowets repository/ref eller GitHub-miljø, og dens Azure-roller skal tillade de anmodede operationer.
 
 ---
 
@@ -120,7 +128,7 @@ Provisionér eller implementér efter login med det tilsigtede AZD-miljø, abonn
 ### Q: Hvor kan jeg finde azd-skabeloner?
 **A**: 
 - Officielle og fællesskabsskabeloner: [Awesome AZD](https://azure.github.io/awesome-azd/)
-- Fællesskabsskabeloner: GitHub-søgning på "azd-template"
+- Fællesskabsskabeloner: GitHub-søgning efter "azd-template"
 - Brug `azd template list` til at gennemse tilgængelige skabeloner
 
 ### Q: Hvordan opretter jeg en brugerdefineret skabelon?
@@ -131,35 +139,35 @@ Provisionér eller implementér efter login med det tilsigtede AZD-miljø, abonn
 4. Publicer til GitHub med passende tags
 
 ### Q: Kan jeg bruge azd uden en skabelon?
-**A**: Ja, brug `azd init` i et eksisterende projekt for at oprette nødvendige konfigurationsfiler. Du skal manuelt konfigurere `azure.yaml` og infrastrukturfiler.
+**A**: Ja, brug `azd init` i et eksisterende projekt for at oprette de nødvendige konfigurationsfiler. Du skal manuelt konfigurere `azure.yaml` og infrastrukturfiler.
 
 ### Q: Hvad er forskellen på officielle og fællesskabsskabeloner?
 **A**: 
 - **Officielle skabeloner**: Vedligeholdt af Microsoft, regelmæssigt opdateret, omfattende dokumentation
-- **Fællesskabsskabeloner**: Oprettet af udviklere, kan have specialiserede anvendelser, varieret kvalitet og vedligeholdelse
+- **Fællesskabsskabeloner**: Oprettet af udviklere, kan have specialiserede anvendelsestilfælde, varierende kvalitet og vedligeholdelse
 
 ### Q: Hvordan opdaterer jeg en skabelon i mit projekt?
 **A**: Skabeloner opdateres ikke automatisk. Du kan:
-1. Manuelt sammenligne og flette ændringer fra kildeskabelonen
+1. Manuel sammenligne og fusionere ændringer fra den oprindelige skabelon
 2. Starte forfra med `azd init` ved brug af den opdaterede skabelon
-3. Plukke specifikke forbedringer fra opdaterede skabeloner
+3. Udvælge specifikke forbedringer fra opdaterede skabeloner
 
 ---
 
-## Implementering & Infrastruktur
+## Deployment & Infrastruktur
 
-### Q: Hvilke Azure-tjenester kan azd implementere?
-**A**: azd kan implementere enhver Azure-tjeneste via Bicep/ARM-skabeloner, herunder:
+### Q: Hvilke Azure-tjenester kan azd deploye?
+**A**: azd kan deploye enhver Azure-tjeneste gennem Bicep/ARM-skabeloner, inklusive:
 - App Services, Container Apps, Functions
 - Databaser (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
 - Netværks-, sikkerheds- og overvågningsressourcer
 
-### Q: Kan jeg implementere til flere regioner?
-**A**: Ja, konfigurer flere regioner i dine Bicep-skabeloner, og sæt locationsparameteren passende for hvert miljø.
+### Q: Kan jeg deploye til flere regioner?
+**A**: Ja, konfigurer flere regioner i dine Bicep-skabeloner og sæt lokationsparametret passende for hvert miljø.
 
 ### Q: Hvordan håndterer jeg database-skema-migrationer?
-**A**: Brug implementeringshooks i `azure.yaml`:
+**A**: Brug deployment hooks i `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -169,14 +177,14 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Kan jeg kun implementere infrastructure uden applikationer?
-**A**: Ja, brug `azd provision` til kun at implementere infrastrukturkomponenterne defineret i dine skabeloner.
+### Q: Kan jeg kun deploye infrastrukturen uden applikationer?
+**A**: Ja, brug `azd provision` til kun at deploye infrastrukturopbygningen defineret i dine skabeloner.
 
-### Q: Hvordan implementerer jeg til eksisterende Azure-ressourcer?
-**A**: Ja, når skabelonen understøtter det. Referer eksisterende ressourcer med Biceps `existing`-erklæringer eller skabelonens dokumenterede eksisterende-ressourceparametre, og kortlæg applikationstjenester til deres tilsigtede mål. Dette importerer ikke ejerskab og opretter ikke automatisk manglende tilladelser. Gennemgå skabelonen før implementering.
+### Q: Hvordan deployer jeg til eksisterende Azure-ressourcer?
+**A**: Ja, hvis skabelonen understøtter det. Referer til eksisterende ressourcer med Biceps `existing`-deklarationer eller skabelonens dokumenterede eksisterende ressource-parametre, og kortlæg applikationstjenester til de tilsigtede mål. Dette importerer ikke ejerskab eller skaber automatisk manglende tilladelser. Gennemgå skabelonen før deployment.
 
 ### Q: Kan jeg bruge Terraform i stedet for Bicep?
-**A**: Ja. AZD understøtter både Terraform og Bicep. Vælg en Terraform-baseret skabelon eller konfigurer `infra.provider: terraform` i `azure.yaml` med passende Terraform-filer og state/backend-konfiguration. Se [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+**A**: Ja. AZD understøtter Terraform såvel som Bicep. Vælg en Terraform-baseret skabelon eller konfigurer `infra.provider: terraform` i `azure.yaml`, med passende Terraform-filer og state/backend-konfiguration. Se [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
@@ -191,7 +199,7 @@ azd env new production
 ```
 
 ### Q: Hvor gemmes miljøkonfigurationer?
-**A**: I `.azure`-mappen inden for din projektmappe. Hvert miljø har sin egen mappe med konfigurationsfiler.
+**A**: I `.azure`-mappen i din projektmappe. Hvert miljø har sin egen mappe med konfigurationsfiler.
 
 ### Q: Hvordan sætter jeg miljøspecifik konfiguration?
 **A**: Brug `azd env set` til at konfigurere miljøvariabler:
@@ -202,18 +210,18 @@ azd env set DATABASE_TIER Basic
 
 ### Q: Kan jeg dele miljøkonfigurationer blandt teammedlemmer?
 **A**: `.azure`-mappen indeholder følsomme oplysninger og bør ikke committes til versionskontrol. I stedet:
-1. Dokumenter nødvendige miljøvariabler
-2. Brug implementeringsscripts til at opsætte miljøer
+1. Dokumenter påkrævede miljøvariabler
+2. Brug deploymentscripts til at sætte miljøer op
 3. Brug Azure Key Vault til følsom konfiguration
 
-### Q: Hvordan tilsidesætter jeg skabelonens standardværdier?
-**A**: Sæt miljøvariabler der svarer til skabelonparametre:
+### Q: Hvordan tilsidesætter jeg skabelonstandarder?
+**A**: Sæt miljøvariabler, som svarer til skabelonparametre:
 ```bash
 azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
-Kun de variabler, som skabelonen bruger, påvirker implementeringen. `SKU_NAME` ovenfor er et eksempel på brugerdefineret input, ikke en universel AZD-indstilling.
+Kun variabler, som forbruges af skabelonen, påvirker deployment. `SKU_NAME` ovenfor er et eksempel på brugerdefineret input, ikke en universel AZD-indstilling.
 
 ---
 
@@ -221,85 +229,85 @@ Kun de variabler, som skabelonen bruger, påvirker implementeringen. `SKU_NAME` 
 
 ### Q: Hvorfor fejler `azd up`?
 **A**: Almindelige årsager:
-1. **Autentificeringsproblemer**: Kør `azd auth login`
+1. **Godkendelsesproblemer**: Kør `azd auth login`
 2. **Utilstrækkelige tilladelser**: Tjek dine Azure-rolle-tildelinger
-3. **Ressourcenavnesammenstød**: Gennemgå den konfliktende ressource og skabelonens navneinput; opret et separat miljø med `azd env new` når isolation er nødvendig
+3. **Ressourcenavnekonflikter**: Gennemgå den konfliktende ressource og skabelonens navngivningsinput; opret et separat miljø med `azd env new` ved behov for isolation
 4. **Kvote-/kapacitetsproblemer**: Tjek regional tilgængelighed
 5. **Skabelonfejl**: Valider Bicep-skabeloner
 
-### Q: Hvordan debugger jeg implementeringsfejl?
+### Q: Hvordan debugger jeg deploymentsfejl?
 **A**: 
 1. Brug `azd deploy --debug` for detaljeret output
-2. Tjek implementeringshistorik i Azure-portalen
-3. Gennemgå Aktivitetslog i Azure-portalen
-4. Brug `azd show` til at vise aktuel miljøstatus
+2. Tjek Azure-portals deploymentshistorik
+3. Gennemgå aktivitetloggen i Azure-portalen
+4. Brug `azd show` til at vise aktuelt miljøstatus
 
 ### Q: Hvorfor virker mine miljøvariabler ikke?
 **A**: Tjek:
 1. Variabelnavne matcher skabelonparametre præcist
-2. Værdier er korrekt citerede, hvis de indeholder mellemrum
+2. Værdier er korrekt citeret, hvis de indeholder mellemrum
 3. Miljøet er valgt: `azd env select <environment>`
-4. Variablerne er sat i det korrekte miljø
+4. Variabler er sat i det korrekte miljø
 
-### Q: Hvordan rydder jeg op efter mislykkede implementeringer?
+### Q: Hvordan rydder jeg op efter mislykkede deployments?
 **A**: 
 ```bash
 azd down
 ```
-Gennemgå først det valgte miljø og sletningsbekræftelse. Dette sletter implementerede Azure-ressourcer, ikke den lokale `.azure` miljøkonfiguration. `--purge` anmoder desuden om permanent sletning af understøttede soft-slettede ressourcer og kan blive blokeret af beholdelses-/rensningsbeskyttelse; det er ikke et rutinemæssigt genoprettelsestrin.
+Gennemgå først valgte miljø og slettebekræftelse. Dette sletter provisionerede Azure-ressourcer, ikke lokale `.azure` miljøkonfigurationer. `--purge` anmoder desuden om permanent sletning af understøttede blødslettede ressourcer og kan blokeres af opbevarings-/rensningsbeskyttelse; det er ikke et rutinemæssigt recovery-trin.
 
-### Q: Hvorfor er min applikation ikke tilgængelig efter implementering?
+### Q: Hvorfor er min applikation ikke tilgængelig efter deployment?
 **A**: Tjek:
-1. Implementeringen er gennemført succesfuldt
+1. Deployment er gennemført succesfuldt
 2. Applikationen kører (tjek logs i Azure-portalen)
 3. Netværkssikkerhedsgrupper tillader trafik
-4. DNS/custom domains er konfigureret korrekt
+4. DNS/brugertilpassede domæner er konfigureret korrekt
 
 ---
 
 ## Omkostninger & Fakturering
 
-### Q: Hvor meget vil azd-implementeringer koste?
+### Q: Hvor meget vil azd deployments koste?
 **A**: Omkostninger afhænger af:
-- Azure-tjenester der implementeres
-- Valgte service-tier/SKU’er
+- Azure-tjenester, der deployeres
+- Valgte servicelag/SKU’er
 - Regionale prisforskelle
-- Brugenmønstre
+- Brugsmønstre
 
 Brug [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) til estimater.
 
-### Q: Hvordan styrer jeg omkostninger i azd-implementeringer?
+### Q: Hvordan kontrollerer jeg omkostninger i azd deployments?
 **A**: 
 1. Brug lavere tier-SKU’er til udviklingsmiljøer
-2. Opret Azure-budgetter og advarsler
-3. Brug `azd down` til at fjerne ressourcer når de ikke er nødvendige
-4. Vælg passende regioner (omkostninger varierer efter placering)
+2. Opret Azure-budgetter og -alarmer
+3. Brug `azd down` til at fjerne ressourcer, når de ikke er nødvendige
+4. Vælg passende regioner (omkostninger varierer efter lokation)
 5. Brug Azure Cost Management-værktøjer
 
-### Q: Findes der gratis tiers for azd-skabeloner?
-**A**: Nogle tjenester har gratis SKU’er eller månedlige kreditter, afhængig af berettigelse, hostingplan, region og abonnement. Disse gør ikke en hel skabelon gratis: databaser, søgning, netværk, registry, telemetri og modelinferens kan påføre gebyrer selvstændigt. Tjek [Azure free services list](https://azure.microsoft.com/free/) og aktuel pris for hver ressource før implementering.
+### S: Findes der gratis planer for azd skabeloner?
+**S**: Nogle tjenester har gratis SKU'er eller månedlige tilskud, afhængig af berettigelse, hostingplan, region og abonnementbegrænsninger. Dette gør ikke en hel skabelon gratis: databaser, søgning, netværk, registre, telemetri og modelinference kan pålægge gebyrer uafhængigt. Tjek [Azure gratis tjenester liste](https://azure.microsoft.com/free/) og aktuel prisfastsættelse for hver ressource før udrulning.
 
-### Q: Hvordan estimerer jeg omkostninger før implementering?
-**A**: 
+### S: Hvordan estimerer jeg omkostninger før udrulning?
+**S**: 
 1. Gennemgå skabelonens `main.bicep` for at se hvilke ressourcer der oprettes
-2. Brug Azure Pricing Calculator med specifikke SKU’er
-3. Implementér først i et udviklingsmiljø for at overvåge faktiske omkostninger
-4. Brug Azure Cost Management til detaljeret omkostningsanalyse
+2. Brug Azure Prisberegner med specifikke SKU'er
+3. Udrul først til et udviklingsmiljø for at overvåge faktiske omkostninger
+4. Brug Azure Omkostningsstyring til detaljeret omkostningsanalyse
 
 ---
 
 ## Bedste Praksis
 
-### Q: Hvad er bedste praksis for azd projektstruktur?
-**A**: 
+### S: Hvad er bedste praksis for azd projektstruktur?
+**S**: 
 1. Hold applikationskode adskilt fra infrastruktur
 2. Brug meningsfulde tjenestenavne i `azure.yaml`
-3. Implementer korrekt fejlhåndtering i build-scripts
+3. Implementer korrekt fejlhåndtering i build scripts
 4. Brug miljøspecifik konfiguration
 5. Inkluder omfattende dokumentation
 
-### Q: Hvordan organiserer jeg flere tjenester i azd?
-**A**: Brug den anbefalede struktur:
+### S: Hvordan skal jeg organisere flere tjenester i azd?
+**S**: Brug den anbefalede struktur:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -310,33 +318,33 @@ Brug [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 └── README.md         # Project documentation
 ```
 
-### Q: Skal jeg committe `.azure`-mappen til versionskontrol?
-**A**: **Nej!** Mappen `.azure` indeholder følsomme oplysninger. Tilføj den til `.gitignore`:
+### S: Skal jeg committe `.azure` mappen til versionskontrol?
+**S**: **Nej!** `.azure` mappen indeholder følsomme oplysninger. Tilføj den til `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### Q: Hvordan håndterer jeg hemmeligheder og følsom konfiguration?
-**A**: 
+### S: Hvordan håndterer jeg hemmeligheder og følsom konfiguration?
+**S**: 
 1. Brug Azure Key Vault til hemmeligheder
-2. Referer Key Vault-hemmeligheder i applikationskonfigurationen
-3. Upload aldrig hemmeligheder til versionskontrol
-4. Brug administrerede identiteter til service-til-service autentificering
+2. Referer Key Vault hemmeligheder i applikationskonfigurationen
+3. Committ aldrig hemmeligheder til versionskontrol
+4. Brug administrerede identiteter til tjeneste-til-tjeneste godkendelse
 
-### Q: Hvad er den anbefalede tilgang for CI/CD med azd?
-**A**: 
-1. Brug separate miljøer for hvert trin (dev/staging/prod)
-2. Implementer automatiseret test før udrulning
-3. Brug serviceprincipaler til autentificering
-4. Opbevar følsom konfiguration i pipeline hemmeligheder/variabler
+### S: Hvad er den anbefalede tilgang til CI/CD med azd?
+**S**: 
+1. Brug separate miljøer for hver fase (dev/staging/prod)
+2. Implementer automatiserede tests før udrulning
+3. Brug tjenesteprincipaler til godkendelse
+4. Gem følsom konfiguration i pipeline hemmeligheder/variabler
 5. Implementer godkendelsesporte for produktionsudrulninger
 
 ---
 
 ## Avancerede Emner
 
-### Q: Kan jeg udvide azd med brugerdefineret funktionalitet?
-**A**: Ja, gennem udrulnings-hooks i `azure.yaml`:
+### S: Kan jeg udvide azd med brugerdefineret funktionalitet?
+**S**: Ja, gennem udrulningskroge i `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -345,31 +353,31 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: Hvordan integrerer jeg azd med eksisterende DevOps-processer?
-**A**: 
-1. Brug azd-kommandoer i eksisterende pipeline scripts
-2. Standardiser på azd-skabeloner på tværs af teams
+### S: Hvordan integrerer jeg azd med eksisterende DevOps-processer?
+**S**: 
+1. Brug azd kommandoer i eksisterende pipeline scripts
+2. Standardiser azd skabeloner på tværs af teams
 3. Integrer med eksisterende overvågning og alarmering
-4. Brug azd's JSON-output til pipeline-integration
+4. Brug azd's JSON output til pipeline integration
 
-### Q: Kan jeg bruge azd med Azure DevOps?
-**A**: Ja, azd fungerer med alle CI/CD-systemer. Opret Azure DevOps pipelines, der bruger azd-kommandoer.
+### S: Kan jeg bruge azd med Azure DevOps?
+**S**: Ja, azd fungerer med ethvert CI/CD system. Opret Azure DevOps pipelines, der bruger azd kommandoer.
 
-### Q: Hvordan bidrager jeg til azd eller opretter fællesskabsskabeloner?
-**A**: 
-1. **azd-værktøj**: Bidrag til [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Skabeloner**: Følg instruktionsguiden for [Awesome AZD-galleri bidrag](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
-3. **Dokumentation**: Bidrag til docs hos [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+### S: Hvordan bidrager jeg til azd eller opretter community skabeloner?
+**S**: 
+1. **azd værktøj**: Bidrag til [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Skabeloner**: Følg [Awesome AZD galleri bidragsinstruktioner](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
+3. **Dokumentation**: Bidrag til docs på [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### Q: Hvad er køreplanen for azd?
-**A**: Se den [officielle køreplan](https://github.com/Azure/azure-dev/projects) for planlagte funktioner og forbedringer.
+### S: Hvad er roadmap for azd?
+**S**: Tjek den [officielle roadmap](https://github.com/Azure/azure-dev/projects) for planlagte funktioner og forbedringer.
 
-### Q: Hvordan migrerer jeg fra andre udrulningsværktøjer til azd?
-**A**: 
-1. Analyser den nuværende udrulningsarkitektur
+### S: Hvordan migrerer jeg fra andre udrulningsværktøjer til azd?
+**S**: 
+1. Analyser nuværende udrulningsarkitektur
 2. Opret tilsvarende Bicep-skabeloner
-3. Konfigurer `azure.yaml` til at matche nuværende services
-4. Test grundigt i udviklingsmiljøet
+3. Konfigurer `azure.yaml` til at matche nuværende tjenester
+4. Test grundigt i udviklingsmiljø
 5. Migrer miljøer gradvist
 
 ---
@@ -377,17 +385,17 @@ hooks:
 ## Har du stadig spørgsmål?
 
 ### **Søg først**
-- Tjek den [officielle dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Tjek [den officielle dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - Søg i [GitHub issues](https://github.com/Azure/azure-dev/issues) efter lignende problemer
 
 ### **Få hjælp**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Fællesskabsstøtte
+- [GitHub Diskussioner](https://github.com/Azure/azure-dev/discussions) - Fællesskabsstøtte
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Tekniske spørgsmål
-- [Azure Discord](https://discord.gg/azure) - Fællesskabschat i realtid
+- [Azure Discord](https://discord.gg/azure) - Realtids fællesskab chat
 
-### **Rapportér problemer**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Fejlrapporter og funktionsanmodninger
-- Inkluder relevante logs, fejlmeddelelser og trin til reproduktion
+### **Rapporter problemer**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Fejlrapporter og funktionsønsker
+- Inkluder relevante logfiler, fejlkoder og reproduktionsskridt
 
 ### **Lær mere**
 - [Azure Developer CLI dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -396,7 +404,7 @@ hooks:
 
 ---
 
-*Teknisk vejledning gennemgået: 4. november 2026. Cloud-tilgængelighed og priser skal kontrolleres for dit abonnement og din region.*
+*Teknisk vejledning gennemgået: 4. november 2026. Cloud-tilgængelighed og prisfastsættelse skal tjekkes for dit abonnement og region.*
 
 ---
 

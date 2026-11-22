@@ -1,4 +1,4 @@
-# دليل استكشاف أخطاء الذكاء الاصطناعي وإصلاحها
+# دليل استكشاف الأخطاء وإصلاحها الخاص بالذكاء الاصطناعي
 
 **تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
@@ -7,22 +7,22 @@
 - **➡️ الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../chapter-08-production/production-ai-practices.md)
 - **🤖 ذات صلة**: [الفصل 2: تطوير الذكاء الاصطناعي أولاً](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-يغطي هذا الدليل الشامل لاستكشاف الأخطاء مشاكل شائعة عند نشر حلول الذكاء الاصطناعي باستخدام AZD، ويوفر حلولًا وتقنيات تصحيح خاصة بخدمات الذكاء الاصطناعي في Azure.
+يغطي هذا الدليل الشامل لاستكشاف الأخطاء وإصلاحها المشكلات الشائعة عند نشر حلول الذكاء الاصطناعي باستخدام AZD، موفرًا حلولًا وتقنيات تصحيح خاصة بخدمات Azure AI.
 
-> **النطاق:** تستخدم الأوامر أسماء موارد نموذجية؛ يرجى استبدالها واختيار الاشتراك الصحيح. كتل Bicep هي أجزاء لدمجها في قالب موجود، وليست نشرات مستقلة. تتطلب مقتطفات بايثون SDKs والتكوين التطب...
+> **النطاق:** تستخدم الأوامر أسماء موارد نموذجية؛ استبدلها واختر الاشتراك الصحيح. كتل Bicep هي شظايا لدمجها في قالب موجود، وليست نشرات مستقلة. مقاطع Python تتطلب SDKs المذكورة وتكوين التطبيق. لم يتم تنفيذ نشر Azure مباشر لهذه المراجعة.
 
 ## جدول المحتويات
 
-- [مشاكل خدمة نماذج مايكروسوفت فاوندرى](#microsoft-foundry-models-service-issues)
-- [مشاكل بحث Azure AI](#azure-ai-search-problems)
-- [مشاكل نشر تطبيقات الحاويات](#container-apps-deployment-issues)
+- [مشكلات خدمة نماذج Microsoft Foundry](#microsoft-foundry-models-service-issues)
+- [مشكلات Azure AI Search](#azure-ai-search-problems)
+- [مشكلات نشر تطبيقات الحاويات](#container-apps-deployment-issues)
 - [أخطاء المصادقة والأذونات](#authentication-and-permission-errors)
-- [فشل نشر النماذج](#model-deployment-failures)
-- [مشاكل الأداء والتمدد](#performance-and-scaling-issues)
+- [فشل نشر النموذج](#model-deployment-failures)
+- [مشكلات الأداء والتوسع](#performance-and-scaling-issues)
 - [إدارة التكلفة والحصص](#cost-and-quota-management)
 - [أدوات وتقنيات التصحيح](#debugging-tools-and-techniques)
 
-## مشاكل خدمة نماذج مايكروسوفت فاوندرى
+## مشكلات خدمة نماذج Microsoft Foundry
 
 ### المشكلة: خدمة OpenAI غير متاحة في المنطقة
 
@@ -32,9 +32,9 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **الأسباب:**
-- نماذج مايكروسوفت فاوندرى غير متوفرة في المنطقة المختارة
-- استنفاد الحصة في المناطق المفضلة
-- قيود السعة الإقليمية
+- نماذج Microsoft Foundry غير متوفرة في المنطقة المختارة
+- نفاد الحصة في المناطق المفضلة
+- قيود في سعة المنطقة
 
 **الحلول:**
 
@@ -45,7 +45,7 @@ az cognitiveservices model list --location eastus2 --output json
 # Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
-2. **تحديث تكوين AZD:**
+2. **قم بتحديث تكوين AZD:**
 ```bash
 # For a new environment: choose a supported region with available quota
 azd env set AZURE_LOCATION eastus2
@@ -53,7 +53,7 @@ azd env set AZURE_LOCATION eastus2
 # through infra/main.parameters.json as documented by the template.
 ```
 
-3. **استخدام مناطق بديلة:**
+3. **استخدم مناطق بديلة:**
 ```bicep
 // infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
@@ -81,10 +81,10 @@ az cognitiveservices usage list \
   --location eastus2 --output table
 ```
 
-2. **طلب زيادة الحصة:**
-استخدم سير عمل إدارة الحصة في بوابة فاوندرى للاشتراك، المنطقة، النموذج، ونوع النشر المتأثر. انظر إلى [الإرشادات الرسمية للحصص](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). طلب حصة VM لا يزيد حصة النموذج.
+2. **اطلب زيادة الحصة:**
+استخدم سير عمل إدارة الحصص في بوابة Foundry للاشتراك والمنطقة والنموذج ونوع النشر المتأثر. راجع [الإرشادات الرسمية للحصة](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). طلب زيادة حصة VM لا يزيد حصة النموذج.
 
-3. **تحسين سعة النموذج:**
+3. **حسن سعة النموذج:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -113,16 +113,16 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **الحلول:**
 
-1. **استخدام إصدار API مدعوم:**
+1. **استخدم إصدار API مدعوم:**
 ```python
 # Stable dated Azure OpenAI data-plane API, where supported by your feature
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **تحقق من توافق إصدار API:**
-تحقق من [مرجع دورة حياة واجهة برمجة تطبيقات Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). إصدارات واجهة برمجة التطبيقات لمزود موارد ARM **لا** تسرد إصدارات واجهة برمجة تطبيقات مستوى الاستدلال/البيانات. يستخدم العملاء الجدد v1 `/openai/v1/` بدون `api-version` مؤرخة؛ لا تخلط بين تكوينات العميلين.
+تحقق من [مرجع دورة حياة API لـ Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). إصدارات API لمزود موارد ARM **لا** تسرد إصدارات API لطائرة الاستدلال/البيانات. يستخدم عملاء v1 الجدد `/openai/v1/` بدون `api-version` بتاريخ؛ لا تخلط بين تكوينات العميلين.
 
-## مشكلات Azure AI Search
+## مشاكل البحث في Azure AI
 
 ### المشكلة: مستوى تسعير خدمة البحث غير كافٍ
 
@@ -133,9 +133,9 @@ Error: Semantic search requires Basic tier or higher
 
 **الحلول:**
 
-1. **استخدام مستوى تسعير مدعوم:**
+1. **استخدم مستوى تسعير مدعوم:**
 
-يتطلب المصنف الدلالي Basic أو أعلى. قد يتطلب التبديل من Free/Basic إلى مستوى مختلف إنشاء خدمة بحث جديدة وإعادة بناء الفهارس؛ لا يعتبر تعديل SKU ترقية مضمونة في المكان.
+يتطلب المصنف الدلالي مستوى Basic أو أعلى. قد يتطلب الانتقال من Free/Basic إلى مستوى آخر إنشاء خدمة بحث جديدة وإعادة بناء الفهارس؛ تعديل SKU ليس ترقية مضمونة في المكان.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -177,7 +177,7 @@ Error: Cannot create index, insufficient permissions
 
 **الحلول:**
 
-1. **التحقق من مفاتيح خدمة البحث:**
+1. **تحقق من مفاتيح خدمة البحث:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -185,7 +185,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **التحقق من مخطط الفهرس:**
+2. **تحقق من مخطط الفهرس:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -202,7 +202,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **استخدام الهوية المدارَة:**
+3. **استخدم الهوية المدارة:**
 ```bicep
 // Grant index-definition management permissions to the managed identity.
 // Search Index Data Contributor manages documents, not index definitions.
@@ -217,7 +217,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## مشكلات نشر تطبيقات الحاويات
+## مشاكل نشر تطبيقات الحاويات
 
 ### المشكلة: فشل بناء الحاوية
 
@@ -228,7 +228,7 @@ Error: Failed to build container image
 
 **الحلول:**
 
-1. **التحقق من بناء جملة Dockerfile:**
+1. **تحقق من صياغة Dockerfile:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -250,7 +250,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **التحقق من التبعيات:**
+2. **تحقق من التبعيات:**
 ```txt
 # Dependency names for these snippets. Resolve supported versions in your
 # project's environment, test together, then commit a lock/pinned requirements file.
@@ -263,7 +263,7 @@ azure-search-documents
 azure-cosmos
 ```
 
-3. **إضافة فحص صحة:**
+3. **أضف فحص صحة:**
 ```python
 # main.py - Add health check endpoint
 from fastapi import FastAPI
@@ -352,7 +352,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## أخطاء المصادقة والأذونات
 
-### المشكلة: رفض إذن الهوية المُدارة
+### المشكلة: رفض إذن الهوية المدارة
 
 **الأعراض:**
 ```
@@ -369,7 +369,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **تعيين الأدوار المطلوبة:**
+2. **عيّن الأدوار المطلوبة:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -403,7 +403,7 @@ def test_authentication():
 test_authentication()
 ```
 
-تُثبت عملية الحصول على الرمز المصادقة، وليس الإذن لاستدعاء النموذج. اختبر العملية المقصودة بشكل منفصل. محليًا، قد يستخدم `DefaultAzureCredential` بيانات اعتماد المطور؛ أما في Azure، فتأكد من اختيار الهوية المُدارة المقصودة.
+اكتساب رمز الوصول يثبت المصادقة، وليس الإذن لاستدعاء نموذج. اختبر العملية المقصودة بشكل منفصل. محليًا، قد يستخدم `DefaultAzureCredential` بيانات اعتماد المطور؛ في Azure، تحقق من اختيار الهوية المدارة المقصودة.
 
 ### المشكلة: رفض الوصول إلى Key Vault
 
@@ -416,7 +416,7 @@ Error: The user, group or application does not have secrets get permission
 
 1. **منح أذونات Key Vault:**
 
-استخدم مقطع سياسة الوصول التالي فقط للخزنة التي تحتوي على `enableRbacAuthorization: false`. بالنسبة إلى خزنة مفعلة بنظام RBAC، استخدم الخيار 2؛ إضافة سياسة وصول لا تمنح الوصول إلى مستوى البيانات في وضع RBAC.
+استخدم جزء سياسة الوصول التالي فقط للخزانة التي بها `enableRbacAuthorization: false`. لخزانة مفعلة بنموذج RBAC، استخدم الخيار 2؛ إضافة سياسة وصول لا تمنح وصولًا لطائرة البيانات في وضع RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **استخدم RBAC بدلًا من سياسات الوصول:**
+2. **استخدم RBAC بدلاً من سياسات الوصول:**
 
-يجب أن تحتوي الخزنة على `enableRbacAuthorization: true`؛ يتطلب تغيير نماذج الأذونات تخطيطًا لنقل الوصول القائم.
+يجب أن تكون الخزانة بها `enableRbacAuthorization: true`؛ يتطلب تغيير نموذج الأذونات هجرة مخططة للوصول الحالي.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -452,7 +452,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## فشل نشر النموذج
 
-### المشكلة: نسخة النموذج غير متوفرة
+### المشكلة: نسخة النموذج غير متاحة
 
 **الأعراض:**
 ```
@@ -498,7 +498,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **تحقق من صحة النموذج قبل النشر:**
+3. **تحقق من النموذج قبل النشر:**
 ```bash
 # Management-plane catalog for the actual account
 az cognitiveservices account list-models \
@@ -506,13 +506,13 @@ az cognitiveservices account list-models \
 # Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## قضايا الأداء والتوسع
+## مشاكل الأداء والتوسع
 
-### المشكلة: استجابات ذات زمن استجابة عالي
+### المشكلة: استجابات ذات زمن تأخير مرتفع
 
 **الأعراض:**
-- أوقات استجابة > 30 ثانية
-- أخطاء تجاوز المهلة
+- أوقات الاستجابة > 30 ثانية
+- أخطاء انتهاء المهلة
 - تجربة مستخدم ضعيفة
 
 **الحلول:**
@@ -532,7 +532,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **إضافة تخزين مؤقت للاستجابات:**
+2. **إضافة تخزين مؤقت للاستجابة:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -552,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **تهيئة التوسع التلقائي:**
+3. **تكوين التوسيع التلقائي:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -641,18 +641,18 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## إدارة التكلفة والحصة
+## إدارة التكاليف والحصص
 
-### المشكلة: تكاليف عالية غير متوقعة
+### المشكلة: تكاليف مرتفعة غير متوقعة
 
 **الأعراض:**
-- فاتورة أزور أعلى من المتوقع
-- استهلاك التوكن يتجاوز التقديرات
+- فاتورة Azure أعلى من المتوقع
+- استخدام الرموز يتجاوز التقديرات
 - تنبيهات الميزانية مفعلة
 
 **الحلول:**
 
-1. **تنفيذ ضوابط التكلفة:**
+1. **تنفيذ ضوابط التكاليف:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-هذا العداد في الذاكرة توضيحي، وليس تحكمًا في الإنفاق الشهري: يعاد ضبطه عند إعادة التشغيل، ولا يُشارك بين النسخ، ويتحقق من الاستخدام فقط بعد المكالمة. الحاجة إلى حد حقيقي يتطلب محاسبة دائمة، حجوزات آمنة للتزامن قبل الطلبات، وسياسة إعادة ضبط شهرية. يجب أن تأخذ مقاييس ذاكرة الحاوية في الاعتبار حدود cgroup ؛ `psutil.virtual_memory()` ليس قياسًا موثوقًا لحد الحاوية، وجمع القمامة لا يفرض حدًا للذاكرة.
+هذا العداد في الذاكرة توضيحي، وليس ضابطًا للإنفاق الشهري: يتم إعادة تعيينه عند إعادة التشغيل، ولا يُشارك عبر النسخ، ويفحص الاستخدام فقط بعد الطلب. العداد الحقيقي يحتاج إلى محاسبة دائمة، واحتجازات متزامنة قبل الطلبات، وسياسة إعادة تعيين شهرية. يجب أن تأخذ مقاييس ذاكرة الحاوية أيضًا في الاعتبار حدود cgroup؛ `psutil.virtual_memory()` ليست قياسًا موثوقًا لحدود الحاوية، وجمع القمامة لا يفرض حدًا للذاكرة.
 
-2. **إعداد تنبيهات التكلفة:**
+2. **إعداد تنبيهات التكاليف:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,7 +699,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-صِف `budgetStartDate` و `budgetEndDate` في قالبك. الميزانيات تُعلم؛ لا توقف الموارد أو تفرض حدًا صارمًا للإنفاق.
+أعلِن `budgetStartDate` و `budgetEndDate` في قالبك. الميزانيات تُبلّغ فقط؛ لا توقف الموارد أو تفرض حدًا صارمًا للإنفاق.
 
 3. **تحسين اختيار النموذج:**
 ```python
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### أوامر تمديد AZD AI للتشخيص
+### أوامر ملحق AZD AI للتشخيص
 
-إذا قمت بنشر الوكلاء باستخدام `azd ai agent init`، تتوفر هذه الأدوات الإضافية:
+إذا نشرت الوكلاء باستخدام `azd ai agent init`، هذه الأدوات الإضافية متاحة:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,15 +762,17 @@ azd mcp start
 azd infra generate
 ```
 
-> **نصيحة:** استخدم `azd infra generate` لكتابة IaC إلى القرص حتى تتمكن من فحص الموارد التي تم توفيرها بدقة. هذا لا يقدر بثمن عند تصحيح مشكلات تكوين الموارد. راجع [مرجع واجهة سطر أوامر AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للتفاصيل الكاملة.
+> **نصيحة:** استخدم `azd infra generate` لكتابة IaC على القرص حتى تتمكن من فحص الموارد التي تم توفيرها بالضبط. هذا ضروري جدًا عند تصحيح مشكلات تكوين الموارد. راجع [مرجع سطر أوامر AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للتفاصيل الكاملة.
 
-**التشخيص الواعِي بالإصدار (2026-11-04):** يتطلب وكلاء `1.0.0-beta.23`  `azd >= 1.37.0`؛ قم بترقية واجهة سطر الأوامر الأساسية قبل التمديدات غير المتوافقة. يحتفظ إصدار الوكيل هذا بتحذيرات RBAC الخاصة بالمطور في إخراج النشر النهائي ويحدد الإصدار المتعلق بفشل أو انتهاء المهلة التنشيطي. انتهاء المهلة لا يثبت فشل النشر: تحقق من الإصدار الذي تم المحاولة به قبل إعادة المحاولة. كما يصلح استدعاءات A2A 0.3 التي تعرض رسائل دورة الحياة بدلاً من الإجابات المكتملة. يصلح جوهر `azd 1.37.1` انتشار الإلغاء عبر التمديدات؛ `1.37.2` يحسن تأكيدات التوفير الحرجة والتعامل مع الإلغاء.
+**تشخيص سير العمل GA (2026-11-09):** تحقق من أن `azd version` لا يقل عن 1.37.0 وافحص `azd ext list --installed`. قم بتحديث CLI الأساسي أولًا باستخدام `azd update` أو مثبته، ثم حدث الحزمة باستخدام `azd ext upgrade microsoft.foundry`. للحالات المحلية، تحقق من uv الحالي، وبايثون 3.13+ للعينة الأساسية، و `PYTHONNOUSERSITE: "1"` في تكوين الخدمة الخاص به، وبيانات اعتماد Azure المستخدمة بواسطة `DefaultAzureCredential`. احتفظ بـ `azd ai agent run` شغالًا أثناء استدعاء `--local` من نافذة طرفية ثانية في دليل المشروع.
 
-إذا كان أمر التقييم في درس أقدم يطبع فقط إرشادات الترحيل، قم بتثبيت `azure.ai.evaluations` (`1.0.0-beta.2` يتطلب `azd >= 1.33.0`) واستخدم `azd ai eval init`، `generate`، و`run start`. لم يعد `--config` الخاص بالتحسين يقبل ملفات التقييم القديمة. انظر [ترحيل التقييم](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) و[ترحيل التحسين](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+نجاح التوفير لا يثبت أن المطور لديه وصول إلى مستوى بيانات الطائرة. راجع تحذيرات RBAC ومصفوفة أذونات الوكيل المستضاف [hosted-agent permission matrix](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). انتهاء المهلة لا يعني فشل النشر: تحقق من الإصدار والمحاولات والسجلات قبل المحاولة مجددًا. الوكلاء الأقدم beta.23 حسّنوا هذه التحذيرات ومخرجات A2A؛ تلك التصحيحات التاريخية موضحة في [ملاحظات الإصدار](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes)، وليست شرطًا لتثبيت ذلك النسخة التجريبية.
 
-### تصحيح التطبيق
+إذا لم يكن `azd ai eval` متوفرًا، فقم بتثبيت `azure.ai.evaluations` بشكل منفصل؛ حزمة GA لا تتضمنه. إذا كان أمر تقييم الوكيل في الدليل الأقدم يطبع إرشادات الترحيل فقط، فاستخدم سير العمل المنفصل `azd ai eval`. لم يعد `--config` الخاص بالتحسين يقبل ملفات التقييم القديمة. راجع [ترحيل التقييم](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) و[ترحيل التحسين](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-1. **التسجيل المنظم:**
+### تصحيح تطبيقات البرمجيات
+
+1. **التسجيل المهيكل:**
 ```python
 import logging
 import json
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **نقاط فحص الحالة الصحية:**
+2. **نقاط فحص الصحة:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -855,39 +860,39 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## أكواد الأخطاء الشائعة والحلول
+## رموز الأخطاء الشائعة وحلولها
 
 | رمز الخطأ | الوصف | الحل |
 |------------|-------------|----------|
-| 401 | غير مخول | تحقق من مفاتيح API وتكوين الهوية المُدارة |
-| 403 | ممنوع | تحقق من تعيينات أدوار RBAC |
-| 429 | تجاوز الحد المسموح | نفذ منطق إعادة المحاولة مع تراجع أسّي |
+| 401 | غير مصرح | تحقق من مفاتيح API وتكوين الهوية المُدارة |
+| 403 | ممنوع | تحقق من تعيينات الأدوار في RBAC |
+| 429 | تم تقييد المعدل | نفذ منطق إعادة المحاولة مع تراجع أسي |
 | 500 | خطأ داخلي في الخادم | تحقق من حالة نشر النموذج والسجلات |
-| 503 | الخدمة غير متوفرة | تحقق من صحة الخدمة وتوافرها الإقليمي |
+| 503 | الخدمة غير متاحة | تحقق من صحة الخدمة وتوافرها الإقليمي |
 
 ## الخطوات التالية
 
 1. **راجع [دليل نشر نموذج الذكاء الاصطناعي](../chapter-02-ai-development/ai-model-deployment.md)** لأفضل ممارسات النشر
 2. **أكمل [ممارسات الذكاء الاصطناعي للإنتاج](../chapter-08-production/production-ai-practices.md)** للحلول الجاهزة للمؤسسات
-3. **انضم إلى [خادم Microsoft Foundry في ديسكورد](https://aka.ms/foundry/discord)** لدعم المجتمع
-4. **قدّم مشكلات** إلى [مستودع AZD على GitHub](https://github.com/Azure/azure-dev) لمشاكل AZD المحددة
+3. **انضم إلى [خادم مايكروسوفت فاوندري على ديسكورد](https://aka.ms/foundry/discord)** للدعم المجتمعي
+4. **قم بإرسال القضايا** إلى [مستودع AZD على GitHub](https://github.com/Azure/azure-dev) لمشاكل AZD المحددة
 
 ## الموارد
 
-- [تصحيح حصص وقيود Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [تصحيح تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [تصحيح بحث Azure AI](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**مهارة وكيل تشخيصات Azure**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - قم بتثبيت مهارات تصحيح أخطاء Azure في محررك: `npx skills add microsoft/github-copilot-for-azure`
+- [استكشاف مشاكل الحصة والحد من سرعة استعمال Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [استكشاف مشاكل تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [استكشاف مشاكل Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**مهارة وكيل تشخيصات Azure**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - ثبّت مهارات استكشاف مشاكل Azure في محررك: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**تصفح الفصل:**
+**تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وإصلاحها وتصحيحها
+- **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وتصحيحها
 - **⬅️ السابق**: [دليل التصحيح](debugging.md)
-- **➡️ الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../chapter-08-production/production-ai-practices.md)
-- **🤖 ذات صلة**: [الفصل 2: تطوير الذكاء الاصطناعي أولاً](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 المرجع**: [استكشاف أخطاء Azure Developer CLI وإصلاحها](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ الفصل التالي**: [الفصل 8: نماذج الإنتاج والمؤسسات](../chapter-08-production/production-ai-practices.md)
+- **🤖 ذات صلة**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 مرجع**: [استكشاف أخطاء وميزات Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

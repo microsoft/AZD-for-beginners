@@ -1,30 +1,30 @@
 # Водич за решавање проблема специфичних за вештачку интелигенцију
 
-**Навигација кроз поглавље:**
-- **📚 Почетна страница курса**: [AZD за почетнике](../../README.md)
+**Навигација кроз поглавља:**
+- **📚 Почетна страна курса**: [AZD за почетнике](../../README.md)
 - **📖 Тренутно поглавље**: Поглавље 7 - Решавање проблема и отклањање грешака
 - **⬅️ Претходно**: [Водич за отклањање грешака](debugging.md)
-- **➡️ Следеће поглавље**: [Поглавље 8: Процесуирање и пословни обрасци](../chapter-08-production/production-ai-practices.md)
-- **🤖 Повезано**: [Поглавље 2: Развој првенствено за вештачку интелигенцију](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Следеће поглавље**: [Поглавље 8: Обрасци за производњу и предузећа](../chapter-08-production/production-ai-practices.md)
+- **🤖 Повезано**: [Поглавље 2: Развој усредсређен на вештачку интелигенцију](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Овај свеобухватни водич за решавање проблема покрива уобичајене проблеме приликом постављања AI решења са AZD-ом, пружајући решења и технике отклањања грешака специфичне за Azure AI услуге.
+Овај свеобухватни водич за решавање проблема обрађује уобичајене проблеме при имплементацији AI решења уз помоћ AZD-а, пружајући решења и технике отклањања грешака специфичне за Azure AI услуге.
 
-> **Опсег:** Команде користе пример имена ресурса; замените их и изаберите одговарајућу претплату. Bicep блокови су фрагменти за убацивање у постојећи шаблон, а не самосталне распоређивања. Python исечци захтевају наведене SDK-ове и конфигурацију апликације. Нема живог Azure распоређивања извршеног за овај преглед.
+> **Опсег:** Команде користе пример имена ресурса; замените их и изаберите одговарајућу претплату. Бицеп блокови су фрагменти за уметање у постојећи шаблон, а не самосталне имплементације. Пајтон примери захтевају наведене SDK и конфигурацију апликације. Није извршена стварна имплементација у Azure за ову ревизију.
 
 ## Садржај
 
 - [Проблеми са Microsoft Foundry Models Service](#microsoft-foundry-models-service-issues)
 - [Проблеми са Azure AI Search](#azure-ai-search-problems)
-- [Проблеми са постављањем Container Apps](#container-apps-deployment-issues)
-- [Грешке аутентификације и дозвола](#authentication-and-permission-errors)
-- [Неуспеси распоређивања модела](#model-deployment-failures)
+- [Проблеми при имплементацији Container Apps](#container-apps-deployment-issues)
+- [Грешке у аутентификацији и дозволама](#authentication-and-permission-errors)
+- [Неуспеси у имплементацији модела](#model-deployment-failures)
 - [Проблеми са перформансама и скалирањем](#performance-and-scaling-issues)
 - [Управљање трошковима и квотама](#cost-and-quota-management)
-- [Алати и технике за отклањање грешака](#debugging-tools-and-techniques)
+- [Алатке и технике за отклањање грешака](#debugging-tools-and-techniques)
 
 ## Проблеми са Microsoft Foundry Models Service
 
-### Проблем: OpenAI услуга недоступна у региону
+### Проблем: Услуга OpenAI није доступна у региону
 
 **Симптоми:**
 ```
@@ -33,7 +33,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Узроци:**
 - Microsoft Foundry Models нису доступни у изабраном региону
-- Квота исцрпљена у одабраним регионима
+- Квота је исцрпљена у жељеним регионима
 - Регионална ограничења капацитета
 
 **Решења:**
@@ -45,7 +45,7 @@ az cognitiveservices model list --location eastus2 --output json
 # Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
-2. **Ажурирајте AZD конфигурацију:**
+2. **Ажурирајте AZД конфигурацију:**
 ```bash
 # For a new environment: choose a supported region with available quota
 azd env set AZURE_LOCATION eastus2
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Проблем: Прекорачење квоте за распоређивање модела
+### Проблем: Прекорачење квоте за имплементацију модела
 
 **Симптоми:**
 ```
@@ -81,8 +81,8 @@ az cognitiveservices usage list \
   --location eastus2 --output table
 ```
 
-2. **Захтевајте повећање квоте:**
-Користите управљачки ток квота у Foundry порталу за погођену претплату, регион, модел и тип распоређивања. Погледајте [званичне смернице о квотама](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Захтев за VM квоту не повећава квоту за модел.
+2. **Затражите повећање квоте:**
+Користите workflow за управљање квотама у Foundry порталу за погођену претплату, регион, модел и тип имплементације. Погледајте [званични водич за квоте](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Захтев за VM квоту не повећава квоту модела.
 
 3. **Оптимизујте капацитет модела:**
 ```bicep
@@ -104,7 +104,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Проблем: Неважећа верзија API-ja
+### Проблем: Неважећа верзија API-ја
 
 **Симптоми:**
 ```
@@ -113,18 +113,18 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Решења:**
 
-1. **Користите подржану верзију API-ja:**
+1. **Користите подржану верзију API-ја:**
 ```python
 # Stable dated Azure OpenAI data-plane API, where supported by your feature
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Проверите компатибилност верзије API-ja:**
-Проверите [Azure OpenAI API lifecycle reference](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM resource-provider верзије API-ја **не** приказују верзије inference/data-plane API-ја. Нови в1 клијенти користе `/openai/v1/` без датумске `api-version`; не мешајте два конфигурације клијената.
+2. **Проверите компатибилност верзије API-ја:**
+Погледајте [Azure OpenAI API lifecycle reference](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM верзије API-ја провајдера ресурса **не** укључују верзије API-ја inference/data-plane. Нови в1 клијенти користе `/openai/v1/` без датумске ознаке `api-version`; немешајте две конфигурације клијената.
 
-## Проблеми са Azure AI претрагом
+## Проблеми са Azure AI Search
 
-### Проблем: Недовољан ниво претплате на претраживачки сервис
+### Проблем: Недовољан ниво ценовног плана услуге претраге
 
 **Симптоми:**
 ```
@@ -133,9 +133,9 @@ Error: Semantic search requires Basic tier or higher
 
 **Решења:**
 
-1. **Користите подржани ниво претплате:**
+1. **Користите подржани ценовни ниво:**
 
-Семантички ранкер захтева Basic или виши ниво. Прелазак са Free/Basic на други ниво може захтевати креирање новог претраживачког сервиса и поновно грађење индекса; измена SKU није загарантовано надоградња на месту.
+Семантички ранкер захтева Basic или виши нивo. Прелазак са Free/Basic на други ниво може захтевати креирање нове услуге претраге и поновно прављење индекса; уређивање SKU није гарантован унутрашњи апгрејд.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Искључите семантичку претрагу (за развој):**
+2. **Онемогућите семантичку претрагу (развој):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -168,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Проблем: Неуспеси при креирању индекса
+### Проблем: Неуспех креирања индекса
 
 **Симптоми:**
 ```
@@ -177,7 +177,7 @@ Error: Cannot create index, insufficient permissions
 
 **Решења:**
 
-1. **Проверите кључеве претраживачког сервиса:**
+1. **Проверите кључеве услуге претраге:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -185,7 +185,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Проверите схему индекса:**
+2. **Проверите шему индекса:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -217,9 +217,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Проблеми са деплојем Container апликација
+## Проблеми при имплементацији Container Apps
 
-### Проблем: Неуспеси при градњи контејнера
+### Проблем: Неуспеси у грађењу контејнера
 
 **Симптоми:**
 ```
@@ -250,7 +250,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Валидирајте зависности:**
+2. **Проверите зависности:**
 ```txt
 # Dependency names for these snippets. Resolve supported versions in your
 # project's environment, test together, then commit a lock/pinned requirements file.
@@ -275,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Проблем: Неуспеси при старту Container апликације
+### Проблем: Неуспеси при покретању Container App
 
 **Симптоми:**
 ```
@@ -284,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Решења:**
 
-1. **Повећајте време за старт:**
+1. **Повећајте време истека покретања:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -350,9 +350,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Грешке при аутентификацији и дозволама
+## Грешке у аутентификацији и дозволама
 
-### Проблем: Одбијене дозволе Managed Identity
+### Проблем: Управљачка идентификација нема дозволу
 
 **Симптоми:**
 ```
@@ -361,7 +361,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Решења:**
 
-1. **Проверите додељене улоге:**
+1. **Проверите доделе улога:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -403,7 +403,7 @@ def test_authentication():
 test_authentication()
 ```
 
-Добијање токена доказује аутентификацију, а не дозволу за позивање модела. Тестирајте намењену операцију посебно. Локално, `DefaultAzureCredential` може користити креатвене акредитиве; у Azure, проверите да ли је изабрана намењена managed identity.
+Добијање токена доказује аутентификацију, не и дозволу за позив модела. Тестирајте намеравану операцију одвојено. Локално, `DefaultAzureCredential` може користити креденцијале програмера; у Azure-у проверите да је одабрана намеравана управљачка идентификација.
 
 ### Проблем: Одбијен приступ Key Vault-у
 
@@ -414,9 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Решења:**
 
-1. **Доделите дозволе за Key Vault:**
+1. **Додајте дозволе за Key Vault:**
 
-Користите следећи access-policy фрагмент само за vault са `enableRbacAuthorization: false`. За vault са RBAC укљученим, користите опцију 2; додавање access policy не даје приступ data-plane у RBAC моду.
+Користите следећи приступни-policy фрагмент само за vault са `enableRbacAuthorization: false`. За vault омогућен за RBAC, користите опцију 2; додавање приступне политике не даје приступ data-plane у режиму RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Користите RBAC уместо Access Policies:**
+2. **Користите RBAC уместо приступних политика:**
 
-Vault мора имати `enableRbacAuthorization: true`; промена модела дозвола захтева планирану миграцију постојећег приступа.
+Vault мора имати `enableRbacAuthorization: true`; промена модела дозвола захтева планирану миграцију постојећих приступа.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -471,7 +471,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Јасно одаберите доступан модел:**
+2. **Изаберите јасно доступан модел:**
 ```bicep
 // Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
@@ -511,13 +511,13 @@ az cognitiveservices account list-models \
 ### Проблем: Високо кашњење одговора
 
 **Симптоми:**
-- Времена одговора > 30 секунди
-- Грешке због истека времена (timeout)
+- Време одговора > 30 секунди
+- Грешке због истека времена
 - Лоше корисничко искуство
 
 **Решења:**
 
-1. **Имплементирајте ограничења времена захтева:**
+1. **Имплементирајте прекиде захтева:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -552,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Подесите аутоматско скалирање:**
+3. **Конфигуришите аутоматско скалирање:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -586,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Проблем: Грешке због недовољне меморије
+### Проблем: Грешке због недостатка меморије
 
 **Симптоми:**
 ```
@@ -595,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Решења:**
 
-1. **Повећајте доделу меморије:**
+1. **Повећајте алокацију меморије:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -646,13 +646,13 @@ class MemoryOptimizedAI:
 ### Проблем: Неочекивано високи трошкови
 
 **Симптоми:**
-- Рачун за Azure већи од очекиваног
-- Потрошња токена премашује процене
-- Активиране аларме за буџет
+- Рачун за Azure виши од очекиваног
+- Потрошња токена прелази процене
+- Погођена су упозорења о буџету
 
 **Решења:**
 
-1. **Имплементирајте контролу трошкова:**
+1. **Имплементирајте контроле трошкова:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-Овај бројач у меморији је илустративан, а не контрола месечне потрошње: ресетује се при рестарту, није заједнички међу репликама и проверава потрошњу само након позива. Право ограничење захтева трајно рачуноводство, резервације без конфликата пре захтева и месечну политику ресета. Метрике меморије контејнера такође морају узети у обзир цгрупа лимите; `psutil.virtual_memory()` није поуздана мера контејнерских ограничења, а скупљање смећа не примењује капу за меморију.
+Овај бројач у меморији је илустративан, а не контрола месечне потрошње: ресетује се при рестарту, није дељен међу репликама, и проверава коришћење тек након позива. Прави лимит захтева трајно рачуноводство, резервације без колизије пре захтева, и месечну политику ресетовања. Метрике меморије контејнера морају узети у обзир cgroup лимите; `psutil.virtual_memory()` није поуздана мера ограничења контејнера, а garbage collection не примењује меморијски капацитет.
 
-2. **Подесите аларме за трошкове:**
+2. **Поставите упозорења о трошковима:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,7 +699,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Декларишите `budgetStartDate` и `budgetEndDate` у свом шаблону. Буџети обавештавају; они не заустављају ресурсе нити наметају јасан лимит потрошње.
+Декларишите `budgetStartDate` и `budgetEndDate` у вашем шаблону. Буџети обавештавају; не заустављају ресурсе нити намећу чврсту границу трошкова.
 
 3. **Оптимизујте избор модела:**
 ```python
@@ -717,9 +717,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4.1'
 ```
 
-## Алатке и технике за дебаговање
+## Алатке и технике за отклањање грешака
 
-### AZD команде за дебаговање
+### AZD команде за отклањање грешака
 
 ```bash
 # Enable verbose logging
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### AZD AI екстензије за дијагностику
+### AZD AI екстензијске команде за дијагностику
 
-Ако сте распоредили агенте користећи `azd ai agent init`, ове додатне алатке су доступне:
+Ако сте имплементирали агенте коришћењем `azd ai agent init`, ове додатне алатке су доступне:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,15 +762,17 @@ azd mcp start
 azd infra generate
 ```
 
-> **Савет:** Користите `azd infra generate` да бисте записали IaC на диск како бисте могли прецизно проверити који су ресурси конфигурисани. Ово је непроцењиво приликом дебаговања проблема са конфигурацијом ресурса. Погледајте [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) за детаљна упутства.
+> **Савет:** Користите `azd infra generate` да бисте записали IaC на диск тако да можете прецизно проверити који су ресурси имплементирани. Ово је непроцењиво при отклањању конфигурационих проблема ресурса. Погледајте [AZD AI CLI референцу](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) за детаљне информације.
 
-**Дијагностика уз свест о издању (2026-11-04):** Агенти `1.0.0-beta.23` захтевају `azd >= 1.37.0`; надоградите основни CLI пре некомпатибилних екстензија. Ово издање агента задржава предупредења за развојне RBAC у коначном излазу распоређивања и идентификује верзију укључену у грешке активирања/прекомерног чекања. Прекомерно чекање не значи да је деплој неуспешан: прегледајте покушану верзију пре поновног покушаја. Исправља и A2A 0.3 позиве који приказују животни циклус поруке уместо комплетних одговора. Основни `azd 1.37.1` исправља пропагацију отказивања преко екстензија; `1.37.2` побољшава кључне потврде о обезбеђивању и руковање отказивањем.
+**GA workflow diagnostics (2026-11-09):** Проверите да је `azd version` најмање 1.37.0 и испитајте `azd ext list --installed`. Прво ажурирајте језгро CLI са `azd update` или инсталером, па онда ажурирајте bundle са `azd ext upgrade microsoft.foundry`. За локалне грешке, проверите текући uv, Python 3.13+ за основни пример, `PYTHONNOUSERSITE: "1"` у конфигурацији услуге, и Azure креденцијале које користи `DefaultAzureCredential`. Држите `azd ai agent run` у покрету док позивате `--local` из другог терминала у пројектном директоријуму.
 
-Ако команда за процену из старијег туторијала само исписује смернице о миграцији, инсталирајте `azure.ai.evaluations` (`1.0.0-beta.2` захтева `azd >= 1.33.0`) и користите `azd ai eval init`, `generate`, и `run start`. Оптимизација `--config` више не прихвата старе датотеке евалуације. Погледајте [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) и [optimization migration](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Успешна имплементација не доказује да програмер има приступ data-plane. Прегледајте RBAC упозорења и [матрицу дозвола hosted-agent](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Истек времена не значи неуспех имплементације: прегледајте покушану верзију и логове пре понављања покушаја. Ранији агенти beta.23 су унапредили ова упозорења и A2A излаз; те историјске исправке су описане у [издању белешки](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), није обавезно инсталирати тај бета.
 
-### Дебаговање апликација
+Ако `azd ai eval` није доступан, инсталирајте `azure.ai.evaluations` посебно; GA bundle га не укључује. Ако команда за евалуацију агента у старом туторијалу само исписује смернице за миграцију, користите посебан `azd ai eval` workflow. Оптимизациони `--config` више не прихвата наследне датотеке евалуације. Погледајте [миграцију евалуације](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) и [миграцију оптимизације](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-1. **Структурирано логовање:**
+### Отклањање грешака апликације
+
+1. **Структурисано логовање:**
 ```python
 import logging
 import json
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Health Check крајње тачке:**
+2. **Ендпоинти за проверу здравља:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -824,7 +829,7 @@ async def detailed_health_check(response: Response):
     return checks
 ```
 
-3. **Мониторинг перформанси:**
+3. **Праћење перформанси:**
 ```python
 import time
 from functools import wraps
@@ -855,39 +860,39 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Чести кодови грешака и решења
+## Уобичајени кодови грешака и решења
 
 | Код грешке | Опис | Решење |
 |------------|-------------|----------|
-| 401 | Неовлашћено | Проверите API кључеве и конфигурацију managed identity |
-| 403 | Забрањено | Проверите додељене улоге у RBAC |
-| 429 | Ограничено учесталошћу | Имплементирајте логики ретрај са експоненцијалним порастом времена |
-| 500 | Унутрашња грешка сервера | Проверите статус и логове имплементације модела |
-| 503 | Сервис није доступан | Проверите здравље сервиса и регионалну доступност |
+| 401 | Неовлашћен приступ | Проверите API кључеве и конфигурацију managed identity |
+| 403 | Забрањено | Проверите доделе улога у RBAC-у |
+| 429 | Ограничен број захтева | Имплементирајте логику поновног покушаја са експоненцијалним задржавањем |
+| 500 | Унутрашња серверска грешка | Проверите статус имплементације модела и логове |
+| 503 | Услуга није доступна | Проверите здравље услуге и регионалну доступност |
 
 ## Следећи кораци
 
-1. **Погледајте [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** за најбоље праксе распоређивања
-2. **Завршите [Production AI Practices](../chapter-08-production/production-ai-practices.md)** за решења спремна за предузећа
-3. **Придружите се [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** за подршку заједнице
-4. **Подајте проблеме** у [AZD GitHub репозиторијум](https://github.com/Azure/azure-dev) за AZD специфичне проблеме
+1. **Прегледајте [Водич за имплементацију AI модела](../chapter-02-ai-development/ai-model-deployment.md)** за најбоље праксе имплементације
+2. **Завршите [Практичне савете за производњи AI](../chapter-08-production/production-ai-practices.md)** за решења спремна за предузећа
+3. **Прикључите се [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** за подршку заједнице
+4. **Поднесите проблеме** у [AZD GitHub репозиторијум](https://github.com/Azure/azure-dev) за проблеме специфичне за AZD
 
 ## Ресурси
 
-- [Azure OpenAI quota and throttling troubleshooting](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Инсталирајте Azure алатке за дијагностику у вашем едитору: `npx skills add microsoft/github-copilot-for-azure`
+- [Решавање проблема квота и успоравања Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Решавање проблема Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Решавање проблема Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Инсталирајте Azure вештине за решавање проблема у вашем едитору: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Навигација кроз поглавља:**
-- **📚 Почетак курса**: [AZD For Beginners](../../README.md)
-- **📖 Тренутно поглавље**: Поглавље 7 - Решавање проблема и дебаговање
-- **⬅️ Претходно**: [Debugging Guide](debugging.md)
-- **➡️ Следеће поглавље**: [Поглавље 8: Производни и корпоративни обрасци](../chapter-08-production/production-ai-practices.md)
-- **🤖 Повезано**: [Поглавље 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Референца**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📚 Почетна страна курса**: [AZD за почетнике](../../README.md)
+- **📖 Тренутно поглавље**: Поглавље 7 - Решавање проблема и отклањање грешака
+- **⬅️ Претходно**: [Водич за отклањање грешака](debugging.md)
+- **➡️ Следеће поглавље**: [Поглавље 8: Обрасци за производњу и предузећа](../chapter-08-production/production-ai-practices.md)
+- **🤖 Повезано**: [Поглавље 2: Развој усредсређен на вештачку интелигенцију](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Референца**: [Azure Developer CLI решавање проблема](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

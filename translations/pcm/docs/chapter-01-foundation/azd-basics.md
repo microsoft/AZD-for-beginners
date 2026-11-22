@@ -11,33 +11,33 @@
 
 > Reviewed against `azd 1.37.2` (November 2026). Bash commands use quoted placeholders that you must replace. Template workflows use `.` to initialize the current directory; without a directory argument, template initialization creates a subdirectory and does not change your shell's working directory. Advanced snippets are illustrative, not complete projects.
 
-This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that accelerates your journey from local development to Azure deployment. You'll learn the fundamental concepts, core features, and understand how azd simplifies cloud-native application deployment.
+Dis lesson go introduce you to Azure Developer CLI (azd), na powerful command-line tool wey dey quicken your waka from local development go Azure deployment. You go learn the basic concepts, main features, and understand how azd dey make cloud-native application deployment easy.
 
 ## Learning Goals
 
-By the end of this lesson, you will:
-- Understand what Azure Developer CLI is and its primary purpose
-- Learn the core concepts of templates, environments, and services
+By di end of dis lesson, you go:
+- Understand wetin Azure Developer CLI be and wetin e dey mainly do
+- Learn di core concepts of templates, environments, and services
 - Explore key features including template-driven development and Infrastructure as Code
-- Understand the azd project structure and workflow
-- Be prepared to install and configure azd for your development environment
+- Understand di azd project structure and workflow
+- Be ready to install and configure azd for your development environment
 
 ## Learning Outcomes
 
-After completing this lesson, you will be able to:
-- Explain the role of azd in modern cloud development workflows
-- Identify the components of an azd project structure
-- Describe how templates, environments, and services work together
-- Understand the benefits of Infrastructure as Code with azd
-- Recognize different azd commands and their purposes
+After you don finish dis lesson, you go fit:
+- Explain di role of azd for modern cloud development workflows
+- Identify di parts of an azd project structure
+- Describe how templates, environments, and services dey work together
+- Understand di benefits of Infrastructure as Code with azd
+- Recognize different azd commands and wetin dem dey do
 
-## What is Azure Developer CLI (azd)?
+## Wetin be Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is a command-line tool designed to accelerate your journey from local development to Azure deployment. It simplifies the process of building, deploying, and managing cloud-native applications on Azure.
+Azure Developer CLI (azd) na command-line tool wey dem design to quicken your waka from local development go Azure deployment. E dey make building, deploying, and managing cloud-native applications for Azure easy.
 
-### What Can You Deploy with azd?
+### Wetin you fit deploy with azd?
 
-azd supports a wide range of workloads—and the list keeps growing. Today, you can use azd to deploy:
+azd fit support plenti kain workloads—and di list dey grow. Today, you fit use azd deploy:
 
 | Workload Type | Examples | Same Workflow? |
 |---------------|----------|----------------|
@@ -46,17 +46,17 @@ azd supports a wide range of workloads—and the list keeps growing. Today, you 
 | **AI-powered applications** | Chat apps with Microsoft Foundry Models, RAG solutions with AI Search | ✅ `azd up` |
 | **Intelligent agents** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
 
-The key insight is that **the azd lifecycle stays the same regardless of what you're deploying**. You initialize a project, provision infrastructure, deploy your code, monitor your app, and clean up—whether it's a simple website or a sophisticated AI agent.
+Di main idea be say **di azd lifecycle dey the same no matter wetin you dey deploy**. You go initialize project, provision infrastructure, deploy your code, monitor your app, and clear things after—whether na simple website or one correct AI agent.
 
-This continuity is by design. azd treats AI capabilities as another kind of service your application can use, not as something fundamentally different. A chat endpoint backed by Microsoft Foundry Models is, from azd's perspective, just another service to configure and deploy.
+Dis continuity na by design. azd treat AI capabilities as another service wey your app fit use, no be as something wey different. A chat endpoint wey Microsoft Foundry Models dey back na, from azd way, just another service to configure and deploy.
 
-### 🎯 Why Use AZD? A Real-World Comparison
+### 🎯 Why You Go Use AZD? Real-Life Comparison
 
-Let's compare deploying a simple web app with database:
+Make we compare how to deploy simple web app wey get database:
 
 #### ❌ WITHOUT AZD: Manual Azure Deployment (30+ minutes)
 
-**Illustrative Bash comparison, not a runnable application starter.** This assumes existing application code, unique resource names, Azure CLI authentication, and any required CLI extensions. Use the template exercise below for the supported end-to-end path.
+**Illustrative Bash comparison, no be runnable application starter.** This one assume say application code dey already, resource names unique, Azure CLI authentication done, plus any needed CLI extensions. Use di template exercise below for di full path wey dem support.
 
 ```bash
 # Step 1: Create resource group
@@ -148,10 +148,10 @@ az webapp deployment source config-zip \
 - ❌ 15+ commands to remember and execute in order
 - ❌ 30-45 minutes of manual work
 - ❌ Easy to make mistakes (typos, wrong parameters)
-- ❌ Credentials require explicit handling; debug logs and shell tracing can expose them
-- ❌ No automated rollback if something fails
-- ❌ Hard to replicate for team members
-- ❌ Different every time (not reproducible)
+- ❌ Credentials need special handling; debug logs and shell tracing fit expose dem
+- ❌ No automatic rollback if something happen
+- ❌ E hard to repeat for team members
+- ❌ Different every time (no fit repeat)
 
 #### ✅ WITH AZD: Automated Deployment (5 commands, 10-15 minutes)
 
@@ -175,46 +175,46 @@ azd up
 ```
 
 **Benefits:**
-- ✅ **5 commands** vs. 15+ manual steps
+- ✅ **5 commands** against 15+ manual steps
 - ✅ **10-15 minutes** total time (mostly waiting for Azure)
-- ✅ **Fewer manual mistakes** - consistent, template-driven workflow
+- ✅ **Less manual mistakes** - consistent, template-driven workflow
 - ✅ **Secure secret handling** - many templates use Azure-managed secret storage
 - ✅ **Repeatable deployments** - same workflow every time
-- ✅ **Repeatable infrastructure definitions** - subject to quotas, region availability, and template versions
-- ✅ **Team-ready** - anyone can deploy with same commands
+- ✅ **Repeatable infrastructure definitions** - depend on quotas, region availability, and template versions
+- ✅ **Team-ready** - anybody fit deploy with same commands
 - ✅ **Infrastructure as Code** - version controlled Bicep templates
-- ✅ **Template-defined monitoring** - Application Insights when included in the template
+- ✅ **Template-defined monitoring** - Application Insights if dem include for template
 
 ### Time and Reliability
 
-The timings above are estimates, not benchmarks. azd reduces the commands you must coordinate, but does not guarantee deployment duration, eliminate errors, or provide automatic application/database rollback. Keep working versions in source control and test recovery procedures.
+Di time dem talk so na estimate, no be benchmark. azd dey reduce di number of commands wey you need arrange, but e no fit guarantee how long deployment go take, no fit stop errors, or do automatic rollback for application/database. Make sure say your working versions dey for source control and test recovery procedures.
 
 ## Core Concepts
 
 ### Templates
-Templates are the foundation of azd. They contain:
+Templates na di foundation for azd. Dem get:
 - **Application code** - Your source code and dependencies
 - **Infrastructure definitions** - Azure resources defined in Bicep or Terraform
 - **Configuration files** - Settings and environment variables
 - **Deployment scripts** - Automated deployment workflows
 
 ### Environments
-Environments represent different deployment targets:
+Environments na different deployment targets:
 - **Development** - For testing and development
 - **Staging** - Pre-production environment
 - **Production** - Live production environment
 
-Each environment maintains its own:
-- Environment name and values; resource isolation depends on the infrastructure template
+Each environment get its own:
+- Environment name and values; resource isolation depend on infrastructure template
 - Configuration settings
 - Deployment state
 
 ### Services
-Services in `azure.yaml` describe deployable application components:
+Services for `azure.yaml` dey describe deployable application parts:
 - **Frontend** - Web applications, SPAs
 - **Backend** - APIs, microservices
 
-Databases and storage are normally provisioned as infrastructure resources, not invented service hosts such as `host: postgres`.
+Databases and storage normally dem provision as infrastructure resources, no be invented service hosts like `host: postgres`.
 
 ## Key Features
 
@@ -230,7 +230,7 @@ azd init --template "<template-name>" .
 ### 2. Infrastructure as Code
 - **Bicep** - Azure's domain-specific language
 - **Terraform** - Multi-cloud infrastructure tool
-- Bicep compiles to ARM templates; raw ARM JSON is not a separate built-in `infra.provider`.
+- Bicep go compile to ARM templates; raw ARM JSON no be separate built-in `infra.provider`.
 
 ### 3. Integrated Workflows
 ```bash
@@ -246,11 +246,11 @@ azd down          # Clean up resources
 ```
 
 #### 🛡️ Safe Infrastructure Planning with Preview
-The `azd provision --preview` command is a game-changer for safe deployments:
-- **Dry-run analysis** - Shows what will be created, modified, or deleted
-- **No infrastructure apply** - Reviews provider changes; inspect project hooks first, since hooks can run commands with side effects
+Di `azd provision --preview` command na correct tool for safe deployments:
+- **Dry-run analysis** - E dey show wetin go create, modify, or delete
+- **No infrastructure apply** - E dey review provider changes; first check project hooks, because hooks fit run commands wey get side effects
 - **Team collaboration** - Share preview results before deployment
-- **Cost planning input** - Inspect proposed SKUs, then price them with the Azure Pricing Calculator; preview does not calculate prices
+- **Cost planning input** - Check proposed SKUs, then price with Azure Pricing Calculator; preview no dey calculate prices
 
 ```bash
 # Example preview workflow
@@ -319,14 +319,14 @@ azd env list
 
 ### 5. Extensions and AI Commands
 
-azd uses an extension system to add capabilities beyond the core CLI. This is especially useful for AI workloads:
+azd get extension system to add more powers beyond di core CLI. Dis one dey especially useful for AI workloads:
 
 ```bash
 # List available extensions
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Initialize an AI agent project interactively
 azd ai agent init
@@ -338,22 +338,24 @@ azd ai agent invoke
 azd mcp start
 ```
 
-**The agent lifecycle, end to end.** Use `azure.ai.agents` for agent lifecycle operations and install `azure.ai.evaluations` separately for evaluation. Use `azd >= 1.37.0` for the combined workflow. You don't need all of these on day one:
+**Di agent lifecycle, end to end.** Di GA `microsoft.foundry` bundle get `azure.ai.agents` plus six other main extensions. Install `azure.ai.evaluations` separate for evaluation. Use `azd >= 1.37.0` for dis workflow. You no need all dis for day one:
 
-| Stage | Command | What it does |
+| Stage | Command | Wetin e do |
 |-------|---------|--------------|
-| **Scaffold** | `azd ai agent init --template <path-to-azure.yaml>` | Adopt a current agent project template |
-| **Test** | `azd ai agent invoke` | Call the agent and view response timing |
-| **Measure** | `azd ai eval init`, `generate`, `run start` | Configure, deploy, and run evaluations using the separate extension |
-| **Improve** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reuse a compatible evaluation to optimize the agent |
-| **Inspect** | `azd ai agent endpoint show` | View the live endpoint configuration |
-| **Clean up** | `azd ai agent delete` | Delete a hosted agent and all its versions |
+| **Scaffold** | `azd ai agent init --template <path-to-azure.yaml>` | Adopt current agent project template |
+| **Run locally** | `azd ai agent run`, then `azd ai agent invoke --local "Test prompt"` for another terminal | Check local activity in Agent Inspector; model calls still dey use Azure |
+| **Deploy** | `azd deploy` | For code-mode hosted agents, upload source for remote Foundry build |
+| **Test** | `azd ai agent invoke` | Call the agent and see how fast e respond |
+| **Measure** | `azd ai eval init`, `generate`, `run start` | Configure, deploy, and run evaluations with separate extension |
+| **Improve** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reuse compatible evaluation to make agent better |
+| **Inspect** | `azd ai agent endpoint show` | View live endpoint configuration |
+| **Clean up** | `azd ai agent delete` | Delete hosted agent and all versions |
 
-> Extensions are covered in detail in [Chapter 2: AI-First Development](../chapter-02-ai-development/agents.md) and the [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
+> Start with di [GA hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga), wey dey cover prerequisites, provisioning, and safe cleanup. Extensions get more talk for di [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
 
 ## 📁 Project Structure
 
-A typical azd project structure:
+Typical azd project structure be dis:
 ```
 my-app/
 ├── .azure/                  # Local environments and selected-environment config
@@ -376,7 +378,7 @@ my-app/
 ## 🔧 Configuration Files
 
 ### azure.yaml
-The main project configuration file:
+Di main project configuration file:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -399,7 +401,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Project-local selection of the default environment (illustrative; managed by azd):
+Project-local choice of default environment (illustrative; managed by azd):
 ```json
 {
   "defaultEnvironment": "dev"
@@ -408,11 +410,11 @@ Project-local selection of the default environment (illustrative; managed by azd
 
 ## 🎪 Common Workflows with Hands-On Exercises
 
-> **💡 Learning Tip:** Follow these exercises in order to build your AZD skills progressively.
+> **💡 Learning Tip:** Follow dis exercises one by one to build your AZD skills steadily.
 
 ### 🎯 Exercise 1: Initialize Your First Project
 
-**Goal:** Create an AZD project and explore its structure
+**Goal:** Create AZD project and explore how e stand
 
 **Steps:**
 ```bash
@@ -431,7 +433,7 @@ ls -la  # View all files including hidden ones
 # - src/ (application code)
 ```
 
-**✅ Success:** You have azure.yaml, infra/, and src/ directories
+**✅ Success:** You get azure.yaml, infra/, and src/ directories
 
 ---
 
@@ -459,7 +461,7 @@ azd show    # View your app URL
 ```
 
 **Expected Time:** 10-15 minutes  
-**✅ Success:** Application URL opens in browser
+**✅ Success:** Application URL open for browser
 
 ---
 
@@ -479,9 +481,9 @@ azd env list
 azd env select dev
 ```
 
-**✅ Success:** Two separate resource groups in Azure Portal
+**✅ Success:** Two different resource groups for Azure Portal
 
-**Cleanup:** Exercise 3 creates a second billable deployment. Delete both when finished:
+**Cleanup:** Exercise 3 dey create second billable deployment. Delete both when you finish:
 
 ```bash
 azd down --environment dev
@@ -492,23 +494,23 @@ azd down --environment staging
 
 ### 🛡️ Destructive Cleanup: `azd down --force --purge`
 
-When you intentionally want to delete the selected environment's Azure resources:
+When you really want to delete selected environment's Azure resources:
 
 ```bash
 azd down --force --purge
 ```
 
-**What it does:**
-- `--force`: No confirmation prompts
-- `--purge`: Also permanently deletes supported soft-deleted resources (for example Key Vaults), where purge protection permits it. It does not delete the local `.azure/` directory.
+**Wetn e do:**
+- `--force`: No confirm prompts
+- `--purge`: Also delete permanently supported soft-deleted resources (like Key Vaults), if purge protection allow am. E no delete local `.azure/` directory.
 
-**Use when:** finished with a disposable environment. Do not treat destructive cleanup as the first response to an authentication, quota, or configuration error.
+**Use am when:** you don finish wit disposable environment. No treat destructive cleanup as first response to authentication, quota, or configuration error.
 
 ---
 
 ## 🎪 Original Workflow Reference
 
-### Starting a New Project
+### Starting New Project
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo .
@@ -538,27 +540,27 @@ azd down --force --purge # Deletes this environment's discovered Azure resources
 ```
 
 ## Understanding `azd down --force --purge`
-The `azd down --force --purge` command is a powerful way to completely tear down your azd environment and all associated resources. Here's a breakdown of what each flag does:
+Di `azd down --force --purge` command na strong tool to destroy your azd environment and all related resources complete. Here na wetin each flag mean:
 ```
 --force
 ```
-- Skips confirmation prompts.
-- Useful for automation or scripting where manual input isn’t feasible.
-- Does not bypass permissions, purge protection, or deletion failures.
+- No need confirm prompt.
+- Useful for automation or script wey no need manual input.
+- No go pass permissions, purge protection, or deletion failure.
 
 ```
 --purge
 ```
-Permanently deletes supported soft-deleted Azure resources without an additional confirmation. Purge protection and permissions still apply. It does **not** remove local environments or the `.azure/` folder.
+For delete finish for good all di soft-deleted Azure resource wey e support without ask you again. Purge protection and permissions still dey apply. E no go **comot** local environments or di `.azure/` folder.
 
 
-### Why use both?
-Use both only when you intend to delete the selected environment's Azure resources and purge recoverable resources. This is destructive cleanup, not a general repair or local-state reset.
+### Why make we use both?
+Use both only if you wan delete di selected environment Azure resources and purge di recoverable resources dem. Dis na destructive cleanup, no be general repair or local-state reset.
 
-It’s especially helpful after manual resource deletions in the Azure portal or when switching templates, environments, or resource group naming conventions.
+E dey especially helpful after you don manually delete resources for Azure portal or when you dey change templates, environments, or resource group naming conventions.
 
 
-### Managing Multiple Environments
+### How to Manage Many Environments
 ```bash
 # Create staging environment
 azd env new staging
@@ -574,11 +576,11 @@ azd env list
 
 ## 🔐 Authentication and Credentials
 
-Distinguish deployment authentication (`azd auth login`) from application SDK authentication (`DefaultAzureCredential`). They are separate. azd does not use Azure CLI credentials by default.
+Make sure say you know the difference between deployment authentication (`azd auth login`) and application SDK authentication (`DefaultAzureCredential`). Dem be different things. azd no dey use Azure CLI credentials by default.
 
 ### Azure CLI Authentication (`az login`)
 
-Run `azd auth login` for azd. The following Azure CLI commands are optional and authenticate `az` commands separately:
+Run `azd auth login` for azd. The next Azure CLI commands no compulsory but dem dey authenticate `az` commands together separate:
 
 ```bash
 # Interactive login (opens browser)
@@ -601,18 +603,18 @@ az account set --subscription "<subscription-id>"
 ```
 
 ### Authentication Flow
-1. **Interactive Login**: Opens your default browser for authentication
-2. **Device Code Flow**: For environments without browser access
-3. **Service Principal**: For automation and CI/CD scenarios
-4. **Managed Identity**: For Azure-hosted applications
+1. **Interactive Login**: E go open your normal browser so you fit authenticate
+2. **Device Code Flow**: For environment wey no get browser access
+3. **Service Principal**: For automation and CI/CD cases
+4. **Managed Identity**: For Azure-hosted applications dem
 
 ### DefaultAzureCredential Chain
 
-`DefaultAzureCredential` is a credential type that provides a simplified authentication experience by automatically trying multiple credential sources in a specific order:
+`DefaultAzureCredential` na one kain credential type wey dey give simple authentication experience by automatically dey try different credential sources for one particular order:
 
 #### Application SDK Credential Chain
 
-Di exact chain depend on di Azure Identity SDK language, version, installed plugins, and options. Dis diagram na conceptual, no be fixed azd authentication sequence; recent SDKs fit still include Azure Developer CLI credentials.
+The exact chain depend on the Azure Identity SDK language, version, plugins wey dey installed, and options dem. This diagram na conceptual, no be fixed azd authentication sequence; recent SDKs fit also get Azure Developer CLI credentials.
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -634,13 +636,13 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
-Dem dey use am automatically for:
+E dey used automatically for:
 - Azure Kubernetes Service (AKS) with Workload Identity
 - GitHub Actions with OIDC federation
 - Other federated identity scenarios
 
 #### 3. Managed Identity
-For Azure resources like:
+For Azure resources dem like:
 - Virtual Machines
 - App Service
 - Azure Functions
@@ -653,8 +655,8 @@ az containerapp show --name "<app-name>" --resource-group "<rg-name>" --query id
 
 #### 4. Developer Tools Integration
 - **Visual Studio**: Automatically dey use signed-in account
-- **VS Code**: Support dey depend on di SDK and im supported broker/plugin setup
-- **Azure CLI**: Dey use `az login` credentials (na di common one for local development)
+- **VS Code**: Support depend on the SDK and how e dey support broker/plugin setup
+- **Azure CLI**: Dey use `az login` credentials (na im dey common for local development)
 
 ### AZD Authentication Setup
 
@@ -700,8 +702,8 @@ azd auth login --check-status
 ```
 
 #### For Production Environments
-- Use **Managed Identity** when you dey run for Azure resources
-- Use **Service Principal** for automation scenarios
+- Use **Managed Identity** when you dey run on Azure resources
+- Use **Service Principal** for automation cases
 - No store credentials for code or configuration files
 - Use **Azure Key Vault** for sensitive configuration
 
@@ -771,9 +773,9 @@ azd up
 
 1. **Credential Storage**: No ever store credentials for source code
 2. **Scope Limitation**: Use least-privilege principle for service principals
-3. **Token Rotation**: Regularly change service principal secrets
+3. **Token Rotation**: Dey regularly rotate service principal secrets
 4. **Audit Trail**: Dey monitor authentication and deployment activities
-5. **Network Security**: Use private endpoints if e fit
+5. **Network Security**: Use private endpoints if e possible
 
 ### Troubleshooting Authentication
 
@@ -827,17 +829,17 @@ azd init --template template1 .
 ```
 
 ### 2. Leverage Templates
-- Start with templates wey dey already
-- Customize dem for your own needs
-- Create templates wey fit reuse for your organization
+- Start with templates wey e already get
+- Customize am for your own needs
+- Create reusable templates for your organization
 
 ### 3. Environment Isolation
 - Use separate environments for dev/staging/prod
-- No ever deploy direct to production from local machine
+- No ever deploy directly to production from your local machine
 - Use CI/CD pipelines for production deployments
 
 ### 4. Configuration Management
-- Use managed identity and Key Vault for secrets; normal `azd env set` values na local plaintext
+- Use managed identity and Key Vault for secrets; ordinary `azd env set` values dey local plaintext
 - Keep configuration for version control
 - Document environment-specific settings
 
@@ -851,25 +853,25 @@ azd init --template template1 .
 
 ### Intermediate (Week 3-4)
 1. Customize templates
-2. Manage multiple environments
+2. Manage many environments
 3. Understand infrastructure code
-4. Set up CI/CD pipelines
+4. Setup CI/CD pipelines
 
 ### Advanced (Week 5+)
 1. Create custom templates
 2. Advanced infrastructure patterns
-3. Multi-region deployments
-4. Enterprise-grade configurations
+3. Deploy to multi-region
+4. Enterprise-level configurations
 
 ## Next Steps
 
 **📖 Continue Chapter 1 Learning:**
-- [Installation & Setup](installation.md) - Get azd installed and configured
+- [Installation & Setup](installation.md) - Make sure say azd dey installed and configured
 - [Your First Project](first-project.md) - Complete hands-on tutorial
-- [Configuration Guide](../chapter-03-configuration/configuration.md) - Advanced configuration options
+- [Configuration Guide](../chapter-03-configuration/configuration.md) - Advanced options for configuration
 
 **🎯 Ready for Next Chapter?**
-- [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - Start building AI applications
+- [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - Start to build AI applications
 
 ## Additional Resources
 
@@ -883,7 +885,7 @@ azd init --template template1 .
 
 ### General Questions
 
-**Q: Wetin be di difference between AZD and Azure CLI?**
+**Q: Wetin be the difference between AZD and Azure CLI?**
 
 A: Azure CLI (`az`) na for managing individual Azure resources. AZD (`azd`) na for managing whole applications:
 
@@ -899,7 +901,7 @@ azd up  # Deploys entire app with all resources
 
 **Think am like dis:**
 - `az` = Operating on individual Lego bricks
-- `azd` = Working with complete Lego sets
+- `azd` = Working with whole Lego sets
 
 ---
 
@@ -912,13 +914,13 @@ azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-You fit learn Bicep later to customize infrastructure. Templates dey provide working examples to learn from.
+You fit learn Bicep later if you want customize infrastructure. Templates dey give examples to help you learn.
 
 ---
 
 **Q: How much e go cost to run AZD templates?**
 
-A: Cost dey different based on region, SKU, uptime, database mode, and model usage. Development environment fit charge plenty money monthly even if e dey idle; no just assume say na $50-150 range e be:
+A: Cost dey vary by region, SKU, uptime, database mode, and model usage. Development environment fit get heavy monthly charges even if e dey idle; no just assume say e go dey always between $50-150:
 
 ```bash
 # Preview resource changes (not prices)
@@ -928,16 +930,16 @@ azd provision --preview
 azd down --force --purge  # Removes all resources
 ```
 
-**Pro tip:** Use free tiers where e dey available:
+**Pro tip:** Use free tiers if dem dey:
 - App Service: F1 (Free) tier
-- Azure OpenAI: no general guaranteed monthly free token allowance; check current model and offer pricing
-- Cosmos DB: accounts wey get eligible provisioned-throughput fit opt into free tier; serverless templates no automatically qualify
+- Azure OpenAI: no steady free tokens every month for general use; make sure you check current model and price
+- Cosmos DB: if your provisioned-throughput account qualify, you fit opt into free tier; serverless templates no automatically qualify
 
 ---
 
-**Q: I fit use AZD with Azure resources wey I don already get?**
+**Q: I fit use AZD with existing Azure resources?**
 
-A: Yes, but e better to start fresh. AZD dey best when e dey manage full lifecycle. For di resources wey don already dey:
+A: Yes, but e better to start fresh. AZD dey work best when e dey manage everything from start to finish. For existing resources:
 
 ```bash
 # Option 1: Import existing resources (advanced)
@@ -951,9 +953,9 @@ azd up  # Creates new environment
 
 ---
 
-**Q: How I go share my project with teammates?**
+**Q: How I go share my project with my teammates?**
 
-A: Commit di AZD project to Git (but NO to di .azure folder):
+A: Commit the AZD project to Git (but no commit .azure folder):
 
 ```bash
 # Already in .gitignore by default
@@ -968,15 +970,15 @@ azd env new "<their-name>-dev"
 azd up
 ```
 
-Everybody go get di same infrastructure from di same templates.
+Everybody go get exactly the same infrastructure from the same templates.
 
 ---
 
 ### Troubleshooting Questions
 
-**Q: "azd up" fail for middle. Wetin I go do?**
+**Q: "azd up" fail halfway. Wetin I go do?**
 
-A: Check di error, fix am, then try again:
+A: Check the error, fix am, then try again:
 
 ```bash
 # Capture detailed diagnostics (redact sensitive values before sharing)
@@ -1006,7 +1008,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<correct-subscription-id>"
 
 ---
 
-**Q: How I go deploy just code changes no reprovision?**
+**Q: How I go deploy changes for code only without reprovisioning?**
 
 A: Use `azd deploy` instead of `azd up`:
 
@@ -1019,14 +1021,14 @@ azd deploy      # Subsequent times: deploy only (fast)
 ```
 
 Speed comparison:
-- `azd up`: 10-15 minutes (e dey provision infrastructure)
+- `azd up`: 10-15 minutes (provisions infrastructure)
 - `azd deploy`: 2-5 minutes (code only)
 
 ---
 
-**Q: I fit customize infrastructure templates?**
+**Q: I fit customize the infrastructure templates?**
 
-A: Yes! Edit di Bicep files for `infra/`:
+A: Yes! Edit the Bicep files inside `infra/`:
 
 ```bash
 # After azd init
@@ -1040,7 +1042,7 @@ azd provision --preview
 azd provision
 ```
 
-**Tip:** Start small - change SKUs first:
+**Tip:** Start small - begin with changing SKUs:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1050,9 +1052,9 @@ sku: {
 
 ---
 
-**Q: How I go delete everything wey AZD create?**
+**Q: How I go delete all the tins wey AZD don create?**
 
-A: One command go remove all resources:
+A: One command fit remove all resources:
 
 ```bash
 azd down --force --purge
@@ -1063,18 +1065,18 @@ azd down --force --purge
 # Local .azure files remain; shared/external resources may remain too.
 ```
 
-**Always run dis when:**
-- Done with testing one template
-- You dey switch to different project
-- You want start fresh
+**Always run this when:**
+- You don finish testing one template
+- You wan switch to different project
+- You wan start fresh
 
-**Cost check:** Make sure you delete inside Azure and check for any resource wey dey retained/shared. Charges wey you don already incur go still apply.
+**Cost check:** Confirm deletion for Azure and check if any resource wey still dey or wey still dey shared. Charges wey don already enter no go change.
 
 ---
 
-**Q: Wetin I suppose do if I accidentally delete resources for Azure Portal?**
+**Q: Wetin I go do if I mistakenly delete resources for Azure Portal?**
 
-A: AZD fit lose sync. Na clean slate approach you suppose use:
+A: AZD state fit no dey align. Clean slate approach:
 
 ```bash
 # 1. Delete remaining resources only if that is your intent
@@ -1093,7 +1095,7 @@ azd provision  # Will create missing resources
 
 **Q: I fit use AZD for CI/CD pipelines?**
 
-A: Yes! Example with GitHub Actions:
+A: Yes! Example for GitHub Actions:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1131,17 +1133,17 @@ jobs:
 
 **Q: How I go handle secrets and sensitive data?**
 
-A: Use Key Vault sharply. `azd env set` dey write normal values to local environment file; e no dey create vault automatically, no dey assign roles, no dey inject secrets into your app.
+A: Use Key Vault clearly. `azd env set` dey write ordinary values for local environment file; e no dey automatically create vault, assign roles, or add secrets inside your application.
 
 ```bash
 # Interactive: create/select a Key Vault secret and save its reference
 azd env set-secret DATABASE_PASSWORD
 ```
 
-You need proper vault permissions. Your infrastructure/app suppose still connect di secret to its user and allow di runtime identity access. No dey print resolved secret values for logs.
+You go need correct permissions for vault. Your infrastructure or application still must wire the secret to the consumer and gree runtime identity access. No dey print resolved secret values inside logs.
 
 **Never commit:**
-- `.azure/` folder (e get environment data)
+- `.azure/` folder (wey get environment data)
 - `.env` files (local secrets)
 - Connection strings
 
@@ -1149,7 +1151,7 @@ You need proper vault permissions. Your infrastructure/app suppose still connect
 
 **Q: I fit deploy to multiple regions?**
 
-A: Yes, create environment per region:
+A: Yes, create environment for each region:
 
 ```bash
 # East US environment
@@ -1166,44 +1168,44 @@ azd up
 azd env list
 ```
 
-For true multi-region apps, customize Bicep templates to deploy to multiple regions at the same time.
+For real multi-region apps, customize Bicep templates to deploy to plenty regions at once.
 
 ---
 
-**Q: Where I go get help if I jam problem?**
+**Q: Where I fit get help if I jam problem?**
 
 1. **AZD Documentation:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli channel
 4. **Stack Overflow:** Tag `azure-developer-cli`
-5. **Dis Course:** [Troubleshooting Guide](../chapter-07-troubleshooting/common-issues.md)
+5. **This Course:** [Troubleshooting Guide](../chapter-07-troubleshooting/common-issues.md)
 
-**Pro tip:** Before you ask, run dis:
+**Pro tip:** Before you ask, run:
 ```bash
 azd show       # Shows current state
 azd version    # Shows your version
 ```
-Include dis info for your question make dem fit help you fast.
+Include this info for your question to get help sharp sharp.
 
 ---
 
-## 🎓 Wetin next?
+## 🎓 Wetin Dey Next?
 
-You don sabi AZD fundamentals now. Choose your own way:
+You don sabi AZD fundamentals now. Choose your path:
 
 ### 🎯 For Beginners:
 1. **Next:** [Installation & Setup](installation.md) - Install AZD for your machine
 2. **Then:** [Your First Project](first-project.md) - Deploy your first app
-3. **Practice:** Finish all 3 exercises for dis lesson
+3. **Practice:** Complete all 3 exercises for this lesson
 
 ### 🚀 For AI Developers:
 1. **Skip to:** [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Deploy:** For one empty project directory, start with `azd init --template get-started-with-ai-chat .`
+2. **Deploy:** For empty project directory, start with `azd init --template get-started-with-ai-chat .`
 3. **Learn:** Build while you deploy
 
 ### 🏗️ For Experienced Developers:
 1. **Review:** [Configuration Guide](../chapter-03-configuration/configuration.md) - Advanced settings
-2. **Explore:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Deep dive into Bicep
+2. **Explore:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Bicep deep dive
 3. **Build:** Create custom templates for your stack
 
 ---

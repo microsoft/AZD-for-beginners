@@ -1,22 +1,22 @@
-# Kapitel 5: Multi-Agent AI Løsninger
+# Kapitel 5: Multi-Agent AI-løsninger
 
-**📚 Kursus**: [AZD For Begyndere](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
+**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker avancerede multi-agent arkitektur mønstre, agent orkestrering og produktionsklare AI-implementeringer til komplekse scenarier.
+Dette kapitel dækker avancerede multi-agent arkitekturmodeller, agentorkestrering og AI-udrulninger klar til produktion til komplekse scenarier.
 
-> Valideret mod `azd 1.27.1` i juli 2026.
+> Kommando-vejledning gennemgået mod den frigivne `azd 1.37.2` reference. Cloud-udrulninger blev ikke udført.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
-- Forstå multi-agent arkitektur mønstre
-- Implementere koordinerede AI agent systemer
+- Forstå multi-agent arkitekturmodeller
+- Udrulle koordinerede AI-agent systemer
 - Implementere agent-til-agent kommunikation
-- Bygge produktionsklare multi-agent løsninger
+- Bygge produktionsklar multi-agent løsninger
 
 ---
 
@@ -24,28 +24,30 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Grundlæggende](multi-agent-basics.md) | Praktisk: implementer en fungerende multi-agent app med `azd up` | 45 min |
-| 2 | [Koordinationsmønstre](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orkestreringsstrategier (fortsætter i Kapitel 6) | 30 min |
-| 3 | [ARM Skabelon Implementering](../../examples/retail-multiagent-arm-template/README.md) | Eksempel på implementering med ét klik | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Praktisk: udrul en fungerende multi-agent app med `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier (fortsætter i Kapitel 6) | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Et-klik udrulningseksempel | 30 min |
 
-> **Start med Lektion 1.** Det er den eneste fuldt praktiske, deployerbare lektion i dette kapitel. Lektion 2 findes i Kapitel 6 (den deles med præ-implementeringsplanlægning), og [Retail Multi-Agent Løsningen](../../examples/retail-scenario.md) er en arkitektur blueprint—en design reference, ikke en ét-kommando skabelon.
+> **Start med Lektion 1.** Det er den eneste fuldt praktiske, udrulningsklare lektion i dette kapitel. Lektion 2 findes i Kapitel 6 (den deles med præ-udrulningsplanlægning), og [Retail Multi-Agent Solution](../../examples/retail-scenario.md) er en arkitektur-blåtryk—et designreference, ikke en ét-kommando skabelon.
 
 ---
 
-## 🚀 Hurtig Start
+## 🚀 Hurtigstart
 
 ```bash
-# Mulighed 1: Udrul fra en skabelon
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Mulighed 2: Udrul fra en agentmanifest (kræver azure.ai.agents-udvidelse)
-azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
+azd ai agent init
 azd up
 ```
 
-> **Hvilken tilgang?** Brug `azd init --template` for at starte fra et fungerende eksempel. Brug `azd ai agent init` når du har dit eget agent manifest. Se [AZD AI CLI referencen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fulde detaljer.
+> **Hvilken tilgang?** Brug `azd init --template` for at starte fra et fungerende eksempel. Brug `azd ai agent init` interaktivt, eller `azd ai agent init --template <path-to-azure.yaml>` for at adoptere et aktuelt agentprojekt. Se [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for versionskrav og evalueringsmigrering.
+
+Kør disse alternativer i separate tomme mapper. GA Foundry workflow kræver `azd >= 1.37.0`; dets interaktive flow genererer ikke den tilpassede Service Bus pipeline i koordineringslektion. For lokal test, kodeudrulning og oprydning mellem nyt og genbrugt projekt, følg [hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
@@ -53,29 +55,29 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Agent<br/>Styrer anmodninger, håndterer arbejdsgang] --> Customer[Kundeagent<br/>Brugerforespørgsler, præferencer]
-    Orchestrator --> Inventory[Lageragent<br/>Lagerbeholdning, ordrer]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
 ## 🎯 Fremhævet Løsning: Retail Multi-Agent
 
-[Retail Multi-Agent Løsningen](../../examples/retail-scenario.md) demonstrerer:
+Løsningen [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrerer:
 
-- **Kunde Agent**: Håndterer brugerinteraktioner og præferencer
-- **Lager Agent**: Styrer lager og ordrebehandling
+- **Kundeagent**: Håndterer brugerinteraktioner og præferencer
+- **Lageragent**: Styrer lagerbeholdning og ordrebehandling
 - **Orkestrator**: Koordinerer mellem agenter
-- **Delt Hukommelse**: Kryds-agent kontekststyring
+- **Delt Hukommelse**: Kontekststyring på tværs af agenter
 
-### Anvendte Tjenester
+### Brugte tjenester
 
-| Tjeneste | Formål |
+| Service | Formål |
 |---------|---------|
-| Microsoft Foundry Modeller | Sprogforståelse |
+| Microsoft Foundry Models | Sprogforståelse |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agent status og hukommelse |
-| Container Apps | Agent hosting |
+| Cosmos DB | Agenttilstand og hukommelse |
+| Container Apps | Agenthosting |
 | Application Insights | Overvågning |
 
 ---
@@ -85,7 +87,7 @@ graph TD
 | Retning | Kapitel |
 |-----------|---------|
 | **Forrige** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Næste** | [Kapitel 6: Præ-Implementering](../chapter-06-pre-deployment/README.md) |
+| **Næste** | [Kapitel 6: Forud for Udrulning](../chapter-06-pre-deployment/README.md) |
 
 ---
 

@@ -1,62 +1,62 @@
-# Corak Penyelarasan Berbilang Ejen
+# Corak Penyelarasan Berbilang Agen
 
-⏱️ **Anggaran Masa**: 60-75 minit membaca; beberapa jam untuk melaksanakan | 💰 **Anggaran Kos**: bergantung kepada beban kerja | ⭐ **Kerumitan**: Lanjutan
+⏱️ **Anggaran Masa**: 60-75 minit membaca; beberapa jam untuk melaksanakan | 💰 **Anggaran Kos**: bergantung pada beban kerja | ⭐ **Kompleksiti**: Lanjutan
 
 **📚 Laluan Pembelajaran:**
 - ← Sebelumnya: [Perancangan Kapasiti](capacity-planning.md) - Strategi saiz dan penyesuaian sumber
-- 🎯 **Anda Di Sini**: Corak Penyelarasan Berbilang Ejen (Orkestrasi, komunikasi, pengurusan keadaan)
-- → Seterusnya: [Pemilihan SKU](sku-selection.md) - Memilih perkhidmatan Azure yang sesuai
+- 🎯 **Anda Di Sini**: Corak Penyelarasan Berbilang Agen (Orkestrasi, komunikasi, pengurusan keadaan)
+- → Seterusnya: [Pemilihan SKU](sku-selection.md) - Memilih perkhidmatan Azure yang betul
 - 🏠 [Laman Utama Kursus](../../README.md)
 
 ---
 
 ## Apa Yang Akan Anda Pelajari
 
-Dengan menyiapkan pelajaran ini, anda akan:
-- Memahami corak **senibina berbilang ejen** dan bila menggunakannya
-- Melaksanakan **corak orkestrasi** (berpusat, terdesentralisasi, hierarki)
-- Mereka bentuk strategi **komunikasi ejen** (sinkron, asinkron, berasaskan acara)
-- Mengurus **keadaan bersama** di kalangan ejen diedarkan
-- Melaksanakan **sistem berbilang ejen** di Azure dengan AZD
-- Menerapkan **corak penyelarasan** untuk senario AI dunia sebenar
-- Memantau dan membaiki sistem ejen diedarkan
+Dengan menyelesaikan pelajaran ini, anda akan:
+- Memahami corak **senibina berbilang agen** dan bila untuk menggunakannya
+- Melaksanakan **corak orkestrasi** (terpusat, terdesentralisasi, hierarki)
+- Mereka bentuk strategi **komunikasi agen** (segerak, tidak segerak, dipacu acara)
+- Mengurus **keadaan dikongsi** merentasi agen tersebar
+- Melaksanakan **sistem berbilang agen** di Azure dengan AZD
+- Membuat aplikasi **corak penyelarasan** untuk senario AI sebenar
+- Memantau dan menyahpepijat sistem agen tersebar
 
-## Kenapa Penyelarasan Berbilang Ejen Penting
+## Kenapa Penyelarasan Berbilang Agen Penting
 
-### Evolusi: Dari Ejen Tunggal ke Berbilang Ejen
+### Evolusi: Dari Agen Tunggal ke Berbilang Agen
 
-**Ejen Tunggal (Mudah):**
+**Agen Tunggal (Mudah):**
 ```
 User → Agent → Response
 ```
 - ✅ Mudah difahami dan dilaksanakan
-- ✅ Pantas untuk tugasan mudah
-- ❌ Terhad oleh keupayaan model tunggal
-- ❌ Tidak boleh menjalankan tugasan kompleks secara selari
-- ❌ Tiada pengkhususan
+- ✅ Cepat untuk tugas mudah
+- ❌ Terhad oleh kemampuan model tunggal
+- ❌ Tidak boleh jalankan tugas kompleks secara selari
+- ❌ Tiada kepakaran khusus
 
-**Sistem Berbilang Ejen (Lanjutan):**
+**Sistem Berbilang Agen (Lanjutan):**
 ```mermaid
 graph TD
     Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
     Orchestrator --> Agent2[Agent2<br/>Code]
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
-- ✅ Ejen khusus untuk tugasan tertentu
+- ✅ Agen khusus untuk tugas tertentu
 - ✅ Pelaksanaan selari untuk kelajuan
 - ✅ Modular dan mudah diselenggara
 - ✅ Lebih baik untuk aliran kerja kompleks
 - ⚠️ Memerlukan logik penyelarasan
 
-**Analogi**: Ejen tunggal ibarat satu orang melakukan semua tugasan. Berbilang ejen adalah seperti satu pasukan di mana setiap ahli mempunyai kemahiran khusus (penyelidik, penulis kod, pemeriksa, penulis) bekerjasama.
+**Analogi**: Agen tunggal ibarat seorang yang buat semua tugas. Berbilang agen seperti satu pasukan dengan setiap ahli mempunyai kemahiran khusus (penyelidik, penulis kod, penyemak, penulis) bekerja bersama.
 
 ---
 
 ## Corak Penyelarasan Teras
 
-### Corak 1: Penyelarasan Berurutan (Rantaian Tanggungjawab)
+### Corak 1: Penyelarasan Berturutan (Rantaian Tanggungjawab)
 
-**Bila digunakan**: Tugasan mesti selesai dalam susunan tertentu, setiap ejen membina hasil dari ejen sebelumnya.
+**Bila digunakan**: Tugas mesti diselesaikan mengikut urutan tertentu, setiap agen membina output sebelumnya.
 
 ```mermaid
 sequenceDiagram
@@ -79,25 +79,25 @@ sequenceDiagram
 ```
 
 **Manfaat:**
-- ✅ Aliran data jelas
-- ✅ Mudah dibetulkan
-- ✅ Susunan pelaksanaan boleh diramalkan
+- ✅ Aliran data yang jelas
+- ✅ Mudah untuk disahpepijat
+- ✅ Urutan pelaksanaan yang boleh diramalkan
 
-**Keterbatasan:**
+**Kelemahan:**
 - ❌ Lebih perlahan (tiada pelaksanaan selari)
-- ❌ Satu kegagalan menghalang keseluruhan rantaian
-- ❌ Tidak dapat menangani tugasan saling bergantung
+- ❌ Kegagalan satu blok keseluruhan rantaian
+- ❌ Tidak boleh kendali tugas saling bergantung
 
 **Contoh Kes Penggunaan:**
 - Saluran penciptaan kandungan (penyelidikan → tulis → sunting → terbit)
-- Penjanaan kod (rancang → laksana → ujian → lancar)
+- Penjanaan kod (rancang → laksanakan → uji → guna)
 - Penjanaan laporan (pengumpulan data → analisis → visualisasi → ringkasan)
 
 ---
 
 ### Corak 2: Penyelarasan Selari (Fan-Out/Fan-In)
 
-**Bila digunakan**: Tugasan bebas boleh dijalankan serentak, hasil digabungkan di akhir.
+**Bila digunakan**: Tugas bebas boleh berjalan serentak, hasil digabungkan di akhir.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Manfaat:**
-- ✅ Pantas (pelaksanaan selari)
-- ✅ Tahan kesilapan (hasil separa boleh diterima)
-- ✅ Boleh diskalakan secara mendatar
+- ✅ Cepat (pelaksanaan selari)
+- ✅ Tahan ralat (hasil separa boleh diterima)
+- ✅ Skala secara mendatar
 
-**Keterbatasan:**
-- ⚠️ Hasil mungkin tiba tidak mengikut urutan
+**Kelemahan:**
+- ⚠️ Hasil mungkin tiba tidak mengikut turutan
 - ⚠️ Memerlukan logik agregasi
 - ⚠️ Pengurusan keadaan kompleks
 
 **Contoh Kes Penggunaan:**
-- Pengumpulan data pelbagai sumber (API + pangkalan data + pengekstrakan web)
-- Analisis persaingan (pelbagai model menjana penyelesaian, terbaik dipilih)
-- Perkhidmatan terjemahan (terjemah ke pelbagai bahasa serentak)
+- Pengumpulan data dari pelbagai sumber (API + pangkalan data + pengikisan web)
+- Analisis persaingan (model berganda hasilkan penyelesaian, pilih terbaik)
+- Perkhidmatan terjemahan (terjemah serentak ke pelbagai bahasa)
 
 ---
 
 ### Corak 3: Penyelarasan Hierarki (Pengurus-Pekerja)
 
-**Bila digunakan**: Aliran kerja kompleks dengan sub-tugasan, perlukan delegasi.
+**Bila digunakan**: Aliran kerja kompleks dengan sub-tugas, delegasi diperlukan.
 
 ```mermaid
 graph TB
@@ -168,23 +168,23 @@ graph TB
 **Manfaat:**
 - ✅ Menangani aliran kerja kompleks
 - ✅ Modular dan mudah diselenggara
-- ✅ Sempadan tanggungjawab jelas
+- ✅ Had tanggungjawab yang jelas
 
-**Keterbatasan:**
+**Kelemahan:**
 - ⚠️ Senibina lebih kompleks
 - ⚠️ Latensi lebih tinggi (berbilang lapisan penyelarasan)
-- ⚠️ Memerlukan orkestrasi canggih
+- ⚠️ Memerlukan orkestrasi yang canggih
 
 **Contoh Kes Penggunaan:**
-- Pemprosesan dokumen perusahaan (klasifikasikan → alihkan → proses → arkib)
-- Saluran data berperingkat (serap → bersih → ubah → analisis → laporan)
-- Aliran kerja automasi kompleks (perancangan → agihan sumber → pelaksanaan → pemantauan)
+- Pemprosesan dokumen perusahaan (klasifikasi → hala → proses → arkib)
+- Saluran data bertahap (masuk → bersihkan → transformasi → analisa → laporan)
+- Aliran kerja automasi kompleks (perancangan → peruntukan sumber → pelaksanaan → pemantauan)
 
 ---
 
-### Corak 4: Penyelarasan Berasaskan Acara (Terbit-Langgan)
+### Corak 4: Penyelarasan Dipacu Acara (Terbit-Langgan)
 
-**Bila digunakan**: Ejen perlu bertindak balas kepada acara, hubungan longgar diinginkan.
+**Bila digunakan**: Agen perlu bertindak balas pada acara, ikatan longgar diingini.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Manfaat:**
-- ✅ Hubungan longgar antara ejen
-- ✅ Mudah tambah ejen baru (cuma langgan)
-- ✅ Pemprosesan asinkron
-- ✅ Tahan lasak (pesanan kekal)
+- ✅ Ikatan longgar antara agen
+- ✅ Mudah tambah agen baru (cukup langgan)
+- ✅ Pemprosesan tidak segerak
+- ✅ Tahan lasak (persistensi mesej)
 
-**Keterbatasan:**
+**Kelemahan:**
 - ⚠️ Konsistensi akhirnya
-- ⚠️ Sukar membaiki
+- ⚠️ Penyahpepijatan kompleks
 - ⚠️ Cabaran susunan mesej
 
 **Contoh Kes Penggunaan:**
 - Sistem pemantauan masa nyata (amaran, papan pemuka, log)
-- Pemberitahuan pelbagai saluran (emel, SMS, tolak, Slack)
+- Pemberitahuan berbilang saluran (e-mel, SMS, push, Slack)
 - Saluran pemprosesan data (berbilang pengguna data sama)
 
 ---
 
-### Corak 5: Penyelarasan Berdasarkan Konsensus (Pengundian/Kuorum)
+### Corak 5: Penyelarasan Berasaskan Konsensus (Pelarisan/Kuorum)
 
-**Bila digunakan**: Perlu persetujuan dari berbilang ejen sebelum meneruskan.
+**Bila digunakan**: Perlu persetujuan dari pelbagai agen sebelum meneruskan.
 
 ```mermaid
 graph TB
@@ -248,25 +248,25 @@ graph TB
 ```
 
 **Manfaat:**
-- ✅ Ketepatan lebih tinggi (berbilang pendapat)
-- ✅ Tahan kesilapan (kegagalan minoriti boleh diterima)
-- ✅ Penjamin kualiti terbina dalam
+- ✅ Ketepatan lebih tinggi (pelbagai pandangan)
+- ✅ Tahan ralat (kegagalan minoriti boleh diterima)
+- ✅ Jaminan kualiti terbina dalam
 
-**Keterbatasan:**
-- ❌ Mahal (panggilan berbilang model)
-- ❌ Lebih perlahan (menunggu semua ejen)
+**Kelemahan:**
+- ❌ Mahal (panggilan model berganda)
+- ❌ Lebih perlahan (menunggu semua agen)
 - ⚠️ Perlu penyelesaian konflik
 
 **Contoh Kes Penggunaan:**
-- Moderasi kandungan (berbilang model semak kandungan)
-- Semakan kod (berbilang linter/penganalisis)
-- Diagnosis perubatan (berbilang model AI, pengesahan pakar)
+- Pengawala kandungan (pelbagai model menyemak kandungan)
+- Semakan kod (pelbagai linter/penganalisis)
+- Diagnosa perubatan (pelbagai model AI, pengesahan pakar)
 
 ---
 
 ## Gambaran Senibina
 
-### Sistem Berbilang Ejen Lengkap di Azure
+### Sistem Berbilang Agen Lengkap di Azure
 
 ```mermaid
 graph TB
@@ -318,15 +318,15 @@ graph TB
 
 | Komponen | Tujuan | Perkhidmatan Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Titik masuk, had kadar, pengesahan | Pengurusan API |
-| **Orchestrator** | Menyelaras aliran kerja ejen | Aplikasi Kontena |
-| **Message Queue** | Komunikasi asinkron | Service Bus / Event Hubs |
-| **Ejen** | Pekerja AI khusus | Aplikasi Kontena / Fungsi |
-| **State Store** | Keadaan bersama, pengesanan tugasan | Cosmos DB |
-| **Artifact Storage** | Dokumen, keputusan, log | Penyimpanan Blob |
-| **Monitoring** | Jejak diedarkan, log | Application Insights |
+| **API Gateway** | Titik masuk, batasan kadar, pengesahan | Pengurusan API |
+| **Orkestrator** | Menyelaras aliran kerja agen | Aplikasi Kontena |
+| **Barisan Mesej** | Komunikasi tidak segerak | Service Bus / Event Hubs |
+| **Agen** | Pekerja AI khusus | Aplikasi Kontena / Fungsi |
+| **Penyimpan Keadaan** | Keadaan dikongsi, penjejakan tugas | Cosmos DB |
+| **Penyimpanan Artifak** | Dokumen, hasil, log | Penyimpanan Blob |
+| **Pemantauan** | Jejak tersebar, log | Application Insights |
 
-Antrian/topik Service Bus dan Event Hubs adalah perkhidmatan berlainan dengan model penyampaian/penggunaan berlainan; Event Hubs bukan pengganti terus bagi kod pekerja Service Bus di bawah. Paralelisme, mesej disimpan, dan pengundian model sendiri tidak menjamin ketahanan kesilapan atau ketepatan lebih tinggi.
+Barisan/topik Service Bus dan Event Hubs adalah perkhidmatan berbeza dengan model penghantaran/penggunaan berbeza; Event Hubs bukan pengganti langsung untuk kod pekerja Service Bus di bawah. Pelaksanaan selari, mesej berterusan, dan pelarisan model tidak menjamin ketahanan ralat atau ketepatan lebih tinggi dengan sendirinya.
 
 ---
 
@@ -351,29 +351,29 @@ docker --version
 ### Keperluan Azure
 
 - Langganan Azure aktif
-- Kebenaran untuk mencipta:
+- Kebenaran untuk membuat:
   - Aplikasi Kontena
-  - Namespace Service Bus
+  - Ruang nama Service Bus
   - Akaun Cosmos DB
-  - Akaun Penyimpanan
+  - Akaun penyimpanan
   - Application Insights
 
 ### Prasyarat Pengetahuan
 
-Anda harus sudah menyiapkan:
+Anda harus telah menyelesaikan:
 - [Pengurusan Konfigurasi](../chapter-03-configuration/configuration.md)
 - [Pengesahan & Keselamatan](../chapter-03-configuration/authsecurity.md)
-- [Contoh Mikroservis](../../../../examples/microservices)
+- [Contoh Mikrosistem](../../../../examples/microservices)
 
 ---
 
 ## Panduan Pelaksanaan
 
-> **Reka bentuk serpihan, bukan makmal yang boleh digunakan:** Pokok projek dan label `File:` di bawah menerangkan fail yang perlu dibuat dalam projek anda sendiri; repositori ini tidak mengandungi aplikasi lengkap `multi-agent-system`. Bahagian hilang termasuk templat utama/parameter, persekitaran/daftar Aplikasi Kontena, Dockerfile dan kunci kebergantungan, persediaan pangkalan data/kontena Cosmos, penempatan model, konfigurasi identiti/peranan, peraturan skala, dan pekerja/antrian selari. Jangan jangka `azd init` menjana fail ini atau `azd up` melaksanakan snippet tanpa ubah suai. Untuk titik mula boleh dilaksanakan, lengkapkan [Asas Berbilang Ejen](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Reka bentuk serpihan, bukan makmal boleh dikerahkan:** Struktur projek dan label `File:` di bawah menerangkan fail yang perlu dibuat dalam projek anda sendiri; repositori ini tidak mengandungi aplikasi `multi-agent-system` lengkap. Bahagian hilang termasuk templat utama/parameter, persekitaran/pangkalan data Aplikasi Kontena, Dockerfile dan kunci pergantungan, penubuhan pangkalan data/kontena Cosmos, pelaksanaan model, konfigurasi identiti/peranan, peraturan penskalaan, dan pekerja/barisan selari. Jangan jangka `azd init` menjana fail ini atau `azd up` mengerahkan snipet tanpa ubah. Untuk titik permulaan yang boleh dijalankan, lengkapkan [Asas Berbilang Agen](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Andaian runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, dan (untuk pemantauan) `azure-monitor-opentelemetry`; letakkan `shared` dalam laluan import Python dalam setiap imej perkhidmatan. Kontena `agent-state/tasks` Cosmos mesti sudah wujud dengan kunci partition `/id`. Sambungan berasaskan kunci memudahkan serpihan ini, bukan untuk panduan produksi: lebih suka identiti diurus dengan peranan data-plane Service Bus/Cosmos/OpenAI yang terbatas skop. Jangan dedahkan kunci dalam output atau log.
+**Andaian Masa Jalan:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, dan (untuk pemantauan) `azure-monitor-opentelemetry`; letakkan `shared` di laluan import Python dalam setiap imej perkhidmatan. Kontena Cosmos `agent-state/tasks` mesti sudah ada dengan kekunci pengasingan `/id`. Sambungan berasaskan kunci mempermudah serpihan ini, bukan panduan pengeluaran: utamakan identiti terurus dengan peranan data-pesawat Service Bus/Cosmos/OpenAI tertentu. Jangan dedahkan kunci dalam output atau log.
 
-Penyampaian Service Bus adalah **sekurang-kurangnya sekali**. Kekalkan idempoten per tugas **dan langkah**, gunakan persaingan optimistik (ETags) untuk baca/ubah/tulis keadaan, dan perbaharui kunci mesej semasa pemprosesan panjang. Pengurus keadaan mudah di bawah hanya sequential dan tidak melaksanakan jaminan produksi ini.
+Penghantaran Service Bus adalah **sekurang-kurangnya sekali**. Kekalkan idempotensi bagi setiap tugas **dan langkah**, gunakan keserentakan optimistik (ETags) untuk baca/ubah/tulis keadaan, dan perbaharui kunci mesej semasa pemprosesan lama. Pengurus keadaan mudah di bawah adalah hanya berturutan dan tidak melaksanakan jaminan pengeluaran ini.
 
 ### Struktur Projek
 
@@ -407,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Pelajaran 1: Corak Penyelarasan Berurutan
+## Pelajaran 1: Corak Penyelarasan Berturutan
 
 ### Pelaksanaan: Saluran Penciptaan Kandungan
 
-Mari reka saluran berurutan: Penyelidikan → Tulis → Sunting. Penerbitan di luar contoh ini.
+Mari reka saluran berturutan: Penyelidikan → Tulis → Sunting. Penerbitan di luar contoh ini.
 
 ### 1. Konfigurasi AZD
 
@@ -502,7 +502,7 @@ output namespace string = serviceBusNamespace.name
 // securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Pengurus Keadaan Bersama
+### 3. Pengurus Keadaan Dikongsi
 
 **Fail: `src/shared/state_manager.py`**
 
@@ -639,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Ejen Penyelidik
+### 5. Agen Penyelidik
 
 **Fail: `src/agents/research/app.py`**
 
@@ -729,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Ejen Penulis
+### 6. Agen Penulis
 
 **Fail: `src/agents/writer/app.py`**
 
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Ejen Penyunting
+### 7. Agen Penyunting
 
 **Fail: `src/agents/editor/app.py`**
 
@@ -893,16 +893,16 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Penghantaran dan Ujian
+### 8. Deploy dan Uji
 
-Arahan ini hanya digunakan **selepas anda melaksanakan fail projek yang hilang**. Inisialisasi ejen Foundry interaktif adalah aliran kerja berasingan; ia tidak menjana reka bentuk Service Bus ini.
+Perintah ini hanya digunakan **selepas anda melaksanakan fail projek yang hilang**. Inisialisasi agen Foundry interaktif adalah aliran kerja berasingan; ia tidak menjana reka bentuk Service Bus ini.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
@@ -919,7 +919,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Output dijangkakan:**
+**✅ Output dijangka:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -930,13 +930,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Semak kemajuan tugasan:**
+**Semak kemajuan tugas:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Output dijangkakan (selesai):**
+**✅ Output dijangka (selesai):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -966,9 +966,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Pelajaran 2: Corak Penyelarasan Selari
 
-### Pelaksanaan: Pengumpul Penyelidikan Pelbagai Sumber
+### Pelaksanaan: Pengumpul Penyelidikan Berbilang Sumber
 
-Mari bina sistem selari yang mengumpul maklumat dari berbilang sumber serentak.
+Mari bina sistem selari yang mengumpul maklumat dari pelbagai sumber serentak.
 
 ### Orkestrator Selari
 
@@ -1124,9 +1124,9 @@ if __name__ == '__main__':
 ```
 
 **Manfaat Corak Selari:**
-- ⚡ **Potensi latensi lebih rendah** (dibatasi oleh pekerja paling lambat tambah overhed penyelarasan)
-- 🔄 **Boleh sokong hasil separa** dengan tarikh akhir dan polisi kegagalan eksplisit (tidak dilaksanakan oleh pengumpul asas)
-- 📈 **Boleh diskalakan** (mudah tambah ejen)
+- ⚡ **Potensi latensi lebih rendah** (dihadkan oleh pekerja paling lambat tambah overhead penyelarasan)
+- 🔄 **Boleh sokong hasil separa** dengan tarikh akhir eksplisit dan polisi kegagalan (tidak dilaksanakan oleh pengumpul asas)
+- 📈 **Boleh skala** (tambah agen dengan mudah)
 
 ---
 
@@ -1134,9 +1134,9 @@ if __name__ == '__main__':
 
 ### Latihan 1: Tambah Pengendalian Tamat Masa ⭐⭐ (Sederhana)
 
-**Matlamat**: Melaksanakan logik tamat masa supaya pengumpul tidak menunggu terlalu lama bagi ejen perlahan.
+**Matlamat**: Melaksanakan logik tamat masa supaya pengumpul tidak menunggu selamanya untuk agen lambat.
 
-**Titik mula:** Jalankan simulasi tarikh akhir tempatan ini sebelum menyatukannya ke dalam pekerja antrian. Tamat masa yang diperiksa hanya apabila mesej lain tiba tidak akan dicetus jika pekerja hilang tidak menghantar apa-apa.
+**Titik permulaan:** Jalankan simulasi tarikh akhir lokal ini sebelum mengintegrasikan ke dalam pekerja barisan. Tamat masa yang diperiksa hanya apabila mesej lain tiba tidak pernah dipicu jika pekerja hilang tidak menghantar apa-apa.
 
 **Langkah-langkah**:
 
@@ -1164,15 +1164,15 @@ async def main():
 asyncio.run(main())
 ```
 
-2. **Output dijangkakan:**
+2. **Output dijangka:**
 
 ```text
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Integrasi sistem antrian (tugas reka bentuk):** Kekalkan tarikh akhir penyampaian dan ejen dijangka semasa mencipta tugasan, jalankan pembersihan tarikh akhir berkala bebas dari hasil masuk, pastikan hasil separa atomik selesai, dan abaikan mesej lewat/pendua bagi tugasan selesai. Tamat masa tempatan tidak membatalkan pekerja jauh.
+3. **Integrasi sistem barisan (tugas reka bentuk):** Kekalkan tarikh akhir penghantaran dan agen dijangka ketika mencipta tugas, jalankan sapuan tarikh akhir berkala bebas dari hasil masuk, selesai atomik hasil separa, dan abaikan mesej lewat/pendua untuk tugas selesai. Tamat masa lokal tidak membatalkan pekerja jauh.
 
-Untuk projek anda sahaja yang dilaksanakan:
+Untuk projek yang anda laksanakan sahaja:
 
 ```bash
 azd deploy aggregator
@@ -1187,21 +1187,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Kriteria Kejayaan:**
-- ✅ Ujian tempatan kembali selepas tarikh akhir satu saat walaupun ejen tidak lengkap
+- ✅ Ujian lokal kembali selepas tarikh akhir satu saat walaupun agen tidak lengkap
 - ✅ Respons menunjukkan hasil separa (`"timed_out": true`)
-- ✅ Hasil yang tersedia dikembalikan (3 daripada 4 ejen)
+- ✅ Hasil tersedia dikembalikan (3 dari 4 agen)
 
 **Masa**: 20-25 minit
 
 ---
 
-### Latihan 2: Melaksanakan Logik Cuba Semula ⭐⭐⭐ (Lanjutan)
+### Latihan 2: Melaksanakan Logik Cubaan Semula ⭐⭐⭐ (Lanjutan)
 
-**Matlamat**: Cuba semula tugasan ejen yang gagal secara automatik sebelum menyerah kalah.
+**Matlamat**: Cubaan semula tugas agen yang gagal secara automatik sebelum menyerah.
 
 **Langkah-langkah**:
 
-1. **Gunakan kiraan penghantaran Service Bus bukan pengiraan cuba semula tersuai:**
+1. **Gunakan kiraan penghantaran Service Bus daripada pengira cubaan semula tersuai yang digalakkan semula:**
 
 ```python
 import json
@@ -1210,7 +1210,7 @@ import time
 # Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Tambah pengendali cuba semula ke ejen:**
+2. **Tambah pengendali cubaan semula ke agen:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1240,7 +1240,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Pantau antrian surat mati:**
+3. **Pantau barisan surat mati:**
 
 ```python
 def monitor_dead_letters():
@@ -1259,22 +1259,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Kriteria Kejayaan:**
-- ✅ Tugasan gagal cuba semula secara automatik (sehingga 3 kali)
-- ✅ Penangguhan berkadar antara cubaan semula (5s, 10s, 20s), dengan pembaharuan kunci mesej di mana perlu
-- ✅ Selepas maksimum cubaan semula, mesej dihantar ke antrian surat mati
-- ✅ Mesej surat mati boleh diperiksa; ulang main memerlukan aliran kerja pemulihan idempoten berasingan
+- ✅ Tugas gagal cuba semula secara automatik (hingga 3 kali)
+- ✅ Jeda eksponen antara cubaan semula (5s, 10s, 20s), dengan pembaharuan kunci mesej jika perlu
+- ✅ Selepas cubaan maksimum, mesej dihantar ke barisan surat mati
+- ✅ Mesej surat mati boleh diperiksa; main semula memerlukan aliran pemulihan idempotent berasingan
 
 **Masa**: 30-40 minit
 
 ---
 
-### Latihan 3: Melaksanakan Pemutus Litar (Circuit Breaker) ⭐⭐⭐ (Lanjutan)
+### Latihan 3: Melaksanakan Pemutus Litar ⭐⭐⭐ (Lanjutan)
 
-**Matlamat**: Mengelakkan kegagalan bertingkat dengan menghentikan permintaan kepada ejen yang gagal.
+**Matlamat**: Mengelakkan kegagalan berangkai dengan menghentikan permintaan ke agen yang gagal.
 
 **Langkah-langkah**:
 
-1. **Cipta kelas pemutus litar:**
+1. **Bina kelas pemutus litar:**
 
 ```python
 from enum import Enum
@@ -1326,7 +1326,7 @@ class CircuitBreaker:
             raise
 ```
 
-2. **Gunakan pada panggilan ejen:**
+2. **Gunakan pada panggilan agen:**
 
 ```python
 # In orchestrator
@@ -1348,7 +1348,7 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Litar ini melindungi **operasi penghantaran**, bukan penyelesaian oleh pekerja jauh: berjaya memasukkan mesej tidak bermakna agen masih hidup. `send_message` adalah fungsi penghantar aplikasi anda. Untuk litar pelaksanaan, masukkan kegagalan/tamat tugas yang diperhatikan ke dalam penyelaras tahan lama. Kelas berasaskan memori ini adalah demonstrasi satu benang, bukan pemutus litar diedarkan.
+Litar ini melindungi **operasi penghantaran**, bukan penyempurnaan oleh pekerja jauh: berjaya memasukkan mesej ke dalam antrian tidak bermakna sama ada agen itu masih hidup. `send_message` adalah fungsi penghantar aplikasi anda. Untuk litar pelaksanaan, salurkan kegagalan/masa tamat tugasan yang diperhatikan ke penyelaras yang tahan lasak. Kelas dalam memori ini adalah demonstrasi berasaskan satu benang, bukan pemutus litar teragih.
 
 3. **Uji pemutus litar secara tempatan:**
 
@@ -1370,7 +1370,7 @@ print("Circuit breaker recovery verified")
 
 **✅ Kriteria Kejayaan:**
 - ✅ Selepas 5 kegagalan, litar terbuka (menolak permintaan)
-- ✅ Selepas 60 saat, litar menjadi separuh terbuka (menguji pemulihan)
+- ✅ Selepas 60 saat, litar menjadi separa terbuka (menguji pemulihan)
 - ✅ Agen lain terus bekerja seperti biasa
 - ✅ Litar tutup secara automatik apabila agen pulih
 
@@ -1378,7 +1378,7 @@ print("Circuit breaker recovery verified")
 
 ---
 
-## Pemantauan dan Pengendalian Ralat
+## Pemantauan dan Penyahpepijatan
 
 ### Penjejakan Teragih dengan Application Insights
 
@@ -1427,7 +1427,7 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
 
 ### Pertanyaan Application Insights
 
-**Jejak aliran kerja multi-agen:**
+**Jejaki aliran kerja multi-agen:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1470,22 +1470,22 @@ exceptions
 
 ### Kos Sistem Multi-Agen (Anggaran Bulanan)
 
-Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **$240-565/bulan**. Sahkan kadar serantau semasa, jam replika aktif/bebas, campuran token input/output, penyimpanan, dan telemetri. Serverless tiada had minimum penyediaan aliran tetapi masih mengenakan bayaran untuk permintaan dan penyimpanan.
+Angka perancangan ilustratif sahaja, bukan sebut harga: jumlah di bawah adalah **$240-565/bulan**. Sahkan kadar serantau semasa, jam replika aktif/diam, campuran token input/output, penyimpanan, dan telemetri. Serverless tidak mempunyai minimum peruntukan aliran tetapi masih mengenakan bayaran untuk permintaan dan penyimpanan.
 
 | Komponen | Konfigurasi | Kos |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Aplikasi Kontena (1 vCPU, 2GB) | $30-50 |
+| **Penganjur** | 1 Aplikasi Kontena (1 vCPU, 2GB) | $30-50 |
 | **4 Agen** | 4 Aplikasi Kontena (0.5 vCPU, 1GB setiap satu) | $60-120 |
 | **Service Bus** | Tahap standard, 10M mesej | $10-20 |
-| **Cosmos DB** | Serverless, 5GB penyimpanan, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB penyimpanan, 100K operasi | $5-10 |
-| **Application Insights** | 5GB penyerapan | $10-15 |
+| **Cosmos DB** | Serverless, 5GB penyimpanan, 1M RU | $25-50 |
+| **Penyimpanan Blob** | 10GB penyimpanan, 100K operasi | $5-10 |
+| **Application Insights** | 5GB pengambilan | $10-15 |
 | **Model Microsoft Foundry** | gpt-4.1, 10M token | $100-300 |
 | **Jumlah** | | **$240-565/bulan** |
 
 ### Strategi Pengoptimuman Kos
 
-1. **Gunakan serverless jika boleh:**
+1. **Gunakan serverless bila boleh:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1494,7 +1494,7 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
    }
    ```
 
-2. **Skala agen ke sifar semasa tidak aktif:**
+2. **Tingkatkan agen ke sifar apabila tidak aktif:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1508,7 +1508,7 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Simpan hasil yang kerap digunakan dalam cache:**
+4. **Cache hasil yang sering digunakan:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1528,7 +1528,7 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Laksanakan log menyeluruh**
+2. **Laksanakan log lengkap**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1549,7 +1549,7 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
    }
    ```
 
-5. **Pantau antrian surat mati**
+5. **Pantau antrian 'dead letter'**
    ```python
    # Regular monitoring of failed messages
    monitor_dead_letters()
@@ -1563,7 +1563,7 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Jangan sekat benang agen**
+2. **Jangan blokir benang agen**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1578,7 +1578,7 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Jangan gunakan cubaan tanpa henti**
+4. **Jangan guna ulangan tanpa had**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1593,9 +1593,9 @@ Angka perancangan ilustrasi sahaja, bukan sebut harga: jumlah di bawah adalah **
 **Gejala:**
 - Mesej terkumpul dalam antrian
 - Agen tidak memproses
-- Status tugasan kekal "pending"
+- Status tugasan tersekat pada "pending"
 
-**Diagnosa:**
+**Diagnosis:**
 ```bash
 # Check queue depth
 az servicebus queue show \
@@ -1619,7 +1619,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Periksa antrian surat mati:**
+2. **Periksa antrian dead letter:**
    ```bash
    az servicebus queue show \
      --resource-group "$RG_NAME" \
@@ -1630,14 +1630,14 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Masalah: Tugasan tamat waktu/tidak pernah selesai
+### Masalah: Tugasan tamat masa/tidak selesai
 
 **Gejala:**
 - Status tugasan kekal "in_progress"
-- Beberapa agen selesai, yang lain tidak
+- Sesetengah agen selesai, yang lain tidak
 - Tiada mesej ralat
 
-**Diagnosa:**
+**Diagnosis:**
 ```bash
 # Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -1648,7 +1648,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Penyelesaian:**
 
-1. **Laksanakan tamat waktu dalam pengumpul (Latihan 1)**
+1. **Laksanakan tamat masa pada pengumpul (Latihan 1)**
 
 2. **Periksa kegagalan agen menggunakan Azure Monitor:**
    ```bash
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Sahkan semua agen beroperasi:**
+3. **Sahkan semua agen berjalan:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1674,7 +1674,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Pola Orkestrasi Agen AI](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+- [Corak Orkestrasi Agen AI](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Langkah Seterusnya dalam Kursus Ini
 - ← Sebelumnya: [Perancangan Kapasiti](capacity-planning.md)
@@ -1682,7 +1682,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - 🏠 [Laman Utama Kursus](../../README.md)
 
 ### Contoh Berkaitan
-- [Contoh Perkhidmatan Mikro](../../../../examples/microservices) - Pola komunikasi perkhidmatan
+- [Contoh Mikroservis](../../../../examples/microservices) - Corak komunikasi perkhidmatan
 - [Contoh Model Microsoft Foundry](../../../../examples/azure-openai-chat) - Integrasi AI
 
 ---
@@ -1690,24 +1690,24 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ## Ringkasan
 
 **Anda telah belajar:**
-- ✅ Lima pola penyelarasan (sekuen, selari, hierarki, dipacu peristiwa, konsensus)
-- ✅ Seni bina multi-agen pada Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Pengurusan keadaan merentasi agen diedarkan
-- ✅ Pengendalian tamat waktu, cubaan semula, dan pemutus litar
-- ✅ Pemantauan dan pengendalian ralat sistem teragih
+- ✅ Lima corak koordinasi (berurutan, selari, hierarki, dipacu acara, konsensus)
+- ✅ Seni bina multi-agen di Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Pengurusan keadaan merentasi agen teragih
+- ✅ Pengendalian tamat masa, ulangan, dan pemutus litar
+- ✅ Pemantauan dan penyahpepijatan sistem teragih
 - ✅ Strategi pengoptimuman kos
 
-**Pengajaran Utama:**
-1. **Pilih pola yang tepat** - Sekuen untuk aliran kerja berurutan, selari untuk kelajuan, dipacu peristiwa untuk fleksibiliti
-2. **Urus keadaan dengan teliti** - Gunakan Cosmos DB atau setara untuk keadaan bersama
-3. **Tangani kegagalan dengan berhati-hati** - Tamat waktu, cubaan semula, pemutus litar, antrian surat mati
-4. **Pantau semuanya** - Penjejakan teragih penting untuk pengendalian ralat
-5. **Optimumkan kos** - Skala ke sifar, gunakan serverless, laksanakan cache
+**Pokok Utama:**
+1. **Pilih corak yang betul** - Berurutan untuk aliran kerja berperingkat, selari untuk kelajuan, dipacu acara untuk fleksibiliti
+2. **Urus keadaan dengan teliti** - Gunakan Cosmos DB atau yang serupa untuk keadaan bersama
+3. **Tangani kegagalan dengan baik** - Tamat masa, ulangan, pemutus litar, antrian dead letter
+4. **Pantau semuanya** - Penjejakan teragih penting untuk penyahpepijatan
+5. **Optimumkan kos** - Skala ke sifar, gunakan serverless, laksanakan caching
 
 **Langkah Seterusnya:**
-1. Lengkapkan latihan praktikal
+1. Selesaikan latihan praktikal
 2. Bina sistem multi-agen untuk kes penggunaan anda
-3. Pelajari [Pemilihan SKU](sku-selection.md) untuk mengoptimumkan prestasi dan kos
+3. Kaji [Pemilihan SKU](sku-selection.md) untuk mengoptimumkan prestasi dan kos
 
 ---
 

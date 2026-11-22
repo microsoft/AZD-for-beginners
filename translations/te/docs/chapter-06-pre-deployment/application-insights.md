@@ -1,32 +1,32 @@
-# Application Insights Integration with AZD
+# AZD తో అప్లికేషన్ ఇన్‌సైట్ సమగ్రత
 
-⏱️ **Estimated Time**: 40-50 minutes | 💰 **Cost Impact**: ~$5-15/month | ⭐ **Complexity**: Intermediate
+⏱️ **అంచనా సమయం**: 40-50 నిమిషాలు | 💰 **ఖర్చు ప్రభావం**: ~$5-15/నెల | ⭐ **సంక్లిష్టత**: మధ్యస్థాయి
 
-**📚 Learning Path:**
-- ← Previous: [ప్రీఫ్లైట్ తనిఖీలు](preflight-checks.md) - ముందస్తు-డిప్లాయ్ ధృవీకరణ
-- 🎯 **You Are Here**: Application Insights Integration (మానిటరింగ్, టెలీమేట్రీ, డీబగ్గింగ్)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Azureలో despley చేయడం
-- 🏠 [Course Home](../../README.md)
+**📚 నేర్చుకునే పాఠం:**
+- ← మునుపటి: [చెక్కింపు ముందస్తు పరీక్షలు](preflight-checks.md) - ప్రీ-డిప్లాయ్ చెక్
+- 🎯 **మీరు ఇక్కడ ఉన్నారు**: అప్లికేషన్ ఇన్‌సైట్ సమగ్రత (మానిటరింగ్, టెలిమెట్రీ, డీబగ్గింగ్)
+- → తరువాత: [డిప్లాయ్ గైడ్](../chapter-04-infrastructure/deployment-guide.md) - Azureకి డిప్లాయ్ చేయండి
+- 🏠 [కార్సు హోమ్](../../README.md)
 
 ---
 
-## What You'll Learn
+## మీరు నేర్చుకోబోయేది
 
-By completing this lesson, you will:
-- AZD ప్రాజెక్టుల్లో **Application Insights** స్వయంచాలకంగా統కరించటం
-- మైక్రోసర్వీసుల కోసం **distributed tracing** కాన్ఫిగర్ చేయడం
-- **custom telemetry** (మెట్రిక్స్, ఈవెంట్స్, డిపెండెన్సీస్) అమలు చేయడం
-- రియల్-టైమ్ మానిటరింగ్ కోసం **live metrics** సెట్ చేయడం
-- AZD డిప్లాయ్‌మెంట్లుచే **alerts మరియు dashboards** సృష్టించడం
-- **telemetry queries** తో ప్రొడక్షన్ సమస్యలను డీబగ్ చేయడం
-- ఖర్చు మరియు శాంప్లింగ్ వ్యూహాలను ఆప్టిమైజ్ చేయడం
-- **AI/LLM అప్లికేషన్స్** (టోకెన్లు, ఆలస్యం, ఖర్చులు) ని మానిటర్ చేయడం
+ఈ పాఠం పూర్తి చేయడం ద్వారా మీరు:
+- AZD ఇన్‌ఫ్రాస్ట్రక్చర్‌లో **అప్లికేషన్ ఇన్‌సైట్స్** ని ప్రకటించి SDK ఇన్‌స్ట్రూమెంటేషన్‌ను సెట్టుచేయడం
+- మైక్రోసర్వీసుల కోసం **డిస్ట్రిబ్యూటెడ్ ట్రేసింగ్** ను కాష్టమైజ్ చేయడం
+- **అనుకూల టెలిమెట్రీ** (మెట్రిక్స్, ఈవెంట్స్, డిపెండెన్సీలు) అమలు చేయడం
+- రియల్-టైమ్ మానిటరింగ్ కోసం **లైవ్ మెట్రిక్స్** ఏర్పాటు
+- AZD డిప్లాయ్‌మెంట్ నుండి **అలర్ట్స్ మరియు డ్యాష్‌బోర్డ్స్** సృష్టించడం
+- **టెలిమెట్రీ క్వెరీలు** తో ప్రొడక్షన్ సమస్యలను డీబగ్ చేయడం
+- **ఖర్చులు మరియు నమూనాలు** వ్యూహాలను ఆప్టిమైజ్ చేయడం
+- **AI/LLM అప్లికేషన్‌లు** (టోకెన్లు, ఆలస్యం, ఖర్చులు) ను మానిటర్ చేయడం
 
-## Why Application Insights with AZD Matters
+## AZDతో అప్లికేషన్ ఇన్ సైట్స్ ఎందుకు ముఖ్యం
 
-### The Challenge: Production Observability
+### సవాలు: ప్రొడక్షన్ ఆబ్జర్వబిలిటీ
 
-**Without Application Insights:**
+**అప్లికేషన్ ఇన్ సైట్స్ లేకుండా:**
 ```
 ❌ No visibility into production behavior
 ❌ Manual log aggregation across services
@@ -36,7 +36,7 @@ By completing this lesson, you will:
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**With Application Insights + AZD:**
+**అప్లికేషన్ ఇన్‌సైట్స్ + AZDతో:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,37 +44,37 @@ By completing this lesson, you will:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogy**: Application Insights మీ అప్లికేషన్ కోసం "బ్లాక్ బాక్స్" ఫ్లైట్ రికార్డర్ + కాక్‌పిట్ డాష్‌బోర్డ్ లాంటిదే. మీరు రియల్-టైమ్‌లో జరుగుతున్న అన్ని విషయాలను చూడగలరు మరియు ఏ ఇన్సిడెంట్ అయినా రీప్లే చేయగలరు.
+**ఉపమా**: అప్లికేషన్ ఇన్ సైట్స్ అనేది మీ అప్లికేషన్ కోసం ఒక "బ్లాక్ బాక్స్" ఫ్లైట్ రికార్డర్ + కాక్‌పిట్ డ్యాష్‌బోర్డ్ లా ఉంటుంది. మీరు రియల్-టైమ్ లో జరిగే ప్రతిదీ చూడొచ్చు మరియు ఏదైనా ఘటనను మళ్లీ ప్లే చేయవచ్చు.
 
 ---
 
-## Architecture Overview
+## వాస్తవ నిర్మాణ అవలోకనం
 
-### Application Insights in AZD Architecture
+### AZD వాస్తవ నిర్మాణంలో అప్లికేషన్ ఇన్ సైట్స్
 
 ```mermaid
 graph TB
-    User[వినియోగదారు/క్లయింట్]
-    App1[కంటెయినర్ యాప్ 1<br/>API గేట్వే]
-    App2[కంటెయినర్ యాప్ 2<br/>ఉత్పత్తి సేవ]
-    App3[కంటెయినర్ యాప్ 3<br/>ఆర్డర్ సేవ]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[అప్లికేషన్ ఇన్సైట్స్<br/>టెలిమెట్రీ హబ్]
-    LogAnalytics[(లాగ్ అనలిటిక్స్<br/>వర్క్‌స్పేస్)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[ఆజూర్ పోర్టల్<br/>డాష్‌బోర్డ్లు & అలర్ట్స్]
-    Query[Kusto క్వెరీలు<br/>కస్టమ్ విశ్లేషణ]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|ఆటో-ఇన్స్ట్రుమెంటేషన్| AppInsights
-    App2 -.->|ఆటో-ఇన్స్ట్రుమెంటేషన్| AppInsights
-    App3 -.->|ఆటో-ఇన్స్ట్రుమెంటేషన్| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,59 +83,64 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### What Gets Monitored Automatically
 
-| Telemetry Type | What It Captures | Use Case |
+### స్వయంచాలకంగా ఏం మానిటర్ అవుతుంది
+
+మద్దతు ఉన్న ఆటో-ఇన్‌స్ట్రూమెంటేషన్ ఇన్‌స్ట్రూమెంటెడ్ లైబ్రరీల కోసం అభ్యర్థనలు/ఆధారాలను క్యాప్చర్ చేస్తుంది. అనుకూల ఈవెంట్స్ మరియు మెట్రిక్స్ కోసం అప్లికేషన్ కోడ్ అవసరం; అందుబాటు పరీక్షలు వేయాలి. వనరు ఉన్నందున అన్నింటికీ క్రింద ప్రతీ రోలను సేకరించదు.
+
+| టెలిమెట్రీ రకం | అది క్యాప్చర్ చేసేది | ఉపయోగం |
 |----------------|------------------|----------|
-| **Requests** | HTTP requests, status codes, duration | API పనితీరు మానిటరింగ్ |
-| **Dependencies** | External calls (DB, APIs, storage) | బాటల్నెక్స్ గుర్తించడం |
-| **Exceptions** | Unhandled errors with stack traces | ఫెయిల్యూర్‌లను డీబగ్ చేయడం |
-| **Custom Events** | Business events (signup, purchase) | అనలిటిక్స్ మరియు ఫనల్స్ |
-| **Metrics** | Performance counters, custom metrics | కెపాసిటీ ప్లానింగ్ |
-| **Traces** | Log messages with severity | డీబగింగ్ మరియు ఆడిటింగ్ |
-| **Availability** | Uptime and response time tests | SLA మానిటరింగ్ |
+| **అభ్యర్థనలు** | HTTP అభ్యర్థనలు, స్థితి కోడ్స్, వ్యవధి | API ప్రదర్శన మానిటరింగ్ |
+| **డిపెండెన్సీలు** | బయటి కాల్స్ (డేటాబేస్, APIs, స్టోరేజ్) | బాటిల్‌నెక్స్ గుర్తించడం |
+| **విశేషాలు** | హ్యాండిల్ కాని లోపాలు మరియు స్టాక్ ట్రేసులు | వైఫల్యాల డీబగ్గింగ్ |
+| **కస్టమ్ ఈవెంట్స్** | వ్యాపార సంబంఘింత ఈవెంట్స్ (సైన్ అప్, కొనుగోలు) | విశ్లేషణలు మరియు ఫన్నెల్స్ |
+| **మెట్రిక్స్** | ప్రదర్శన కౌంటర్లు, కస్టమ్ మెట్రిక్స్ | సామర్థ్య ప్రణాళిక |
+| **ట్రేస్‌లు** | తీవ్రమైన లాగ్ సందేశాలు | డీబగ్గింగ్ మరియు ఆడిటింగ్ |
+| **అందుబాటు** | అప్టైమ్ మరియు స్పందన స్థితి పరీక్షలు | SLA మానిటరింగ్ |
 
 ---
 
-## Prerequisites
+## అవసరమైన పరికరాలు
 
-### Required Tools
+### అవసరమైన పరికరాలు
 
 ```bash
-# Azure Developer CLIని తనిఖీ చేయండి
+# Verify Azure Developer CLI
 azd version
-# ✅ ఆశించబడింది: azd వెర్షన్ 1.0.0 లేదా అంతకన్నా పైగా
+# Command reference baseline: azd 1.37.2
 
-# Azure CLIని తనిఖీ చేయండి
+# Verify Azure CLI
 az --version
-# ✅ ఆశించబడింది: azure-cli 2.50.0 లేదా అంతకన్నా పైగా
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### Azure Requirements
+### Azure అవసరాలు
 
-- Active Azure subscription
-- Permissions to create:
-  - Application Insights resources
-  - Log Analytics workspaces
-  - Container Apps
-  - Resource groups
+- యాక్టివ్ Azure సబ్‌స్క్రిప్షన్
+- క్రియేటు చేసే అనుమతులు:
+  - అప్లికేషన్ ఇన్ సైట్స్ వనరులు
+  - లాగ్ అనలిటిక్స్ వర్క్‌స్పేసులు
+  - కంటైనర్ యాప్స్
+  - వనరు సమూహాలు
 
-### Knowledge Prerequisites
+### జ్ఞాన అవసరాలు
 
-You should have completed:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - AZD ప్రధాన ధోరణులు
-- [Configuration](../chapter-03-configuration/configuration.md) - ఎన్విరోన్మెంట్ సెటప్
-- [First Project](../chapter-01-foundation/first-project.md) - బేసిక్ డిప్లాయ్‌మెంట్
+మీరు పూర్తిచేసి ఉండాలి:
+- [AZD మూలకం](../chapter-01-foundation/azd-basics.md) - ప్రాథమిక AZD కాన్సెప్ట్స్
+- [కన్ఫిగరేషన్](../chapter-03-configuration/configuration.md) - వాతావరణ సెట్టింగ్స్
+- [మొదటి ప్రాజెక్ట్](../chapter-01-foundation/first-project.md) - ప్రాథమిక డిప్లాయ్‌మెంట్
 
 ---
 
-## Lesson 1: Automatic Application Insights with AZD
+## పాఠం 1: AZDతో ఆటోమేటిక్ అప్లికేషన్ ఇన్‌సైట్స్
 
-### How AZD Provisions Application Insights
+### AZD ఎలా అప్లికేషన్ ఇన్‌సైట్స్ ప్రావిషన్ చేస్తుంది
 
-AZD డిప్లాయ్ చేసినప్పుడు Application Insights ను స్వయంచాలకంగా సృష్టించి కాన్ఫిగర్ చేస్తుంది. ఇది ఎలా పనిచేస్తుందో చూద్దాం.
+AZD అప్లికేషన్ ఇన్ సైట్స్ **ప్రాజెక్ట్ ఇన్‌ఫ్రా స్పష్టం చేసినప్పుడు మాత్రమే ప్రావిషన్ చేస్తుంది**. `azure.yaml` మాత్రమే మానిటరింగ్ సృష్టించదు లేదా అప్లికేషన్ కోడ్ ను ఇన్‌స్ట్రూమెంటు చేయదు.
 
-### Project Structure
+> **ఉదాహరణ పరిధి:** ఈ పాఠం సమగ్ర భాగాల కలిగి ఉంది, ఈ రిపోజిటరీలో పూర్తి `monitored-app` ప్రాజెక్ట్ కాదు. ప్రధాన టెంప్లేట్ మరియు పారామెటర్ మ్యాపింగ్, కంటైనర్ యాప్స్ వాతావరణం, రిజిస్ట్రీ/ఇమేజ్ మరియు ఐడెంటిటీ సెట్టింగ్స్, డాకర్ ఫైల్ మరియు సేవ ట్యాగ్‌లు అందించాలి ముందు డిప్లాయ్ చేయడానికి. తర్వాత పాఠాలు వేరే/పెంపొందింపు భాగాలు చూపిస్తాయి, అన్ని ఫైళ్ళను మార్చకుండా కలిసి ఉపయోగించరాదు. మీరు ఒక పనిచేయగల [మైక్రోసర్వీసెస్ ఉదాహరణ](../../../../examples/microservices)తో ప్రారంభించండి అవసరం అయితే.
+
+### ప్రాజెక్ట్ నిర్మాణం
 
 ```
 monitored-app/
@@ -154,9 +159,9 @@ monitored-app/
 
 ---
 
-### Step 1: Configure AZD (azure.yaml)
+### దశ 1: AZD కాన్ఫిగర్ చేయండి (azure.yaml)
 
-**File: `azure.yaml`**
+**ఫైల్: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -169,16 +174,16 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**అంతేనటు!** ప్రాథమిక మానిటరింగ్ కోసం అదనపు కాన్ఫిగరేషన్ అవసరం లేకుండా AZD డిఫాల్ట్‌గా Application Insightsని సృష్టిస్తుంది.
+ఇది డిప్లాయ్ చేయదగిన సేవను ప్రకటిస్తుంది. క్రింది బైసెప్ మరియు SDK కాన్ఫిగరేషన్ మానిటరింగ్ అందిస్తాయి; azd అవి స్వయంచాలకంగా జతపరచదు.
 
 ---
 
-### Step 2: Monitoring Infrastructure (Bicep)
+### దశ 2: మానిటరింగ్ వనరులు (Bicep)
 
-**File: `infra/core/monitoring.bicep`**
+**ఫైల్: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -223,19 +228,21 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### Step 3: Connect Container App to Application Insights
+### దశ 3: కంటైనర్ యాప్‌ను అప్లికేషన్ ఇన్ సైట్స్‌కు కనెక్ట్ చేయండి
 
-**File: `infra/app/api.bicep`**
+**ఫైల్: `infra/app/api.bicep`**
 
 ```bicep
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -285,35 +293,29 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### Step 4: Application Code with Telemetry
+### దశ 4: టెలిమెట్రీతో అప్లికేషన్ కోడ్
 
-**File: `src/app.py`**
+**ఫైల్: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Application Insights కనెక్షన్ స్ట్రింగ్ పొందండి
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # డిస్ట్రిబ్యూటెడ్ ట్రేసింగ్‌ను కాన్ఫిగర్ చేయండి
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # డెవ్ కోసం 100% సాంప్లింగ్
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # లాగింగ్‌ను కాన్ఫిగర్ చేయండి
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # డేటాబేస్ కాల్‌ను అనుకరించండి (ఆటోమేటిగ్గా డిపెండెన్సీగా ట్రాక్ చేయబడుతుంది)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # నెమ్మదైన ఆపరేషన్‌ను అనుకరించండి
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -364,37 +366,37 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: `src/requirements.txt`**
+**ఫైల్: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+ఈ డిపెండెన్సీలను మీ ప్రాజెక్టులో పరిష్కరించి, వాటిని కలిసి పరీక్షించండి, మరియు పొందిన సంచికలను లాక్ చేయండి. కొత్త ప్రాజెక్టులు Azure Monitor OpenTelemetry ఉపయోగించాలి, రిటైర్డ్ OpenCensus Python ఎక్స్పార్టర్లను కాకుండా.
 
 ---
 
-### Step 5: Deploy and Verify
+### దశ 5: డిప్లాయ్ చేసి ధృవీకరించండి
 
 ```bash
-# AZDని ప్రారంభించండి
-azd init
-
-# డిప్లాయ్ చేయండి (Application Insightsను స్వయంచాలకంగా ఏర్పాటు చేస్తుంది)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# యాప్ URLని పొందండి
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# టెలిమెట్రీని ఉత్పత్తి చేయండి
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Expected output:**
+**✅ ఆశించదగిన అవుట్‌పుట్:**
 ```json
 {
   "status": "healthy",
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### Step 6: View Telemetry in Azure Portal
+### దశ 6: Azure పోర్టల్‌లో టెలిమెట్రీను వీక్షించండి
 
 ```bash
-# Application Insights వివరాలు పొందండి
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure పోర్టల్‌లో తెరవండి
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Navigate to Azure Portal → Application Insights → Transaction Search**
+**Azure పోర్టల్ → అప్లికేషన్ ఇన్ సైట్స్ → ట్రాన్సాక్షన్ శోధనకు వెళ్ళండి**
 
-You should see:
-- ✅ HTTP requests with status codes
-- ✅ Request duration (3+ seconds for `/api/slow`)
-- ✅ Exception details from `/api/error-test`
-- ✅ Custom log messages
+మీరు చూడగలరు:
+- ✅ HTTP అభ్యర్థనలు స్థితి కోడ్స్‌తో
+- ✅ అభ్యర్థన వ్యవధి (3+ సెకన్లు `/api/slow`కి)
+- ✅ `/api/error-test` నుండి తప్పులు వివరాలు
+- ✅ కస్టమ్ లాగ్ సందేశాలు
 
 ---
 
-## Lesson 2: Custom Telemetry and Events
+## పాఠం 2: కస్టమ్ టెలిమెట్రీ మరియు ఈవెంట్స్
 
-### Track Business Events
+### వ్యాపార ఈవెంట్స్ ట్రాక్ చేయండి
 
-Let's add custom telemetry for business-critical events.
+వ్యాపార-గుర్తుతో ముడిపడిన ఈవెంట్స్ కోసం కస్టమ్ టెలిమెట్రీ జోడిద్దాం.
 
-**File: `src/telemetry.py`**
+**ఫైల్: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # లాగర్ సెట్ చేయండి
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # మెట్రిక్స్ ఎక్స్‌పోర్టర్ సెట్ చేయండి
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # ట్రేసర్ సెట్ చేయండి
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# గ్లోబల్ టెలిమేట్రీ క్లయింట్
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Update Application with Custom Events
+### అనుకూల ఈవెంట్స్ తో అప్లికేషన్ను నవీకరించండి
 
-**File: `src/app.py` (enhanced)**
+**ఫైల్: `src/app.py` (వృద్ధి చేయబడింది)**
+
+ఈ మార్గాలను ఉన్న Flask అప్లికేషన్‌కు జోడించండి; ముందరి హెల్త్/టెస్ట్ మార్గాలు ఉంచండి. క్రింద సంక్షిప్త బ్లాక్ స్పష్టత కోసం ప్రత్యేక అప్లికేషన్ చూపిస్తుంది. టెలిమెట్రీ ప్రారంభికాలు ఇప్పుడు `telemetry.py`లో ఉంటాయి — ఎక్స్‌పోర్ట్‌ల‌ను రెండుసార్లు ప్రారంభించకండి.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # వ్యాపార సంఘటనను ట్రాక్ చేయండి
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # ఆదాయ ప్రమాణాన్ని ట్రాక్ చేయండి
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # శోధనను అనుకరించండి (ఇది నిజమైన డేటాబేస్ క్వెరీగా ఉండేది)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # ms కు మార్చండి
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # శోధన సంఘటనను ట్రాక్ చేయండి
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # శోధన పనితీరు ప్రమాణాన్ని ట్రాక్ చేయండి
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # బాహ్య API కాల్‌ను అనుకరించండి
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # డిపెండెన్సీని ట్రాక్ చేయండి
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,25 +586,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Test Custom Telemetry
+### కస్టమ్ టెలిమెట్రీని పరీక్షించండి
 
 ```bash
-# కొనుగోలు ఈవెంట్‌ను ట్రాక్ చేయండి
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# శోధన ఈవెంట్‌ను ట్రాక్ చేయండి
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# బాహ్య ఆధారాన్ని ట్రాక్ చేయండి
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**View in Azure Portal:**
+**Azure పోర్టల్‌లో వీక్షించండి:**
 
-Navigate to Application Insights → Logs, then run:
+అప్లికేషన్ ఇన్ సైట్స్ → లాగ్స్ కి వెళ్లి, తరువాత నడపండి:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,13 +635,13 @@ traces
 
 ---
 
-## Lesson 3: Distributed Tracing for Microservices
+## పాఠం 3: మైక్రోసర్వీసుల కోసం డిస్ట్రిబ్యూటెడ్ ట్రేసింగ్
 
-### Enable Cross-Service Tracing
+### క్రాస్-సర్వీస్ ట్రేసింగ్‌ను ఎనేబుల్ చేయండి
 
-For microservices, Application Insights automatically correlates requests across services.
+అనుకూల ఇన్‌స్ట్రూమెంటేషన్ మరియు W3C ట్రేస్-కాంటెక్స్ట్ ప్రచారంతో, అప్లికేషన్ ఇన్ సైట్స్ సేవల మధ్య అభ్యర్థనలను అనుసంధానం చేస్తుంది. కనెక్షన్ స్ట్రింగ్ పంచుకోవడం తండ్రి-పిల్ల spanలను స్థాపించదు. ఈ క్రింది వాస్తవ నిర్మాణ భాగం మీరు అమలు చేయాల్సిన మాడ్యూల్స్‌ను సూచిస్తుంది.
 
-**File: `infra/main.bicep`**
+**ఫైల్: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### View End-to-End Transaction
+### ఎండ్-టు-ఎండ్ ట్రాన్సాక్షన్‌ను వీక్షించండి
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API గేట్వే<br/>(ట్రేస్ ID: abc123)
-    participant Product as ఉత్త్పత్తి సేవ<br/>(పేరెంట్ ID: abc123)
-    participant Order as ఆర్డర్ సేవ<br/>(పేరెంట్ ID: abc123)
-    participant AppInsights as అప్లికేషన్ ఇన్సైట్స్
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: ట్రేస్ ప్రారంభం: abc123
-    Gateway->>AppInsights: అనురోధాన్ని లాగ్ చేయండి (ట్రేస్ ID: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: పేరెంట్ ID: abc123
-    Product->>AppInsights: డిపెండెన్సీ కాల్‌ను లాగ్ చేయండి
-    Product-->>Gateway: ఉత్పత్తి వివరాలు
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: పేరెంట్ ID: abc123
-    Order->>AppInsights: డిపెండెన్సీ కాల్‌ను లాగ్ చేయండి
-    Order-->>Gateway: ఆర్డర్ సృష్టించబడింది
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: చెకౌట్ పూర్తి
-    Gateway->>AppInsights: ప్రతిస్పందనను లాగ్ చేయండి (వ్యవధి: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: ట్రేస్ ID ద్వారా అనుసంధానం
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Query end-to-end trace:**
+
+**ఎండ్-టు-ఎండ్ ట్రేస్ కోసం క్వెరీ:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## Lesson 4: Live Metrics and Real-Time Monitoring
+## పాఠం 4: లైవ్ మెట్రిక్స్ మరియు రియల్-టైమ్ మానిటరింగ్
 
-### Enable Live Metrics Stream
+### లైవ్ మెట్రిక్స్ స్ట్రీమ్ ఎనేబుల్ చేయండి
 
-Live Metrics provides real-time telemetry with <1 second latency.
+SDK మద్దతుతో మరియు ఎనేబుల్ చేసినప్పుడు లైవ్ మెట్రిక్స్ సమీప-సమయం టెలిమెట్రీని అందిస్తుంది. ఇది ఆలస్య SLA కాదు. పై Python OpenTelemetry సెటప్ `enable_live_metrics=True`తో ఆప్ట్ఇన్ చేస్తుంది.
 
-**Access Live Metrics:**
+**లైవ్ మెట్రిక్స్ యాక్సెస్ చేయండి:**
 
 ```bash
-# Application Insights వనరును పొందండి
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# వనరుల సమూహాన్ని పొందండి
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**What you see in real-time:**
-- ✅ Incoming request rate (requests/sec)
-- ✅ Outgoing dependency calls
-- ✅ Exception count
-- ✅ CPU and memory usage
-- ✅ Active server count
-- ✅ Sample telemetry
+**మీరు రియల్-టైమ్‌లో చూడగలరు:**
+- ✅ వచ్చిన అభ్యర్థన రేటు (requests/sec)
+- ✅ బయటి ఆధారాలు (డిపెండెన్సీ కాల్స్)
+- ✅ తప్పుల లెక్క
+- ✅ CPU మరియు మెమరీ వినియోగం
+- ✅ సక్రియ సర్వర్ లెక్క
+- ✅ నమూనా టెలిమెట్రీ
 
-### Generate Load for Testing
+### పరీక్ష కోసం లోడ్ ఉత్పత్తి చేయండి
 
 ```bash
-# సజీవ మెట్రిక్స్ చూడటానికి లోడ్ సృష్టించండి
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Azure పోర్టల్‌లో సజీవ మెట్రిక్స్ చూడండి
-# మీరు అభ్యర్థన రేటు అకస్మాత్తుగా పెరిగినట్లు చూడాలి
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
-## Practical Exercises
+## ప్రాక్టికల్ ప్రాక్టీస్‌లు
 
-### Exercise 1: Set Up Alerts ⭐⭐ (Medium)
+### వ్యాయామం 1: అలర్ట్స్ సెటప్ చేయండి ⭐⭐ (మధ్యస్థ)
 
-**Goal**: Create alerts for high error rates and slow responses.
+**లక్ష్యం**: అధిక లోపాల రేట్లు మరియు మందగించిన ప్రతిస్పందనలకు అలర్ట్స్ సృష్టించండి.
 
-**Steps:**
+**దశలు:**
 
-1. **Create alert for error rate:**
+1. **లోపాల రేటుకు అలర్ట్ సృష్టించండి:**
 
 ```bash
-# Application Insights రీసోర్స్ ID పొందండి
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# విఫలమైన అభ్యర్థనల కోసం మెట్రిక్ అలర్ట్ సృష్టించండి
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Create alert for slow responses:**
+2. **మందగించిన ప్రతిస్పందనలకు అలర్ట్ సృష్టించండి:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +841,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Create alert via Bicep (preferred for AZD):**
+3. **బైసెప్ ద్వారా అలర్ట్ సృష్టించండి (AZDకి ప్రాధాన్యం):**
 
-**File: `infra/core/alerts.bicep`**
+**ఫైల్: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -944,57 +915,57 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Test alerts:**
+4. **అలర్ట్స్ పరీక్షించండి:**
 
 ```bash
-# లోపాలను సృష్టించండి
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# మందమైన ప్రతిస్పందనలను సృష్టించండి
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# అలర్ట్ స్థితిని తనిఖీ చేయండి (5-10 నిమిషాలు వేచి ఉండండి)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
-**✅ Success Criteria:**
-- ✅Alerts విజయవంతంగా సృష్టించబడ్డాయి
-- ✅Thresholds అధిగమించినప్పుడు alerts ట్రిగర్ అవుతాయి
-- ✅Azure Portalలో alert చరిత్ర చూడగలరు
-- ✅AZD డిప్లాయ్‌మెంట్‌తో సమగ్రంగా సంబంధించినవి
+**✅ విజయ లక్ష్యాలు:**
+- ✅ అలర్ట్‌లు విజయవంతంగా సృష్టించబడినవి
+- ✅ పరిమితులు మించినప్పుడు అలర్ట్‌లు నిడివిని చేసేవి
+- ✅ Azure పోర్టల్ లో అలర్ట్ చరిత్ర చూడగలరు
+- ✅ AZD డిప్లాయ్‌మెంట్‌తో సమగ్రత
 
-**Time**: 20-25 minutes
+**సమయం**: 20-25 నిమిషాలు
 
 ---
 
-### Exercise 2: Create Custom Dashboard ⭐⭐ (Medium)
+### వ్యాయామం 2: కస్టమ్ డ్యాష్‌బోర్డ్ సృష్టించండి ⭐⭐ (మధ్యస్థ)
 
-**Goal**: Build a dashboard showing key application metrics.
+**లక్ష్యం**: ప్రధాన అప్లికేషన్ మెట్రిక్స్ చూపించే డ్యాష్‌బోర్డ్ తయారుచేయండి.
 
-**Steps:**
+**దశలు:**
 
-1. **Create dashboard via Azure Portal:**
+1. **Azure పోర్టల్ ద్వారా డ్యాష్‌బోర్డ్ సృష్టించండి:**
 
-Navigate to: Azure Portal → Dashboards → New Dashboard
+Azure పోర్టల్ → డ్యాష్‌బోర్డ్స్ → కొత్త డ్యాష్‌బోర్డ్ కి వెళ్లండి
 
-2. **Add tiles for key metrics:**
+2. **ప్రధాన మెట్రిక్స్ కోసం టైల్స్ జోడించండి:**
 
-- Request count (last 24 hours)
-- Average response time
-- Error rate
-- Top 5 slowest operations
-- Geographic distribution of users
+- అభ్యర్థన లెక్క (గత 24 గంటలు)
+- సగటు స్పందన సమయం
+- లోపాల రేటు
+- టాప్ 5 మందగించిన ఆపరేషన్‌లు
+- వినియోగదారుల భౌగోళిక పంపిణీ
 
-3. **Create dashboard via Bicep:**
+3. **బైసెప్ ద్వారా డ్యాష్‌బోర్డ్ సృష్టించండి:**
 
-**File: `infra/core/dashboard.bicep`**
+**ఫైల్: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Deploy dashboard:**
+4. **డిప్లాయ్ చేయండి:**
 
-```bash
-# main.bicep లో జోడించండి
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,30 +1057,32 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# డిప్లాయ్ చేయండి
+```bash
+# Deploy
 azd up
 ```
 
-**✅ Success Criteria:**
-- ✅ Dashboard ప్రధాన మెట్రిక్స్ చూపిస్తుంది
-- ✅Azure Portal హోమ్‌కు పిన్ చేయగలరు
-- ✅రియల్-టైమ్‌లో అప్‌డేట్ అవుతుంది
-- ✅AZD ద్వారా డిప్లాయ్ చేయదగినది
+**✅ విజయ లక్ష్యాలు:**
+- ✅ డ్యాష్‌బోర్డ్ ప్రధాన మెట్రిక్స్ చూపిస్తుంది
+- ✅ Azure పోర్టల్ హోమ్‌కు పిన్ చేయవచ్చు
+- ✅ రియల్-టైమ్‌లో నవీకరణలు
+- ✅ AZD ద్వారా డిప్లాయ్ చేయదగినది
 
-**Time**: 25-30 minutes
+**సమయం**: 25-30 నిమిషాలు
 
 ---
 
-### Exercise 3: Monitor AI/LLM Application ⭐⭐⭐ (Advanced)
+### వ్యాయామం 3: AI/LLM అప్లికేషన్ మానిటరింగ్ ⭐⭐⭐ (అత్యాధునిక)
 
-**Goal**: Track Microsoft Foundry Models usage (tokens, costs, latency).
+**లక్ష్యం**: Microsoft Foundry మోడల్‌లు ఉపయోగం (టోకెన్లు, ఖర్చులు, ఆలస్యం) ను ట్రాక్ చేయండి.
 
-**Steps:**
+**దశలు:**
 
-1. **Create AI monitoring wrapper:**
+1. **AI మానిటరింగ్ రాపర్ సృష్టించండి:**
 
-**File: `src/ai_telemetry.py`**
+**ఫైల్: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Microsoft Foundry మోడల్స్‌ను పిలవండి
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # వినియోగాన్ని సేకరించండి
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # ఖర్చు లెక్కించండి (gpt-4.1 ధరల ప్రకారం)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 ప్రతి 1K టోకెన్లకు
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 ప్రతి 1K టోకెన్లకు
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # కస్టమ్ ఈవెంట్‌ను ట్రాక్ చేయండి
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # మెట్రిక్స్‌ను ట్రాక్ చేయండి
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Use monitored client:**
+2. **మానిటరింగ్ చేసిన క్లయింట్ ఉపయోగించండి:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# పర్యవేక్షించబడుతున్న OpenAI క్లయెంట్‌ను ప్రారంభించండి
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # స్వయంచాలిత పర్యవేక్షణతో పిలవండి
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Query AI metrics:**
+3. **AI మెట్రిక్స్ కోసం క్వెరీ:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1250,48 +1239,35 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ Success Criteria:**
-- ✅ ప్రతి OpenAI కాల్ ఆటోమేటిక్‌గా ట్రాక్ అవుతుంది
-- ✅ టోకెన్ వినియోగం మరియు ఖర్చులు దర్శనమవుతాయి
-- ✅ ఆలస్యం మానిటర్ చేయబడుతుంది
-- ✅ బడ్జెట్ అలర్ట్స్ సెట్ చేయగలరు
+**✅ విజయ లక్ష్యాలు:**
+- ✅ ప్రతి OpenAI కాల్ ఆటోమేటిక్‌గా ట్రాక్ చేయబడింది
+- ✅ టోకెన్ వినియోగం మరియు ఖర్చులు కనిపిస్తాయి
+- ✅ ఆలస్యం మానిటర్ చేయబడింది
+- ✅ బడ్జెట్ అలర్ట్స్ సెట్ చేయవచ్చు
 
-**Time**: 35-45 minutes
+**సమయం**: 35-45 నిమిషాలు
 
 ---
 
-## Cost Optimization
+## ఖర్చు ఆప్టిమైజేషన్
 
-### Sampling Strategies
+### నమూనా వ్యూహాలు
 
-Control costs by sampling telemetry:
+టెలిమెట్రీని నమూనా చేయడం ద్వారా ఖర్చులను నియంత్రించండి:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# అభివృద్ధి: 100% శాంప్లింగ్
-sampler = ProbabilitySampler(rate=1.0)
-
-# ఉత్పత్తి: 10% శాంప్లింగ్ (ఖర్చులను 90% వరకు తగ్గిస్తుంది)
-sampler = ProbabilitySampler(rate=0.1)
-
-# అనుకూల శాంప్లింగ్ (స్వయంచాలకంగా సర్దుబాటు అవుతుంది)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**In Bicep:**
+ట్రేస్ నమూనా ప్రతి టెలిమెట్రీ వర్గాన్ని 90% తగ్గించదు. మెట్రిక్స్ మరియు స్వతంత్రంగా పంపే లాగ్లకు వారి స్వంత వాల్యూం నియంత్రణ అవసరం. ఆబ్జర్వబిలిటీ అవసరాల ఆధారంగా రేటు ఎంచుకోండి, ఒక సాధారణ ప్రొడక్షన్ నిషేధం కాదు.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+SDK నమూనాను స్పష్టంగా సెట్ చేయండి; కాంపోనెంట్ యొక్క `SamplingPercentage` లక్షణం Python OpenTelemetry నమూనాదారుని కాన్ఫిగర్ చేయడానికి ప్రత్యామ్నాయం కాదు.
 
-### Data Retention
+### డేటా రిటెన్షన్
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Monthly Cost Estimates
+### నెలవారీ ఖర్చుల అంచనాలు
 
-| Data Volume | Retention | Monthly Cost |
+| డేటా వాల్యూం | నిలుపుదల | నెలవారీ ఖర్చు |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/నెల | 30 రోజులు | ~$2-5 |
+| 5 GB/నెల | 30 రోజులు | ~$10-15 |
+| 10 GB/నెల | 90 రోజులు | ~$25-40 |
+| 50 GB/నెల | 90 రోజులు | ~$100-150 |
 
-**Free tier**: 5 GB/month included
+ఈ సంఖ్యలు సూచనీయంగా ఉన్నాయి, కోట్‌లు కాదు. మీ ప్రాంతంలో, ఒప్పందంలో ఇంజెక్షన్, నిలుపుదల, అలర్ట్ మరియు పరీక్ష ధరలను ధృవీకరించండి; ఉచిత అనుమతులు Azure Monitor ధరల ప్రకారం పంచుకోబడతాయి / పరిశీలించబడతాయి, ప్రతి అప్లికేషన్ ఇన్ సైట్స్ వనరు కోసం గ్యారెంటీచేసిన ఉచిత SKU కాదు.
 
 ---
 
-## Knowledge Checkpoint
+## జ్ఞానCheckpoint
 
-### 1. Basic Integration ✓
+### 1. ప్రాథమిక సమగ్రత ✓
 
-Test your understanding:
+మీ అవగాహనను పరీక్షించండి:
 
-- [ ] **Q1**: How does AZD provision Application Insights?
-  - **A**: Automatically via Bicep templates in `infra/core/monitoring.bicep`
+- [ ] **Q1**: AZD ఎలా అప్లికేషన్ ఇన్ సైట్స్ ప్రావిషన్ చేస్తుంది?
+  - **A**: ఇది ప్రాజెక్ట్ యొక్క బైసెప్/టెర్రాఫార్మ్ టెంప్లేట్స్‌లో స్పష్టంగా ప్రకటించిన మానిటరింగ్ వనరులను డిప్లాయ్ చేస్తుంది.
 
-- [ ] **Q2**: What environment variable enables Application Insights?
+- [ ] **Q2**: ఏ వాతావరణ చల్ల ఉంచడం అప్లికేషన్ ఇన్ సైట్స్‌ను ఎనేబుల్ చేస్తుంది?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: What are the three main telemetry types?
-  - **A**: Requests (HTTP calls), Dependencies (external calls), Exceptions (errors)
+- [ ] **Q3**: ప్రధానమైన మూడు టెలిమెట్రీ రకాలు ఏమిటి?
+  - **A**: అభ్యర్థనలు (HTTP కాల్స్), ఆధారాలు (బయటి కాల్స్), తప్పులు (లోపాలు)
 
-**Hands-On Verification:**
+**ప్రయోగాత్మక ధృవీకరణ:**
 ```bash
-# Application Insights కాన్ఫిగర్ చేయబడిందో లేదో తనిఖీ చేయండి
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# టెలిమెట్రీ ప్రవహిస్తున్నదో లేదో తనిఖీ చేయండి
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1345,20 +1321,20 @@ az monitor app-insights metrics show \
 
 ---
 
-### 2. Custom Telemetry ✓
+### 2. కస్టమ్ టెలిమెట్రీ ✓
 
-Test your understanding:
+మీ అవగాహనను పరీక్షించండి:
 
-- [ ] **Q1**: How do you track custom business events?
-  - **A**: Use logger with `custom_dimensions` or `TelemetryClient.track_event()`
+- [ ] **Q1**: మీరు కస్టమ్ వ్యాపార ఈవెంట్స్‌ను ఎలా ట్రాక్ చేస్తారు?
+  - **A**: ఈ పాఠంలో రాపర్ `event_name` గుణాలతో రాసిన OTel లాగులను, `traces`లో క్వెరీ చేయగలిగేట్టు ఉంచుతుంది; అవి ఆటోమేటిక్‌గా `customEvents` కాదు.
 
-- [ ] **Q2**: What's the difference between events and metrics?
-  - **A**: Events discrete సంఘటనలు, metrics సంఖ్యాత్మక కొలతలు
+- [ ] **Q2**: ఈవెంట్స్ మరియు మెట్రిక్స్ మధ్య వ్యత్యాసం ఏమిటి?
+  - **A**: ఈవెంట్స్ ప్రత్యేక సందర్భాలు, మెట్రిక్స్ సంఖ్యాత్మక కొలతలు
 
-- [ ] **Q3**: How do you correlate telemetry across services?
-  - **A**: Application Insights ఆటోమేటిక్‌గా correlation కోసం `operation_Id` ఉపయోగిస్తుంది
+- [ ] **Q3**: మీరు టెలిమెట్రీని సేవల మధ్య ఎలా అనుసంధానం చేస్తారు?
+  - **A**: అప్లికేషన్ ఇన్ సైట్స్ ఆటోమేటిక్‌గా `operation_Id` ని అనుసంధానం కోసం ఉపయోగిస్తుంది
 
-**Hands-On Verification:**
+**ప్రయోగాత్మక ధృవీకరణ:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. Production Monitoring ✓
+### 3. ప్రొడక్షన్ మానిటరింగ్ ✓
 
-Test your understanding:
+మీ అవగాహనను పరీక్షించండి:
 
-- [ ] **Q1**: What is sampling and why use it?
-  - **A**: Sampling డేటా పరిమాణం (మరియు ఖర్చు) తగ్గించడానికి టెలీమేట్రీ యొక్క ఒక శాతం మాత్రమే క్యాప్చర్ చేయడం
+- [ ] **Q1**: నమూనా అంటే ఏమిటి మరియు దాన్ని ఎందుకు ఉపయోగిస్తారు?
+  - **A**: నమూనా టెలిమెట్రీ డేటా వాల్యూం (మరియు ఖర్చు) ను కొంత శాతం మాత్రమే క్యాప్చర్ చేసి తగ్గిస్తుంది
 
-- [ ] **Q2**: How do you set up alerts?
-  - **A**: Application Insights మెట్రిక్స్ ఆధారంగా Bicep లేదా Azure Portalలో మెట్రిక్ అలర్ట్స్ ఉపయోగించవచ్చు
+- [ ] **Q2**: మీరు అలర్ట్‌లు ఎలా సెటప్ చేస్తారు?
+  - **A**: అప్లికేషన్ ఇన్ సైట్స్ మెట్రిక్స్ ఆధారంగా బైసెప్ లేదా Azure పోర్టల్‌లో మెట్రిక్ అలర్ట్స్ ఉపయోగించండి
 
-- [ ] **Q3**: What's the difference between Log Analytics and Application Insights?
-  - **A**: Application Insights డేటాను Log Analytics workspaceలో స్టోర్ చేస్తుంది; App Insights అప్లికేషన్-స్పెసిఫిక్ వీక్షణల్ని అందిస్తుంది
+- [ ] **Q3**: లాగ్ అనలిటిక్స్ మరియు అప్లికేషన్ ఇన్ సైట్స్ మధ్య తేడా ఏమిటి?
+  - **A**: అప్లికేషన్ ఇన్ సైట్స్ డేటాను లాగ్ అనలిటిక్స్ వర్క్‌స్పేస్‌లో నిల్వ చేస్తుంది; App Insights అప్లికేషన్-స్పెసిఫిక్ దృశ్యాలను అందిస్తుంది
 
-**Hands-On Verification:**
+**ప్రయోగాత్మక ధృవీకరణ:**
 ```bash
-# సాంప్లింగ్ కాన్ఫిగరేషన్‌ను తనిఖీ చేయండి
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
-## Best Practices
+## ఉత్తమ ఆచారాలు
 
-### ✅ DO:
+### ✅ చేయండి:
 
-1. **Use correlation IDs**
+1. **కరలేషన్ IDs ఉపయోగించండి**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Set up alerts for critical metrics**
+2. **ముఖ్యమైన మెట్రిక్స్ కోసం అలర్ట్స్ సెటప్ చేయండి**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Use structured logging**
+3. **సంరచిత లాగింగ్ ఉపయోగించండి**
    ```python
-   # ✅ మంచి: సంఘటిత
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ చెడు: అసంఘటిత
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **Monitor dependencies**
+4. **డిపెండెన్సీలను మానిటర్ చేయండి**
    ```python
-   # డేటాబేస్ کال్స్, HTTP అభ్యర్థనలు మొదలైన వాటిని స్వయంచాలకంగా ట్రాక్ చేయండి.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **Use Live Metrics during deployments**
+5. **డిప్లాయ్‌మెంట్ల సమయంలో లైవ్ మెట్రిక్స్ ఉపయోగించండి**
 
-### ❌ DON'T:
+### ❌ చేయవద్దు:
 
-1. **Don't log sensitive data**
+1. **సెన్సిటివ్ డేటాను లాగ్ చేయవద్దు**
    ```python
-   # ❌ చెడు
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ మంచి
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Don't use 100% sampling in production**
+2. **వాల్యూమ్ మరియు డయాగ్నోస్టిక్ అవసరాలను కొలవకుండా సాంప్లింగ్ ఎంచుకోవద్దు**
    ```python
-   # ❌ ఖరీదైన
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ ఖర్చు-ప్రయోజనకరమైన
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Don't ignore dead letter queues**
+3. **డెడ్ లెటర్ క్యూలను నిర్లక్ష్యంగా వదలవద్దు**
 
-4. **Don't forget to set data retention limits**
+4. **డేటా నిల్వ పరిమితులు సెట్ చేయడం మర్చిపోకండి**
 
 ---
 
-## Troubleshooting
+## సమస్య పరిష్కారం
 
-### Problem: No telemetry appearing
+### స‌మ‌స్య: టెలిమెట్రీ కనిపించడంలేదు
 
-**Diagnosis:**
+**నిర్ధారణ:**
 ```bash
-# కనెక్షన్ స్ట్రింగ్ సెట్ చేయబడిందో తనిఖీ చేయండి
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure Monitor ద్వారా అప్లికేషన్ లాగ్‌లను తనిఖీ చేయండి
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# లేదా Container Apps కోసం Azure CLIని ఉపయోగించండి:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
-**Solution:**
+**పరిష్కారం:**
 ```bash
-# కంటైనర్ యాప్‌లో కనెక్షన్ స్ట్రింగ్‌ను ధృవీకరించండి
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,71 +1453,70 @@ az containerapp show \
 
 ---
 
-### Problem: High costs
+### స‌మ‌స్య: అధిక ఖర్చులు
 
-**Diagnosis:**
+**నిర్ధారణ:**
 ```bash
-# డేటా ఇన్‌జెషన్‌ను తనిఖీ చేయండి
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
-**Solution:**
-- Reduce sampling rate
-- Decrease retention period
-- Remove verbose logging
+**పరిష్కారం:**
+- సాంప్లింగ్ రేటును తగ్గించండి
+- నిల్వ వ్యవధిని తగ్గించండి
+- వివరణాత్మక లాగింగ్ తొలగించండి
 
 ---
 
-## Learn More
+## మరింత నేర్చుకోండి
 
-### Official Documentation
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+### అధికారిక డాక్యుమెంటేషన్
+- [అప్లికేషన్ ఇన్సైట్స్ అవలోకనం](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [అజూర్ మోనిటర్ ఓపెన్‌టెలిమెట్రీ సెటప్](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [కుస్తో క్వరీ లాంగ్వేజ్](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD మానిటరింగ్](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Next Steps in This Course
-- ← Previous: [ప్రీఫ్లైట్ తనిఖీలు](preflight-checks.md)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Course Home](../../README.md)
+### ఈ కోర్సులో తదుపరి దశలు
+- ← ముందు: [ప్రీఫ్లైట్ తనిఖీలు](preflight-checks.md)
+- → తర్వాత: [డిప్లాయ్‌మెంట్ గైడ్](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [కోర్సు హోమ్](../../README.md)
 
-### Related Examples
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI telemetry
-- [Microservices Example](../../../../examples/microservices) - Distributed tracing
+### సంబంధిత ఉదాహరణలు
+- [మైక్రోసాఫ్ట్ ఫౌండ్రి మోడల్స్ ఉదాహరణ](../../../../examples/azure-openai-chat) - AI టెలిమెట్రీ
+- [మైక్రోసర్వీసెస్ ఉదాహరణ](../../../../examples/microservices) - పంపిణీ ట్రేసింగ్
 
 ---
 
-## Summary
+## సారాంశం
 
-**You've learned:**
-- ✅ AZD తో Automatic Application Insights provisioning
-- ✅ Custom telemetry (ఈవెంట్స్, మెట్రిక్స్, డిపెండెన్సీస్)
-- ✅ మైక్రోసర్వీసుల మధ్య Distributed tracing
-- ✅ Live metrics మరియు రియల్-టైమ్ మానిటరింగ్
-- ✅ Alerts మరియు dashboards
+**మీరు నేర్చుకున్నది:**
+- ✅ AZDతో ఆటోమేటిక్ అప్లికేషన్ ఇన్సైట్స్ ప్రొవిజనింగ్
+- ✅ కస్టమ్ టెలిమెట్రీ (ఈవెంట్స్, మీట్రిక్స్, డిపెండెన్సీలు)
+- ✅ మైక్రోసర్వీసుల మధ్య పంపిణీ ట్రేసింగ్
+- ✅ లైవ్ మీట్రిక్స్ మరియు రియల్-టైమ్ మానిటరింగ్
+- ✅ అలర్ట్స్ మరియు డాష్‌బోర్డ్స్
 - ✅ AI/LLM అప్లికేషన్ మానిటరింగ్
 - ✅ ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలు
 
-**Key Takeaways:**
-1. **AZD మానిటరింగ్‌ను స్వయంచాలకంగా ఏర్పాటు చేస్తుంది** - మాన్యువల్ సెటప్ అవసరం లేదు
-2. **క్రమబద్ధమైన లాగింగ్‌ను ఉపయోగించండి** - క్వెరీ చేయడం సులభం అవుతుంది
-3. **వ్యాపార సంఘటనలను ట్రాక్ చేయండి** - కేవలం సాంకేతిక మీట్రిక్స్ మాత్రమే కాదు
-4. **AI ఖర్చులను పర్యవేక్షించండి** - టోకెన్లు మరియు ఖర్చులను ట్రాక్ చేయండి
-5. **అలర్ట్‌లను ఏర్పాటు చేయండి** - ప్రతిక్రియాత్మకంగా కాకుండా ముందస్తుగా చర్య తీసుకోండి
-6. **ఖర్చులను ఉత్తమీకరించండి** - సాంప్లింగ్ మరియు నిల్వ పరిమితులను ఉపయోగించండి
+**ప్రధాన TAKEAWAYS:**
+1. **మానిటరింగ్‌ను స్పష్టంగా ప్రకటించండి** - AZD మీ టెంప్లేట్లను డిప్లాయ్ చేస్తుంది; SDK ఇన్స్ట్రుమెంటేషన్ టెలిమెట్రీ పంపిస్తుంది
+2. **సంరచనాత్మక లాగ్ చేస్తుండండి** - క్వెరింగ్ సులభం చేస్తుంది
+3. **బిజినెస్ ఈవెంట్స్‌ను ట్రాక్ చేయండి** - కేవలం సాంకేతిక మీట్రిక్స్ కాదు
+4. **AI ఖర్చులను మానిటర్ చేయండి** - టోకెన్లు మరియు ఖర్చులను ట్రాక్ చేయండి
+5. **అలర్ట్స్ ఏర్పాటు చేయండి** - ప్రతిస్పందనకు కాకుండా ముందస్తు చర్యలు తీసుకోండి
+6. **ఖర్చులను ఆప్టిమైజ్ చేయండి** - సాంప్లింగ్ మరియు నిల్వ పరిమితులను ఉపయోగించండి
 
 **తదుపరి దశలు:**
-1. ప్రాయోగిక వ్యాయామాలను పూర్తి చేయండి
-2. మీ AZD ప్రాజెక్టులకు Application Insights జోడించండి
-3. మీ బృందం కోసం కస్టమ్ డాష్‌బోర్డులను సృష్టించండి
-4. తెలుసుకోండి [డిప్లాయ్‌మెంట్ గైడ్](../chapter-04-infrastructure/deployment-guide.md)
+1. ప్రాక్టికల్ వ్యాయామాలు పూర్తి చేయండి
+2. మీ AZD ప్రాజెక్టులకు అప్లికేషన్ ఇన్సైట్స్ జత చేయండి
+3. మీ బృందానికి కస్టమ్ డాష్‌బోర్డ్స్ సృష్టించండి
+4. నేర్చుకోండి [డిప్లాయ్ మెంట్ గైడ్](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**నిరాకరణ**:
-ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా లోపాలు ఉండే అవకాశం ఉన్నదని దయచేసి గమనించండి. దాని స్థానిక భాషలోని అసలైన పత్రాన్ని అధికారిక మూలంగా పరిగణించాలి. కీలక సమాచారం కోసం, వృత్తిపరమైన మానవ అనువాదాన్ని సిఫార్సు చేస్తాము. ఈ అనువాదాన్ని ఉపయోగించడంవల్ల ఉత్పన్నమయ్యే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడంపై మేము బాధ్యత వహించము.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

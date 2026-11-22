@@ -1,66 +1,66 @@
 # Domande Frequenti (FAQ)
 
 **Ottieni Aiuto per Capitolo**
-- **📚 Home del Corso**: [AZD Per Principianti](../README.md)
-- **🚆 Problemi di Installazione**: [Capitolo 1: Installazione & Configurazione](../docs/chapter-01-foundation/installation.md)
+- **📚 Home del Corso**: [AZD per Principianti](../README.md)
+- **🚆 Problemi di Installazione**: [Capitolo 1: Installazione e Configurazione](../docs/chapter-01-foundation/installation.md)
 - **🤖 Domande sull'IA**: [Capitolo 2: Sviluppo AI-First](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🔧 Risoluzione Problemi**: [Capitolo 7: Risoluzione Problemi & Debugging](../docs/chapter-07-troubleshooting/common-issues.md)
+- **🔧 Risoluzione Problemi**: [Capitolo 7: Debugging e Risoluzione Problemi](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Introduzione
 
-Questa completa FAQ fornisce risposte alle domande più comuni su Azure Developer CLI (azd) e sulle distribuzioni Azure. Trova soluzioni rapide ai problemi comuni, comprendi le migliori pratiche e ottieni chiarimenti sui concetti e flussi di lavoro azd.
+Questa FAQ completa fornisce risposte alle domande più comuni su Azure Developer CLI (azd) e le distribuzioni Azure. Trova soluzioni rapide ai problemi comuni, comprendi le best practice e ottieni chiarimenti sui concetti e i flussi di lavoro azd.
 
-## Obiettivi di apprendimento
+## Obiettivi di Apprendimento
 
-Esaminando questa FAQ, potrai:
-- Trovare risposte rapide alle domande e problemi comuni di Azure Developer CLI
-- Comprendere concetti chiave e terminologia tramite domande e risposte pratiche
-- Accedere a soluzioni di troubleshooting per problemi e scenari di errore frequenti
-- Apprendere le migliori pratiche attraverso domande frequenti sull'ottimizzazione
+Rivedendo questa FAQ, potrai:
+- Trovare risposte rapide a domande e problemi comuni di Azure Developer CLI
+- Comprendere i concetti chiave e la terminologia tramite formato pratico Q&A
+- Accedere a soluzioni di risoluzione problemi per scenari ricorrenti ed errori
+- Imparare le best practice tramite domande frequenti sull'ottimizzazione
 - Scoprire funzionalità avanzate e capacità tramite domande di livello esperto
-- Fare riferimento in modo efficiente a linee guida su costi, sicurezza e strategie di distribuzione
+- Fare riferimento a indicazioni su costi, sicurezza e strategie di deployment in modo efficiente
 
-## Risultati di apprendimento
+## Risultati di Apprendimento
 
-Con riferimenti regolari a questa FAQ, sarai in grado di:
-- Risolvere autonomamente problemi comuni di Azure Developer CLI usando le soluzioni fornite
-- Prendere decisioni informate su strategie e configurazioni di distribuzione
+Con referenze regolari a questa FAQ, sarai in grado di:
+- Risolvere problemi comuni di Azure Developer CLI autonomamente usando soluzioni fornite
+- Prendere decisioni informate su strategie e configurazioni di deployment
 - Comprendere la relazione tra azd e altri strumenti e servizi Azure
-- Applicare le migliori pratiche basate sull'esperienza della community e raccomandazioni di esperti
-- Risolvere efficacemente problemi di autenticazione, distribuzione e configurazione
-- Ottimizzare costi e prestazioni usando intuizioni e raccomandazioni dalle FAQ
+- Applicare best practice basate sull'esperienza della community e raccomandazioni di esperti
+- Risolvere problemi di autenticazione, deployment e configurazione in modo efficace
+- Ottimizzare costi e prestazioni usando spunti e raccomandazioni dalla FAQ
 
 ## Indice
 
-- [Prima di Iniziare](#getting-started)
-- [Autenticazione & Accesso](#authentication--access)
-- [Template & Progetti](#templates--projects)
-- [Distribuzione & Infrastruttura](#deployment--infrastructure)
-- [Configurazione & Ambiente](#configuration--environments)
+- [Per Iniziare](#getting-started)
+- [Autenticazione e Accesso](#authentication--access)
+- [Template e Progetti](#templates--projects)
+- [Deployment e Infrastruttura](#deployment--infrastructure)
+- [Configurazioni e Ambienti](#configuration--environments)
 - [Risoluzione Problemi](#troubleshooting)
-- [Costi & Fatturazione](#cost--billing)
-- [Best Practices](#best-practices)
+- [Costi e Fatturazione](#cost--billing)
+- [Best Practice](#best-practices)
 - [Argomenti Avanzati](#advanced-topics)
 
 ---
 
-## Prima di Iniziare
+## Per Iniziare
 
-### D: Cos’è Azure Developer CLI (azd)?
-**R**: Azure Developer CLI (azd) è uno strumento da riga di comando incentrato sullo sviluppatore che accelera il tempo necessario per portare un'applicazione dall'ambiente di sviluppo locale ad Azure. Fornisce best practice tramite template e aiuta con l'intero ciclo di vita di distribuzione.
+### D: Cos'è Azure Developer CLI (azd)?
+**R**: Azure Developer CLI (azd) è uno strumento a linea di comando orientato agli sviluppatori che accelera il tempo necessario per portare la tua applicazione dall'ambiente di sviluppo locale ad Azure. Fornisce best practice tramite template e supporta l'intero ciclo di vita del deployment.
 
-### D: In cosa si differenzia azd da Azure CLI?
+### D: In cosa azd è diverso da Azure CLI?
 **R**: 
 - **Azure CLI**: Strumento generico per la gestione delle risorse Azure
-- **azd**: Strumento focalizzato sullo sviluppatore per i flussi di lavoro di distribuzione applicativa
-- azd ha un proprio flusso di autenticazione e distribuzione; Azure CLI è uno strumento separato e complementare
-- azd include template, gestione ambienti e automazione della distribuzione
+- **azd**: Strumento focalizzato sugli sviluppatori per i flussi di lavoro di deployment applicativo
+- azd ha un proprio flusso di autenticazione e deployment; Azure CLI è uno strumento separato e complementare
+- azd include template, gestione degli ambienti e automazione del deployment
 
-### D: Devo avere Azure CLI installato per usare azd?
-**R**: Non per il flusso principale di AZD. Autenticati con `azd auth login`. Installa Azure CLI separatamente quando un hook di un template o un esercizio eseguono esplicitamente comandi `az`.
+### D: Ho bisogno di installare Azure CLI per usare azd?
+**R**: Non per il flusso di lavoro core AZD. Autenticati con `azd auth login`. Installa Azure CLI separatamente quando un hook del template o un esercizio esegue esplicitamente comandi `az`.
 
 ### D: Quali linguaggi di programmazione supporta azd?
-**R**: azd è agnostico rispetto al linguaggio. Funziona con:
+**R**: azd è agnostico al linguaggio. Funziona con:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -72,31 +72,39 @@ Con riferimenti regolari a questa FAQ, sarai in grado di:
 
 ### D: Posso usare azd con progetti esistenti?
 **R**: Sì! Puoi:
-1. Usare `azd init` per aggiungere configurazione azd a progetti esistenti
-2. Adattare progetti esistenti per corrispondere alla struttura del template azd
+1. Usare `azd init` per aggiungere la configurazione azd a progetti esistenti
+2. Adattare progetti esistenti per conformarsi alla struttura del template azd
 3. Creare template personalizzati basati sulla tua architettura esistente
+
+### D: Cosa è cambiato con la disponibilità generale dell'estensione Foundry?
+**R**: Il pacchetto `microsoft.foundry` ha raggiunto la versione 1.0 e GA il 5 novembre 2026. Con AZD 1.37.0+ usa `azd ext install microsoft.foundry` per installare sette estensioni core per agenti, connessioni, inspector, progetti, routine, competenze e toolkit. Non è un nuovo namespace di comandi, i suoi componenti sono versionati indipendentemente. Valutazioni, dataset, fine-tuning e modelli custom sono installati separatamente; le funzionalità opzionali in anteprima non diventano GA solo perché il bundle è GA.
+
+La [guida per l'agente ospitato](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) utilizza Python 3.13+ e la versione attuale di uv. `azd ai agent run` apre localmente Agent Inspector, ma le chiamate modello usano ancora Azure e comportano costi. La modalità codice `azd deploy` carica il codice sorgente per una build remota senza richiedere build locali in container.
+
+### D: `azd down` rimuove un agente ospitato da un progetto Foundry esistente?
+**R**: Non per il percorso del progetto riutilizzato descritto nell’avvio rapido dell’agente ospitato: lascia inalterati il progetto, l’agente ospitato e altre risorse. Rimuovi risorse indesiderate separatamente senza eliminare risorse condivise. Se l’ambiente ha creato un nuovo progetto Foundry, `azd down` elimina il suo gruppo di risorse e tutto ciò che contiene. Controlla le [indicazioni per la pulizia](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately) e le richieste di cancellazione prima di confermare.
 
 ---
 
-## Autenticazione & Accesso
+## Autenticazione e Accesso
 
 ### D: Come mi autentico con Azure usando azd?
-**R**: Usa `azd auth login` che aprirà una finestra del browser per l'autenticazione Azure. Per scenari CI/CD, usa service principal o managed identity.
+**R**: Usa `azd auth login` che aprirà una finestra del browser per l'autenticazione Azure. Per scenari CI/CD, usa service principal o managed identities.
 
 ### D: Posso usare azd con più sottoscrizioni Azure?
-**R**: Sì. Usa `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` per specificare quale sottoscrizione usare per ogni ambiente.
+**R**: Sì. Usa `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` per specificare la sottoscrizione da usare per ogni ambiente.
 
-### D: Quali permessi servono per distribuire con azd?
+### D: Quali permessi servono per effettuare il deployment con azd?
 **R**: Tipicamente servono:
-- ruolo **Contributor** sul gruppo risorse o sottoscrizione
+- ruolo **Contributor** sul gruppo di risorse o sottoscrizione
 - ruolo **User Access Administrator** se si distribuiscono risorse che richiedono assegnazioni di ruolo
-- Permessi specifici variano in base al template e alle risorse distribuite
+- permessi specifici variano in base al template e alle risorse distribuite
 
-### D: Posso usare azd nelle pipeline CI/CD?
-**R**: Assolutamente! azd è progettato per integrazione CI/CD. Usa service principal per l'autenticazione e imposta variabili d'ambiente per la configurazione.
+### D: Posso usare azd in pipeline CI/CD?
+**R**: Assolutamente! azd è progettato per l'integrazione CI/CD. Usa service principal per l’autenticazione e imposta variabili d’ambiente per la configurazione.
 
 ### D: Come gestisco l'autenticazione in GitHub Actions?
-**R**: Preferisci workload identity federation (OIDC), configurata con `azd pipeline config`. Il workflow generato installa AZD e autentica AZD direttamente con un'identità federata. Un solo step `azure/login` non stabilisce un login AZD. Uno step di login in un job esistente è:
+**R**: Preferisci la federazione di identità del carico di lavoro (OIDC), configurata con `azd pipeline config`. Il workflow generato installa AZD e autentica AZD direttamente con identità federata. Un passo `azure/login` da solo non stabilisce un login AZD. Un passo di login all’interno di un job esistente è:
 ```yaml
 permissions:
   contents: read
@@ -111,55 +119,55 @@ steps:
       --federated-credential-provider github
 ```
 
-Procedi a provisionare o distribuire dopo il login, con ambiente AZD, sottoscrizione e località configurati correttamente. La credenziale federata dell'identità deve affidare il repository/ref del workflow o l'ambiente GitHub, e i ruoli Azure devono consentire le operazioni richieste.
+Provi o distribuisci dopo il login, con l’ambiente AZD previsto, sottoscrizione e location configurati. La credenziale federata dell’identità deve fidarsi del repository/ref del workflow o dell’ambiente GitHub, e i ruoli Azure devono consentire le operazioni richieste.
 
 ---
 
-## Template & Progetti
+## Template e Progetti
 
-### D: Dove trovo i template azd?
+### D: Dove posso trovare template azd?
 **R**: 
 - Template ufficiali e della community: [Awesome AZD](https://azure.github.io/awesome-azd/)
-- Template community: ricerca GitHub per "azd-template"
-- Usa `azd template list` per sfogliare i template disponibili
+- Template della community: ricerca GitHub per "azd-template"
+- Usa `azd template list` per navigare i template disponibili
 
 ### D: Come creo un template personalizzato?
 **R**: 
-1. Parti da una struttura template esistente
-2. Modifica `azure.yaml`, file infrastruttura e codice applicazione
-3. Testa a fondo con `azd up`
+1. Parti da una struttura di template esistente
+2. Modifica `azure.yaml`, file infrastruttura e codice applicativo
+3. Testa approfonditamente con `azd up`
 4. Pubblica su GitHub con tag appropriati
 
 ### D: Posso usare azd senza un template?
-**R**: Sì, usa `azd init` in un progetto esistente per creare i file configurazione necessari. Sarà necessario configurare manualmente `azure.yaml` e file infrastruttura.
+**R**: Sì, usa `azd init` in un progetto esistente per creare i file di configurazione necessari. Dovrai configurare manualmente `azure.yaml` e file infrastrutturali.
 
-### D: Qual è la differenza tra template ufficiali e community?
+### D: Qual è la differenza tra template ufficiali e della community?
 **R**: 
-- **Template ufficiali**: mantenuti da Microsoft, aggiornati regolarmente, documentazione completa
-- **Template community**: creati da sviluppatori, possono avere casi d’uso specializzati, qualità e manutenzione variabili
+- **Template ufficiali**: Mantenuti da Microsoft, aggiornati regolarmente, documentazione completa
+- **Template della community**: Creati da sviluppatori, possono avere casi d’uso specializzati, qualità e manutenzione variabili
 
 ### D: Come aggiorno un template nel mio progetto?
 **R**: I template non si aggiornano automaticamente. Puoi:
-1. Confrontare e unire manualmente cambiamenti dal template di origine
-2. Partire da zero con `azd init` usando il template aggiornato
-3. Selezionare specifici miglioramenti dai template aggiornati
+1. Confrontare e unire manualmente le modifiche dal template sorgente
+2. Ricominciare da capo con `azd init` usando il template aggiornato
+3. Selezionare miglioramenti specifici da template aggiornati
 
 ---
 
-## Distribuzione & Infrastruttura
+## Deployment e Infrastruttura
 
 ### D: Quali servizi Azure può distribuire azd?
-**R**: azd può distribuire qualsiasi servizio Azure tramite template Bicep/ARM, includendo:
+**R**: azd può distribuire qualsiasi servizio Azure tramite template Bicep/ARM, inclusi:
 - App Services, Container Apps, Functions
 - Database (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
-- Rete, sicurezza e risorse di monitoraggio
+- Risorse di rete, sicurezza e monitoraggio
 
 ### D: Posso distribuire in più regioni?
-**R**: Sì, configura più regioni nei tuoi template Bicep e imposta il parametro location opportunamente per ogni ambiente.
+**R**: Sì, configura più regioni nei tuoi template Bicep e imposta correttamente il parametro location per ogni ambiente.
 
 ### D: Come gestisco le migrazioni dello schema del database?
-**R**: Usa hook di deploy in `azure.yaml`:
+**R**: Usa hook di deployment in `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -173,16 +181,16 @@ hooks:
 **R**: Sì, usa `azd provision` per distribuire solo i componenti infrastrutturali definiti nei tuoi template.
 
 ### D: Come distribuisco su risorse Azure esistenti?
-**R**: Sì, quando il template lo supporta. Fai riferimento a risorse esistenti con dichiarazioni `existing` di Bicep o con i parametri template per risorse esistenti documentati e mappa i servizi applicativi ai loro target previsti. Questo non importa ownership né crea automaticamente permessi mancanti. Rivedi il template prima di distribuire.
+**R**: Sì, se il template lo supporta. Riferisci risorse esistenti con dichiarazioni `existing` di Bicep o con i parametri esistenti documentati del template, mappando i servizi applicativi ai loro target previsti. Questo non importa proprietà né crea automaticamente permessi mancanti. Controlla il template prima di distribuire.
 
 ### D: Posso usare Terraform invece di Bicep?
-**R**: Sì. AZD supporta sia Terraform che Bicep. Seleziona un template basato su Terraform o configura `infra.provider: terraform` in `azure.yaml`, con file e configurazione state/backend Terraform appropriata. Vedi il [flusso di lavoro Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+**R**: Sì. AZD supporta sia Terraform sia Bicep. Seleziona un template basato su Terraform o configura `infra.provider: terraform` in `azure.yaml`, con file Terraform e configurazione stato/backend appropriati. Vedi il [workflow Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
-## Configurazione & Ambiente
+## Configurazioni e Ambienti
 
-### D: Come gestisco ambienti differenti (dev, staging, prod)?
+### D: Come gestisco ambienti diversi (dev, staging, prod)?
 **R**: Crea ambienti separati con `azd env new <environment-name>` e configura impostazioni diverse per ciascuno:
 ```bash
 azd env new development
@@ -191,29 +199,29 @@ azd env new production
 ```
 
 ### D: Dove sono memorizzate le configurazioni ambiente?
-**R**: Nella cartella `.azure` all’interno della directory progetto. Ogni ambiente ha la propria cartella con file di configurazione.
+**R**: Nella cartella `.azure` all’interno della directory del progetto. Ogni ambiente ha la propria cartella con file di configurazione.
 
 ### D: Come imposto configurazioni specifiche per ambiente?
-**R**: Usa `azd env set` per configurare variabili d’ambiente:
+**R**: Usa `azd env set` per configurare variabili ambiente:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
 ### D: Posso condividere configurazioni ambiente tra membri del team?
-**R**: La cartella `.azure` contiene informazioni sensibili e non dovrebbe essere sottoposta a controllo versione. Invece:
-1. Documenta le variabili ambiente richieste
-2. Usa script di distribuzione per configurare gli ambienti
+**R**: La cartella `.azure` contiene informazioni sensibili e non dovrebbe essere committata nel controllo versione. Invece:
+1. Documenta variabili ambiente richieste
+2. Usa script di deployment per configurare gli ambienti
 3. Usa Azure Key Vault per configurazioni sensibili
 
 ### D: Come sovrascrivo i valori di default del template?
-**R**: Imposta variabili ambiente corrispondenti ai parametri del template:
+**R**: Imposta variabili ambiente che corrispondono ai parametri del template:
 ```bash
 azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
-Solo le variabili utilizzate dal template influenzano la distribuzione. `SKU_NAME` sopra è un esempio di input personalizzato, non una configurazione AZD universale.
+Solo le variabili consumate dal template influenzano il deployment. `SKU_NAME` sopra è un esempio di input personalizzato, non un'impostazione universale AZD.
 
 ---
 
@@ -223,18 +231,18 @@ Solo le variabili utilizzate dal template influenzano la distribuzione. `SKU_NAM
 **R**: Cause comuni:
 1. **Problemi di autenticazione**: Esegui `azd auth login`
 2. **Permessi insufficienti**: Controlla le assegnazioni di ruolo Azure
-3. **Conflitti nome risorsa**: Rivedi la risorsa in conflitto e gli input del template; crea un ambiente separato con `azd env new` quando serve isolamento
-4. **Problemi di quota/capacità**: Controlla la disponibilità regionale
+3. **Conflitti nei nomi delle risorse**: Controlla la risorsa in conflitto e gli input del template; crea un ambiente separato con `azd env new` se serve isolamento
+4. **Problemi di quota/capacità**: Verifica disponibilità regionale
 5. **Errori nel template**: Valida i template Bicep
 
-### D: Come debuggo fallimenti di distribuzione?
+### D: Come debuggo fallimenti di deployment?
 **R**: 
-1. Usa `azd deploy --debug` per output dettagliato
-2. Controlla la cronologia distribuzioni nel portale Azure
-3. Rivedi il Log Attività nel portale Azure
-4. Usa `azd show` per visualizzare lo stato ambiente corrente
+1. Usa `azd deploy --debug` per output dettagliati
+2. Controlla la cronologia dei deployment nel portale Azure
+3. Controlla il Registro Attività nel portale Azure
+4. Usa `azd show` per mostrare lo stato corrente dell'ambiente
 
-### D: Perché le mie variabili d’ambiente non funzionano?
+### D: Perché le mie variabili ambiente non funzionano?
 **R**: Controlla:
 1. I nomi variabili corrispondono esattamente ai parametri del template
 2. I valori sono correttamente quotati se contengono spazi
@@ -246,57 +254,57 @@ Solo le variabili utilizzate dal template influenzano la distribuzione. `SKU_NAM
 ```bash
 azd down
 ```
-Rivedi prima la selezione dell’ambiente e conferma l'eliminazione. Questo cancella risorse Azure provisionate, non la configurazione dell’ambiente `.azure` locale. `--purge` richiede anche la cancellazione permanente di risorse supp. soft-eliminate e può essere bloccato da protezione retention/purge; non è una routine di recupero.
+Rivedi prima l’ambiente selezionato e conferma la cancellazione. Questo elimina risorse Azure provisionate, non la configurazione locale dell'ambiente `.azure`. `--purge` chiede inoltre la cancellazione permanente di risorse soft-delete supportate e può essere bloccata da protezione retention/purge; non è una procedura di recupero standard.
 
-### D: Perché la mia applicazione non è accessibile dopo la distribuzione?
+### D: Perché la mia applicazione non è accessibile dopo il deployment?
 **R**: Controlla:
-1. Distribuzione completata con successo
-2. Applicazione in esecuzione (controlla i log nel portale Azure)
+1. Il deployment è stato completato con successo
+2. L'applicazione è in esecuzione (controlla log nel portale Azure)
 3. I gruppi di sicurezza di rete permettono il traffico
-4. DNS/domini personalizzati configurati correttamente
+4. DNS/domini personalizzati sono configurati correttamente
 
 ---
 
-## Costi & Fatturazione
+## Costi e Fatturazione
 
-### D: Quanto costeranno le distribuzioni azd?
+### D: Quanto costeranno i deployment azd?
 **R**: I costi dipendono da:
 - Servizi Azure distribuiti
-- Tier/SKU dei servizi scelti
+- Tier/SKU selezionati
 - Differenze di prezzo regionali
 - Modelli di utilizzo
 
 Usa il [Calcolatore Prezzi Azure](https://azure.microsoft.com/pricing/calculator/) per stime.
 
-### D: Come controllo i costi nelle distribuzioni azd?
+### D: Come controllo i costi nei deployment azd?
 **R**: 
 1. Usa SKU di livello inferiore per ambienti di sviluppo
-2. Imposta budget e avvisi Azure
-3. Usa `azd down` per rimuovere risorse quando non servono
+2. Configura budget e avvisi Azure
+3. Usa `azd down` per rimuovere risorse non necessarie
 4. Scegli regioni appropriate (i costi variano per località)
-5. Usa strumenti Azure Cost Management
+5. Usa strumenti di Azure Cost Management
 
-### D: Ci sono opzioni gratuite per i template azd?
-**R**: Alcuni servizi hanno SKU gratuiti o concessioni mensili, soggette a idoneità, piano hosting, regione e limiti di sottoscrizione. Questi non rendono gratuito un intero template: database, ricerca, rete, registro, telemetria e inferenza modelli possono generare costi indipendenti. Verifica la [lista servizi gratuiti Azure](https://azure.microsoft.com/free/) e i prezzi correnti per ogni risorsa prima della distribuzione.
+### D: Esistono opzioni gratuite per i modelli azd?
+**R**: Alcuni servizi hanno SKU gratuite o contributi mensili, soggetti a idoneità, piano di hosting, regione e limiti di abbonamento. Questi non rendono gratuito l'intero modello: database, ricerca, rete, registry, telemetria e inferenza del modello possono comportare costi indipendentemente. Controlla la [lista dei servizi gratuiti di Azure](https://azure.microsoft.com/free/) e i prezzi attuali di ogni risorsa prima del deployment.
 
-### D: Come stimo i costi prima della distribuzione?
+### D: Come posso stimare i costi prima del deployment?
 **R**: 
-1. Rivedi `main.bicep` del template per vedere quali risorse si creano
-2. Usa il Calcolatore Prezzi Azure con SKU specifici
-3. Distribuisci prima in ambiente di sviluppo per monitorare i costi reali
-4. Usa Azure Cost Management per analisi dettagliate dei costi
+1. Esamina il `main.bicep` del modello per vedere quali risorse vengono create
+2. Usa il Calcolatore dei Prezzi di Azure con SKU specifici
+3. Esegui il deployment in un ambiente di sviluppo per monitorare i costi reali
+4. Usa Azure Cost Management per un'analisi dettagliata dei costi
 
 ---
 
-## Best Practices
+## Migliori Pratiche
 
-### D: Quali sono le best practice per la struttura del progetto azd?
+### D: Quali sono le migliori pratiche per la struttura del progetto azd?
 **R**: 
-1. Mantieni il codice applicativo separato dall’infrastruttura
-2. Usa nomi di servizio significativi in `azure.yaml`
-3. Implementa gestione errori appropriata negli script di build
+1. Mantieni il codice dell'applicazione separato dall'infrastruttura
+2. Usa nomi significativi per i servizi in `azure.yaml`
+3. Implementa una corretta gestione degli errori negli script di build
 4. Usa configurazioni specifiche per ambiente
-5. Includi documentazione completa
+5. Includi una documentazione completa
 
 ### D: Come dovrei organizzare più servizi in azd?
 **R**: Usa la struttura raccomandata:
@@ -310,33 +318,33 @@ Usa il [Calcolatore Prezzi Azure](https://azure.microsoft.com/pricing/calculator
 └── README.md         # Project documentation
 ```
 
-### D: Devo committare la cartella `.azure` nel controllo versione?
+### D: Devo includere la cartella `.azure` nel controllo versione?
 **R**: **No!** La cartella `.azure` contiene informazioni sensibili. Aggiungila a `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### D: Come gestisco segreti e configurazioni sensibili?
+### D: Come gestisco i segreti e la configurazione sensibile?
 **R**: 
 1. Usa Azure Key Vault per i segreti
 2. Fai riferimento ai segreti di Key Vault nella configurazione dell'applicazione
-3. Non inserire mai segreti nel controllo versione
+3. Non includere mai i segreti nel controllo versione
 4. Usa identità gestite per l'autenticazione tra servizi
 
-### D: Qual è l'approccio consigliato per CI/CD con azd?
+### D: Qual è l'approccio raccomandato per CI/CD con azd?
 **R**: 
 1. Usa ambienti separati per ogni fase (dev/staging/prod)
 2. Implementa test automatizzati prima del deployment
 3. Usa service principal per l'autenticazione
 4. Conserva la configurazione sensibile nei segreti/variabili della pipeline
-5. Implementa gate di approvazione per i deployment in produzione
+5. Implementa approvazioni per i deployment in produzione
 
 ---
 
-## Argomenti avanzati
+## Argomenti Avanzati
 
 ### D: Posso estendere azd con funzionalità personalizzate?
-**R**: Sì, tramite deployment hook in `azure.yaml`:
+**R**: Sì, tramite hook di deployment in `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -345,31 +353,31 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### D: Come integro azd con i processi DevOps esistenti?
+### D: Come integro azd con processi DevOps esistenti?
 **R**: 
-1. Usa i comandi azd negli script delle pipeline esistenti
-2. Standardizza i template azd tra i team
-3. Integra con il monitoraggio e gli allarmi esistenti
-4. Usa l'output JSON di azd per l'integrazione nelle pipeline
+1. Usa i comandi azd negli script della pipeline esistenti
+2. Standardizza l'uso dei modelli azd fra i team
+3. Integra con il monitoraggio e gli alert esistenti
+4. Usa l'output JSON di azd per l'integrazione nella pipeline
 
 ### D: Posso usare azd con Azure DevOps?
-**R**: Sì, azd funziona con qualsiasi sistema CI/CD. Crea pipeline Azure DevOps che usano comandi azd.
+**R**: Sì, azd funziona con qualsiasi sistema CI/CD. Crea pipeline Azure DevOps che usano i comandi azd.
 
-### D: Come posso contribuire ad azd o creare template comunitari?
+### D: Come posso contribuire ad azd o creare modelli comunitari?
 **R**: 
 1. **Strumento azd**: Contribuisci a [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Template**: Segui le [istruzioni per contribuire alla galleria Awesome AZD](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
-3. **Documentazione**: Contribuisci alla documentazione in [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+2. **Modelli**: Segui le [istruzioni per contributi alla galleria Awesome AZD](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
+3. **Documentazione**: Contribuisci ai documenti su [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
 ### D: Qual è la roadmap di azd?
-**R**: Consulta la [roadmap ufficiale](https://github.com/Azure/azure-dev/projects) per funzionalità e migliorie pianificate.
+**R**: Consulta la [roadmap ufficiale](https://github.com/Azure/azure-dev/projects) per funzionalità e miglioramenti pianificati.
 
-### D: Come migro da altri tool di deployment ad azd?
+### D: Come migro da altri strumenti di deployment ad azd?
 **R**: 
 1. Analizza l'architettura di deployment attuale
-2. Crea template Bicep equivalenti
+2. Crea modelli Bicep equivalenti
 3. Configura `azure.yaml` per corrispondere ai servizi attuali
-4. Testa approfonditamente in ambiente di sviluppo
+4. Testa accuratamente in ambiente di sviluppo
 5. Migra gradualmente gli ambienti
 
 ---
@@ -378,31 +386,31 @@ hooks:
 
 ### **Cerca prima**
 - Consulta la [documentazione ufficiale](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Cerca tra le [issue GitHub](https://github.com/Azure/azure-dev/issues) problemi simili
+- Cerca tra le [issue di GitHub](https://github.com/Azure/azure-dev/issues) problemi simili
 
-### **Chiedi aiuto**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Supporto comunitario
+### **Ottieni aiuto**
+- [Discussioni GitHub](https://github.com/Azure/azure-dev/discussions) - Supporto della comunità
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Domande tecniche
 - [Azure Discord](https://discord.gg/azure) - Chat comunitaria in tempo reale
 
-### **Segnala problemi**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Segnalazioni bug e richieste funzionalità
-- Includi log rilevanti, messaggi di errore e passi per riprodurre
+### **Segnala Problemi**
+- [Issue di GitHub](https://github.com/Azure/azure-dev/issues/new) - Segnalazioni di bug e richieste di funzionalità
+- Includi log rilevanti, messaggi di errore e passaggi per riprodurre il problema
 
-### **Per saperne di più**
+### **Scopri di più**
 - [Documentazione Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*Guida tecnica revisionata: 4 novembre 2026. La disponibilità cloud e i prezzi devono essere verificati per il tuo abbonamento e la tua area.*
+*Indicazioni tecniche verificate: 4 novembre 2026. Disponibilità e prezzi cloud devono essere verificati in base al tuo abbonamento e regione.*
 
 ---
 
 **Navigazione**
 - **Lezione precedente**: [Glossario](glossary.md)
-- **Prossima lezione**: [Guida di studio](study-guide.md)
+- **Lezione successiva**: [Guida allo studio](study-guide.md)
 
 ---
 
