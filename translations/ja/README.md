@@ -1061,7 +1061,7 @@ azd env get-values
 **AI開発者**: [第2章：AIファースト開発](#-chapter-2-ai-first-development-recommended-for-ai-developers) にジャンプ  
 <strong>経験豊富な開発者</strong>: [第3章：設定と認証](#️-chapter-3-configuration--authentication) から始めましょう
 
-<strong>次のステップ</strong>: [第1章 - AZD Basics](docs/chapter-01-foundation/azd-basics.md) を始める →
+<strong>次のステップ</strong>: [第1章 - AZD 入門](docs/chapter-01-foundation/azd-basics.md) を始める →
 
 ---
 
