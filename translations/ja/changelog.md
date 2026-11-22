@@ -1310,8 +1310,8 @@
 ---
 
 <strong>ナビゲーション</strong>
-- <strong>前のレッスン</strong>: [Study Guide](resources/study-guide.md)
-- <strong>次のレッスン</strong>: [Main README](README.md) に戻る
+- <strong>前のレッスン</strong>: [学習ガイド](resources/study-guide.md)
+- <strong>次のレッスン</strong>: [メインのREADME](README.md) に戻る
 
 <strong>最新情報を入手</strong>: このリポジトリをウォッチして、新リリースや学習資料の重要な更新の通知を受け取ってください。
 
