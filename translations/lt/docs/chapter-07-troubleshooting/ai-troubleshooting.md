@@ -1,30 +1,30 @@
-# AI Specifinis trikčių šalinimo vadovas
+# KI specifinė trikčių šalinimo vadovas
 
 **Skyriaus naršymas:**
-- **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 7 skyrius – Trikčių šalinimas ir derinimas
 - **⬅️ Ankstesnis**: [Derinimo vadovas](debugging.md)
-- **➡️ Kitas skyrius**: [8 skyrius: Gamybiniai ir įmonių šablonai](../chapter-08-production/production-ai-practices.md)
-- **🤖 Susiję**: [2 skyrius: AI-pirmas vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Kitas skyrius**: [8 skyrius: Gamybos ir įmonių modeliai](../chapter-08-production/production-ai-practices.md)
+- **🤖 Susiję**: [2 skyrius: KI pirmenybės vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Šis išsamus trikčių šalinimo vadovas sprendžia dažnas problemas diegiant AI sprendimus naudojant AZD, teikdamas sprendimus ir derinimo technikas, būdingas Azure AI paslaugoms.
+Šis išsamus trikčių šalinimo vadovas sprendžia dažnas problemas, susijusias su KI sprendimų diegimu naudojant AZD, pateikdamas sprendimus ir derinimo metodus, būdingus Azure KI paslaugoms.
 
-> **Aprėptis:** Komandos naudoja pavyzdinius išteklių pavadinimus; pakeiskite juos ir pasirinkite tinkamą prenumeratą. Bicep blokai yra fragmentai, kuriuos reikia įtraukti į esamą šabloną, o ne atskiras diegimas. Python fragmentai reikalauja nurodytų SDK ir aplikacijos konfigūracijos. Ši apžvalga nebuvo atliekama tiesioginiu Azure diegimu.
+> **Apimtis:** Komandos naudoja pavyzdinius išteklių pavadinimus; juos pakeiskite ir pasirinkite teisingą prenumeratą. Bicep blokai yra fragmentai, kuriuos reikia įjungti į esamą šabloną, o ne atskirai diegti. „Python“ fragmentams reikalingos nurodytos SDK ir programos konfigūracija. Šiam peržiūrėjimui tiesioginis Azure diegimas nebuvo vykdomas.
 
 ## Turinys
 
-- [Microsoft Foundry modeliavimo paslaugų problemos](#microsoft-foundry-models-service-issues)
-- [Azure AI paieškos problemos](#azure-ai-search-problems)
+- [Microsoft Foundry modelių paslaugos problemos](#microsoft-foundry-models-service-issues)
+- [Azure KI paieškos problemos](#azure-ai-search-problems)
 - [Container Apps diegimo problemos](#container-apps-deployment-issues)
-- [Autentifikacijos ir leidimų klaidos](#authentication-and-permission-errors)
-- [Modelių diegimo klaidos](#model-deployment-failures)
+- [Autentifikavimo ir leidimų klaidos](#authentication-and-permission-errors)
+- [Modelių diegimo nesėkmės](#model-deployment-failures)
 - [Veikimo ir mastelio problemos](#performance-and-scaling-issues)
-- [Išliukdymo ir kvotų valdymas](#cost-and-quota-management)
+- [Išlaidų ir kvotų valdymas](#cost-and-quota-management)
 - [Derinimo įrankiai ir metodai](#debugging-tools-and-techniques)
 
-## Microsoft Foundry modeliavimo paslaugų problemos
+## Microsoft Foundry modelių paslaugos problemos
 
-### Problema: OpenAI paslauga neprieinama regione
+### Problema: OpenAI paslauga nepasiekiama regione
 
 **Simptomai:**
 ```
@@ -32,9 +32,9 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Priežastys:**
-- Microsoft Foundry modeliai neprieinami pasirinktoje regione
-- Kvota išeikvota pageidaujamuose regionuose
-- Regioniniai pajėgumo apribojimai
+- Microsoft Foundry modeliai nepasiekiami pasirinktoje regione
+- Kvota išnaudota pageidaujamuose regionuose
+- Regionų pajėgumo apribojimai
 
 **Sprendimai:**
 
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Problema: Modelio diegimo kvota viršyta
+### Problema: Viršytas modelio diegimo kvotos limitas
 
 **Simptomai:**
 ```
@@ -74,7 +74,7 @@ Error: Deployment failed due to insufficient quota
 
 **Sprendimai:**
 
-1. **Patikrinkite dabartinę kvotą:**
+1. **Patikrinkite esamą kvotą:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
@@ -82,9 +82,9 @@ az cognitiveservices usage list \
 ```
 
 2. **Prašykite kvotos padidinimo:**
-Naudokite Foundry portalo kvotų valdymo srautą atitinkamai prenumeratai, regionui, modeliui ir diegimo tipui. Žr. [oficialias kvotų gaires](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). VM kvotos prašymas nepadidina modelio kvotos.
+Naudokite Foundry portalo kvotų valdymo darbo eigą konkrečioje prenumeratoje, regione, modelyje ir diegimo tipe. Žr. [oficialią kvotų gairę](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). VM kvotos prašymas nepadidina modelio kvotos.
 
-3. **Optimizuokite modelio pajėgumus:**
+3. **Optimizuokite modelio pajėgumą:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -119,12 +119,12 @@ Error: The API version '2023-05-15' is not available for OpenAI
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Patikrinkite API versijų suderinamumą:**
-Patikrinkite [Azure OpenAI API gyvavimo ciklo nuorodą](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM resursų teikėjo API versijos **ne** nurodo inferencijos/duomenų plokštumos API versijas. Nauji v1 klientai naudoja `/openai/v1/` be datuoto `api-version`; nekombinuokite šių dviejų kliento konfigūracijų.
+2. **Patikrinkite API versijos suderinamumą:**
+Peržiūrėkite [Azure OpenAI API gyvavimo ciklo nuorodą](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM išteklių tiekėjo API versijos **neskelbia** inferencijos/duomenų plokštumos API versijų. Nauji v1 klientai naudoja `/openai/v1/` be datos žymos `api-version`; nemaišykite dviejų klientų konfigūracijų.
 
-## Azure AI paieškos problemos
+## Azure KI paieškos problemos
 
-### Problema: Nepakankamas paieškos paslaugos kainodaros lygis
+### Problema: Nepakankamas paieškos paslaugos kainų lygis
 
 **Simptomai:**
 ```
@@ -133,9 +133,9 @@ Error: Semantic search requires Basic tier or higher
 
 **Sprendimai:**
 
-1. **Naudokite palaikomą kainodaros lygį:**
+1. **Naudokite palaikomą kainų lygį:**
 
-Semantinis rūšiavimas reikalauja Basic arba aukštesnės versijos. Pereinant nuo Free/Basic prie kito lygio gali prireikti sukurti naują paieškos paslaugą ir iš naujo sukurti indeksus; SKU redagavimas nėra garantuotas vietinis atnaujinimas.
+Semantinis reitinguotojas reikalauja Bent Basic arba aukštesnį lygį. Pereinant nuo Free/Basic į kitą lygį gali prireikti kurti naują paieškos paslaugą ir perkurti indeksus; SKU redagavimas negarantuoja tiesioginio atnaujinimo vietoje.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Išjungti semantinę paiešką (vystymui):**
+2. **Išjunkite semantinę paiešką (vystymui):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -168,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Problema: Indekso kūrimo klaidos
+### Problema: Nepavyksta sukurti indekso
 
 **Simptomai:**
 ```
@@ -219,7 +219,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Container Apps diegimo problemos
 
-### Problema: Konteinerio kūrimo klaidos
+### Problema: Nepavyksta sukurti konteinerio
 
 **Simptomai:**
 ```
@@ -250,7 +250,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Patvirtinkite priklausomybes:**
+2. **Patikrinkite priklausomybes:**
 ```txt
 # Dependency names for these snippets. Resolve supported versions in your
 # project's environment, test together, then commit a lock/pinned requirements file.
@@ -275,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problema: Konteinerio aplikacijos paleidimo klaidos
+### Problema: Nepavyksta paleisti Container App
 
 **Simptomai:**
 ```
@@ -284,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Sprendimai:**
 
-1. **Padidinkite paleidimo laukimo laiką:**
+1. **Padidinkite paleidimo limitą:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -350,9 +350,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Autentifikacijos ir leidimų klaidos
+## Autentifikavimo ir leidimų klaidos
 
-### Problema: Valdomos tapatybės leidimas atmestas
+### Problema: Valdomos tapatybės leidimas atimtas
 
 **Simptomai:**
 ```
@@ -403,9 +403,9 @@ def test_authentication():
 test_authentication()
 ```
 
-Žetonų gavimas įrodo autentifikaciją, bet ne leidimą iškviesti modelį. Išbandykite numatomą operaciją atskirai. Vietoje `DefaultAzureCredential` gali naudoti kūrėjo kredencialus; Azure patikrinkite, ar pasirinkta numatytoji valdyta tapatybė.
+Tokeno gavimas įrodo autentifikaciją, bet ne leidimą kvieti modelį. Išbandykite numatomą operaciją atskirai. Vietoje `DefaultAzureCredential` gali naudoti kūrėjo kredencialus; Azure aplinkoje patikrinkite, ar pasirinkta tinkama valdomos tapatybės paskyra.
 
-### Problema: Key Vault prieiga atmesta
+### Problema: Atmestas Key Vault prieigos leidimas
 
 **Simptomai:**
 ```
@@ -416,7 +416,7 @@ Error: The user, group or application does not have secrets get permission
 
 1. **Suteikite Key Vault leidimus:**
 
-Naudokite šį prieigos politikos fragmentą tik su seifu, turinčiu `enableRbacAuthorization: false`. RBAC įjungto seifo atveju naudokite 2 variantą; prieigos politika RBAC režimu neduoda duomenų plokštumos prieigos.
+Naudokite šį prieigos politikos fragmentą tik saugykloms su `enableRbacAuthorization: false`. Jeigu saugykla su RBAC, naudokite 2 variantą; prieigos politikos pridėjimas neįgalina duomenų plokštumos prieigos RBAC režimu.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -437,7 +437,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 
 2. **Naudokite RBAC vietoje prieigos politikų:**
 
-Seife turi būti `enableRbacAuthorization: true`; leidimų modelio keitimas reikalauja suplanuotos esamų prieigos migracijos.
+Saugykla turi turėti `enableRbacAuthorization: true`; leidimų modelio keitimas reikalauja suplanuotos migracijos egzistuojančiai prieigai.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -450,9 +450,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Modelių diegimo klaidos
+## Modelių diegimo nesėkmės
 
-### Problema: Modelio versija neprieinama
+### Problema: Modelio versija nepasiekiama
 
 **Simptomai:**
 ```
@@ -471,7 +471,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Pasirinkite galimą modelį tiesiogiai:**
+2. **Aiškiai pasirinkite prieinamą modelį:**
 ```bicep
 // Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
@@ -498,7 +498,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Patikrinkite modelį prieš diegimą:**
+3. **Patikrinkite modelį prieš diegiant:**
 ```bash
 # Management-plane catalog for the actual account
 az cognitiveservices account list-models \
@@ -506,18 +506,18 @@ az cognitiveservices account list-models \
 # Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Veikimo ir mastelio problemos
+## Veiklos ir mastelio problemos
 
-### Problema: Didelis atsako delsimas
+### Problema: Didelis vėlinimas atsakymuose
 
 **Simptomai:**
-- Atsako laikas > 30 sekundžių
-- Laukimo klaidos
+- Atsakymų laikai > 30 sekundžių
+- Laiko išeikvojimo klaidos
 - Prasta vartotojo patirtis
 
 **Sprendimai:**
 
-1. **Įgyvendinkite užklausos laiko ribas:**
+1. **Įgyvendinkite užklausų laiko limitus:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -532,7 +532,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Pridėkite atsako talpyklą:**
+2. **Pridėkite atsakymų talpyklą:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -586,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problema: Atminties trūkumas
+### Problema: Atminties išeikvojimo klaidos
 
 **Simptomai:**
 ```
@@ -641,18 +641,18 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Sąnaudų ir kvotų valdymas
+## Išlaidų ir kvotų valdymas
 
-### Problema: Netikėtai didelės sąnaudos
+### Problema: Netikėtos didelės išlaidos
 
 **Simptomai:**
 - Azure sąskaita didesnė nei tikėtasi
-- Žetonų naudojimas viršija apskaičiavimus
-- Biudžeto įspėjimai suveikia
+- Žetonų naudojimas viršija prognozes
+- Biudžeto perspėjimai suveikė
 
 **Sprendimai:**
 
-1. **Įgyvendinkite sąnaudų kontrolę:**
+1. **Įgyvendinkite išlaidų kontrolę:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-Šis skaitiklis atmintyje yra iliustratyvus, o ne mėnesinių išlaidų kontrolė: jis atsinaujina perkrovus, nėra dalijamas tarp replikų ir tikrina naudojimą po kvietimo. Tikras limitas reikalauja patikimos apskaitos, konkurencijos saugių rezervacijų prieš užklausas ir mėnesinio nullinimo politikos. Konteinerių atminties metrikos taip pat turi atsižvelgti į cgroup ribas; `psutil.virtual_memory()` nėra patikimas konteinerio limito matavimas, o šiukšlių surinkimas neįgyvendina atminties ribos.
+Šis atminties skaitiklis yra demonstracinis, ne mėnesinio išlaidų valdymo priemonė: jis atsinaujina paleidus iš naujo, nėra bendrinamas tarp replikų ir tikrina naudojimą po kvietimo. Tikras limitas reikalauja patikimos apskaitos, konkurencingos rezervacijos prieš užklausas ir mėnesio atnaujinimo politikos. Konteinerių atminties metrikos turi įskaitant cgroup limitus; `psutil.virtual_memory()` nėra patikimas konteinerio apribojimo matas, o šiukšlių surinkimas neriboja atminties.
 
-2. **Nustatykite sąnaudų įspėjimus:**
+2. **Nustatykite išlaidų perspėjimus:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,7 +699,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Deklaruokite `budgetStartDate` ir `budgetEndDate` savo šablone. Biudžetai informuoja; jie nestabdo išteklių ar neįveda kietos išlaidų ribos.
+Šablone deklaruokite `budgetStartDate` ir `budgetEndDate`. Biudžetai informuoja; jie nestabdo išteklių ir neriboja išlaidų.
 
 3. **Optimizuokite modelio pasirinkimą:**
 ```python
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### AZD AI plėtinių diagnostikos komandos
+### AZD KI plėtinio diagnostikos komandos
 
-Jei įdiegėte agentus naudodami `azd ai agent init`, pridėtiniai įrankiai yra prieinami:
+Jei naudojote `azd ai agent init` agentų diegimui, prieinama šių papildomų įrankių:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,15 +762,17 @@ azd mcp start
 azd infra generate
 ```
 
-> **Patarimas:** Naudokite `azd infra generate` rašyti IaC į diską, kad galėtumėte tiksliai patikrinti, kokie ištekliai buvo sukurti. Tai neįkainojama, kai derinami išteklių konfigūracijos klausimai. Žr. [AZD AI CLI nuorodą](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pilnai informacijai.
+> **Patarimas:** Naudokite `azd infra generate`, kad įrašytumėte IaC į diską ir galėtumėte tiksliai patikrinti, kurie ištekliai buvo sukurti. Tai itin naudinga derinant išteklių konfigūracijų problemas. Visą informaciją žr. [AZD KI CLI nuorodoje](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
-**Išleidimo žinomas diagnostikos (2026-11-04):** Agentams `1.0.0-beta.23` reikalingas `azd >= 1.37.0`; atnaujinkite pagrindinį CLI prieš nesuderinamus plėtinius. Ši agentų versija išlaiko kūrėjų RBAC įspėjimus galutiniame diegimo išvestyje ir identifikuoja versiją, susijusią su aktyvavimo klaidomis/laiko viršijimais. Laiko viršijimas neįrodo, kad diegimas nepavyko: peržiūrėkite mėgintą versiją prieš bandydami vėl. Taip pat taiso A2A 0.3 kvietimus, rodančius gyvavimo ciklo žinutes vietoje baigtų atsakymų. Branduolio `azd 1.37.1` taiso atšaukimo propagavimą per plėtinius; `1.37.2` pagerina kritinius patvirtinimus ir atšaukimo valdymą.
+**GA darbo eigos diagnostika (2026-11-09):** Patikrinkite, ar `azd version` yra bent 1.37.0, ir apžvelkite `azd ext list --installed`. Pirmiausia atnaujinkite pagrindinį CLI su `azd update` ar jo diegėju, tada atnaujinkite paketą su `azd ext upgrade microsoft.foundry`. Vietinėms klaidoms patikrinkite dabartinį uv, Python 3.13+ pagrindiniam pavyzdžiui, `PYTHONNOUSERSITE: "1"` jo paslaugos konfigūracijoje ir Azure kredencialus, kuriuos naudoja `DefaultAzureCredential`. Leiskite `azd ai agent run` veikti iškviečiant `--local` iš kito terminalo projekto kataloge.
 
-Jei senesnio pamokos vertinimo komanda tik spausdina migracijos gaires, įdiekite `azure.ai.evaluations` (`1.0.0-beta.2` reikalauja `azd >= 1.33.0`) ir naudokite `azd ai eval init`, `generate`, ir `run start`. Optimizavimo `--config` nebepriima senų vertinimo failų. Žr. [vertinimo migraciją](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ir [optimizavimo migraciją](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Sėkmingas diegimas neįrodo kūrėjo turimos duomenų plokštumos prieigos. Peržiūrėkite RBAC įspėjimus ir [talpinamo agente leidimų matricą](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Laiko limitas negarantuoja diegimo nesėkmės: patikrinkite bandytą versiją ir žurnalus prieš bandydami dar kartą. Ankstesni agentai beta.23 patobulino įspėjimus ir A2A išvestį; šie istoriniai pataisymai aprašyti [išleidimo pastabose](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), bet ne kaip reikalavimas įdiegti tą beta versiją.
+
+Jei `azd ai eval` nėra, atskirai įdiekite `azure.ai.evaluations`; GA paketas jo neįtraukia. Jei senesnio mokymo agent-evaluation komanda tik spausdina migracijos gaires, naudokite atskirą `azd ai eval` darbo eigą. Optimizavimo `--config` nepriima senųjų vertinimo failų. Žr. [vertinimo migraciją](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ir [optimizacijos migraciją](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Programos derinimas
 
-1. **Struktūruota registracija:**
+1. **Struktūruotas žurnalas:**
 ```python
 import logging
 import json
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Sveikatos patikrinimo galiniai taškai:**
+2. **Sveikatos tikrinimo taškai:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -824,7 +829,7 @@ async def detailed_health_check(response: Response):
     return checks
 ```
 
-3. **Veikimo stebėjimas:**
+3. **Veiklos stebėsena:**
 ```python
 import time
 from functools import wraps
@@ -855,38 +860,38 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Dažnos klaidų kodų reikšmės ir sprendimai
+## Dažniausios klaidų kodai ir sprendimai
 
 | Klaidos kodas | Aprašymas | Sprendimas |
 |------------|-------------|----------|
-| 401 | Nepilnateisiška prieiga | Patikrinkite API raktus ir valdomos tapatybės konfigūraciją |
+| 401 | Neautorizuotas | Patikrinkite API raktus ir valdomos tapatybės konfigūraciją |
 | 403 | Draudžiama | Patikrinkite RBAC vaidmenų priskyrimus |
-| 429 | Ribotas dažnis | Įgyvendinkite pakartotinio bandymo logiką su eksponentine vėlinimo trajektorija |
+| 429 | Apribotas dažnis | Įgyvendinkite pakartojimo logiką su eksponentiniu laiko atidėjimu |
 | 500 | Vidinė serverio klaida | Patikrinkite modelio diegimo būseną ir žurnalus |
-| 503 | Paslauga neprieinama | Patikrinkite paslaugos būklę ir regioninį prieinamumą |
+| 503 | Paslauga nepasiekiama | Patikrinkite paslaugos sveikatą ir regiono prieinamumą |
 
 ## Tolimesni žingsniai
 
-1. **Peržiūrėkite [AI modelio diegimo vadovą](../chapter-02-ai-development/ai-model-deployment.md)** dėl diegimo gerosios praktikos
-2. **Užbaikite [Gamybinius AI įgūdžius](../chapter-08-production/production-ai-practices.md)** dėl įmonėms parengtų sprendimų
-3. **Prisijunkite prie [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** dėl bendruomenės palaikymo
-4. **Pateikite klaidas** į [AZD GitHub saugyklą](https://github.com/Azure/azure-dev) dėl AZD specifinių problemų
+1. **Peržiūrėkite [KI modelio diegimo vadovą](../chapter-02-ai-development/ai-model-deployment.md)** dėl diegimo gerosios praktikos
+2. **Baikite [Gamybinės KI praktikas](../chapter-08-production/production-ai-practices.md)** dėl verslui paruoštų sprendimų
+3. **Prisijunkite prie [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** bendruomenės palaikymui
+4. **Pateikite problemas** į [AZD GitHub saugyklą](https://github.com/Azure/azure-dev) dėl AZD specifinių klaidų
 
 ## Ištekliai
 
-- [Azure OpenAI kvotų ir sulėtinimo trikčių šalinimas](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Azure OpenAI kvotų ir ribojimo trikčių šalinimas](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
 - [Container Apps trikčių šalinimas](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI paieškos trikčių šalinimas](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure diagnostikos agento įgūdžiai**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Įdiekite Azure trikčių šalinimo įgūdžius savo redaktoriuje: `npx skills add microsoft/github-copilot-for-azure`
+- [Azure KI paieškos trikčių šalinimas](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure diagnostikos agento įgūdžiai**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Įdiekite Azure trikčių šalinimo įgūdžius redaktoriuje: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Skyriaus naršymas:**
-- **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 7 skyrius – Trikčių šalinimas ir derinimas
 - **⬅️ Ankstesnis**: [Derinimo vadovas](debugging.md)
-- **➡️ Kitas skyrius**: [8 skyrius: Gamybiniai ir įmonių šablonai](../chapter-08-production/production-ai-practices.md)
-- **🤖 Susiję**: [2 skyrius: AI-pirmas vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Kitas skyrius**: [8 skyrius: Gamybos ir įmonių modeliai](../chapter-08-production/production-ai-practices.md)
+- **🤖 Susiję**: [2 skyrius: KI pirmenybės vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **📖 Nuoroda**: [Azure Developer CLI trikčių šalinimas](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
