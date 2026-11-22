@@ -34,44 +34,22 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "cs",
-      "failure_date": "2026-11-19T03:45:34+00:00",
+      "failure_date": "2026-11-22T17:16:05+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-05-multi-agent/multi-agent-basics.md": {
-      "original_hash": "df4c2763597c44723e5e646dcac629ca",
-      "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
-      "language_code": "cs",
-      "failure_date": "2026-11-19T03:52:45+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1 of 'multi-agent-basics.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/index.md": {
       "original_hash": "a1cbc39623d29f76aefe40099c5c890e",
       "source_file": "workshop/docs/index.md",
       "language_code": "cs",
-      "failure_date": "2026-11-19T04:03:59+00:00",
+      "failure_date": "2026-11-22T17:19:37+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2 of 'index.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "examples/azure-openai-chat/README.md": {
-      "original_hash": "e14a657c0896c4ad83ef83b2b8236e23",
-      "source_file": "examples/azure-openai-chat/README.md",
-      "language_code": "cs",
-      "failure_date": "2026-11-19T04:08:39+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -202,8 +180,8 @@
     "language_code": "cs"
   },
   "docs/chapter-05-multi-agent/multi-agent-basics.md": {
-    "original_hash": "95bdd9e25bd394ab3d75b109c1963d1d",
-    "translation_date": "2026-07-14T09:50:56+00:00",
+    "original_hash": "df4c2763597c44723e5e646dcac629ca",
+    "translation_date": "2026-11-22T17:18:33+00:00",
     "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
     "language_code": "cs"
   },
@@ -286,8 +264,8 @@
     "language_code": "cs"
   },
   "examples/azure-openai-chat/README.md": {
-    "original_hash": "c7a1d4eec3c9509b19f9a64a78183242",
-    "translation_date": "2026-06-17T04:11:14+00:00",
+    "original_hash": "e14a657c0896c4ad83ef83b2b8236e23",
+    "translation_date": "2026-11-22T17:22:56+00:00",
     "source_file": "examples/azure-openai-chat/README.md",
     "language_code": "cs"
   },
