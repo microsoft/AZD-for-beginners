@@ -2,9 +2,9 @@
 
 **章ごとのヘルプ**
 - **📚 コースホーム**: [初心者向け AZD](../README.md)
-- **🚆 インストールの問題**: [第1章: Installation & Setup](../docs/getting-started/installation.md)
-- **🤖 AI に関する質問**: [第2章: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **🔧 トラブルシューティング**: [第7章: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+- **🚆 インストールの問題**: [第1章: インストールとセットアップ](../docs/getting-started/installation.md)
+- **🤖 AI に関する質問**: [第2章: AIファースト開発](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🔧 トラブルシューティング**: [第7章: トラブルシューティング](../docs/troubleshooting/common-issues.md)
 
 ## はじめに
 
@@ -46,20 +46,20 @@
 
 ## はじめに
 
-### Q: What is Azure Developer CLI (azd)?
+### Q: Azure Developer CLI (azd) とは何ですか？
 **A**: Azure Developer CLI (azd) は、ローカルの開発環境から Azure へのアプリケーション移行にかかる時間を短縮する、開発者向けのコマンドラインツールです。テンプレートを通じてベストプラクティスを提供し、デプロイのライフサイクル全体を支援します。
 
-### Q: How is azd different from Azure CLI?
+### Q: azd は Azure CLI とどう違うのですか？
 **A**: 
 - **Azure CLI**: Azure リソースを管理するための汎用ツール
 - **azd**: アプリケーションのデプロイワークフローに特化した開発者向けツール
 - azd は内部で Azure CLI を使用しますが、一般的な開発シナリオ向けにより高レベルの抽象化を提供します
 - azd にはテンプレート、環境管理、デプロイ自動化が含まれます
 
-### Q: Do I need Azure CLI installed to use azd?
+### Q: azd を使用するには、Azure CLI をインストールしておく必要がありますか？
 **A**: はい、azd は認証や一部の操作に Azure CLI を必要とします。まず Azure CLI をインストールし、その後 azd をインストールしてください。
 
-### Q: What programming languages does azd support?
+### Q: azd はどのようなプログラミング言語をサポートしていますか？
 **A**: azd は言語に依存しません。次の言語で動作します:
 - Node.js/JavaScript/TypeScript
 - Python
@@ -70,7 +70,7 @@
 - 静的サイト
 - コンテナ化されたアプリケーション
 
-### Q: Can I use azd with existing projects?
+### Q: 既存のプロジェクトで azd を使用できますか？
 **A**: はい！次のいずれかの方法で対応できます:
 1. 既存プロジェクトに azd の構成を追加するには `azd init` を使用する
 2. 既存プロジェクトを azd テンプレート構成に合わせて調整する
@@ -80,22 +80,22 @@
 
 ## 認証とアクセス
 
-### Q: How do I authenticate with Azure using azd?
+### Q: azd を使用して Azure に対して認証を行うにはどうすればよいですか？
 **A**: `azd auth login` を使用すると、Azure 認証用にブラウザウィンドウが開きます。CI/CD シナリオでは、サービスプリンシパルやマネージド ID を使用してください。
 
-### Q: Can I use azd with multiple Azure subscriptions?
+### Q: 複数のAzureサブスクリプションでazdを使用することはできますか？
 **A**: はい。環境ごとに使用するサブスクリプションを指定するには `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` を使用します。
 
-### Q: What permissions do I need to deploy with azd?
+### Q: azd を使用してデプロイするには、どのような権限が必要ですか？
 **A**: 通常は次が必要です:
 - リソースグループまたはサブスクリプションに対する **Contributor** ロール
 - ロール割り当てを行うリソースをデプロイする場合は **User Access Administrator**
 - 必要な具体的な権限はテンプレートやデプロイするリソースによって異なります
 
-### Q: Can I use azd in CI/CD pipelines?
+### Q: CI/CD パイプラインで azd を使用できますか？
 **A**: もちろんです！azd は CI/CD 統合を想定して設計されています。認証にはサービスプリンシパルを使用し、構成には環境変数を設定してください。
 
-### Q: How do I handle authentication in GitHub Actions?
+### Q: GitHub Actionsにおける認証は、どのように扱えばよいでしょうか？
 **A**: サービスプリンシパル資格情報を使用して Azure Login アクションを使用してください:
 ```yaml
 - uses: azure/login@v1
@@ -108,28 +108,28 @@
 
 ## テンプレートとプロジェクト
 
-### Q: Where can I find azd templates?
+### Q: azd テンプレートはどこで見つけられますか？
 **A**: 
 - 公式テンプレート: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - コミュニティテンプレート: GitHub で "azd-template" を検索
 - `azd template list` を使用して利用可能なテンプレートを参照
 
-### Q: How do I create a custom template?
+### Q: カスタムテンプレートを作成するにはどうすればよいですか？
 **A**: 
 1. 既存のテンプレート構造から始める
 2. `azure.yaml`、インフラファイル、アプリケーションコードを修正する
 3. `azd up` で十分にテストする
 4. 適切なタグを付けて GitHub に公開する
 
-### Q: Can I use azd without a template?
+### Q: テンプレートなしで azd を使用することはできますか？
 **A**: はい、既存プロジェクトで `azd init` を使用して必要な構成ファイルを作成できます。`azure.yaml` とインフラファイルを手動で構成する必要があります。
 
-### Q: What's the difference between official and community templates?
+### Q: 公式テンプレートとコミュニティテンプレートには、どのような違いがありますか？
 **A**: 
 - **公式テンプレート**: Microsoft によって保守され、定期的に更新され、包括的なドキュメントがある
 - **コミュニティテンプレート**: 開発者が作成したもので、特化したユースケース向けであり、品質やメンテナンスは様々
 
-### Q: How do I update a template in my project?
+### Q: プロジェクト内のテンプレートを更新するにはどうすればよいですか？
 **A**: テンプレートは自動的に更新されません。次の方法があります:
 1. ソーステンプレートと手動で差分を比較してマージする
 2. 更新されたテンプレートを使って `azd init` で新規に開始する
@@ -139,17 +139,17 @@
 
 ## デプロイとインフラストラクチャ
 
-### Q: What Azure services can azd deploy?
+### Q: azd はどのような Azure サービスをデプロイできますか？
 **A**: azd は Bicep/ARM テンプレートを通じて任意の Azure サービスをデプロイできます。例:
 - App Services、Container Apps、Functions
 - データベース（SQL、PostgreSQL、Cosmos DB）
 - ストレージ、Key Vault、Application Insights
 - ネットワーキング、セキュリティ、監視リソース
 
-### Q: Can I deploy to multiple regions?
+### Q: 複数のリージョンにデプロイすることはできますか？
 **A**: はい、Bicep テンプレートで複数のリージョンを構成し、各環境の location パラメーターを適切に設定してください。
 
-### Q: How do I handle database schema migrations?
+### Q: データベースのスキーママイグレーションは、どのように扱えばよいでしょうか？
 **A**: `azure.yaml` のデプロイフックを使用してください:
 ```yaml
 hooks:
@@ -160,23 +160,23 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Can I deploy only infrastructure without applications?
+### Q: アプリケーションを含めず、インフラストラクチャのみをデプロイすることはできますか？
 **A**: はい。テンプレートで定義されたインフラストラクチャコンポーネントのみをデプロイするには `azd provision` を使用します。
 
-### Q: How do I deploy to existing Azure resources?
+### Q: 既存のAzureリソースに対してデプロイするにはどうすればよいですか？
 **A**: これは複雑で直接サポートされていません。次の方法があります:
 1. 既存リソースを Bicep テンプレートにインポートする
 2. テンプレート内で既存リソース参照を使用する
 3. リソースを条件付きで作成または参照するようテンプレートを修正する
 
-### Q: Can I use Terraform instead of Bicep?
+### Q: Bicepの代わりにTerraformを使用することはできますか？
 **A**: 現在、azd は主に Bicep/ARM テンプレートをサポートしています。Terraform のサポートは公式には提供されていませんが、コミュニティによるソリューションが存在する可能性があります。
 
 ---
 
 ## 構成と環境
 
-### Q: How do I manage different environments (dev, staging, prod)?
+### Q: 開発環境（dev）、ステージング環境（staging）、本番環境（prod）といった、異なる環境をどのように管理すればよいでしょうか？
 **A**: `azd env new <environment-name>` を使用して別々の環境を作成し、それぞれに異なる設定を構成します:
 ```bash
 azd env new development
@@ -184,23 +184,23 @@ azd env new staging
 azd env new production
 ```
 
-### Q: Where are environment configurations stored?
+### Q: 環境設定はどこに保存されますか？
 **A**: プロジェクトディレクトリ内の `.azure` フォルダーに保存されます。各環境には構成ファイルを含む専用のフォルダーがあります。
 
-### Q: How do I set environment-specific configuration?
+### Q: 環境固有の設定はどのように行えばよいですか？
 **A**: 環境変数を構成するには `azd env set` を使用します:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: Can I share environment configurations across team members?
+### Q: チームメンバー間で環境設定を共有することはできますか？
 **A**: `.azure` フォルダーには機密情報が含まれるため、バージョン管理にコミットすべきではありません。代わりに次を行ってください:
 1. 必要な環境変数を文書化する
 2. 環境をセットアップするデプロイスクリプトを使用する
 3. 機密構成には Azure Key Vault を使用する
 
-### Q: How do I override template defaults?
+### Q: テンプレートのデフォルト設定を上書きするにはどうすればよいですか？
 **A**: テンプレートパラメーターに対応する環境変数を設定してください:
 ```bash
 azd env set LOCATION "West US 2"
@@ -211,7 +211,7 @@ azd env set SKU_NAME "B1"
 
 ## トラブルシューティング
 
-### Q: Why is `azd up` failing?
+### Q: なぜ `azd up` が失敗するのでしょうか？
 **A**: 一般的な原因:
 1. **認証の問題**: `azd auth login` を実行する
 2. **権限不足**: Azure のロール割り当てを確認する
@@ -219,28 +219,28 @@ azd env set SKU_NAME "B1"
 4. **クォータ/容量の問題**: リージョンの可用性を確認する
 5. **テンプレートのエラー**: Bicep テンプレートを検証する
 
-### Q: How do I debug deployment failures?
+### Q: デプロイの失敗をデバッグするにはどうすればよいですか？
 **A**: 
 1. 詳細な出力のために `azd deploy --debug` を使用する
 2. Azure ポータルのデプロイ履歴を確認する
 3. Azure ポータルのアクティビティログを確認する
 4. 現在の環境状態を表示するには `azd show` を使用する
 
-### Q: Why are my environment variables not working?
+### Q: なぜ環境変数が機能しないのでしょうか？
 **A**: 次を確認してください:
 1. 変数名がテンプレートのパラメーターと完全に一致していること
 2. 値にスペースが含まれる場合は適切に引用されていること
 3. 環境が選択されていること: `azd env select <environment>`
 4. 変数が正しい環境に設定されていること
 
-### Q: How do I clean up failed deployments?
+### Q: 失敗したデプロイをクリーンアップするにはどうすればよいですか？
 **A**: 
 ```bash
 azd down --force --purge
 ```
 これにより、すべてのリソースと環境構成が削除されます。
 
-### Q: Why is my application not accessible after deployment?
+### Q: デプロイ後、なぜアプリケーションにアクセスできないのでしょうか？
 **A**: 次を確認してください:
 1. デプロイが正常に完了していること
 2. アプリケーションが稼働していること（Azure ポータルのログを確認）
@@ -251,7 +251,7 @@ azd down --force --purge
 
 ## コストと請求
 
-### Q: How much will azd deployments cost?
+### Q: azdのデプロイにはどのくらいの費用がかかりますか？
 **A**: コストは次によって決まります:
 - デプロイされる Azure サービス
 - 選択したサービスの階層/SKU
@@ -260,7 +260,7 @@ azd down --force --purge
 
 見積もりには [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) を使用してください。
 
-### Q: How do I control costs in azd deployments?
+### Q: azd デプロイにおけるコストをどのように管理すればよいですか？
 **A**: 
 1. 開発環境では低階層の SKU を使用する
 2. Azure 予算とアラートを設定する
@@ -268,7 +268,7 @@ azd down --force --purge
 4. 適切なリージョンを選択する（場所によってコストが異なる）
 5. Azure Cost Management ツールを使用する
 
-### Q: Are there free tier options for azd templates?
+### Q: azd テンプレートに無料枠（フリーティア）の選択肢はありますか？
 **A**: 多くの Azure サービスにはフリーティアがあります:
 - App Service: 無料ティアあり
 - Azure Functions: 月間 100 万回の無料実行
@@ -277,7 +277,7 @@ azd down --force --purge
 
 テンプレートを可能な限りフリーティアを使用するよう設定してください。
 
-### Q: How do I estimate costs before deployment?
+### Q: デプロイ前にコストを見積もるにはどうすればよいですか？
 **A**: 
 1. テンプレートの `main.bicep` を確認して作成されるリソースを把握する
 2. 特定の SKU を用いて Azure Pricing Calculator を使用する
@@ -288,7 +288,7 @@ azd down --force --purge
 
 ## ベストプラクティス
 
-### Q: What are the best practices for azd project structure?
+### Q: azdプロジェクトの構成におけるベストプラクティスは何ですか？
 **A**: 
 1. アプリケーションコードをインフラストラクチャから分離する
 2. `azure.yaml` にわかりやすいサービス名を使用する
@@ -296,7 +296,7 @@ azd down --force --purge
 4. 環境固有の構成を使用する
 5. 包括的なドキュメントを含める
 
-### Q: How should I organize multiple services in azd?
+### Q: azdにおいて、複数のサービスをどのように構成すべきでしょうか？
 **A**: 推奨される構成を使用してください:
 ```
 ├── src/
@@ -308,20 +308,20 @@ azd down --force --purge
 └── README.md         # Project documentation
 ```
 
-### Q: Should I commit the `.azure` folder to version control?
+### Q: `.azure` フォルダーをバージョン管理に含めるべきでしょうか？
 **A**: **いいえ！** `.azure` フォルダーには機密情報が含まれています。`.gitignore` に追加してください:
 ```gitignore
 .azure/
 ```
 
-### Q: How do I handle secrets and sensitive configuration?
+### Q: シークレットや機密性の高い設定は、どのように取り扱えばよいでしょうか？
 **A**: 
 1. 機密情報には Azure Key Vault を使用する
 2. アプリケーション構成で Key Vault のシークレットを参照する
 3. 機密情報をバージョン管理にコミットしない
 4. サービス間認証にはマネージド ID を使用する
 
-### Q: What's the recommended approach for CI/CD with azd?
+### Q: azd を使用した CI/CD には、どのようなアプローチが推奨されますか？
 **A**: 
 1. 各ステージ（dev/staging/prod）ごとに別々の環境を使用する
 2. デプロイ前に自動テストを実行する
@@ -333,7 +333,7 @@ azd down --force --purge
 
 ## 高度なトピック
 
-### Q: Can I extend azd with custom functionality?
+### Q: azdに独自の機能を追加して拡張することはできますか？
 **A**: はい、`azure.yaml` のデプロイフックを通じて拡張できます:
 ```yaml
 hooks:
@@ -343,17 +343,17 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: How do I integrate azd with existing DevOps processes?
+### Q: 既存のDevOpsプロセスにazdを統合するにはどうすればよいですか？
 **A**: 
 1. 既存のパイプラインスクリプトで azd コマンドを使用する
 2. チーム間で azd テンプレートを標準化する
 3. 既存の監視とアラートに統合する
 4. パイプライン統合のために azd の JSON 出力を使用する
 
-### Q: Can I use azd with Azure DevOps?
+### Q: Azure DevOpsでazdを使用することはできますか？
 **A**: はい、azd は任意の CI/CD システムで動作します。azd コマンドを使用する Azure DevOps パイプラインを作成してください。
 
-### Q: How do I contribute to azd or create community templates?
+### Q: azd に貢献したり、コミュニティ用テンプレートを作成したりするにはどうすればよいですか？
 **A**:
 1. **azd ツール**: [Azure/azure-dev](https://github.com/Azure/azure-dev) に貢献する
 2. **テンプレート**: [テンプレートのガイドライン](https://github.com/Azure-Samples/awesome-azd) に従ってテンプレートを作成する
