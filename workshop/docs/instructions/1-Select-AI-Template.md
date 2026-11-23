@@ -2,10 +2,11 @@
 
 > [!TIP]
 > **By the end of this module, you will be able to:**
-> - Describe what AZD templates are
-> - Discover and use AZD templates for AI
-> - Get started with the AI Agents template
-> - **Lab 1:** AZD Quickstart in Codespaces or a dev container
+
+    - [ ] Describe what AZD templates are
+    - [ ] Discover and use AZD templates for AI
+    - [ ] Get started with the AI Agents template
+    - [ ] **Lab 1:** AZD Quickstart in Codespaces or a dev container
 
 ---
 
