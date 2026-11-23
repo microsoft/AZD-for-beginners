@@ -2,73 +2,56 @@
 
 **هدایت فصل:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل جاری**: فصل ۲ - توسعه هوشمند محور هوش مصنوعی
-- **⬅️ قبلی**: [یکپارچه‌سازی Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ بعدی**: [کارگاه هوش مصنوعی](ai-workshop-lab.md)
+- **📖 فصل جاری**: فصل ۲ - توسعه با اولویت هوش مصنوعی
+- **⬅️ قبلی**: [عامل‌های هوش مصنوعی](agents.md)
+- **➡️ بعدی**: [آزمایشگاه کارگاهی هوش مصنوعی](ai-workshop-lab.md)
 - **🚀 فصل بعدی**: [فصل ۳: پیکربندی](../chapter-03-configuration/configuration.md)
 
-این راهنما دستورالعمل‌های جامعی برای استقرار مدل‌های هوش مصنوعی با استفاده از قالب‌های AZD ارائه می‌دهد، که همه چیز از انتخاب مدل تا الگوهای استقرار در تولید را پوشش می‌دهد.
+این راهنما دستورالعمل‌های کامل برای استقرار مدل‌های هوش مصنوعی با استفاده از قالب‌های AZD ارائه می‌دهد که از انتخاب مدل تا الگوهای استقرار در محیط تولید را شامل می‌شود.
 
-> **نکته اعتبارسنجی (۲۰۲۶-۰۷-۱۳):** جریان کاری AZD در این راهنما با نسخه `azd` `1.27.1` بررسی شده است. برای استقرارهای هوش مصنوعی که زمان بیشتری نسبت به پنجره پیش‌فرض استقرار سرویس می‌گیرند، نسخه‌های جاری AZD از گزینه `azd deploy --timeout <seconds>` پشتیبانی می‌کنند.
+> **بررسی انتشار (۲۰۲۶-۱۱-۰۴):** تغییرات مرتبط در CLI در برابر `azd` `1.37.2` بررسی شده‌اند؛ دسترسی به مدل، نسخه‌ها و سهمیه همچنان به منطقه و اشتراک وابسته است. `azd deploy --timeout <seconds>` پنجره استقرار سرویس را کنترل می‌کند، تضمینی برای فعال‌سازی عامل نیست. نکات انتشار جاری و راهنمای مهاجرت هوش مصنوعی را ببینید [در اینجا](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## فهرست مطالب
 
-- [استراتژی انتخاب مدل](#استراتژی-انتخاب-مدل)
-- [پیکربندی AZD برای مدل‌های هوش مصنوعی](#پیکربندی-azd-برای-مدل‌های-هوش-مصنوعی)
-- [الگوهای استقرار](#الگوهای-استقرار)
-- [مدیریت مدل](#مدیریت-مدل)
-- [ملاحظات تولید](#ملاحظات-تولید)
-- [نظارت و دیده‌بانی](#نظارت-و-دیده‌بانی)
+- [استراتژی انتخاب مدل](#model-selection-strategy)
+- [پیکربندی AZD برای مدل‌های هوش مصنوعی](#azd-configuration-for-ai-models)
+- [الگوهای استقرار](#deployment-patterns)
+- [مدیریت مدل](#model-management)
+- [ملاحظات تولید](#production-considerations)
+- [نظارت و قابلیت مشاهده](#monitoring-and-observability)
 
 ## استراتژی انتخاب مدل
 
-### مدل‌های Microsoft Foundry
+### مدل‌های Azure OpenAI در Microsoft Foundry
 
-مدل مناسب برای مورد استفاده خود انتخاب کنید:
+مدل مناسب برای مورد استفاده خود را انتخاب کنید:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+استقرار مدل‌ها را در Bicep (در زیر) اعلام کنید، نه در تنظیمات تصادفی `services.*.config.AZURE_OPENAI_MODELS`. AZD چنین تنظیمی را به عنوان فهرست منابع مدل تفسیر نمی‌کند. `project` یک سرویس به منبع برنامه اشاره می‌کند، نه دایرکتوری `infra/` آن.
+
+مثال‌ها از نسخه منتشر شده `gpt-4.1-mini` **`2025-04-14`** و نسخه جاسازی **`1`** استفاده می‌کنند. قبل از فراهم‌سازی، تأیید کنید نسخه مدل و SKU استقرار در منطقه/حساب هدف پشتیبانی می‌شوند.
 
 ### برنامه‌ریزی ظرفیت مدل
 
-| نوع مدل | مورد استفاده | ظرفیت پیشنهادی | ملاحظات هزینه |
+| نوع مدل | مورد استفاده | تقاضای توکن مثال | ملاحظات هزینه |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | گفتگو، سوال و جواب | ۱۰-۵۰ TPM | مقرون به صرفه برای اکثر بارهای کاری |
-| gpt-4.1 | استدلال پیچیده | ۲۰-۱۰۰ TPM | هزینه بیشتر، استفاده برای قابلیت‌های پرمیوم |
-| text-embedding-3-large | جستجو، RAG | ۳۰-۱۲۰ TPM | انتخاب قوی پیش‌فرض برای جستجوی معناشناختی و بازیابی |
-| Whisper | تبدیل گفتار به متن | ۱۰-۵۰ TPM | بارهای کاری پردازش صوت |
+| gpt-4.1-mini | چت، سوال و جواب | ۱۰,۰۰۰-۵۰,۰۰۰ TPM | بررسی هزینه و کیفیت برای بار کاری شما |
+| gpt-4.1 | کارهای پیچیده | ۲۰,۰۰۰-۱۰۰,۰۰۰ TPM | ارزیابی بهبود کیفیت نسبت به هزینه توکن |
+| text-embedding-3-large | جستجو، RAG | ۳۰,۰۰۰-۱۲۰,۰۰۰ TPM | لحاظ ورودی و ترافیک پرس‌وجو |
+| Whisper | تبدیل گفتار به متن | برنامه‌ریزی با توجه به مدت زمان صدا و محدودیت درخواست‌ها | فرمول ظرفیت TPM مدل متنی را اعمال نکنید |
+
+TPM به معنای توکن در دقیقه است. برای این استقرارهای متن استاندارد، ARM `sku.capacity` در واحدهای **۱,۰۰۰ TPM** است، نه TPM تکی (ظرفیت `10` به معنای ۱۰,۰۰۰ TPM است). نسبت‌های RPM به TPM بسته به نوع مدل/استقرار متفاوتند؛ هر دو محدودیت را در برابر [مستندات سهمیه](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic) بررسی کنید. این بازه‌ها مثال‌اند، توصیه سایزدهی نیستند.
 
 ## پیکربندی AZD برای مدل‌های هوش مصنوعی
 
 ### پیکربندی قالب Bicep
 
-ایجاد استقرار مدل‌ها از طریق قالب‌های Bicep:
+استقرار مدل‌ها را از طریق قالب‌های Bicep ایجاد کنید:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+این یک **نمونه زیرساخت توسعه با دامنه گروه منابع** است، نه قالب کامل برنامه AZD. حساب اجازه دسترسی به شبکه عمومی را می‌دهد و نیازمند احراز هویت Entra ID/RBAC (`Cognitive Services OpenAI User` برای فراخوان‌ها) است. تولید به نقطه پایانی خصوصی، DNS و اتصال برنامه در فصل ۸ نیاز دارد. AZD همچنین به نقشه‌برداری قالب/پارامتر اصلی و منابع میزبان برنامه نیاز دارد؛ برای استقرار کامل از نمونه کاری استفاده کنید.
+
 ### متغیرهای محیطی
 
 محیط برنامه خود را پیکربندی کنید:
 
 ```bash
-# پیکربندی .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
+این‌ها نام‌های تعریف شده توسط برنامه هستند؛ آن‌ها را در پیکربندی میزبان خود داشته باشید. نقطه پایانی Azure OpenAI v1 که در بررسی سلامت زیر استفاده می‌شود، پارامتر کوئری قدیمی `api-version` را نیاز ندارد؛ کلاینت‌های قدیمی‌تر `AzureOpenAI` آن را می‌خواهند، پس از API استفاده شده توسط برنامه خود پیروی کنید.
+
 ## الگوهای استقرار
 
-### الگو ۱: استقرار در یک منطقه
+### الگو ۱: استقرار تک منطقه‌ای
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 بهترین برای:
-- توسعه و تست
-- برنامه‌های بازار تک‌منطقه‌ای
+- توسعه و آزمایش
+- برنامه‌های بازار تک
 - بهینه‌سازی هزینه
 
-### الگو ۲: استقرار چندمنطقه‌ای
+### الگو ۲: استقرار چند منطقه‌ای
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
+خصوصیات/SKU حساب حذف شده باید فراهم شود؛ این تکه به این شکل استقرارپذیر نیست. مدل‌ها در هر حساب مستقر کنید و کنترل‌های مسیر‌یابی/تحمل خطا و محل داده را جداگانه پیاده‌سازی کنید.
+
 بهترین برای:
 - برنامه‌های جهانی
-- نیازمندی‌های در دسترس بودن بالا
+- نیازمندی‌های دسترسی بالا
 - توزیع بار
 
 ### الگو ۳: استقرار ترکیبی
 
-ترکیب مدل‌های Microsoft Foundry با سایر خدمات هوش مصنوعی:
+مدل‌های Microsoft Foundry را با سایر سرویس‌های هوش مصنوعی ترکیب کنید:
+
+بخش‌های زیر فرض می‌کنند نام‌ها و `location` توسط قالب شامل فراهم شده‌اند.
 
 ```bicep
 // Hybrid AI services
@@ -209,14 +201,14 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### کنترل نسخه
 
-نسخه‌های مدل را در پیکربندی AZD خود ردیابی کنید:
+نسخه‌های مدل را در پیکربندی برنامه یا زیرساخت به عنوان کد خود دنبال کنید. این JSON یک **مثال تعریف‌شده توسط برنامه** است، نه طرح AZD ساخته‌شده؛ باید پشتیبان پیاده‌سازی و به طور صریح مستقر شود:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### به‌روزرسانی مدل
+### به‌روزرسانی مدل‌ها
 
-از هوک‌های AZD برای به‌روزرسانی مدل استفاده کنید:
+از هوک AZD برای بررسی فقط خواندنی دسترسی استفاده کنید، سپس IaC را به‌روزرسانی و مستقر کنید:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# اگر استقرار بیش از زمان پیش‌فرض طول بکشد
-azd deploy --timeout 1800
 ```
 
-### تست A/B
+اجرای `azd up` **خارج از** هوک برای اعمال تغییرات زیرساخت مدل و استقرار کد. هرگز `azd deploy` را از هوک `predeploy` فراخوانی نکنید: این هوک را به صورت بازگشتی فعال می‌کند. `azd deploy --timeout 1800` زمان اجرای استقرار برنامه را تمدید می‌کند؛ منابع Bicep را به‌روزرسانی نمی‌کند.
 
-چند نسخه از مدل را استقرار دهید:
+### آزمایش A/B
+
+منبع مثال زیر نام استقرار و ظرفیت را انتخاب می‌کند؛ **یک** استقرار ایجاد می‌کند، نه آزمایش A/B. برای یک آزمایش واقعی، دو منبع استقرار متمایز فراهم کنید، یک بخش کنترل شده از درخواست‌ها را به هر یک مسیریابی کرده و کیفیت، تأخیر و هزینه را مقایسه کنید. فرض بر `openAi` از مثال حساب است:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -276,7 +268,8 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 ظرفیت مورد نیاز را بر اساس الگوهای استفاده محاسبه کنید:
 
 ```python
-# مثال محاسبه ظرفیت
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# مثال استفاده
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
+خروجی مورد انتظار: `Required capacity: 9100 TPM`. با واحدهای ظرفیت ۱۰۰۰ TPM، به حداقل `10` گرد کنید، سپس تخمین نرخ محدودیت RPM مدل و سرویس را بررسی کنید (شامل بودجه خروجی درخواستی). این تخمین تقاضای توکن تضمینی در برابر محدودیت نیست.
+
 ### پیکربندی مقیاس خودکار
 
-مقیاس خودکار برای Container Apps را پیکربندی کنید:
+مقیاس خودکار را برای Container Apps پیکربندی کنید:
+
+**منبع جزئی:** تنظیمات `template.scale` را در یک Container App کامل با مکان، محیط مدیریت شده، تصویر کانتینر، منابع و ورودی ادغام کنید. افزایش تکثیرها ظرفیت مدل را افزایش نمی‌دهد.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### بهینه‌سازی هزینه
 
-کنترل‌های هزینه را پیاده‌سازی کنید:
+کنترل هزینه را پیاده‌سازی کنید:
+
+**منبع بودجه مثال:** `budgetStartDate` را به اولین روز ماه جاری در UTC (برای مثال `2026-11-01T00:00:00Z` برای این بازبینی) تعریف کنید و آدرس تماس را جایگزین کنید. شروع باید با محدودیت‌های تاریخ سرویس هماهنگ باشد. بودجه‌ها روی داده‌های صورتحساب تأخیردار هشدار می‌دهند؛ هزینه را متوقف نمی‌کنند.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,9 +368,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## نظارت و دیده‌بانی
+## نظارت و قابلیت مشاهده
 
-### ادغام Application Insights
+### یکپارچه‌سازی Application Insights
 
 نظارت بر بارهای کاری هوش مصنوعی را پیکربندی کنید:
 
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
+
+بخش منبع فرض می‌کند `applicationInsightsName`، `location` و یک `logAnalyticsWorkspace` موجود است. نظارت را فراهم می‌کند، اما برنامه را اندازه‌گیری نمی‌کند یا معیارهای سفارشی ایجاد نمی‌کند.
 
 ### معیارهای سفارشی
 
-معیارهای خاص هوش مصنوعی را ردیابی کنید:
+معیارهای مخصوص هوش مصنوعی را دنبال کنید:
+
+از توزیع [Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python) پشتیبانی شده استفاده کنید، نه SDK قدیمی `applicationinsights` Python. `azure-monitor-opentelemetry` را نصب، `APPLICATIONINSIGHTS_CONNECTION_STRING` را پیکربندی و یکبار در زمان شروع مقداردهی اولیه کنید:
 
 ```python
-# تلومتری سفارشی برای مدل‌های هوش مصنوعی
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
+
+این نمونه انتشار ویژگی‌ها را نشان می‌دهد، نه اندازه‌گیری واقعی فراخوان مدل. درخواست واقعی را در یک span بپیچید تا مدت آن اندازه‌گیری شود؛ `dependencies`/`traces` را در Application Insights بررسی کنید. هیچ پرامپت، پاسخ، کلید یا پیام خطای خام حاوی داده حساس ارسال نکنید.
 
 ### بررسی سلامت
 
-نظارت بر سلامت سرویس هوش مصنوعی را پیاده‌سازی کنید:
+نظارت سلامت سرویس هوش مصنوعی را پیاده‌سازی کنید:
+
+نصب `fastapi`، `uvicorn`، `httpx` و `azure-identity`. متغیرهای endpoint/deployment بالا را تنظیم کنید و به caller `Cognitive Services OpenAI User` اعطا کنید. این **probe آمادگی** از محور داده v1 Azure OpenAI با Entra ID استفاده می‌کند؛ این یک درخواست مدل قابل هزینه است. پس از ذخیره با `uvicorn health:app` اجرا کنید به عنوان `health.py`. از یک بررسی سبُک جداگانه برای زنده بودن استفاده کنید، نتایج آمادگی را محدود به نرخ/کش کنید و این مسیر را بدون کنترل‌های دسترسی به صورت عمومی در دسترس قرار ندهید.
 
 ```python
-# نقاط پایانی بررسی سلامت
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # آزمایش اتصال OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+انتظار می‌رود: `GET /health/ai-models` زمانی که دپلوی چت پیکربندی شده قابل استفاده است `200 {"status":"healthy"}` را برگرداند، یا `503` را بدون افشای جزئیات بالادستی. فهرست کردن دپلوی‌ها یک عملیات صفحه مدیریت است و پروب سلامت محور داده معتبر نیست.
 
 ## مراحل بعدی
 
-۱. **بررسی [راهنمای یکپارچه‌سازی Microsoft Foundry](microsoft-foundry-integration.md)** برای الگوهای ادغام سرویس
-۲. **کامل کردن [کارگاه هوش مصنوعی](ai-workshop-lab.md)** برای تجربه عملی
-۳. **اجرای [روش‌های تولید هوش مصنوعی](production-ai-practices.md)** برای استقرارهای سازمانی
-۴. **مرور [راهنمای عیب‌یابی هوش مصنوعی](../chapter-07-troubleshooting/ai-troubleshooting.md)** برای مسائل رایج
+1. **مرور [راهنمای یکپارچه‌سازی Microsoft Foundry](microsoft-foundry-integration.md)** برای الگوهای یکپارچه‌سازی سرویس
+2. **تکمیل [آزمایشگاه کارگاه AI](ai-workshop-lab.md)** برای تجربه عملی
+3. **پیاده‌سازی [تمرین‌های AI در تولید](../chapter-08-production/production-ai-practices.md)** برای استقرارهای سازمانی
+4. **کاوش [راهنمای عیب‌یابی AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** برای مشکلات رایج
 
 ## منابع
 
-- [دسترس‌پذیری مدل‌های Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [دسترسی مدل‌های Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [مستندات Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [مقیاس‌پذیری Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [بهینه‌سازی هزینه مدل هوش مصنوعی](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [بهینه‌سازی هزینه مدل AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**هدایت فصل:**
+**ناوبری فصل:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل جاری**: فصل ۲ - توسعه هوشمند محور هوش مصنوعی
-- **⬅️ قبلی**: [یکپارچه‌سازی Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ بعدی**: [کارگاه هوش مصنوعی](ai-workshop-lab.md)
+- **📖 فصل فعلی**: فصل ۲ - توسعه هوش مصنوعی در اولویت
+- **⬅️ قبلی**: [عوامل هوش مصنوعی](agents.md)
+- **➡️ بعدی**: [آزمایشگاه کارگاه AI](ai-workshop-lab.md)
 - **🚀 فصل بعدی**: [فصل ۳: پیکربندی](../chapter-03-configuration/configuration.md)
 
 ---
