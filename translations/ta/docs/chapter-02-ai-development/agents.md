@@ -1,305 +1,304 @@
 # Azure Developer CLI உடன் AI முகவர்கள்
 
-**அதிகாரம் வழிசெலுத்தல்:**
-- **📚 பாடநெடுஞ்சாலை முகப்பு**: [AZD For Beginners](../../README.md)
-- **📖 தற்போதைய அதிகாரம்**: அதிகாரம் 2 - முதன்மையான AI மேம்பாடு
-- **⬅️ முந்தையது**: [Microsoft Foundry ஒருமை](microsoft-foundry-integration.md)
-- **➡️ அடுத்து**: [AI மாதிரி வினியோகம்](ai-model-deployment.md)
-- **🚀 முன்னேற்றம்**: [பல முகவர் தீர்வுகள்](../../examples/retail-scenario.md)
+**நூல் பரிசீலனை:**
+- **📚 பாடநெறி முகப்பு**: [AZD தொடக்கக்காரர்களுக்காக](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI முதலான மேம்பாடு
+- **⬅️ முந்தைய**: [Microsoft Foundry ஒருங்கிணைப்பு](microsoft-foundry-integration.md)
+- **➡️ அடுத்தது**: [AI மாதிரி நிலைபேறாக்கம்](ai-model-deployment.md)
+- **🚀 மேம்பட்டது**: [பல முகவர் தீர்வுகள்](../../examples/retail-scenario.md)
 
 ---
 
 ## அறிமுகம்
 
-AI முகவர்கள் சுயமாக இயங்கும் நிரல்கள் ஆகும், அவை சுற்றுப்புறத்தை உணர்ந்து, தீர்மானங்களை எடுத்து, குறிப்பிட்ட இலக்குகளை அடைய நடவடிக்கைகள் எடுக்க முடியும். தட்டுப்பூங்கல் (chatbot) போன்ற எளிதானதாக அல்லாமல், முகவர்கள்:
+AI முகவர்கள் தங்களின் சூழலை அறிந்து, முடிவுகள் எடுத்து, குறிப்பிட்ட இலக்குகளை அடைவதற்கு நடவடிக்கைகள் எடுக்கக்கூடிய சுயாதீன நிகழ்ச்சித் திட்டங்கள் ஆகும். கேள்விக்குப் பதிலளிப்பதிலிருந்து வெறுமனே செயல்படும் சாத்தியமான சாதாரண சாட்போட்டுகளுக்கு மாறாக, முகவர்கள்:
 
-- **கருவிகள் பயன்படுத்துதல்** - APIகளை அழை, தரவுத்தளங்கள் தேடு, குறியீடு இயக்கு
-- **திட்டமிடல் மற்றும் காரணம் கூறுதல்** - சிக்கலான வேலைகளை படிகளால் பிரி
-- **கட்டமைப்பில் இருந்து கற்றல்** - நினைவூட்டல் உண்டு, நடத்தையை இசைகிறது
-- **உடன்படுதல்** - பிற முகவர்களுடன் பணியாற்றுதல் (பல முகவர் முறைகள்)
+- **கருவிகளை பயன்படுத்தவும்** - APIகளை அழைக்க, தரவுத்தளங்களை தேட, குறியீட்டை நிறைவேற்றவும்
+- **திட்டமிடவும், கருதவும்** - சிக்கலான பணிகளை நிலைகளாக உடைக்கவும்
+- **அர்த்தத்தை அறிந்து கற்கவும்** - நினைவாற்றலை பராமரித்து, நடத்தையை பொருந்துமாறு மாற்றவும்
+- **கூடமைந்து செயல்படவும்** - மற்ற முகவர்களுடன் பணியாற்றவும் (பல முகவர் அமைப்புகள்)
 
-இந்த வழிகாட்டி Azure Developer CLI (azd) பயன்படுத்தி Azure-க்கு AI முகவர்களை எப்படி வினியோகிக்கின்றது என்பதைக் காட்டுகிறது.
+இந்த வழிகாட்டி உங்களுக்கு Azure Developer CLI (azd) பயன்படுத்தி Azure இல் AI முகவர்களை நிலைபேறாக்குவது எப்படி என்பதை காட்டு.
 
-> **சரிபார்ப்பு குறிப்பு (2026-07-13):** இந்த வழிகாட்டி `azd` `1.27.1` மற்றும் `azure.ai.agents` `1.0.0-beta.5` உடன் மதிப்பாய்வு செய்யப்பட்டது. `azd ai` அனுபவம் இன்னும் முன்னோட்டம் சார்ந்தது, ஆகையால் உங்கள் நிறுவப்பட்ட கொடியைகள் வேறுபட்டால் விரிவாக்க உதவியை பார்க்கவும்.
+உரையாடல் அர்த்தத்தைப் பயன்படுத்துவது மாதிரித்திறனுக் கற்றல் அல்ல: நிரந்தர நினைவு, அணுகல் கட்டுப்பாடு மற்றும் கைமுறை நிலைத்திருத்தம் பயன்பாட்டால் நடைமுறைப்படுத்தப்பட வேண்டும் / அமைக்கப்பட வேண்டும்.
 
-## கற்றல் இலக்குகள்
+> **Foundry GA புதுப்பிப்பு (2026-11-09):** பொதுவாக கிடைக்கும் `microsoft.foundry` 1.0 தொகுப்பை `azd >= 1.37.0` கொண்டு நிறுவவும். மதிப்பீடுகள் தனியாக நிறுவப்படுகின்றன; விருப்ப முன்னோட்ட அம்சங்களும் கீழே உள்ள பாரம்பரிய SDK துண்டும் தொகுப்பு அறிவிப்பால் GAக்கு முன்னோக்கி எடுத்து செல்லப்படவில்லை. இந்த வழிகாட்டி [GA அறிவிப்பு](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/) மற்றும் ஆவணங்களைப் பொருந்தியது, நேரடி Azure நிலைபேறாக்கம் அல்ல.
 
-இந்த வழிகாட்டியை முடித்ததன் மூலம், நீங்கள்:
-- AI முகவர்கள் என்ன என்பதையும், அவர்கள் தட்டுப்பூங்கல்களிலிருந்து எப்படி வேறுபடுகின்றனர் என்பதையும் புரிந்து கொள்வீர்கள்
-- AZD பயன்படுத்தி முன்கூட்டியே உருவாக்கப்பட்ட AI முகவர் வார்ப்புருக்களை துவக்கம் செய்வீர்கள்
-- Foundry முகவர்களை தனிப்பயன் முகவர்களுக்காக அமைப்பீர்கள்
-- அடிப்படை முகவர் மாதிரிகளை (கருவி பயன்படுத்துதல், RAG, பல முகவர்) செயல்படுத்துவீர்கள்
-- வினியோகிக்கப்பட்ட முகவர்களை கண்காணித்து பிழைதிருத்துவீர்கள்
+## கற்றல் நோக்கங்கள்
+
+இந்த வழிகாட்டியை முடித்தவுடன், நீங்கள்:
+- AI முகவர்கள் என்ன மற்றும் சாட்போட்டுகளிலிருந்து அவர்கள் எப்படி வேறுபடுகிறார்கள் என்பதை புரிந்துக்கொள்ளவும்
+- AZD மூலம் முன்கூட்டியே கட்டப்பட்ட AI முகவர் வார்ப்புருக்களை நிலைபேறாக்கவும்
+- தனிப்பட்ட முகவர்கள் க்காக Foundry முகவர்களை ஒழுங்கமைக்கவும்
+- அடிப்படையான முகவர் மாதிரிகளை (கருவி பயன்பாடு, RAG, பல முகவர்) செயல்படுத்தவும்
+- நிலைபேறாக்கப்பட்ட முகவர்களை கண்காணிக்கவும் மற்றும் பிழையனுப்பவும்
 
 ## கற்றல் முடிவுகள்
 
-முடிவு செய்தவுடன் நீங்கள் செயல்படுத்த முடியும்:
-- ஒரு கட்டளை மூலம் Azure-க்கு AI முகவர் பயன்பாடுகளை வினியோகிக்க
-- முகவர் கருவிகளையும் திறன்களையும் அமைக்க
-- முகவர்களுடன் கூடிய தேடியுடனான உருவாக்கத்தை (RAG) செயல்படுத்த
-- சிக்கலான பணிக்கிடவு கையாள பல முகவர் கட்டிடக்கலை வடிவங்களை வடிவமைக்க
-- பொதுவான முகவர் வினியோக பிரச்சினைகளை திருத்த
+முடித்த பிறகு, நீங்கள் செய்ய முடியும்:
+- ஒரே கட்டளையுடன் AI முகவர் பயன்பாடுகளை Azure இல் நிலைபேறாக்கவும்
+- முகவர் கருவிகள் மற்றும் திறன்களை ஒழுங்கமைக்கவும்
+- முகவர்களுடன் பெறல்-வழங்கப்பட்ட உருவாக்கத்தை (RAG) செயல்படுத்தவும்
+- சிக்கலான பணித் தொடர்களுக்கு பல முகவர் கலைவழக்கங்களை வடிவமைக்கவும்
+- பொதுவான முகவர் நிலைபேறாக்கப் பிரச்சினைகளை தீர்க்கவும்
 
 ---
 
-## 🤖 ஒரு முகவர் தட்டுப்பூங்கலிலிருந்து எப்படி வேறுபடுகிறது?
+## 🤖 ஒரு AI முகவர் சாட்போட்டிலிருந்து வேறுபடுவதன் காரணம் என்ன?
 
-| அம்சம் | தட்டுப்பூங்கல் | AI முகவர் |
+| அம்சம் | சாட்போட் | AI முகவர் |
 |---------|---------|----------|
-| **நடவடிக்கை** | கேள்விகளுக்கு பதிலளிக்கும் | சுயமாக நடவடிக்கைகள் எடுக்கிறது |
-| **கருவிகள்** | ஒன்றுமே இல்லை | APIகளை அழைக்க முடியும், தேட முடியும், குறியீடு இயக்கு |
-| **நினைவூட்டல்** | only session-based | அமர்வுகளுக்கு இடையேயான நிரந்தர நினைவூட்டல் |
-| **திட்டமிடல்** | ஒரு பதில் | பல படிகளால் காரணமிடல் |
-| **கூட்டு வேலை** | ஒரு தனி அங்கம் | பிற முகவர்களுடன் பணியாற்ற முடியும் |
+| **நடத்தை** | கேள்விகளுக்கு பதிலளிக்கும் | சுயாதீனமான நடவடிக்கைகள் எடுக்கும் |
+| **கருவிகள்** | பெறல் அல்லது கருவிகளை பயன்படுத்தும் வாய்ப்பு | இலக்காக விளங்கும் சுற்றிலுள்ள கருவிகளைக் பயன்படுத்துகிறது |
+| **நினைவகம்** | பயன்பாட்டினால் சார்ந்தது | தெளிவாக செயல்படுத்தப்படின் மட்டும் நிரந்தர நினைவகம் |
+| **திட்டமிடுதல்** | ஒரே பதில் | பல நிலை கருதுகோள் |
+| **கூடமைதி** | ஒரே அலகு | மற்ற முகவர்களுடன் கூடி வேலை செய்யும் |
 
-### எளிய உவமை
+### எளிய ஒப்புமை
 
-- **தட்டுப்பூங்கல்** = தகவல் மன்றத்தில் கேள்விகளுக்கு பதிலளிக்கும் உதவியாளர்
-- **AI முகவர்** = அழைப்புகள் செய்யும், நேரங்கள் ஒதுக்கும், பணிகளை நிறைவேற்றும் தனிப்பட்ட உதவியாளர்
+- **சாட்போட்** = தகவல் மேசையில் கேள்விகளுக்கு பதிலளிக்கும் உதவியாளர்
+- **AI முகவர்** = அழைப்புகளை செய்து, நியமனங்களை ஒழுங்கமைத்து, பணி நடத்தும் தனிப்பட்ட உதவியாளர்
 
 ---
 
-## 🚀 விரைவான துவக்கம்: உங்கள் முதல் முகவரைக் கைகாட்டவும்
+## 🚀 விரைவான துவக்கம்: உங்கள் முதல் முகவரையும் நிலைபேறாக்குக
 
-### விருப்பம் 1: Foundry முகவர் வார்ப்புரு ( பரிந்துரைக்கப்பட்டது )
+ஒரு **புதிய காலி வேலை அடைவு** இல் ஒரு விருப்பத்தைத் தெரிவு செய்யவும். பின்னிலையிலுள்ள `.` அங்கு துவங்கி செயல்படுகிறது; தெளிவான இடம் குறிப்பிடப்படாமல் இருந்தால், தற்போதைய AZD ஒரு மாதிரி பெயர் கொண்ட துணை அடைவைக் உருவாக்கலாம் மற்றும் உங்கள் ஷெல்லின் அடைவைக் மாற்றாது. தனித்த தனித்த மாதிரிகள்/சுற்றுப்புறங்களை தனித்த அடைவுகளிலேயே வைத்திருங்கள்.
+
+கீழ்க்காணும் நேரம்/செலவு வரம்புகள் விளக்கமாக உள்ளன, சரிபார்க்கப்பட்ட மேற்கோள்கள் அல்ல. டெப்பிளாய்மென்ட் செய்வதற்கு முன் ஒவ்வொரு மாதிரியின் தற்போதைய தேவைகள், விலை, மாதிரித் தொகுதி மற்றும் விருப்ப சேவைகளை சரிபார்க்கவும்.
+
+### விருப்பம் 1: ஃபௌன்ட்ரி ஏஜெண்ட்ஸ் டெம்ப்ளேட் (பரிந்துரைக்கப்பட்டது)
 
 ```bash
-# AI முகவர்கள் வார்ப்புருவை ஆரம்பியுங்கள்
-azd init --template get-started-with-ai-agents
+# Initialize the AI agents template
+azd init --template get-started-with-ai-agents .
 
-# Azure-க்கு பயன்படுத்தி நிரப்புக
+# Deploy to Azure
 azd up
 ```
 
-**என்ன வினியோகிக்கப்படுகிறது:**
-- ✅ Foundry முகவர்கள்
-- ✅ Microsoft Foundry மாதிரிகள் (gpt-4.1)
-- ✅ Azure AI தேடல் (RAGக்காக)
-- ✅ Azure Container Apps (வலை முகப்பு)
-- ✅ Application Insights (கண்காணிப்பு)
+**என்ன நடக்கிறது:** மாதிரியை, கருவிகளை, ஹோஸ்டிங் மற்றும் கண்காணிப்பு வளங்களை தற்போதைய மாதிரியின் கட்டமைப்பு மற்றும் தேர்ந்தெடுக்கப்பட்ட விருப்பங்கள் குறிக்கின்றன. அதைப் பராமரிப்பதற்கு முன் அதன் README மற்றும் `infra/` ஐப் பரிசீலிக்கவும்; எல்லா முகவர் வார்ப்புருவும் Search அல்லது ஒரு வலை இடைமுகத்தை உள்ளடக்குகிறது என்று கருத வேண்டாம்.
 
 **நேரம்:** ~15-20 நிமிடங்கள்
-**செலவு:** ~$100-150/மாதம் (மென்பொருள் மேம்பாடு)
+**செலவு:** ~$100-150/மாதம் (வளர்)
 
-### விருப்பம் 2: Prompty உடன் OpenAI முகவர்
+### விருப்பம் 2: Prompty உடன் படைப்பாற்றல் எழுதும் முகவர்கள்
 
 ```bash
-# Prompty-ஆல் அடிப்படையாக்கப்பட்ட முகவர் மாதிரியை ஆரம்பிப்பது
-azd init --template agent-openai-python-prompty
+# Initialize the Prompty-based agent template
+azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 
-# Azure-க்கு பணியிடுக
+# Deploy to Azure
 azd up
 ```
 
-**என்ன வினியோகிக்கப்படுகிறது:**
-- ✅ Azure Functions (சேவைஇல்லாத முகவர் செயல்பாடு)
-- ✅ Microsoft Foundry மாதிரிகள்
-- ✅ Prompty அமைப்புத் கோப்புகள்
-- ✅ மாதிரி முகவர் அமலாக்கம்
+**என்ன வெளியிடப்படுகிறது:** Azure OpenAI, Bing Grounding மற்றும் Azure AI Search பயன்படுத்தி FastAPI/Prompty பல-ஏஜன்ட் எழுத்து உதாரணம். முந்தைய `agent-openai-python-prompty` காப்பகம் இங்கே.redirect ஆகும்; இது குறைந்தபட்ச Azure Functions வானிலை-ஏஜன்ட் மாதிரி அல்ல. ஹோஸ்டிங், மாதிரி கொட்டா மற்றும் Bing Grounding சிறுபிரிவுகளுக்கு அதன் தற்போதைய README ஐ பின்பற்றவும்.
 
 **நேரம்:** ~10-15 நிமிடங்கள்
-**செலவு:** ~$50-100/மாதம் (மென்பொருள் மேம்பாடு)
+**செலவு:** ~$50-100/மாதம் (உருவாக்குதல்)
 
-### விருப்பம் 3: RAG அரங்குக்குரிய முகவர்
+### விருப்பம் 3: RAG செட் ஏஜன்ட்
 
 ```bash
-# RAG உரையாடல் வார்ப்புருவை துவங்கவும்
-azd init --template azure-search-openai-demo
+# Initialize RAG chat template
+azd init --template azure-search-openai-demo .
 
-# Azure க்கு தளவமைக்கவும்
+# Deploy to Azure
 azd up
 ```
 
-**என்ன வினியோகிக்கப்படுகிறது:**
+**என்ன வெளியிடப்படுகிறது:**
 - ✅ Microsoft Foundry மாதிரிகள்
-- ✅ மாதிரி தரவுடன் Azure AI தேடல்
-- ✅ ஆவணி செயலாக்க குழாய்
-- ✅ மேற்கோள் கொண்ட அரங்குக் கிடங்கு
+- ✅ மாதிரி தரவுடன் Azure AI Search
+- ✅ ஆவணம் செயலாக்க குழாய்
+- ✅ மேற்கோள்களுடன் உரையாடல் இடையீடு
 
 **நேரம்:** ~15-25 நிமிடங்கள்
-**செலவு:** ~$80-150/மாதம் (மென்பொருள் மேம்பாடு)
+**மூலம்:** ~$80-150/மாதம் (வளரும்)
 
-### விருப்பம் 4: AZD AI முகவர் தொடக்கம் (முகவருகோப்போ அல்லது வார்ப்புரு அடிப்படையிலான முன்னோட்டம்)
+### விருப்பம் 4: GA Foundry தொகுப்புடன் நடுநிலை முகவர்
 
-உங்கள் அருகில் ஒரு முகவருச்சீட்டு இருந்தால், நீங்கள் நேரடியாக Foundry முகவர் சேவை திட்டத்தை `azd ai` கட்டளையுடன் உருவாக்கலாம். சமீபத்திய முன்னோட்ட வெளியீடுகள் வார்ப்புரு அடிப்படையிலான தொடக்க ஆதரவையும் சேர்த்துள்ளன, ஆகையால் உங்கள் நிறுவப்பட்ட விரிவுருப் பதிப்பின் அடிப்படையில் குறுக்கெழுத்து கொடுப்பழுக்கல் வேறுபடலாம்.
+அடிப்படை Python முகவர் Framework Responses API மாதிரிக்கான [முழுமையான நடுநிலை-முகவர் நடைமுறை](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) பயன்படுத்துங்கள். இந்த குறியிட்டு வெளியீட்டு பாதை Python 3.13+, தற்போதைய uv, Foundry அனுமதிகள் மற்றும் பிராந்திய மாதிரி இலவச அடிப்படையைத் தேவைப்படுத்துகிறது. Azure CLI அனுமதிகளைக் பயன்படுத்தும் போது உள்ளூர் SDK அழைப்புகளுக்கு தனித்தனியான அங்கீகாரத்தை வழங்குங்கள்.
 
 ```bash
-# AI முகவர்கள் நீட்சியை நிறுவுக
-azd extension install azure.ai.agents
-
-# விருப்பமானது: நிறுவப்பட்ட முன்னோட்ட பதிப்பை சரிபார்க்கவும்
-azd extension show azure.ai.agents
-
-# முகவர் விளக்கத்திலிருந்து தொடங்கவும்
-azd ai agent init -m agent-manifest.yaml
-
-# Azure க்கு பரிமாறவும்
-azd up
-
-# பரிமாறப்பட்ட முகவரியை சோதிக்கவும் (விலம்பு + முதல் பைட் வரையிலான நேரம் காணப்படுகிறது)
-azd ai agent invoke
+azd auth login
+azd ext install microsoft.foundry
 ```
 
-**`azd ai agent init` மற்றும் `azd init --template` எப்போது பயன்படுத்துவது:**
+காலியாக உள்ள அடைவில், மாதிரியை துவங்குங்கள்:
 
-| அணுகுமுறை | சிறந்ததாக | செயல்பாடு எப்படி |
+```text
+azd ai agent init --template https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml --deploy-mode code --src .
+```
+
+புதியதாயோ அல்லது ஏற்கனவே இருப்பதாயோ ஒரு திட்டத்தை தேர்ந்தெடுத்து, `azure.yaml` ஐ எல்லித்து, `azd provision` ஐ இயக்குங்கள். முகவர் ஆய்வாளரைத் திறக்க `azd ai agent run` ஐப் பயன்படுத்தி, அடுத்ததொரு இனிய அடைவில் இருந்து `azd ai agent invoke --local "Explain how this agent is hosted."` ஐ இயக்குங்கள். உள்ளூர் சரிபார்ப்புக்குப்பின்பு, வெளியிடப்பட்ட பதில்களை ஒப்பிட `azd deploy` மற்றும் `azd ai agent invoke "Explain how this agent is hosted."` ஐப் பயன்படுத்துங்கள். Foundry பதிவேற்றிய மூலத்தை தொலைவில் கட்டமைக்கிறது; உள்ளூர் கடவை கட்டமைப்பு அவசியமில்லை.
+
+**எப்போது `azd ai agent init` ஐ பயன்படுத்துவது மற்றும் எப்போது `azd init --template` என்பதைப் பற்றி:**
+
+| முறை | சிறந்தது | அது எப்படி வேலை செய்கிறது |
 |----------|----------|------|
-| `azd init --template` | வேலை செய்கிற மாதிரி செயலி மூலம் துவக்கம் | கோடு + அமைப்பு உடைய முழு வார்ப்புரு களஞ்சியத்தை நகலெடுக்கிறது |
-| `azd ai agent init -m` | உங்கள் முகவருச்சீட்டில் இருந்து கட்டமைக்கிறது | உங்கள் முகவருக் வரையறையிலிருந்து திட்ட கட்டமைப்பை உருவாக்குகிறது |
+| `azd init --template` | ஒரு இயங்கும் மாதிரி பயன்பாட்டைத் தொடங்குவதற்கு | நிரல் மற்றும் அடியமைப்பு கொண்ட முழு மாதிரி ரெப்போவை நகலெடுக்கிறது |
+| `azd ai agent init --template` | தற்போதைய Foundry முகவர் திட்டத்தை ஏற்க | ஒரு `azure.yaml` திட்ட ஆவணம் மற்றும் அதன் வரையறைகளை பயன்படுத்துகிறது |
 
-> **கருத்து:** கற்றலுக்கு (மேலே உள்ள விருப்பங்கள் 1-3) `azd init --template` பயன்படுத்தவும். உங்கள் சொந்த முகவருச்சீட்டுகளுடன் உற்பத்தி முகவர்களை உருவாக்க `azd ai agent init` பயன்படுத்தவும்.
+> **உதவிக்குறிப்பு:** விருப்பங்கள் 1-3 முழு செயலி வார்ப்புருக்களிலிருந்து துவங்குகின்றன; விருப்பம் 4 GA ஆகிட்-ஏஜென்ட் வேலைப்பாட்டை கற்பிக்கிறது. எந்த ஆரம்பத்துக் கட்டளையும் பழைய ஏஜென்டு விளக்கங்களைக் தானாக மாற்றுவதில்லை. ஒரு நேரடி ஏஜென்ட் வரையறையை ஏற்கனவே உள்ள திட்டத்தில் சேர்க்க, [துவக்கமும் மாற்றும் வழிகாட்டுதலும்](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init) பாருங்கள்.
 
-`azd up` பிறகு, அதே விரிவுகள் முகவர் வாழ்நாள் முறையின் மற்ற பகுதிகளை முன்னெடுக்கிறது: சோதனைக்கு `azd ai agent invoke`, தரம் அளவீடு மற்றும் மேம்பாட்டுக்கு `azd ai agent eval generate` மற்றும் `azd ai agent optimize`, மற்றும் பசியாக்க `azd ai agent delete`. முழு குறிப்புக்காக [AZD AI CLI கட்டளைகள்](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) பார்க்கவும்.
+தனியாக `azure.ai.evaluations` ஐ நிறுவி தேர்வு தரவுகள்/அளவுகோல்கள் உருவாக்கவும், மதிப்பீட்டை கட்டமைக்கவும், மற்றும் `azd ai eval` ஐ பயன்படுத்தி இயக்கவும். ஓர் ஒத்துப்போகும் மதிப்பீட்டை மீண்டும் பயன்படுத்தி சிறப்பிக்கலாம்; ஒன்றை தெளிவாகும் முறையில் பயன்படுத்துவதற்கு முன் претендент்களை பரிசீலிக்கவும். பழைய எடுத்துக்காட்டுகளை மீண்டும் பயன்படுத்துவதற்கு முன் [மதிப்பீட்டு பணிமுறை](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) மற்றும் [சீரமைப்பு இடமாற்றம்](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) ஐ பின்பற்றவும். சுத்தம் செய்ய, மீண்டும் பயன்படுத்தப்பட்ட Foundry திட்டத்தின் வளங்கள் `azd down`க்குப் பிறகு மீண்டும் நிலை படுத்தப்படுகின்றன; புதியதாக உருவாக்கப்பட்ட திட்டத்தின் வள குழு நீக்கப்படுகிறது. [நடத்தை சுத்தம் செய்தல் வழிகாட்டி](microsoft-foundry-integration.md#7-clean-up-deliberately) ஐ பார்க்கவும்.
 
 ---
 
-## 🏗️ முகவர் கட்டிடக்கலை மாதிரிகள்
+## 🏗️ முகவர் கட்டமைப்பு வடிவங்கள்
 
-### மாதிரி 1: கருவி கொண்ட ஒரே முகவர்
+### வடிவம் 1: கருவிகள் கொண்ட ஒரே முகவர்
 
-எளிய முகவர் மாதிரி - பல கருவிகளை பயன்படுத்த முடியும்.
+மிக எளிய முகவர் வடிவம் - பல கருவிகளை பயன்படுத்தக்கூடிய ஒரே முகவர்.
 
 ```mermaid
 graph TD
-    UI[பயனர் இடைமுகம்] --> Agent[ஏ.ஐ முகவர்<br/>gpt-4.1]
-    Agent --> Search[தேடல் கருவி]
-    Agent --> Database[தரவுத்தளம் கருவி]
-    Agent --> API[API கருவி]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
-**சிறந்த இடங்கள்:**
-- வாடிக்கையாளர் ஆதரவு ரோபோக்கள்
-- ஆராய்ச்சி உதவியாளர்கள்
+**உத்தமம்:**
+- வாடிக்கையாளர் ஆதரவு பாக்கிகள்
+- ஆய்வு உதவியாளர்கள்
 - தரவு பகுப்பாய்வு முகவர்கள்
 
-**AZD வார்ப்புரு:** `azure-search-openai-demo`
+**உருவாக்கப்பட்ட பயன்பாட்டு மாதிரி:** `azure-search-openai-demo` பொதுவான சீரற்ற கருவி முகவர் சுற்றை அல்ல, RAG ஐ காண்பிக்கிறது.
 
-### மாதிரி 2: RAG முகவர் (தேடல்-வளர்ப்பு உருவாக்கம்)
+### வடிவம் 2: RAG முகவர் (பெறுதல்-மேம்படுத்தப்பட்ட உருவாக்கம்)
 
-ஒரு முகவர், பதில்களை உருவாக்கும் முன் சம்பந்தப்பட்ட ஆவணங்களை மீட்டெடுக்கும்.
+பதில்களை உருவாக்குவதற்கு முன்பு தொடர்புடைய ஆவணங்களைப் பெறும் ஒரு முகவர்.
 
 ```mermaid
 graph TD
-    Query[பயனர் கேள்வி] --> RAG[RAG முகவர்]
-    RAG --> Vector[வடிகட்டி தேடல்]
+    Query[User Query] --> RAG[RAG Agent]
+    RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Documents --> LLM
-    LLM --> Response[மேற்கோள்களுடன் பதில்]
+    LLM --> Response[Response with Citations]
 ```
 
-**சிறந்த இடங்கள்:**
-- கம்பெனி அறிவுத் தளங்கள்
-- ஆவணி கேள்வி பதில் முறைகள்
-- இணக்கம் மற்றும் சட்ட ஆய்வு
+**சிறந்தது:**
+- நிறுவன அறிவு ஆதாரங்கள்
+- ஆவண கேள்வி & பதில் அமைப்புகள்
+- अनुपालन மற்றும் சட்ட ஆராய்ச்சி
 
 **AZD வார்ப்புரு:** `azure-search-openai-demo`
 
-### மாதிரி 3: பல முகவர் முறைமை
+### முறை 3: பன்முக முகவர் அமைப்பு
 
-பல சிறப்பு முகவர்கள் சிக்கலான பணிகளில் ஒருங்கிணைந்து செயல்படுகின்றனர்.
+பல விசேஷப்படுத்தப்பட்ட முகவர்கள் கூட்டு முயற்சியில் சிக்கலான பணிகளை செய்யும்.
 
 ```mermaid
 graph TD
-    Orchestrator[ஒர்கஸ்ட்ரேட்டர் முகவர்] --> Research[ஆராய்ச்சி முகவர்<br/>gpt-4.1]
-    Orchestrator --> Writer[எழுத்தாளர் முகவர்<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[மதிப்பாய்வாளர் முகவர்<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
-**சிறந்த இடங்கள்:**
+**சிறந்தது:**
 - சிக்கலான உள்ளடக்க உருவாக்கம்
-- பல படி வேலைசெய்தல் முறைமைகள்
-- வேறுபட்ட திறன்களை தேவையான பணிகள்
+- பல படி பணியமைப்புகள்
+- வெவ்வேறு நிபுணத்துவம் தேவைப்படும் பணிகள்
 
-**மேலும் கற்றுக்கொள்ள:** [பல முகவர் ஒருங்கிணைப்பு மாதிரிகள்](../chapter-06-pre-deployment/coordination-patterns.md)
+**மேலும் அறிய:** [பன்முக முகவர் ஒத்துழைப்பு முறைமைகள்](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ முகவர் கருவிகள் அமைப்பு
+## ⚙️ முகவர் கருவிகள் கட்டமைக்குதல்
 
-முகவர்கள் கருவிகளை பயன்படுத்தும் போது வலுவாக இருக்கின்றனர். பொதுவான கருவிகளை அமைப்பது இங்கே:
+முகவர்கள் கருவிகளை பயன்படுத்தும் போது சக்திவாய்ந்தவராகிறார்கள். பொதுவான கருவிகளை எவ்வாறு கட்டமைப்பது என்பத Here's உள்ளது:
 
-### Foundry முகவர்களில் கருவி அமைப்பு
+### Foundry முகவர்களில் கருவி கட்டமைப்பு
+
+இந்த **பாரம்பரிய ஏஜెంట్ சேவை SDK துணுக்கினை** `azure-ai-projects==1.0.0` மற்றும் `azure-ai-agents==1.1.0` உடன் `azure-identity` நோக்கமாகக் கொண்டுள்ளது. இது சில தற்போதைய Foundry வடிவமைப்புகள் பயன்படுத்தும் புதிய பதிப்பு ஏஜென்ட்/Responses API அல்ல, மறுபடியும் `azure.ai.agents` AZD நீட்சிப்பாகும் (வேறுபட்ட தொகுப்பு). இந்த API தலைமுறைகளை கலப்பது தவிர்க்கவும். `PROJECT_ENDPOINT` ஐ பாரம்பரிய Foundry திட்ட முடுக்கமான இடத்துக்காகவும், `MODEL_DEPLOYMENT_NAME` ஐ ஏற்கனவே ஆதரவு கிடைக்கும் மாதிரி ஒப்படைப்புக்கு அமைக்கவும்; உள்ளூர் முறையில் `az login` உடன் அங்கீகாரம் செய்யவும் மற்றும் தேவையான திட்ட அனுமதிகளை வழங்கவும்.
 
 ```python
 # agent_config.py
+import os
 from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
+from azure.ai.agents.models import FunctionTool
+from azure.identity import DefaultAzureCredential
 
-# உடனடி கருவிகள் வரையறு
-search_tool = FunctionTool(
-    name="search_knowledge_base",
-    description="Search the company knowledge base for relevant documents",
-    parameters={
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+def search_knowledge_base(query: str) -> str:
+    """Search the demonstration knowledge base.
+
+    :param query: Search text.
+    :return: Matching demonstration information.
+    """
+    # Local fixture only, not a production search implementation.
+    return "Demo policy: returns are accepted within 30 days."
+
+project_client = AIProjectClient(
+    endpoint=os.environ["PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential(),
 )
-
-# கருவிகளுடன் முகவரியை உருவாக்கவும்
+search_tool = FunctionTool(functions={search_knowledge_base})
+project_client.agents.enable_auto_function_calls(search_tool)
 agent = project_client.agents.create_agent(
-    model="gpt-4.1",
+    model=os.environ["MODEL_DEPLOYMENT_NAME"],
     name="Support Agent",
-    instructions="You are a helpful support agent. Use the search tool to find relevant information.",
-    tools=[search_tool, CodeInterpreterTool()]
+    instructions="Use search_knowledge_base for policy questions. Label results as demo data.",
+    tools=search_tool.definitions,
 )
 ```
 
-### சூழல் அமைப்பு
+ஒரு செயல்பாடு வடிவமைப்பை பதிவு செய்வதால் சேவையில் Python இயக்கப்படாது. இந்த SDK இல், `enable_auto_function_calls` மற்றும் `agents.runs.create_and_process(...)` இணைந்து பதிவு செய்யப்பட்ட கால்பேக்குகளை உங்கள் கிளையண்ட் செயலியில் இயக்குகின்றன. [இடையிடுகூடிய SDK எடுத்துக்காட்டு](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py) ஐ காணவும். முடிந்தவுடன் கிளையண்டை மூடவும் மற்றும் டெமோ ஏஜெண்ட்/துறைகளைக் கண்டு தொடங்கவும்.
+
+### சூழல் அமைப்புகள்
+
+கீழ்க்காணும் பெயர்களும் **காட்சிப் தனிப்பயன் வடிவமைப்பு உள்ளீடுகளும்**, கட்டமைக்கப்பட்ட AZD மாற்றி வழிகளும் அல்ல. முதலில் ஒவ்வொன்றும் `infra/main.parameters.json`, போன்ற உள்கட்டமைப்பு மற்றும் பயன்பாடு குறியீட்டின் வழியாக மையப்படுத்தவும். `azd env set` தனக்கே ஒரு ஏஜெண்டின் கருவிகள் அல்லது வழிகாட்டிகள் மாற்றப்படாது.
 
 ```bash
-# முகவர்-சิส்டம் சார்ந்த பரிமாற்ற நிலைமைகள் அமைக்கவும்
+# Set up agent-specific environment variables
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# புதுப்பிக்கப்பட்ட கட்டமைப்புடன் பாயிண்ட் செய்யவும்
-azd deploy
+# Apply wired infrastructure and application changes
+azd up
 ```
 
 ---
 
-## 📊 முகவர்களை கண்காணித்தல்
+## 📊 கண்காணிப்பு ஏஜெண்டுகள்
 
-### Application Insights சங்கமிப்பு
+### பயன்பாட்டு அறிவுக் குறிப்புகளுடன் ஒருங்கிணைவு
 
-அனைத்து AZD முகவர் வார்ப்புருக்களும் கண்காணிப்புக்காக Application Insights-ஐ உடையவை:
+நீங்கள் தேர்ந்தெடுத்த வடிவமைப்பு பயன்பாட்டு அறிவுக் குறிப்புகளை ஏற்படுத்தி கருவி பொருத்தலை அமைக்கும் என்பதை காண:
 
 ```bash
-# கண்காணிப்புத் தளம் திறக்கவும்
+# Open monitoring dashboard
 azd monitor --overview
 
-# நேரடி பதிவுகளை பார்க்கவும்
+# Open the Application Insights logs view (not a streaming log tail)
 azd monitor --logs
 
-# நேரடி பரிமாணங்களை பார்க்கவும்
+# View live metrics
 azd monitor --live
 ```
 
-### கண்காணிக்க தேவையான முக்கிய அளவுருக்கள்
+### பின்தொடர வேண்டிய முக்கிய அளவுகோல்கள்
 
-| அளவுரு | விளக்கம் | இலக்கு |
+| அளவுகோல் | விளக்கம் | இலக்கு |
 |--------|-------------|--------|
-| பதில் தாமதம் | பதிலை உருவாக்க நேரம் | < 5 நொடிகள் |
-| டோக்கன் பயன்பாடு | கேள்விக்கு டோக்கன்கள் | செலவுக்கு கண்காணி |
-| கருவி அழைப்பு வெற்றி வீதம் | வெற்றிகரமான கருவி இயக்கங்கள் % | > 95% |
-| பிழை வீதம் | தோல்வியுற்ற முகவர் கோரிக்கைகள் | < 1% |
-| பயனர் திருப்தி | கருத்து மதிப்பீடுகள் | > 4.0/5.0 |
+| பதில் தாமதம் | பதிலை உருவாக்கும் நேரம் | < 5 வினாடிகள் |
+| டோக்கன் பயன்பாடு | கோரிக்கைக்கு டோக்கன்கள் | செலவுக்காக கண்காணிக்கவும் |
+| கருவி அழைப்பு வெற்றிகரமாக நடந்த அளவு | வெற்றிகரமாக செயல்பட்ட கருவி செயல்பாடுகளின் % | > 95% |
+| பிழை வீதம் | தோல்வியடைந்த முகவர் கோரிக்கைகள் | < 1% |
+| பயனர் திருப்தி | கருத்து மதிப்பெண்கள் | > 4.0/5.0 |
 
-### முகவர்களுக்கு தனிப்பயன் பதிவேட்டுகள்
+### முகவர்களுக்கான தனிப்பயன் பதிவு
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# OpenTelemetry உடன் Azure கண்காணிப்பை அமைக்கவும்
+# Configure Azure Monitor with OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -309,111 +308,107 @@ tracer = trace.get_tracer(__name__)
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
     with tracer.start_as_current_span("agent_interaction") as span:
         span.set_attributes({
-            "user_query": user_query,
+            "query_length": len(user_query),  # Do not log raw prompts or personal data
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
         })
 ```
 
-> **குறிப்பு:** தேவையான தொகுப்புகளை நிறுவுக: `pip install azure-monitor-opentelemetry opentelemetry`
+> **குறிப்பு:** தேவைப்படும் தொகுப்பை நிறுவவும்: `pip install azure-monitor-opentelemetry`. இது OpenTelemetry சார்புகளை கொண்டுவருகிறது; `opentelemetry` என்ற தொகுப்பை நிறுவும் மாற்றுத் பெயர் தேவையில்லை.
 
 ---
 
-## 💰 செலவு கருதுகோள்கள்
+## 💰 செலவு கருத்துக்கள்
 
-### மாதாந்திர செலவு மதிப்பீடுகள் மாதிரிகளால்
+### மாதாந்திர செலவுகளை வடிவமைப்பியல் மூலம் கணக்கிடல்
 
-| மாதிரி | மேம்பாட்டு சூழல் | உற்பத்தி |
+இவை எடுத்துக்காட்டு திட்டமிடும் வரம்புகள், மேற்கோள்கள் அல்லது செலவுக் கடைகளாக இல்லை. பகுதி, மாதிரி டோக்கன்கள், தேடல்/கணினி SKUகள், கருவி அமர்வுகள், சேமிப்பு, மற்றும் போக்குவரத்து இதற்கும் மேல் இருக்க முடியும். உதாரணத்தின் செலவு வழிகாட்டி மற்றும் Azure விலைப்பட்டியலை `azd up` முன் சரிபார்க்கவும்.
+
+| வடிவமைப்பு | மேம்பாட்டு சூழல் | உற்பத்தி |
 |---------|-----------------|------------|
 | ஒரே முகவர் | $50-100 | $200-500 |
 | RAG முகவர் | $80-150 | $300-800 |
-| பல முகவர் (2-3 முகவர்கள்) | $150-300 | $500-1,500 |
-| நிறுவனர் பல முகவர் | $300-500 | $1,500-5,000+ |
+| பன்முகவர் (2-3 முகவர்கள்) | $150-300 | $500-1,500 |
+| நிறுவன பன்முகவர் | $300-500 | $1,500-5,000+ |
 
-### செலவு மேம்படுத்தும் குறிப்புகள்
+### செலவு விருத்தி குறிப்பு
 
-1. **எளிய பணிகளுக்கு gpt-4.1-mini பயன்படுத்தவும்**
+1. **எளிய பணிகளுக்கு gpt-4.1-mini பயன்படுத்தவும்** (உங்கள் வார்ப்புரு இந்த உள்ளீட்டை பயன்படுத்தினால் மட்டுமே)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **மீண்டும் கேள்விகள் அடிக்கடி வரும் போதெல்லாம் கேச் செயல்படுத்தவும்**
-   ```python
-   from functools import lru_cache
-   
-   @lru_cache(maxsize=1000)
-   def get_cached_response(query_hash):
-       return agent.run(query_hash)
-   ```
+2. **சுத்தமான மற்றும் மறு கேள்விகளுக்கான வரம்பு நிலையாக்கத்தை நடைமுறைப்படுத்தவும்.** வாடிக்கையாளர்/பயனர் அங்கீகாரம், மாதிரி நிறுவல், அறிவுறுத்தல்கள் மற்றும் பெற்று மதிப்பின் பதிப்பை பதிவேட்டுச் சாவியில் சேர்க்கவும்; காலாவதியாக்கவும். தனிப்பட்ட உரையாடல் பதில்களை செயல்முறை பரப்பு கேள்வி மட்டுமே கொண்ட பதிவேட்டுடன் பகிர வேண்டாம். SDK முகவர் பொருள் பொதுவான `agent.run()` முறையைக் கொண்டிராதது.
 
-3. **ஒவ்வொரு ஓட்டத்திலும் டோக்கன் வரம்புகளை அமைக்கவும்**
+3. **ஒவ்வொரு இயக்கத்திற்கும் டோக்கன் வரம்புகளை அமைக்கவும்**
    ```python
-   # முகவரியை இயக்கும்போது max_completion_tokens-ஐ அமைக்கவும், உருவாக்கும் போது அல்ல
-   run = project_client.agents.create_run(
+   # Set max_completion_tokens when running the agent, not during creation
+   run = project_client.agents.runs.create_and_process(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # பதில் நீளத்தை வரையறு
+       max_completion_tokens=1000  # Budget across the run; may finish as incomplete
    )
    ```
 
-4. **பயன்பாடு இன்றி இருந்தால் வலுவாயிருத்தல் (Scale to zero) செய்யவும்**
+4. **பயன்பாட்டில் இல்லாத நேரத்தில் தகுதியான Container Apps ஐ பூஜ்ஜியமாக ஆக்கவும்**
    ```bash
-   # கன்டெய்னர் செயலிகள் தானாக திருத்தி பூஜ்யமாக மாறுகின்றன
+   # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
+   கட்டமைப்பு மாற்றத்தை `azd provision` அல்லது `azd up` மூலம் நடைமுறைப்படுத்தவும். பூஜ்ஜியமாக்கல் தேவையான தூண்டுதலுடன் செய்ய வேண்டும் மற்றும் தேடல், சேமிப்பு அல்லது மாதிரி/கருவி கட்டணங்களை நிறுத்தாது.
 
 ---
 
-## 🔧 முகவர் பிரச்சினைகள் தீர்க்கல்
+## 🔧 முகவர்களை பிழைத்திருக்க செய்ய உதவிகள்
 
 ### பொதுவான பிரச்சினைகள் மற்றும் தீர்வுகள்
 
 <details>
-<summary><strong>❌ கருவி அழைப்புக்கு முகவர் பதிலளிக்கவில்லை</strong></summary>
+<summary><strong>❌ கருவி அழைப்புகளுக்கு முகவர் பதிலளிக்கவில்லை</strong></summary>
 
 ```bash
-# கருவிகள் சரியாக பதிவு செய்யப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்
+# Inspect the application deployment (not the agent's registered tools)
 azd show
 
-# OpenAI உட்படையைச் சரிபார்க்கவும்
+# Verify OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# முகவர் பதிவுகளைக் சரிபார்க்கவும்
+# Check agent logs
 azd monitor --logs
 ```
 
 **பொதுவான காரணங்கள்:**
-- கருவி செயல்பாட்டு கையொப்பம் பொருந்தவில்லை
-- தேவையான அனுமதிகள் இல்லை
+- கருவி செயல்பாட்டு கையேடு பொருந்தவில்லை
+- அவசியமான அனுமதிகள் இல்லாமை
 - API இடைமுகம் அணுக முடியவில்லை
 </details>
 
 <details>
-<summary><strong>❌ முகவர் பதில்களில் அதிக தாமதம்</strong></summary>
+<summary><strong>❌ முகவரின் பதில்கள் மிக உயர்ந்த தாமதம்</strong></summary>
 
 ```bash
-# தடைகள் உள்ளதா என Application Insights ஐ சரிபார்க்கவும்
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# வேகமான மாதிரியை பயன்படுத்த பரிசீலனை செய்யவும்
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
-azd deploy
+azd up
 ```
 
-**மேம்படுத்தல் குறிப்புகள்:**
-- ஸ்ட்ரீமிங் பதில்களை பயன்படுத்தவும்
-- பதில் கேச் செயல்படுத்தவும்
-- கட்டமைப்புச் சாளரத்தின் அளவை குறைக்கவும்
+**விருத்தி குறிப்புகள்:**
+- ஸ்ட்ரீமிங் பதில்களைப் பயன்படுத்தவும்
+- பதில் பதிவுசெய்யலை நடைமுறைப்படுத்தவும்
+- உள்ளடக்க சாளர அளவை குறைக்கவும்
 </details>
 
 <details>
-<summary><strong>❌ முகவர் தவறான அல்லது பாரபட்சமான தகவலை வழங்குவது</strong></summary>
+<summary><strong>❌ முகவர் தவறான அல்லது மாயப்பொருள் தகவலை வழங்குகிறான்</strong></summary>
 
 ```python
-# சிறந்த அமைப்பு பதில்களை பயன்படுத்தி மேம்படுத்துங்கள்
+# Improve with better system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,22 +417,21 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# அடிப்படைக்கு தேடலைச் சேர்க்கவும்
-agent = project_client.agents.create_agent(
-    model="gpt-4.1",
-    instructions=instructions,
-    tools=[FileSearchTool()]  # பதில்களை ஆவணங்களில் அடிப்படையாக்கவும்
-)
+# Use these instructions in the agent definition.
+# For classic file search, first upload/index documents in a vector store,
+# then use FileSearchTool(vector_store_ids=[...]) and pass both its
+# .definitions and .resources when creating the agent.
 ```
+அறிவுறுத்தல்கள் மற்றும் பெறுதல் ஆபத்துக்களை குறைக்கிறது; எவை உண்மையான பதில்களை உறுதி செய்யாது. நிலையான மற்றும் எல்லை மீறிய கேள்விகளை அறிந்த பதில்களை எதிரொலிக்கவும்.
 </details>
 
 <details>
 <summary><strong>❌ டோக்கன் வரம்பு மீறல் பிழைகள்</strong></summary>
 
 ```python
-# சூழல் ஜன்னல் மேலாண்மையை அமல்படுத்துக
+# Implement context window management
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
-    """Keep only recent messages within token limit."""
+    """Approximate content-only budget for objects with .content strings."""
     import tiktoken
     encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
@@ -452,163 +446,174 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
+இந்த உதவியாளர் வேட்பு/கருவி ஸ்கீமாக்கள், அமைப்பு அறிவுறுத்தல்கள், படக்குறிகள், மற்றும் புரோடோகால் மேலதிகம் ஆகியவற்றை தவிர்க்கின்றது. அவற்றுக்கும் நிரப்புதலுக்கும் இடம் ஒதுக்கி வைக்கவும்; கருவி-அழைப்பு/முடிவு ஜோடிகளை பிரிக்கவேண்டாம் அல்லது தேவையான அமைப்பு அறிவுறுத்தல்களை நீக்கக்கூடாது. `tiktoken` ஐ தனியாக நிறுவவும். இது பொதுவான காட்சிப் பான சந்தைப்படுத்தியாளராக இல்லை.
 </details>
 
 ---
 
-## 🎓 கைமுறை பயிற்சிகள்
+## 🎓 கைச்சிறப்புப் பயிற்சிகள்
 
-### பயிற்சி 1: அடிப்படை முகவரைக் கைகாட்டுதல் (20 நிமிடங்கள்)
+### பயிற்சி 1: அடிப்படைக் முகவரியை வழிமொழி (20 நிமிடங்கள்)
 
-**இலக்கு:** AZD பயன்படுத்தி உங்கள் முதல் AI முகவரைக் கைகாட்டுதல்
+**நோக்கம்:** AZD பயன்படுத்தி உங்கள் முதல் AI முகவரியை வடிவமைக்கவும்
 
 ```bash
-# படி 1: தளவமைப்பை துவங்கி செயல் படுத்துக
-azd init --template get-started-with-ai-agents
+# Step 1: Initialize template
+azd init --template get-started-with-ai-agents .
 
-# படி 2: அசுருக்கு உள்நுழைக
+# Step 2: Login to Azure
 azd auth login
-# நீங்கள் பன்முகவர்கள் இடையே வேலை செய்யும் போது, --tenant-id <tenant-id> சேர்க்கவும்
+# If you work across tenants, add --tenant-id <tenant-id>
 
-# படி 3: அமுல்படுத்துக
+# Step 3: Deploy
 azd up
 
-# படி 4: முகவரியை சோதிக்கவும்
-# நிறைவேற்றும் பின்பு எதிர்பார்க்கப்படும் வெளியீடு:
-#   அமுல்படுத்தல் நிறைவடைந்தது!
-#   இடைமுகம்: https://<app-name>.<region>.azurecontainerapps.io
-# வெளியீட்டில் காணப்படும் URL ஐ திறந்து ஒரு கேள்வி கேட்க முயலவும்
+# Step 4: Test the agent
+# Expected output after deployment:
+#   Deployment Complete!
+#   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
+# Open the URL shown in the output and try asking a question
 
-# படி 5: கண்காணிப்பை பார்வையிடுக
+# Step 5: View monitoring
 azd monitor --overview
 
-# படி 6: சுத்திகரிக்கவும்
-azd down --force --purge
+# Step 6: Review the listed resources and confirm cleanup
+azd down
 ```
 
 **வெற்றி அளவுகோல்கள்:**
-- [ ] முகவர் கேள்விகளுக்கு பதிலளிக்கிறது
-- [ ] `azd monitor` மூலம் கண்காணிப்பு கவுண்ட்போர்ட்டை அணுக முடியும்
-- [ ] வளங்கள் வெற்றிகரமாக சுத்தமாக்கப்பட்டன
+- [ ] முகவர்கள் கேள்விகளுக்கு பதிலளிக்கின்றனர்
+- [ ] `azd monitor` மூலம் கண்காணிப்பு கட்டமைப்பை அணுக முடியும்
+- [ ] வளங்கள் வெற்றிகரமாக தூய்மைப்படுத்தப்பட்டன
 
-### பயிற்சி 2: தனிப்பயன் கருவி சேர்க்கவும் (30 நிமிடங்கள்)
+### பயிற்சி 2: தனிப்பயன் கருவி சேர்க்க (30 நிமிடங்கள்)
 
-**இலக்கு:** முகவர்களுக்கு தனிப்பயன் கருவி நீட்டிப்பு
+**நோக்கம்:** முகவரை தனிப்பயன் கருவியுடன் விரிவாக்கவும்
 
-1. முகவர் வார்ப்புருவை வினியோகியுங்கள்:
-   ```bash
-   azd init --template get-started-with-ai-agents
-   azd up
-   ```
-2. உங்கள் முகவர் குறியீட்டில் புதிய கருவி செயல்பாட்டை உருவாக்குங்கள்:
+**தொடக்க நிலை:** வேறு SDK தலைமுறை கொண்ட எந்தவொரு மாதிரியையும் பயன்படுத்தாமல் [கருவி கட்டமைப்பு](#tool-configuration-in-foundry-agents) மூலம் பாரம்பரிய SDK கிளையண்டைப் பயன்படுத்தவும்.
+
+1. இந்த நிரந்தரமான செட்டைப் `agent_config.py`-க்கு சேர்க்கவும்:
    ```python
    def get_weather(location: str) -> str:
-       """Get current weather for a location."""
-       # காலநிலை சேவைக்கு API அழைப்பு
-       return f"Weather in {location}: Sunny, 72°F"
+       """Return demonstration weather, not live conditions.
+
+       :param location: City name.
+       :return: A clearly labelled fixture.
+       """
+       print(f"TOOL_CALLED: {location}")
+       return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-3. கருவியை முகவருடன் பதிவு செய்யுங்கள்:
+2. தேடல்-கருவி பதிவுசெய்தல் மற்றும் உருவாக்க பிரிவை இதனால் மாற்றவும்:
    ```python
-   from azure.ai.projects.models import FunctionTool
-
-   weather_tool = FunctionTool(
-       name="get_weather",
-       description="Get current weather for a location",
-       parameters={
-           "type": "object",
-           "properties": {
-               "location": {"type": "string", "description": "City name"}
-           },
-           "required": ["location"]
-       }
-   )
-
+   weather_tool = FunctionTool(functions={get_weather})
+   project_client.agents.enable_auto_function_calls(weather_tool)
    agent = project_client.agents.create_agent(
-       model="gpt-4.1",
+       model=os.environ["MODEL_DEPLOYMENT_NAME"],
        name="Weather Agent",
-       tools=[weather_tool]
+       instructions="Call get_weather for weather questions; explain that it returns demo data.",
+       tools=weather_tool.definitions,
    )
+   thread = project_client.agents.threads.create()
+   try:
+       project_client.agents.messages.create(
+           thread_id=thread.id, role="user", content="Use get_weather for Seattle."
+       )
+       run = project_client.agents.runs.create_and_process(
+           thread_id=thread.id, agent_id=agent.id
+       )
+       if run.status != "completed":
+           raise RuntimeError(f"Run status: {run.status}; error: {run.last_error}")
+       for message in project_client.agents.messages.list(thread_id=thread.id):
+           for text in message.text_messages:
+               print(text.text.value)
+   finally:
+       project_client.agents.threads.delete(thread.id)
+       project_client.agents.delete_agent(agent.id)
+       project_client.close()
    ```
-4. மீண்டும் வினியோகித்து சோதிக்கவும்:
+3. உள்ளூரில் இயக்கவும் (இது നിലവிலுள்ள Azure திட்டத்தை அழைத்து மாதிரி கட்டணத்தை ஏற்படுத்தும்):
    ```bash
-   azd deploy
-   # கேள்: "சியாட்டிலில் வானிலை என்ன?"
-   # எதிர்பார்ப்பு: முகவர் get_weather("சியாட்டில்") என்னும் அழைப்பை செய்து வானிலை தகவலை திருப்பிப் பெறுவது
+   python agent_config.py
+   # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
 **வெற்றி அளவுகோல்கள்:**
-- [ ] முகவர் வானிலை சம்பந்தப்பட்ட கேள்விகளை அடையாளம் காண்கிறது
+- [ ] முகவர் வானிலை சார்ந்த கேள்விகளைக் கண்டு கொள்கிறது
 - [ ] கருவி சரியாக அழைக்கப்படுகிறது
-- [ ] பதிலில் வானிலைத் தகவல்கள் உள்ளன
+- [ ] பதிலில் வானிலை தகவல் உள்ளது
 
-### பயிற்சி 3: RAG முகவரைக் கட்டுமானம் (45 நிமிடங்கள்)
+### பயிற்சி 3: RAG முகவரை உருவாக்க (45 நிமிடங்கள்)
 
-**இலக்கு:** உங்கள் ஆவணங்களிலிருந்து கேள்விகளுக்கு பதிலளிக்கும் முகவரைக் உருவாக்குதல்
+**நோக்கம்:** உங்கள் ஆவணங்களில் இருந்து கேள்விகளுக்கு பதிலளிக்கும் முகவரை உருவாக்கு
 
 ```bash
-# படி 1: RAG மாதிரியை நியமிக்கவும்
-azd init --template azure-search-openai-demo
+# Step 1: Deploy RAG template
+azd init --template azure-search-openai-demo .
 azd up
 
-# படி 2: உங்கள் ஆவணங்களை பதிவேற்றுக
-# PDF/TXT கோப்புகளை data/ கோப்புறையில் வைக்கவும், பின்னர் இயக்கவும்:
-python scripts/prepdocs.py
+# Step 2: Upload your documents
+# For the sample's local ingestion path, place supported files in data/.
+# Run from the sample root after following its Python environment setup:
+./scripts/prepdocs.sh
+# Windows PowerShell equivalent: .\\scripts\\prepdocs.ps1
 
-# படி 3: துறை சார்ந்த கேள்விகளுடன் சோதனை செய்யவும்
-# azd up வெளியீட்டில் இருந்து வலை பயன்பாட்டு URL ஐ திறக்கவும்
-# உங்கள் பதிவேற்றப்பட்ட ஆவணங்கள பற்றிய கேள்விகளை கேளுங்கள்
-# பதில்கள் [doc.pdf] போன்ற மேற்கோள் குறிப்புகளை உள்ளடக்க வேண்டும்
+# Step 3: Test with domain-specific questions
+# Open the web app URL from the azd up output
+# Ask questions about your uploaded documents
+# Responses should include citation references like [doc.pdf]
 ```
 
 **வெற்றி அளவுகோல்கள்:**
-- [ ] முகவர் ஏற்றப்பட்ட ஆவணங்களிலிருந்து பதிலளிக்கிறது
-- [ ] பதில்கள் மேற்கோள் ചേட்கள் கொண்டவை
-- [ ] வரம்புக்கு வெளியான கேள்விகளில் பிழை இல்லை
+- [ ] முகவர் பதிவேற்றப்பட்ட ஆவணங்களில் இருந்து பதிலளிக்கின்றார்
+- [ ] பதில்கள் மேற்கோள்களைக் கொண்டுள்ளன
+- [ ] வரம்புக்கு அப்பாற்பட்ட சோதனை கேள்விகள் ஆதரவு இல்லாத দাবிகளின்றி கையாளப்படுகின்றன (எல்லா எதிர்கால கேள்விகளுக்கும் உத்தரவாதம் இல்லை)
+
+`USE_CLOUD_INGESTION=true` என்றால், எடுத்துக்காட்டின் மேக விழுத்தல்/பதிவேற்றும் பணிகளைப் பதிலாக பயன்படுத்தவும்; உள்ளூரான திரைமுகம் விழுத்தலை意ெந்த செய்தலை கடைசியில் முடிக்கிறது. சோதனைக்கு பிறகு, RAG சூழலில் `azd down` ஐ இயக்கவும் மற்றும் அழிக்க வேண்டிய வளங்களை மதிப்பாய்வு செய்யவும்.
 
 ---
 
-## 📚 அடுத்து என்ன செய்யவேண்டும்
+## 📚 அடுத்த படிகள்
 
-இப்போது நீங்கள் AI முகவர்களைப் புரிந்துகொண்டீர்கள், இந்த முன்னேற்ற தலைப்புகளை ஆராயுங்கள்:
+இப்போது நீங்கள் AI முகவர்களை புரிந்து கொண்டதால், இவற்றை ஆராயுங்கள்:
 
 | தலைப்பு | விளக்கம் | இணைப்பு |
 |-------|-------------|------|
-| **பல முகவர் முறைமைகள்** | பல முகவர்கள் இணைந்து செயல்படும் முறைமையை கட்டமைக்கவும் | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **ஒத்துழைப்பு மாதிரிகள்** | ஒருங்கோலம் மற்றும் தகவல் பரிமாற்ற மாதிரிகளை கற்றுக்கொள்ளவும் | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **உற்பத்தி வினியோகம்** | நிறுவனத் தயாராக் முகவர் வினியோகம் | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **முகவர் மதிப்பாய்வு** | முகவர் செயல்திறன் சோதனை மற்றும் மதிப்பீடு | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI பணிமனை ஆய்வு** | கைமுறை: உங்கள் AI தீர்வை AZD-கு தயார் செய்ய | [AI Workshop Lab](ai-workshop-lab.md) |
+| **பல் முகவர் அமைப்புகள்** | பல இணைந்து செயல்படும் முகவர்களை உருவாக்கவும் | [சில்லறை பல் முகவர் உதாரணம்](../../examples/retail-scenario.md) |
+| **இணைப்பு வடிவங்கள்** | ஒருங்கிணைப்பு மற்றும் தொடர்பு முறைகளை கற்றுக்கொள்ளவும் | [இணைப்பு வடிவங்கள்](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **தயாரிப்பு விநியோகம்** | நிறுவன தயாராக தயாரிப்புக் கூரைக்கு முகவர்களை அனுப்பவும் | [தயாரிப்பு AI நடைமுறைகள்](../chapter-08-production/production-ai-practices.md) |
+| **முகவர் மதிப்பீடு** | முகவர் செயல்திறனை சோதனை மற்றும் மதிப்பிடல் | [AI சிக்கல் தீர்க்கல்](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI பணியகம் ஆய்வகம்** | செயல்பாட்டு பயிற்சி: உங்கள் AI தீர்வை AZD-க்குத் தயாராக செய்யவும் | [AI பணியகம் ஆய்வகம்](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 கூடுதல் வளங்கள்
 
 ### அதிகாரப்பூர்வ ஆவணங்கள்
-- [Microsoft Foundry முகவர் சேவை](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry முகவர் சேவை விரைவான துவக்கம்](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel முகவர் கட்டமைப்பு](https://learn.microsoft.com/semantic-kernel/)
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service விரைவு தொடக்கம்](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### AI முகவர்களுக்கு AZD வார்ப்புருக்கள்
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+### முகவர்களுக்கான AZD வார்ப்புதான்கள்
+- [AI முகவர்களுடன் தொடங்கவும்](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Prompty உடன் சுறுசுறுப்பான எழுத்து முகவர்கள்](https://github.com/Azure-Samples/contoso-creative-writer)
+- [Azure Search OpenAI டெமோ](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### சமூக வளங்கள்
-- [Awesome AZD - முகவர் வார்ப்புருக்கள்](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### சமூகவளங்கள்
+- [அற்புத AZD - முகவர் வார்ப்புதான்கள்](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### உங்கள் தொகுப்புக்கான முகவர் திறன்கள்
-- [**Microsoft Azure முகவர் திறன்கள்**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot, Cursor அல்லது வேறொரு ஆதரவு முகவருக்கான Azure மேம்பாட்டுக்கான மீண்டும் பயன்படுத்தக்கூடிய AI திறன்கள் நிறுவுக. இதில் [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [வினியோகம்](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), மற்றும் [நோயறிதல்](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) திறன்கள் உள்ளன:
+### உங்கள் தொனிப்பதிவிற்கான முகவர் திறன்கள்
+- [**Microsoft Azure முகவர் திறன்கள்**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot, Cursor அல்லது எந்த ஆதரவைப் பெற்ற முகவரிகளுக்காக மறுபயன்பாட்டு AI முகவர் திறன்களை நிறுவவும். இதில் [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [விநியோகம்](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), மற்றும் [வினியோகம்](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) திறன்கள் அடங்கும்:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**வழிசெலுத்தல்**
-- **முந்தைய பாடம்**: [Microsoft Foundry ஒருமை](microsoft-foundry-integration.md)
-- **அடுத்த பாடம்**: [AI மாதிரி வினியோகம்](ai-model-deployment.md)
+**நெவிகேஷன்**
+- **முந்தைய பாடம்**: [Microsoft Foundry ஒன்றுசேர்த்தல்](microsoft-foundry-integration.md)
+- **அடுத்த பாடம்**: [AI மாதிரி முன்னேற்றம்](ai-model-deployment.md)
 
 ---
 
