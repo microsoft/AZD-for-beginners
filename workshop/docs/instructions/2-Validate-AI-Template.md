@@ -2,7 +2,8 @@
 
 > Source guidance reviewed against AZD 1.37.2 and the current sample on November 4, 2026. Screenshots are illustrative; portal navigation, template defaults, and service availability can change. This review did not perform a live Azure deployment.
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+> [!TIP]
+> **By the end of this module, you will be able to:**
 
     - [ ] Identify the sample's prerequisites and intended resources
     - [ ] Deploy the selected template into an intentional environment
