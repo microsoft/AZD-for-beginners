@@ -34,88 +34,55 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "ru",
-      "failure_date": "2026-11-18T06:52:42+00:00",
+      "failure_date": "2026-11-23T09:24:35+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/index.md": {
       "original_hash": "a1cbc39623d29f76aefe40099c5c890e",
       "source_file": "workshop/docs/index.md",
       "language_code": "ru",
-      "failure_date": "2026-11-18T07:12:48+00:00",
+      "failure_date": "2026-11-23T09:32:54+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2 of 'index.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "workshop/docs/instructions/2-Validate-AI-Template.md": {
-      "original_hash": "08d94072fd61ef49bd86481689cb0484",
-      "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-      "language_code": "ru",
-      "failure_date": "2026-11-18T07:15:24+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/instructions/1-Select-AI-Template.md": {
       "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
       "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
       "language_code": "ru",
-      "failure_date": "2026-11-18T07:17:39+00:00",
+      "failure_date": "2026-11-23T09:38:36+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '1-Select-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "examples/azure-openai-chat/README.md": {
-      "original_hash": "e14a657c0896c4ad83ef83b2b8236e23",
-      "source_file": "examples/azure-openai-chat/README.md",
-      "language_code": "ru",
-      "failure_date": "2026-11-18T07:21:05+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "README.md": {
       "original_hash": "7d76d299c366c5dc2fda84482bcaab5b",
       "source_file": "README.md",
       "language_code": "ru",
-      "failure_date": "2026-11-18T06:41:12+00:00",
+      "failure_date": "2026-11-23T09:20:47+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-08-production/production-ai-practices.md": {
-      "original_hash": "9fbedacd6668e71b42c90685832ae72c",
-      "source_file": "docs/chapter-08-production/production-ai-practices.md",
-      "language_code": "ru",
-      "failure_date": "2026-11-18T06:57:14+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 2.2.1.1.1.1.1.1 of 'production-ai-practices.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "docs/chapter-02-ai-development/microsoft-foundry-integration.md": {
       "original_hash": "a06e914b625f8c251fa2bfcab0d01057",
       "source_file": "docs/chapter-02-ai-development/microsoft-foundry-integration.md",
       "language_code": "ru",
-      "failure_date": "2026-11-18T07:04:30+00:00",
+      "failure_date": "2026-11-23T09:32:07+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1 of 'microsoft-foundry-integration.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.2.1.1.1 of 'microsoft-foundry-integration.md', and the chunk could not be split further.",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -318,8 +285,8 @@
     "language_code": "ru"
   },
   "docs/chapter-08-production/production-ai-practices.md": {
-    "original_hash": "5607d88a9ca9fcb5d9d396e3dcc804d2",
-    "translation_date": "2026-11-10T18:59:23+00:00",
+    "original_hash": "9fbedacd6668e71b42c90685832ae72c",
+    "translation_date": "2026-11-23T09:28:48+00:00",
     "source_file": "docs/chapter-08-production/production-ai-practices.md",
     "language_code": "ru"
   },
@@ -330,8 +297,8 @@
     "language_code": "ru"
   },
   "examples/azure-openai-chat/README.md": {
-    "original_hash": "c7a1d4eec3c9509b19f9a64a78183242",
-    "translation_date": "2026-06-16T12:54:29+00:00",
+    "original_hash": "e14a657c0896c4ad83ef83b2b8236e23",
+    "translation_date": "2026-11-23T09:43:01+00:00",
     "source_file": "examples/azure-openai-chat/README.md",
     "language_code": "ru"
   },
@@ -426,8 +393,8 @@
     "language_code": "ru"
   },
   "workshop/docs/instructions/2-Validate-AI-Template.md": {
-    "original_hash": "979324fb4ae43facc08b21f6e1a8efbb",
-    "translation_date": "2026-07-14T14:36:26+00:00",
+    "original_hash": "08d94072fd61ef49bd86481689cb0484",
+    "translation_date": "2026-11-23T09:36:12+00:00",
     "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
     "language_code": "ru"
   },
