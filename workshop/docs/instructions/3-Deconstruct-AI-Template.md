@@ -1,6 +1,7 @@
 # 3. Deconstruct a Template
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+> [!TIP]
+> **By the End of This Module, You Will Be Able To:**
 
     - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
     - [ ] Identify the template's application, infrastructure, configuration, and test entry points
