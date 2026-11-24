@@ -34,28 +34,17 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "he",
-      "failure_date": "2026-11-18T21:46:39+00:00",
+      "failure_date": "2026-11-24T00:35:20+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "changelog.md": {
-      "original_hash": "45f2542dffc811fc8e0c6cf7f4ab083b",
-      "source_file": "changelog.md",
-      "language_code": "he",
-      "failure_date": "2026-11-18T21:40:04+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 2.2.1.1.1.1.1 of 'changelog.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
   "changelog.md": {
-    "original_hash": "247312270281a91d52d3198c1c948971",
-    "translation_date": "2026-11-08T13:47:28+00:00",
+    "original_hash": "45f2542dffc811fc8e0c6cf7f4ab083b",
+    "translation_date": "2026-11-24T00:31:49+00:00",
     "source_file": "changelog.md",
     "language_code": "he"
   },
