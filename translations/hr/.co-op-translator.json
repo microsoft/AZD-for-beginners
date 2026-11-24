@@ -30,48 +30,37 @@
     "language_code": "hr"
   },
   "__translation_failures__": {
-    "resources/study-guide.md": {
-      "original_hash": "01c1623df4017722e09e7293cf75a45c",
-      "source_file": "resources/study-guide.md",
-      "language_code": "hr",
-      "failure_date": "2026-11-18T04:59:32+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
     "workshop/docs/instructions/2-Validate-AI-Template.md": {
       "original_hash": "08d94072fd61ef49bd86481689cb0484",
       "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
       "language_code": "hr",
-      "failure_date": "2026-11-18T05:24:54+00:00",
+      "failure_date": "2026-11-24T07:49:26+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/instructions/1-Select-AI-Template.md": {
       "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
       "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
       "language_code": "hr",
-      "failure_date": "2026-11-18T05:27:00+00:00",
+      "failure_date": "2026-11-24T07:52:29+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.2.2 of '1-Select-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "README.md": {
       "original_hash": "7d76d299c366c5dc2fda84482bcaab5b",
       "source_file": "README.md",
       "language_code": "hr",
-      "failure_date": "2026-11-18T04:45:33+00:00",
+      "failure_date": "2026-11-24T07:41:14+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -352,8 +341,8 @@
     "language_code": "hr"
   },
   "resources/study-guide.md": {
-    "original_hash": "ee5a79cbb3eff899fbb9761182ec2b5a",
-    "translation_date": "2026-03-17T22:34:49+00:00",
+    "original_hash": "01c1623df4017722e09e7293cf75a45c",
+    "translation_date": "2026-11-24T07:46:06+00:00",
     "source_file": "resources/study-guide.md",
     "language_code": "hr"
   },

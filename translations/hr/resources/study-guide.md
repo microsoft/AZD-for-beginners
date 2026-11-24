@@ -1,302 +1,308 @@
-# Vodič za učenje - Sveobuhvatni ciljevi učenja
+# Studijski vodič - Sveobuhvatni ciljevi učenja
 
-**Navigacija putem puta učenja**
-- **📚 Početna stranica tečaja**: [AZD Za početnike](../README.md)
-- **📖 Početak učenja**: [Poglavlje 1: Osnova i Brzi početak](../README.md#-poglavlje-1-osnova--brzi-početak)
-- **🎯 Praćenje napretka**: [Dovršenje tečaja](../README.md#-dovršenje-tečaja--certifikacija)
+**Navigacija kroz put učenja**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
+- **📖 Početak učenja**: [Poglavlje 1: Osnove i Brzi početak](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Praćenje napretka**: [Završetak tečaja](../README.md#-course-completion--certification)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič za učenje pruža strukturirane ciljeve učenja, ključne pojmove, praktične vježbe i materijale za procjenu kako biste savladali Azure Developer CLI (azd). Koristite ovaj vodič za praćenje napretka i osigurajte da ste pokrili sve važne teme.
+Ovaj sveobuhvatni studijski vodič pruža strukturirane ciljeve učenja, ključne koncepte, praktične vježbe i materijale za procjenu kako bi vam pomogao da savladate Azure Developer CLI (azd). Koristite ovaj vodič za praćenje svog napretka i osigurajte da ste pokrili sve bitne teme.
 
 ## Ciljevi učenja
 
-Nakon dovršetka ovog vodiča za učenje, moći ćete:
-- Savladati sve osnovne i napredne pojmove Azure Developer CLI-a
+Završetkom ovog studijskog vodiča, moći ćete:
+- Savladati sve temeljne i napredne koncepte Azure Developer CLI
 - Razviti praktične vještine u implementaciji i upravljanju Azure aplikacijama
-- Izgraditi samopouzdanje u rješavanju problema i optimiziranju implementacija
-- Razumjeti prakse implementacije spremne za proizvodnju i sigurnosne aspekte
+- Izgraditi samopouzdanje u rješavanju problema i optimizaciji implementacija
+- Razumjeti prakse implementacije spremne za produkciju i sigurnosne aspekte
 
 ## Ishodi učenja
 
-Nakon dovršetka svih odjeljaka ovog vodiča za učenje, moći ćete:
-- Dizajnirati, implementirati i upravljati kompletnim arhitekturama aplikacija koristeći azd
-- Provoditi sveobuhvatne strategije nadzora, sigurnosti i optimizacije troškova
+Nakon završetka svih dijelova ovog studijskog vodiča, moći ćete:
+- Dizajnirati, implementirati i upravljati cjelovitim arhitekturama aplikacija koristeći azd
+- Primijeniti sveobuhvatne strategije nadzora, sigurnosti i optimizacije troškova
 - Samostalno rješavati složene probleme implementacije
-- Kreirati prilagođene predloške i doprinositi zajednici azd-a
+- Kreirati prilagođene predloške i doprinositi azd zajednici
 
-## Struktura učenja u 8 poglavlja
+## Struktura učenja kroz 8 poglavlja
 
-### Poglavlje 1: Osnova i Brzi početak (1. tjedan)
+### Poglavlje 1: Osnove & Brzi početak (Tjedan 1)
 **Trajanje**: 30-45 minuta | **Složenost**: ⭐
 
 #### Ciljevi učenja
-- Razumjeti osnovne koncepte i terminologiju Azure Developer CLI-a
-- Uspješno instalirati i konfigurirati AZD na svojoj razvojnoj platformi
+- Razumjeti temeljne koncepte i terminologiju Azure Developer CLI
+- Uspješno instalirati i konfigurirati AZD na vašoj razvojnoj platformi
 - Implementirati svoju prvu aplikaciju koristeći postojeći predložak
-- Efikasno se kretati kroz AZD sučelje naredbenog retka
+- Efektivno navigirati AZD sučeljem naredbenog retka
 
-#### Ključni pojmovi za savladati
+#### Ključni koncepti za savladati
 - Struktura i komponente AZD projekta (azure.yaml, infra/, src/)
-- Radni tijekovi implementacije temeljeni na predlošcima
-- Osnove konfiguracije okruženja
+- Radni tokovi implementacije na temelju predložaka
+- Osnove konfiguracije okoline
 - Upravljanje grupama resursa i pretplatama
 
 #### Praktične vježbe
-1. **Provjera instalacije**: Instalirajte AZD i provjerite s `azd version`
-2. **Prva implementacija**: Uspješno implementirajte predložak todo-nodejs-mongo
-3. **Postavljanje okruženja**: Konfigurirajte svoje prve varijable okruženja
-4. **Istraživanje resursa**: Pregledajte implementirane resurse u Azure portalu
+1. **Provjera instalacije**: Instalirajte AZD i provjerite pomoću `azd version`
+2. **Prva implementacija**: Uspješno implementirajte todo-nodejs-mongo predložak
+3. **Postavljanje okoline**: Konfigurirajte svoje prve varijable okoline
+4. **Istraživanje resursa**: Pregledajte implementirane resurse u Azure Portalu
 
 #### Pitanja za procjenu
 - Koje su ključne komponente AZD projekta?
 - Kako inicijalizirati novi projekt iz predloška?
 - Koja je razlika između `azd up` i `azd deploy`?
-- Kako upravljati višestrukim okruženjima pomoću AZD-a?
+- Kako upravljati višestrukim okolinama pomoću AZD?
 
 ---
 
-### Poglavlje 2: AI-prvo programiranje (2. tjedan)
-**Trajanje**: 1-2 sata | **Složenost**: ⭐⭐
+### Poglavlje 2: AI-prvo programiranje (Tjedan 2)
+**Trajanje**: 4-5 sati uključujući radionicu | **Složenost**: ⭐⭐
 
 #### Ciljevi učenja
-- Integrirati Microsoft Foundry usluge s AZD radnim tokovima
+- Integrirati Microsoft Foundry usluge u AZD radne tokove
+- Koristiti GA `microsoft.foundry` paket s AZD verzijom 1.37.0+ za razvoj s hostiranim agentom
 - Implementirati i konfigurirati AI-pokretane aplikacije
-- Razumjeti uzorke implementacije RAG (Retrieval-Augmented Generation)
+- Razumjeti obrasce implementacije RAG (Retrieval-Augmented Generation)
 - Upravljati implementacijama i skaliranjem AI modela
 
-#### Ključni pojmovi za savladati
-- Integracija Microsoft Foundry Models usluga i upravljanje API-jem
+#### Ključni koncepti za savladati
+- Integracija i upravljanje API-jem Microsoft Foundry Models usluge
 - Konfiguracija AI pretraživanja i vektorsko indeksiranje
 - Strategije implementacije modela i planiranje kapaciteta
-- Praćenje i optimizacija performansi AI aplikacija
+- Praćenje AI aplikacija i optimizacija performansi
+- Lokalni Agent Inspector nasuprot tragovima u cloudu, implementacija iz izvornog koda i kontrola evaluacijskih resursa u verzioniranju
 
 #### Praktične vježbe
-1. **Implementacija AI chata**: Implementirajte predložak azure-search-openai-demo
-2. **RAG implementacija**: Konfigurirajte indeksiranje i dohvaćanje dokumenata
-3. **Konfiguracija modela**: Postavite više AI modela s različitim svrhema
+1. **Implementacija AI chata**: Implementirajte azure-search-openai-demo predložak
+2. **RAG implementacija**: Konfigurirajte indeksiranje i dohvat dokumenata
+3. **Konfiguracija modela**: Postavite višestruke AI modele za različite svrhe
 4. **Praćenje AI-a**: Implementirajte Application Insights za AI radna opterećenja
+5. **GA hostirani agent**: Slijedite [upute za hostirani agent](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga); usporedite lokalne i cloud odgovore, pregledajte rezultat evaluacije i provjerite vlasništvo čišćenja
 
 #### Pitanja za procjenu
 - Kako konfigurirati Microsoft Foundry Models usluge u AZD predlošku?
 - Koje su ključne komponente RAG arhitekture?
 - Kako upravljati kapacitetom i skaliranjem AI modela?
-- Koji su važni metrički podaci za praćenje AI aplikacija?
+- Koje metrike praćenja su važne za AI aplikacije?
+- Koji su dodaci uključeni u `microsoft.foundry`, i zašto se evaluacije instaliraju zasebno?
+- Zašto lokalni testovi agenta i dalje generiraju troškove Azure modela?
+- Što `azd down` ostavlja nakon ponovne upotrebe postojećeg Foundry projekta?
 
 ---
 
-### Poglavlje 3: Konfiguracija i autentikacija (3. tjedan)
+### Poglavlje 3: Konfiguracija & Autentikacija (Tjedan 3)
 **Trajanje**: 45-60 minuta | **Složenost**: ⭐⭐
 
 #### Ciljevi učenja
-- Savladati strategije konfiguracije i upravljanja okruženjima
-- Implementirati sigurne obrasce autentikacije i upravljane identitete
-- Organizirati resurse s pravilnim konvencijama imenovanja
-- Konfigurirati višestruke implementacije okruženja (razvoj, testiranje, produkcija)
+- Savladati strategije konfiguracije i upravljanja okolinama
+- Implementirati sigurnosne obrasce autentikacije i upravljanog identiteta
+- Organizirati resurse pravilnim konvencijama imenovanja
+- Konfigurirati višestruke okoline implementacije (razvoj, test, produkcija)
 
-#### Ključni pojmovi za savladati
-- Hijerarhija okruženja i redoslijed konfiguracije
-- Upravljana identiteta i autentikacija servisnih računa
-- Integracija Key Vaulta za upravljanje tajnama
-- Upravljanje parametrima specifičnim za okruženja
+#### Ključni koncepti za savladati
+- Hijerarhija okoline i prednost konfiguracije
+- Upravljani identitet i autentikacija servisnog računa
+- Integracija Key Vault-a za upravljanje tajnama
+- Upravljanje parametrima specifičnim za okolinu
 
 #### Praktične vježbe
-1. **Postavljanje višestrukog okruženja**: Konfigurirajte razvoj, testiranje i produkcijska okruženja
-2. **Konfiguracija sigurnosti**: Implementirajte autentikaciju pomoću upravljanih identiteta
+1. **Postavljanje višestrukih okolina**: Konfigurirajte razvojne, testne i produkcijske okoline
+2. **Sigurnosna konfiguracija**: Implementirajte autentikaciju upravljanim identitetom
 3. **Upravljanje tajnama**: Integrirajte Azure Key Vault za osjetljive podatke
-4. **Upravljanje parametrima**: Kreirajte konfiguracije specifične za okruženja
+4. **Upravljanje parametrima**: Kreirajte konfiguracije specifične za okoline
 
 #### Pitanja za procjenu
-- Kako konfigurirati različita okruženja pomoću AZD-a?
-- Koje su prednosti upravljane identitete u odnosu na servisne račune?
-- Kako sigurno upravljati tajnama aplikacije?
-- Koja je hijerarhija konfiguracije u AZD-u?
+- Kako konfigurirati različite okoline pomoću AZD?
+- Koje su prednosti korištenja upravljanog identiteta u odnosu na servisne račune?
+- Kako sigurno upravljati tajnama aplikacija?
+- Koja je hijerarhija konfiguracije u AZD?
 
 ---
 
-### Poglavlje 4: Infrastruktura kao kod i implementacija (4.-5. tjedan)
+### Poglavlje 4: Infrastruktura kao kod & Implementacija (Tjedan 4-5)
 **Trajanje**: 1-1.5 sati | **Složenost**: ⭐⭐⭐
 
 #### Ciljevi učenja
-- Kreirati i prilagoditi Bicep infrastrukturne predloške
-- Implementirati napredne obrasce i tokove rada implementacije
-- Razumjeti strategije provisioniranja resursa
+- Kreirati i prilagoditi Bicep predloške infrastrukture
+- Implementirati napredne obrasce i radne tokove implementacije
+- Razumjeti strategije za dodjeljivanje resursa
 - Dizajnirati skalabilne višeservisne arhitekture
 
-- Implementirati kontejnerizirane aplikacije koristeći Azure Container Apps i AZD
+- Implementirati aplikacije u kontejnerima koristeći Azure Container Apps i AZD
 
 
-#### Ključni pojmovi za savladati
-- Struktura Bicep predloška i najbolje prakse
-- Ovisnosti o resursima i redoslijed implementacije
-- Datoteke parametara i modularnost predložaka
+#### Ključni koncepti za savladati
+- Struktura Bicep predložaka i najbolje prakse
+- Ovisnosti resursa i redoslijed implementacije
+- Datoteke s parametrima i modularnost predložaka
 - Prilagođeni hookovi i automatizacija implementacije
-- Obrasci implementacije Container App (brzi početak, produkcija, mikroservisi)
+- Obrasci implementacije aplikacija u kontejnerima (brzi početak, produkcija, mikroservisi)
 
 #### Praktične vježbe
-1. **Izrada prilagođenog predloška**: Izgradite predložak aplikacije s više servisa
-2. **Savladavanje Bicepa**: Kreirajte modularne i višekratno upotrebljive infrastrukturne komponente
+1. **Izrada prilagođenog predloška**: Izradite predložak za višeservisnu aplikaciju
+2. **Ovladavanje Bicepom**: Kreirajte modularne, ponovno upotrebljive komponente infrastrukture
 3. **Automatizacija implementacije**: Implementirajte hookove prije i poslije implementacije
-4. **Dizajn arhitekture**: Implementirajte složenu arhitekturu mikroservisa
-5. **Implementacija Container App**: Implementirajte primjere [Simple Flask API](../../../examples/container-app/simple-flask-api) i [Microservices Architecture](../../../examples/container-app/microservices) koristeći AZD
+4. **Dizajn arhitekture**: Implementirajte složenu mikroservisnu arhitekturu
+5. **Implementacija aplikacije u kontejneru**: Implementirajte primjere [Simple Flask API](../../../examples/container-app/simple-flask-api) i [Microservices Architecture](../../../examples/container-app/microservices) koristeći AZD
 
 #### Pitanja za procjenu
 - Kako kreirati prilagođene Bicep predloške za AZD?
-- Koje su najbolje prakse za organizaciju infrastrukturnog koda?
-- Kako rukovati ovisnostima resursa u predlošcima?
-- Koji obrasci implementacije podržavaju nadogradnje bez prekida?
+- Koje su najbolje prakse za organizaciju infrastrukturalnog koda?
+- Kako upravljati ovisnostima resursa u predlošcima?
+- Koji obrasci implementacije podržavaju ažuriranja bez zastoja?
 
 ---
 
-### Poglavlje 5: AI rješenja s više agenata (6.-7. tjedan)
+### Poglavlje 5: Više-agentna AI rješenja (Tjedan 6-7)
 **Trajanje**: 2-3 sata | **Složenost**: ⭐⭐⭐⭐
 
 #### Ciljevi učenja
 - Dizajnirati i implementirati AI arhitekture s više agenata
-- Koordinirati suradnju i komunikaciju agenata
-- Implementirati proizvodno spremna AI rješenja s nadzorom
+- Orkestrirati koordinaciju i komunikaciju agenata
+- Implementirati produkcijska AI rješenja s nadzorom
 - Razumjeti specijalizaciju agenata i obrasce radnih tokova
-- Integrirati kontejnerizirane mikroservise kao dio rješenja s više agenata
+- Integrirati kontejnerizirane mikroservise kao dio multi-agentnih rješenja
 
-#### Ključni pojmovi za savladati
-- Obrasci arhitekture s više agenata i principi dizajna
+#### Ključni koncepti za savladati
+- Obrasci arhitekture više agenata i dizajnerska načela
 - Protokoli komunikacije agenata i protok podataka
 - Strategije balansiranja opterećenja i skaliranja AI agenata
-- Praćenje proizvodnje za sustave s više agenata
-- Komunikacija službe prema službi u kontejneriziranim okruženjima
+- Praćenje produkcije za sustave s više agenata
+- Komunikacija servis-servis u kontejneriziranim okruženjima
 
 #### Praktične vježbe
-1. **Implementacija maloprodajnog rješenja**: Implementirajte cjeloviti scenarij maloprodaje s više agenata
-2. **Prilagodba agenta**: Izmijenite ponašanja agenata Customer i Inventory
+1. **Pregled maloprodajne arhitekture**: Analizirajte plan maloprodaje i odredite koje komponente aplikacija treba implementirati prije implementacije
+2. **Prilagodba agenata**: Modificirajte ponašanja agenata Customer i Inventory
 3. **Skaliranje arhitekture**: Implementirajte balansiranje opterećenja i automatsko skaliranje
-4. **Praćenje proizvodnje**: Postavite sveobuhvatno praćenje i upozoravanje
-5. **Integracija mikroservisa**: Proširite primjer [Microservices Architecture](../../../examples/container-app/microservices) za podršku radnih tokova temeljenih na agentima
+4. **Praćenje produkcije**: Postavite sveobuhvatni nadzor i upozorenja
+5. **Integracija mikroservisa**: Proširite primjer [Microservices Architecture](../../../examples/container-app/microservices) kako biste podržali radne tokove bazirane na agentima
 
 #### Pitanja za procjenu
 - Kako dizajnirati učinkovite obrasce komunikacije više agenata?
-- Koji su ključni čimbenici za skaliranje radnih opterećenja AI agenata?
-- Kako pratiti i otkloniti pogreške u sustavima AI s više agenata?
-- Koji obrasci proizvodnje osiguravaju pouzdanost AI agenata?
+- Koji su ključni čimbenici za skaliranje AI radnih opterećenja agenata?
+- Kako pratiti i otkloniti pogreške u AI sustavima s više agenata?
+- Koji obrasci produkcije osiguravaju pouzdanost AI agenata?
 
 ---
 
-### Poglavlje 6: Validacija i planiranje prije implementacije (8. tjedan)
+### Poglavlje 6: Validacija i planiranje prije implementacije (Tjedan 8)
 **Trajanje**: 1 sat | **Složenost**: ⭐⭐
 
 #### Ciljevi učenja
-- Provesti sveobuhvatno planiranje kapaciteta i validaciju resursa
+- Izvesti sveobuhvatno planiranje kapaciteta i validaciju resursa
 - Odabrati optimalne Azure SKU-ove za isplativost
-- Implementirati automatizirane prelipte provjere i validacije
-- Planirati implementacije sa strategijama optimizacije troškova
+- Implementirati automatizirane pre-flight provjere i validacije
+- Planirati implementacije uz strategije optimizacije troškova
 
-#### Ključni pojmovi za savladati
-- Kvote Azure resursa i ograničenja kapaciteta
+#### Ključni koncepti za savladati
+- Kvote resursa i ograničenja kapaciteta u Azureu
 - Kriteriji odabira SKU-a i optimizacija troškova
-- Automatizirani validacijski skripti i testiranje
+- Automatizirani skripti za validaciju i testiranje
 - Planiranje implementacije i procjena rizika
 
 #### Praktične vježbe
-1. **Analiza kapaciteta**: Analizirajte zahtjeve resursa za svoje aplikacije
-2. **Optimizacija SKU-a**: Usporedite i odaberite isplative razine usluga
-3. **Automatizacija validacije**: Implementirajte skripte za provjere prije implementacije
-4. **Planiranje troškova**: Kreirajte procjene troškova i budžete za implementacije
+1. **Analiza kapaciteta**: Analizirajte zahtjeve za resursima za svoje aplikacije
+2. **Optimizacija SKU-a**: Usporedite i odaberite isplative slojeve usluga
+3. **Automatizacija validacije**: Implementirajte skripte za provjeru prije implementacije
+4. **Planiranje troškova**: Izradite procjene troškova implementacije i proračune
 
 #### Pitanja za procjenu
 - Kako validirati Azure kapacitet prije implementacije?
 - Koji čimbenici utječu na odluke o odabiru SKU-a?
 - Kako automatizirati validaciju prije implementacije?
-- Koje strategije pomažu optimizirati troškove implementacije?
+- Koje strategije pomažu u optimizaciji troškova implementacije?
 
 ---
 
-### Poglavlje 7: Rješavanje problema i otklanjanje pogrešaka (9. tjedan)
+### Poglavlje 7: Rješavanje problema & Otklanjanje pogrešaka (Tjedan 9)
 **Trajanje**: 1-1.5 sati | **Složenost**: ⭐⭐
 
 #### Ciljevi učenja
-- Razviti sistematske pristupe otklanjanju pogrešaka za AZD implementacije
-- Rješavati uobičajene probleme implementacije i konfiguracije
-- Otklanjati AI-specifične probleme i probleme performansi
-- Implementirati praćenje i upozoravanje za proaktivno otkrivanje problema
+- Razviti sustavne pristupe otklanjanju pogrešaka u AZD implementacijama
+- Riješiti uobičajene probleme implementacije i konfiguracije
+- Otklanjati AI-specifične probleme i probleme s performansama
+- Implementirati nadzor i upozorenja za proaktivno otkrivanje problema
 
-#### Ključni pojmovi za savladati
-- Dijagnostičke tehnike i strategije zapisivanja logova
+#### Ključni koncepti za savladati
+- Dijagnostičke tehnike i strategije zapisivanja
 - Uobičajeni obrasci pogrešaka i njihova rješenja
-- Praćenje i optimizacija performansi
-- Postupci odgovora na incidente i oporavka
+- Praćenje performansi i optimizacija
+- Postupci reagiranja i oporavka u incidentima
 
 #### Praktične vježbe
-1. **Dijagnostičke vještine**: Vježbajte s namjerno pogrešnim implementacijama
-2. **Analiza logova**: Efektivno koristite Azure Monitor i Application Insights
-3. **Optimizacija performansi**: Optimizirajte aplikacije s lošim performansama
+1. **Dijagnostičke vještine**: Vježbajte s namjerno neispravnim implementacijama
+2. **Analiza zapisa**: Koristite Azure Monitor i Application Insights učinkovito
+3. **Podešavanje performansi**: Optimizirajte aplikacije s lošim performansama
 4. **Postupci oporavka**: Implementirajte sigurnosne kopije i oporavak od katastrofe
 
 #### Pitanja za procjenu
-- Koji su najčešći problemi pri implementaciji AZD-a?
-- Kako otkloniti probleme s autentikacijom i dozvolama?
-- Koje strategije praćenja pomažu spriječiti probleme u produkciji?
+- Koji su najčešći neuspjesi implementacije AZD-a?
+- Kako otkloniti probleme s autentikacijom i dopuštenjima?
+- Koje strategije nadzora pomažu u sprečavanju problema u produkciji?
 - Kako optimizirati performanse aplikacija u Azureu?
 
 ---
 
-### Poglavlje 8: Obrasci za proizvodnju i poduzeća (10.-11. tjedan)
+### Poglavlje 8: Produkcijski & Enterprise obrasci (Tjedan 10-11)
 **Trajanje**: 2-3 sata | **Složenost**: ⭐⭐⭐⭐
 
 #### Ciljevi učenja
-- Implementirati strategije implementacije na razini poduzeća
+- Implementirati strategije implementacije razine poduzeća
 - Dizajnirati sigurnosne obrasce i okvire usklađenosti
 - Uspostaviti nadzor, upravljanje i kontrolu troškova
-- Kreirati skalabilne CI/CD procese integrirane s AZD-om
-- Primijeniti najbolje prakse za proizvodne implementacije Container App (sigurnost, nadzor, troškovi, CI/CD)
+- Kreirati skalabilne CI/CD pipelineove s AZD integracijom
+- Primijeniti najbolje prakse za produkcijsku implementaciju aplikacija u kontejnerima (sigurnost, nadzor, troškovi, CI/CD)
 
-#### Ključni pojmovi za savladati
-- Zahtjevi sigurnosti i usklađenosti poduzeća
-- Okviri upravljanja i implementacija pravila
+#### Ključni koncepti za savladati
+- Zahtjevi sigurnosti i usklađenosti na razini poduzeća
+- Okviri upravljanja i implementacija politika
 - Napredni nadzor i upravljanje troškovima
-- CI/CD integracija i automatizirani pipelineovi implementacije
-- Strategije plavo-zelene i kanareve implementacije za kontejnerizirana radna opterećenja
+- Integracija CI/CD i automatizirani pipelineovi implementacije
+- Blue-green i canary obrasci implementacije za kontejnerizirana radna opterećenja
 
 #### Praktične vježbe
-1. **Sigurnost poduzeća**: Implementirajte sveobuhvatne sigurnosne obrasce
+1. **Poduzećna sigurnost**: Implementirajte sveobuhvatne sigurnosne obrasce
 2. **Okvir upravljanja**: Postavite Azure Policy i upravljanje resursima
 3. **Napredni nadzor**: Kreirajte nadzorne ploče i automatizirana upozorenja
-4. **CI/CD integracija**: Izgradite automatizirane pipelineove implementacije
-5. **Proizvodne Container App**: Primijenite sigurnost, nadzor i optimizaciju troškova na primjer [Microservices Architecture](../../../examples/container-app/microservices)
+4. **CI/CD integracija**: Izradite automatizirane pipelineove implementacije
+5. **Produkciona kontejnerska aplikacija**: Primijenite sigurnost, nadzor i optimizaciju troškova na [Microservices Architecture](../../../examples/container-app/microservices) primjer
 
 #### Pitanja za procjenu
 - Kako implementirati sigurnost poduzeća u AZD implementacijama?
 - Koji obrasci upravljanja osiguravaju usklađenost i kontrolu troškova?
-- Kako dizajnirati skalabilan nadzor za proizvodne sustave?
+- Kako dizajnirati skalabilan nadzor za produkcijske sustave?
 - Koji CI/CD obrasci najbolje funkcioniraju s AZD radnim tokovima?
 
 #### Ciljevi učenja
-- Razumjeti osnovne pojmove i temeljne koncepte Azure Developer CLI-a
-- Uspješno instalirati i konfigurirati azd u razvojnom okruženju
-- Dovršiti prvu implementaciju koristeći postojeći predložak
-- Navigirati strukturom azd projekta i razumjeti ključne komponente
+- Razumjeti osnove i ključne koncepte Azure Developer CLI
+- Uspješno instalirati i konfigurirati azd u vašem razvojnome okruženju
+- Završiti svoju prvu implementaciju koristeći postojeći predložak
+- Kretati se strukturom azd projekta i razumjeti ključne komponente
 
 #### Ključni pojmovi za savladati
 - Predlošci, okruženja i servisi
 - Struktura konfiguracije azure.yaml
 - Osnovne azd naredbe (init, up, down, deploy)
-- Principi Infrastrukture kao koda
+- Principi infrastrukture kao koda
 - Azure autentikacija i autorizacija
 
-#### Praktične vježbe
+#### Vježbe za prakticiranje
 
 **Vježba 1.1: Instalacija i postavljanje**
-```bash
-# Završite ove zadatke:
+```text
+# Complete these tasks:
 1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
+2. Install Azure CLI only for exercises or template hooks that explicitly use `az`; authenticate AZD independently
 3. Verify installation with: azd version
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
 
 **Vježba 1.2: Prva implementacija**
-```bash
-# Postavite jednostavnu web aplikaciju:
-1. Initialize project: azd init --template todo-nodejs-mongo
+```text
+# Deploy a simple web application:
+1. Initialize project in an empty directory: azd init --template todo-nodejs-mongo .
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
@@ -313,17 +319,17 @@ Analyze the following components:
 ```
 
 #### Pitanja za samoocjenu
-1. Koja su tri osnovna koncepta azd arhitekture?
+1. Koja su tri temeljna koncepta azd arhitekture?
 2. Koja je svrha datoteke azure.yaml?
-3. Kako okruženja pomažu upravljati različitim ciljevima implementacije?
-4. Koje metode autentikacije se mogu koristiti s azd-om?
-5. Što se događa kad prvi put pokrenete `azd up`?
+3. Kako okruženja pomažu u upravljanju različitim ciljevima implementacije?
+4. Koje metode autentifikacije se mogu koristiti s azd?
+5. Što se događa kada prvi put pokrenete `azd up`?
 
 ---
 
-## Praćenje napretka i okvir za procjenu
-```bash
-# Kreirajte i konfigurirajte višestruke okoline:
+## Okvir za praćenje napretka i procjenu
+```text
+# Create and configure multiple environments:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -331,8 +337,8 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Vježba 2.2: Napredna konfiguracija**
-```yaml
+**Vježba 2.2: Napredno konfiguriranje**
+```text
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
 2. Pre and post deployment hooks
@@ -340,41 +346,41 @@ Analyze the following components:
 4. Custom resource naming patterns
 ```
 
-**Vježba 2.3: Konfiguracija sigurnosti**
-```bash
-# Provedite najbolje sigurnosne prakse:
+**Vježba 2.3: Sigurnosno konfiguriranje**
+```text
+# Implement security best practices:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Pitanja za samoocjenu
-1. Kako azd obrađuje redoslijed važnosti varijabli okruženja?
-2. Što su hookovi za implementaciju i kada ih treba koristiti?
-3. Kako konfigurirati različite SKU-ove za različita okruženja?
-4. Koji su sigurnosni aspekti različitih metoda autentikacije?
-5. Kako upravljati tajnama i osjetljivim konfiguracijskim podacima?
+#### Pitanja za samoprocjenu
+1. Kako azd upravlja prioritetom varijabli okoline?
+2. Što su deployment hooks i kada ih trebate koristiti?
+3. Kako konfigurirate različite SKU za različite okoline?
+4. Koje su sigurnosne implikacije različitih metoda autentifikacije?
+5. Kako upravljate tajnama i osjetljivim konfiguracijskim podacima?
 
-### Modul 3: Implementacija i provisioniranje (4. tjedan)
+### Modul 3: Deploy i Provisioning (Tjedan 4)
 
 #### Ciljevi učenja
-- Savladati tokove rada implementacije i najbolje prakse
-- Razumjeti infrastrukturu kao kod kroz Bicep predloške
-- Implementirati složene višeservisne arhitekture
-- Optimizirati izvedbu i pouzdanost implementacije
+- Ovladati radnim tokovima deploya i najboljim praksama
+- Razumjeti Infrastructure as Code s Bicep predlošcima
+- Implementirati složene višeservice arhitekture
+- Optimizirati performanse i pouzdanost deploya
 
-#### Ključni pojmovi za savladati
-- Struktura Bicep predloška i moduli
-- Ovisnosti resursa i njihov redoslijed
-- Strategije implementacije (plavo-zelena, postupne nadogradnje)
-- Implementacije u više regija
+#### Ključni pojmovi za ovladati
+- Struktura Bicep predložaka i moduli
+- Ovisnosti resursa i redoslijed
+- Strategije deploya (blue-green, rolling updates)
+- Deployi u više regija
 - Migracije baza podataka i upravljanje podacima
 
 #### Praktične vježbe
 
 **Vježba 3.1: Prilagođena infrastruktura**
-```bicep
+```text
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
 2. Database with backup and high availability
@@ -383,9 +389,9 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Vježba 3.2: Aplikacija s više servisa**
-```bash
-# Implementirajte arhitekturu mikroservisa:
+**Vježba 3.2: Višeservisna aplikacija**
+```text
+# Deploy a microservices architecture:
 1. Frontend web application
 2. Backend API service
 3. Database service
@@ -394,8 +400,8 @@ Analyze the following components:
 ```
 
 **Vježba 3.3: Integracija baze podataka**
-```bash
-# Implementirajte obrasce implementacije baze podataka:
+```text
+# Implement database deployment patterns:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -404,32 +410,32 @@ Analyze the following components:
 ```
 
 #### Pitanja za samoocjenu
-1. Koje su prednosti korištenja Bicep-a u odnosu na ARM predloške?
-2. Kako upravljati migracijama baza podataka u azd implementacijama?
-3. Koje strategije postoje za implementacije bez zastoja?
-4. Kako upravljati ovisnostima između servisa?
-5. Koji čimbenici su važni za implementacije u više regija?
+1. Koje su prednosti korištenja Bicepa u odnosu na ARM predloške?
+2. Kako rukujete migracijama baza podataka u azd implementacijama?
+3. Koje postoje strategije za implementacije bez zastoja?
+4. Kako upravljate ovisnostima između servisa?
+5. Koja su razmatranja za implementacije u više regija?
 
-### Modul 4: Validacija prije implementacije (5. tjedan)
+### Modul 4: Validacija prije implementacije (tjedan 5)
 
 #### Ciljevi učenja
-- Provedite opsežne provjere prije implementacije
-- Savladajte planiranje kapaciteta i provjeru resursa
-- Razumite odabir SKU-a i optimizaciju troškova
-- Izgradite automatizirane pipelineove za validaciju
+- Provesti sveobuhvatne provjere prije implementacije
+- Ovladati planiranjem kapaciteta i validacijom resursa
+- Razumjeti odabir SKU i optimizaciju troškova
+- Izgraditi automatizirane validacijske pipeline
 
-#### Ključni koncepti za savladati
+#### Ključni pojmovi za usvajanje
 - Kvote i ograničenja Azure resursa
-- Kriteriji za odabir SKU-a i implikacije troškova
-- Skripte i alati za automatiziranu validaciju
+- Kriteriji odabira SKU i implikacije troškova
+- Automatizirani validacijski skripti i alati
 - Metodologije planiranja kapaciteta
 - Testiranje performansi i optimizacija
 
 #### Vježbe za praksu
 
 **Vježba 4.1: Planiranje kapaciteta**
-```bash
-# Implementirajte provjeru kapaciteta:
+```text
+# Implement capacity validation:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -437,9 +443,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Vježba 4.2: Validacija prije implementacije**
-```powershell
-# Izgradite sveobuhvatan tijek provjere valjanosti:
+**Vježba 4.2: Pre-ulazna validacija**
+```text
+# Build comprehensive validation pipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -447,9 +453,9 @@ Analyze the following components:
 5. Cost estimation and budget verification
 ```
 
-**Vježba 4.3: Optimizacija SKU-a**
-```bash
-# Optimizirajte konfiguracije usluga:
+**Vježba 4.3: Optimizacija SKU**
+```text
+# Optimize service configurations:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -458,32 +464,32 @@ Analyze the following components:
 ```
 
 #### Pitanja za samoocjenu
-1. Koji čimbenici trebaju utjecati na odluke pri odabiru SKU-a?
-2. Kako potvrđujete dostupnost Azure resursa prije implementacije?
-3. Koje su ključne komponente sustava za provjeru prije implementacije?
+1. Koji čimbenici bi trebali utjecati na odluke pri odabiru SKU?
+2. Kako validirati dostupnost Azure resursa prije implementacije?
+3. Koje su ključne komponente sustava pre-ulazne provjere?
 4. Kako procjenjujete i kontrolirate troškove implementacije?
-5. Koji nadzor je ključan za planiranje kapaciteta?
+5. Koji je esencijalni monitoring za planiranje kapaciteta?
 
-### Modul 5: Rješavanje problema i otklanjanje pogrešaka (Tjedan 6)
+### Modul 5: Otklanjanje poteškoća i ispravljanje pogrešaka (tjedan 6)
 
 #### Ciljevi učenja
-- Savladajte sustavne metodologije rješavanja problema
-- Razvijte stručnost u otklanjanju složenih problema implementacije
-- Provedite opsežni nadzor i upozoravanje
-- Izgradite procedure odgovora na incidente i oporavka
+- Ovladati sustavnim metodologijama otklanjanja poteškoća
+- Razviti stručnost u ispravljanju složenih problema implementacije
+- Provesti sveobuhvatni monitoring i upozorenja
+- Izgraditi procedure za odgovor na incidente i oporavak
 
-#### Ključni koncepti za savladati
+#### Ključni pojmovi za usvajanje
 - Uobičajeni obrasci neuspjeha implementacije
 - Tehnike analize i korelacije zapisa
 - Praćenje performansi i optimizacija
-- Otkrivanje i odgovor na sigurnosne incidente
+- Otkrivanje sigurnosnih incidenata i reakcija
 - Oporavak od katastrofa i kontinuitet poslovanja
 
 #### Vježbe za praksu
 
-**Vježba 5.1: Scenariji za rješavanje problema**
-```bash
-# Vježbajte rješavanje uobičajenih problema:
+**Vježba 5.1: Scenariji otklanjanja poteškoća**
+```text
+# Practice resolving common issues:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -491,9 +497,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Vježba 5.2: Implementacija nadzora**
-```bash
-# Postavite sveobuhvatno praćenje:
+**Vježba 5.2: Implementacija monitoringa**
+```text
+# Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -501,9 +507,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Vježba 5.3: Odgovor na incidente**
-```bash
-# Izradite postupke odgovora na incidente:
+**Vježba 5.3: Odgovor na incident**
+```text
+# Build incident response procedures:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -512,22 +518,22 @@ Analyze the following components:
 ```
 
 #### Pitanja za samoocjenu
-1. Koji je sustavni pristup rješavanju problema u azd implementacijama?
-2. Kako povezujete zapise iz više usluga i resursa?
-3. Koji su nadzorni metrički podaci najvažniji za rano otkrivanje problema?
-4. Kako provodite učinkovite procedure oporavka od katastrofa?
-5. Koje su ključne komponente plana odgovora na incident?
+1. Koji je sustavni pristup otklanjanju poteškoća u azd implementacijama?
+2. Kako korrelirati zapise preko više servisa i resursa?
+3. Koji su metrički pokazatelji monitoringa najvažniji za rano otkrivanje problema?
+4. Kako implementirati učinkovite procedure za oporavak od katastrofe?
+5. Koje su ključne komponente plana odgovora na incidente?
 
-### Modul 6: Napredne teme i najbolje prakse (Tjedan 7-8)
+### Modul 6: Napredne teme i najbolje prakse (tjedan 7-8)
 
 #### Ciljevi učenja
-- Provedite obrasce implementacije razine poduzeća
-- Savladajte integraciju CI/CD i automatizaciju
-- Razvijte prilagođene predloške i doprinesite zajednici
-- Razumite napredne sigurnosne i usklađene zahtjeve
+- Implementirati obrasce implementacije razine poduzeća
+- Ovladati integracijom i automatizacijom CI/CD
+- Razvijati prilagođene predloške i doprinositi zajednici
+- Razumjeti napredne sigurnosne i usklađenosti zahtjeve
 
-#### Ključni koncepti za savladati
-- Obrasci integracije CI/CD pipelineova
+#### Ključni pojmovi za usvajanje
+- Obrasci integracije CI/CD pipeline
 - Razvoj i distribucija prilagođenih predložaka
 - Upravljanje poduzećem i usklađenost
 - Napredne mrežne i sigurnosne konfiguracije
@@ -536,7 +542,7 @@ Analyze the following components:
 #### Vježbe za praksu
 
 **Vježba 6.1: Integracija CI/CD**
-```yaml
+```text
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
 2. Azure DevOps pipeline integration
@@ -546,8 +552,8 @@ Analyze the following components:
 ```
 
 **Vježba 6.2: Razvoj prilagođenih predložaka**
-```bash
-# Stvorite i objavite prilagođene predloške:
+```text
+# Create and publish custom templates:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -555,9 +561,9 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
 
-**Vježba 6.3: Implementacija za poduzeća**
-```bash
-# Implementirajte značajke razine poduzeća:
+**Vježba 6.3: Poduzećna implementacija**
+```text
+# Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -566,118 +572,118 @@ Analyze the following components:
 ```
 
 #### Pitanja za samoocjenu
-1. Kako integrirati azd u postojeće CI/CD tijekove rada?
-2. Koji su ključni čimbenici u razvoju prilagođenih predložaka?
-3. Kako implementirati upravljanje i usklađenost u azd implementacijama?
-4. Koje su najbolje prakse za implementacije u razmjeru poduzeća?
-5. Kako učinkovito doprinijeti azd zajednici?
+1. Kako integrirati azd u postojeće CI/CD tokove rada?
+2. Koja su ključna razmatranja za razvoj prilagođenih predložaka?
+3. Kako uvesti upravljanje i usklađenost u azd implementacije?
+4. Koje su najbolje prakse za implementacije razine poduzeća?
+5. Kako učinkovito doprinijeti zajednici azd?
 
 ## Praktični projekti
 
 ### Projekt 1: Osobna portfolio web stranica
-**Složenost**: Početnik  
+**Težina**: Početnik  
 **Trajanje**: 1-2 tjedna
 
-Izgradite i implementirajte osobnu portfolio web stranicu koristeći:
-- Hosting statične web stranice na Azure Storageu
+Izradite i implementirajte osobnu portfolio web stranicu koristeći:
+- Hosting statične web stranice na Azure Storage
 - Konfiguraciju prilagođene domene
 - CDN integraciju za globalne performanse
 - Automatizirani pipeline za implementaciju
 
 **Isporuke**:
 - Funkcionalna web stranica implementirana na Azure
-- Prilagođeni azd predložak za portfolio implementacije
+- Prilagođeni azd predložak za implementacije portfolija
 - Dokumentacija procesa implementacije
 - Analiza troškova i preporuke za optimizaciju
 
 ### Projekt 2: Aplikacija za upravljanje zadacima
-**Složenost**: Srednje napredno  
+**Težina**: Srednja  
 **Trajanje**: 2-3 tjedna
 
-Izradite full-stack aplikaciju za upravljanje zadacima s:
+Kreirajte full-stack aplikaciju za upravljanje zadacima s:
 - React frontendom implementiranim na App Service
-- Node.js API backendom s autentifikacijom
+- Node.js API backendom s autentikacijom
 - PostgreSQL bazom podataka s migracijama
 - Monitoringom putem Application Insights
 
 **Isporuke**:
-- Potpuna aplikacija s korisničkom autentifikacijom
-- Shema baze podataka i skripte za migracije
-- Nadzorne ploče i pravila upozoravanja
-- Konfiguracija višestrukih okruženja za implementaciju
+- Potpuna aplikacija s autentikacijom korisnika
+- Shema baze i migracijski skripti
+- Upravljačke ploče za monitoring i pravila upozorenja
+- Konfiguracija implementacije za više okruženja
 
-### Projekt 3: Platforma za e-trgovinu bazirana na mikroservisima
-**Složenost**: Napredno  
+### Projekt 3: Platforma za e-trgovinu temeljena na mikroservisima
+**Težina**: Napredno  
 **Trajanje**: 4-6 tjedana
 
 Dizajnirajte i implementirajte platformu za e-trgovinu temeljenu na mikroservisima:
-- Više API servisa (katalog, narudžbe, plaćanja, korisnici)
-- Integracija message queue s Service Busom
+- Višestruke API usluge (katalog, narudžbe, plaćanja, korisnici)
+- Integracija poruka kroz Service Bus
 - Redis cache za optimizaciju performansi
-- Sveobuhvatno zapisivanje i monitoring
+- Sveobuhvatno vođenje zapisa i monitoring
 
-**Referentni primjer**: Pogledajte [Microservices Architecture](../../../examples/container-app/microservices) za predložak i vodič za implementaciju spreman za proizvodnju
+**Referentni primjer**: Pogledajte [Microservices Architecture](../../../examples/container-app/microservices) za primjerni uzorak s dvije usluge i vodič za implementaciju. Redovi čekanja, trajnost, autentikacija, obrada plaćanja i prilagodba za produkciju su zasebni projekti.
 
 **Isporuke**:
-- Potpuna arhitektura mikroservisa
-- Obrasci komunikacije između servisa
+- Potpuna mikroservisna arhitektura
+- Obrasci međuservisne komunikacije
 - Testiranje performansi i optimizacija
-- Implementacija sigurnosti spremna za produkciju
+- Sigurnosna implementacija spremna za produkciju
 
 ## Procjena i certifikacija
 
 ### Provjere znanja
 
-Završite ove procjene nakon svakog modula:
+Dovršite ove procjene nakon svakog modula:
 
-**Procjena modula 1**: Osnovni pojmovi i instalacija  
-- Pitanja s višestrukim izborom na temelju osnovnih pojmova  
-- Praktični zadaci instalacije i konfiguracije  
-- Jednostavna vježba implementacije  
+**Procjena modula 1**: Osnovni koncepti i instalacija
+- Pitanja s višestrukim izborom na temu osnovnih pojmova
+- Praktični zadaci instalacije i konfiguracije
+- Jednostavna vježba implementacije
 
-**Procjena modula 2**: Konfiguracija i okruženja  
-- Scenariji upravljanja okruženjima  
-- Vježbe za rješavanje problema u konfiguraciji  
-- Implementacija sigurnosne konfiguracije  
+**Procjena modula 2**: Konfiguracija i okruženja
+- Scenariji upravljanja okruženjem
+- Vježbe rješavanja problema konfiguracije
+- Implementacija sigurnosne konfiguracije
 
-**Procjena modula 3**: Implementacija i provisioniranje  
-- Izazovi u dizajnu infrastrukture  
-- Scenariji implementacije s više servisa  
-- Vježbe optimizacije performansi  
+**Procjena modula 3**: Implementacija i provisioniranje
+- Izazovi dizajna infrastrukture
+- Scenariji višeservisnih implementacija
+- Vježbe optimizacije performansi
 
-**Procjena modula 4**: Validacija prije implementacije  
-- Studije slučaja planiranja kapaciteta  
-- Scenariji optimizacije troškova  
-- Implementacija pipelinea za validaciju  
+**Procjena modula 4**: Validacija prije implementacije
+- Studije slučaja planiranja kapaciteta
+- Scenariji optimizacije troškova
+- Implementacija validacijskog pipelinea
 
-**Procjena modula 5**: Rješavanje problema i otklanjanje pogrešaka  
-- Vježbe dijagnostike problema  
-- Zadaci implementacije nadzora  
-- Simulacije odgovora na incidente  
+**Procjena modula 5**: Otklanjanje poteškoća i ispravljanje pogrešaka
+- Vježbe dijagnostike problema
+- Zadaci implementacije monitoringa
+- Simulacije odgovora na incidente
 
-**Procjena modula 6**: Napredne teme  
-- Dizajn CI/CD pipelineova  
-- Razvoj prilagođenih predložaka  
-- Scenariji arhitekture za poduzeća  
+**Procjena modula 6**: Napredne teme
+- Dizajn CI/CD pipelinea
+- Razvoj prilagođenih predložaka
+- Scenariji arhitekture poduzeća
 
-### Završni glavni projekt
+### Završni projekt
 
-Dizajnirajte i implementirajte cjelovito rješenje koje prikazuje ovladavanje svim konceptima:
+Dizajnirajte i implementirajte cjelovito rješenje koje demonstrira usvajanje svih koncepata:
 
 **Zahtjevi**:
-- Arhitektura višeslojne aplikacije  
-- Višestruka okruženja za implementaciju  
-- Opsežan nadzor i upozoravanje  
-- Implementacija sigurnosti i usklađenosti  
-- Optimizacija troškova i podešavanje performansi  
-- Potpuna dokumentacija i vodiči za rad  
+- Višenivojska arhitektura aplikacije
+- Višestruka okruženja za implementaciju
+- Sveobuhvatni monitoring i upozorenja
+- Implementacija sigurnosti i usklađenosti
+- Optimizacija troškova i podešavanje performansi
+- Potpuna dokumentacija i priručnici
 
-**Kriteriji procjene**:
-- Kvaliteta tehničke implementacije  
-- Potpunost dokumentacije  
-- Pridržavanje sigurnosnih i najboljih praksi  
-- Optimizacija performansi i troškova  
-- Učinkovitost rješavanja problema i nadzora  
+**Kriteriji ocjenjivanja**:
+- Kvaliteta tehničke implementacije
+- Potpunost dokumentacije
+- Poštivanje sigurnosti i najboljih praksi
+- Optimizacija performansi i troškova
+- Učinkovitost u otklanjanju poteškoća i monitoringu
 
 ## Resursi za učenje i reference
 
@@ -686,12 +692,12 @@ Dizajnirajte i implementirajte cjelovito rješenje koje prikazuje ovladavanje sv
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Resursi zajednice
+### Zajednički resursi
 - [AZD Template Gallery](https://azure.github.io/awesome-azd/)
 - [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
 - [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
-### Prakse okruženja
+### Praksa okruženja
 - [Azure Free Account](https://azure.microsoft.com/free/)
 - [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
@@ -701,163 +707,163 @@ Dizajnirajte i implementirajte cjelovito rješenje koje prikazuje ovladavanje sv
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Preporuke za studijski raspored
+## Preporuke za raspored učenja
 
-### Studij puno radno vrijeme (8 tjedana)
+### Puno radno vrijeme (8 tjedana)
 - **Tjedni 1-2**: Moduli 1-2 (Uvod, konfiguracija)
 - **Tjedni 3-4**: Moduli 3-4 (Implementacija, prije implementacije)
-- **Tjedni 5-6**: Moduli 5-6 (Rješavanje problema, napredne teme)
+- **Tjedni 5-6**: Moduli 5-6 (Otklanjanje poteškoća, napredne teme)
 - **Tjedni 7-8**: Praktični projekti i završna procjena
 
-### Studij pola radnog vremena (16 tjedana)
+### Nepuno radno vrijeme (16 tjedana)
 - **Tjedni 1-4**: Modul 1 (Uvod)
 - **Tjedni 5-7**: Modul 2 (Konfiguracija i okruženja)
 - **Tjedni 8-10**: Modul 3 (Implementacija i provisioniranje)
 - **Tjedni 11-12**: Modul 4 (Validacija prije implementacije)
-- **Tjedni 13-14**: Modul 5 (Rješavanje problema i otklanjanje pogrešaka)
+- **Tjedni 13-14**: Modul 5 (Otklanjanje poteškoća i debugging)
 - **Tjedni 15-16**: Modul 6 (Napredne teme i procjena)
 
 ---
 
-## Praćenje napretka i okvir za procjenu
+## Okviri za praćenje napretka i ocjenjivanje
 
-### Popis za dovršetak poglavlja
+### Popis dovršetka poglavlja
 
-Pratite svoj napredak kroz svako poglavlje koristeći ove mjerljive ishode:
+Pratite svoj napredak kroz svako poglavlje s ovim mjerljivim ishodima:
 
-#### 📚 Poglavlje 1: Osnove i brzi početak
+#### 📚 Poglavlje 1: Osnove i brz početak
 - [ ] **Instalacija dovršena**: AZD instaliran i verificiran na vašoj platformi
 - [ ] **Prva implementacija**: Uspješno implementiran predložak todo-nodejs-mongo
 - [ ] **Postavljanje okruženja**: Konfigurirane prve varijable okruženja
-- [ ] **Navigacija resursa**: Istraženi implementirani resursi u Azure Portalu
-- [ ] **Ovladavanje naredbama**: Ugodno rukovanje osnovnim AZD naredbama
+- [ ] **Navigacija resursima**: Istraženi implementirani resursi u Azure Portalu
+- [ ] **Ovladavanje naredbama**: Ugodno snalaženje u osnovnim AZD naredbama
 
-#### 🤖 Poglavlje 2: AI-Prvi razvoj  
+#### 🤖 Poglavlje 2: AI-First razvoj  
 - [ ] **Implementacija AI predloška**: Uspješno implementiran azure-search-openai-demo
-- [ ] **RAG implementacija**: Konfigurirano indeksiranje i dohvat dokumenata
-- [ ] **Konfiguracija modela**: Postavljeno više AI modela s različitim namjenama
-- [ ] **AI nadzor**: Implementiran Application Insights za AI radna opterećenja
+- [ ] **Implementacija RAG-a**: Konfigurirano indeksiranje i dohvaćanje dokumenata
+- [ ] **Konfiguracija modela**: Postavljeno više AI modela za različite svrhe
+- [ ] **AI monitoring**: Implementiran Application Insights za AI radne opterećenja
 - [ ] **Optimizacija performansi**: Podešavanje performansi AI aplikacije
 
-#### ⚙️ Poglavlje 3: Konfiguracija i autentifikacija
-- [ ] **Postavljanje višestrukih okruženja**: Konfigurirani razvojna, testna i produkcijska okruženja
-- [ ] **Implementacija sigurnosti**: Postavljena autentifikacija upravljane identitete
+#### ⚙️ Poglavlje 3: Konfiguracija i autentikacija
+- [ ] **Postavljanje više okruženja**: Konfigurirana razvojna, testna i produkcijska okruženja
+- [ ] **Implementacija sigurnosti**: Postavljena autentikacija upravljane identitete
 - [ ] **Upravljanje tajnama**: Integriran Azure Key Vault za osjetljive podatke
-- [ ] **Upravljanje parametrima**: Kreirane konfiguracije specifične za okruženje
-- [ ] **Ovladavanje autentifikacijom**: Implementirani sigurni obrasci pristupa
+- [ ] **Upravljanje parametrima**: Kreirane konfiguracije specifične za okruženja
+- [ ] **Ovladavanje autentikacijom**: Implementirani sigurni obrasci pristupa
 
 #### 🏗️ Poglavlje 4: Infrastruktura kao kod i implementacija
-- [ ] **Kreiranje prilagođenog predloška**: Izgrađen predložak za aplikaciju s više servisa
-- [ ] **Ovladavanje Bicepom**: Kreirani modularni, višekratno upotrebljivi infrastrukturni dijelovi
-- [ ] **Automatizacija implementacije**: Provedeni hookovi prije i poslije implementacije
-- [ ] **Dizajn arhitekture**: Implementirana složena arhitektura mikroservisa
+- [ ] **Kreiranje prilagođenih predložaka**: Izgrađen predložak za višeservisnu aplikaciju
+- [ ] **Ovladavanje Bicepom**: Kreirani modularni, ponovo upotrebljivi infrastrukturni dijelovi
+- [ ] **Automatizacija implementacije**: Implementirani pre- i post-implementacijski hookovi
+- [ ] **Dizajn arhitekture**: Implementirana složena mikroservisna arhitektura
 - [ ] **Optimizacija predložaka**: Optimizirani predlošci za performanse i troškove
 
-#### 🎯 Poglavlje 5: AI rješenja s više agenata
-- [ ] **Implementacija rješenja za maloprodaju**: Implementiran cjeloviti scenarij s više agenata
-- [ ] **Prilagodba agenata**: Modificirano ponašanje agenata za korisnike i inventar
-- [ ] **Skaliranje arhitekture**: Provedeno balansiranje opterećenja i automatsko skaliranje
-- [ ] **Nadzor produkcije**: Postavljen sveobuhvatan nadzor i upozoravanje
-- [ ] **Podešavanje performansi**: Optimizirane performanse sustava s više agenata
+#### 🎯 Poglavlje 5: Višagentna AI rješenja
+- [ ] **Pregled arhitekture maloprodaje**: Identificirani nedostajući dijelovi aplikacije te planirane implementacije i validacije
+- [ ] **Prilagodba agenata**: Modificirano ponašanje agenata za kupce i inventar
+- [ ] **Skaliranje arhitekture**: Primijenjeno uravnoteženje opterećenja i automatsko skaliranje
+- [ ] **Monitoring u produkciji**: Postavljen sveobuhvatan monitoring i alerti
+- [ ] **Podešavanje performansi**: Optimizirane performanse višagentnog sustava
 
 #### 🔍 Poglavlje 6: Validacija prije implementacije i planiranje
-- [ ] **Analiza kapaciteta**: Analizirani zahtjevi resursa za aplikacije
-- [ ] **Optimizacija SKU-a**: Odabrane usluge koje su isplative
-- [ ] **Automatizacija validacije**: Implementirane skripte za provjeru prije implementacije
-- [ ] **Planiranje troškova**: Kreirani proračuni i procjene troškova za implementaciju
-- [ ] **Procjena rizika**: Identificirani i umanjeni rizici implementacije
+- [ ] **Analiza kapaciteta**: Analizirani zahtjevi za resursima aplikacija
+- [ ] **Optimizacija SKU-a**: Odabrani isplativi slojevi usluga
+- [ ] **Automatizacija validacije**: Implementirani skripte za provjere prije implementacije
+- [ ] **Planiranje troškova**: Izrađene procjene troškova i budžeti implementacije
+- [ ] **Procjena rizika**: Identificirani i ublaženi rizici implementacije
 
-#### 🚨 Poglavlje 7: Rješavanje problema i otklanjanje pogrešaka
-- [ ] **Dijagnostičke sposobnosti**: Uspješno otklonjene namjerno pokvarene implementacije
+#### 🚨 Poglavlje 7: Otklanjanje poteškoća i debugging
+- [ ] **Dijagnostičke vještine**: Uspješno ispravljene namjerno pokvarene implementacije
 - [ ] **Analiza zapisa**: Učinkovito korišten Azure Monitor i Application Insights
-- [ ] **Podešavanje performansi**: Optimizirane sporo radne aplikacije
-- [ ] **Procedure oporavka**: Implementirani backup i oporavak od katastrofa
-- [ ] **Postavljanje nadzora**: Kreiran proaktivan nadzor i upozoravanje
+- [ ] **Podešavanje performansi**: Optimizirane spore aplikacije
+- [ ] **Postupci oporavka**: Implementirani backup i oporavak od katastrofe
+- [ ] **Postavljanje monitoringa**: Kreiran proaktivan monitoring i upozorenja
 
-#### 🏢 Poglavlje 8: Produkcijski i korporativni obrasci
-- [ ] **Sigurnost za poduzeća**: Implementirani opsežni sigurnosni obrasci
-- [ ] **Okvir upravljanja**: Postavljen Azure Policy i upravljanje resursima
-- [ ] **Napredni nadzor**: Kreirane nadzorne ploče i automatizirano upozoravanje
+#### 🏢 Poglavlje 8: Produkcijski i poduzećni obrasci
+- [ ] **Sigurnost poduzeća**: Implementirani sveobuhvatni sigurnosni obrasci
+- [ ] **Okviri upravljanja**: Postavljena Azure Policy i upravljanje resursima
+- [ ] **Napredni monitoring**: Kreirane nadzorne ploče i automatizirana upozorenja
 - [ ] **Integracija CI/CD**: Izgrađeni automatizirani pipelineovi za implementaciju
 - [ ] **Implementacija usklađenosti**: Zadovoljeni zahtjevi usklađenosti poduzeća
 
-### Vremenski plan učenja i prekretnice
+### Vremenski okvir i ključni događaji u učenju
 
 #### Tjedni 1-2: Izgradnja temelja
-- **Prekretnica**: Implementacija prve AI aplikacije koristeći AZD
-- **Provjera**: Funkcionalna aplikacija dostupna preko javne URL adrese
-- **Vještine**: Osnovni AZD tokovi rada i integracija AI servisa
+- **Ključni događaj**: Implementirati prvu AI aplikaciju koristeći AZD
+- **Validacija**: Funkcionalna aplikacija dostupna putem javnog URL-a
+- **Vještine**: Osnovni AZD tijekovi rada i integracija AI usluge
 
 #### Tjedni 3-4: Ovladavanje konfiguracijom
-- **Prekretnica**: Implementacija u višestruka okruženja s sigurnom autentifikacijom
-- **Provjera**: Ista aplikacija implementirana u razvojnom/testnom/produkcijskom okruženju
+- **Ključni događaj**: Implementacija u više okruženja s sigurnom autentikacijom
+- **Validacija**: Ista aplikacija implementirana u dev/test/prod
 - **Vještine**: Upravljanje okruženjima i implementacija sigurnosti
 
 #### Tjedni 5-6: Stručnost u infrastrukturi
-- **Prekretnica**: Prilagođeni predložak za složenu aplikaciju s više servisa
-- **Provjera**: Višekratni predložak implementira drugi član tima
+- **Ključni događaj**: Prilagođeni predložak za složenu višeservisnu aplikaciju
+- **Validacija**: Ponovno upotrebljiv predložak implementirao drugi član tima
 - **Vještine**: Ovladavanje Bicepom i automatizacija infrastrukture
 
 #### Tjedni 7-8: Napredna AI implementacija
-- **Prekretnica**: Produkcijski spremno AI rješenje s više agenata
-- **Provjera**: Sustav rukuje stvarnim opterećenjem uz nadzor
-- **Vještine**: Orkestracija više agenata i optimizacija performansi
+- **Ključni događaj**: AI rješenje za višagentnu produkciju
+- **Validacija**: Sustav podnosi stvarni teret s monitoringom
+- **Vještine**: Orkestracija višagenata i optimizacija performansi
 
 #### Tjedni 9-10: Spremnost za produkciju
-- **Prekretnica**: Implementacija razine poduzeća s potpunom usklađenošću
-- **Provjera**: Prolaz sigurnosne revizije i revizije optimizacije troškova
+- **Ključni događaj**: Implementacija razine poduzeća s potpunom usklađenošću
+- **Validacija**: Prolazak sigurnosne revizije i revizije optimizacije troškova
 - **Vještine**: Upravljanje, monitoring i integracija CI/CD
 
 ### Procjena i certifikacija
 
 #### Metode validacije znanja
-1. **Praktične implementacije**: Funkcionalne aplikacije za svako poglavlje  
-2. **Pregledi koda**: Procjena kvalitete predložaka i konfiguracija  
-3. **Rješavanje problema**: Scenariji i rješenja za rješavanje problema  
-4. **Podučavanje kolega**: Objašnjenje koncepata drugim učenicima  
-5. **Doprinos zajednici**: Dijeljenje predložaka ili poboljšanja  
+1. **Praktične implementacije**: Funkcionalne aplikacije za svaki poglavlje
+2. **Code Reviews**: Predlošci i ocjena kvalitete konfiguracije
+3. **Rješavanje problema**: Scenariji i rješenja za otklanjanje poteškoća
+4. **Podučavanje kolega**: Objašnjavanje pojmova drugim polaznicima
+5. **Doprinos zajednici**: Dijeljenje predložaka ili poboljšanja
 
 #### Ishodi profesionalnog razvoja
-- **Projekti u portfelju**: 8 produkcijski spremnih implementacija  
-- **Tehničke vještine**: Stručnost u industrijskim standardima za AZD i AI implementaciju  
-- **Sposobnosti rješavanja problema**: Neovisno otklanjanje problema i optimizacija  
-- **Priznanje zajednice**: Aktivno sudjelovanje u Azure zajednici developera  
-- **Napredovanje u karijeri**: Vještine izravno primjenjive na uloge u oblaku i AI-u  
+- **Portfolio projekti**: Vježbe implementacije i arhitekture; spremnost za produkciju zahtijeva zasebnu implementaciju i pregled
+- **Tehničke vještine**: Stručno znanje industrijskih standarda za AZD i AI implementacije
+- **Sposobnosti rješavanja problema**: Samostalno otklanjanje poteškoća i optimizacija
+- **Prepoznavanje u zajednici**: Aktivno sudjelovanje u Azure developerskoj zajednici
+- **Napredak u karijeri**: Vještine izravno primjenjive na uloge u cloud i AI domeni
 
-#### Mjerila uspjeha  
-- **Stopa uspješnosti implementacija**: >95% uspješnih implementacija  
-- **Vrijeme za otklanjanje problema**: <30 minuta za uobičajene probleme  
-- **Optimizacija performansi**: Dokazive poboljšanja u troškovima i izvedbi  
-- **Sigurnosna usklađenost**: Sve implementacije zadovoljavaju standarde sigurnosti poduzeća  
-- **Prijenos znanja**: Sposobnost mentoriranja drugih developera  
+#### Metrike uspjeha
+- **Stopa uspješnih implementacija**: >95% uspješnih implementacija
+- **Vrijeme rješavanja problema**: <30 minuta za uobičajene probleme
+- **Optimizacija performansi**: Dokaziva poboljšanja u troškovima i performansama
+- **Sigurnosna provjera**: Dokumentirajte kontrole i preostale nedostatke u skladu sa zahtjevima vaše organizacije; završetak tečaja ne certifikata usklađenost
+- **Prijenos znanja**: Sposobnost mentoriranja drugih developera
 
-### Kontinuirano učenje i angažman u zajednici  
+### Kontinuirano učenje i angažman u zajednici
 
-#### Ostanite u toku  
-- **Azure novosti**: Pratite bilješke o izdanju Azure Developer CLI  
-- **Događaji zajednice**: Sudjelujte na Azure i AI događajima za developere  
-- **Dokumentacija**: Doprinesite dokumentaciji i primjerima zajednice  
-- **Povratna informacija**: Davanje povratnih informacija o sadržaju tečaja i Azure uslugama  
+#### Ostanite u toku
+- **Azure novosti**: Pratite bilješke o izdanjima Azure Developer CLI-a
+- **Događanja u zajednici**: Sudjelujte na događajima za Azure i AI developere
+- **Dokumentacija**: Pridonosite dokumentaciji i primjerima za zajednicu
+- **Povratne informacije**: Dajte povratne informacije o sadržaju tečaja i Azure uslugama
 
-#### Razvoj karijere  
-- **Profesionalna mreža**: Povežite se s Azure i AI stručnjacima  
-- **Mogućnosti prezentiranja**: Izložite svoja saznanja na konferencijama ili meetup-ima  
-- **Doprinos open source-u**: Doprinesite AZD predlošcima i alatima  
-- **Mentorstvo**: Vodite druge developere u njihovom AZD putovanju učenja  
+#### Razvoj karijere
+- **Profesionalna mreža**: Povežite se s Azure i AI stručnjacima
+- **Prilike za javni nastup**: Prezentirajte naučeno na konferencijama ili susretima
+- **Doprinos open source-u**: Doprinesite AZD predlošcima i alatima
+- **Mentorstvo**: Vodite druge developere u njihovom AZD učenju
 
 ---
 
-**Navigacija poglavljima:**  
-- **📚 Početak tečaja**: [AZD za početnike](../README.md)  
-- **📖 Počnite učiti**: [Poglavlje 1: Osnove i brzi početak](../README.md#-chapter-1-foundation--quick-start)  
-- **🎯 Praćenje napretka**: Pratite svoj napredak kroz sveobuhvatan sustav učenja od 8 poglavlja  
-- **🤝 Zajednica**: [Azure Discord](https://discord.gg/microsoft-azure) za podršku i raspravu  
+**Navigacija po poglavljima:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
+- **📖 Početak učenja**: [Poglavlje 1: Osnove i brzi početak](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Praćenje napretka**: Pratite svoj napredak kroz sveobuhvatan 8-poglavlja sustav učenja
+- **🤝 Zajednica**: [Azure Discord](https://discord.gg/microsoft-azure) za podršku i raspravu
 
-**Praćenje napretka u učenju**: Koristite ovaj strukturirani vodič za savladavanje Azure Developer CLI kroz progresivno, praktično učenje s mjerljivim rezultatima i profesionalnim razvojnim prednostima.
+**Praćenje napretka u učenju**: Koristite ovaj strukturirani vodič za savladavanje Azure Developer CLI kroz progresivno, praktično učenje s mjerljivim rezultatima i profesionalnim koristima.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje od odgovornosti**:
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim izvorom. Za važne informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazuma ili kriva tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
