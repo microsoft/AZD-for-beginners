@@ -34,22 +34,22 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "es",
-      "failure_date": "2026-11-16T20:22:04+00:00",
+      "failure_date": "2026-11-22T10:56:40+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "docs/chapter-03-configuration/configuration.md": {
       "original_hash": "0f149d295e8d48938b1b8ff712ea0bf9",
       "source_file": "docs/chapter-03-configuration/configuration.md",
       "language_code": "es",
-      "failure_date": "2026-11-16T20:32:15+00:00",
+      "failure_date": "2026-11-22T10:59:45+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'configuration.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },

@@ -34,44 +34,33 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "pl",
-      "failure_date": "2026-11-19T04:59:05+00:00",
+      "failure_date": "2026-11-23T21:56:24+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/index.md": {
       "original_hash": "a1cbc39623d29f76aefe40099c5c890e",
       "source_file": "workshop/docs/index.md",
       "language_code": "pl",
-      "failure_date": "2026-11-19T05:18:18+00:00",
+      "failure_date": "2026-11-23T22:00:20+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2 of 'index.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/instructions/2-Validate-AI-Template.md": {
       "original_hash": "08d94072fd61ef49bd86481689cb0484",
       "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
       "language_code": "pl",
-      "failure_date": "2026-11-19T05:21:14+00:00",
+      "failure_date": "2026-11-23T22:03:07+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-05-multi-agent/multi-agent-basics.md": {
-      "original_hash": "df4c2763597c44723e5e646dcac629ca",
-      "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
-      "language_code": "pl",
-      "failure_date": "2026-11-19T05:08:05+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1 of 'multi-agent-basics.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -202,8 +191,8 @@
     "language_code": "pl"
   },
   "docs/chapter-05-multi-agent/multi-agent-basics.md": {
-    "original_hash": "7f55ab87aae10e3ccc8c4c4a7d700c40",
-    "translation_date": "2026-11-08T06:29:22+00:00",
+    "original_hash": "df4c2763597c44723e5e646dcac629ca",
+    "translation_date": "2026-11-23T21:59:15+00:00",
     "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
     "language_code": "pl"
   },

@@ -1,282 +1,133 @@
-# 3. Template ကို ခွဲစိတ်လေ့လာခြင်း
+# 3. သင်တန်းပုံစံ တည်ဆောက်ခြင်း
 
-!!! tip "ဤမော်ဂျူး၏ အဆုံးတွင် သင် အောက်ပါများကို ပြုလုပ်နိုင်ပါမည်"
+!!! tip "ဒီသင်ခန်းစာပြီးဆုံးသည့်အချိန်မှာ သင်သည်"
 
-    - [ ] GitHub Copilot ကို Azure အကူအညီအတွက် MCP servers ဖြင့် စတင်ဖွင့်နိုင်မည်
-    - [ ] AZD template ဖိုလ်ဒါ ဖွဲ့စည်းပုံနှင့် ပါဝင်ပစ္စည်းများကို နားလည်နိုင်မည်
-    - [ ] infrastructure-as-code (Bicep) အဖွဲ့အစည်းပုံစံများကို လေ့လာနိုင်မည်
-    - [ ] **Lab 3:** GitHub Copilot ကို အသုံးပြု၍ repository တည်ဆောက်ပုံကို လေ့လာ နားလည်နိုင်မည် 
-
----
-
-
-AZD templates နှင့် Azure Developer CLI (`azd`) များကို အသုံးပြု၍ ဗဟုသုတရှိပြီး အသုံးပြုနိုင်သော နမူနာကိုဒ်များ၊ အင်ဖရာစ्ट्रပ်ချာနှင့် ဆက်တင်ဖိုင်များပါဝင်သည့် စံပြ repository များကို အသုံးပြုပြီး AI ဖွံ့ဖြိုးရေးခရီးစဉ်ကို အလျင်အမြန် စတင်နိုင်ပါသည် - အသင့်တင်ရန် _starter_ ပရောဂျက် အဖြစ်။
-
-**ယခုအချိန်တွင်တော့၊ ပရောဂျက် ဖွဲ့စည်းပုံနှင့် ကိုးဒ်ဘေ့စ်ကို နားလည်ရမည်ဖြစ်ပြီး - AZD အကြောင်း အကြိုအသိမရှိဘဲ AZD template ကို ကိုယ်တိုင် ထပ်မံ အပြင်ပြင် ပြုလုပ်နိုင်ရမည်!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
-## 1. Activate GitHub Copilot
+## 1. GitHub Copilot ကို ဖွင့်ပါ
 
-### 1.1 Install GitHub Copilot Chat
+VS Code တွင် initialized AI နမူနာကို ဖွင့်ပြီး [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) ကို ဖွင့်ပါ။ အရည်အသွေးမြင့် လုပ်ငန်းစီမံချက်တစ်ခုရှိသည့်အကောင့်ဖြင့် လော့ဂ်အင် ဝင်ပါ၊ သုံးစွဲမှုကန့်သတ်ချက်များကွဲပြားနိုင်သည်။ အပြောင်းအလဲများပြုလုပ်မီ Copilot ကို သိုလှောင်ထားသောကွန်ရက်ကိုရှင်းပြရန် မေးမြန်းပါ။
 
-ယခုအခါ [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) ကို လေ့လာဖို့ အချိန်ရောက်ပြီ။ ယခုမှ စ၍ သဘာဝဘာသာစကားဖြင့် ကျွန်တော်တို့၏ အလုပ်ကို အမြင်အရာကိန်း ထားပြီး သင့်အတွက် အကောင်အထည်ဖော်ရာတွင် အကူအညီ ရယူနိုင်သည်။ ဤ lab အတွက် ကျွန်တော်တို့သည် လစဉ် အပြည့်ဖြင့် ပြီးမြောက်မှုများနှင့် chat အင်တာ‌ယက်ရှင်းများအတွက် ကန့်သတ်ချက်ရှိသော [Copilot Free plan](https://github.com/github-copilot/signup) ကို အသုံးပြုပါမည်။
+### ရွေးချယ်စရာ MCP ဆာဗာများ
 
-Extension ကို marketplace မှ တပ်ဆင်နိုင်ပြီး Codespaces သို့မဟုတ် dev container ပတ်ဝန်းကျင်များတွင် ပုံမှန်အားဖြင့် ရနိုင်ပြီဖြစ်ပါတယ်။ _Copilot icon dropdown မှ `Open Chat` ကို နှိပ်ပြီး `What can you do?` ကဲ့သို့သော prompt တစ်ခု ရိုက်ထည့်ပါ_ - အကောင့်ဝင်ရန် ဖိတ်ခေါ်နိုင်သည်။ **GitHub Copilot Chat အသင့် ဖြစ်ပါပြီ**။
+ဤဝန်ဆောင်မှုများက ပိုမိုသောကိရိယာများကို ပံ့ပိုးပေးနိုင်သည်-
 
-### 1.2. Install MCP Servers
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-Agent mode က ထိရောက်စွာ လုပ်ဆောင်ရန်အတွက် သိကောင်းစရာများ ရယူပေးခြင်း သို့မဟုတ် လုပ်ဆောင်မှုများ လက်တွေ့ ထမ်းဆောင်ပေးနိုင်မည့် သင်္ချာတူကိရိယာများသို့ ဝင်ရောက်အသုံးပြုခွင့် လိုအပ်합니다။ ဒီနေရာမှာ MCP servers များက အကူအညီ ပေးနိုင်ပါသည်။ ကျွန်တော်တို့ အောက်ပါ servers များကို ဖွဲ့စည်းမည်ဖြစ်သည်။
+VS Code တွင် [MCP ဖွဲ့စည်းပုံ လမ်းညွှန်ချက်](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) ကို ကြည့်ပြီး လိုအပ်သည်ဆို `.vscode/mcp.json` ကို ဖန်တီးပါ-
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-ဤအရာများကို ဖွင့်ရန်:
+`npx` အမိန့်သည် Node.js/npm ထောက်ခံထားသော ထည့်သွင်းမှုတစ်ခုလိုအပ်ပြီး အကောင်အထည်ဖော်နိုင်သောကုဒ်ကို ဒေါင်းလုပ်ဆွဲပါသည်။ အထုပ်ကို ပြန်လည်သုံးသပ်ပြီး အတည်ပြုထားသောဗားရှင်းကို ပင်းဆက်ထားပါ၊ အသင်းကြားသုံးရန် ထပ်မံထုတ်လုပ်နိုင်သည်။ VS Code ၏ MCP ထိန်းချုပ်မှုများဖြင့် ဆာဗာများကို စတင်၍ ရနိုင်သောကိရိယာများအား စစ်ဆေးကြည့်ရှုစေခြင်း၊ နာမည်များသည် ဗားရှင်းများအလိုက် ပြောင်းလဲနိုင်သည်။
 
-1. `.vscode/mcp.json` ဆိုသော ဖိုင်ကို လိုအပ်ပါက ဖန်တီးပါ
-1. အောက်ပါ အကြောင်းအရာကို ထိုဖိုင်ထဲ ထည့်၍ 서버များကို စတင်ပါ!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**အတည်ပြုခြင်းကို သီးခြားထားသည်။** AZD အတွက် `azd auth login` ကို အသုံးပြုပါ။ Azure MCP ရဲ့ စာရွက်အတိုင်း authentication လုပ်ငန်းစဥ်ကို သူ့ရဲ့ ကိရိယာများအတွက် လိုက်နာပါ။ AZD login ဒါပေမဲ့ MCP session တည်ဆောက်မှု မဖြစ်စေပါ။ Azure CLI ကို လေ့ကျင့်ခန်း ဒါမှမဟုတ် hook မှ အသုံးပြုသောအခါ သီးခြား `az login` ကို သုံးပါ။
 
-??? warning "npx がインストールされていないというエラーが出ることがあります（修正手順を見るには展開してください）"
+ဖတ်-only အမိန့်များကို ကြိုးစားကြည့်ပါ။
 
-      ပြဿနာကို ဖြေရှင်းရန်၊ `.devcontainer/devcontainer.json` ဖိုင်ကို ဖွင့်ပြီး features အပိုင်းတွင် အောက်ပါလိုင်းကို ထည့်ပါ။ ထို့နောက် container ကို ပြန်လည်တည်ဆောက်ပါ။ ယခု `npx` ထည့်သွင်းပြီး အသုံးပြုနိုင်နေပါပြီ။
+1. “Microsoft Learn MCP ကို အသုံးပြု၍ Azure Developer CLI ရဲ့ configuration စာရွက်များကို ရှာဖွေပါ။”
+2. “ဤ repository ရဲ့ `azure.yaml` ကို ရှင်းပြပါ။ hook တစ်ခုချင်းစီကို ဖော်ဆောင်တဲ့ ဖိုင်များကို ရည်ညွှန်းပါ။”
+3. “အသုံးပြုနိုင်သော Azure MCP ကိရိယာများကို အသုံးပြု၍၊ ကိုယ့်ရဲ့ deployed resources များကို ဘာမှ မပြောင်းလဲဘဲ စာရင်းပေးပါ။”
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+ရွေးထားသော tenant/subscription နှင့် တင်ပြထားသော tool call တစ်ခုချင်းစီကို စစ်ဆေးပါ။ only architecture ကို အသိပညာရရန်အတွက် resource ဖန်တီးခြင်း၊ ဖျက်ခြင်း သို့မဟုတ် access ပြောင်းခြင်းများ မအတည်ပြုပါနှင့်။
 
----
+## ၂။ စက်ပစ္စည်းနည်းပညာကို နားလည်ပါ
 
-### 1.3. Test GitHub Copilot Chat
+ဥပမာသည် Azure Container Apps မှာ Python FastAPI backend နဲ့ React/TypeScript frontend ကို ပြုလုပ်ထားသည်။ Backend သည် Microsoft Foundry project ရဲ့ agent နဲ့ ဆက်သွယ်သည်။ ရယူခြင်းနဲ့ ကြည့်ရှုနိုင်ခြင်းသည် မှန်ကန်စွာ တပ်ဆင်ချက်များနှင့် tied ဖြစ်ပြီး အဲဒီ application deployed ဖြစ်တာက ချက်ချင်း အာမခံချက်မဟုတ်ပါ။
 
-**ပထမဦးဆုံး VS Code command line တွင် Azure အသုံးပြုစေရန် `azd auth login` ကို အသုံးပြုကာ authentication ပြုလုပ်ပါ။ Azure CLI commands များကို တိုက်ရိုက် မရိုက်ရန် ရည်ရွယ်ပါက `az login` ကိုလည်း အသုံးပြုနိုင်သည်။**
+![မှတ်ပုံတင်ထားသော စက်ပစ္စည်းဗဟုသုတ](../../../../../translated_images/my/architecture.8cec470ec15c65c7.webp)
 
-ယခု သင့် Azure subscription အခြေအနေကို မေးမြန်းနိုင်ပြီး deploy လုပ်ထားသော resources များ သို့မဟုတ် configuration အကြောင်း မေးမြန်းနိုင်ပါပြီ။ အောက်ပါ prompts များကို စမ်းကြည့်ပါ။
+ဒီ ပုံနဲ့ [လက်ရှိ upstream deployment မျက်နှာစာလမ်းညွှန်](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) နဲ့ ကိုယ့်ရဲ့ အမှန်တကယ် resource များကို နှိုင်းယှဉ်ပါ။ configured model deployment၊ agent ကိရိယာများ၊ managed identity၊ အခန်းကဏ္ဍသတ်မှတ်ချက်များ၊ နဲ့ အလိုရှိပါက AI Search/Application Insights resource များကို စစ်ဆေးပါ။
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**လေ့ကျင့်ခန်း:** Copilot ကို ရှေ့မောင်းမှ API သို့၊ ပြီးတော့ Foundry သို့ chat request တစ်ခုကို တန်းကြောင်းလိုက်ဖော်ထုတ်ရန် တောင်းဆိုပါ၊ ဖိုင်နဲ့ function ကို ရည်ညွှန်းပါ။ အဲဒီ ရည်ညွှန်းချက်တွေကို ဖွင့်ပြီး ရှင်းပြချက်ကို အတည်ပြုပါ။ diagram တစ်ခုကနေ authentication၊ routing သို့မဟုတ် authorization ကို သီးသန့် ခန့်မှန်းသင့်မယ် မဟုတ်ပါ။
 
-Microsoft Docs MCP server တွင် အခြေခံထားသော တုံ့ပြန်ချက်များကို ပြန်လည်ရနိုင်ရန် Azure စာရွက်စာတမ်းများအကြောင်း မေးမြန်းနိုင်ပါသည်။ အောက်ပါ prompts များကို စမ်းကြည့်ပါ။
+## ၃။ Repository ဝန်းကျင်ဖွဲ့စည်းမှု
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+၂၀၁၆ ခုနှစ် နိုဝင်ဘာ ၄ ရက်တွင် စမ်းသပ်ထားသော နမူနာနှင့် နှိုင်းယှဉ်ဆန်းစစ်ထားသော ရွေးချယ်သည့် လမ်းကြောင်းများဖြစ်သည်။ ကိုယ့်ရဲ့ initialize ပြုလုပ်ထားသော ပြုပြင်မှု မူလရင်းမြစ် ဖြစ်ပါသည်။
 
-သို့မဟုတ် တစ်ခုခု အလုပ္တစ်ခု ပြီးမြောက်အောင် ကုဒ် အပိုင်းအစများကို မေးမြန်းနိုင်သည်။ ဤ prompt ကို စမ်းကြည့်ပါ။
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### အဆောက်အအုံနှင့် ပြင်ဆင်ခြင်း
 
-`Ask` mode တွင်၊ ဤသည်က မင်းကော်ပီကာတ်ထုတ်ယူပြီး ကူးယူ အသုံးပြုနိုင်သော ကုဒ်ပုံစံကို ပေးပါလိမ့်မယ်။ `Agent` mode တွင်တော့ ပိုများပြီး သပ်ရပ်စွာ လိုအပ်သော resources များကို ဖန်တီးပေးခြင်း၊ setup scripts နှင့် စာရွက်စာတမ်းများကို အပြင်လက်များ အပြည့်အဝ ဖြတ်တောက်ပေးနိုင်သည်။
+`infra/main.bicep` သည် resource များကို စီမံခန့်ခွဲသည်။ `main.parameters.json` သည် template ပို့ရသော input များကို AZD ပတ်ဝန်းကျင် တန်ဖိုးများနှင့် ချိတ်ဆက်သည်။ `azure.yaml` သည် application service နှင့် lifecycle hook များကို ရွေးချယ်သည်။ `USE_AZURE_AI_SEARCH_SERVICE` ကဲ့သို့ လက်ခံ input တစ်ခုကို ဖိုင်များ၌ လိုက်တွဲပြီး ဘယ်လို ပြောင်းလဲမှု ရှိသည်ကို ရှာပါ။
 
-**ယခု သင်သည် template repository ကို လေ့လာရန် ပြင်ဆင်ပြီးဖြစ်ပါသည်**
+### application နှင့် အထောက်အထား
 
----
+`src/api/` နှင့် `src/frontend/` ကိုအတူဖတ်ပါ။ agent ကို ဘယ်မှာ ဖန်တီးထား သို့မဟုတ် ရယူထားသည်၊ အညွှန်းများ/ကိရိယာများကို ဘယ်မှာ ဖွင့်ထားသည်၊ Azure call တစ်ခုချင်းစီမှာ identity ဘယ်ဟာ သုံးထားသည်ကို သတ်မှတ်ပါ။ `src/files/` အောက်ရှိ နမူနာဖိုင်များသည် ပြသမှုအချက်အလက်များဖြစ်ပြီး ထုတ်လုပ်မှု စာရင်းသွင်းမှု သို့မဟုတ် authorization မော်ဒယ် မဟုတ်ပါ။
 
-## 2. Architecture ကို ခွဲစိတ်လေ့လာခြင်း
+### စမ်းသပ်မှုနှင့် ကြည့်ရှုခြင်း
 
-??? prompt "ASK: docs/images/architecture.png ဖိုင်ထဲရှိ application architecture ကို ၁ပိုဒ်စာဖြင့် ရှင်းပြပါ"
+လက်ရှိ တန်ဖိုးထားခြင်းနဲ့ red-teaming ဝင်ရောက်မှုများသည် `tests/` အောက်ရှိသည်။ ရှစ်လွန်သော `evals/` နှင့် `airedteaming/` directory ကို ဤနမူနာအတွက် အသုံးမပြုတော့ပဲ ဖြစ်သည်။ cloud စမ်းသပ်ခန်းများကို လုပ်ခိုင်းခြင်းမတိုင်မှီ `docs/observability.md` ကိုဖတ်ပါ။ ဤ Python စမ်းသပ်မှုများသည် ရွေးချယ်ထားသော `azure.ai.evaluations` AZD extension နှင့် သီးခြားထားသည်။
 
-      ဤ application သည် Azure ပေါ်တွင် တည်ဆောက်ထားသော AI အခြေခံ chat application ဖြစ်ပြီး ယာယီ agent-based architecture ကို ပြသသည်။ ဖြေရှင်းချက်လက်တွင် Azure Container App တစ်ခု၌ မူလ application code ကို ဟိုက်စတင်ထားပြီး အသုံးပြုသူ အဝင်ဒေတာကို ဆက်လက်လုပ်ဆောင်ကာ AI agent မှ တုံ့ပြန်မှုအသစ်များကို ထုတ်ပေးသည်။
-      
-      architecture သည် Microsoft Foundry Project ကို AI စွမ်းရည်အခြေခံအဖြစ် အသုံးပြုကာ Azure AI Services (ဥပမာ gpt-4.1-mini) နှင့် agent လုပ်ဆောင်မှုများကို ချိတ်ဆက်ထားသည်။ အသုံးပြုသူ အပြန်အလှန်များသည် React အခြေပြု frontend မှ FastAPI backend သို့ ဖြတ်သန်းကာ AI agent service နှင့် ဆက်သွယ်၍ ပတ်သက်သောတုံ့ပြန်ချက်များကို ထုတ်ပေးသည်။
-      
-      စနစ်တွင် ဖိုင်ရှာဖွေရေး သို့မဟုတ် Azure AI Search service ကဲ့သို့သော knowledge retrieval စွမ်းရည်များကို ထည့်သွင်းထား므로 agent သည် အပ်လုတ်လုပ်ထားသော စာရွက်စာတမ်းများမှ သတင်းအချက်အလက်ကို ရယူ၍ အညွှန်းပြနိုင်သည်။
-      
-      စီမံခန့်ခွဲမှုအတွက် Application Insights နှင့် Log Analytics Workspace မှလည်း ကြီးကြပ်မှု၊ မှတ်တမ်းတင်ခြင်းနှင့် စွမ်းဆောင်ချက် အကောင်းမြင့်အတွက် စုံလင်သော မျက်နှာသာများ ပါဝင်သည်။
-      
-      Azure Storage သည် application data နှင့် ဖိုင်များအတွက် blob storage ကို ပံ့ပိုးပေးပြီး Managed Identity သည် Azure resources များအကြား လုံခြုံစိတ်ချရသော 접근မရှိဘဲ အသုံးပြုခွင့် ပေးသည်။ ဆက်လက်ထုတ်လုပ်နိုင်စွမ်းနှင့် ထိန်းသိမ်းရလွယ်ကူမှုအတွက် ဒီဖြေရှင်းချက်ကို containerize လုပ်ထားပြီး သက်ဆိုင်ရာ demand အပေါ် မူတည်၍ အလိုမှီ တိုက်ရိုက် scale ပြုလုပ်နိုင်သည်ဟု သိရှိရပြီး Azure ၏ managed services ecosystem မှ security၊ monitoring နှင့် CI/CD အတွက် ထောက်ပံ့ထားသည်။
+## ၄။ ကိုယ့်ရဲ့ ရလဒ်အတည်ပြုပါ
 
-![Architecture](../../../../../translated_images/my/architecture.48d94861e6e6cdc0.webp)
+- API route၊ agent ဆက်သွယ်မှုနှင့် retrieval ကုဒ်ကို နမူနာမေးခွန်းတစ်ခုအတွက် ဖော်ထုတ်ပါ။
+- Foundry ကို access လုပ်သော identity နှင့် ကွန်ဖစ်ဂျာရွေးချယ်ထားသော endpoint ကို ရှင်းပြပါ။
+- အမှန်တကယ် pre-up နဲ့ post-deploy script များနှင့် သူတို့၏ အမှားကိုင်တွယ်မှု အပြုအမှုကို ရှာပါ။
+- ကိုယ့် deployment မှ ပျောက်ဆုံးနေသော မှီခိုမှုများ သို့မဟုတ် တိုက်ဆိုင်နိုင်သော လက္ခဏာများကို စာရင်းပြုစုပါ။
 
----
-
-## 3. Repository ဖိုင်ဖွဲ့စည်းပုံ
-
-!!! prompt "ASK: Explain the template folder structure. Start with a visual hierarchical diagram."
-
-??? info "ANSWER: Visual Hierarchical Diagram"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # Azure Developer CLI configuration
-      │   ├── docker-compose.yaml           # Local development containers
-      │   ├── pyproject.toml                # Python project configuration
-      │   ├── requirements-dev.txt          # Development dependencies
-      │   └── .devcontainer/                # VS Code dev container setup
-      │
-      ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # Main infrastructure template
-      │   ├── api.bicep                     # API-specific resources
-      │   ├── main.parameters.json          # Infrastructure parameters
-      │   └── core/                         # Modular infrastructure components
-      │       ├── ai/                       # AI service configurations
-      │       ├── host/                     # Hosting infrastructure
-      │       ├── monitor/                  # Monitoring and logging
-      │       ├── search/                   # Azure AI Search setup
-      │       ├── security/                 # Security and identity
-      │       └── storage/                  # Storage account configs
-      │
-      ├── 💻 Application Source (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # FastAPI application entry
-      │   │   ├── routes.py                 # API route definitions
-      │   │   ├── search_index_manager.py   # Search functionality
-      │   │   ├── data/                     # API data handling
-      │   │   ├── static/                   # Static web assets
-      │   │   └── templates/                # HTML templates
-      │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js dependencies
-      │   │   ├── vite.config.ts            # Vite build configuration
-      │   │   └── src/                      # Frontend source code
-      │   ├── data/                         # Sample data files
-      │   │   └── embeddings.csv            # Pre-computed embeddings
-      │   ├── files/                        # Knowledge base files
-      │   │   ├── customer_info_*.json      # Customer data samples
-      │   │   └── product_info_*.md         # Product documentation
-      │   ├── Dockerfile                    # Container configuration
-      │   └── requirements.txt              # Python dependencies
-      │
-      ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Post-deployment setup
-      │   ├── setup_credential.sh/.ps1     # Credential configuration
-      │   ├── validate_env_vars.sh/.ps1    # Environment validation
-      │   └── resolve_model_quota.sh/.ps1  # Model quota management
-      │
-      ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # Unit and integration tests
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agent evaluation framework
-      │   │   ├── evaluate.py               # Evaluation runner
-      │   │   ├── eval-queries.json         # Test queries
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Development playground
-      │   │   ├── 1-quickstart.py           # Getting started examples
-      │   │   └── aad-interactive-chat.py   # Authentication examples
-      │   └── airedteaming/                 # AI safety evaluation
-      │       └── ai_redteaming.py          # Red team testing
-      │
-      ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # Deployment guide
-      │   ├── local_development.md          # Local setup instructions
-      │   ├── troubleshooting.md            # Common issues & fixes
-      │   ├── azure_account_setup.md        # Azure prerequisites
-      │   └── images/                       # Documentation assets
-      │
-      └── 📄 Project Metadata
-         ├── README.md                     # Project overview
-         ├── CODE_OF_CONDUCT.md           # Community guidelines
-         ├── CONTRIBUTING.md              # Contribution guide
-         ├── LICENSE                      # License terms
-         └── next-steps.md                # Post-deployment guidance
-      ```
-
-### 3.1. Core App Architecture
-
-ဤ template သည် **full-stack web application** ပုံစံကို လိုက်နာထားပြီး အောက်ပါအရာများ ပါဝင်သည်။
-
-- **Backend**: Python FastAPI နှင့် Azure AI ပေါင်းစည်းမှု
-- **Frontend**: TypeScript/React (Vite build system)
-- **Infrastructure**: cloud resources များအတွက် Azure Bicep templates
-- **Containerization**: တူညီသော deployment အတွက် Docker
-
-### 3.2 Infra As Code (bicep)
-
-အင်ဖရာစထရွက်ခြင်း အလွှာသည် **Azure Bicep** templates များကို modular အမျိုးအစားဖြင့် စီစဉ်ထားသည်။
-
-   - **`main.bicep`**: အားလုံးသော Azure resources များကို အစုလိုက်စီမံခန့်ခွဲသည်
-   - **`core/` modules**: ဝန်ဆောင်မှုများအလိုက် ပြန်အသုံးပြုနိုင်သော component များ
-      - AI services (Microsoft Foundry Models, AI Search)
-      - Container hosting (Azure Container Apps)
-      - Monitoring (Application Insights, Log Analytics)
-      - Security (Key Vault, Managed Identity)
-
-### 3.3 Application Source (`src/`)
-
-**Backend API (`src/api/`)**:
-
-- FastAPI အခြေပြု REST API
-- Foundry Agents ပေါင်းစည်းမှု
-- Knowledge retrieval အတွက် Search index စီမံခန့်ခွဲမှု
-- ဖိုင်တင်ခြင်းနှင့် ဖိုင်ကို ကောက်ယူ ပြုလုပ်နိုင်မှုများ
-
-**Frontend (`src/frontend/`)**:
-
-- ခေတ်မီ React/TypeScript SPA
-- ဖွံ့ဖြိုးရေးအတွက် မြန်မာနှုန်း Vite အသုံးပြုမှုနှင့် optimized builds
-- agent interaction များအတွက် chat interface
-
-**Knowledge Base (`src/files/`)**:
-
-- နမူနာ customer နှင့် product ဒေတာများ
-- ဖိုင်အခြေပြု knowledge retrieval ကို ပြသခြင်း
-- JSON နှင့် Markdown ဖိုင် နမူနာများ
-
-
-### 3.4 DevOps & Automation
-
-**Scripts (`scripts/`)**:
-
-- Cross-platform PowerShell နှင့် Bash scripts များ
-- ပတ်ဝန်းကျင်အပြောင်းအလဲ စစ်ဆေးခြင်းနှင့် စီမံခန့်ခွဲခြင်း
-- Post-deployment configuration
-- မော်ဒယ် quota စီမံခန့်ခွဲမှု
-
-**Azure Developer CLI Integration**:
-
-- `azure.yaml` တွင် `azd` workflows အတွက် ဆက်တင်များ
-- အလိုအလျောက် provisioning နှင့် deployment
-- ပတ်ဝန်းကျင် အပြောင်းအလဲများကို ထိန်းချုပ်ခြင်း
-
-### 3.5 Testing & Quality Assurance
-
-**Evaluation Framework (`evals/`)**:
-
-- Agent performance အကဲဖြတ်မှု
-- Query-response အရည်အသွေး စမ်းသပ်မှု
-- အလိုအလျောက် အကဲဖြတ် pipeline
-
-**AI Safety (`airedteaming/`)**:
-
-- AI လုံခြုံရေးအတွက် Red team စမ်းသပ်မှုများ
-- လုံခြုံရေး အားနည်းချက် စစ်ဆေးမှု
-- တာဝန်ရှိသော AI လေ့လာမှု များ
-
----
-
-## 4. ဝမ်းမြောက်ပါတယ် 🏆
-
-သင်သည် MCP servers နှင့်အတူ GitHub Copilot Chat ကို အသုံးပြုပြီး repository ကို လေ့လာနိုင်ခဲ့ပါသည်။
-
-- [X] GitHub Copilot ကို Azure အတွက် ဖွင့်ခဲ့ပြီးဖြစ်သည်
-- [X] Application Architecture ကို နားလည်ခဲ့သည်
-- [X] AZD template ဖိုလ်ဒါ ဖွဲ့စည်းပုံကို လေ့လာခဲ့သည်
-
-ဤအချက်များက ဒီ template အတွက် _infrastructure as code_ အရင်းအမြစ်များကို သင် သိရှိနိုင်စေပါသည်။ နောက်တစ်ဆင့်တွင် AZD ၏ configuration ဖိုင်ကို ကြည့်ရှုမည်။
+အဆက်မပြတ် [Configure a Template](4-Configure-AI-Template.md) သို့ ဆက်လက် သွားပါ။
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်မှု ဝန်ဆောင်မှုဖြစ်သော [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုကို အာရုံစိုက်ပါသေးသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် တိကျမှုမရှိနိုင်သည့် အချက်များ ပါဝင်နိုင်ကြောင်း ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူရင်းဘာသာစကားဖြင့် တရားဝင် အရင်းအမြစ်အဖြစ် သတ်မှတ်စဉ်းစားသင့်သည်။ အရေးကြီးသော သတင်းအချက်အလက်များအတွက် ပရဖက်ရှင်နယ် လူ့ဘာသာပြန်ကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်နိုင်သည့် နားမလည်မှုများ သို့မဟုတ် အမှားဖတ်ရှုမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,280 +1,133 @@
-# 3. Bir Şablonu Parçalarına Ayır
+# 3. Bir Şablonu Parçalarına Ayırma
 
-!!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
+!!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLİRSİNİZ"
 
-    - [ ] Azure yardımı için MCP sunucularıyla GitHub Copilot'u etkinleştirin
-    - [ ] AZD şablon klasör yapısını ve bileşenlerini anlayın
-    - [ ] Altyapı olarak kod (Bicep) organizasyon modellerini keşfedin
-    - [ ] **Lab 3:** GitHub Copilot'u kullanarak depo mimarisini keşfedin ve anlayın 
-
----
-
-
-With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
-
-**Ama şimdi, proje yapısını ve kod tabanını anlamamız gerekiyor - ve AZD şablonunu herhangi bir ön deneyim veya AZD bilgisi olmadan özelleştirebilmeliyiz!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. GitHub Copilot'u Etkinleştirin
 
-### 1.1 GitHub Copilot Chat'i Yükleyin
+Başlatılan AI örneğini VS Code'da açın ve [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) etkinleştirin. Uygun bir plana sahip bir hesapla oturum açın; kullanım sınırları değişir. Copilot'tan değişiklikleri yetkilendirmeden önce depoyu açıklamasını isteyin.
 
-It's time to explore [GitHub Copilot Agent Modu](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Ücretsiz planı](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+### İsteğe bağlı MCP sunucuları
 
-The extension can be installed from the marketplace, and it is often already available in Codespaces or dev container environments. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat hazır**.
+Bu hizmetler ek araçlar sağlayabilir:
 
-### 1.2. MCP Sunucularını Yükleyin
+- [Azure MCP Sunucusu](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Sunucusu](https://learn.microsoft.com/training/support/mcp)
 
-For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
+VS Code'da, [MCP yapılandırma rehberi](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) gözden geçirin ve gerekirse `.vscode/mcp.json` oluşturun:
 
-1. [Azure MCP Sunucusu](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Sunucusu](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-To activate these:
+`npx` komutu desteklenen bir Node.js/npm kurulumu gerektirir ve çalıştırılabilir kod indirir. Paketi inceleyin ve tekrarlanabilir bir ekip kurulumu için onaylanmış bir sürüme sabitleyin. Sunucuları VS Code'un MCP kontrollerini kullanarak başlatın ve mevcut araçlarını inceleyin; isimler sürümler arasında değişebilir.
 
-1. Create a file called `.vscode/mcp.json` if it does not exist
-1. Copy the following into that file - and start the servers!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Kimlik doğrulama ayrıdır.** AZD için `azd auth login` kullanın. Azure MCP'nin belgelenmiş kimlik doğrulama akışını araçları için takip edin; yalnızca AZD oturumu MCP oturumu oluşturmaz. Bir egzersiz veya kanca Azure CLI çağırdığında `az login` ayrı kullanılır.
 
-??? warning " `npx` yüklü değil hatası alabilirsiniz (çözüm için genişletmek üzere tıklayın)"
+Yalnızca okuma amaçlı istemleri deneyin:
 
-      Bunu düzeltmek için `.devcontainer/devcontainer.json` dosyasını açın ve features bölümüne aşağıdaki satırı ekleyin. Ardından konteyneri yeniden oluşturun. Artık `npx` yüklü olmalıdır.
+1. “Microsoft Learn MCP'yi kullanarak Azure Developer CLI yapılandırma belgelerini bulun.”
+2. “Bu deponun `azure.yaml`'unu açıklayın; her kancayı uygulayan dosyaları belirtin.”
+3. “Mevcut Azure MCP araçlarını kullanarak konuşlandırılmış kaynaklarımı listeleyin, herhangi bir şeyi değiştirmeden.”
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Seçili kiracı/abonelik ve önerilen her araç çağrısını kontrol edin. Mimarinin keşfi amacıyla kaynak oluşturma, silme veya erişim değişikliği onaylamayın.
 
----
+## 2. Mimarini Anlayın
 
-### 1.3 GitHub Copilot Chat'i Test Edin
+Örnek, Azure Container Apps içinde Python FastAPI arka ucu ve React/TypeScript ön ucu barındırır. Arka uç, Microsoft Foundry projesinde bir ajanla iletişim kurar. Alma ve gözlemlenebilirlik etkinleştirilmiş şablon özellikleri ve başarılı kurulumla ilgilidir; uygulamanın dağıtılması bunu garanti etmez.
 
-**Önce VS Code komut satırından Azure ile kimlik doğrulamak için `azd auth login` komutunu kullanın. Azure CLI komutlarını doğrudan çalıştırmayı planlıyorsanız sadece `az login`'i de kullanın.**
+![Anlatımlı mimari](../../../../../translated_images/tr/architecture.8cec470ec15c65c7.webp)
 
-You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
+Bu diyagramı [güncel yukarı akış dağıtım kılavuzu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) ve gerçek kaynaklarınızla karşılaştırın. Yapılandırılmış model konuşlandırması, ajan araçları, yönetilen kimlik, rol atamaları ve isteğe bağlı AI Search/Uygulama İçgörü kaynaklarını kontrol edin.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**Egzersiz:** Copilot'tan, ön uçtan API'ye ve ordan Foundry’e bir sohbet isteğini dosya ve fonksiyon referanslarıyla izleyip anlatmasını isteyin. Bu referansları açın ve açıklamayı doğrulayın. Yalnızca diyagramdan uygulanan kimlik doğrulama, yönlendirme veya yetkilendirme çıkarımı yapmayın.
 
-You can also ask questions about Azure documentation and get responses grounded in the Microsoft Docs MCP server. Try these prompts:
+## 3. Depo yapısı
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+Aşağıdaki seçili yollar 4 Kasım 2026 tarihinde örnekle kontrol edilmiştir. Başlatılan revizyonunuz gerçek kaynaktır:
 
-Or you can ask for code snippets to complete a task. Try this prompt.
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### Altyapı ve yapılandırma
 
-In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
+`infra/main.bicep` kaynakları düzenler; `main.parameters.json` şablon girişlerini AZD ortam değerlerine bağlar. `azure.yaml` uygulama hizmetini ve yaşam döngüsü kancalarını seçer. `USE_AZURE_AI_SEARCH_SERVICE` gibi bir girişi bu dosyalar üzerinden izleyerek aslında neyin değiştiğini bulun.
 
-**Artık şablon deposunu keşfetmeye başlamak için donanımlısınız**
+### Uygulama ve kimlik
 
----
+`src/api/` ve `src/frontend/` dosyalarını birlikte okuyun. Ajanın nerede oluşturulduğunu veya alındığını, talimatların/araçların nerede yapılandırıldığını ve her Azure çağrısında hangi kimliğin kullanıldığını belirleyin. `src/files/` altındaki örnek dosyalar gösterim verileridir, üretim kataloğu veya yetkilendirme modeli değildir.
 
-## 2. Mimarinin Yapısını Çözümleme
+### Testler ve gözlemlenebilirlik
 
-??? prompt "SOR: docs/images/architecture.png içindeki uygulama mimarisini 1 paragrafta açıklayın"
+Mevcut değerlendirme ve kırmızı takım giriş noktaları `tests/` altında; daha eski `evals/` ve `airedteaming/` dizin referansları bu örnek için geçersizdir. Bulut testlerini çalıştırmadan önce ön koşullar ve maliyetler için `docs/observability.md` okunmalıdır. Bu Python testleri isteğe bağlı `azure.ai.evaluations` AZD uzantısından ayrıdır.
 
-      Bu uygulama, Azure üzerinde modern bir ajan tabanlı mimariyi gösteren yapay zeka destekli bir sohbet uygulamasıdır. Çözüm, kullanıcı girdilerini işleyen ve AI ajanı aracılığıyla zeki yanıtlar üreten ana uygulama kodunu barındıran bir Azure Container App etrafında toplanır.
-      
-      Mimari, AI yetenekleri için temel olan Microsoft Foundry Projesi'ni kullanır ve gpt-4.1-mini gibi dil modellerini ve ajan işlevselliğini sağlayan Azure AI Hizmetlerine bağlanır. Kullanıcı etkileşimleri, React tabanlı bir ön yüz üzerinden FastAPI arka uca akar; arka uç, bağlamsal yanıtlar üretmek için AI ajan servisiyle iletişim kurar.
-      
-      Sistem, ajanların yüklenen belgelerden bilgi almasını ve alıntı yapmasını sağlayan dosya araması veya Azure AI Search servisi aracılığıyla bilgi alma yeteneklerini içerir. Operasyonel mükemmellik için mimari, izleme, günlükleme ve performans optimizasyonu için Application Insights ve Log Analytics Workspace üzerinden kapsamlı bir izleme içerir.
-      
-      Azure Storage, uygulama verileri ve dosya yüklemeleri için blob depolama sağlar, Managed Identity ise kimlik bilgilerini saklamadan Azure kaynakları arasında güvenli erişim sağlar. Tüm çözüm, talebe göre otomatik ölçeklenen konteyner tabanlı uygulama ile birlikte yerleşik güvenlik, izleme ve CI/CD yetenekleri sunarak ölçeklenebilirlik ve sürdürülebilirlik için tasarlanmıştır.
+## 4. Bulgularınızı Doğrulayın
 
-![Mimari](../../../../../translated_images/tr/architecture.48d94861e6e6cdc0.webp)
+- Bir örnek soru için API yolu, ajan etkileşimi ve alma kodunu tanımlayın.
+- Foundry'e hangi kimliğin eriştiğini ve hangi yapılandırmanın uç noktasını seçtiğini açıklayın.
+- Gerçek pre-up ve post-deploy betiklerini ve hata işleme davranışlarını bulun.
+- Dağıtımınızda eksik olan herhangi bir bağımlılık veya isteğe bağlı özelliği listeleyin.
 
----
-
-## 3. Depo Yapısı
-
-!!! prompt "SOR: Şablon klasör yapısını açıklayın. Görsel hiyerarşik bir diyagram ile başlayın."
-
-??? info "YANIT: Görsel Hiyerarşik Diyagram"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Yapılandırma ve Kurulum
-      │   ├── azure.yaml                    # Azure Developer CLI yapılandırması
-      │   ├── docker-compose.yaml           # Yerel geliştirme konteynerleri
-      │   ├── pyproject.toml                # Python proje yapılandırması
-      │   ├── requirements-dev.txt          # Geliştirme bağımlılıkları
-      │   └── .devcontainer/                # VS Code dev container kurulumu
-      │
-      ├── 🏗️ Altyapı (infra/)
-      │   ├── main.bicep                    # Ana altyapı şablonu
-      │   ├── api.bicep                     # API'ye özgü kaynaklar
-      │   ├── main.parameters.json          # Altyapı parametreleri
-      │   └── core/                         # Modüler altyapı bileşenleri
-      │       ├── ai/                       # AI servis yapılandırmaları
-      │       ├── host/                     # Barındırma altyapısı
-      │       ├── monitor/                  # İzleme ve günlükleme
-      │       ├── search/                   # Azure AI Search kurulumu
-      │       ├── security/                 # Güvenlik ve kimlik
-      │       └── storage/                  # Depolama hesabı yapılandırmaları
-      │
-      ├── 💻 Uygulama Kaynakları (src/)
-      │   ├── api/                          # Arka uç API
-      │   │   ├── main.py                   # FastAPI uygulama girişi
-      │   │   ├── routes.py                 # API rota tanımları
-      │   │   ├── search_index_manager.py   # Arama işlevselliği
-      │   │   ├── data/                     # API veri işlemleri
-      │   │   ├── static/                   # Statik web varlıkları
-      │   │   └── templates/                # HTML şablonları
-      │   ├── frontend/                     # React/TypeScript ön yüzü
-      │   │   ├── package.json              # Node.js bağımlılıkları
-      │   │   ├── vite.config.ts            # Vite yapılandırma ayarları
-      │   │   └── src/                      # Ön yüz kaynak kodu
-      │   ├── data/                         # Örnek veri dosyaları
-      │   │   └── embeddings.csv            # Ön hesaplanmış embedding'ler
-      │   ├── files/                        # Bilgi tabanı dosyaları
-      │   │   ├── customer_info_*.json      # Müşteri veri örnekleri
-      │   │   └── product_info_*.md         # Ürün dokümantasyonu
-      │   ├── Dockerfile                    # Konteyner yapılandırması
-      │   └── requirements.txt              # Python bağımlılıkları
-      │
-      ├── 🔧 Otomasyon ve Betikler (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Dağıtımdan sonra kurulum
-      │   ├── setup_credential.sh/.ps1     # Kimlik bilgisi yapılandırması
-      │   ├── validate_env_vars.sh/.ps1    # Ortam değişkenleri doğrulama
-      │   └── resolve_model_quota.sh/.ps1  # Model kota yönetimi
-      │
-      ├── 🧪 Test & Değerlendirme
-      │   ├── tests/                        # Birim ve entegrasyon testleri
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Ajan değerlendirme çerçevesi
-      │   │   ├── evaluate.py               # Değerlendirme çalıştırıcısı
-      │   │   ├── eval-queries.json         # Test sorguları
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Geliştirme oyun alanı
-      │   │   ├── 1-quickstart.py           # Başlangıç örnekleri
-      │   │   └── aad-interactive-chat.py   # Kimlik doğrulama örnekleri
-      │   └── airedteaming/                 # Yapay Zeka güvenliği değerlendirmesi
-      │       └── ai_redteaming.py          # Kırmızı takım testleri
-      │
-      ├── 📚 Dokümantasyon (docs/)
-      │   ├── deployment.md                 # Dağıtım kılavuzu
-      │   ├── local_development.md          # Yerel kurulum talimatları
-      │   ├── troubleshooting.md            # Yaygın sorunlar ve çözüm yolları
-      │   ├── azure_account_setup.md        # Azure önkoşulları
-      │   └── images/                       # Dokümantasyon varlıkları
-      │
-      └── 📄 Proje Meta Verileri
-         ├── README.md                     # Proje genel bakışı
-         ├── CODE_OF_CONDUCT.md           # Topluluk kuralları
-         ├── CONTRIBUTING.md              # Katkıda bulunma rehberi
-         ├── LICENSE                      # Lisans şartları
-         └── next-steps.md                # Dağıtımdan sonra rehberlik
-      ```
-
-### 3.1. Temel Uygulama Mimarisi
-
-This template follows a **full-stack web application** pattern with:
-
-- **Arka uç**: Azure AI entegrasyonu ile Python FastAPI
-- **Ön yüz**: TypeScript/React ile Vite yapı sistemi
-- **Altyapı**: Bulut kaynakları için Azure Bicep şablonları
-- **Konteynerleştirme**: Tutarlı dağıtımlar için Docker
-
-### 3.2 Altyapı Olarak Kod (Bicep)
-
-The infrastructure layer uses **Azure Bicep** templates organized modularly:
-
-   - **`main.bicep`**: Tüm Azure kaynaklarını orkestre eder
-   - **`core/` modülleri**: Farklı hizmetler için yeniden kullanılabilir bileşenler
-      - AI hizmetleri (Microsoft Foundry Modelleri, AI Search)
-      - Konteyner barındırma (Azure Container Apps)
-      - İzleme (Application Insights, Log Analytics)
-      - Güvenlik (Key Vault, Managed Identity)
-
-### 3.3 Uygulama Kaynakları (`src/`)
-
-**Arka uç API (`src/api/`)**:
-
-- FastAPI tabanlı REST API
-- Foundry Ajanları entegrasyonu
-- Bilgi erişimi için arama dizini yönetimi
-- Dosya yükleme ve işleme yetenekleri
-
-**Ön yüz (`src/frontend/`)**:
-
-- Modern React/TypeScript SPA
-- Hızlı geliştirme ve optimize edilmiş derlemeler için Vite
-- Ajan etkileşimleri için sohbet arayüzü
-
-**Bilgi Tabanı (`src/files/`)**:
-
-- Örnek müşteri ve ürün verileri
-- Dosya tabanlı bilgi erişimini gösterir
-- JSON ve Markdown formatı örnekleri
-
-
-### 3.4 DevOps ve Otomasyon
-
-**Betikler (`scripts/`)**:
-
-- Çapraz platform PowerShell ve Bash betikleri
-- Ortam doğrulaması ve kurulumu
-- Dağıtımdan sonra yapılandırma
-- Model kota yönetimi
-
-**Azure Developer CLI Entegrasyonu**:
-
-- `azure.yaml` `azd` iş akışları için yapılandırma
-- Otomatik sağlama ve dağıtım
-- Ortam değişkenleri yönetimi
-
-### 3.5 Test & Kalite Güvencesi
-
-**Değerlendirme Çerçevesi (`evals/`)**:
-
-- Ajan performans değerlendirmesi
-- Sorgu-yanıt kalite testi
-- Otomatik değerlendirme hattı
-
-**Yapay Zeka Güvenliği (`airedteaming/`)**:
-
-- Yapay zeka güvenliği için kırmızı takım testleri
-- Güvenlik açığı taraması
-- Sorumlu Yapay Zeka uygulamaları
-
----
-
-## 4. Tebrikler 🏆
-
-Depoyu keşfetmek için MCP sunucuları ile GitHub Copilot Chat'i başarıyla kullandınız.
-
-- [X] Azure için GitHub Copilot'u etkinleştirdiniz
-- [X] Uygulama Mimarisi'ni anladınız
-- [X] AZD şablon yapısını keşfettiniz
-
-Bu, bu şablon için _altyapı olarak kod_ varlıklarına dair bir fikir verir. Sonraki bölümde AZD için yapılandırma dosyasına bakacağız.
+Devam etmek için [Bir Şablonu Yapılandırın](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Sorumluluk Reddi**:
-Bu belge [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba gösteriyor olsak da, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki versiyonuyla yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

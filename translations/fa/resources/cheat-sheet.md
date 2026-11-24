@@ -1,238 +1,244 @@
-# برگه تقلب فرمان‌ها - دستورات اساسی AZD
+# جدول تقلب دستورات - دستورات ضروری AZD
 
-**مرجع سریع برای تمام فصل‌ها**
-- **📚 صفحه دوره**: [AZD برای مبتدیان](../README.md)
-- **📖 شروع سریع**: [فصل 1: پایه و شروع سریع](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 دستورات AI**: [فصل 2: توسعه مبتنی بر AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 پیشرفته**: [فصل 4: زیرساخت به‌عنوان کد](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**مرجع سریع برای همه فصل‌ها**
+- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../README.md)
+- **📖 شروع سریع**: [فصل ۱: بنیاد و شروع سریع](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 دستورات هوش مصنوعی**: [فصل ۲: توسعه محور هوش مصنوعی](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 پیشرفته**: [فصل ۴: زیرساخت به عنوان کد](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## معرفی
+## مقدمه
 
-این برگه تقلب جامع، مرجع سریعی برای پرکاربردترین دستورات Azure Developer CLI فراهم می‌کند که بر اساس دسته‌بندی همراه با مثال‌های عملی سازمان‌دهی شده‌اند. مناسب برای جستجوی سریع در طول توسعه، عیب‌یابی و عملیات روزانه با پروژه‌های azd.
+این جدول تقلب جامع مرجع سریع برای دستورات معمول CLI توسعه‌دهنده Azure است، که بر اساس دسته‌بندی با مثال‌های کاربردی سازمان‌دهی شده است. برای جستجوهای سریع هنگام توسعه، عیب‌یابی و عملیات روزانه در پروژه‌های azd بسیار مناسب است.
 
-## اهداف آموزشی
+## اهداف یادگیری
 
-با استفاده از این برگه تقلب، شما:
-- دسترسی فوری به دستورات و نحوهای اساسی Azure Developer CLI خواهید داشت
-- سازمان‌دهی دستورات را بر اساس دسته‌های عملکردی و موارد استفاده درک خواهید کرد
-- به مثال‌های عملی برای سناریوهای رایج توسعه و استقرار مراجعه خواهید کرد
-- به دستورات عیب‌یابی برای حل سریع مسائل دسترسی خواهید داشت
-- گزینه‌های پیکربندی و سفارشی‌سازی پیشرفته را به‌طور کارآمد پیدا خواهید کرد
-- دستورات مدیریت محیط و جریان‌های کاری چندمحیطی را مکان‌یابی خواهید کرد
+با استفاده از این جدول تقلب، شما:
+- دسترسی فوری به دستورات و سینتکس‌های ضروری CLI توسعه‌دهنده Azure خواهید داشت
+- سازماندهی دستورات را بر اساس دسته‌های عملکردی و موارد استفاده درک خواهید کرد
+- به نمونه‌های عملی برای سناریوهای معمول توسعه و استقرار مراجعه خواهید کرد
+- به دستورات عیب‌یابی برای حل سریع مشکلات دسترسی خواهید داشت
+- گزینه‌های پیکربندی پیشرفته و سفارشی‌سازی را به‌طور کارآمد پیدا خواهید کرد
+- دستورات مدیریت محیط و گردش کار چند محیطی را پیدا خواهید کرد
 
 ## نتایج یادگیری
 
-با مراجعه منظم به این برگه تقلب، شما قادر خواهید بود:
-- دستورات azd را با اطمینان اجرا کنید بدون اینکه به مستندات کامل مراجعه کنید
-- با استفاده از دستورات تشخیصی مناسب، مسائل رایج را سریع حل کنید
-- چندین محیط و سناریوهای استقرار را به‌طور مؤثر مدیریت کنید
-- در صورت نیاز، از ویژگی‌ها و گزینه‌های پیکربندی پیشرفته azd استفاده کنید
-- مشکلات استقرار را با استفاده از توالی‌های دستوری سیستماتیک عیب‌یابی کنید
-- جریان‌های کاری را از طریق استفاده مؤثر از میانبرها و گزینه‌های azd بهینه کنید
+با مراجعه منظم به این جدول تقلب، قادر خواهید بود:
+- دستورات azd را با اطمینان اجرا کنید بدون نیاز به مراجعه کامل به مستندات
+- مشکلات رایج را سریع با استفاده از دستورات تشخیصی مناسب حل کنید
+- محیط‌ها و سناریوهای استقرار متعدد را به‌طور کارآمد مدیریت کنید
+- ویژگی‌ها و گزینه‌های پیشرفته azd را در صورت نیاز اعمال کنید
+- مشکلات استقرار را با توالی‌های سیستماتیک دستورات عیب‌یابی کنید
+- گردش کارها را با استفاده مؤثر از میان‌برها و گزینه‌های azd بهینه کنید
 
-## دستورات شروع
+## دستورات شروع به کار
 
 ### احراز هویت
 ```bash
-# ورود به Azure از طریق AZD
+# Login to Azure via AZD
 azd auth login
 
-# ورود به Azure CLI (AZD در پس‌زمینه از این استفاده می‌کند)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# بررسی حساب فعلی
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# تنظیم اشتراک پیش‌فرض
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# خروج از AZD
+# Logout from AZD
 azd auth logout
 
-# خروج از Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
 ### راه‌اندازی پروژه
 ```bash
-# قالب‌های موجود را مرور کنید
+# Browse available templates
 azd template list
 
-# از قالب مقداردهی اولیه کنید
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# در پوشهٔ جاری مقداردهی اولیه کنید
+# Initialize in current directory
 azd init .
 
-# با نام دلخواه مقداردهی اولیه کنید
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
 ## دستورات اصلی استقرار
 
-### جریان کار کامل استقرار
+### گردش کار کامل استقرار
 ```bash
-# همه چیز را مستقر کنید (تأمین منابع + استقرار)
+# Deploy everything (provision + deploy)
 azd up
 
-# استقرار با غیرفعال بودن پیام‌های تأیید
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# استقرار در محیط مشخص
+# Deploy to specific environment
 azd up --environment production
 
-# استقرار با پارامترهای سفارشی
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### فقط زیرساخت
 ```bash
-# فراهم‌سازی منابع Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 پیش‌نمایش تغییرات زیرساخت
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# نمایشی از اجرای آزمایشی که نشان می‌دهد چه منابعی ایجاد/تغییر/حذف خواهند شد
-# مشابه 'terraform plan' یا 'bicep what-if' — ایمن برای اجرا، هیچ تغییری اعمال نمی‌شود
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### فقط برنامه
 ```bash
-# استقرار کد برنامه
+# Deploy application code
 azd deploy
 
-# استقرار سرویس مشخص
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# استقرار همه سرویس‌ها
+# Deploy all services
 azd deploy --all
 ```
 
 ### ساخت و بسته‌بندی
 ```bash
-# بازگرداندن (دانلود) وابستگی‌های برنامه
+# Restore (download) application dependencies
 azd restore
 
-# بازگرداندن یک سرویس مشخص
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# ساخت یک آرتیفکت قابل استقرار بدون انجام استقرار
+# Build a deployable artifact without deploying
 azd package
 
-# ساخت یک سرویس مشخص
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** وابستگی‌های برنامه شما را دانلود می‌کند (npm, pip, NuGet, Maven، و غیره). این دستور به‌صورت خودکار هنگام اجرای `azd package` و `azd deploy` اجرا می‌شود، بنابراین به‌ندرت به‌صورت مستقیم آن را فراخوانی می‌کنید — آن را به‌صورت دستی اجرا کنید تا وابستگی‌ها را از پیش دریافت کنید (برای مثال، برای گرم کردن کش CI یا کار به‌صورت آفلاین پس از آن).
+> **`azd restore`** وابستگی‌های برنامه شما را دانلود می‌کند (npm، pip، NuGet، Maven و غیره). این دستور به‌صورت خودکار در طول `azd package` و `azd deploy` اجرا می‌شود، بنابراین به ندرت مستقیم آن را فراخوانی می‌کنید — برای پیش‌بارگذاری وابستگی‌ها (مثلاً برای گرم‌کردن کش CI یا کار آفلاین بعدی) آن را دستی اجرا کنید.
 
-> **`azd package`** یک آرشیو قابل استقرار (تصویر کانتینر یا zip) را **بدون** ارسال آن به Azure می‌سازد. به‌تنهایی از آن استفاده کنید تا مطمئن شوید ساخت موفق است، خروجی را بررسی کنید، یا آرشیویی تولید کنید که فرآیند دیگری بعداً آن را مستقر کند. `azd deploy` به‌طور خودکار بسته‌بندی می‌کند، بنابراین تنها زمانی به `azd package` نیاز دارید که بخواهید آرشیو را بدون استقرار داشته باشید.
+> **`azd package`** یک آرشیو قابل استقرار آماده می‌کند بدون اینکه سرویس برنامه را مستقر کند. رفتار آن به زبان و میزبان بستگی دارد: بسته‌بندی کانتینر می‌تواند از ساخت‌های راه دور Azure استفاده کند و تصاویر را به رجیستری منتشر کند، پس لزوماً آفلاین یا بدون نوشتن روی Azure نیست. `azd deploy` می‌تواند به‌طور خودکار بسته‌بندی کند؛ وقتی به یک آرشیو یا بررسی ساخت نیاز دارید، از مرحله بسته‌بندی جداگانه استفاده کنید.
 
 
 ## 🌍 مدیریت محیط
 
 ### عملیات محیط
 ```bash
-# فهرست همهٔ محیط‌ها
+# List all environments
 azd env list
 
-# ایجاد محیط جدید
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# انتخاب محیط
+# Select environment
 azd env select production
 
-# نمایش محیط‌های موجود
+# Show available environments
 azd env list
 
-# به‌روزرسانی وضعیت محیط
+# Refresh environment state
 azd env refresh
 ```
 
 ### متغیرهای محیطی
 ```bash
-# تنظیم متغیر محیطی
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# دریافت متغیر محیطی
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# فهرست تمام متغیرهای محیطی
+# List all environment variables
 azd env get-values
 
-# حذف متغیر محیطی
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
+فایل‌های محیطی متن ساده هستند. `azd env set` را به‌عنوان ذخیره‌سازی مخفیانه در نظر نگیرید؛ به جای آن از مراجع Key Vault یا Managed Identity به‌تناسب استفاده کنید.
+
 ## ⚙️ دستورات پیکربندی
 
-### پیکربندی سراسری
+### پیکربندی جهانی
 ```bash
-# تمام پیکربندی‌ها را فهرست کن
+# List all configuration
 azd config show
 
-# تنظیم پیش‌فرض‌های سراسری
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# حذف پیکربندی
+# Remove configuration
 azd config unset defaults.location
 
-# بازنشانی تمام پیکربندی‌ها
+# Reset all configuration
 azd config reset
 ```
 
 ### پیکربندی پروژه
 ```bash
-# اعتبارسنجی azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# نمایش اطلاعات پروژه
+# Show project information
 azd show
 
-# دریافت نقاط پایانی سرویس
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 نظارت و تشخیص
+## 📊 پایش و عیب‌یابی
 
-### داشبورد نظارت
+### داشبورد پایش
 ```bash
-# باز کردن داشبورد مانیتورینگ پورتال Azure
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# باز کردن متریک‌های زنده Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# باز کردن بلید لاگ‌های Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# باز کردن نمای کلی Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
+Application Insights باید توسط قالب تنظیم شود. گزینه Live Metrics در AZD در حال حاضر برای برنامه‌های Python پشتیبانی نمی‌شود؛ به جای آن از overview، لاگ‌ها یا گردش کار ردیابی مستند نمونه استفاده کنید.
+
 ### مشاهده لاگ‌های کانتینر
 ```bash
-# مشاهده لاگ‌ها از طریق Azure CLI (برای Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# دنبال کردن لاگ‌ها به‌صورت زنده
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# مشاهده لاگ‌ها از طریق Azure Portal
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### کوئری‌های Log Analytics
 ```bash
-# دسترسی به Log Analytics از طریق پرتال Azure
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# پرس‌وجوی لاگ‌ها با استفاده از Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -240,30 +246,30 @@ az monitor log-analytics query \
 
 ## 🛠️ دستورات نگهداری
 
-### پاک‌سازی
+### پاکسازی
 ```bash
-# تمام منابع Azure را حذف کنید
+# Remove all Azure resources
 azd down
 
-# حذف اجباری بدون تأیید
+# Force delete without confirmation
 azd down --force
 
-# پاکسازی منابع حذف‌شده به‌صورت موقت
+# Purge soft-deleted resources
 azd down --purge
 
-# پاکسازی کامل
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### به‌روزرسانی‌ها
 ```bash
-# بررسی به‌روزرسانی‌های azd
+# Check for azd updates
 azd version
 
-# دریافت نسخهٔ فعلی
+# Get current version
 azd version
 
-# مشاهدهٔ پیکربندی فعلی
+# View current configuration
 azd config show
 ```
 
@@ -271,254 +277,310 @@ azd config show
 
 ### خط لوله و CI/CD
 ```bash
-# GitHub Actions را پیکربندی کنید
+# Configure GitHub Actions
 azd pipeline config
 
-# Azure DevOps را پیکربندی کنید
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# پیکربندی خط لوله را نمایش دهید
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### مدیریت زیرساخت
 ```bash
-# تولید قالب‌های زیرساخت
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 پیش‌نمایش و برنامه‌ریزی زیرساخت‌ها
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# شبیه‌سازی فراهم‌آوری زیرساخت بدون انجام استقرار
-# قالب‌های Bicep/Terraform را تحلیل کرده و نشان می‌دهد:
-# - منابعی که اضافه خواهند شد (سبز +)
-# - منابعی که تغییر خواهند کرد (زرد ~)
-# - منابعی که حذف خواهند شد (قرمز -)
-# اجرای ایمن - هیچ تغییر واقعی در محیط Azure اعمال نمی‌شود
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# ساخت زیرساخت از فایل azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### اطلاعات پروژه
 ```bash
-# نمایش وضعیت پروژه و نقاط پایانی
+# Show project status and endpoints
 azd show
 
-# نمایش اطلاعات دقیق پروژه به‌صورت JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# دریافت نقاط پایانی سرویس
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
 ## 🤖 دستورات AI و افزونه‌ها
 
 ### افزونه‌های AZD
+
+مرجع Foundry GA به‌روزرسانی شد ۲۰۲۶-۱۱-۰۹: بسته `microsoft.foundry` نسخه ۱.۰، اعلام‌شده [۵ نوامبر ۲۰۲۶](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). از `azd >= 1.37.0` استفاده کنید؛ کامپوننت‌ها به‌صورت مستقل نسخه‌بندی شده‌اند و ویژگی‌های پیش‌نمایش اختیاری وضعیت خود را حفظ می‌کنند.
+
 ```bash
-# تمام افزونه‌های موجود را فهرست کن (شامل هوش مصنوعی)
+# List all available extensions (including AI)
 azd extension list
 
-# افزونه‌ی Foundry agents را نصب کن
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
 
-# افزونه‌ی agent skills را نصب کن (پیش‌نمایش)
-azd extension install azure.ai.skills
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
-# افزونه‌ی Foundry connections را نصب کن (پیش‌نمایش)
-azd extension install azure.ai.connections
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
 
-# افزونه‌ی fine-tuning را نصب کن
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# افزونه‌ی custom models را نصب کن
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# تمام افزونه‌های نصب‌شده را به‌روز کن
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### دستورات عامل AI
+در این بسته ارزیابی‌ها، مجموعه داده‌ها، تنظیم دقیق یا مدل‌های سفارشی گنجانده نشده‌اند. نصب افزونه‌های اصلی جداگانه همچنان پشتیبانی می‌شود. برای نمونه‌ای اجرایی با Python 3.13+، uv جاری، مجوزها و سقف مدل، راهنمای [GA hosted-agent ](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) را دنبال کنید.
+
+### دستورات عامل هوش مصنوعی
 ```bash
-# یک پروژهٔ عامل را از یک مانیفست مقداردهی اولیه کنید
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# یک پروژهٔ مشخص Foundry را هدف قرار دهید
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# دایرکتوری منبع عامل را مشخص کنید
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# یک هدف میزبانی را انتخاب کنید
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# یک عامل مستقر را آزمایش کنید (زمان تأخیر و زمان تا اولین بایت را چاپ می‌کند)
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# پیکربندی نقطهٔ پایانی زنده را نمایش دهید
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# یک مجموعه‌دادهٔ ارزیابی تولید کنید، سپس عامل را بهینه کنید
-azd ai agent eval generate
-azd ai agent optimize
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
-# منبع مستقر یک عامل میزبانی‌شده مبتنی بر کد را دانلود کنید
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# یک عامل میزبانی‌شده و همهٔ نسخه‌های آن را حذف کنید (--force جلسات فعال را خاتمه می‌دهد)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
+`--template`/`-t` جایگزین املا منسوخ شده `--manifest`/`-m` شده است؛ مانیفست‌های قدیمی نیاز به مهاجرت دارند. در حال حاضر گزینه agent-init `--host containerapp` وجود ندارد. پیش‌نمایش‌های Managed-harness، صوتی، و بلندمدت نیاز به فعال‌سازی مستقل شل/محیط CI دارند؛ به [مرجع AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features) مراجعه کنید.
+
+آزمایش محلی هنوز از استقرار مدل‌های Azure استفاده می‌کند و هزینه دارد. برای پاکسازی، `azd down` گروه منابع پروژه Foundry تازه ایجاد شده را حذف می‌کند، اما منابع پروژه بازاستفاده‌شده را دست‌نخورده باقی می‌گذارد؛ منابع ناخواسته خود را جداگانه حذف کنید.
+
+### ارزیابی و بهینه‌سازی هوش مصنوعی
+```bash
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
+azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --eval quality --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agents نسخه beta.22 دستورات ارزیابی قدیمی را با `azd ai eval` از `azure.ai.evaluations` جایگزین کرد. پیکربندی ارزیابی جدید از کلیدهای camelCase استفاده می‌کند. بهینه‌سازی `--config` درخواست API بهینه‌سازی مستقل است، **نه** قدیمی `eval.yaml` یا جدید `azure.eval.yaml`؛ برای استفاده مجدد ارزیابی از `--eval`/`--eval-config` استفاده کنید. به [تنظیم ارزیابی](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) و [مهاجرت بهینه‌سازی](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration) مراجعه کنید.
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+قطعه رانر یک گردش کار کامل نیست. پیکربندی ارزیابی بررسی شده و دارایی‌های غیرمحرمانه را کامیت کنید، مجوز دسترسی به مجموعه داده/ارزیاب/مدل را بدهید، و برای هر مرحله یک محیط استفاده کنید. نمونه CI/CD تأییدشده را ببینید [authenticated CI/CD example](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
+
 ### سرور MCP (آلفا)
 ```bash
-# سرور MCP را برای پروژهٔ خود راه‌اندازی کنید
+# Start the MCP server for your project
 azd mcp start
 
-# مجوز ابزار برای عملیات MCP را مدیریت کنید
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
 ### تولید زیرساخت
 ```bash
-# فایل‌های زیرساخت به‌عنوانِ کد (IaC) را از تعریف پروژه‌تان تولید کنید
+# Generate IaC files from your project definition
 azd infra generate
 
-# زیرساخت را از فایل azure.yaml سنتز کنید
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 جریان‌های کاری سریع
+## 🎯 گردش کارهای سریع
 
-### جریان کاری توسعه
+### گردش کار توسعه
 ```bash
-# شروع پروژهٔ جدید
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# استقرار در محیط توسعه
+# Deploy to development
 azd env new dev
 azd up
 
-# تغییرات را اعمال کنید و مجدداً استقرار دهید
+# Make changes and redeploy
 azd deploy
 
-# داشبورد پایش را باز کنید
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### جریان کاری چندمحیطی
+### گردش کار چند محیطی
 ```bash
-# راه‌اندازی محیط‌ها
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# استقرار در محیط توسعه
+# Deploy to dev
 azd env select dev
 azd up
 
-# آزمون و ارتقاء به محیط پیش‌تولید
+# Test and promote to staging
 azd env select staging
 azd up
 
-# استقرار در محیط تولید
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### جریان کاری عیب‌یابی
+### گردش کار عیب‌یابی
 ```bash
-# فعال‌سازی حالت اشکال‌زدایی
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# بررسی وضعیت استقرار
-azd show
-
-# اعتبارسنجی پیکربندی
+# Validate configuration
 azd config show
 
-# باز کردن داشبورد مانیتورینگ برای لاگ‌ها
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# بررسی وضعیت منابع
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 دستورات دیباگ
+## 🔍 دستورات اشکال‌زدایی
 
-### اطلاعات دیباگ
+### اطلاعات اشکال‌زدایی
 ```bash
-# خروجی اشکال‌زدایی را فعال کنید
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# برای خروجی تمیزتر، تله‌متری را غیرفعال کنید
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# پیکربندی فعلی را بررسی کنید
+# Check current configuration
 azd config show
 
-# وضعیت احراز هویت را بررسی کنید
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### دیباگ قالب‌ها
+### اشکال‌زدایی قالب
 ```bash
-# فهرست الگوهای موجود همراه با جزئیات
+# List available templates with details
 azd template list --output json
 
-# نمایش اطلاعات قالب
+# Show template information
 azd template show <template-name>
 
-# اعتبارسنجی قالب قبل از مقداردهی اولیه
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
 ## 📁 دستورات فایل و دایرکتوری
 
 ### ساختار پروژه
 ```bash
-# نمایش ساختار دایرکتوری جاری
-tree /f  # ویندوز
-find . -type f  # لینوکس/مک‌اواس
+# Show current directory structure
+tree /f  # Windows
+find . -type f  # Linux/macOS
 
-# به ریشهٔ پروژهٔ azd بروید
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# نمایش دایرکتوری پیکربندی azd
-echo $AZD_CONFIG_DIR  # معمولاً ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 فرمت‌بندی خروجی
+## 🎨 قالب‌بندی خروجی
 
 ### خروجی JSON
 ```bash
-# خروجی JSON را برای اسکریپت‌نویسی دریافت کنید
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# با jq تجزیه کنید
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### خروجی جدولی
+### خروجی جدول
 ```bash
-# قالب‌بندی به صورت جدول
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# مشاهده سرویس‌های مستقر
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 ترکیب‌های رایج دستوری
+## 🔧 ترکیب‌های رایج دستورات
 
-### اسکریپت بررسی سلامت
+### اسکریپت چک سلامت
 ```bash
 #!/bin/bash
-# بررسی سریع سلامت
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -527,108 +589,102 @@ azd monitor --logs
 ### اعتبارسنجی استقرار
 ```bash
 #!/bin/bash
-# اعتبارسنجی پیش از استقرار
+# Pre-deployment validation
 azd show
-azd provision --preview  # پیش‌نمایش تغییرات قبل از استقرار
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### مقایسه محیط‌ها
 ```bash
 #!/bin/bash
-# مقایسه محیط‌ها
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### اسکریپت پاک‌سازی منابع
+### اسکریپت پاکسازی منابع
 ```bash
 #!/bin/bash
-# پاک‌سازی محیط‌های قدیمی
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 متغیرهای محیطی
 
-### متغیرهای محیطی رایج
+### متغیرهای رایج محیطی
 ```bash
-# پیکربندی آژور
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# پیکربندی AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# پیکربندی برنامه
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 دستورات اضطراری
 
-### اصلاحات سریع
+### رفع سریع مشکلات
 ```bash
-# بازنشانی احراز هویت
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# اجبار به تازه‌سازی محیط
+# Force refresh environment
 azd env refresh
 
-# استقرار مجدد همه سرویس‌ها
+# Redeploy all services
 azd deploy
 
-# بررسی وضعیت استقرار
+# Check deployment status
 azd show --output json
 ```
 
 ### دستورات بازیابی
 ```bash
-# بازیابی از استقرار ناموفق - پاک‌سازی و استقرار مجدد
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# فقط بازتأمین زیرساخت‌ها
+# Reprovision infrastructure only
 azd provision
 
-# فقط استقرار مجدد برنامه
+# Redeploy application only
 azd deploy
 ```
 
 ## 💡 نکات حرفه‌ای
 
-### مستعارها برای سرعت بخشیدن به جریان کار
+### مستعارها برای گردش کار سریع‌تر
 ```bash
-# به فایل .bashrc یا .zshrc خود اضافه کنید
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### میانبرهای تابع
+### کلیدهای میان‌بر تابعی
 ```bash
-# تعویض سریع محیط
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# استقرار سریع همراه با مانیتورینگ
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# وضعیت محیط
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -637,46 +693,46 @@ azd-status() {
 }
 ```
 
-## 📖 کمک و مستندات
+## 📖 راهنما و مستندات
 
 ### دریافت کمک
 ```bash
-# راهنمای عمومی
+# General help
 azd --help
 azd help
 
-# راهنمای مربوط به دستور
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# نمایش نسخه و اطلاعات ساخت
+# Show version and build info
 azd version
 azd version --output json
 ```
 
-### پیوندهای مستندات
+### لینک‌های مستندات
 ```bash
-# مستندات را در مرورگر باز کنید
+# Open documentation in browser
 azd docs
 
-# مستندات قالب را نمایش دهید
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**نکته**: این برگه تقلب را نشانک (Bookmark) کنید و از `Ctrl+F` برای پیدا کردن سریع دستورات مورد نیازتان استفاده کنید!
+**نکته**: این جدول تقلب را نشانک کنید و از `Ctrl+F` برای یافتن سریع دستورات مورد نیاز خود استفاده کنید!
 
 ---
 
-**ناوبری**
-- **درس قبلی**: [چک‌های پیش‌استقرار](../docs/pre-deployment/preflight-checks.md)
+**هدایت**
+- **درس قبلی**: [بررسی‌های پیش‌پرواز](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **درس بعدی**: [واژه‌نامه](glossary.md)
 
 ---
 
-> **💡 آیا کمک دستورات Azure را در ویرایشگر خود می‌خواهید؟** [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) را با `npx skills add microsoft/github-copilot-for-azure` نصب کنید — 37 مهارت برای AI، Foundry، استقرار، تشخیص خطا و موارد بیشتر.
+> **💡 می‌خواهید کمک دستورات Azure را در ویرایشگر خود داشته باشید؟** افزونه [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) را با `npx skills add microsoft/github-copilot-for-azure` نصب کنید — ۳۷ مهارت برای AI، Foundry، استقرار، عیب‌یابی و بیشتر.
 
 ---
 

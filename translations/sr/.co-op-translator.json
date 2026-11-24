@@ -34,66 +34,44 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "sr",
-      "failure_date": "2026-11-18T04:18:22+00:00",
+      "failure_date": "2026-11-24T07:20:06+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/instructions/2-Validate-AI-Template.md": {
       "original_hash": "08d94072fd61ef49bd86481689cb0484",
       "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
       "language_code": "sr",
-      "failure_date": "2026-11-18T04:38:16+00:00",
+      "failure_date": "2026-11-24T07:35:08+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "workshop/docs/instructions/1-Select-AI-Template.md": {
       "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
       "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
       "language_code": "sr",
-      "failure_date": "2026-11-18T04:40:55+00:00",
+      "failure_date": "2026-11-24T07:37:39+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '1-Select-AI-Template.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     },
     "README.md": {
       "original_hash": "7d76d299c366c5dc2fda84482bcaab5b",
       "source_file": "README.md",
       "language_code": "sr",
-      "failure_date": "2026-11-18T04:03:49+00:00",
+      "failure_date": "2026-11-24T07:15:51+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-08-production/production-ai-practices.md": {
-      "original_hash": "9fbedacd6668e71b42c90685832ae72c",
-      "source_file": "docs/chapter-08-production/production-ai-practices.md",
-      "language_code": "sr",
-      "failure_date": "2026-11-18T04:23:21+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 2.2.1.1.1.1.1.1 of 'production-ai-practices.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-01-foundation/azd-basics.md": {
-      "original_hash": "edf4e3abc9f981212b54ebab3f416e44",
-      "source_file": "docs/chapter-01-foundation/azd-basics.md",
-      "language_code": "sr",
-      "failure_date": "2026-11-18T04:34:45+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1 of 'azd-basics.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -116,8 +94,8 @@
     "language_code": "sr"
   },
   "docs/chapter-01-foundation/azd-basics.md": {
-    "original_hash": "f0b678263ead0764a6529842e7bc2154",
-    "translation_date": "2026-11-09T10:49:06+00:00",
+    "original_hash": "edf4e3abc9f981212b54ebab3f416e44",
+    "translation_date": "2026-11-24T07:32:12+00:00",
     "source_file": "docs/chapter-01-foundation/azd-basics.md",
     "language_code": "sr"
   },
@@ -296,8 +274,8 @@
     "language_code": "sr"
   },
   "docs/chapter-08-production/production-ai-practices.md": {
-    "original_hash": "5607d88a9ca9fcb5d9d396e3dcc804d2",
-    "translation_date": "2026-11-09T10:12:22+00:00",
+    "original_hash": "9fbedacd6668e71b42c90685832ae72c",
+    "translation_date": "2026-11-24T07:28:47+00:00",
     "source_file": "docs/chapter-08-production/production-ai-practices.md",
     "language_code": "sr"
   },

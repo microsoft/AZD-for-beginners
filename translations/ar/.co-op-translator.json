@@ -34,22 +34,11 @@
       "original_hash": "01c1623df4017722e09e7293cf75a45c",
       "source_file": "resources/study-guide.md",
       "language_code": "ar",
-      "failure_date": "2026-11-18T07:37:52+00:00",
+      "failure_date": "2026-11-23T09:47:41+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-08-production/production-ai-practices.md": {
-      "original_hash": "9fbedacd6668e71b42c90685832ae72c",
-      "source_file": "docs/chapter-08-production/production-ai-practices.md",
-      "language_code": "ar",
-      "failure_date": "2026-11-18T07:44:09+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 2.2.2.1.1.1.1 of 'production-ai-practices.md', and the chunk could not be split further.",
-      "translator_version": "0.24.0",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.2.1.1.1.1.1 of 'study-guide.md', and the chunk could not be split further.",
+      "translator_version": "0.24.1",
       "failure_policy_version": 1
     }
   },
@@ -252,8 +241,8 @@
     "language_code": "ar"
   },
   "docs/chapter-08-production/production-ai-practices.md": {
-    "original_hash": "5607d88a9ca9fcb5d9d396e3dcc804d2",
-    "translation_date": "2026-11-10T20:47:09+00:00",
+    "original_hash": "9fbedacd6668e71b42c90685832ae72c",
+    "translation_date": "2026-11-23T09:52:20+00:00",
     "source_file": "docs/chapter-08-production/production-ai-practices.md",
     "language_code": "ar"
   },
