@@ -1,6 +1,7 @@
 # 4. Configure a Template
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+> [!TIP]
+> **By the End of This Module, You Will Be Able To:**
 
     - [ ] Explain the purpose and structure of `azure.yaml`
     - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
