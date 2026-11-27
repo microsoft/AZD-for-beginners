@@ -1,6 +1,7 @@
 # 5. Customize a Template
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+[!TIP]
+> **BY THE END OF THIS MODULE YOU WILL BE ABLE TO:**
 
     - [ ] Distinguish configuration changes from application implementation
     - [ ] Plan a grounded retrieval customization
@@ -98,7 +99,8 @@ Authentication is separate from evaluation. Follow the sample's documented ident
 
 ## 5.6 Design exercise: retail customization
 
-!!! warning "Design exercise, not a completed deployment"
+> [!WARNING]
+> **Design exercise, not a completed deployment**
 
     The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
 
@@ -118,7 +120,8 @@ Saving `custom-agents/shopper-agent-instructions.md` does not cause the sample t
 
 Apply one change at a time, redeploy the affected components, and rerun your baseline questions and evaluations. Keep a working revision for comparison. For architecture inspiration, see the [retail blueprint](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), which is also not a complete retail application.
 
-!!! quote "BY THE END OF THIS LAB YOU SHOULD HAVE"
+> [!NOTE]
+> **BY THE END OF THIS LAB YOU SHOULD HAVE**
 
     - [ ] A documented customization scope and cost/region checks
     - [ ] Evidence that retrieval and tracing work for your selected environment
