@@ -87,7 +87,8 @@ To select a different chat model, update its compatible **name, version, format,
 
 ## 4. Lab: enable optional search and tracing
 
-!!! warning "These settings can add billable resources"
+> [!WARNING]
+> **These settings can add billable resources**
 
     Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
 
